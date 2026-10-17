@@ -16,9 +16,11 @@ installer/.venv/bin/python installer/make-art.py
 
 echo "== uninstaller app (built on the build PC)"
 rsync -a installer/uninstaller installer/art/UninstallIcon.icns scripts/uninstall.sh "$HOST":oa-build/installer/
+rsync -a scripts/bundle-swift-runtime.sh "$HOST":oa-build/scripts/
 ssh "$HOST" 'cd ~/oa-build/installer && rm -rf uapp && mkdir -p "uapp/Uninstall OpenAudio FW1814.app/Contents/MacOS" "uapp/Uninstall OpenAudio FW1814.app/Contents/Resources" \
   && SDK=$(xcrun --sdk macosx --show-sdk-path) \
   && xcrun swiftc -sdk "$SDK" -target x86_64-apple-macosx10.13 -O -o "uapp/Uninstall OpenAudio FW1814.app/Contents/MacOS/Uninstall OpenAudio FW1814" uninstaller/Uninstaller.swift \
+  && ../scripts/bundle-swift-runtime.sh "uapp/Uninstall OpenAudio FW1814.app" "Uninstall OpenAudio FW1814" \
   && cp uninstaller/Info.plist "uapp/Uninstall OpenAudio FW1814.app/Contents/Info.plist" \
   && cp UninstallIcon.icns "uapp/Uninstall OpenAudio FW1814.app/Contents/Resources/UninstallIcon.icns" \
   && cp uninstall.sh "uapp/Uninstall OpenAudio FW1814.app/Contents/Resources/uninstall.sh" && chmod 755 "uapp/Uninstall OpenAudio FW1814.app/Contents/Resources/uninstall.sh" \
@@ -26,6 +28,10 @@ ssh "$HOST" 'cd ~/oa-build/installer && rm -rf uapp && mkdir -p "uapp/Uninstall 
 rm -rf "$STAGE"; mkdir -p "$STAGE"
 scp -q "$HOST":oa-build/installer/uapp.tgz "$STAGE/"
 tar -C "$STAGE" -xzf "$STAGE/uapp.tgz"
+echo "== self-contained check of the uninstaller app"
+rsync -a scripts/check-self-contained.sh "$HOST":oa-build/scripts/
+ssh "$HOST" 'cd ~/oa-build/installer && ../scripts/check-self-contained.sh uapp'
+# note: a missing Swift runtime shows up as a launch crash only on a Mac without Xcode; this check is the machine-independent proof
 
 DMG=dist/OpenAudioFW1814-$VERSION.dmg
 rm -f "$DMG"

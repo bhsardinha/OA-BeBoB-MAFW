@@ -27,6 +27,7 @@ app:
 	$(SWIFTC) -O -o "$(APP)/Contents/MacOS/OpenAudio FW1814" $(wildcard Sources/*.swift)
 	cp Info.plist "$(APP)/Contents/Info.plist"
 	mkdir -p "$(APP)/Contents/Resources" && cp Resources/* "$(APP)/Contents/Resources/"
+	../scripts/bundle-swift-runtime.sh "$(APP)" "OpenAudio FW1814"        # 10.13 has no Swift runtime: ship it inside the app
 
 clean:
 	rm -rf $(BUILD)

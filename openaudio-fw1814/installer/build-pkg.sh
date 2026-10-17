@@ -38,6 +38,12 @@ chmod 755 "$ROOT/Library/PrivilegedHelperTools/com.openaudio.fw1814.helper"
 chmod 644 "$ROOT/Library/LaunchDaemons/com.openaudio.fw1814.helper.plist"
 chmod -R go-w "$ROOT"
 find "$ROOT" -name .DS_Store -delete
+echo "== self-contained check + clean launch of the panel"
+scripts/check-self-contained.sh "$ROOT"
+# the staged panel must start with no Xcode rpath (its Swift runtime is inside the bundle); --demo --snapshot exits by itself
+PANEL="$ROOT/Applications/OpenAudio FW1814.app/Contents/MacOS/OpenAudio FW1814"
+SNAP=$(mktemp -d); "$PANEL" --demo --snapshot "$SNAP" >/dev/null 2>&1 || { echo "the staged panel does not launch"; exit 1; }
+[ -f "$SNAP/48000-adat-mixer.png" ] || { echo "the staged panel did not render"; exit 1; }; rm -rf "$SNAP"
 chmod 755 installer/scripts/preinstall installer/scripts/postinstall
 
 echo "== pkgbuild / productbuild $VERSION"
