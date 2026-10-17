@@ -41,7 +41,6 @@ The FireWire 1814 is a 18-in / 14-out FireWire audio interface (BridgeCo BeBoB /
 </tr>
 <tr>
 <td align="center"><img src="docs/images/panel-meters.png" width="400" alt="Meter window"><br><sub>Meter window</sub></td>
-<td align="center"><img src="docs/images/dmg-background.png" width="400" alt="Disk image background"><br><sub>Disk image: installer and uninstaller</sub></td>
 </tr>
 </table>
 
