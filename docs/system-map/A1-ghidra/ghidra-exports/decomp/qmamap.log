@@ -1,0 +1,2199 @@
+=== FWSettingsLevels::Init @ 00021dd8 ===
+
+/* FWSettingsLevels::Init(m_audio_b_FWAVCAudioDevice*, m_audio_FWb::BaseChannelGroup*,
+   m_audio_FWb::BaseChannelGroup*, m_audio_FWb::BaseChannelGroup*, m_audio_FWb::BaseChannelGroup*,
+   m_audio_FWb::BaseChannelGroup*) */
+
+int __thiscall
+FWSettingsLevels::Init
+          (FWSettingsLevels *this,m_audio_b_FWAVCAudioDevice *param_1,BaseChannelGroup *param_2,
+          BaseChannelGroup *param_3,BaseChannelGroup *param_4,BaseChannelGroup *param_5,
+          BaseChannelGroup *param_6)
+
+{
+  m_audio_b_FWBaseProp *this_00;
+  IOAudioEngine *pIVar1;
+  long lVar2;
+  int iVar3;
+  uint uVar4;
+  BaseChannelGroup *pBVar5;
+  FWSettingsLevels *this_01;
+  IOAudioControl *local_78;
+  IOAudioControl *local_70;
+  IOAudioControl *local_68;
+  undefined8 local_60;
+  undefined8 local_58;
+  undefined8 local_50;
+  undefined8 local_48;
+  undefined8 local_40;
+  undefined8 local_38;
+  
+  pIVar1 = *(IOAudioEngine **)(param_1 + 0xe8);
+  iVar3 = (*(code *)PTR_Init_000470c0)(this,param_1);
+  if (iVar3 != 0) {
+    return iVar3;
+  }
+  *(m_audio_b_FWAVCAudioDevice **)(this + 0xa58) = param_1;
+  *(BaseChannelGroup **)(this + 0x8b0) = param_2;
+  *(BaseChannelGroup **)(this + 0x8b8) = param_3;
+  *(BaseChannelGroup **)(this + 0x8c0) = param_4;
+  *(BaseChannelGroup **)(this + 0x8c8) = param_5;
+  *(undefined8 *)(this + 0xa50) = *(undefined8 *)(param_1 + 0xf8);
+  if (param_2 != (BaseChannelGroup *)0x0) {
+    *(undefined4 *)(param_2 + 0x14) = 0xffffff01;
+    *(undefined4 *)(param_2 + 0x18) = 0;
+    m_audio_FWb::
+    TFunctor<int(unsigned_int,unsigned_int),m_audio_FWb::FunctorNilArgument,m_audio_FWb::FunctorNilArgument,m_audio_FWb::FunctorNilArgument>
+    ::Init<FWSettingsLevels*,int(FWSettingsLevels::*)(unsigned_int,unsigned_int)>
+              ((FWSettingsLevels *)(*(long *)(this + 0x8b0) + 0x20),(_func_int_uint_uint *)this);
+    iVar3 = InitGroupProp(this,"SWReturn",*(BaseChannelGroup **)(this + 0x8b0),
+                          (ChannelGroupProperties *)(this + 0x4f0),true,
+                          *(BaseChannelGroup **)(this + 0x8c0));
+    if (iVar3 != 0) {
+      return iVar3;
+    }
+    local_60 = 0x71;
+    local_58 = 0;
+    uVar4 = (**(code **)(**(long **)(this + 0x8b0) + 0x10))();
+    iVar3 = m_audio_b_FWBaseArrayProp::
+            init<FWSettingsLevels*,int(FWSettingsLevels::*)(unsigned_int,unsigned_int)>
+                      ((m_audio_b_FWPropertyDict *)(this + 0x9f0),*(char **)(this + 0xa50),0x2f27e,
+                       (FWSettingsLevels *)(ulong)(uVar4 >> 1),(_func_int_uint_uint *)this);
+    if (iVar3 != 0) {
+      return iVar3;
+    }
+  }
+  if (param_3 == (BaseChannelGroup *)0x0) {
+    if (param_2 == (BaseChannelGroup *)0x0) goto LAB_00022096;
+    m_audio_b_FWBaseProp::EstablishVolumeControl
+              ((m_audio_b_FWBaseProp *)(this + 0x4f0),pIVar1,0x6f757470,0,0,&local_70,-0x80,0,-0x40,
+               0);
+    m_audio_b_FWBaseArrayProp::EstablishVolumeControls
+              ((m_audio_b_FWBaseArrayProp *)(this + 0x4f0),pIVar1,0x6f757470,1,-0x80,0,-0x40,0);
+    this_01 = this + 0x568;
+  }
+  else {
+    lVar2 = *(long *)(this + 0x8b8);
+    *(undefined4 *)(lVar2 + 0x14) = 0xffffff01;
+    *(undefined4 *)(lVar2 + 0x18) = 0;
+    m_audio_FWb::
+    TFunctor<int(unsigned_int,unsigned_int),m_audio_FWb::FunctorNilArgument,m_audio_FWb::FunctorNilArgument,m_audio_FWb::FunctorNilArgument>
+    ::Init<FWSettingsLevels*,int(FWSettingsLevels::*)(unsigned_int,unsigned_int)>
+              ((FWSettingsLevels *)(*(long *)(this + 0x8b8) + 0x20),(_func_int_uint_uint *)this);
+    this_00 = (m_audio_b_FWBaseProp *)(this + 0x130);
+    iVar3 = InitGroupProp(this,"Output",*(BaseChannelGroup **)(this + 0x8b8),
+                          (ChannelGroupProperties *)this_00,true,(BaseChannelGroup *)0x0);
+    if (iVar3 != 0) {
+      return iVar3;
+    }
+    m_audio_b_FWBaseProp::EstablishVolumeControl
+              (this_00,pIVar1,0x6f757470,0,0,&local_68,-0x80,0,-0x40,0);
+    m_audio_b_FWBaseArrayProp::EstablishVolumeControls
+              ((m_audio_b_FWBaseArrayProp *)this_00,pIVar1,0x6f757470,1,-0x80,0,-0x40,0);
+    this_01 = this + 0x1a8;
+  }
+  m_audio_b_FWBaseArrayProp::EstablishMuteControls
+            ((m_audio_b_FWBaseArrayProp *)this_01,pIVar1,0x6f757470,1);
+LAB_00022096:
+  if (param_4 != (BaseChannelGroup *)0x0) {
+    lVar2 = *(long *)(this + 0x8c0);
+    *(undefined4 *)(lVar2 + 0x14) = 0xffffff01;
+    *(undefined4 *)(lVar2 + 0x18) = 0;
+    m_audio_FWb::
+    TFunctor<int(unsigned_int,unsigned_int),m_audio_FWb::FunctorNilArgument,m_audio_FWb::FunctorNilArgument,m_audio_FWb::FunctorNilArgument>
+    ::Init<FWSettingsLevels*,int(FWSettingsLevels::*)(unsigned_int,unsigned_int)>
+              ((FWSettingsLevels *)(*(long *)(this + 0x8c0) + 0x20),(_func_int_uint_uint *)this);
+    iVar3 = InitGroupProp(this,"Input",*(BaseChannelGroup **)(this + 0x8c0),
+                          (ChannelGroupProperties *)(this + 0x310),true,
+                          *(BaseChannelGroup **)(this + 0x8b0));
+    if (iVar3 != 0) {
+      return iVar3;
+    }
+    m_audio_b_FWBaseArrayProp::EstablishVolumeControls
+              ((m_audio_b_FWBaseArrayProp *)(this + 0x310),pIVar1,0x696e7074,1,-0x80,0,-0x40,0);
+    m_audio_b_FWBaseArrayProp::EstablishMuteControls
+              ((m_audio_b_FWBaseArrayProp *)(this + 0x388),pIVar1,0x696e7074,1);
+    local_50 = 0x59;
+    local_48 = 0;
+    uVar4 = (**(code **)(**(long **)(this + 0x8c0) + 0x10))();
+    iVar3 = m_audio_b_FWBaseArrayProp::
+            init<FWSettingsLevels*,int(FWSettingsLevels::*)(unsigned_int,unsigned_int)>
+                      ((m_audio_b_FWPropertyDict *)(this + 0x10),*(char **)(this + 0xa50),0x2f292,
+                       (FWSettingsLevels *)(ulong)uVar4,(_func_int_uint_uint *)this);
+    if (iVar3 != 0) {
+      return iVar3;
+    }
+    *(undefined4 *)(this + 0x11c) = 1;
+    iVar3 = m_audio_b_FW32BitNumberProp::
+            init<FWSettingsLevels*,int(FWSettingsLevels::*)(unsigned_int)>
+                      ((m_audio_b_FW32BitNumberProp *)(this + 0xf0),
+                       *(m_audio_b_FWPropertyDict **)(this + 0xa50),"MADirectMonitoringActive",this,
+                       SetDirectMonitoringActive);
+    if (iVar3 != 0) {
+      return iVar3;
+    }
+    local_40 = 0x69;
+    local_38 = 0;
+    uVar4 = (**(code **)(**(long **)(this + 0x8c0) + 0x10))();
+    iVar3 = m_audio_b_FWBaseArrayProp::
+            init<FWSettingsLevels*,int(FWSettingsLevels::*)(unsigned_int,unsigned_int)>
+                      ((m_audio_b_FWPropertyDict *)(this + 0x990),*(char **)(this + 0xa50),0x2f010,
+                       (FWSettingsLevels *)(ulong)(uVar4 >> 1),(_func_int_uint_uint *)this);
+    if (iVar3 != 0) {
+      return iVar3;
+    }
+  }
+  if (param_5 != (BaseChannelGroup *)0x0) {
+    lVar2 = *(long *)(this + 0x8c8);
+    *(undefined4 *)(lVar2 + 0x14) = 0xffffff01;
+    *(undefined4 *)(lVar2 + 0x18) = 0;
+    m_audio_FWb::
+    TFunctor<int(unsigned_int,unsigned_int),m_audio_FWb::FunctorNilArgument,m_audio_FWb::FunctorNilArgument,m_audio_FWb::FunctorNilArgument>
+    ::Init<FWSettingsLevels*,int(FWSettingsLevels::*)(unsigned_int,unsigned_int)>
+              ((FWSettingsLevels *)(*(long *)(this + 0x8c8) + 0x20),(_func_int_uint_uint *)this);
+    iVar3 = InitGroupProp(this,"Headphone",*(BaseChannelGroup **)(this + 0x8c8),
+                          (ChannelGroupProperties *)(this + 0x6d0),false,(BaseChannelGroup *)0x0);
+    if (iVar3 != 0) {
+      return iVar3;
+    }
+  }
+  iVar3 = 0;
+  if (*(BaseChannelGroup **)(this + 0x8b0) != (BaseChannelGroup *)0x0 ||
+      *(BaseChannelGroup **)(this + 0x8c0) != (BaseChannelGroup *)0x0) {
+    m_audio_FWb::GroupChannelGroup::Init
+              ((GroupChannelGroup *)(this + 0x8d0),*(BaseChannelGroup **)(this + 0x8b0),
+               *(BaseChannelGroup **)(this + 0x8c0),(BaseChannelGroup *)0x0);
+  }
+  pBVar5 = *(BaseChannelGroup **)(this + 0x8b8);
+  if ((pBVar5 != (BaseChannelGroup *)0x0 || param_6 != (BaseChannelGroup *)0x0) ||
+     (*(BaseChannelGroup **)(this + 0x8c8) != (BaseChannelGroup *)0x0)) {
+    m_audio_FWb::GroupChannelGroup::Init
+              ((GroupChannelGroup *)(this + 0x930),pBVar5,param_6,
+               *(BaseChannelGroup **)(this + 0x8c8));
+    pBVar5 = *(BaseChannelGroup **)(this + 0x8b8);
+  }
+  if (pBVar5 != (BaseChannelGroup *)0x0) {
+    local_78 = (IOAudioControl *)0x0;
+    iVar3 = m_audio_b_FW32BitNumberProp::
+            init<FWSettingsLevels*,int(FWSettingsLevels::*)(unsigned_int)>
+                      ((m_audio_b_FW32BitNumberProp *)(this + 0xb0),
+                       *(m_audio_b_FWPropertyDict **)(this + 0xa50),"MAGlobalDim",this,SetGlobalDim)
+    ;
+    if (iVar3 == 0) {
+      iVar3 = m_audio_b_FW32BitNumberProp::
+              init<FWSettingsLevels*,int(FWSettingsLevels::*)(unsigned_int)>
+                        ((m_audio_b_FW32BitNumberProp *)(this + 0x70),
+                         *(m_audio_b_FWPropertyDict **)(this + 0xa50),"MAGlobalMute",this,
+                         SetGlobalMute);
+      if (iVar3 == 0) {
+        m_audio_b_FWBaseProp::EstablishMuteControl
+                  ((m_audio_b_FWBaseProp *)(this + 0x70),pIVar1,0x6f757470,0,0,&local_78);
+      }
+    }
+  }
+  return iVar3;
+}
+
+
+
+=== FWSettingsLevels::InitGroupProp @ 00021444 ===
+
+/* FWSettingsLevels::InitGroupProp(char const*, m_audio_FWb::BaseChannelGroup*,
+   FWSettingsLevels::ChannelGroupProperties&, bool, m_audio_FWb::BaseChannelGroup*) */
+
+void __thiscall
+FWSettingsLevels::InitGroupProp
+          (FWSettingsLevels *this,char *param_1,BaseChannelGroup *param_2,
+          ChannelGroupProperties *param_3,bool param_4,BaseChannelGroup *param_5)
+
+{
+  int iVar1;
+  char local_70 [64];
+  
+  _snprintf(local_70,0x40,"MA%sLevels",param_1);
+  iVar1 = (*(code *)PTR_init_00035078)(param_3,*(undefined8 *)(this + 0xa50),local_70,param_2,0,0);
+  if (iVar1 == 0) {
+    _snprintf(local_70,0x40,"MA%sMute",param_1);
+    iVar1 = (*(code *)PTR_init_00035078)
+                      (param_3 + 0x78,*(undefined8 *)(this + 0xa50),local_70,param_2,8,0);
+    if (iVar1 == 0) {
+      if (param_4) {
+        _snprintf(local_70,0x40,"MA%sSolo",param_1);
+        iVar1 = (*(code *)PTR_init_00035078)
+                          (param_3 + 0x168,*(undefined8 *)(this + 0xa50),local_70,param_2,0x10,
+                           param_5);
+        if (iVar1 != 0) {
+          return;
+        }
+      }
+      _snprintf(local_70,0x40,"MA%sLink",param_1);
+      (*(code *)PTR_init_00035078)
+                (param_3 + 0xf0,*(undefined8 *)(this + 0xa50),local_70,param_2,0x18,0);
+    }
+  }
+  return;
+}
+
+
+
+=== FWSettingsAuxSend::Init @ 00020854 ===
+
+/* FWSettingsAuxSend::Init(m_audio_b_FWAVCAudioDevice*, m_audio_FWb::BaseChannelGroup*,
+   m_audio_FWb::BaseChannelGroup*, unsigned int) */
+
+void __thiscall
+FWSettingsAuxSend::Init
+          (FWSettingsAuxSend *this,m_audio_b_FWAVCAudioDevice *param_1,BaseChannelGroup *param_2,
+          BaseChannelGroup *param_3,uint param_4)
+
+{
+  long lVar1;
+  undefined *puVar2;
+  int iVar3;
+  uint uVar4;
+  
+  iVar3 = (*(code *)PTR_Init_000470c0)(this,param_1);
+  if (iVar3 == 0) {
+    *(m_audio_b_FWAVCAudioDevice **)(this + 0x2d0) = param_1;
+    *(undefined8 *)(this + 0x2c0) = *(undefined8 *)(param_1 + 0xf8);
+    *(uint *)(this + 0x2c8) = param_4;
+    *(BaseChannelGroup **)(this + 0x10) = param_2;
+    *(BaseChannelGroup **)(this + 0x18) = param_3;
+    *(undefined4 *)(param_2 + 0x14) = 0xffffff01;
+    *(undefined4 *)(param_2 + 0x18) = 0;
+    lVar1 = *(long *)(this + 0x18);
+    *(undefined4 *)(lVar1 + 0x14) = 0xffffff01;
+    *(undefined4 *)(lVar1 + 0x18) = 0;
+    m_audio_FWb::
+    TFunctor<int(unsigned_int,unsigned_int),m_audio_FWb::FunctorNilArgument,m_audio_FWb::FunctorNilArgument,m_audio_FWb::FunctorNilArgument>
+    ::Init<FWSettingsAuxSend*,int(FWSettingsAuxSend::*)(unsigned_int,unsigned_int)>
+              ((FWSettingsAuxSend *)(*(long *)(this + 0x10) + 0x20),(_func_int_uint_uint *)this);
+    m_audio_FWb::
+    TFunctor<int(unsigned_int,unsigned_int),m_audio_FWb::FunctorNilArgument,m_audio_FWb::FunctorNilArgument,m_audio_FWb::FunctorNilArgument>
+    ::Init<FWSettingsAuxSend*,int(FWSettingsAuxSend::*)(unsigned_int,unsigned_int)>
+              ((FWSettingsAuxSend *)(*(long *)(this + 0x18) + 0x20),(_func_int_uint_uint *)this);
+    puVar2 = PTR_init_00035078;
+    (*(code *)PTR_init_00035078)
+              (this + 0x20,*(undefined8 *)(this + 0x2c0),"MAAuxSendLevels",
+               *(undefined8 *)(this + 0x10),0,0);
+    (*(code *)puVar2)(this + 0x98,*(undefined8 *)(this + 0x2c0),"MAAuxOutputLevels",
+                      *(undefined8 *)(this + 0x18),0,0);
+    (*(code *)puVar2)(this + 0x110,*(undefined8 *)(this + 0x2c0),"MAAuxOutputMute",
+                      *(undefined8 *)(this + 0x18),8,0);
+    (*(code *)puVar2)(this + 0x188,*(undefined8 *)(this + 0x2c0),"MAAuxOutputLink",
+                      *(undefined8 *)(this + 0x18),0x18,0);
+    uVar4 = (**(code **)(**(long **)(this + 0x18) + 0x10))();
+    iVar3 = m_audio_b_FWBaseArrayProp::
+            init<FWSettingsAuxSend*,int(FWSettingsAuxSend::*)(unsigned_int,unsigned_int)>
+                      ((m_audio_b_FWPropertyDict *)(this + 0x260),*(char **)(this + 0x2c0),0x2f1ce,
+                       (FWSettingsAuxSend *)(ulong)uVar4,(_func_int_uint_uint *)this);
+    if (iVar3 == 0) {
+      m_audio_b_FWBaseArrayProp::
+      init<FWSettingsAuxSend*,int(FWSettingsAuxSend::*)(unsigned_int,unsigned_int)>
+                ((m_audio_b_FWPropertyDict *)(this + 0x200),*(char **)(this + 0x2c0),0x2f1de,
+                 (FWSettingsAuxSend *)(ulong)*(uint *)(this + 0x2c8),(_func_int_uint_uint *)this);
+    }
+  }
+  return;
+}
+
+
+
+=== FWSettingsRotaryControl::Init @ 00020ed2 ===
+
+/* FWSettingsRotaryControl::Init(m_audio_b_FWAudioDevice*, m_audio_FWb::BaseChannelGroup*,
+   m_audio_FWb::BaseChannelGroup*, m_audio_FWb::BaseChannelGroup*, m_audio_FWb::BaseChannelGroup*,
+   m_audio_FWb::BaseChannelGroup*) */
+
+undefined8 __thiscall
+FWSettingsRotaryControl::Init
+          (FWSettingsRotaryControl *this,m_audio_b_FWAudioDevice *param_1,BaseChannelGroup *param_2,
+          BaseChannelGroup *param_3,BaseChannelGroup *param_4,BaseChannelGroup *param_5,
+          BaseChannelGroup *param_6)
+
+{
+  undefined8 uVar1;
+  undefined8 *puVar2;
+  
+  uVar1 = (*(code *)PTR_Init_000470c0)(this,param_1);
+  if ((int)uVar1 == 0) {
+    *(BaseChannelGroup **)(this + 0x10) = param_2;
+    *(BaseChannelGroup **)(this + 0x18) = param_3;
+    *(BaseChannelGroup **)(this + 0x20) = param_4;
+    *(BaseChannelGroup **)(this + 0x28) = param_5;
+    *(BaseChannelGroup **)(this + 0x30) = param_6;
+    uVar1 = *(undefined8 *)(param_1 + 0xf8);
+    *(undefined8 *)(this + 0xc0) = uVar1;
+    if (param_1 != (m_audio_b_FWAudioDevice *)0x0) {
+      if (*(void **)(this + 0x78) != (void *)0x0) {
+        operator_delete(*(void **)(this + 0x78));
+      }
+      puVar2 = operator_new(0x20);
+      if (puVar2 == (undefined8 *)0x0) {
+        *(undefined8 *)(this + 0x78) = 0;
+      }
+      else {
+        *puVar2 = &PTR_Call_00048d90;
+        puVar2[1] = param_1;
+        puVar2[2] = m_audio_b_FWAudioDevice::NullSetProperty64;
+        puVar2[3] = 0;
+        *(undefined8 **)(this + 0x78) = puVar2;
+        uVar1 = (*(code *)PTR_init_00037a68)(this + 0x38,uVar1,"MARotaryControlV2");
+        if ((int)uVar1 != 0) {
+          return uVar1;
+        }
+        uVar1 = *(undefined8 *)(this + 0xc0);
+        if (*(void **)(this + 0xb8) != (void *)0x0) {
+          operator_delete(*(void **)(this + 0xb8));
+        }
+        if (this == (FWSettingsRotaryControl *)0x0) {
+          section_000000b8.sectname[0] = '\0';
+          section_000000b8.sectname[1] = '\0';
+          section_000000b8.sectname[2] = '\0';
+          section_000000b8.sectname[3] = '\0';
+          section_000000b8.sectname[4] = '\0';
+          section_000000b8.sectname[5] = '\0';
+          section_000000b8.sectname[6] = '\0';
+          section_000000b8.sectname[7] = '\0';
+        }
+        else {
+          puVar2 = operator_new(0x20);
+          if (puVar2 != (undefined8 *)0x0) {
+            *puVar2 = &PTR_Call_00048db0;
+            puVar2[1] = this;
+            puVar2[2] = VirtualRotateKnob;
+            puVar2[3] = 0;
+            *(undefined8 **)(this + 0xb8) = puVar2;
+                    /* WARNING: Could not recover jumptable at 0x00021055. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+            uVar1 = (**(code **)(*(long *)(this + 0x80) + 0x148))
+                              (this + 0x80,uVar1,"MAMetaVirtualRotateDataKnob");
+            return uVar1;
+          }
+          *(undefined8 *)(this + 0xb8) = 0;
+        }
+      }
+    }
+    uVar1 = 0xe00002bc;
+  }
+  return uVar1;
+}
+
+
+
+=== FWSettingsABSwitch::Init @ 0001e00a ===
+
+/* FWSettingsABSwitch::Init(m_audio_b_FWAudioDevice*) */
+
+int __thiscall FWSettingsABSwitch::Init(FWSettingsABSwitch *this,m_audio_b_FWAudioDevice *param_1)
+
+{
+  m_audio_b_FWPropertyDict *pmVar1;
+  long lVar2;
+  int iVar3;
+  undefined8 *puVar4;
+  
+  *(m_audio_b_FWAudioDevice **)(this + 8) = param_1;
+  pmVar1 = *(m_audio_b_FWPropertyDict **)(param_1 + 0xf8);
+  if (pmVar1 == (m_audio_b_FWPropertyDict *)0x0) {
+    return -0x1ffffd3e;
+  }
+  if (*(void **)(this + 0xa8) != (void *)0x0) {
+    operator_delete(*(void **)(this + 0xa8));
+  }
+  if (this == (FWSettingsABSwitch *)0x0) {
+    section_00000068.flags = 0;
+    section_00000068.reserved1 = 0;
+  }
+  else {
+    puVar4 = operator_new(0x20);
+    if (puVar4 == (undefined8 *)0x0) {
+      *(undefined8 *)(this + 0xa8) = 0;
+    }
+    else {
+      *puVar4 = &PTR_Call_00047050;
+      puVar4[1] = this;
+      puVar4[2] = SetMomentarySwitchRoutingSource;
+      puVar4[3] = 0;
+      *(undefined8 **)(this + 0xa8) = puVar4;
+      iVar3 = (**(code **)(*(long *)(this + 0x70) + 0x148))
+                        (this + 0x70,pmVar1,"MAMomentarySwitchRoutings",4);
+      if (iVar3 != 0) {
+        return iVar3;
+      }
+      iVar3 = m_audio_b_FW32BitNumberProp::
+              init<FWSettingsABSwitch*,int(FWSettingsABSwitch::*)(unsigned_int)>
+                        ((m_audio_b_FW32BitNumberProp *)(this + 0x118),pmVar1,"MAHeadphoneSourceV2",
+                         this,SetHeadphoneSource);
+      if (iVar3 != 0) {
+        return iVar3;
+      }
+      iVar3 = m_audio_b_FW32BitNumberProp::
+              init<FWSettingsABSwitch*,int(FWSettingsABSwitch::*)(unsigned_int)>
+                        ((m_audio_b_FW32BitNumberProp *)(this + 0x158),pmVar1,
+                         "MAHeadphoneSecondSource",this,SetHeadphoneSecondSource);
+      if (iVar3 != 0) {
+        return iVar3;
+      }
+      iVar3 = m_audio_b_FW32BitNumberProp::
+              init<FWSettingsABSwitch*,int(FWSettingsABSwitch::*)(unsigned_int)>
+                        ((m_audio_b_FW32BitNumberProp *)(this + 0x30),pmVar1,
+                         "MAMomentarySwitchSource",this,SetMomentarySwitchSource);
+      if (iVar3 != 0) {
+        return iVar3;
+      }
+      lVar2 = *(long *)(this + 8);
+      if (lVar2 != 0) {
+        if (*(void **)(this + 0x110) != (void *)0x0) {
+          operator_delete(*(void **)(this + 0x110));
+        }
+        puVar4 = operator_new(0x20);
+        if (puVar4 != (undefined8 *)0x0) {
+          *puVar4 = &PTR_Call_00047090;
+          puVar4[1] = lVar2;
+          puVar4[2] = m_audio_b_FWAudioDevice::NullSetProperty32;
+          puVar4[3] = 0;
+          *(undefined8 **)(this + 0x110) = puVar4;
+          iVar3 = (*(code *)PTR_init_00037a68)(this + 0xd8,pmVar1,"MAMomentarySwitchLatent");
+          return iVar3;
+        }
+        *(undefined8 *)(this + 0x110) = 0;
+      }
+    }
+  }
+  return -0x1ffffd44;
+}
+
+
+
+=== com_m_audio_FW1814Device::InitializeUserSettableProperties @ 0000e6ca ===
+
+/* com_m_audio_FW1814Device::InitializeUserSettableProperties() */
+
+ulong __thiscall
+com_m_audio_FW1814Device::InitializeUserSettableProperties(com_m_audio_FW1814Device *this)
+
+{
+  com_m_audio_FW1814Device *pcVar1;
+  com_m_audio_FW1814Device *pcVar2;
+  com_m_audio_FW1814Device *pcVar3;
+  com_m_audio_FW1814Device *pcVar4;
+  BaseChannelGroup *pBVar5;
+  uint uVar6;
+  ulong uVar7;
+  undefined8 *puVar8;
+  int iVar9;
+  com_m_audio_FW1814Device *pcVar10;
+  
+  uVar7 = (*(code *)PTR_InitializeUserSettableProperties_0003c1c8)(this);
+  if ((int)uVar7 == 0) {
+    pcVar1 = this + 0x1b00;
+    pcVar2 = this + 0x1668;
+    pcVar3 = this + 0x1318;
+    pcVar4 = this + 0x13e0;
+    pBVar5 = (BaseChannelGroup *)(this + 0x1730);
+    uVar7 = (*(code *)PTR_Init_00048df8)(this + 0x470,this,pcVar2,pcVar3,pcVar4,pBVar5,pcVar1);
+    if ((int)uVar7 == 0) {
+      uVar6 = (**(code **)(*(long *)(this + 0x1318) + 0x10))(pcVar3);
+      uVar7 = FWSettingsAuxSend::Init
+                        ((FWSettingsAuxSend *)(this + 0xf98),(m_audio_b_FWAVCAudioDevice *)this,
+                         (BaseChannelGroup *)(this + 0x17f8),(BaseChannelGroup *)pcVar1,
+                         (uVar6 >> 1) + 1);
+      if ((int)uVar7 == 0) {
+        pcVar10 = pcVar3;
+        uVar7 = FWSettingsLevels::Init
+                          ((FWSettingsLevels *)(this + 0x538),(m_audio_b_FWAVCAudioDevice *)this,
+                           (BaseChannelGroup *)pcVar2,(BaseChannelGroup *)pcVar3,
+                           (BaseChannelGroup *)pcVar4,pBVar5,(BaseChannelGroup *)pcVar1);
+        iVar9 = (int)pcVar10;
+        if ((int)uVar7 == 0) {
+          m_audio_FWb::BaseChannelGroup::
+          SetupBatchChangeMethod<com_m_audio_FW1814Device*,int(m_audio_b_FWAVCAudioDevice::*)(unsigned_int,unsigned_int,void*)>
+                    (pcVar3,(_func_int_uint_uint_void_ptr *)this,8,iVar9);
+          m_audio_FWb::BaseChannelGroup::
+          SetupBatchChangeMethod<com_m_audio_FW1814Device*,int(m_audio_b_FWAVCAudioDevice::*)(unsigned_int,unsigned_int,void*)>
+                    (pcVar4,(_func_int_uint_uint_void_ptr *)this,0x10,iVar9);
+          m_audio_FWb::BaseChannelGroup::
+          SetupBatchChangeMethod<com_m_audio_FW1814Device*,int(m_audio_b_FWAVCAudioDevice::*)(unsigned_int,unsigned_int,void*)>
+                    (pcVar2,(_func_int_uint_uint_void_ptr *)this,0,iVar9);
+          m_audio_FWb::BaseChannelGroup::
+          SetupBatchChangeMethod<com_m_audio_FW1814Device*,int(m_audio_b_FWAVCAudioDevice::*)(unsigned_int,unsigned_int,void*)>
+                    ((com_m_audio_FW1814Device *)pBVar5,(_func_int_uint_uint_void_ptr *)this,0x38,
+                     iVar9);
+          *(undefined4 *)(this + 0x183c) = 0x80;
+          *(undefined4 *)(this + 0x1838) = 100;
+          if (*(void **)(this + 0x1830) != (void *)0x0) {
+            operator_delete(*(void **)(this + 0x1830));
+          }
+          if (this == (com_m_audio_FW1814Device *)0x0) {
+            uRam0000000000001830 = 0;
+            m_audio_FWb::BaseChannelGroup::
+            SetupBatchChangeMethod<com_m_audio_FW1814Device*,int(m_audio_b_FWAVCAudioDevice::*)(unsigned_int,unsigned_int,void*)>
+                      ((com_m_audio_FW1814Device *)0x1b00,(_func_int_uint_uint_void_ptr *)0x0,0x34,
+                       iVar9);
+          }
+          else {
+            puVar8 = operator_new(0x20);
+            if (puVar8 != (undefined8 *)0x0) {
+              *puVar8 = &PTR_Call_00036830;
+              puVar8[1] = this;
+              iVar9 = 0xe982;
+              puVar8[2] = CustomMixerWriteWithRotatedAuxChannels;
+              puVar8[3] = 0;
+            }
+            *(undefined8 **)(this + 0x1830) = puVar8;
+            m_audio_FWb::BaseChannelGroup::
+            SetupBatchChangeMethod<com_m_audio_FW1814Device*,int(m_audio_b_FWAVCAudioDevice::*)(unsigned_int,unsigned_int,void*)>
+                      (pcVar1,(_func_int_uint_uint_void_ptr *)this,0x34,iVar9);
+            if (this != (com_m_audio_FW1814Device *)0x0) {
+              uVar6 = (**(code **)(*(long *)(this + 0x2d8) + 0x10))
+                                ((FWSettingsABSwitch *)(this + 0x2d8),this);
+              if (uVar6 != 0) {
+                return (ulong)uVar6;
+              }
+              if (*(void **)(this + 0x2f0) != (void *)0x0) {
+                operator_delete(*(void **)(this + 0x2f0));
+              }
+              if (this == (com_m_audio_FW1814Device *)0x0) {
+                section_000002e0.segname[0] = '\0';
+                section_000002e0.segname[1] = '\0';
+                section_000002e0.segname[2] = '\0';
+                section_000002e0.segname[3] = '\0';
+                section_000002e0.segname[4] = '\0';
+                section_000002e0.segname[5] = '\0';
+                section_000002e0.segname[6] = '\0';
+                section_000002e0.segname[7] = '\0';
+              }
+              else {
+                puVar8 = operator_new(0x20);
+                if (puVar8 == (undefined8 *)0x0) {
+                  *(undefined8 *)(this + 0x2f0) = 0;
+                }
+                else {
+                  *puVar8 = &PTR_Call_00036850;
+                  puVar8[1] = this;
+                  puVar8[2] = 0xbe9;
+                  puVar8[3] = 0;
+                  *(undefined8 **)(this + 0x2f0) = puVar8;
+                  if (*(void **)(this + 0x300) != (void *)0x0) {
+                    operator_delete(*(void **)(this + 0x300));
+                  }
+                  puVar8 = operator_new(0x20);
+                  if (puVar8 != (undefined8 *)0x0) {
+                    *puVar8 = &PTR_Call_00036870;
+                    puVar8[1] = this;
+                    puVar8[2] = SetHeadphoneSelector;
+                    puVar8[3] = 0;
+                    *(undefined8 **)(this + 0x300) = puVar8;
+                    FWSettingsABSwitch::UpdateLEDs((FWSettingsABSwitch *)(this + 0x2d8));
+                    return 0;
+                  }
+                  *(undefined8 *)(this + 0x300) = 0;
+                }
+              }
+              return 0xe00002c2;
+            }
+          }
+                    /* WARNING: Subroutine does not return */
+          _panic(
+                "\"device is NULL\"@/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/KernelExtension/Source/Settings/FWSettingsABSwitch.h:75"
+                );
+        }
+      }
+    }
+  }
+  return uVar7;
+}
+
+
+
+=== m_audio_b_FWAudioDevice::InitializeUserSettableProperties @ 0000252a ===
+
+/* m_audio_b_FWAudioDevice::InitializeUserSettableProperties() */
+
+int __thiscall
+m_audio_b_FWAudioDevice::InitializeUserSettableProperties(m_audio_b_FWAudioDevice *this)
+
+{
+  code *pcVar1;
+  char cVar2;
+  int iVar3;
+  undefined8 uVar4;
+  m_audio_b_FWPropertyDict *this_00;
+  char *pcVar5;
+  
+  pcVar1 = *(code **)(*(long *)this + 0x268);
+  uVar4 = (**(code **)(**(long **)(this + 0xe0) + 0x2e8))(*(long **)(this + 0xe0),"GUID");
+  pcVar5 = "GUID";
+  (*pcVar1)(this,"GUID",uVar4);
+  this_00 = OSObject::operator_new((OSObject *)(section_00000068.segname + 8),(ulong)pcVar5);
+  if (this_00 == (m_audio_b_FWPropertyDict *)0x0) {
+    *(undefined8 *)(this + 0xf8) = 0;
+  }
+  else {
+    m_audio_b_FWPropertyDict::m_audio_b_FWPropertyDict(this_00);
+    *(m_audio_b_FWPropertyDict **)(this + 0xf8) = this_00;
+    cVar2 = (**(code **)(*(long *)this_00 + 0x1b8))(this_00,this);
+    if (cVar2 != '\0') {
+      iVar3 = m_audio_b_FW32BitNumberProp::
+              init<m_audio_b_FWAudioDevice*,int(m_audio_b_FWAudioDevice::*)(unsigned_int)>
+                        ((m_audio_b_FW32BitNumberProp *)(this + 0x158),
+                         *(m_audio_b_FWPropertyDict **)(this + 0xf8),"MAEnableStereoPairEngines",
+                         this,SetExportStereoPairEngines);
+      if (iVar3 != 0) {
+        return iVar3;
+      }
+      iVar3 = m_audio_b_FW32BitNumberProp::
+              init<m_audio_b_FWAudioDevice*,int(m_audio_b_FWAudioDevice::*)(unsigned_int)>
+                        ((m_audio_b_FW32BitNumberProp *)(this + 0x198),
+                         *(m_audio_b_FWPropertyDict **)(this + 0xf8),"MAEnableAggregateEngine",this,
+                         SetExportAggregateEngine);
+      if (iVar3 != 0) {
+        return iVar3;
+      }
+      iVar3 = m_audio_b_FWFunctionProp::
+              init<m_audio_b_FWAudioDevice*,int(m_audio_b_FWAudioDevice::*)(OSObject*)>
+                        ((m_audio_b_FWFunctionProp *)(this + 0x218),
+                         *(m_audio_b_FWPropertyDict **)(this + 0xf8),"MAMetaResetToFactorySettings",
+                         this,ResetMixer);
+      if (iVar3 != 0) {
+        return iVar3;
+      }
+      iVar3 = m_audio_b_FWFunctionProp::
+              init<m_audio_b_FWAudioDevice*,int(m_audio_b_FWAudioDevice::*)(OSObject*)>
+                        ((m_audio_b_FWFunctionProp *)(this + 0x1d8),
+                         *(m_audio_b_FWPropertyDict **)(this + 0xf8),"MADeviceUserLabel",this,
+                         SetDeviceUserLabel);
+      return iVar3;
+    }
+  }
+  return -0x1ffffd43;
+}
+
+
+
+=== m_audio_b_FWChannelGroupProperty::init @ 000093a4 ===
+
+/* m_audio_b_FWChannelGroupProperty::init(m_audio_b_FWPropertyDict*, char const*,
+   m_audio_FWb::BaseChannelGroup&, unsigned int, m_audio_FWb::BaseChannelGroup*) */
+
+void __thiscall
+m_audio_b_FWChannelGroupProperty::init
+          (m_audio_b_FWChannelGroupProperty *this,m_audio_b_FWPropertyDict *param_1,char *param_2,
+          BaseChannelGroup *param_3,uint param_4,BaseChannelGroup *param_5)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  
+  uVar1 = (**(code **)(*(long *)param_3 + 0x10))(param_3);
+  iVar2 = (*(code *)PTR_init_000349e8)(this,param_1,param_2,uVar1);
+  if (iVar2 == 0) {
+    *(BaseChannelGroup **)(this + 0x60) = param_3;
+    *(uint *)(this + 0x68) = param_4;
+    *(BaseChannelGroup **)(this + 0x70) = param_5;
+  }
+  return;
+}
+
+
+
+=== m_audio_b_FWChannelGroupProperty::CallSetter @ 0000940e ===
+
+/* m_audio_b_FWChannelGroupProperty::CallSetter(OSSymbol const*, OSObject*) */
+
+int __thiscall
+m_audio_b_FWChannelGroupProperty::CallSetter
+          (m_audio_b_FWChannelGroupProperty *this,OSSymbol *param_1,OSObject *param_2)
+
+{
+  long *plVar1;
+  int iVar2;
+  void *pvVar3;
+  void *pvVar4;
+  
+  pvVar3 = (void *)m_audio_FWb::BaseChannelGroup::AdjustedLevels
+                             (*(BaseChannelGroup **)(this + 0x60));
+  if (pvVar3 == (void *)0x0) {
+    iVar2 = 0;
+  }
+  else {
+    if (*(BaseChannelGroup **)(this + 0x70) == (BaseChannelGroup *)0x0) {
+      pvVar4 = (void *)0x0;
+    }
+    else {
+      pvVar4 = (void *)m_audio_FWb::BaseChannelGroup::AdjustedLevels
+                                 (*(BaseChannelGroup **)(this + 0x70));
+    }
+    iVar2 = m_audio_b_FWBaseArrayProp::OSArrayToSeriatimValues
+                      ((m_audio_b_FWBaseArrayProp *)this,param_2,*(uint *)(this + 0x2c));
+    if (iVar2 == 0) {
+      (**(code **)(**(long **)(this + 0x60) + 0x28))(*(long **)(this + 0x60),pvVar3);
+      operator_delete__(pvVar3);
+      plVar1 = *(long **)(this + 0x70);
+      if (plVar1 != (long *)0x0) {
+        (**(code **)(*plVar1 + 0x28))(plVar1,pvVar4);
+        if (pvVar4 != (void *)0x0) {
+          operator_delete__(pvVar4);
+        }
+      }
+    }
+  }
+  return iVar2;
+}
+
+
+
+=== m_audio_b_FWPropertyDict::InstallProperty @ 0000a060 ===
+
+/* m_audio_b_FWPropertyDict::InstallProperty(m_audio_b_FWBaseProp*) */
+
+undefined8 __thiscall
+m_audio_b_FWPropertyDict::InstallProperty
+          (m_audio_b_FWPropertyDict *this,m_audio_b_FWBaseProp *param_1)
+
+{
+  long *plVar1;
+  
+  plVar1 = *(long **)(this + 0x60);
+  if (plVar1 == (long *)0x0) {
+    plVar1 = (long *)OSDictionary::withCapacity(0x20);
+    *(long **)(this + 0x60) = plVar1;
+    if (plVar1 == (long *)0x0) {
+      return 0xe00002bd;
+    }
+  }
+  (**(code **)(*plVar1 + 0x1c0))(plVar1,*(undefined8 *)(param_1 + 0x18),param_1);
+  if (param_1[0x28] != (m_audio_b_FWBaseProp)0x0) {
+    plVar1 = *(long **)(this + 0x50);
+    if (plVar1 == (long *)0x0) {
+      plVar1 = (long *)OSSet::withCapacity(4);
+      *(long **)(this + 0x50) = plVar1;
+      if (plVar1 == (long *)0x0) {
+        return 0;
+      }
+    }
+    (**(code **)(*plVar1 + 0x1c0))(plVar1,*(undefined8 *)(param_1 + 0x18));
+  }
+  *(m_audio_b_FWPropertyDict **)(param_1 + 0x20) = this;
+  return 0;
+}
+
+
+
+=== m_audio_b_FWPropertyDict::SetOneProperty @ 00009f74 ===
+
+/* m_audio_b_FWPropertyDict::SetOneProperty(OSSymbol const*, OSObject*) */
+
+undefined8 __thiscall
+m_audio_b_FWPropertyDict::SetOneProperty
+          (m_audio_b_FWPropertyDict *this,OSSymbol *param_1,OSObject *param_2)
+
+{
+  char cVar1;
+  long *plVar2;
+  
+  cVar1 = (**(code **)(**(long **)(this + 0x50) + 0x1e0))(*(long **)(this + 0x50),param_1);
+  if (cVar1 == '\0') {
+    ModifyProperty(this,param_1,param_2);
+  }
+  else {
+    plVar2 = (long *)(**(code **)(**(long **)(this + 0x60) + 0x1f8))
+                               (*(long **)(this + 0x60),param_1);
+    (**(code **)(*plVar2 + 0x128))(plVar2,param_1,param_2);
+  }
+  return 0;
+}
+
+
+
+=== m_audio_b_FWPropertyDict::ApplyModifiedProperties @ 00009b40 ===
+
+/* m_audio_b_FWPropertyDict::ApplyModifiedProperties(bool) */
+
+void __thiscall
+m_audio_b_FWPropertyDict::ApplyModifiedProperties(m_audio_b_FWPropertyDict *this,bool param_1)
+
+{
+  long *plVar1;
+  char cVar2;
+  int iVar3;
+  long lVar4;
+  IOService *pIVar5;
+  long *plVar6;
+  long *local_38;
+  
+  cVar2 = _OSCompareAndSwap(0,1,this + 0x70);
+  if ((cVar2 != '\0') && (*(OSDictionary **)(this + 0x58) != (OSDictionary *)0x0)) {
+    CacheModifiedPropertyDictionaryInUserClients(this,*(OSDictionary **)(this + 0x58));
+    local_38 = (long *)0x0;
+    lVar4 = TCollectionIterator<OSSymbol*>::start
+                      ((TCollectionIterator<OSSymbol*> *)&local_38,*(OSCollection **)(this + 0x58));
+    plVar1 = local_38;
+    while (lVar4 != 0) {
+      pIVar5 = (IOService *)
+               (**(code **)(**(long **)(this + 0x60) + 0x1f8))(*(long **)(this + 0x60),lVar4);
+      plVar6 = *(long **)(this + 0x58);
+      if (pIVar5 == (IOService *)0x0) {
+        (**(code **)(*plVar6 + 0x1d8))(plVar6,lVar4);
+        (**(code **)(*plVar1 + 0x118))(plVar1);
+      }
+      else {
+        plVar6 = (long *)(**(code **)(*plVar6 + 0x1f8))(plVar6,lVar4);
+        if (plVar6 != (long *)0x0) {
+          (**(code **)(*plVar6 + 0x20))(plVar6);
+          (**(code **)(**(long **)(this + 0x58) + 0x1d8))(*(long **)(this + 0x58),lVar4);
+          (**(code **)(*plVar1 + 0x118))(plVar1);
+          iVar3 = (**(code **)(*(long *)pIVar5 + 0x128))(pIVar5,lVar4,plVar6);
+          (**(code **)(*plVar6 + 0x28))(plVar6);
+          if ((iVar3 == 0) && (param_1)) {
+            m_audio_b_FWBaseProp::NotifyAudioControlsOfChange(pIVar5);
+          }
+        }
+      }
+      lVar4 = (**(code **)(*plVar1 + 0x128))(plVar1);
+    }
+    if (plVar1 != (long *)0x0) {
+      (**(code **)(*plVar1 + 0x28))(plVar1);
+    }
+    _OSCompareAndSwap(1,0,this + 0x70);
+  }
+  return;
+}
+
+
+
+=== FWSettingsLevels::SendToDevice @ 00021a36 ===
+
+/* FWSettingsLevels::SendToDevice() */
+
+undefined8 __thiscall FWSettingsLevels::SendToDevice(FWSettingsLevels *this)
+
+{
+  m_audio_b_FWBaseArrayProp *this_00;
+  uint uVar1;
+  undefined4 uVar2;
+  ulong uVar3;
+  uint uVar4;
+  uint uVar5;
+  
+  if (this[0x8e2] != (FWSettingsLevels)0x0) {
+    (*(code *)PTR_SendLevelsToDevice_00047fe8)(this + 0x8d0);
+  }
+  if (this[0x942] != (FWSettingsLevels)0x0) {
+    (*(code *)PTR_SendLevelsToDevice_00047fe8)(this + 0x930);
+  }
+  if (*(long **)(this + 0x8c8) != (long *)0x0) {
+    (**(code **)(**(long **)(this + 0x8c8) + 0x28))();
+  }
+  if (*(long **)(this + 0x8c0) != (long *)0x0) {
+    uVar1 = (**(code **)(**(long **)(this + 0x8c0) + 0x10))();
+    this_00 = (m_audio_b_FWBaseArrayProp *)(this + 0x10);
+    uVar4 = 0;
+    uVar2 = m_audio_b_FWBaseArrayProp::Get(this_00,0);
+    (**(code **)**(undefined8 **)(this + 0x48))(*(undefined8 **)(this + 0x48),1,uVar2);
+    uVar2 = m_audio_b_FWBaseArrayProp::Get(this_00,1);
+    (**(code **)**(undefined8 **)(this + 0x48))(*(undefined8 **)(this + 0x48),2,uVar2);
+    uVar2 = m_audio_b_FWBaseArrayProp::Get(this_00,2);
+    (**(code **)**(undefined8 **)(this + 0x48))(*(undefined8 **)(this + 0x48),3,uVar2);
+    uVar2 = m_audio_b_FWBaseArrayProp::Get(this_00,3);
+    (**(code **)**(undefined8 **)(this + 0x48))(*(undefined8 **)(this + 0x48),4,uVar2);
+    if (uVar1 >> 1 != 0) {
+      do {
+        uVar2 = m_audio_b_FWBaseArrayProp::Get((m_audio_b_FWBaseArrayProp *)(this + 0x990),uVar4);
+        uVar5 = uVar4 + 2;
+        uVar4 = uVar4 + 1;
+        (**(code **)**(undefined8 **)(this + 0x9c8))(*(undefined8 **)(this + 0x9c8),uVar4,uVar2);
+      } while (uVar5 <= uVar1 >> 1);
+    }
+  }
+  if (*(long **)(this + 0x8b0) != (long *)0x0) {
+    uVar3 = (**(code **)(**(long **)(this + 0x8b0) + 0x10))();
+    if ((uVar3 >> 1 & 0x7fffffff) != 0) {
+      uVar1 = 0;
+      do {
+        uVar2 = m_audio_b_FWBaseArrayProp::Get((m_audio_b_FWBaseArrayProp *)(this + 0x9f0),uVar1);
+        uVar4 = uVar1 + 2;
+        uVar1 = uVar1 + 1;
+        (**(code **)**(undefined8 **)(this + 0xa28))(*(undefined8 **)(this + 0xa28),uVar1,uVar2);
+      } while (uVar4 <= ((uint)(uVar3 >> 1) & 0x7fffffff));
+    }
+  }
+  return 0;
+}
+
+
+
+=== FWSettingsLevels::ResetToFactorySettings @ 00021bc4 ===
+
+/* FWSettingsLevels::ResetToFactorySettings() */
+
+undefined8 __thiscall FWSettingsLevels::ResetToFactorySettings(FWSettingsLevels *this)
+
+{
+  uint uVar1;
+  bool bVar2;
+  int iVar3;
+  long *plVar4;
+  uint uVar5;
+  
+  *(undefined4 *)(this + 0x11c) = 1;
+  *(undefined1 *)(*(long *)(this + 0x8c0) + 0x11) = 0;
+  if (this[0x942] != (FWSettingsLevels)0x0) {
+    iVar3 = (int)(this + 0x930);
+    m_audio_FWb::BaseChannelGroup::SetAllLevels(iVar3);
+    m_audio_FWb::BaseChannelGroup::SetAllBalance(iVar3);
+    bVar2 = SUB81(this + 0x930,0);
+    m_audio_FWb::BaseChannelGroup::SetAllMute(bVar2);
+    m_audio_FWb::BaseChannelGroup::SetAllSolo(bVar2);
+    m_audio_FWb::BaseChannelGroup::SetAllLinked(bVar2);
+  }
+  if (this[0x8e2] != (FWSettingsLevels)0x0) {
+    iVar3 = (int)(this + 0x8d0);
+    m_audio_FWb::BaseChannelGroup::SetAllLevels(iVar3);
+    m_audio_FWb::BaseChannelGroup::SetAllBalance(iVar3);
+    bVar2 = SUB81(this + 0x8d0,0);
+    m_audio_FWb::BaseChannelGroup::SetAllMute(bVar2);
+    m_audio_FWb::BaseChannelGroup::SetAllSolo(bVar2);
+    m_audio_FWb::BaseChannelGroup::SetAllLinked(bVar2);
+  }
+  plVar4 = *(long **)(this + 0x8c0);
+  if (plVar4 != (long *)0x0) {
+    if (*(int *)(this + 0x3c) != 0) {
+      uVar5 = 0;
+      do {
+        m_audio_b_FWBaseArrayProp::Set((m_audio_b_FWBaseArrayProp *)(this + 0x10),uVar5,0xffffff01);
+        m_audio_b_FWBaseArrayProp::Set((m_audio_b_FWBaseArrayProp *)(this + 0x10),uVar5 + 1,0xff);
+        uVar5 = uVar5 + 2;
+      } while (uVar5 < *(uint *)(this + 0x3c));
+      plVar4 = *(long **)(this + 0x8c0);
+    }
+    uVar5 = (**(code **)(*plVar4 + 0x10))();
+    if (1 < uVar5) {
+      uVar5 = 0;
+      do {
+        m_audio_b_FWBaseArrayProp::Set((m_audio_b_FWBaseArrayProp *)(this + 0x990),uVar5,0);
+        uVar1 = (**(code **)(**(long **)(this + 0x8c0) + 0x10))();
+        uVar5 = uVar5 + 1;
+      } while (uVar5 < uVar1 >> 1);
+    }
+  }
+  if (*(long **)(this + 0x8b0) != (long *)0x0) {
+    uVar5 = (**(code **)(**(long **)(this + 0x8b0) + 0x10))();
+    if (1 < uVar5) {
+      uVar5 = 0;
+      do {
+        m_audio_b_FWBaseArrayProp::Set
+                  ((m_audio_b_FWBaseArrayProp *)(this + 0x9f0),uVar5,
+                   (uint)(1L << ((byte)uVar5 & 0x3f)));
+        uVar1 = (**(code **)(**(long **)(this + 0x8b0) + 0x10))();
+        uVar5 = uVar5 + 1;
+      } while (uVar5 < uVar1 >> 1);
+    }
+  }
+  return 0;
+}
+
+
+
+=== FWSettingsAuxSend::SendToDevice @ 00020af4 ===
+
+/* FWSettingsAuxSend::SendToDevice() */
+
+undefined8 __thiscall FWSettingsAuxSend::SendToDevice(FWSettingsAuxSend *this)
+
+{
+  undefined4 uVar1;
+  uint uVar2;
+  
+  (**(code **)(**(long **)(this + 0x10) + 0x28))();
+  if (*(int *)(this + 0x2c8) != 0) {
+    uVar2 = 0;
+    do {
+      uVar1 = m_audio_b_FWBaseArrayProp::Get((m_audio_b_FWBaseArrayProp *)(this + 0x200),uVar2);
+      uVar2 = uVar2 + 1;
+      (**(code **)**(undefined8 **)(this + 0x238))(*(undefined8 **)(this + 0x238),uVar2,uVar1);
+    } while (uVar2 < *(uint *)(this + 0x2c8));
+  }
+  uVar1 = m_audio_b_FWBaseArrayProp::Get((m_audio_b_FWBaseArrayProp *)(this + 0x260),0);
+  (**(code **)**(undefined8 **)(this + 0x298))(*(undefined8 **)(this + 0x298),1,uVar1);
+  uVar1 = m_audio_b_FWBaseArrayProp::Get((m_audio_b_FWBaseArrayProp *)(this + 0x260),1);
+  (**(code **)**(undefined8 **)(this + 0x298))(*(undefined8 **)(this + 0x298),2,uVar1);
+  return 0;
+}
+
+
+
+=== FWSettingsAuxSend::ResetToFactorySettings @ 00020b9c ===
+
+/* FWSettingsAuxSend::ResetToFactorySettings() */
+
+undefined8 __thiscall FWSettingsAuxSend::ResetToFactorySettings(FWSettingsAuxSend *this)
+
+{
+  long *plVar1;
+  int iVar2;
+  undefined4 *puVar3;
+  int iVar4;
+  
+  plVar1 = *(long **)(this + 0x10);
+  if (plVar1 != (long *)0x0) {
+    iVar2 = (**(code **)(*plVar1 + 0x10))(plVar1);
+    if (iVar2 != 0) {
+      iVar4 = 0;
+      do {
+        puVar3 = (undefined4 *)(**(code **)(*plVar1 + 0x18))(plVar1);
+        *puVar3 = 0xffffff01;
+        iVar4 = iVar4 + 1;
+      } while (iVar2 != iVar4);
+    }
+  }
+  m_audio_b_FWBaseArrayProp::Set((m_audio_b_FWBaseArrayProp *)(this + 0x260),0,0xffffff01);
+  m_audio_b_FWBaseArrayProp::Set((m_audio_b_FWBaseArrayProp *)(this + 0x260),1,0xff);
+  m_audio_b_FWBaseArrayProp::Fill((m_audio_b_FWBaseArrayProp *)(this + 0x200),0);
+  return 0;
+}
+
+
+
+=== FWSettingsRotaryControl::ResetToFactorySettings @ 00021060 ===
+
+/* FWSettingsRotaryControl::ResetToFactorySettings() */
+
+undefined8 __thiscall FWSettingsRotaryControl::ResetToFactorySettings(FWSettingsRotaryControl *this)
+
+{
+  *(undefined8 *)(this + 0x68) = 0xffff00000000;
+  return 0;
+}
+
+
+
+=== FWSettingsABSwitch::SendToDevice @ 0001df6c ===
+
+/* FWSettingsABSwitch::SendToDevice() */
+
+undefined8 __thiscall FWSettingsABSwitch::SendToDevice(FWSettingsABSwitch *this)
+
+{
+  *(uint *)(this + 0x104) = (uint)(*(int *)(this + 0x104) != 0);
+  return 0;
+}
+
+
+
+=== FWSettingsABSwitch::ResetToFactorySettings @ 0001df88 ===
+
+/* FWSettingsABSwitch::ResetToFactorySettings() */
+
+undefined8 __thiscall FWSettingsABSwitch::ResetToFactorySettings(FWSettingsABSwitch *this)
+
+{
+  m_audio_b_FWBaseArrayProp *this_00;
+  
+  *(undefined4 *)(this + 0x104) = 0;
+  *(undefined4 *)(this + 0xd0) = 0;
+  this_00 = (m_audio_b_FWBaseArrayProp *)(this + 0x70);
+  m_audio_b_FWBaseArrayProp::Set(this_00,0,1);
+  m_audio_b_FWBaseArrayProp::Set(this_00,1,2);
+  m_audio_b_FWBaseArrayProp::Set(this_00,2,3);
+  m_audio_b_FWBaseArrayProp::Set(this_00,3,4);
+  *(undefined4 *)(this + 0x144) = 1;
+  *(undefined4 *)(this + 0x184) = 1;
+  return 0;
+}
+
+
+
+=== FWSettingsLevels::SetDirectMonitoringActive @ 000217ec ===
+
+/* FWSettingsLevels::SetDirectMonitoringActive(unsigned int) */
+
+undefined8 FWSettingsLevels::SetDirectMonitoringActive(uint param_1)
+
+{
+  undefined4 in_register_0000003c;
+  long lVar1;
+  
+  lVar1 = CONCAT44(in_register_0000003c,param_1);
+  *(undefined4 *)(lVar1 + 0x11c) = 1;
+  *(undefined1 *)(*(long *)(lVar1 + 0x8c0) + 0x11) = 0;
+  (**(code **)(**(long **)(lVar1 + 0x8c0) + 0x28))(*(long **)(lVar1 + 0x8c0),0);
+  return 0;
+}
+
+
+
+=== FWSettingsLevels::SetGlobalMute @ 00021818 ===
+
+/* FWSettingsLevels::SetGlobalMute(unsigned int) */
+
+undefined8 __thiscall FWSettingsLevels::SetGlobalMute(FWSettingsLevels *this,uint param_1)
+
+{
+  *(uint *)(this + 0x9c) = (uint)(param_1 != 0);
+  *(bool *)(*(long *)(this + 0x8b8) + 0x11) = param_1 != 0;
+  (**(code **)(**(long **)(this + 0x8b8) + 0x28))(*(long **)(this + 0x8b8),0);
+  return 0;
+}
+
+
+
+=== FWSettingsLevels::SetGlobalDim @ 00021848 ===
+
+/* FWSettingsLevels::SetGlobalDim(unsigned int) */
+
+undefined8 __thiscall FWSettingsLevels::SetGlobalDim(FWSettingsLevels *this,uint param_1)
+
+{
+  *(uint *)(this + 0xdc) = (uint)(param_1 != 0);
+  *(bool *)(*(long *)(this + 0x8b8) + 0x10) = param_1 != 0;
+  (**(code **)(**(long **)(this + 0x8b8) + 0x28))(*(long **)(this + 0x8b8),0);
+  return 0;
+}
+
+
+
+=== FWSettingsLevels::SetInputPan @ 00021878 ===
+
+/* FWSettingsLevels::SetInputPan(unsigned int, unsigned int) */
+
+void __thiscall FWSettingsLevels::SetInputPan(FWSettingsLevels *this,uint param_1,uint param_2)
+
+{
+                    /* WARNING: Could not recover jumptable at 0x0002188d. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(*(long *)this + 0x48))(this,param_1,3,-param_2);
+  return;
+}
+
+
+
+=== FWSettingsLevels::SetInputLevel @ 00021890 ===
+
+/* FWSettingsLevels::SetInputLevel(unsigned int, unsigned int) */
+
+void __thiscall FWSettingsLevels::SetInputLevel(FWSettingsLevels *this,uint param_1,uint param_2)
+
+{
+                    /* WARNING: Could not recover jumptable at 0x000218a3. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(*(long *)this + 0x48))(this,param_1,2,param_2);
+  return;
+}
+
+
+
+=== FWSettingsLevels::SetSWReturnRouting @ 000218a6 ===
+
+/* FWSettingsLevels::SetSWReturnRouting(unsigned int, unsigned int) */
+
+void __thiscall
+FWSettingsLevels::SetSWReturnRouting(FWSettingsLevels *this,uint param_1,uint param_2)
+
+{
+  code *UNRECOVERED_JUMPTABLE;
+  uint uVar1;
+  
+  UNRECOVERED_JUMPTABLE = *(code **)(*(long *)this + 0x60);
+  uVar1 = (**(code **)(**(long **)(this + 0x8b0) + 0x10))();
+                    /* WARNING: Could not recover jumptable at 0x000218f3. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (*UNRECOVERED_JUMPTABLE)(this,1,uVar1 >> 1,param_1,param_2);
+  return;
+}
+
+
+
+=== FWSettingsLevels::SetInputRouting @ 000218f6 ===
+
+/* FWSettingsLevels::SetInputRouting(unsigned int, unsigned int) */
+
+void __thiscall FWSettingsLevels::SetInputRouting(FWSettingsLevels *this,uint param_1,uint param_2)
+
+{
+  code *UNRECOVERED_JUMPTABLE;
+  uint uVar1;
+  
+  UNRECOVERED_JUMPTABLE = *(code **)(*(long *)this + 0x60);
+  uVar1 = (**(code **)(**(long **)(this + 0x8b0) + 0x10))();
+                    /* WARNING: Could not recover jumptable at 0x00021940. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (*UNRECOVERED_JUMPTABLE)(this,0,uVar1 >> 1,param_1,param_2);
+  return;
+}
+
+
+
+=== FWSettingsLevels::SetSWReturnLevel @ 00022396 ===
+
+/* FWSettingsLevels::SetSWReturnLevel(unsigned int, unsigned int) */
+
+undefined8 __thiscall
+FWSettingsLevels::SetSWReturnLevel(FWSettingsLevels *this,uint param_1,uint param_2)
+
+{
+  uint uVar1;
+  undefined8 uVar2;
+  undefined4 local_30;
+  uchar local_2c;
+  uchar local_2b;
+  undefined4 local_28;
+  
+  local_30 = 3;
+  local_2c = '\0';
+  local_2b = (uchar)param_1;
+  local_28 = 0;
+  if (((*(long **)(this + 0x8b0) != (long *)0x0) && (param_1 != 0)) &&
+     (uVar1 = (**(code **)(**(long **)(this + 0x8b0) + 0x10))(), param_1 <= uVar1)) {
+    uVar2 = (**(code **)(**(long **)(this + 0xa58) + 0xb48))(*(long **)(this + 0xa58),&local_30);
+    if ((int)uVar2 != 0) {
+      return uVar2;
+    }
+    uVar2 = m_audio_b_FWAVCAudioDevice::AVCControlFeatureFunctionBlock
+                      (*(m_audio_b_FWAVCAudioDevice **)(this + 0xa58),local_2c,'\x02',local_2b,
+                       (ushort)(param_2 << 7));
+    return uVar2;
+  }
+  return 0xe00002c2;
+}
+
+
+
+=== FWSettingsLevels::SetOutputLevel @ 00022428 ===
+
+/* FWSettingsLevels::SetOutputLevel(unsigned int, unsigned int) */
+
+undefined8 __thiscall
+FWSettingsLevels::SetOutputLevel(FWSettingsLevels *this,uint param_1,uint param_2)
+
+{
+  uint uVar1;
+  undefined8 uVar2;
+  undefined4 local_30;
+  uchar local_2c;
+  uchar local_2b;
+  undefined4 local_28;
+  
+  local_30 = 2;
+  local_2c = '\0';
+  local_2b = (uchar)param_1;
+  local_28 = 0;
+  if (((*(long **)(this + 0x8b8) != (long *)0x0) && (param_1 != 0)) &&
+     (uVar1 = (**(code **)(**(long **)(this + 0x8b8) + 0x10))(), param_1 <= uVar1)) {
+    uVar2 = (**(code **)(**(long **)(this + 0xa58) + 0xb48))(*(long **)(this + 0xa58),&local_30);
+    if ((int)uVar2 != 0) {
+      return uVar2;
+    }
+    uVar2 = m_audio_b_FWAVCAudioDevice::AVCControlFeatureFunctionBlock
+                      (*(m_audio_b_FWAVCAudioDevice **)(this + 0xa58),local_2c,'\x02',local_2b,
+                       (ushort)(param_2 << 7));
+    return uVar2;
+  }
+  return 0xe00002c2;
+}
+
+
+
+=== FWSettingsLevels::SetHeadphonesLevel @ 000224ba ===
+
+/* FWSettingsLevels::SetHeadphonesLevel(unsigned int, unsigned int) */
+
+undefined8 __thiscall
+FWSettingsLevels::SetHeadphonesLevel(FWSettingsLevels *this,uint param_1,uint param_2)
+
+{
+  uint uVar1;
+  undefined8 uVar2;
+  undefined4 local_30;
+  uchar local_2c;
+  uchar local_2b;
+  undefined4 local_28;
+  
+  local_30 = 1;
+  local_2c = '\0';
+  local_2b = (uchar)param_1;
+  local_28 = 0;
+  if (((*(long **)(this + 0x8c8) != (long *)0x0) && (param_1 != 0)) &&
+     (uVar1 = (**(code **)(**(long **)(this + 0x8c8) + 0x10))(), param_1 <= uVar1)) {
+    uVar2 = (**(code **)(**(long **)(this + 0xa58) + 0xb48))(*(long **)(this + 0xa58),&local_30);
+    if ((int)uVar2 != 0) {
+      return uVar2;
+    }
+    uVar2 = m_audio_b_FWAVCAudioDevice::AVCControlFeatureFunctionBlock
+                      (*(m_audio_b_FWAVCAudioDevice **)(this + 0xa58),local_2c,'\x02',local_2b,
+                       (ushort)(param_2 << 7));
+    return uVar2;
+  }
+  return 0xe00002c2;
+}
+
+
+
+=== FWSettingsLevels::SetInputChannelFeature @ 0002254c ===
+
+/* FWSettingsLevels::SetInputChannelFeature(unsigned int, unsigned char, unsigned int) */
+
+void __thiscall
+FWSettingsLevels::SetInputChannelFeature
+          (FWSettingsLevels *this,uint param_1,uchar param_2,uint param_3)
+
+{
+  undefined4 local_30;
+  uchar local_2c;
+  uchar local_2b;
+  undefined4 local_28;
+  
+  local_30 = 6;
+  local_2c = '\0';
+  local_2b = (uchar)param_1;
+  local_28 = 0;
+  (**(code **)(**(long **)(this + 0xa58) + 0xb48))(*(long **)(this + 0xa58),&local_30);
+  m_audio_b_FWAVCAudioDevice::AVCControlFeatureFunctionBlock
+            (*(m_audio_b_FWAVCAudioDevice **)(this + 0xa58),local_2c,param_2,local_2b,
+             (ushort)(param_3 << 7));
+  return;
+}
+
+
+
+=== FWSettingsLevels::SetAVCRouting @ 000225b4 ===
+
+/* FWSettingsLevels::SetAVCRouting(m_audio_b_FWAVCAudioDevice::GenericBusType, unsigned int,
+   unsigned int, unsigned int) */
+
+ulong __thiscall
+FWSettingsLevels::SetAVCRouting
+          (FWSettingsLevels *this,undefined4 param_2,uint param_3,undefined4 param_4,uint param_5)
+
+{
+  uint uVar1;
+  ulong uVar2;
+  uint uVar3;
+  undefined4 local_40;
+  undefined4 local_3c;
+  uint local_38;
+  uchar local_34;
+  uchar local_33;
+  
+  uVar2 = 0xe00002bc;
+  uVar3 = 0;
+  local_40 = param_2;
+  while( true ) {
+    if (param_3 <= uVar3) {
+      return uVar2;
+    }
+    local_3c = param_4;
+    local_38 = uVar3 + 1;
+    uVar1 = (**(code **)(**(long **)(this + 0xa58) + 0xb40))(*(long **)(this + 0xa58),&local_40);
+    uVar2 = (ulong)uVar1;
+    if (uVar1 == 0xe00002d7) {
+      uVar2 = 0;
+    }
+    if ((int)uVar2 != 0) break;
+    uVar2 = m_audio_b_FWAVCAudioDevice::AVCMixerConnectPair
+                      (*(m_audio_b_FWAVCAudioDevice **)(this + 0xa58),
+                       (bool)((byte)(param_5 >> ((byte)uVar3 & 0x1f)) & 1),local_34,local_33,
+                       (uchar)local_3c,(uchar)local_38);
+    uVar3 = uVar3 + 1;
+    if ((int)uVar2 != 0) {
+      return uVar2;
+    }
+  }
+  return uVar2;
+}
+
+
+
+=== FWSettingsAuxSend::SetAuxMonitor @ 00020c68 ===
+
+/* FWSettingsAuxSend::SetAuxMonitor(unsigned int, unsigned int) */
+
+undefined8 __thiscall
+FWSettingsAuxSend::SetAuxMonitor(FWSettingsAuxSend *this,uint param_1,uint param_2)
+
+{
+  undefined8 uVar1;
+  undefined4 local_28;
+  uchar local_24;
+  undefined1 local_23;
+  undefined4 local_20;
+  
+  local_28 = 5;
+  local_24 = '\0';
+  local_23 = (undefined1)param_1;
+  local_20 = 0;
+  if (param_2 < 2) {
+    uVar1 = (**(code **)(**(long **)(this + 0x2d0) + 0xb48))(*(long **)(this + 0x2d0),&local_28);
+    if ((int)uVar1 == 0) {
+      uVar1 = m_audio_b_FWAVCAudioDevice::AVCSelectorCommand
+                        (*(m_audio_b_FWAVCAudioDevice **)(this + 0x2d0),local_24,param_2 != 0);
+    }
+  }
+  else {
+    uVar1 = 0xe00002c2;
+  }
+  return uVar1;
+}
+
+
+
+=== FWSettingsAuxSend::SetAuxOutChannelFeature @ 00020cd4 ===
+
+/* FWSettingsAuxSend::SetAuxOutChannelFeature(unsigned int, unsigned char, unsigned int) */
+
+undefined8 __thiscall
+FWSettingsAuxSend::SetAuxOutChannelFeature
+          (FWSettingsAuxSend *this,uint param_1,uchar param_2,uint param_3)
+
+{
+  uint uVar1;
+  undefined8 uVar2;
+  undefined4 local_38;
+  uchar local_34;
+  uchar local_33;
+  undefined4 local_30;
+  
+  local_38 = 7;
+  local_34 = '\0';
+  local_33 = (uchar)param_1;
+  local_30 = 0;
+  if ((param_1 != 0) && (uVar1 = (**(code **)(**(long **)(this + 0x18) + 0x10))(), param_1 <= uVar1)
+     ) {
+    uVar2 = (**(code **)(**(long **)(this + 0x2d0) + 0xb48))(*(long **)(this + 0x2d0),&local_38);
+    if ((int)uVar2 != 0) {
+      return uVar2;
+    }
+    uVar2 = m_audio_b_FWAVCAudioDevice::AVCControlFeatureFunctionBlock
+                      (*(m_audio_b_FWAVCAudioDevice **)(this + 0x2d0),local_34,param_2,local_33,
+                       (ushort)(param_3 << 7));
+    return uVar2;
+  }
+  return 0xe00002c2;
+}
+
+
+
+=== FWSettingsAuxSend::SetAuxOutputLevel @ 00020d66 ===
+
+/* FWSettingsAuxSend::SetAuxOutputLevel(unsigned int, unsigned int) */
+
+void __thiscall
+FWSettingsAuxSend::SetAuxOutputLevel(FWSettingsAuxSend *this,uint param_1,uint param_2)
+
+{
+  SetAuxOutChannelFeature(this,param_1,'\x02',param_2);
+  return;
+}
+
+
+
+=== FWSettingsAuxSend::SetAuxPan @ 00020d78 ===
+
+/* FWSettingsAuxSend::SetAuxPan(unsigned int, unsigned int) */
+
+void __thiscall FWSettingsAuxSend::SetAuxPan(FWSettingsAuxSend *this,uint param_1,uint param_2)
+
+{
+  SetAuxOutChannelFeature(this,param_1,'\x03',-param_2);
+  return;
+}
+
+
+
+=== FWSettingsAuxSend::SetAuxSendLevel @ 00020d8c ===
+
+/* FWSettingsAuxSend::SetAuxSendLevel(unsigned int, unsigned int) */
+
+void __thiscall
+FWSettingsAuxSend::SetAuxSendLevel(FWSettingsAuxSend *this,uint param_1,uint param_2)
+
+{
+  int iVar1;
+  undefined4 local_28;
+  uchar local_24;
+  uchar local_23;
+  undefined4 local_20;
+  
+  local_28 = 0;
+  local_24 = '\0';
+  local_23 = (uchar)param_1;
+  local_20 = 0;
+  iVar1 = (**(code **)(**(long **)(this + 0x2d0) + 0xb48))(*(long **)(this + 0x2d0),&local_28);
+  if (iVar1 == -0x1ffffd29) {
+    iVar1 = 0;
+  }
+  if (iVar1 == 0) {
+    m_audio_b_FWAVCAudioDevice::AVCControlFeatureFunctionBlock
+              (*(m_audio_b_FWAVCAudioDevice **)(this + 0x2d0),local_24,'\x02',local_23,
+               (ushort)(param_2 << 7));
+  }
+  return;
+}
+
+
+
+=== FWSettings1814AuxSend::SetAuxMonitor @ 0000d0b4 ===
+
+/* FWSettings1814AuxSend::SetAuxMonitor(unsigned int, unsigned int) */
+
+void __thiscall
+FWSettings1814AuxSend::SetAuxMonitor(FWSettings1814AuxSend *this,uint param_1,uint param_2)
+
+{
+  long *plVar1;
+  
+  plVar1 = (long *)OSMetaClassBase::safeMetaCast
+                             (*(OSMetaClassBase **)(this + 8),
+                              (OSMetaClass *)&com_m_audio_FW1814Device::gMetaClass);
+                    /* WARNING: Could not recover jumptable at 0x0000d0e6. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(*plVar1 + 0xbc8))(plVar1,param_1,param_2,*(code **)(*plVar1 + 0xbc8));
+  return;
+}
+
+
+
+=== FWSettings1814Levels::SetInputPan @ 0000d128 ===
+
+/* FWSettings1814Levels::SetInputPan(unsigned int, unsigned int) */
+
+void __thiscall
+FWSettings1814Levels::SetInputPan(FWSettings1814Levels *this,uint param_1,uint param_2)
+
+{
+  long *plVar1;
+  
+  plVar1 = (long *)OSMetaClassBase::safeMetaCast
+                             (*(OSMetaClassBase **)(this + 8),
+                              (OSMetaClass *)&com_m_audio_FW1814Device::gMetaClass);
+                    /* WARNING: Could not recover jumptable at 0x0000d15a. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(*plVar1 + 0xbc0))(plVar1,param_1,param_2,*(code **)(*plVar1 + 0xbc0));
+  return;
+}
+
+
+
+=== FWSettings1814Levels::SetInputRouting @ 0000d15c ===
+
+/* FWSettings1814Levels::SetInputRouting(unsigned int, unsigned int) */
+
+void __thiscall
+FWSettings1814Levels::SetInputRouting(FWSettings1814Levels *this,uint param_1,uint param_2)
+
+{
+  long *plVar1;
+  
+  plVar1 = (long *)OSMetaClassBase::safeMetaCast
+                             (*(OSMetaClassBase **)(this + 8),
+                              (OSMetaClass *)&com_m_audio_FW1814Device::gMetaClass);
+                    /* WARNING: Could not recover jumptable at 0x0000d18e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(*plVar1 + 3000))(plVar1,param_1,param_2,*(code **)(*plVar1 + 3000));
+  return;
+}
+
+
+
+=== com_m_audio_FW1814Device::ResetToFactorySettings @ 0000d190 ===
+
+/* com_m_audio_FW1814Device::ResetToFactorySettings() */
+
+void __thiscall com_m_audio_FW1814Device::ResetToFactorySettings(com_m_audio_FW1814Device *this)
+
+{
+  (*(code *)PTR_ResetToFactorySettings_0003c1a8)(this);
+  (*(code *)PTR_ResetToFactorySettings_000470f8)(this + 0x2d8);
+  (*(code *)PTR_ResetToFactorySettings_00048dd8)(this + 0x470);
+  FWSettingsAuxSend::ResetToFactorySettings((FWSettingsAuxSend *)(this + 0xf98));
+  FWSettingsLevels::ResetToFactorySettings((FWSettingsLevels *)(this + 0x538));
+  *(undefined4 *)(this + 0x144) = 0x40000003;
+  return;
+}
+
+
+
+=== com_m_audio_FW1814Device::SetHeadphoneSelector @ 0000d1f8 ===
+
+/* com_m_audio_FW1814Device::SetHeadphoneSelector(unsigned int, unsigned int) */
+
+void __thiscall
+com_m_audio_FW1814Device::SetHeadphoneSelector
+          (com_m_audio_FW1814Device *this,uint param_1,uint param_2)
+
+{
+  uint uVar1;
+  int iVar2;
+  int iVar3;
+  
+  uVar1 = *(uint *)(this + 0x1310) & 0xfffff8ff;
+  if (param_1 == 0) {
+    uVar1 = *(uint *)(this + 0x1310) & 0xf8ffffff;
+  }
+  *(uint *)(this + 0x1310) = uVar1;
+  if (param_2 == 2) {
+    iVar3 = (uint)(param_1 == 0) << 0x1a;
+    iVar2 = (uint)(param_1 != 0) << 10;
+  }
+  else if (param_2 == 1) {
+    iVar3 = (uint)(param_1 == 0) << 0x19;
+    iVar2 = (uint)(param_1 != 0) << 9;
+  }
+  else {
+    if (param_2 != 0) goto LAB_0000d27e;
+    iVar3 = (uint)(param_1 == 0) << 0x18;
+    iVar2 = (uint)(param_1 != 0) << 8;
+  }
+  *(uint *)(this + 0x1310) = iVar2 + iVar3 | uVar1;
+LAB_0000d27e:
+                    /* WARNING: Could not recover jumptable at 0x0000d296. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(*(long *)this + 0xba8))(this,0x98,1);
+  return;
+}
+
+
+
+=== com_m_audio_FW1814Device::SetAuxMonitor @ 0000cfc4 ===
+
+/* com_m_audio_FW1814Device::SetAuxMonitor(unsigned int, unsigned int) */
+
+void __thiscall
+com_m_audio_FW1814Device::SetAuxMonitor(com_m_audio_FW1814Device *this,uint param_1,uint param_2)
+
+{
+  uint uVar1;
+  
+  uVar1 = (uint)(1L << ((char)param_1 - 1U & 0x3f));
+  uVar1 = uVar1 >> 0x18 | (uVar1 & 0xff0000) >> 8 | (uVar1 & 0xff00) << 8 | uVar1 << 0x18;
+  if (param_2 == 0) {
+    uVar1 = *(uint *)(this + 0x1314) & ~uVar1;
+  }
+  else {
+    uVar1 = uVar1 | *(uint *)(this + 0x1314);
+  }
+  *(uint *)(this + 0x1314) = uVar1;
+                    /* WARNING: Could not recover jumptable at 0x0000d012. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(*(long *)this + 0xba8))(this,0x9c,1,this + 0x1314);
+  return;
+}
+
+
+
+=== com_m_audio_FW1814Device::ResendCurrentMixerSettings @ 0000d014 ===
+
+/* com_m_audio_FW1814Device::ResendCurrentMixerSettings() */
+
+void __thiscall com_m_audio_FW1814Device::ResendCurrentMixerSettings(com_m_audio_FW1814Device *this)
+
+{
+  (*(code *)PTR_ResendCurrentMixerSettings_0003c1a0)(this);
+  (*(code *)PTR_SendToDevice_000470f0)(this + 0x2d8);
+  (*(code *)PTR_SendToDevice_00048dd0)(this + 0x470);
+  FWSettingsAuxSend::SendToDevice((FWSettingsAuxSend *)(this + 0xf98));
+  FWSettingsLevels::SendToDevice((FWSettingsLevels *)(this + 0x538));
+  return;
+}
+
+
+
+=== com_m_audio_FW1814Device::SetInputRouting @ 0000dbea ===
+
+/* com_m_audio_FW1814Device::SetInputRouting(unsigned int, unsigned int) */
+
+undefined8 __thiscall
+com_m_audio_FW1814Device::SetInputRouting(com_m_audio_FW1814Device *this,uint param_1,uint param_2)
+
+{
+  char cVar1;
+  uint uVar2;
+  uint uVar3;
+  
+  if ((param_1 == 0) ||
+     (uVar2 = (**(code **)(*(long *)(this + 0x13e0) + 0x10))(this + 0x13e0), uVar2 >> 1 < param_1))
+  {
+    return 0xe00002c2;
+  }
+  cVar1 = (char)param_1;
+  if (param_1 < 5) {
+    uVar2 = 1 << (cVar1 - 1U & 0x1f);
+    uVar2 = uVar2 >> 0x18 | (uVar2 & 0xff0000) >> 8 | (uVar2 & 0xff00) << 8 | uVar2 << 0x18;
+    if ((param_2 & 1) == 0) {
+      uVar2 = ~uVar2 & *(uint *)(this + 0x1308);
+    }
+    else {
+      uVar2 = uVar2 | *(uint *)(this + 0x1308);
+    }
+    *(uint *)(this + 0x1308) = uVar2;
+    uVar3 = 1 << (cVar1 + 3U & 0x1f);
+    uVar3 = uVar3 >> 0x18 | (uVar3 & 0xff0000) >> 8 | (uVar3 & 0xff00) << 8 | uVar3 << 0x18;
+    if ((param_2 & 2) == 0) {
+      uVar3 = ~uVar3 & uVar2;
+    }
+    else {
+      uVar3 = uVar3 | uVar2;
+    }
+  }
+  else {
+    if (5 < param_1) {
+      if (param_1 < 10) {
+        uVar2 = 1 << (cVar1 + 2U & 0x1f);
+        uVar2 = uVar2 >> 0x18 | (uVar2 & 0xff0000) >> 8 | (uVar2 & 0xff00) << 8 | uVar2 << 0x18;
+        if ((param_2 & 1) == 0) {
+          uVar2 = ~uVar2 & *(uint *)(this + 0x1308);
+        }
+        else {
+          uVar2 = uVar2 | *(uint *)(this + 0x1308);
+        }
+        *(uint *)(this + 0x1308) = uVar2;
+        uVar3 = 1 << (cVar1 + 6U & 0x1f);
+        uVar3 = uVar3 >> 0x18 | (uVar3 & 0xff0000) >> 8 | (uVar3 & 0xff00) << 8 | uVar3 << 0x18;
+        if ((param_2 & 2) == 0) {
+          uVar3 = ~uVar3 & uVar2;
+        }
+        else {
+          uVar3 = uVar3 | uVar2;
+        }
+        *(uint *)(this + 0x1308) = uVar3;
+      }
+      goto LAB_0000dd0d;
+    }
+    uVar2 = *(uint *)(this + 0x1308) | 0x100;
+    if ((param_2 & 1) == 0) {
+      uVar2 = *(uint *)(this + 0x1308) & 0xfffffeff;
+    }
+    uVar3 = uVar2 | 0x200;
+    if ((param_2 & 2) == 0) {
+      uVar3 = uVar2 & 0xfffffdff;
+    }
+  }
+  *(uint *)(this + 0x1308) = uVar3;
+LAB_0000dd0d:
+  (**(code **)(*(long *)this + 0xba8))(this,0x90,1,this + 0x1308);
+  return 0;
+}
+
+
+
+=== com_m_audio_FW1814Device::SetInputPan @ 0000dd3e ===
+
+/* com_m_audio_FW1814Device::SetInputPan(unsigned int, unsigned int) */
+
+undefined8 __thiscall
+com_m_audio_FW1814Device::SetInputPan(com_m_audio_FW1814Device *this,uint param_1,uint param_2)
+
+{
+  undefined *puVar1;
+  uint uVar2;
+  undefined8 uVar3;
+  ulong uVar4;
+  
+  uVar2 = param_1 - 1;
+  if (uVar2 < 0x12) {
+    uVar4 = (ulong)uVar2;
+    *(ushort *)(this + (long)(&UNK_000012b8 + uVar4 * 2)) =
+         ((ushort)(-param_2 >> 1) & 0xff) + (short)param_2 * -0x8000;
+    if ((param_1 & 1) == 0) {
+      puVar1 = &UNK_000012b6 + uVar4 * 2;
+    }
+    else {
+      puVar1 = &UNK_000012b8 + uVar4 * 2;
+      uVar2 = param_1;
+    }
+                    /* WARNING: Could not recover jumptable at 0x0000dd94. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+    uVar3 = (**(code **)(*(long *)this + 0xba8))(this,uVar2 * 2 + 0x3e,1,this + (long)puVar1);
+    return uVar3;
+  }
+  return 0xe00002c2;
+}
+
+
+
+=== com_m_audio_FW1814Device::SourceMaskToHeadphoneSelector @ 0000cf8c ===
+
+/* com_m_audio_FW1814Device::SourceMaskToHeadphoneSelector(unsigned int) */
+
+undefined8 __thiscall
+com_m_audio_FW1814Device::SourceMaskToHeadphoneSelector(com_m_audio_FW1814Device *this,uint param_1)
+
+{
+  if ((param_1 != 8) && (param_1 != 4)) {
+    if (param_1 == 2) {
+      return 1;
+    }
+    return 0;
+  }
+  return 3;
+}
+
+
+
+=== com_m_audio_FW1814Device::MapRoutingParameters @ 0000cfb2 ===
+
+/* com_m_audio_FW1814Device::MapRoutingParameters(m_audio_b_FWAVCAudioDevice::Routing&) */
+
+void __thiscall
+com_m_audio_FW1814Device::MapRoutingParameters(com_m_audio_FW1814Device *this,Routing *param_1)
+
+{
+  (*(code *)PTR_MapRoutingParameters_0003c1e0)();
+  return;
+}
+
+
+
+=== FWSettingsABSwitch::SetHeadphoneSecondSource @ 0001ddfe ===
+
+/* FWSettingsABSwitch::SetHeadphoneSecondSource(unsigned int) */
+
+void FWSettingsABSwitch::SetHeadphoneSecondSource(uint param_1)
+
+{
+  code *UNRECOVERED_JUMPTABLE;
+  undefined4 uVar1;
+  undefined4 in_register_0000003c;
+  long *plVar2;
+  
+  plVar2 = (long *)CONCAT44(in_register_0000003c,param_1);
+  uVar1 = (**(code **)(*plVar2 + 0x28))(plVar2);
+  UNRECOVERED_JUMPTABLE = (code *)**(undefined8 **)plVar2[5];
+                    /* WARNING: Could not recover jumptable at 0x0001de2a. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (*UNRECOVERED_JUMPTABLE)((undefined8 *)plVar2[5],1,uVar1,UNRECOVERED_JUMPTABLE);
+  return;
+}
+
+
+
+=== FWSettingsABSwitch::SetHeadphoneSource @ 0001de2c ===
+
+/* FWSettingsABSwitch::SetHeadphoneSource(unsigned int) */
+
+void __thiscall FWSettingsABSwitch::SetHeadphoneSource(FWSettingsABSwitch *this,uint param_1)
+
+{
+  code *UNRECOVERED_JUMPTABLE;
+  undefined4 uVar1;
+  
+  *(undefined4 *)(this + 0x104) = 1;
+  UpdateLEDs(this);
+  uVar1 = (**(code **)(*(long *)this + 0x28))(this,param_1);
+  UNRECOVERED_JUMPTABLE = *(code **)**(undefined8 **)(this + 0x28);
+                    /* WARNING: Could not recover jumptable at 0x0001de68. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (*UNRECOVERED_JUMPTABLE)(*(undefined8 **)(this + 0x28),0,uVar1,UNRECOVERED_JUMPTABLE);
+  return;
+}
+
+
+
+=== FWSettingsABSwitch::SubmitHeadphoneSourceChange @ 0001e2e2 ===
+
+/* FWSettingsABSwitch::SubmitHeadphoneSourceChange() */
+
+void __thiscall FWSettingsABSwitch::SubmitHeadphoneSourceChange(FWSettingsABSwitch *this)
+
+{
+  undefined4 uVar1;
+  OSObject *pOVar2;
+  
+  pOVar2 = (OSObject *)OSNumber::withNumber((ulong)*(uint *)(this + 0x144),0x20);
+  if (pOVar2 == (OSObject *)0x0) {
+    return;
+  }
+  uVar1 = (**(code **)(*(long *)this + 0x28))(this,*(undefined4 *)(this + 0x144));
+  (**(code **)**(undefined8 **)(this + 0x28))(*(undefined8 **)(this + 0x28),0,uVar1);
+  m_audio_b_FWPropertyDict::SendArbitraryPropertyToUserClients
+            (*(m_audio_b_FWPropertyDict **)(*(long *)(this + 8) + 0xf8),"MAHeadphoneSourceV2",pOVar2
+            );
+                    /* WARNING: Could not recover jumptable at 0x0001e349. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(*(long *)pOVar2 + 0x28))(pOVar2);
+  return;
+}
+
+
+
+=== FWSettingsABSwitch::SetMomentarySwitchRoutingSource @ 0001e34c ===
+
+/* FWSettingsABSwitch::SetMomentarySwitchRoutingSource(unsigned int, unsigned int) */
+
+undefined8 __thiscall
+FWSettingsABSwitch::SetMomentarySwitchRoutingSource
+          (FWSettingsABSwitch *this,uint param_1,uint param_2)
+
+{
+  if (param_1 - 1 == *(int *)(this + 0xd0)) {
+    *(uint *)(this + 0x144) = param_2;
+    SubmitHeadphoneSourceChange(this);
+  }
+  return 0;
+}
+
+
+
+=== FWSettingsABSwitch::SendMixerSettingsForCurrentMomentaryMode @ 0001e36a ===
+
+/* FWSettingsABSwitch::SendMixerSettingsForCurrentMomentaryMode() */
+
+void __thiscall
+FWSettingsABSwitch::SendMixerSettingsForCurrentMomentaryMode(FWSettingsABSwitch *this)
+
+{
+  OSMetaClass *pOVar1;
+  undefined4 uVar2;
+  uint uVar3;
+  OSMetaClassBase *pOVar4;
+  long *plVar5;
+  long *plVar6;
+  long *plVar7;
+  OSObject *pOVar8;
+  uint uVar9;
+  OSObject *local_40;
+  long *local_38;
+  
+  if (*(int *)(this + 0x5c) == 0) {
+    uVar2 = m_audio_b_FWBaseArrayProp::Get
+                      ((m_audio_b_FWBaseArrayProp *)(this + 0x70),*(uint *)(this + 0xd0));
+    *(undefined4 *)(this + 0x144) = uVar2;
+    SubmitHeadphoneSourceChange(this);
+  }
+  else {
+    local_40 = (OSObject *)0x0;
+    local_38 = (long *)0x0;
+    pOVar4 = (OSMetaClassBase *)
+             m_audio_b_FWPropertyDict::CopyProperty
+                       (*(m_audio_b_FWPropertyDict **)(*(long *)(this + 8) + 0xf8),
+                        "MAInputRoutingV2");
+    plVar5 = (long *)OSMetaClassBase::safeMetaCast(pOVar4,*(OSMetaClass **)PTR_metaClass_00030078);
+    if (plVar5 == (long *)0x0) {
+      uVar9 = 0;
+      uVar3 = 0;
+    }
+    else {
+      uVar3 = 0;
+      pOVar4 = (OSMetaClassBase *)(**(code **)(*plVar5 + 0x1e8))(plVar5,0);
+      pOVar1 = *(OSMetaClass **)PTR_metaClass_00030080;
+      plVar6 = (long *)OSMetaClassBase::safeMetaCast(pOVar4,pOVar1);
+      pOVar4 = (OSMetaClassBase *)(**(code **)(*plVar5 + 0x1e8))(plVar5,1);
+      plVar7 = (long *)OSMetaClassBase::safeMetaCast(pOVar4,pOVar1);
+      if (plVar6 != (long *)0x0) {
+        uVar3 = (**(code **)(*plVar6 + 0x148))();
+      }
+      if (plVar7 == (long *)0x0) {
+        uVar9 = 0;
+      }
+      else {
+        uVar9 = (**(code **)(*plVar7 + 0x148))(plVar7);
+      }
+      (**(code **)(*plVar5 + 0x28))(plVar5);
+    }
+    if (*(int *)(this + 0xd0) == 0) {
+      local_40 = (OSObject *)OSNumber::withNumber((ulong)(uVar3 & 0xfffffffe),0x20);
+      uVar9 = uVar9 & 0xffffffed;
+    }
+    else {
+      local_40 = (OSObject *)OSNumber::withNumber((ulong)(uVar3 | 1),0x20);
+      uVar9 = uVar9 | 0x12;
+    }
+    local_38 = (long *)OSNumber::withNumber((ulong)uVar9,0x20);
+    pOVar8 = (OSObject *)OSArray::withObjects(&local_40,2,0);
+    if (((local_40 != (OSObject *)0x0) && (local_38 != (long *)0x0)) && (pOVar8 != (OSObject *)0x0))
+    {
+      m_audio_b_FWPropertyDict::SetPropertyAndNotifyUserClients
+                (*(m_audio_b_FWPropertyDict **)(*(long *)(this + 8) + 0xf8),"MAInputRoutingV2",
+                 pOVar8);
+    }
+    if (local_40 != (OSObject *)0x0) {
+      (**(code **)(*(long *)local_40 + 0x28))();
+    }
+    if (local_38 != (long *)0x0) {
+      (**(code **)(*local_38 + 0x28))();
+    }
+    if (pOVar8 != (OSObject *)0x0) {
+      (**(code **)(*(long *)pOVar8 + 0x28))(pOVar8);
+    }
+  }
+  return;
+}
+
+
+
+=== FWSettingsABSwitch::SetMomentarySwitchSource @ 0001e53e ===
+
+/* FWSettingsABSwitch::SetMomentarySwitchSource(unsigned int) */
+
+undefined8 FWSettingsABSwitch::SetMomentarySwitchSource(uint param_1)
+
+{
+  undefined4 in_register_0000003c;
+  
+  SendMixerSettingsForCurrentMomentaryMode
+            ((FWSettingsABSwitch *)CONCAT44(in_register_0000003c,param_1));
+  return 0;
+}
+
+
+
+=== FWSettingsABSwitch::MomentarySwitchPressed @ 0001e54c ===
+
+/* FWSettingsABSwitch::MomentarySwitchPressed() */
+
+void __thiscall FWSettingsABSwitch::MomentarySwitchPressed(FWSettingsABSwitch *this)
+
+{
+  *(undefined4 *)(this + 0x104) = 0;
+  if (*(int *)(this + 0xd0) == 1) {
+    *(undefined4 *)(this + 0xd0) = 0;
+  }
+  else if (*(int *)(this + 0xd0) == 0) {
+    *(undefined4 *)(this + 0xd0) = 1;
+  }
+  SendMixerSettingsForCurrentMomentaryMode(this);
+  UpdateLEDs(this);
+  return;
+}
+
+
+
+=== FWSettingsRotaryControl::SetPairLevelsFromRotary @ 00021204 ===
+
+/* FWSettingsRotaryControl::SetPairLevelsFromRotary(char const*, unsigned int, OSArray*&, int) */
+
+void __thiscall
+FWSettingsRotaryControl::SetPairLevelsFromRotary
+          (FWSettingsRotaryControl *this,char *param_1,uint param_2,OSArray **param_3,int param_4)
+
+{
+  OSMetaClassBase *pOVar1;
+  long lVar2;
+  OSArray *pOVar3;
+  bool bVar4;
+  OSArray **ppOVar5;
+  bool bVar6;
+  int iVar7;
+  
+  pOVar3 = *param_3;
+  ppOVar5 = param_3;
+  iVar7 = param_4;
+  if (pOVar3 != (OSArray *)0x0) {
+LAB_00021257:
+    bVar4 = SUB81(ppOVar5,0);
+    bVar6 = SUB41(iVar7,0);
+    AdjustOSNumberElement(pOVar3,param_2 * 2,param_4,bVar4,bVar6);
+    AdjustOSNumberElement(*param_3,param_2 * 2 + 1,param_4,bVar4,bVar6);
+    return;
+  }
+  pOVar1 = (OSMetaClassBase *)
+           m_audio_b_FWPropertyDict::CopyProperty
+                     (*(m_audio_b_FWPropertyDict **)(this + 0xc0),param_1);
+  *param_3 = (OSArray *)pOVar1;
+  if (pOVar1 != (OSMetaClassBase *)0x0) {
+    ppOVar5 = (OSArray **)PTR_metaClass_00030078;
+    lVar2 = OSMetaClassBase::safeMetaCast(pOVar1,*(OSMetaClass **)PTR_metaClass_00030078);
+    if (lVar2 != 0) {
+      pOVar3 = *param_3;
+      goto LAB_00021257;
+    }
+  }
+  return;
+}
+
+
+
+=== FWSettingsRotaryControl::SetLevelsFromKnob @ 00021284 ===
+
+/* FWSettingsRotaryControl::SetLevelsFromKnob(unsigned long long, char const*, unsigned int,
+   m_audio_FWb::BaseChannelGroup*, int) */
+
+void __thiscall
+FWSettingsRotaryControl::SetLevelsFromKnob
+          (FWSettingsRotaryControl *this,ulonglong param_1,char *param_2,uint param_3,
+          BaseChannelGroup *param_4,int param_5)
+
+{
+  OSArray *pOVar1;
+  uint uVar2;
+  long lVar3;
+  OSArray *local_38;
+  
+  if (param_4 != (BaseChannelGroup *)0x0) {
+    local_38 = (OSArray *)0x0;
+    uVar2 = (**(code **)(*(long *)param_4 + 0x10))();
+    if (param_3 < (uVar2 >> 1) + param_3) {
+      lVar3 = 0;
+      do {
+        if ((param_1 >> ((ulong)param_3 + lVar3 & 0x3f) & 1) != 0) {
+          SetPairLevelsFromRotary(this,param_2,(uint)lVar3,&local_38,param_5);
+        }
+        pOVar1 = local_38;
+        lVar3 = lVar3 + 1;
+      } while ((ulong)((uVar2 >> 1) - 1) + 1 != lVar3);
+      if (local_38 != (OSArray *)0x0) {
+        m_audio_b_FWPropertyDict::SetPropertyAndNotifyUserClients
+                  (*(m_audio_b_FWPropertyDict **)(this + 0xc0),param_2,(OSObject *)local_38);
+        (**(code **)(*(long *)pOVar1 + 0x28))(pOVar1);
+      }
+    }
+  }
+  return;
+}
+
+
+
+=== FWSettingsRotaryControl::UserRotatedHardwareKnob @ 00021334 ===
+
+/* FWSettingsRotaryControl::UserRotatedHardwareKnob(int) */
+
+void __thiscall
+FWSettingsRotaryControl::UserRotatedHardwareKnob(FWSettingsRotaryControl *this,int param_1)
+
+{
+  ulonglong uVar1;
+  
+  uVar1 = *(ulonglong *)(this + 0x68);
+  if (uVar1 == 0) {
+    return;
+  }
+  SetLevelsFromKnob(this,uVar1,"MASWReturnLevels",0,*(BaseChannelGroup **)(this + 0x10),param_1);
+  SetLevelsFromKnob(this,uVar1,"MAOutputLevels",0x20,*(BaseChannelGroup **)(this + 0x18),param_1);
+  SetLevelsFromKnob(this,uVar1,"MAInputLevels",0x10,*(BaseChannelGroup **)(this + 0x20),param_1);
+  SetLevelsFromKnob(this,uVar1,"MAHeadphoneLevels",0x38,*(BaseChannelGroup **)(this + 0x28),param_1)
+  ;
+  SetLevelsFromKnob(this,uVar1,"MAAuxOutputLevels",0x32,*(BaseChannelGroup **)(this + 0x30),param_1)
+  ;
+  return;
+}
+
+
+
+=== FWSettingsRotaryControl::VirtualRotateKnob @ 000213f8 ===
+
+/* FWSettingsRotaryControl::VirtualRotateKnob(OSObject*) */
+
+undefined8 __thiscall
+FWSettingsRotaryControl::VirtualRotateKnob(FWSettingsRotaryControl *this,OSObject *param_1)
+
+{
+  int iVar1;
+  long *plVar2;
+  undefined8 uVar3;
+  
+  plVar2 = (long *)OSMetaClassBase::safeMetaCast
+                             ((OSMetaClassBase *)param_1,*(OSMetaClass **)PTR_metaClass_00030080);
+  if (plVar2 == (long *)0x0) {
+    uVar3 = 0xe00002bc;
+  }
+  else {
+    iVar1 = (**(code **)(*plVar2 + 0x148))(plVar2);
+    UserRotatedHardwareKnob(this,iVar1);
+    uVar3 = 0;
+  }
+  return uVar3;
+}
+
+
+

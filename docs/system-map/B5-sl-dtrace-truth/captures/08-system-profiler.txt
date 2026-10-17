@@ -1,0 +1,53 @@
+FireWire:
+
+    FireWire Bus:
+
+      Maximum Speed: Up to 800 Mb/sec
+
+        Built-in Hub:
+
+          Maximum Speed: Up to 800 Mb/sec
+          Connection Speed: Up to 800 Mb/sec
+
+        FW 1814:
+
+          Manufacturer: M-AUDIO
+          Model: 0x10071
+          GUID: 0xD6C040074B9FB
+          Maximum Speed: Up to 400 Mb/sec
+          Connection Speed: Up to 400 Mb/sec
+          Sub-units:
+            FW 1814 Unit:
+              Unit Software Version: 0x14001
+              Unit Spec ID: 0xA02D
+
+Audio (Built In):
+
+    Intel High Definition Audio:
+
+      Audio ID: 12
+
+        Line Output:
+
+          Connection: 1/8-Inch Jack
+
+        Headphone:
+
+          Connection: 1/8-Inch Jack
+
+        Line Input:
+
+          Connection: 1/8-Inch Jack
+
+        Speaker:
+
+          Connection: Internal
+
+        S/PDIF Optical Digital Audio Output:
+
+          Connection: Optical
+
+        S/PDIF Optical Digital Audio Input:
+
+          Connection: Optical
+

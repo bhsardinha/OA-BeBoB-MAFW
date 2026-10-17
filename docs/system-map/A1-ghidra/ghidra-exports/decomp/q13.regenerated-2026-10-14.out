@@ -1,0 +1,190 @@
+openjdk version "21.0.12.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode)
+INFO  Using log config file: jar:file:/Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /Users/bernardosardinha/Library/ghidra/ghidra_12.1.4_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /Users/bernardosardinha/Library/ghidra/ghidra_12.1.4_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (2256 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (5584 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 59 extension points (20 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Debug/Debugger/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/PyGhidra/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Processors/JVM/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Processors/PIC/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/VersionTracking/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/BytePatterns/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/PDB/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/Base/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/FileFormats/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Processors/DATA/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Processors/Atmel/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/BSim/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Processors/8051/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/Decompiler/ghidra_scripts
+    /Users/bernardosardinha/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/FunctionID/ghidra_scripts
+    /Users/bernardosardinha/Documents/openaudio-fw1814/docs/system-map/A1-ghidra/scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Opening existing project: /Users/bernardosardinha/Documents/openaudio-fw1814/docs/system-map/A1-ghidra/ghidra-project/fw1814-kext (HeadlessAnalyzer)  
+INFO  Opening project: /Users/bernardosardinha/Documents/openaudio-fw1814/docs/system-map/A1-ghidra/ghidra-project/fw1814-kext (HeadlessProject)  
+INFO  REPORT: Processing read-only project file: /M-AudioFireWireBeBoB.x86_64-slice (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: DecompQ13.java  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/bernardosardinha/Documents/openaudio-fw1814/docs/system-map/A1-ghidra/scripts/DecompQ13.java (HeadlessAnalyzer)  
+INFO  DecompQ13.java> === com_m_audio_FWEngine2::com_m_audio_FWEngine2 @ 00012762 === (GhidraScript)  
+INFO  DecompQ13.java> 
+/* com_m_audio_FWEngine2::com_m_audio_FWEngine2(OSMetaClass const*) */
+
+void __thiscall
+com_m_audio_FWEngine2::com_m_audio_FWEngine2(com_m_audio_FWEngine2 *this,OSMetaClass *param_1)
+
+{
+  m_audio_b_FWBaseEngine::m_audio_b_FWBaseEngine((m_audio_b_FWBaseEngine *)this,param_1);
+  *(undefined ***)this = &PTR__com_m_audio_FWEngine2_000391d0;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompQ13.java> === com_m_audio_FWEngine2::MetaClass::alloc @ 00011a18 === (GhidraScript)  
+INFO  DecompQ13.java> 
+/* com_m_audio_FWEngine2::MetaClass::alloc() const */
+
+m_audio_b_FWBaseEngine * com_m_audio_FWEngine2::MetaClass::alloc(void)
+
+{
+  m_audio_b_FWBaseEngine *this;
+  ulong in_RSI;
+  
+  this = OSObject::operator_new((OSObject *)&section_00000330.offset,in_RSI);
+  if (this != (m_audio_b_FWBaseEngine *)0x0) {
+    m_audio_b_FWBaseEngine::m_audio_b_FWBaseEngine
+              (this,(OSMetaClass *)&com_m_audio_FWEngine2::gMetaClass);
+    *(undefined ***)this = &PTR__com_m_audio_FWEngine2_000391d0;
+    OSMetaClass::instanceConstructed();
+  }
+  return this;
+}
+
+ (GhidraScript)  
+INFO  DecompQ13.java> === com_m_audio_FWAudiophileDevice::SetupAudioEngine @ 0000bb9a === (GhidraScript)  
+INFO  DecompQ13.java> 
+/* com_m_audio_FWAudiophileDevice::SetupAudioEngine(m_audio_b_FWBaseEngine*) */
+
+void __thiscall
+com_m_audio_FWAudiophileDevice::SetupAudioEngine
+          (com_m_audio_FWAudiophileDevice *this,m_audio_b_FWBaseEngine *param_1)
+
+{
+  *(undefined4 *)(param_1 + 0x2e8) = 1;
+  m_audio_b_FWBaseEngine::SetMIDIInputPorts(param_1,(m_audio_b_FWAudioDevice *)this,1,(char **)0x0);
+  m_audio_b_FWBaseEngine::SetMIDIOutputPorts(param_1,(m_audio_b_FWAudioDevice *)this,1,(char **)0x0)
+  ;
+  *(undefined4 *)(param_1 + 0x2e4) = 4;
+  *(undefined4 *)(param_1 + 0x2e0) = 6;
+  *(undefined4 *)(param_1 + 0x2f0) = 4;
+  *(undefined4 *)(param_1 + 0x2ec) = 6;
+  *(code **)(param_1 + 0x310) = _ConvertLLRR4SkipMIDI1;
+  *(com_m_audio_FWAudiophileDevice **)(param_1 + 0x318) = this;
+  *(code **)(param_1 + 0x300) = _RearrangeSampleFrameLLRR6;
+  *(code **)(param_1 + 0x308) = _SamplePeaks6;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompQ13.java> === com_m_audio_FW1814Device::SetupAudioEngine @ 0000ed34 === (GhidraScript)  
+INFO  DecompQ13.java> 
+/* com_m_audio_FW1814Device::SetupAudioEngine(m_audio_b_FWBaseEngine*) */
+
+void __thiscall
+com_m_audio_FW1814Device::SetupAudioEngine
+          (com_m_audio_FW1814Device *this,m_audio_b_FWBaseEngine *param_1)
+
+{
+  m_audio_b_FWBaseEngine::SetMIDIInputPorts(param_1,(m_audio_b_FWAudioDevice *)this,1,(char **)0x0);
+  m_audio_b_FWBaseEngine::SetMIDIOutputPorts(param_1,(m_audio_b_FWAudioDevice *)this,1,(char **)0x0)
+  ;
+  param_1[0x2d5] = (m_audio_b_FWBaseEngine)0x1;
+  param_1[0x2d6] = (m_audio_b_FWBaseEngine)0x1;
+  param_1[0x348] = (m_audio_b_FWBaseEngine)0x1;
+  *(undefined4 *)(param_1 + 0x2e8) = 1;
+  if (((byte)this[0x144] & 0x10) == 0) {
+    *(undefined4 *)(param_1 + 0x2ec) = 6;
+    *(undefined4 *)(param_1 + 0x2e0) = 6;
+  }
+  else {
+    *(undefined4 *)(param_1 + 0x2ec) = 0xc;
+    *(undefined4 *)(param_1 + 0x2e0) = 0xc;
+  }
+  if (((byte)this[0x144] & 8) == 0) {
+    *(undefined4 *)(param_1 + 0x2f0) = 10;
+    *(undefined4 *)(param_1 + 0x2e4) = 10;
+  }
+  else {
+    *(undefined4 *)(param_1 + 0x2f0) = 0x10;
+    *(undefined4 *)(param_1 + 0x2e4) = 0x10;
+  }
+                    /* WARNING: Could not recover jumptable at 0x0000ee00. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(*(long *)this + 0xaf8))(this,param_1);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompQ13.java> === m_audio_b_FWPairEngine::performAudioEngineStart @ 0001ae44 === (GhidraScript)  
+INFO  DecompQ13.java> 
+/* m_audio_b_FWPairEngine::performAudioEngineStart() */
+
+void __thiscall m_audio_b_FWPairEngine::performAudioEngineStart(m_audio_b_FWPairEngine *this)
+
+{
+  m_audio_b_FWDiscreteEngine::ActivateSubEngine
+            (*(m_audio_b_FWDiscreteEngine **)(this + 0x118),(uint)(1L << ((byte)this[300] & 0x3f)));
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompQ13.java> === m_audio_b_FWDiscreteEngine::clipOutputSamples @ 000188c6 === (GhidraScript)  
+INFO  DecompQ13.java> 
+/* m_audio_b_FWDiscreteEngine::clipOutputSamples(void const*, void*, unsigned int, unsigned int,
+   _IOAudioStreamFormat const*, IOAudioStream*) */
+
+void __thiscall
+m_audio_b_FWDiscreteEngine::clipOutputSamples
+          (m_audio_b_FWDiscreteEngine *this,void *param_1,void *param_2,uint param_3,uint param_4,
+          _IOAudioStreamFormat *param_5,IOAudioStream *param_6)
+
+{
+  ClipSubEngineOutput(this,1,param_3,param_4,param_5,param_6);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompQ13.java> === m_audio_b_FWPairEngine::clipOutputSamples @ 0001af04 === (GhidraScript)  
+INFO  DecompQ13.java> 
+/* m_audio_b_FWPairEngine::clipOutputSamples(void const*, void*, unsigned int, unsigned int,
+   _IOAudioStreamFormat const*, IOAudioStream*) */
+
+void __thiscall
+m_audio_b_FWPairEngine::clipOutputSamples
+          (m_audio_b_FWPairEngine *this,void *param_1,void *param_2,uint param_3,uint param_4,
+          _IOAudioStreamFormat *param_5,IOAudioStream *param_6)
+
+{
+  m_audio_b_FWDiscreteEngine::ClipSubEngineOutput
+            (*(m_audio_b_FWDiscreteEngine **)(this + 0x118),(uint)(1L << ((byte)this[300] & 0x3f)),
+             param_3,param_4,param_5,param_6);
+  return;
+}
+
+ (GhidraScript)  

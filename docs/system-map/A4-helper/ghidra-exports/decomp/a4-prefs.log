@@ -1,0 +1,304 @@
+=== +[MAFireWireDeviceInstance deviceInstanceForService:] @ 0x000023a0 ===
+
+undefined4
+__MAFireWireDeviceInstance_deviceInstanceForService__
+          (undefined4 param_1,undefined4 param_2,uint param_3)
+
+{
+  undefined4 *puVar1;
+  undefined4 uVar2;
+  int iVar3;
+  int iVar4;
+  undefined4 uVar5;
+  int iVar6;
+  int iVar7;
+  undefined *puVar8;
+  
+  uVar2 = _objc_msgSend(PTR_s_MAFireWireDeviceInstance_0000a008,PTR_s_alloc_0000a078);
+  iVar3 = _objc_msgSend(uVar2,PTR_s_init_0000a07c);
+  *(uint *)(iVar3 + 4) = param_3;
+  puVar1 = (undefined4 *)(iVar3 + 8);
+  iVar4 = _IOServiceOpen(param_3,*(undefined4 *)PTR__mach_task_self__00009010,0,puVar1);
+  if (iVar4 == 0) {
+    _IOObjectRetain();
+    uVar2 = CanonicalGUIDForDevice(param_3);
+    uVar2 = _objc_msgSend(uVar2,PTR_s_retain_0000a090);
+    *(undefined4 *)(iVar3 + 0x10) = uVar2;
+    uVar2 = *puVar1;
+    iVar4 = 0;
+    iVar7 = iVar3;
+    puVar8 = PTR_s_port_sentAsyncMessage_ofSize__0000a094;
+    uVar5 = _objc_msgSend(PTR_s_MAAsyncNotification_0000a00c,
+                          PTR_s_userClientNotificationOfType_con_0000a098,0,uVar2,iVar3,
+                          PTR_s_port_sentAsyncMessage_ofSize__0000a094);
+    *(undefined4 *)(iVar3 + 0x14) = uVar5;
+    _objc_msgSend(uVar5,PTR_s_retain_0000a090);
+    iVar6 = _objc_msgSend(PTR_s_MAConsoleUser_0000a010,PTR_s_currentUserName_0000a09c);
+    if (iVar6 == 0) {
+      _NSLog(&cf_Nouserloggedin);
+    }
+    else {
+      _objc_msgSend(iVar3,PTR_s_loadPrefsForUser__0000a0a0,iVar6,uVar2,iVar7,puVar8);
+      iVar4 = iVar6;
+    }
+    uVar2 = _objc_msgSend(iVar3,PTR_s_autorelease_0000a0a4,iVar4);
+  }
+  else {
+    _NSLog(&cf_IOServiceOpenstatus0x_lX,iVar4);
+    _DebugAssert(0x3f2a3f2a,0,"Third Party Client: status == 0 ","CannotOpenConnection",0,
+                 "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/DeviceHelper/MAFireWireLoader.mm"
+                 ,0x8d,iVar4);
+    _objc_msgSend(iVar3,PTR_s_release_0000a08c);
+    *puVar1 = 0;
+    uVar2 = 0;
+  }
+  return uVar2;
+}
+
+
+
+=== -[MAFireWireDeviceInstance receivedPropertyChangeMessage:] @ 0x000026df ===
+
+void __MAFireWireDeviceInstance_receivedPropertyChangeMessage__
+               (int param_1,undefined4 param_2,int param_3)
+
+{
+  char cVar1;
+  int iVar2;
+  undefined4 uVar3;
+  undefined4 local_14;
+  
+  cVar1 = _objc_msgSend(PTR_s_MAConsoleUser_0000a010,PTR_s_isUserLoggedIn_0000a0b4);
+  if (cVar1 != '\0') {
+    local_14 = 0;
+    iVar2 = _IOCFUnserialize(param_3 + 0x24,0,0,&local_14);
+    if (iVar2 == 0) {
+      _NSLog(&cf_Changedpropertyset_NULLerrorString___,local_14);
+    }
+    else {
+      uVar3 = _objc_msgSend(PTR_s_MAConsoleUser_0000a010,PTR_s_currentUserName_0000a09c);
+      _objc_msgSend(*(undefined4 *)(param_1 + 0xc),PTR_s_addEntriesFromDictionary__0000a0b8,iVar2);
+      _objc_msgSend(iVar2,PTR_s_release_0000a08c);
+      *(undefined1 *)(param_1 + 0x18) = 1;
+      _objc_msgSend(PTR_s_NSObject_0000a014,PTR_s_cancelPreviousPerformRequestsWit_0000a0ac,param_1,
+                    PTR_s_commitSettings__0000a0a8,uVar3);
+      _objc_msgSend(param_1,PTR_s_performSelector_withObject_after_0000a0bc,
+                    PTR_s_commitSettings__0000a0a8,uVar3,0,0x40100000);
+    }
+  }
+  return;
+}
+
+
+
+=== -[MAFireWireDeviceInstance defaultsForUser:] @ 0x00002829 ===
+
+void __MAFireWireDeviceInstance_defaultsForUser__
+               (undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = _objc_msgSend(PTR_s_NSUserDefaults_0000a018,PTR_s_alloc_0000a078);
+  uVar1 = _objc_msgSend(uVar1,PTR_s_initWithUser__0000a0c4,param_3);
+  _objc_msgSend(uVar1,PTR_s_addSuiteNamed__0000a0c8,&cf_com_m_audio_device_settings_firewire);
+  _objc_msgSend(uVar1,PTR_s_autorelease_0000a0a4);
+  return;
+}
+
+
+
+=== -[MAFireWireDeviceInstance commitSettings:] @ 0x00002892 ===
+
+void __MAFireWireDeviceInstance_commitSettings__(int param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  undefined4 uVar1;
+  WithCurrentEffectiveUserAndGroup local_1c [12];
+  
+  if ((*(char *)(param_1 + 0x18) != '\0') &&
+     (*(undefined1 *)(param_1 + 0x18) = 0, *(int *)(param_1 + 0xc) != 0)) {
+    WithCurrentEffectiveUserAndGroup::WithCurrentEffectiveUserAndGroup(local_1c);
+    uVar1 = *(undefined4 *)PTR__kCFPreferencesAnyHost_00009008;
+    _CFPreferencesSetValue
+              (*(undefined4 *)(param_1 + 0x10),*(undefined4 *)(param_1 + 0xc),
+               &cf_com_m_audio_device_settings_firewire,param_3,uVar1);
+    _CFPreferencesSynchronize(&cf_com_m_audio_device_settings_firewire,param_3,uVar1);
+    WithCurrentEffectiveUserAndGroup::~WithCurrentEffectiveUserAndGroup(local_1c);
+  }
+  return;
+}
+
+
+
+=== -[MAFireWireDeviceInstance configureDCLLatency] @ 0x0000290a ===
+
+void __MAFireWireDeviceInstance_configureDCLLatency_(int param_1)
+
+{
+  int iVar1;
+  int *piVar2;
+  int iVar3;
+  undefined4 uVar4;
+  char cVar5;
+  undefined4 uVar6;
+  int local_20;
+  undefined4 local_1c;
+  undefined4 local_18;
+  size_t local_10;
+  
+  local_18 = 0;
+  local_1c = 0;
+  local_20 = 0;
+  local_10 = 8;
+  iVar1 = _sysctlbyname("hw.cpufrequency",&local_1c,&local_10,(void *)0x0,0);
+  if (iVar1 == 0) {
+LAB_0000296b:
+    local_10 = 4;
+    iVar1 = _sysctlbyname("hw.cpusubtype",&local_20,&local_10,(void *)0x0,0);
+    if (iVar1 != 0) {
+      piVar2 = ___error();
+      iVar1 = *piVar2;
+      if (iVar1 != 0) {
+        uVar6 = 0x18a;
+        goto LAB_00002ac8;
+      }
+    }
+    iVar1 = local_20;
+    iVar3 = ___udivdi3(local_1c,local_18,1000000,0);
+    if (iVar1 < 9) {
+      _NSLog(&cf_Pre_G3_dMHzpackets__lu,iVar3,0x80);
+      cVar5 = -0x80;
+    }
+    else if (iVar1 == 9) {
+      _NSLog(&cf_G3_dMHzpackets__lu,iVar3,0x40);
+      cVar5 = '@';
+    }
+    else if (iVar1 - 10U < 0x5a) {
+      cVar5 = ' ';
+      if (0x2ed < iVar3) {
+        cVar5 = (iVar3 < 0x352) * '\b' + '\b';
+      }
+      _NSLog(&cf_G4_dMHzpackets__lu,iVar3,cVar5);
+    }
+    else {
+      _NSLog(&cf_G5_dMHzpackets__lu,iVar3,8);
+      cVar5 = '\b';
+    }
+    uVar6 = *(undefined4 *)(param_1 + 4);
+    uVar4 = _objc_msgSend(PTR_s_NSNumber_0000a01c,PTR_s_numberWithUnsignedLong__0000a0cc,cVar5);
+    _IORegistryEntrySetCFProperty(uVar6,&cf_MAMetaConfigureDCLLatency,uVar4);
+  }
+  else {
+    piVar2 = ___error();
+    iVar1 = *piVar2;
+    if (iVar1 == 0) goto LAB_0000296b;
+    uVar6 = 0x180;
+LAB_00002ac8:
+    _DebugAssert(0x3f2a3f2a,0,"Third Party Client: status == 0 ","Exit",0,
+                 "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/DeviceHelper/MAFireWireLoader.mm"
+                 ,uVar6,iVar1);
+  }
+  return;
+}
+
+
+
+=== -[MAFireWireDeviceInstance loadPrefsForUser:] @ 0x00002afe ===
+
+void __MAFireWireDeviceInstance_loadPrefsForUser__
+               (int param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  int iVar3;
+  undefined4 uVar4;
+  
+  _objc_msgSend(*(undefined4 *)(param_1 + 0xc),PTR_s_release_0000a08c);
+  *(undefined4 *)(param_1 + 0xc) = 0;
+  iVar1 = _CFPreferencesCopyValue
+                    (*(undefined4 *)(param_1 + 0x10),&cf_com_m_audio_device_settings_firewire,
+                     param_3,*(undefined4 *)PTR__kCFPreferencesAnyHost_00009008);
+  if (iVar1 == 0) {
+    uVar4 = 0;
+    iVar3 = 0;
+    iVar1 = _IORegistryEntryCreateCFProperty
+                      (*(undefined4 *)(param_1 + 4),&cf_MAMetaAllProperties,0,0);
+    if (iVar1 != 0) {
+      uVar2 = _objc_msgSend(PTR_s_NSMutableDictionary_0000a020,PTR_s_alloc_0000a078);
+      uVar4 = 1;
+      iVar3 = iVar1;
+      uVar2 = _objc_msgSend(uVar2,PTR_s_initWithDictionary_copyItems__0000a0d0,iVar1,1);
+      *(undefined4 *)(param_1 + 0xc) = uVar2;
+    }
+  }
+  else {
+    uVar2 = _objc_msgSend(PTR_s_NSMutableDictionary_0000a020,PTR_s_alloc_0000a078);
+    uVar4 = 1;
+    iVar3 = iVar1;
+    uVar2 = _objc_msgSend(uVar2,PTR_s_initWithDictionary_copyItems__0000a0d0,iVar1,1);
+    *(undefined4 *)(param_1 + 0xc) = uVar2;
+    _IORegistryEntrySetCFProperties(*(undefined4 *)(param_1 + 4),uVar2);
+  }
+  _objc_msgSend(iVar1,PTR_s_release_0000a08c,iVar3,uVar4);
+  return;
+}
+
+
+
+=== -[MAFireWireDeviceInstance service:changedProperties:] @ 0x00002c13 ===
+
+void __MAFireWireDeviceInstance_service_changedProperties__
+               (int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  _objc_msgSend(*(undefined4 *)(param_1 + 0xc),PTR_s_addEntriesFromDictionary__0000a0b8,param_4);
+  return;
+}
+
+
+
+=== -[MAFireWireLoader driverInstanceMatched:] @ 0x000035d5 ===
+
+void __MAFireWireLoader_driverInstanceMatched__(int param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  int iVar3;
+  
+  iVar1 = _objc_msgSend(PTR_s_MAFireWireDeviceInstance_0000a008,
+                        PTR_s_deviceInstanceForService__0000a170,param_3);
+  _NSLog(&cf_driverinstancecreated__lX_,iVar1);
+  iVar3 = *(int *)(param_1 + 4);
+  if (iVar3 == 0) {
+    uVar2 = _objc_msgSend(PTR_s_NSMutableArray_0000a048,PTR_s_alloc_0000a078,param_3);
+    iVar3 = _objc_msgSend(uVar2,PTR_s_init_0000a07c);
+    *(int *)(param_1 + 4) = iVar3;
+  }
+  if (iVar1 != 0) {
+    _objc_msgSend(iVar3,PTR_s_addObject__0000a174,iVar1);
+  }
+  return;
+}
+
+
+
+=== -[MAFireWireLoader driverInstanceTerminated:] @ 0x00003664 ===
+
+void __MAFireWireLoader_driverInstanceTerminated__
+               (int param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = _objc_msgSend(param_1,PTR_s_deviceForService__0000a178,param_3);
+  _NSLog(&cf_driverinstanceremoved__lX_,uVar1);
+  _objc_msgSend(uVar1,PTR_s_breakRetainCycles_0000a17c);
+  _objc_msgSend(*(undefined4 *)(param_1 + 4),PTR_s_removeObject__0000a180,uVar1);
+  return;
+}
+
+
+

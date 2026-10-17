@@ -1,0 +1,374 @@
+=== +[MAFireWireFirmwareFile firmwareFilesAtPath:forDevice:] @ 0x00005a90 ===
+
+undefined4
+__MAFireWireFirmwareFile_firmwareFilesAtPath_forDevice__
+          (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  char cVar1;
+  undefined4 uVar2;
+  cfstringStruct *pcVar3;
+  int iVar4;
+  undefined4 uVar5;
+  undefined4 uVar6;
+  undefined4 uVar7;
+  uint uVar8;
+  cfstringStruct *pcVar9;
+  uint uVar10;
+  
+  uVar2 = _objc_msgSend(PTR_s_NSMutableArray_0000a048,PTR_s_array_0000a268);
+  pcVar3 = (cfstringStruct *)
+           _objc_msgSend(param_4,PTR_s_propertyForKey__0000a11c,&cf_FireWireProductName);
+  iVar4 = _objc_msgSend(pcVar3,PTR_s_rangeOfString__0000a26c,&cf_Bootloader);
+  if (iVar4 != 0x7fffffff) {
+    pcVar3 = (cfstringStruct *)_objc_msgSend(pcVar3,PTR_s_substringToIndex__0000a270,iVar4);
+  }
+  cVar1 = _objc_msgSend(pcVar3,PTR_s_isEqualToString__0000a274,&cf_FW);
+  pcVar9 = &cf_FW410;
+  if (cVar1 == '\0') {
+    cVar1 = _objc_msgSend(pcVar3,PTR_s_isEqualToString__0000a274,&cf_FWSolo);
+    pcVar9 = pcVar3;
+    if (cVar1 != '\0') {
+      pcVar9 = &cf_FWSolo;
+    }
+  }
+  uVar5 = _objc_msgSend(param_3,PTR_s_stringByAppendingPathComponent__0000a110,pcVar9);
+  uVar5 = _objc_msgSend(uVar5,PTR_s_stringByStandardizingPath_0000a278);
+  uVar6 = _objc_msgSend(PTR_s_NSFileManager_0000a040,PTR_s_defaultManager_0000a138);
+  uVar6 = _objc_msgSend(uVar6,PTR_s_subpathsAtPath__0000a27c,uVar5);
+  uVar7 = _objc_msgSend(PTR_s_NSArray_0000a06c,PTR_s_arrayWithObject__0000a280,&cf_bcd);
+  uVar6 = _objc_msgSend(uVar6,PTR_s_pathsMatchingExtensions__0000a284,uVar7);
+  iVar4 = _objc_msgSend(uVar6,PTR_s_count_0000a140);
+  if (iVar4 != 0) {
+    uVar10 = 0;
+    do {
+      uVar7 = _objc_msgSend(uVar6,PTR_s_objectAtIndex__0000a144,uVar10);
+      uVar7 = _objc_msgSend(uVar5,PTR_s_stringByAppendingPathComponent__0000a110,uVar7);
+      uVar7 = _objc_msgSend(PTR_s_MAFireWireFirmwareFile_0000a044,PTR_s_firmwareWithPath__0000a288,
+                            uVar7);
+      _objc_msgSend(uVar2,PTR_s_addObject__0000a174,uVar7);
+      uVar10 = uVar10 + 1;
+      uVar8 = _objc_msgSend(uVar6,PTR_s_count_0000a140);
+    } while (uVar10 < uVar8);
+  }
+  return uVar2;
+}
+
+
+
+=== +[MAFireWireFirmwareFile firmwareWithPath:] @ 0x00005734 ===
+
+int __MAFireWireFirmwareFile_firmwareWithPath__
+              (undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  
+  uVar1 = _objc_msgSend(param_1,PTR_s_alloc_0000a078);
+  uVar1 = _objc_msgSend(uVar1,PTR_s_init_0000a07c);
+  iVar2 = _objc_msgSend(uVar1,PTR_s_autorelease_0000a0a4);
+  uVar1 = _objc_msgSend(param_3,PTR_s_retain_0000a090);
+  *(undefined4 *)(iVar2 + 0xc) = uVar1;
+  uVar1 = _objc_msgSend(param_3,PTR_s_lastPathComponent_0000a250);
+  uVar1 = _objc_msgSend(uVar1,PTR_s_retain_0000a090);
+  *(undefined4 *)(iVar2 + 8) = uVar1;
+  uVar1 = _objc_msgSend(PTR_s_NSData_0000a068,PTR_s_dataWithContentsOfMappedFile__0000a254,param_3);
+  uVar1 = _objc_msgSend(uVar1,PTR_s_retain_0000a090);
+  *(undefined4 *)(iVar2 + 4) = uVar1;
+  uVar1 = _objc_msgSend(uVar1,PTR_s_bytes_0000a134);
+  *(undefined4 *)(iVar2 + 0x14) = uVar1;
+  return iVar2;
+}
+
+
+
+=== -[MAFireWireFirmwareFile validateFirmwareUpdate:] @ 0x00005cc8 ===
+
+int __MAFireWireFirmwareFile_validateFirmwareUpdate__
+              (int param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  uint uVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  uint uVar4;
+  int iVar5;
+  int iVar6;
+  
+  if (*(char *)(param_1 + 0x69) == '\0') {
+    iVar5 = *(int *)(param_1 + 4);
+    if (iVar5 == 0) {
+      uVar2 = _objc_msgSend(PTR_s_NSAssertionHandler_0000a060,PTR_s_currentHandler_0000a1f0);
+      uVar3 = _objc_msgSend(PTR_s_NSString_0000a038,PTR_s_stringWithUTF8String__0000a1f4,
+                            "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/DeviceHelper/MAFireWireFirmwareFile.mm"
+                           );
+      _objc_msgSend(uVar2,PTR_s_handleFailureInMethod_object_fil_0000a1f8,param_2,param_1,uVar3,
+                    0x112,&cf_Invalidparameternotsatisfying__s,"fFirmwareData != nil",0,0,0,0);
+      iVar5 = *(int *)(param_1 + 4);
+    }
+    uVar4 = _objc_msgSend(iVar5,PTR_s_length_0000a228);
+    if (*(int *)(param_1 + 4) == 0) {
+      _NSLog(&cf_Noupdatedfirmware);
+    }
+    else if (uVar4 < 0x60) {
+      _objc_msgSend(param_1,PTR_s_reportCorruptFirmwareToDelegate__0000a290,param_3,
+                    &cf_Corrupt_Shouldbeatleast_lubyteslong_butisactually_dbyteslong_,0x60,uVar4);
+    }
+    else {
+      uVar1 = *(int *)(*(int *)(param_1 + 0x14) + 0x38) + 0x60 +
+              *(int *)(*(int *)(param_1 + 0x14) + 0x58);
+      if (uVar4 < uVar1) {
+        _objc_msgSend(param_1,PTR_s_reportCorruptFirmwareToDelegate__0000a290,param_3,
+                      &cf_Corrupt_Embeddedlengthis_lubytes_butisactually_dbyteslong_,uVar1,uVar4);
+      }
+      else {
+        iVar5 = _objc_msgSend(param_1,PTR_s_actualCRC_0000a294);
+        iVar6 = _objc_msgSend(param_1,PTR_s_embeddedCRC_0000a298);
+        if (iVar5 == iVar6) {
+          iVar5 = *(int *)(param_1 + 0x14);
+          uVar2 = CalendarDateFromFirmwareDate
+                            (*(ulong *)(iVar5 + 8),*(ulong *)(iVar5 + 0xc),*(ulong *)(iVar5 + 0x10),
+                             *(ulong *)(iVar5 + 0x14));
+          *(undefined4 *)(param_1 + 0x10) = uVar2;
+          _objc_msgSend(uVar2,PTR_s_retain_0000a090);
+          iVar5 = _objc_msgSend(*(undefined4 *)(param_1 + 0x10),PTR_s_yearOfCommonEra_0000a29c);
+          if (iVar5 < 0x7d3) {
+            uVar2 = _objc_msgSend(*(undefined4 *)(param_1 + 0x10),PTR_s_yearOfCommonEra_0000a29c);
+            _objc_msgSend(param_1,PTR_s_reportCorruptFirmwareToDelegate__0000a290,param_3,
+                          &cf_Corrupt_Year_d_,uVar2);
+          }
+          else {
+            *(undefined1 *)(param_1 + 0x6a) = 1;
+          }
+        }
+        else {
+          _objc_msgSend(param_1,PTR_s_reportCorruptFirmwareToDelegate__0000a290,param_3,
+                        &cf_Corrupt_CRCchecksumfailed__expected_0x_lXactual_0x_lX,iVar6,iVar5);
+        }
+      }
+    }
+  }
+  return (int)*(char *)(param_1 + 0x6a);
+}
+
+
+
+=== -[MAFireWireFirmwareFile embeddedCRC] @ 0x00005c7d ===
+
+undefined4 __MAFireWireFirmwareFile_embeddedCRC_(int param_1)
+
+{
+  return *(undefined4 *)(*(int *)(param_1 + 0x14) + 0x3c);
+}
+
+
+
+=== -[MAFireWireFirmwareFile actualCRC] @ 0x00005c8b ===
+
+void __MAFireWireFirmwareFile_actualCRC_(int param_1)
+
+{
+  _objc_msgSend(*(undefined4 *)(param_1 + 4),PTR_s_CRC32WithRange__0000a28c,
+                CONCAT44(*(undefined4 *)(*(int *)(param_1 + 0x14) + 0x38),
+                         *(undefined4 *)(*(int *)(param_1 + 0x14) + 0x30)));
+  return;
+}
+
+
+
+=== CalendarDateFromFirmwareDate @ 0x000055fc ===
+
+/* CalendarDateFromFirmwareDate(unsigned long, unsigned long, unsigned long, unsigned long) */
+
+undefined4 CalendarDateFromFirmwareDate(ulong param_1,ulong param_2,ulong param_3,ulong param_4)
+
+{
+  undefined *puVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  ulong local_9c;
+  undefined1 uStack_98;
+  undefined3 uStack_97;
+  undefined1 uStack_94;
+  undefined1 uStack_93;
+  ulong uStack_92;
+  undefined1 uStack_8e;
+  ulong uStack_8d;
+  undefined1 uStack_89;
+  undefined4 uStack_88;
+  undefined4 uStack_84;
+  undefined4 uStack_80;
+  undefined4 local_7c;
+  undefined4 uStack_78;
+  undefined4 uStack_74;
+  undefined4 uStack_70;
+  undefined4 local_6c;
+  undefined4 uStack_68;
+  undefined4 uStack_64;
+  undefined4 uStack_60;
+  undefined4 local_5c;
+  undefined4 uStack_58;
+  undefined4 uStack_54;
+  undefined4 uStack_50;
+  undefined4 local_4c;
+  undefined4 uStack_48;
+  undefined4 uStack_44;
+  undefined4 uStack_40;
+  undefined4 local_3c;
+  undefined4 uStack_38;
+  undefined4 uStack_34;
+  undefined4 uStack_30;
+  undefined4 local_2c;
+  undefined4 uStack_28;
+  undefined4 uStack_24;
+  undefined4 uStack_20;
+  int local_10;
+  
+  puVar1 = PTR____stack_chk_guard_00009020;
+  local_10 = *(int *)PTR____stack_chk_guard_00009020;
+  local_2c = 0;
+  uStack_28 = 0;
+  uStack_24 = 0;
+  uStack_20 = 0;
+  local_3c = 0;
+  uStack_38 = 0;
+  uStack_34 = 0;
+  uStack_30 = 0;
+  local_4c = 0;
+  uStack_48 = 0;
+  uStack_44 = 0;
+  uStack_40 = 0;
+  local_5c = 0;
+  uStack_58 = 0;
+  uStack_54 = 0;
+  uStack_50 = 0;
+  local_6c = 0;
+  uStack_68 = 0;
+  uStack_64 = 0;
+  uStack_60 = 0;
+  local_7c = 0;
+  uStack_78 = 0;
+  uStack_74 = 0;
+  uStack_70 = 0;
+  uStack_89 = 0;
+  uStack_88 = 0;
+  uStack_84 = 0;
+  uStack_80 = 0;
+  local_9c = param_1;
+  _uStack_98 = CONCAT31((int3)param_2,0x20);
+  uStack_94 = (undefined1)(param_2 >> 0x18);
+  uStack_93 = 0x20;
+  uStack_8e = 0x20;
+  uStack_8d = param_4;
+  uStack_92 = param_3;
+  uVar2 = _objc_msgSend(PTR_s_NSString_0000a038,PTR_s_stringWithCString__0000a238,&local_9c);
+  uVar2 = _objc_msgSend(PTR_s_NSCalendarDate_0000a064,PTR_s_dateWithString_calendarFormat__0000a23c,
+                        uVar2,&cf__Y_m_d_H_M_S);
+  uVar3 = _objc_msgSend(PTR_s_NSCalendarDate_0000a064,PTR_s_calendarDate_0000a240);
+  uVar3 = _objc_msgSend(uVar3,PTR_s_calendarFormat_0000a244);
+  _objc_msgSend(uVar2,PTR_s_setCalendarFormat__0000a248,uVar3);
+  if (*(int *)puVar1 == local_10) {
+    return uVar2;
+  }
+                    /* WARNING: Subroutine does not return */
+  ___stack_chk_fail();
+}
+
+
+
+=== CanonicalGUIDForDevice @ 0x00002542 ===
+
+/* CanonicalGUIDForDevice(unsigned int) */
+
+undefined4 CanonicalGUIDForDevice(uint param_1)
+
+{
+  undefined *puVar1;
+  undefined4 uVar2;
+  undefined8 uVar3;
+  undefined4 uVar4;
+  undefined4 uVar5;
+  
+  uVar5 = 0;
+  uVar4 = 0;
+  uVar2 = _IORegistryEntryCreateCFProperty();
+  puVar1 = PTR_s_NSString_0000a038;
+  uVar3 = _objc_msgSend(uVar2,PTR_s_unsignedLongLongValue_0000a120,uVar4,uVar5);
+  uVar4 = _objc_msgSend(puVar1,PTR_s_stringWithFormat__0000a124,&cf__llX,uVar3);
+  _objc_msgSend(uVar2,PTR_s_release_0000a08c);
+  return uVar4;
+}
+
+
+
+=== -[MAFireWireFirmwareFile firmwareValidationFailed:] @ 0x00005884 ===
+
+void __MAFireWireFirmwareFile_firmwareValidationFailed__
+               (undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  _NSLog(param_3);
+  return;
+}
+
+
+
+=== -[MAFireWireFirmwareFile reportCorruptFirmwareToDelegate:format:] @ 0x0000589a ===
+
+void __MAFireWireFirmwareFile_reportCorruptFirmwareToDelegate_format__
+               (int param_1,undefined4 param_2,int param_3,undefined4 param_4)
+
+{
+  undefined4 uVar1;
+  undefined1 *puVar2;
+  
+  puVar2 = &stack0x00000014;
+  uVar1 = _objc_msgSend(PTR_s_NSString_0000a038,PTR_s_alloc_0000a078);
+  uVar1 = _objc_msgSend(uVar1,PTR_s_initWithFormat_arguments__0000a258,param_4,puVar2);
+  if (param_3 == 0) {
+    param_3 = param_1;
+  }
+  _objc_msgSend(param_3,PTR_s_firmwareValidationFailed__0000a25c,uVar1,puVar2);
+  _objc_msgSend(uVar1,PTR_s_release_0000a08c);
+  return;
+}
+
+
+
+=== -[MAFireWireFirmwareFile date] @ 0x00005f15 ===
+
+void __MAFireWireFirmwareFile_date_(int param_1)
+
+{
+  int iVar1;
+  
+  iVar1 = *(int *)(param_1 + 0x14);
+  CalendarDateFromFirmwareDate
+            (*(ulong *)(iVar1 + 8),*(ulong *)(iVar1 + 0xc),*(ulong *)(iVar1 + 0x10),
+             *(ulong *)(iVar1 + 0x14));
+  return;
+}
+
+
+
+=== -[MAFireWireFirmwareFile dealloc] @ 0x00005801 ===
+
+void __MAFireWireFirmwareFile_dealloc_(int param_1)
+
+{
+  int local_14;
+  undefined *local_10;
+  
+  _objc_msgSend(*(undefined4 *)(param_1 + 0xc),PTR_s_release_0000a08c);
+  _objc_msgSend(*(undefined4 *)(param_1 + 8),PTR_s_release_0000a08c);
+  _objc_msgSend(*(undefined4 *)(param_1 + 4),PTR_s_release_0000a08c);
+  _objc_msgSend(*(undefined4 *)(param_1 + 0x10),PTR_s_release_0000a08c);
+  local_14 = param_1;
+  local_10 = PTR_s_NSObject_0000a528;
+  _objc_msgSendSuper(&local_14,PTR_s_dealloc_0000a0b0);
+  return;
+}
+
+
+

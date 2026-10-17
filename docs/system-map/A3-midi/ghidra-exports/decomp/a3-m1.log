@@ -1,0 +1,550 @@
+=== 0x00001be6  _NewFW410MIDIDriver  size=192 ===
+
+MAFWMIDIPluginGlueBeBoB * _NewFW410MIDIDriver(undefined8 param_1,undefined8 param_2)
+
+{
+  char cVar1;
+  undefined8 uVar2;
+  MAFWMIDIPluginGlueBeBoB *pMVar3;
+  
+  pMVar3 = (MAFWMIDIPluginGlueBeBoB *)0x0;
+  uVar2 = _CFUUIDGetConstantUUIDWithBytes
+                    (0,0xec,0xde,0x95,0x74,0xf,0xe4,0x11,0xd4,0xbb,0x1a,0,0x50,0xe4,0xce,0xa5,0x26);
+  cVar1 = _CFEqual(param_2,uVar2);
+  if (cVar1 != '\0') {
+    pMVar3 = operator_new(0x20);
+    MAFWMIDIPluginGlueBeBoB::MAFWMIDIPluginGlueBeBoB(pMVar3);
+    pMVar3 = pMVar3 + 8;
+  }
+  return pMVar3;
+}
+
+
+
+=== 0x000019f3  MIDIDriverQueryInterface  size=396 ===
+
+/* MIDIDriverQueryInterface(void*, CFUUIDBytes, void**) */
+
+undefined8
+MIDIDriverQueryInterface(long *param_1,undefined8 param_2,undefined8 param_3,undefined8 *param_4)
+
+{
+  char cVar1;
+  undefined8 uVar2;
+  undefined8 uVar3;
+  undefined8 uVar4;
+  
+  uVar2 = _CFUUIDCreateFromUUIDBytes(0);
+  uVar3 = _CFUUIDGetConstantUUIDWithBytes
+                    (0,0x43,0xc9,0x8c,0x3c,0x30,0x6c,0x11,0xd5,0xaf,0x73,0,0x30,0x65,0xa8,0x30,0x1e)
+  ;
+  cVar1 = _CFEqual(uVar2,uVar3);
+  if (cVar1 == '\0') {
+    uVar4 = 0;
+    uVar3 = _CFUUIDGetConstantUUIDWithBytes
+                      (*(undefined8 *)PTR__kCFAllocatorSystemDefault_00009038,0,0,0,0,0,0,0,0,0xc0,0
+                       ,0,0,0,0,0,0x46);
+    cVar1 = _CFEqual(uVar2,uVar3);
+    if (cVar1 == '\0') {
+      *param_4 = 0;
+      _CFRelease(uVar2);
+      uVar4 = 0x80000004;
+    }
+    else {
+      (**(code **)(*param_1 + 0x10))(param_1);
+      *param_4 = param_1;
+      _CFRelease(uVar2);
+    }
+  }
+  else {
+    (**(code **)(*param_1 + 0x10))(param_1);
+    *param_4 = param_1;
+    _CFRelease(uVar2);
+    uVar4 = 0;
+    *(undefined4 *)((long)param_1 + 0x14) = 2;
+  }
+  return uVar4;
+}
+
+
+
+=== 0x00001b7f  MIDIDriverAddRef  size=14 ===
+
+/* MIDIDriverAddRef(void*) */
+
+void MIDIDriverAddRef(void *param_1)
+
+{
+  *(int *)((long)param_1 + 0x10) = *(int *)((long)param_1 + 0x10) + 1;
+  return;
+}
+
+
+
+=== 0x00001b8d  MIDIDriverRelease  size=33 ===
+
+/* MIDIDriverRelease(void*) */
+
+int MIDIDriverRelease(void *param_1)
+
+{
+  int iVar1;
+  
+  if ((long *)((long)param_1 + -8) != (long *)0x0) {
+    iVar1 = *(int *)((long)param_1 + 0x10) + -1;
+    *(int *)((long)param_1 + 0x10) = iVar1;
+    if (iVar1 != 0) {
+      return iVar1;
+    }
+    (**(code **)(*(long *)((long)param_1 + -8) + 8))();
+  }
+  return 0;
+}
+
+
+
+=== 0x000018b4  MIDIDriverFindDevices  size=19 ===
+
+/* MIDIDriverFindDevices(MIDIDriverInterface**, unsigned int) */
+
+void MIDIDriverFindDevices(MIDIDriverInterface **param_1,uint param_2)
+
+{
+                    /* WARNING: Could not recover jumptable at 0x000018c5. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(param_1[-1] + 0x10))(param_1 + -1);
+  return;
+}
+
+
+
+=== 0x000018c7  MIDIDriverStart  size=19 ===
+
+/* MIDIDriverStart(MIDIDriverInterface**, unsigned int) */
+
+void MIDIDriverStart(MIDIDriverInterface **param_1,uint param_2)
+
+{
+                    /* WARNING: Could not recover jumptable at 0x000018d8. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(param_1[-1] + 0x18))(param_1 + -1);
+  return;
+}
+
+
+
+=== 0x000018da  MIDIDriverStop  size=16 ===
+
+/* MIDIDriverStop(MIDIDriverInterface**) */
+
+void MIDIDriverStop(MIDIDriverInterface **param_1)
+
+{
+                    /* WARNING: Could not recover jumptable at 0x000018e7. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(param_1[-1] + 0x20))(param_1 + -1);
+  return;
+}
+
+
+
+=== 0x000018ea  MIDIDriverConfigure  size=19 ===
+
+/* MIDIDriverConfigure(MIDIDriverInterface**, unsigned int) */
+
+void MIDIDriverConfigure(MIDIDriverInterface **param_1,uint param_2)
+
+{
+                    /* WARNING: Could not recover jumptable at 0x000018fb. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(param_1[-1] + 0x28))(param_1 + -1);
+  return;
+}
+
+
+
+=== 0x000018fd  MIDIDriverSend  size=19 ===
+
+/* MIDIDriverSend(MIDIDriverInterface**, MIDIPacketList const*, void*, void*) */
+
+void MIDIDriverSend(MIDIDriverInterface **param_1,MIDIPacketList *param_2,void *param_3,
+                   void *param_4)
+
+{
+                    /* WARNING: Could not recover jumptable at 0x0000190e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(param_1[-1] + 0x30))(param_1 + -1);
+  return;
+}
+
+
+
+=== 0x00001910  MIDIDriverEnableSource  size=19 ===
+
+/* MIDIDriverEnableSource(MIDIDriverInterface**, unsigned int, unsigned char) */
+
+void MIDIDriverEnableSource(MIDIDriverInterface **param_1,uint param_2,uchar param_3)
+
+{
+                    /* WARNING: Could not recover jumptable at 0x00001921. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(param_1[-1] + 0x38))(param_1 + -1);
+  return;
+}
+
+
+
+=== 0x00001923  MIDIDriverFlush  size=19 ===
+
+/* MIDIDriverFlush(MIDIDriverInterface**, unsigned int, void*, void*) */
+
+void MIDIDriverFlush(MIDIDriverInterface **param_1,uint param_2,void *param_3,void *param_4)
+
+{
+                    /* WARNING: Could not recover jumptable at 0x00001934. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(param_1[-1] + 0x40))(param_1 + -1);
+  return;
+}
+
+
+
+=== 0x00001936  MIDIDriverMonitor  size=19 ===
+
+/* MIDIDriverMonitor(MIDIDriverInterface**, unsigned int, MIDIPacketList const*) */
+
+void MIDIDriverMonitor(MIDIDriverInterface **param_1,uint param_2,MIDIPacketList *param_3)
+
+{
+                    /* WARNING: Could not recover jumptable at 0x00001947. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(param_1[-1] + 0x48))(param_1 + -1);
+  return;
+}
+
+
+
+=== 0x0000194a  MIDIDriver::MIDIDriver  size=57 ===
+
+/* MIDIDriver::MIDIDriver(__CFUUID const*) */
+
+void __thiscall MIDIDriver::MIDIDriver(MIDIDriver *this,__CFUUID *param_1)
+
+{
+  *(undefined ***)this = &PTR__MIDIDriver_0000aa20;
+  *(undefined ***)(this + 8) = &MIDIDriverInterfaceFtbl;
+  *(__CFUUID **)(this + 0x10) = param_1;
+  _CFPlugInAddInstanceForFactory(param_1);
+  *(undefined8 *)(this + 0x18) = 1;
+  return;
+}
+
+
+
+=== 0x00001984  MIDIDriver::~MIDIDriver  size=47 ===
+
+/* MIDIDriver::~MIDIDriver() */
+
+void __thiscall MIDIDriver::~MIDIDriver(MIDIDriver *this)
+
+{
+  *(undefined ***)this = &PTR__MIDIDriver_0000aa20;
+  if (*(long *)(this + 0x10) != 0) {
+    _CFPlugInRemoveInstanceForFactory();
+  }
+  operator_delete(this);
+  return;
+}
+
+
+
+=== 0x00001bae  MIDIDriver::Start  size=8 ===
+
+/* MIDIDriver::Start(unsigned int) */
+
+undefined8 MIDIDriver::Start(uint param_1)
+
+{
+  return 0;
+}
+
+
+
+=== 0x00001bb6  MIDIDriver::Stop  size=8 ===
+
+/* MIDIDriver::Stop() */
+
+undefined8 MIDIDriver::Stop(void)
+
+{
+  return 0;
+}
+
+
+
+=== 0x00001bbe  MIDIDriver::Configure  size=8 ===
+
+/* MIDIDriver::Configure(unsigned int) */
+
+undefined8 MIDIDriver::Configure(uint param_1)
+
+{
+  return 0;
+}
+
+
+
+=== 0x00001bc6  MIDIDriver::Send  size=8 ===
+
+/* MIDIDriver::Send(MIDIPacketList const*, void*, void*) */
+
+undefined8 MIDIDriver::Send(MIDIPacketList *param_1,void *param_2,void *param_3)
+
+{
+  return 0;
+}
+
+
+
+=== 0x00001bce  MIDIDriver::EnableSource  size=8 ===
+
+/* MIDIDriver::EnableSource(unsigned int, unsigned char) */
+
+undefined8 MIDIDriver::EnableSource(uint param_1,uchar param_2)
+
+{
+  return 0;
+}
+
+
+
+=== 0x00001bd6  MIDIDriver::Flush  size=8 ===
+
+/* MIDIDriver::Flush(unsigned int, void*, void*) */
+
+undefined8 MIDIDriver::Flush(uint param_1,void *param_2,void *param_3)
+
+{
+  return 0;
+}
+
+
+
+=== 0x00001bde  MIDIDriver::Monitor  size=8 ===
+
+/* MIDIDriver::Monitor(unsigned int, MIDIPacketList const*) */
+
+undefined8 MIDIDriver::Monitor(uint param_1,MIDIPacketList *param_2)
+
+{
+  return 0;
+}
+
+
+
+=== 0x00001ca6  MAFWMIDIPluginGlueBeBoB::MAFWMIDIPluginGlueBeBoB  size=10 ===
+
+/* MAFWMIDIPluginGlueBeBoB::MAFWMIDIPluginGlueBeBoB() */
+
+void __thiscall MAFWMIDIPluginGlueBeBoB::MAFWMIDIPluginGlueBeBoB(MAFWMIDIPluginGlueBeBoB *this)
+
+{
+  MAFWMIDIPluginGlueBeBoB(this);
+  return;
+}
+
+
+
+=== 0x00001cb0  MAFWMIDIPluginGlueBeBoB::MAFWMIDIPluginGlueBeBoB  size=164 ===
+
+/* MAFWMIDIPluginGlueBeBoB::MAFWMIDIPluginGlueBeBoB() */
+
+void __thiscall MAFWMIDIPluginGlueBeBoB::MAFWMIDIPluginGlueBeBoB(MAFWMIDIPluginGlueBeBoB *this)
+
+{
+  __CFUUID *p_Var1;
+  
+  p_Var1 = (__CFUUID *)
+           _CFUUIDGetConstantUUIDWithBytes
+                     (0,0x29,0xf2,0x8f,0xc6,0xb0,0xf8,0x11,0xd7,0xb8,0x50,0,3,0x93,0x94,0x20,0x16);
+  MIDIDriver::MIDIDriver((MIDIDriver *)this,p_Var1);
+  *(undefined ***)this = &PTR__MAFWMIDIPluginGlueBeBoB_0000aa80;
+  return;
+}
+
+
+
+=== 0x00001d54  MAFWMIDIPluginGlueBeBoB::~MAFWMIDIPluginGlueBeBoB  size=28 ===
+
+/* MAFWMIDIPluginGlueBeBoB::~MAFWMIDIPluginGlueBeBoB() */
+
+void __thiscall MAFWMIDIPluginGlueBeBoB::~MAFWMIDIPluginGlueBeBoB(MAFWMIDIPluginGlueBeBoB *this)
+
+{
+  MIDIDriver::~MIDIDriver((MIDIDriver *)this);
+  operator_delete(this);
+  return;
+}
+
+
+
+=== 0x00001d70  MAFWMIDIPluginGlueBeBoB::~MAFWMIDIPluginGlueBeBoB  size=10 ===
+
+/* MAFWMIDIPluginGlueBeBoB::~MAFWMIDIPluginGlueBeBoB() */
+
+void __thiscall MAFWMIDIPluginGlueBeBoB::~MAFWMIDIPluginGlueBeBoB(MAFWMIDIPluginGlueBeBoB *this)
+
+{
+  MIDIDriver::~MIDIDriver((MIDIDriver *)this);
+  return;
+}
+
+
+
+=== 0x00001d7a  MAFWMIDIPluginGlueBeBoB::~MAFWMIDIPluginGlueBeBoB  size=10 ===
+
+/* MAFWMIDIPluginGlueBeBoB::~MAFWMIDIPluginGlueBeBoB() */
+
+void __thiscall MAFWMIDIPluginGlueBeBoB::~MAFWMIDIPluginGlueBeBoB(MAFWMIDIPluginGlueBeBoB *this)
+
+{
+  MIDIDriver::~MIDIDriver((MIDIDriver *)this);
+  return;
+}
+
+
+
+=== 0x00001d84  MAFWMIDIPluginGlueBeBoB::FindDevices  size=8 ===
+
+/* MAFWMIDIPluginGlueBeBoB::FindDevices(unsigned int) */
+
+undefined8 MAFWMIDIPluginGlueBeBoB::FindDevices(uint param_1)
+
+{
+  return 0;
+}
+
+
+
+=== 0x00001d8c  MAFWMIDIPluginGlueBeBoB::Start  size=14 ===
+
+/* MAFWMIDIPluginGlueBeBoB::Start(unsigned int) */
+
+void MAFWMIDIPluginGlueBeBoB::Start(uint param_1)
+
+{
+  undefined4 in_register_0000003c;
+  
+  _MAFireWireMIDIDICE_Start(CONCAT44(in_register_0000003c,param_1) + 8);
+  return;
+}
+
+
+
+=== 0x00001d9a  MAFWMIDIPluginGlueBeBoB::Stop  size=10 ===
+
+/* MAFWMIDIPluginGlueBeBoB::Stop() */
+
+void MAFWMIDIPluginGlueBeBoB::Stop(void)
+
+{
+  _MAFireWireMIDIDICE_Stop();
+  return;
+}
+
+
+
+=== 0x00001da4  MAFWMIDIPluginGlueBeBoB::Send  size=19 ===
+
+/* MAFWMIDIPluginGlueBeBoB::Send(MIDIPacketList const*, void*, void*) */
+
+void __thiscall
+MAFWMIDIPluginGlueBeBoB::Send
+          (MAFWMIDIPluginGlueBeBoB *this,MIDIPacketList *param_1,void *param_2,void *param_3)
+
+{
+  _MAFireWireMIDIDICE_Send(param_1,param_2,param_3);
+  return;
+}
+
+
+
+=== 0x0000337b  MAFWMIDIFactoryBeBoB::initWithDriver:  size=344 ===
+
+/* Function Stack Size: 0x18 bytes */
+
+ID MAFWMIDIFactoryBeBoB::initWithDriver_(ID param_1,SEL param_2,MIDIDriverInterface **param_3)
+
+{
+  undefined8 uVar1;
+  ID IVar2;
+  char *pcVar3;
+  uint uVar4;
+  ID local_88;
+  undefined *local_80;
+  char *local_78 [5];
+  char *pcStack_50;
+  undefined8 local_48;
+  long local_38;
+  
+  local_38 = *(long *)PTR____stack_chk_guard_00009030;
+  local_48 = 0;
+  pcVar3 = "com_m_audio_FW410Device";
+  local_78[0] = "com_m_audio_FW410Device";
+  local_78[1] = "com_m_audio_FWAudiophileDevice";
+  local_78[2] = "com_m_audio_FW1814Device";
+  local_78[3] = "com_m_audio_FWOzonicDevice";
+  local_78[4] = "com_m_audio_FWProjectMixDevice";
+  pcStack_50 = "com_m_audio_FWLightbridgeDevice";
+  local_80 = PTR_MAFWMIDIFactoryBeBoB_0000a770;
+  local_88 = param_1;
+  NSObject::init((ID)&local_88,PTR_s_init_0000a3e8);
+  *(MIDIDriverInterface ***)(param_1 + fMIDIDriver) = param_3;
+  setAllDevicesToOffline(param_1,PTR_s_setAllDevicesToOffline_0000a4c8);
+  uVar4 = 1;
+  while( true ) {
+    uVar1 = _IOServiceMatching(pcVar3);
+    IVar2 = (*autorelease_message_ref.imp)(uVar1,&autorelease_message_ref);
+    MAFWBeBoBServiceNotification::observeServiceMatched_target_selector_
+              ((ID)PTR_MAFWBeBoBServiceNotification_0000a6f8,
+               PTR_s_observeServiceMatched_target_sel_0000a4d8,IVar2,param_1,
+               PTR_s_driverInstanceMatched__0000a4d0);
+    MAFWBeBoBServiceNotification::observeServiceTerminated_target_selector_
+              ((ID)PTR_MAFWBeBoBServiceNotification_0000a6f8,
+               PTR_s_observeServiceTerminated_target__0000a4e8,IVar2,param_1,
+               PTR_s_driverInstanceTerminated__0000a4e0);
+    pcVar3 = local_78[uVar4];
+    if (pcVar3 == (char *)0x0) break;
+    uVar4 = uVar4 + 1;
+  }
+  if (*(long *)PTR____stack_chk_guard_00009030 == local_38) {
+    return param_1;
+  }
+                    /* WARNING: Subroutine does not return */
+  ___stack_chk_fail();
+}
+
+
+
+=== 0x000034d3  MAFWMIDIFactoryBeBoB::dealloc  size=95 ===
+
+/* Function Stack Size: 0x10 bytes */
+
+void MAFWMIDIFactoryBeBoB::dealloc(ID param_1,SEL param_2)
+
+{
+  ID local_28;
+  undefined *local_20;
+  
+  MAFWBeBoBServiceNotification::stopObserving
+            ((ID)PTR_MAFWBeBoBServiceNotification_0000a6f8,PTR_s_stopObserving_0000a4f0);
+  MAFWBeBoBPowerNotification::stopObserving
+            ((ID)PTR_MAFWBeBoBPowerNotification_0000a700,PTR_s_stopObserving_0000a4f0);
+  local_20 = PTR_MAFWMIDIFactoryBeBoB_0000a770;
+  local_28 = param_1;
+  NSObject::dealloc((ID)&local_28,PTR_s_dealloc_0000a420);
+  return;
+}
+
+
+

@@ -1,0 +1,15 @@
+# Capture 71 — SL Mac Pro (10.6.8, M-Audio driver v1.9, panel 1.4), 2026-10-14. Transcript excerpt (raw dtrace output was not archived on the rig; these are the lines seen).
+# Probe: fbt::is_io_registry_entry_set_properties:entry (mach_kernel), tracemem not used for payload; arg2 = byte count.
+
+## A) Panel killed (pid 319) and relaunched (pid 417, started 19:20:53), device connected, saved prefs present
+Window: ~45 s from probe armed. Result: 0 is_io_registry_entry_set_properties events (any pid).
+Panel (pid 417) made 9x is_io_connect_method sel=2 and 1x sel=4 (target user-client unidentified).
+
+## B) Helper daemon restarted: launchctl unload/load /Library/LaunchDaemons/com.m-audio.firewire.helper.plist (new pid 463)
+2026 Oct 14 19:22:01.170 REGSETPROPS pid=463 exec=M-Audio FireWir bytes=60
+2026 Oct 14 19:22:01.177 REGSETPROPS pid=463 exec=M-Audio FireWir bytes=6570
+2026 Oct 14 19:22:01.188 REGSETPROPS pid=463 exec=M-Audio FireWir bytes=6570
+
+## C) afplay (FW1814 Multichannel = default output, engine IOAudioEngineState 0 -> 1, 1 active client) with fbt::IOSleep + IOLog armed
+Only 14 ms IOSleeps from kernel_task (caller 0x1184af4.., outside the M-Audio kext range 0x160e000..0x164f000). No IOSleep(500) from the kext observed; no IOLog output.
+Interpretation limits: fbt only sees mach_kernel on this SL build (B5 §12), so kext internals are invisible; the connection may already have been established before the probe was armed.

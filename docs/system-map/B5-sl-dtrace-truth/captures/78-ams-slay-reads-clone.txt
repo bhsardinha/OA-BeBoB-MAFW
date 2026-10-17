@@ -1,0 +1,22 @@
+# capture 78 - AMS (10.13) property reads during the clone's switch (DTrace pid provider on Audio MIDI Setup, 2026-10-17)
+# AMS re-reads kAudioDevicePropertyStreamConfiguration (slay) of the device twice, ~150 ms apart, ~12.7 s after the set, and gets in=16 out=12; the sidebar label nevertheless stays '10 ins / 6 outs'
+ 16740 ms  obj=68 scope=696e7074 slay: size=24 nbuf=1 ch0=16 ret=0
+ 16742 ms  obj=68 scope=6f757470 slay: size=24 nbuf=1 ch0=12 ret=0
+ 16743 ms  obj=68 scope=6f757470 slay: size=24 nbuf=1 ch0=12 ret=0
+ 16743 ms  obj=68 scope=6f757470 slay: size=24 nbuf=1 ch0=12 ret=0
+ 16744 ms  obj=68 scope=6f757470 slay: size=24 nbuf=1 ch0=12 ret=0
+ 16745 ms  obj=68 scope=6f757470 slay: size=24 nbuf=1 ch0=12 ret=0
+ 16745 ms  obj=68 scope=6f757470 slay: size=24 nbuf=1 ch0=12 ret=0
+ 16746 ms  obj=68 scope=6f757470 slay: size=24 nbuf=1 ch0=12 ret=0
+ 16747 ms  obj=68 scope=6f757470 slay: size=24 nbuf=1 ch0=12 ret=0
+ 16748 ms  obj=68 scope=6f757470 slay: size=24 nbuf=1 ch0=12 ret=0
+ 16749 ms  obj=68 scope=6f757470 slay: size=24 nbuf=1 ch0=12 ret=0
+ 16751 ms  obj=68 scope=6f757470 slay: size=24 nbuf=1 ch0=12 ret=0
+ 16753 ms  obj=68 scope=6f757470 slay: size=24 nbuf=1 ch0=12 ret=0
+ 16755 ms  obj=68 scope=6f757470 slay: size=24 nbuf=1 ch0=12 ret=0
+ 16757 ms  obj=68 scope=6f757470 slay: size=24 nbuf=1 ch0=12 ret=0
+ 16757 ms  obj=68 scope=6f757470 slay: size=24 nbuf=1 ch0=12 ret=0
+ 16763 ms  obj=68 scope=6f757470 slay: size=24 nbuf=1 ch0=12 ret=0
+ 16764 ms  obj=68 scope=6f757470 slay: size=24 nbuf=1 ch0=12 ret=0
+ 16765 ms  obj=68 scope=6f757470 slay: size=24 nbuf=1 ch0=12 ret=0
+ 16766 ms  obj=68 scope=6f757470 slay: size=24 nbuf=1 ch0=12 ret=0

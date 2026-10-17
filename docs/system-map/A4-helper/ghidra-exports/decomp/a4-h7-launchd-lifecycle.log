@@ -1,0 +1,206 @@
+=== _main @ 0x000021ee ===
+
+undefined4 _main(int param_1,int param_2)
+
+{
+  char *pcVar1;
+  undefined4 uVar2;
+  int iVar3;
+  undefined4 uVar4;
+  undefined4 uVar5;
+  int iVar6;
+  undefined *puVar7;
+  
+  uVar2 = _objc_msgSend(PTR_s_NSAutoreleasePool_0000a004,PTR_s_alloc_0000a078);
+  uVar2 = _objc_msgSend(uVar2,PTR_s_init_0000a07c);
+  puVar7 = _kMAFireWireServerName;
+  iVar3 = _objc_msgSend(PTR_s_MAFireWireCommunicator_0000a000,PTR_s_getServer__0000a074,
+                        _kMAFireWireServerName);
+  if (iVar3 == 0) {
+    uVar4 = _objc_msgSend(PTR_s_NSAutoreleasePool_0000a004,PTR_s_alloc_0000a078,puVar7);
+    uVar4 = _objc_msgSend(uVar4,PTR_s_init_0000a07c);
+    uVar5 = _objc_msgSend(PTR_s_MAFireWireCommunicator_0000a000,PTR_s_alloc_0000a078);
+    iVar3 = _objc_msgSend(uVar5,PTR_s_init_0000a07c);
+    _objc_msgSend(uVar4,PTR_s_release_0000a08c);
+    puVar7 = _kMAFireWireServerName;
+    _objc_msgSend(iVar3,PTR_s_runServer__0000a080,_kMAFireWireServerName);
+  }
+  uVar4 = _objc_msgSend(PTR_s_NSAutoreleasePool_0000a004,PTR_s_alloc_0000a078,puVar7);
+  uVar4 = _objc_msgSend(uVar4,PTR_s_init_0000a07c);
+  if ((1 < param_1) && (iVar3 != 0)) {
+    _NSLog(&cf_Serverrunning);
+    pcVar1 = *(char **)(param_2 + 4);
+    iVar6 = _strcmp(pcVar1,"start");
+    if (iVar6 == 0) {
+      _NSLog(&cf_Startingserver);
+      puVar7 = PTR_s_start_0000a084;
+    }
+    else {
+      iVar6 = _strcmp(pcVar1,"stop");
+      if (iVar6 != 0) goto LAB_00002371;
+      _NSLog(&cf_Stoppingserver);
+      puVar7 = PTR_s_stop_0000a088;
+    }
+    _objc_msgSend(iVar3,puVar7);
+  }
+LAB_00002371:
+  _objc_msgSend(uVar4,PTR_s_release_0000a08c);
+  _objc_msgSend(uVar2,PTR_s_release_0000a08c);
+  return 0;
+}
+
+
+
+=== -[MAFireWireCommunicator init] @ 0x00003c48 ===
+
+undefined4 __MAFireWireCommunicator_init_(undefined4 param_1)
+
+{
+  undefined4 local_14;
+  undefined *local_10;
+  
+  local_14 = param_1;
+  local_10 = PTR_s_MACommunicator_0000a408;
+  _objc_msgSendSuper(&local_14,PTR_s_init_0000a07c);
+  _objc_msgSend(param_1,PTR_s_start_0000a084);
+  return param_1;
+}
+
+
+
+=== -[MAFireWireCommunicator start] @ 0x00003c8a ===
+
+void __MAFireWireCommunicator_start_(int param_1)
+
+{
+  undefined4 uVar1;
+  
+  _NSLog(&cf_starting);
+  if (*(int *)(param_1 + 8) == 0) {
+    uVar1 = _objc_msgSend(PTR_s_MAFireWireLoader_0000a050,PTR_s_alloc_0000a078);
+    uVar1 = _objc_msgSend(uVar1,PTR_s_init_0000a07c);
+    *(undefined4 *)(param_1 + 8) = uVar1;
+  }
+  return;
+}
+
+
+
+=== -[MAFireWireCommunicator stop] @ 0x00003cd8 ===
+
+void __MAFireWireCommunicator_stop_(int param_1)
+
+{
+  _NSLog(&cf_stopping);
+  _objc_msgSend(*(undefined4 *)(param_1 + 8),PTR_s_release_0000a08c);
+  *(undefined4 *)(param_1 + 8) = 0;
+  return;
+}
+
+
+
+=== -[MACommunicator serve] @ 0x00003a58 ===
+
+void __MACommunicator_serve_(int param_1)
+
+{
+  undefined4 uVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  
+  *(undefined1 *)(param_1 + 4) = 1;
+  uVar1 = *(undefined4 *)PTR__NSDefaultRunLoopMode_00009018;
+  do {
+    uVar2 = _objc_msgSend(PTR_s_NSRunLoop_0000a02c,PTR_s_currentRunLoop_0000a0f8);
+    uVar3 = _objc_msgSend(PTR_s_NSDate_0000a030,PTR_s_distantFuture_0000a194);
+    _objc_msgSend(uVar2,PTR_s_runMode_beforeDate__0000a198,uVar1,uVar3);
+  } while (*(char *)(param_1 + 4) != '\0');
+  return;
+}
+
+
+
+=== +[MACommunicator serve:forName:] @ 0x00003ac7 ===
+
+bool __MACommunicator_serve_forName__
+               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  char cVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  
+  uVar2 = _objc_msgSend(PTR_s_NSConnection_0000a04c,PTR_s_alloc_0000a078);
+  uVar3 = _objc_msgSend(uVar2,PTR_s_init_0000a07c);
+  _objc_msgSend(uVar3,PTR_s_setRootObject__0000a19c,param_3);
+  uVar2 = param_4;
+  cVar1 = _objc_msgSend(uVar3,PTR_s_registerName__0000a1a0,param_4);
+  if (cVar1 == '\0') {
+    _NSLog(&cf_____couldnotregisterserver_Isonealreadyrunning_,param_4);
+  }
+  else {
+    _NSLog(&cf_____startedserver,param_4);
+    _objc_msgSend(param_3,PTR_s_serve_0000a1a4,uVar2);
+    _NSLog(&cf_____stoppedserver,param_4);
+  }
+  _objc_msgSend(uVar3,PTR_s_release_0000a08c,uVar2);
+  return cVar1 != '\0';
+}
+
+
+
+=== -[MACommunicator runServer:] @ 0x00003b92 ===
+
+void __MACommunicator_runServer__(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = _objc_msgSend(param_1,PTR_s_class_0000a1a8);
+  _objc_msgSend(uVar1,PTR_s_serve_forName__0000a1ac,param_1,param_3);
+  return;
+}
+
+
+
+=== -[MACommunicator stopServer] @ 0x00003bd0 ===
+
+void __MACommunicator_stopServer_(int param_1)
+
+{
+  *(undefined1 *)(param_1 + 4) = 0;
+  return;
+}
+
+
+
+=== +[MACommunicator getServer:] @ 0x00003bdc ===
+
+int __MACommunicator_getServer__(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  int iVar1;
+  cfstringStruct *pcVar2;
+  undefined4 uVar3;
+  undefined4 uVar4;
+  
+  uVar4 = 0;
+  uVar3 = param_3;
+  iVar1 = _objc_msgSend(PTR_s_NSConnection_0000a04c,PTR_s_connectionWithRegisteredName_hos_0000a1b0,
+                        param_3,0);
+  if (iVar1 == 0) {
+    pcVar2 = &cf___server_couldnotfindserver_Youneedtostartoneonthismachinefirst_;
+  }
+  else {
+    iVar1 = _objc_msgSend(iVar1,PTR_s_rootProxy_0000a1b4,uVar3,uVar4);
+    if (iVar1 != 0) {
+      return iVar1;
+    }
+    pcVar2 = &cf___server_couldnotgetproxy_Thisshouldnothappen_;
+  }
+  _NSLog(pcVar2,param_3);
+  return 0;
+}
+
+
+

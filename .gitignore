@@ -1,0 +1,48 @@
+# --- build artifacts ---
+openaudio-fw1814/build/
+openaudio-fw1814/**/build/
+openaudio-fw1814/**/*.o
+openaudio-fw1814/**/*.dSYM/
+
+# --- Xcode ---
+xcuserdata/
+*.xcuserstate
+*.xcworkspace/xcuserdata/
+DerivedData/
+*.hmap
+*.ipa
+*.xcarchive
+
+# --- macOS ---
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# --- editor / IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- misc ---
+*.log
+
+# --- recovered / regenerated decompile evidence (cited by line in docs/system-map) ---
+!docs/system-map/**/ghidra-exports/decomp/*.log
+
+# --- third-party reference clones + scratch unpacks (recipes + pins in _refs/README.md) ---
+_refs/*
+!_refs/README.md
+# Office lock files
+~$*
+openaudio-fw1814/dist/
+openaudio-fw1814/installer/.venv/
+
+openaudio-fw1814/installer/assets/MAudioFireWireMIDI.plugin/
+openaudio-fw1814/installer/.venv/
+openaudio-fw1814/dist/

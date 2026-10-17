@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>OpenAudioFW1814</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.openaudio.OpenAudioFW1814</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>OpenAudioFW1814</string>
+	<key>CFBundlePackageType</key>
+	<string>KEXT</string>
+	<key>CFBundleSignature</key>
+	<string>DDRV</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.1.0</string>
+	<key>CFBundleVersion</key>
+	<string>0.1.0</string>
+	<key>IOKitPersonalities</key>
+	<dict>
+		<!-- Q-INFO personality 1: polymorphic nub on IOFireWireDevice, no Model_ID/Vendor_ID/IOProbeScore
+		     in the plist; vendor/product discrimination is in FWMetaNub::probe (mafw.asm 0x1ce62). -->
+		<key>FWMetaNub</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.openaudio.OpenAudioFW1814</string>
+			<key>IOClass</key>
+			<string>com_openaudio_FWMetaNub</string>
+			<key>IOProviderClass</key>
+			<string>IOFireWireDevice</string>
+		</dict>
+		<!-- Q-INFO personality 2: per-product match on the nub, by "FireWire Product Name".
+		     Accepted only in the second matching round (FWAVCAudioDevice::probe, Q-SDK5). -->
+		<key>FW1814Device</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.openaudio.OpenAudioFW1814</string>
+			<key>IOClass</key>
+			<string>com_openaudio_FW1814Device</string>
+			<key>IOProviderClass</key>
+			<string>com_openaudio_FWMetaNub</string>
+			<key>FireWire Product Name</key>
+			<string>FW 1814</string>
+			<key>IOUserClientClass</key>
+			<string>com_openaudio_FW1814UserClient</string>
+		</dict>
+		<!-- Q-INFO personality 3 (deliberate extension of the reference, which only ships these for FW Solo):
+		     keep AppleFWAudio off the FW1814 AV/C sub-units (Audio=1, Music=12). -->
+		<key>FW1814AppleGoAway1</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.openaudio.OpenAudioFW1814</string>
+			<key>IOClass</key>
+			<string>com_openaudio_MakeAppleFWAudioGoAway</string>
+			<key>IOProviderClass</key>
+			<string>IOFireWireAVCSubUnit</string>
+			<key>SubUnit_Type</key>
+			<integer>1</integer>
+			<key>Vendor_ID</key>
+			<integer>3436</integer>
+			<key>FireWire Product Name</key>
+			<string>FW 1814</string>
+			<key>FireWire Vendor Name</key>
+			<string>M-Audio</string>
+		</dict>
+		<key>FW1814AppleGoAway12</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.openaudio.OpenAudioFW1814</string>
+			<key>IOClass</key>
+			<string>com_openaudio_MakeAppleFWAudioGoAway</string>
+			<key>IOProviderClass</key>
+			<string>IOFireWireAVCSubUnit</string>
+			<key>SubUnit_Type</key>
+			<integer>12</integer>
+			<key>Vendor_ID</key>
+			<integer>3436</integer>
+			<key>FireWire Product Name</key>
+			<string>FW 1814</string>
+			<key>FireWire Vendor Name</key>
+			<string>M-Audio</string>
+		</dict>
+	</dict>
+	<key>OSBundleLibraries</key>
+	<dict>
+		<key>com.apple.iokit.IOAudioFamily</key>
+		<string>1.1</string>
+		<key>com.apple.iokit.IOFireWireAVC</key>
+		<string>1.0</string>
+		<key>com.apple.iokit.IOFireWireFamily</key>
+		<string>1.0.0</string>
+		<key>com.apple.kpi.iokit</key>
+		<string>8.0</string>
+		<key>com.apple.kpi.libkern</key>
+		<string>8.0</string>
+		<key>com.apple.kpi.mach</key>
+		<string>8.0</string>
+	</dict>
+</dict>
+</plist>

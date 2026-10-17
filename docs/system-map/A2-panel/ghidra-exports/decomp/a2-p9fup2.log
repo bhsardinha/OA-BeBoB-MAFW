@@ -1,0 +1,296 @@
+openjdk version "25.0.4.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Zulu25.36+205-CA (build 25.0.4.1+1-LTS)
+OpenJDK 64-Bit Server VM Zulu25.36+205-CA (build 25.0.4.1+1-LTS, mixed mode)
+INFO  Using log config file: jar:file:/opt/local/share/java/ghidra-12.1.4/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /Users/bernardosardinha/Library/ghidra/ghidra_12.1.4_DEV/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /Users/bernardosardinha/Library/ghidra/ghidra_12.1.4_DEV/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (1969 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (5433 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 59 extension points (20 false positives) (ClassSearcher)  
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldOffset has been called by org.apache.felix.framework.util.SecureAction (file:/opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Base/lib/org.apache.felix.framework-7.0.5.jar)
+WARNING: Please consider reporting this to the maintainers of class org.apache.felix.framework.util.SecureAction
+WARNING: sun.misc.Unsafe::staticFieldOffset will be removed in a future release
+INFO  HEADLESS Script Paths:
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/BSim/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Base/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/PDB/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/8051/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Opening existing project: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/ghidra-project/panel-app (HeadlessAnalyzer)  
+INFO  Opening project: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/ghidra-project/panel-app (HeadlessProject)  
+INFO  REPORT: Processing project file: /Panel (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: DecompA2P9fup2.java  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/scripts/DecompA2P9fup2.java (HeadlessAnalyzer)  
+INFO  DecompA2P9fup2.java> === CXDevice::CXDevice @ 0006c2b8 === (GhidraScript)  
+INFO  DecompA2P9fup2.java> 
+/* CXDevice::CXDevice(MAIOKitService*, bool) */
+
+void __thiscall CXDevice::CXDevice(CXDevice *this,MAIOKitService *param_1,bool param_2)
+
+{
+  char cVar1;
+  short sVar2;
+  undefined4 uVar3;
+  undefined4 uVar4;
+  int iVar5;
+  longdouble lVar6;
+  cfstringStruct *pcVar7;
+  char *pcVar8;
+  undefined4 local_34;
+  CXDevice *local_1c;
+  undefined1 local_18 [4];
+  undefined4 *local_14;
+  
+  CMiddleWareDevice::CMiddleWareDevice((CMiddleWareDevice *)this,sDeviceCount);
+  *(undefined ***)this = &PTR__CXDevice_001876a8;
+  *(undefined ***)(this + 0x30) = &PTR__CXDevice_00187728;
+  LTimerTask::LTimerTask((LTimerTask *)(this + 0xe0));
+  *(undefined ***)(this + 0xe0) = &PTR__TTimerTask_001648b8;
+  *(undefined4 *)(this + 0xec) = 0;
+  *(undefined4 *)(this + 0xf4) = 0;
+  *(undefined4 *)(this + 0xf0) = 0;
+  LTimerTask::LTimerTask((LTimerTask *)(this + 0xf8));
+  *(undefined ***)(this + 0xf8) = &PTR__TTimerTask_001648b8;
+  *(undefined4 *)(this + 0x104) = 0;
+  *(undefined4 *)(this + 0x10c) = 0;
+  *(undefined4 *)(this + 0x108) = 0;
+  uVar3 = _objc_msgSend(PTR_s_NSAutoreleasePool_001d47a4,PTR_s_alloc_001d401c);
+  uVar3 = _objc_msgSend(uVar3,PTR_s_init_001d4000);
+  sDeviceCount = sDeviceCount + 1;
+  *(CXDevice **)(this + 0xec) = this;
+  *(code **)(this + 0xf0) = CoalesceChangesHandler;
+  *(undefined4 *)(this + 0xf4) = 0;
+  *(CXDevice **)(this + 0x104) = this;
+  *(code **)(this + 0x108) = SendNewSampleRateTimer;
+  *(undefined4 *)(this + 0x10c) = 0;
+  uVar4 = _objc_msgSend(PTR_s_NSMutableDictionary_001d4778,PTR_s_alloc_001d401c);
+  uVar4 = _objc_msgSend(uVar4,PTR_s_init_001d4000);
+  *(undefined4 *)(this + 0x6c) = uVar4;
+  uVar4 = _objc_msgSend(PTR_s_NSMutableDictionary_001d4778,PTR_s_alloc_001d401c);
+  uVar4 = _objc_msgSend(uVar4,PTR_s_init_001d4000);
+  *(undefined4 *)(this + 0x74) = uVar4;
+  uVar4 = _objc_msgSend(PTR_s_NSMutableSet_001d477c,PTR_s_alloc_001d401c);
+  uVar4 = _objc_msgSend(uVar4,PTR_s_init_001d4000);
+  *(undefined4 *)(this + 0x70) = uVar4;
+  *(undefined4 *)(this + 0x110) = 0;
+  *(undefined4 *)(this + 0x78) = 0;
+  uVar4 = _objc_msgSend(param_1,PTR_s_retain_001d4020);
+  *(undefined4 *)(this + 0x5c) = uVar4;
+  pcVar7 = &cf_GUID;
+  uVar4 = _objc_msgSend(uVar4,PTR_s_propertyForKey__001d4018,&cf_GUID);
+  uVar4 = _objc_msgSend(uVar4,PTR_s_retain_001d4020);
+  *(undefined4 *)(this + 0xdc) = uVar4;
+  this[0x7c] = (CXDevice)0x0;
+  *(undefined4 *)(this + 0x80) = 0;
+  sVar2 = _objc_msgSend(*(undefined4 *)(this + 0x5c),PTR_s_openConnection_001d4024);
+  if (sVar2 != 0) {
+    pcVar8 = 
+    "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+    ;
+    UDebugging::DebugThrow
+              ((int)sVar2,"CXDevice",
+               (uchar *)
+               "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+               ,0xef);
+    pcVar7 = (cfstringStruct *)pcVar8;
+  }
+  *(undefined4 *)(this + 0x68) = 0;
+  if (param_2) {
+    uVar4 = _objc_msgSend(*(undefined4 *)(this + 0x5c),PTR_s_connection_001d4028,pcVar7);
+    sVar2 = _IOConnectMapMemory(uVar4,1,*(undefined4 *)PTR__mach_task_self__00163140,this + 0x68,
+                                local_18,0x1001);
+    if (sVar2 != 0) {
+      UDebugging::DebugThrow
+                ((int)sVar2,"CXDevice",
+                 (uchar *)
+                 "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+                 ,0xf9);
+    }
+  }
+  FetchCoreAudioDevices(this);
+  InstallPropertyChangeHandlers(this);
+  RegisterForNotifications(this);
+  uVar4 = _objc_msgSend(PTR_s_MXDevice_001d4780,PTR_s_alloc_001d401c);
+  uVar4 = _objc_msgSend(uVar4,PTR_s_initWithDevice__001d402c,this);
+  *(undefined4 *)(this + 100) = uVar4;
+  lVar6 = (longdouble)
+          _objc_msgSend_fpret(*(undefined4 *)(this + 0x60),PTR_s_nominalSampleRate_001d4030);
+  local_34 = (undefined4)(longlong)lVar6;
+  *(undefined4 *)(this + 0x84) = local_34;
+  pcVar7 = &cf_MAMetaAllProperties;
+  iVar5 = _objc_msgSend(*(undefined4 *)(this + 0x5c),PTR_s_propertyForKey__001d4018,
+                        &cf_MAMetaAllProperties);
+  if (iVar5 != 0) {
+    uVar4 = _objc_msgSend(PTR_s_NSDictionary_001d4784,PTR_s_class_001d4034,pcVar7);
+    cVar1 = _objc_msgSend(iVar5,PTR_s_isKindOfClass__001d4038,uVar4);
+    if (cVar1 != '\0') {
+      _objc_msgSend(*(undefined4 *)(this + 0x6c),PTR_s_addEntriesFromDictionary__001d403c,iVar5);
+    }
+  }
+  iVar5 = _objc_msgSend(*(undefined4 *)(this + 0x5c),PTR_s_propertyForKey__001d4018,
+                        &cf_MAFirmwareInfo);
+  if (iVar5 != 0) {
+    _objc_msgSend(iVar5,PTR_s_getBytes_length__001d4040,this + 0x88,0x50);
+  }
+  _pthread_create((pthread_t *)(this + 0xd8),(pthread_attr_t *)0x0,(void **)TerminationWaitThread,
+                  this);
+  local_1c = this;
+  local_14 = &fDeviceArray;
+  std::list<CXDevice*,std::allocator<CXDevice*>>::_M_insert
+            ((list<CXDevice*,std::allocator<CXDevice*>> *)&fDeviceArray,&fDeviceArray,&local_1c);
+  _objc_msgSend(uVar3,PTR_s_release_001d4048);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9fup2.java> === CXDevice::TerminationWaitThread @ 0006d108 === (GhidraScript)  
+INFO  DecompA2P9fup2.java> 
+/* CXDevice::TerminationWaitThread(void*) */
+
+void CXDevice::TerminationWaitThread(void *param_1)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = _objc_msgSend(*(undefined4 *)((int)param_1 + 0x5c),PTR_s_connection_001d4028);
+  _IOConnectMethodScalarIScalarO(uVar1,0x1fa,0,0);
+  *(undefined4 *)((int)param_1 + 0x68) = 0;
+                    /* WARNING: Subroutine does not return */
+  _pthread_exit((void *)0x0);
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9fup2.java> === CXDevice::~CXDevice @ 0006d1b4 === (GhidraScript)  
+INFO  DecompA2P9fup2.java> 
+/* CXDevice::~CXDevice() */
+
+void __thiscall CXDevice::~CXDevice(CXDevice *this)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  CXDevice *local_10;
+  
+  *(undefined ***)this = &PTR__CXDevice_001876a8;
+  *(undefined ***)(this + 0x30) = &PTR__CXDevice_00187728;
+  local_10 = this;
+  std::list<CXDevice*,std::allocator<CXDevice*>>::remove
+            ((list<CXDevice*,std::allocator<CXDevice*>> *)&fDeviceArray,&local_10);
+  if (*(int *)(this + 0x114) != 0) {
+    _CFMachPortInvalidate(*(int *)(this + 0x114));
+  }
+  if (*(int *)(this + 0x5c) != 0) {
+    iVar1 = _objc_msgSend(*(int *)(this + 0x5c),PTR_s_connection_001d4028);
+    if (iVar1 != 0) {
+      if (*(int *)(this + 0x68) != 0) {
+        uVar2 = _objc_msgSend(*(undefined4 *)(this + 0x5c),PTR_s_connection_001d4028);
+        _IOConnectUnmapMemory
+                  (uVar2,1,*(undefined4 *)PTR__mach_task_self__00163140,*(undefined4 *)(this + 0x68)
+                  );
+      }
+      _objc_msgSend(*(undefined4 *)(this + 0x5c),PTR_s_closeConnection_001d4044);
+      _objc_msgSend(*(undefined4 *)(this + 0x5c),PTR_s_release_001d4048);
+    }
+  }
+  _objc_msgSend(*(undefined4 *)(this + 0x6c),PTR_s_release_001d4048);
+  _objc_msgSend(*(undefined4 *)(this + 0x70),PTR_s_release_001d4048);
+  _objc_msgSend(*(undefined4 *)(this + 0x74),PTR_s_release_001d4048);
+  _objc_msgSend(*(undefined4 *)(this + 0x110),PTR_s_release_001d4048);
+  _objc_msgSend(*(undefined4 *)(this + 0xdc),PTR_s_release_001d4048);
+  _objc_msgSend(*(undefined4 *)(this + 100),PTR_s_release_001d4048);
+  _objc_msgSend(*(undefined4 *)(this + 0x60),PTR_s_release_001d4048);
+  LTimerTask::~LTimerTask((LTimerTask *)(this + 0xf8));
+  LTimerTask::~LTimerTask((LTimerTask *)(this + 0xe0));
+  CMiddleWareDevice::~CMiddleWareDevice((CMiddleWareDevice *)this);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9fup2.java> === CX1814Device LPeriodical-subobject vtable @ 001cce20 === (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x0] = 0xe9e60  CX1814Device::~CX1814Device (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x4] = 0xe9e7a  CX1814Device::~CX1814Device (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x8] = 0x2c07a  LPeriodical::StartIdling (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0xc] = 0x2c12a  LPeriodical::StopIdling (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x10] = 0x2c26e  LPeriodical::StartRepeating (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x14] = 0x2c31e  LPeriodical::StopRepeating (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x18] = 0x639d0  CMiddleWareDevice::SpendTime (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x1c] = 0x2c444  LPeriodical::StartIdling (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x20] = 0x2c4d8  LPeriodical::StartRepeating (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x24] = 0x0 (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x28] = 0x272400 (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x2c] = 0xfa0ec (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x30] = 0x187948 (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x34] = 0x0 (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x38] = 0x0 (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x3c] = 0x0 (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x40] = 0x130 (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x44] = 0x0 (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x48] = 0x1cd190 (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x4c] = 0xe9fd4  CFWNebulaMetersView::~CFWNebulaMetersView (GhidraScript)  
+INFO  DecompA2P9fup2.java> === CX1814Device main vtable @ 001ccd98 (first 40 slots) === (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x0] = 0xe9e12  CX1814Device::~CX1814Device (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x4] = 0xe9e1c  CX1814Device::~CX1814Device (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x8] = 0x70ed0  CXDevice::IsDevicePresent (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0xc] = 0x70ec0  CXDevice::IsFeaturePresent (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x10] = 0x63b92  CMiddleWareDevice::GetDeviceID (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x14] = 0xe9e4c  CX1814Device::GetDeviceType (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x18] = 0x72e4a  CX1814Device::GetNumberOfOutputChannels (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x1c] = 0x72e54  CX1814Device::GetNumberOfMixerChannels (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x20] = 0x73584  CXSelectorHPDevice::GetHWSetting (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x24] = 0x6e200  CXDevice::GetHWSettingRange (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x28] = 0x73906  CXSelectorHPDevice::SetHWSetting (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x2c] = 0x73c64  CXSelectorHPDevice::SetHWIndexedSetting (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x30] = 0x73df4  CXSelectorHPDevice::GetHWIndexedSetting (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x34] = 0x638e2  CMiddleWareDevice::SpendTime (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x38] = 0x639ea  CMiddleWareDevice::AddMWPollingType (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x3c] = 0x63a72  CMiddleWareDevice::RemoveMWPollingType (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x40] = 0x63b16  CMiddleWareDevice::SuspendAllPolling (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x44] = 0x63b42  CMiddleWareDevice::ResumeAllPolling (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x48] = 0x6378a  CMiddleWareDevice::GetCPSetting (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x4c] = 0x637de  CMiddleWareDevice::SetCPSetting (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x50] = 0x6388a  CMiddleWareDevice::SetCPIndexedSetting (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x54] = 0x63832  CMiddleWareDevice::GetCPIndexedSetting (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x58] = 0xe9e56  CX1814Device::GetMaximumMixerSampleRate (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x5c] = 0x72e68  CX1814Device::GetNumberOfInputChannels (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x60] = 0x72e72  CX1814Device::GetNumberOfHeadphoneChannels (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x64] = 0x72e7c  CX1814Device::GetNumberOfDirectMonitorChannels (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x68] = 0x72166  CXDevice::GetNumberOfAuxMonitorSwitchChannels (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x6c] = 0x72e86  CX1814Device::GetSWReturnPeaksAreEmbedded (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x70] = 0xe9dac  CX1814Device::ReceiveHeadphoneSourceValueChange (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x74] = 0x7154c  CXDevice::ReceiveClockSourceValueChange (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x78] = 0x72e8e  CX1814Device::TranslateHPRoutingPairsForBitConversion (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x7c] = 0x72ea6  CX1814Device::OutputChannelPairMaskToHPRoutingPairs (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x80] = 0xffffffd0 (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x84] = 0x1cce48 (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x88] = 0xe9e60  CX1814Device::~CX1814Device (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x8c] = 0xe9e7a  CX1814Device::~CX1814Device (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x90] = 0x2c07a  LPeriodical::StartIdling (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x94] = 0x2c12a  LPeriodical::StopIdling (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x98] = 0x2c26e  LPeriodical::StartRepeating (GhidraScript)  
+INFO  DecompA2P9fup2.java>   [+0x9c] = 0x2c31e  LPeriodical::StopRepeating (GhidraScript)  
+INFO  REPORT: Save succeeded for processed file: /Panel (HeadlessAnalyzer)  

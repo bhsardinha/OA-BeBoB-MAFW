@@ -1,0 +1,346 @@
+openjdk version "25.0.4.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Zulu25.36+205-CA (build 25.0.4.1+1-LTS)
+OpenJDK 64-Bit Server VM Zulu25.36+205-CA (build 25.0.4.1+1-LTS, mixed mode)
+INFO  Using log config file: jar:file:/opt/local/share/java/ghidra-12.1.4/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /Users/bernardosardinha/Library/ghidra/ghidra_12.1.4_DEV/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /Users/bernardosardinha/Library/ghidra/ghidra_12.1.4_DEV/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (2275 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (6593 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 59 extension points (20 false positives) (ClassSearcher)  
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldOffset has been called by org.apache.felix.framework.util.SecureAction (file:/opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Base/lib/org.apache.felix.framework-7.0.5.jar)
+WARNING: Please consider reporting this to the maintainers of class org.apache.felix.framework.util.SecureAction
+WARNING: sun.misc.Unsafe::staticFieldOffset will be removed in a future release
+INFO  HEADLESS Script Paths:
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/BSim/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Base/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/PDB/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/8051/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A1-ghidra/scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Opening existing project: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A1-ghidra/ghidra-project/fw1814-kext (HeadlessAnalyzer)  
+INFO  Opening project: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A1-ghidra/ghidra-project/fw1814-kext (HeadlessProject)  
+INFO  REPORT: Processing project file: /M-AudioFireWireBeBoB.x86_64-slice (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: DecompClockBijection.java  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A1-ghidra/scripts/DecompClockBijection.java (HeadlessAnalyzer)  
+INFO  DecompClockBijection.java> === m_audio_b_FWAVCAudioDevice::setProperties @ 00022e28 === (GhidraScript)  
+INFO  DecompClockBijection.java> 
+/* m_audio_b_FWAVCAudioDevice::setProperties(OSObject*) */
+
+undefined8 __thiscall
+m_audio_b_FWAVCAudioDevice::setProperties(m_audio_b_FWAVCAudioDevice *this,OSObject *param_1)
+
+{
+  int iVar1;
+  long *plVar2;
+  OSMetaClassBase *pOVar3;
+  undefined8 uVar4;
+  
+  if ((*(long *)(this + 0xf8) != 0) && (*(long *)(this + 0xe8) != 0)) {
+    plVar2 = (long *)OSMetaClassBase::safeMetaCast
+                               ((OSMetaClassBase *)param_1,*(OSMetaClass **)PTR_metaClass_00030008);
+    if (plVar2 == (long *)0x0) {
+      return 0;
+    }
+    pOVar3 = (OSMetaClassBase *)(**(code **)(*plVar2 + 0x208))(plVar2,"MASampleRate");
+    plVar2 = (long *)OSMetaClassBase::safeMetaCast(pOVar3,*(OSMetaClass **)PTR_metaClass_00030080);
+    if (plVar2 != (long *)0x0) {
+      iVar1 = (**(code **)(*plVar2 + 0x148))(plVar2);
+      if (*(int *)(*(long *)(this + 0xe8) + 0x8c) != iVar1) {
+        (**(code **)(*(long *)this + 0xa78))(this,iVar1);
+      }
+    }
+  }
+  uVar4 = (*(code *)PTR_setProperties_00031470)(this,param_1);
+  return uVar4;
+}
+
+ (GhidraScript)  
+INFO  DecompClockBijection.java> === m_audio_b_FWAVCAudioDevice::SetClockSource @ 00023858 === (GhidraScript)  
+INFO  DecompClockBijection.java> 
+/* m_audio_b_FWAVCAudioDevice::SetClockSource(unsigned int) */
+
+int __thiscall
+m_audio_b_FWAVCAudioDevice::SetClockSource(m_audio_b_FWAVCAudioDevice *this,uint param_1)
+
+{
+  byte bVar1;
+  long *plVar2;
+  int iVar3;
+  bool bVar4;
+  
+  plVar2 = *(long **)(this + 0xe8);
+  if (plVar2 != (long *)0x0) {
+    (**(code **)(*plVar2 + 0xa50))(plVar2);
+  }
+  if (param_1 < 0x40000000) {
+    _IOLog("M-FW: Converting old digital bitmap (%X)\n",param_1);
+    switch(param_1) {
+    case 0:
+      param_1 = 0x40000000;
+      break;
+    case 1:
+      param_1 = 0x40000004;
+      break;
+    case 2:
+      param_1 = 0x40000001;
+      break;
+    case 3:
+      param_1 = 0x40000005;
+    }
+  }
+  if (*(long *)(this + 0xe8) == 0) {
+    iVar3 = 0;
+  }
+  else {
+    bVar1 = *(byte *)(*(long *)(this + 0xe8) + 0x2d0);
+    iVar3 = (**(code **)(*(long *)this + 0xb60))(this,param_1,0);
+    if (iVar3 == 0) {
+      if ((int)param_1 < 0) {
+        bVar4 = (param_1 & 0xf) != 0;
+      }
+      else {
+        bVar4 = (bool)(-((param_1 & 3) - 1 < 2) & 1);
+      }
+      if (bVar4 != (bool)bVar1) {
+        (**(code **)(**(long **)(this + 0xe8) + 0xce8))(*(long **)(this + 0xe8),bVar4);
+      }
+      m_audio_b_FWBaseEngine::CompletePendingStateChanges(*(m_audio_b_FWBaseEngine **)(this + 0xe8))
+      ;
+    }
+  }
+  if (plVar2 != (long *)0x0) {
+    (**(code **)(*plVar2 + 0xa58))(plVar2);
+  }
+  return iVar3;
+}
+
+ (GhidraScript)  
+INFO  DecompClockBijection.java> === m_audio_b_FWAVCAudioDevice::SetClockSourceInternal @ 00023148 === (GhidraScript)  
+INFO  DecompClockBijection.java> 
+/* m_audio_b_FWAVCAudioDevice::SetClockSourceInternal(unsigned int, bool) */
+
+undefined8 m_audio_b_FWAVCAudioDevice::SetClockSourceInternal(uint param_1,bool param_2)
+
+{
+  undefined8 uVar1;
+  undefined7 in_register_00000031;
+  undefined4 in_register_0000003c;
+  m_audio_b_FWAVCAudioDevice *this;
+  undefined4 local_20;
+  uchar local_1c;
+  uchar local_1b;
+  uint local_18;
+  
+  this = (m_audio_b_FWAVCAudioDevice *)CONCAT44(in_register_0000003c,param_1);
+  local_18 = (uint)CONCAT71(in_register_00000031,param_2);
+  local_20 = 4;
+  local_1c = '\0';
+  local_1b = '\0';
+  if (local_18 < 0x40000000) {
+    uVar1 = 0xe00002c2;
+  }
+  else {
+    uVar1 = (**(code **)(*(long *)this + 0xb48))(this,&local_20);
+    if ((int)uVar1 == 0) {
+      uVar1 = AVCSelectorCommand(this,local_1c,local_1b);
+    }
+  }
+  return uVar1;
+}
+
+ (GhidraScript)  
+INFO  DecompClockBijection.java> === com_m_audio_FW1814Device::SetClockSourceInternal @ 0000e25c === (GhidraScript)  
+INFO  DecompClockBijection.java> 
+/* com_m_audio_FW1814Device::SetClockSourceInternal(unsigned int, bool) */
+
+int com_m_audio_FW1814Device::SetClockSourceInternal(uint param_1,bool param_2)
+
+{
+  long *plVar1;
+  int iVar2;
+  undefined1 *puVar3;
+  char in_DL;
+  undefined7 in_register_00000031;
+  ulong uVar4;
+  undefined4 in_register_0000003c;
+  long *plVar5;
+  undefined8 in_R9;
+  uint uVar6;
+  uint uVar7;
+  undefined1 *puVar8;
+  undefined4 uVar9;
+  undefined1 local_6c [20];
+  undefined1 *local_58;
+  uint local_50;
+  undefined1 local_4c [24];
+  undefined4 local_34;
+  
+  plVar5 = (long *)CONCAT44(in_register_0000003c,param_1);
+  uVar4 = CONCAT71(in_register_00000031,param_2);
+  local_50 = 0x10;
+  local_58 = local_4c;
+  _bzero(local_58,0x10);
+  uVar9 = 0x10;
+  puVar8 = local_6c;
+  _bzero(puVar8,0x10);
+  plVar1 = (long *)plVar5[0x1d];
+  if (plVar1 != (long *)0x0) {
+    (**(code **)(*plVar1 + 0xa50))(plVar1);
+  }
+  if ((char)plVar5[0x371] == '\0') {
+    (**(code **)(*(long *)plVar5[0x1d] + 0xb00))();
+    *(undefined1 *)(plVar5 + 0x371) = 1;
+    uVar7 = (uint)uVar4;
+    if (uVar7 < 0x40000000) {
+      iVar2 = -0x1ffffd3e;
+    }
+    else {
+      *local_58 = 0;
+      puVar3 = local_58;
+      if (1 < local_50) {
+        puVar3 = local_58 + 1;
+      }
+      *puVar3 = 0xff;
+      puVar3 = local_58;
+      if (2 < local_50) {
+        puVar3 = local_58 + 2;
+      }
+      *puVar3 = 0;
+      puVar3 = local_58;
+      if (3 < local_50) {
+        puVar3 = local_58 + 3;
+      }
+      *puVar3 = 4;
+      puVar3 = local_58;
+      if (4 < local_50) {
+        puVar3 = local_58 + 4;
+      }
+      *puVar3 = 0;
+      puVar3 = local_58;
+      if (5 < local_50) {
+        puVar3 = local_58 + 5;
+      }
+      *puVar3 = 4;
+      uVar6 = uVar7 & 3;
+      if (uVar6 == 1) {
+        puVar3 = local_58;
+        if (6 < local_50) {
+          puVar3 = local_58 + 6;
+        }
+        *puVar3 = 1;
+      }
+      else if (uVar6 == 2) {
+        puVar3 = local_58;
+        if (6 < local_50) {
+          puVar3 = local_58 + 6;
+        }
+        *puVar3 = 2;
+      }
+      else if (uVar6 == 3) {
+        puVar3 = local_58;
+        if (6 < local_50) {
+          puVar3 = local_58 + 6;
+        }
+        *puVar3 = 0;
+      }
+      else {
+        puVar3 = local_58;
+        if (6 < local_50) {
+          puVar3 = local_58 + 6;
+        }
+        *puVar3 = 3;
+      }
+      puVar3 = local_58;
+      if (7 < local_50) {
+        puVar3 = local_58 + 7;
+      }
+      *puVar3 = 0;
+      puVar3 = local_58;
+      if (8 < local_50) {
+        puVar3 = local_58 + 8;
+      }
+      *puVar3 = 0;
+      puVar3 = local_58;
+      if (9 < local_50) {
+        puVar3 = local_58 + 9;
+      }
+      *puVar3 = 0;
+      local_34 = 0x10;
+      (**(code **)(*(long *)plVar5[0x4d] + 0x8b8))
+                ((long *)plVar5[0x4d],local_58,0x10,puVar8,&local_34,in_R9,puVar8,uVar9);
+      _IOSleep(300);
+      *(uint *)((long)plVar5 + 0x144) = uVar7;
+      iVar2 = (*(code *)PTR_SetClockSourceInternal_0003c200)(plVar5,uVar4 & 0xffffffff,in_DL);
+      if (iVar2 == 0) {
+        _IOSleep(300);
+        if (in_DL == '\0') {
+          *(uint *)((long)plVar5 + 0x144) = uVar7;
+          (**(code **)(*plVar5 + 0xbe0))(plVar5,uVar4 & 0xffffffff);
+          FWSettingsLevels::SendToDevice((FWSettingsLevels *)(plVar5 + 0xa7));
+        }
+        *(undefined1 *)(plVar5 + 0x371) = 0;
+        (**(code **)(*(long *)plVar5[0x1d] + 0xb08))();
+        goto LAB_0000e4cb;
+      }
+    }
+    *(undefined1 *)(plVar5 + 0x371) = 0;
+    (**(code **)(*(long *)plVar5[0x1d] + 0xb10))();
+  }
+  else {
+    iVar2 = 0;
+  }
+LAB_0000e4cb:
+  if (plVar1 != (long *)0x0) {
+    (**(code **)(*plVar1 + 0xa58))(plVar1);
+  }
+  return iVar2;
+}
+
+ (GhidraScript)  
+INFO  DecompClockBijection.java> === com_m_audio_FW1814Device::SetBlankSlateClockSource @ 0000e4f0 === (GhidraScript)  
+INFO  DecompClockBijection.java> 
+/* com_m_audio_FW1814Device::SetBlankSlateClockSource() */
+
+undefined4 __thiscall
+com_m_audio_FW1814Device::SetBlankSlateClockSource(com_m_audio_FW1814Device *this)
+
+{
+  undefined4 uVar1;
+  
+  if (*(long *)(this + 0xe8) == 0) {
+    uVar1 = 0;
+  }
+  else {
+    uVar1 = (**(code **)(*(long *)this + 0xb60))
+                      (this,(*(uint *)(this + 0x144) & 0x1c) + 0x40000003,1);
+    _IOSleep(0x9c4);
+  }
+  return uVar1;
+}
+
+ (GhidraScript)  
+INFO  REPORT: Save succeeded for processed file: /M-AudioFireWireBeBoB.x86_64-slice (HeadlessAnalyzer)  

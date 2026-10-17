@@ -1,0 +1,10 @@
+# Real `kextload` test — build PC (10.13.6, SIP disabled), 2026-10-14 21:04, user-authorized ("dá pra testar tranquilo sem o hardware?... prossiga").
+# Kext: _extracted/kext/M-AudioFireWireBeBoB.kext (bundle 1.11.3, sha256 5532c6e8…ceb17), staged root:wheel in /tmp/maudio-stage. FW1814 NOT attached to this machine; FireWire bus had only IOFireWireLocalNode (no IOFireWireDevice) before and after.
+sudo kextload -v 6 M-AudioFireWireBeBoB.kext
+  -> "Requesting load of …/M-AudioFireWireBeBoB.kext."  "…loaded successfully (or already loaded)."  EXIT=0
+kextd: Kext with invalid signatured (-67007) allowed (SIP disabled)
+kextstat: 162  0 0xffffff7f836a9000 0x4d000 0x4d000 com.m-audio.driver.firewire (1.11.3) <161 116 68 5 4 3>
+ioreg: 0 objects of class com_m_audio_* / m_audio_b_*  (no FWMetaNub, no device instance)
+log: no "M-FW" lines; no new panic report; uptime continuous (19:16 -> 19:17) through +15 s idle.
+sudo kextunload -b com.m-audio.driver.firewire -> see below (unload result recorded in R27)
+sudo kextunload -b com.m-audio.driver.firewire -> EXIT=0; kextstat shows 0 M-Audio kexts afterwards; staged copy deleted; /Library/Extensions has 0 M-Audio entries; 6 pre-existing panic reports unchanged; uptime continuous.

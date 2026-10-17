@@ -1,0 +1,29 @@
+# capture 81 - registry parity SL v1.9 (official) vs clone, helper persistence, UID (2026-10-17)
+
+## object tree under the device (ioreg -p IOService -l, parsed)
+SL v1.9:  FW1814Device, FWAVCUnit 1, FWEngine2 1, FWStream 2, FWUserClient 7 (helper + panel + ...), IOAudioEngineUserClient 7
+clone:    FW1814Device, FWAvcUnit 1, FWEngine2 1, FWStream 2, FW1814UserClient 2,                   IOAudioEngineUserClient 1
+=> same classes and counts; the AV/C unit exists on both (after the 2026-10-17 fix).
+
+## CoreAudio-visible controls, both in S/PDIF mode (IOAudioLevelControl / IOAudioToggleControl by usage)
+SL official: total 65 = input 18 level + 18 mute, output 5 level + 5 mute, PASS-THROUGH ('pass' 0x70617373) 18 level + 1 mute
+clone:       total 46 = input 18 level + 18 mute, output 5 level + 5 mute                     (19 fewer: the pass-through group)
+Version skew, verified in the binaries: SL v1.9 FWSettingsLevels::Init contains the 'pass' immediate twice (otool -tV, x86_64 slice pulled from the SL),
+v1.11.2 (_extracted, the clone's spec) does not (only EstablishDirectMonitoring{Volume,Toggle}Control themselves, with no caller). The clone follows v1.11.2.
+
+## engine unique id
+SL registry IOAudioEngineGlobalUniqueID = "com_m_audio_FWEngine2:0xD6C040074B9FB" (class:GUID); the engine's registry name is its class name, yet the id has no name segment.
+clone before: HAL UID "com_m_audio_FWEngine2:com_openaudio_FWEngine2:0xD6C040012337F" (getName() used for vt[0x3b8]); after (getLocation()): "com_m_audio_FWEngine2:0xD6C040012337F".
+
+## helper persistence (com.m-audio.device-settings.firewire)
+SL: ~/Library/Preferences/com.m-audio.device-settings.firewire.plist, mode 0600 owner = console user, key D6C040012337F, 78 keys (the 36 user-settable keys + MASampleRate, MARateLocked, MABytesPerCycle merged from notifications).
+clone helper installed before 2026-10-17: the minimal H.1 build (10 KB, no settings code) - no preference domain at all.
+clone helper H.4 (23 KB, installed 2026-10-17): file created 4 s after a dirty property, 0600, user-owned, key D6C040012337F, the same 36 user-settable keys.
+replay: output levels saved as -20 x4, panel closed, kext unloaded/reloaded (kext back at 0): helper restored -20 x4 on its own; phone levels restored the same way on every later reload.
+helper bug found by the unload test: it never released the device (no interest notification): "FW1814Device=1" stayed alive, kextunload exit 3. Fixed (kIOMessageServiceIsTerminated handler); first kextunload still races the helper by a few seconds (retry succeeds) -> scripts patched.
+
+## official install set (SL) vs clone (build PC)
+SL: /System/Library/Extensions/M-AudioFireWireBeBoB.kext; /Applications/M-Audio FireWire.app; /Library/Audio/MIDI Drivers/MAudioFireWireMIDI.plugin; /Library/PreferencePanes/M-Audio FWPanel.prefPane;
+    /Library/StartupItems/M-Audio Firmware Loader and M-Audio FireWire Audio Helper (+ /Library/Application Support/M-Audio)
+clone: /Library/Extensions/OpenAudioFW1814.kext; panel app (run from the build tree); LaunchDaemon com.openaudio.fw1814.helper; NO CoreMIDI plug-in installed; no prefpane (dropped by decision).
+The official MIDI plug-in matches the device with IOServiceMatching("com_m_audio_FW1814Device") (strings of MAudioFireWireMIDI x86_64 slice); the clone's kext carries the abstract alias class of that name (M-H2).

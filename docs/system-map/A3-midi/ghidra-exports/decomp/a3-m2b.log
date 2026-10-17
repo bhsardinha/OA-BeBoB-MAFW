@@ -1,0 +1,111 @@
+=== 0x00002588  MAFWMIDIDeviceBeBoB::initWithDevice:driver:service:  size=250 ===
+
+/* Function Stack Size: 0x24 bytes */
+
+ID MAFWMIDIDeviceBeBoB::initWithDevice_driver_service_
+             (ID param_1,SEL param_2,unsigned_int param_3,MIDIDriverInterface **param_4,ID param_5)
+
+{
+  long lVar1;
+  int iVar2;
+  int iVar3;
+  ID IVar4;
+  undefined8 uVar5;
+  ID local_48;
+  undefined *local_40;
+  ID local_38;
+  undefined *local_30;
+  
+  local_30 = PTR_MAFWMIDIDeviceBeBoB_0000a768;
+  local_38 = param_1;
+  IVar4 = NSObject::init((ID)&local_38,PTR_s_init_0000a3e8);
+  if (IVar4 != 0) {
+    *(unsigned_int *)(param_1 + fDevice) = param_3;
+    *(MIDIDriverInterface ***)(param_1 + fDriver) = param_4;
+    uVar5 = (*retain_message_ref.imp)(param_5,&retain_message_ref);
+    lVar1 = fKitDevice;
+    *(undefined8 *)(param_1 + fKitDevice) = uVar5;
+    iVar2 = (*(code *)PTR__objc_msgSend_000090a0)
+                      (*(undefined8 *)(param_1 + lVar1),PTR_s_openConnection_0000a498);
+    if (iVar2 == 0) {
+      iVar3 = start(param_1,PTR_s_start_0000a470);
+      if (iVar3 == 0) {
+        (*(code *)PTR__objc_msgSend_000090a0)(sDrivers,PTR_s_addObject__0000a4a0,param_1);
+        return param_1;
+      }
+    }
+    else {
+      _NSLog(&cf__lXwhileopeningconnection,iVar2);
+    }
+    local_40 = PTR_MAFWMIDIDeviceBeBoB_0000a768;
+    local_48 = param_1;
+    NSObject::release((ID)&local_48,(SEL)&release_message_ref);
+    param_1 = 0;
+  }
+  return param_1;
+}
+
+
+
+=== 0x000024ec  MAFWMIDIDeviceBeBoB::fetchInstanceForDevice:  size=134 ===
+
+/* Function Stack Size: 0x14 bytes */
+
+ID MAFWMIDIDeviceBeBoB::fetchInstanceForDevice_(ID param_1,SEL param_2,unsigned_int param_3)
+
+{
+  undefined *puVar1;
+  undefined *puVar2;
+  char cVar3;
+  undefined8 uVar4;
+  ID IVar5;
+  
+  puVar1 = PTR__objc_msgSend_000090a0;
+  uVar4 = (*(code *)PTR__objc_msgSend_000090a0)(sDrivers,PTR_s_objectEnumerator_0000a480);
+  IVar5 = (*(code *)puVar1)(uVar4,PTR_s_nextObject_0000a488);
+  puVar2 = PTR_s_isForDevice__0000a490;
+  puVar1 = PTR_s_nextObject_0000a488;
+  while ((IVar5 != 0 &&
+         (cVar3 = (*(code *)PTR__objc_msgSend_000090a0)(IVar5,puVar2,param_3), cVar3 == '\0'))) {
+    IVar5 = (*(code *)PTR__objc_msgSend_000090a0)(uVar4,puVar1);
+  }
+  return IVar5;
+}
+
+
+
+=== 0x00002418  MAFWMIDIDeviceBeBoB::terminateInstanceOfDevice:  size=48 ===
+
+/* Function Stack Size: 0x14 bytes */
+
+void MAFWMIDIDeviceBeBoB::terminateInstanceOfDevice_(ID param_1,SEL param_2,unsigned_int param_3)
+
+{
+  ID IVar1;
+  
+  IVar1 = fetchInstanceForDevice_(param_1,PTR_s_fetchInstanceForDevice__0000a448,param_3);
+  if (IVar1 != 0) {
+                    /* WARNING: Could not recover jumptable at 0x00002440. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+    (*(code *)PTR__objc_msgSend_000090a0)(sDrivers,PTR_s_removeObject__0000a450,IVar1);
+    return;
+  }
+  return;
+}
+
+
+
+=== 0x000023f3  MAFWMIDIDeviceBeBoB::terminateAllDevices  size=37 ===
+
+/* Function Stack Size: 0x10 bytes */
+
+void MAFWMIDIDeviceBeBoB::terminateAllDevices(ID param_1,SEL param_2)
+
+{
+  (*release_message_ref.imp)(sDrivers,&release_message_ref);
+  sDrivers = 0;
+  return;
+}
+
+
+

@@ -1,0 +1,258 @@
+<title>FW1814 Panel Wireframe</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: faithful redraw of the v1.9 panel from the user's screenshots: tabs + main area + fixed right sidebar; a screen picker above. */
+:root{
+  --bg:#eceef1; --fg:#1b2027; --mute:#5b6572; --line:#b9c0ca; --panel:#ffffff; --well:#d9dde3; --dark:#2b2d30; --darkfg:#e6e8eb;
+  --accent:#1f5fbf; --on:#2f6fd6; --ok:#2a7d46; --warn:#a45a00; --bar:#2a9d55;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace; --sans:"IBM Plex Sans",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14181d; --fg:#e4e8ed; --mute:#98a2b0; --line:#3b4450; --panel:#1d242c; --well:#2a323c; --dark:#0f1215; --darkfg:#e6e8eb;
+  --accent:#7db0ff; --on:#4f8ff0; --ok:#6fcf8b; --warn:#e0a24a; --bar:#4cc27b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14181d; --fg:#e4e8ed; --mute:#98a2b0; --line:#3b4450; --panel:#1d242c; --well:#2a323c; --dark:#0f1215; --darkfg:#e6e8eb;
+  --accent:#7db0ff; --on:#4f8ff0; --ok:#6fcf8b; --warn:#e0a24a; --bar:#4cc27b; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:14px/1.5 var(--sans);margin:0;padding-block:20px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto;display:grid;gap:16px}
+h1{font-size:1.4rem;margin:0}
+h2{font-size:.8rem;margin:0 0 6px;text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+p{margin:0;max-width:70ch}
+.src,.key{font:11px/1.4 var(--mono);color:var(--mute)}
+.picker{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{font:inherit;font-size:13px;background:var(--panel);color:var(--fg);border:0;border-right:1px solid var(--line);padding:5px 11px;cursor:pointer}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.seg button:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.lab{font-size:12px;color:var(--mute)}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:16px;align-items:start}
+@media(max-width:900px){.cols{grid-template-columns:minmax(0,1fr)}}
+/* window */
+.win{background:var(--dark);border-radius:10px;padding:8px;min-width:0;color:var(--darkfg)}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding:2px 6px 8px;font:12px var(--mono)}
+.tabrow{display:flex;gap:2px;padding-left:4px}
+.tabrow span{background:var(--well);color:var(--fg);padding:4px 12px;border-radius:6px 6px 0 0;font:12px var(--mono)}
+.tabrow span.on{background:var(--panel);font-weight:600}
+.main{display:flex;gap:8px;align-items:flex-start}
+.area{background:var(--panel);color:var(--fg);flex:1;min-width:0;border-radius:0 6px 6px 6px;padding:8px;overflow-x:auto}
+.side{width:128px;flex:none;display:grid;gap:8px}
+.sbox{background:var(--panel);color:var(--fg);border-radius:6px;padding:6px;display:grid;gap:5px;justify-items:center;font:11px var(--mono);text-align:center}
+.sbox b{font-size:11px}
+.btn{font:10px var(--mono);border:1px solid var(--line);background:var(--well);color:var(--fg);border-radius:9px;padding:1px 8px;white-space:nowrap}
+.btn.on{background:var(--on);border-color:var(--on);color:#fff}
+.btn.dis{opacity:.4}
+.btns{display:flex;gap:4px;flex-wrap:wrap;justify-content:center}
+.knob{width:26px;height:26px;border-radius:50%;border:2px solid var(--fg);position:relative;background:var(--panel)}
+.knob::after{content:"";position:absolute;left:50%;top:2px;width:2px;height:8px;background:var(--fg);transform:translateX(-50%)}
+.knob.big{width:44px;height:44px;border-color:var(--hot,#b3261e)}
+.knob.pan{border-color:var(--on)}
+.radio{display:flex;gap:6px;align-items:center;font:11px var(--mono);text-align:left}
+.radio i{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--mute);flex:none;background:var(--well)}
+.radio i.on{background:var(--on);border-color:var(--on)}
+.radio.dis{opacity:.45}
+.radio.sq i{border-radius:2px}
+/* strips */
+.strips{display:flex;gap:6px;min-width:max-content;align-items:stretch}
+.grp{display:flex;gap:6px;padding:4px;background:var(--well);border-radius:6px}
+.grp.white{background:var(--panel);border:1px solid var(--line)}
+.strip{width:74px;background:var(--well);border-radius:4px;padding:4px 3px;display:grid;gap:4px;justify-items:center;align-content:start;font:10px var(--mono);text-align:center}
+.grp.white .strip{background:transparent}
+.strip h4{margin:0;font:600 10px var(--mono)}
+.strip.scale{width:104px}
+.pair{display:flex;gap:2px;align-items:flex-start}
+.knobs{display:flex;gap:6px}
+.fad{display:flex;gap:8px;height:120px;align-items:stretch}
+.fad .t{width:5px;background:var(--line);border-radius:2px;position:relative}
+.fad .t::after{content:"";position:absolute;left:-4px;right:-4px;top:var(--p,6px);height:8px;background:var(--mute);border-radius:2px}
+.fad .sc{display:grid;align-content:space-between;font-size:9px;color:var(--mute);width:16px;text-align:center}
+.fad.noctl .t{opacity:.0;width:0}
+.bus{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:4px 8px;font:10px var(--mono);display:flex;gap:10px;flex-wrap:wrap}
+.mini{display:flex;gap:2px;height:22px;align-items:stretch;justify-content:center}
+.mini div{width:5px;background:linear-gradient(to top,var(--bar) var(--h),var(--panel) var(--h));border:1px solid var(--line)}
+.bus b{align-self:flex-end}
+.bi{display:grid;gap:2px;justify-items:center}
+.radio[data-lc]{cursor:pointer}
+.disp.red{background:#c0392b}
+.btn.g{background:#2f9e5a;border-color:#2f9e5a;color:#fff}
+.gr{opacity:.35;text-decoration:line-through}
+.bi.gr{opacity:.35}
+.under{display:flex;gap:6px;margin-top:6px;min-width:max-content}
+/* hardware */
+.hw{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media(max-width:700px){.hw{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--well);border-radius:6px;padding:10px;display:grid;gap:6px;align-content:start}
+.card h3{margin:0;text-align:center;font:600 11px var(--mono)}
+.disp{background:#3fae3f;color:#fff;font:600 13px var(--mono);padding:3px 18px;border-radius:4px;justify-self:center}
+.about{display:grid;gap:8px}
+.hero{background:linear-gradient(135deg,#5a1414,#a02020);color:#fff;border-radius:6px;padding:40px 16px;font:600 22px var(--sans)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font:11px var(--mono)}
+/* meters */
+.mw{display:flex;gap:8px;flex-wrap:wrap}
+.mp{background:var(--well);border-radius:6px;padding:8px;display:grid;gap:6px;font:10px var(--mono);flex:1 1 140px}
+.mp h4{margin:0;text-align:center;font:600 11px var(--mono)}
+.mv{display:flex;gap:6px}
+.bars{display:flex;gap:7px;height:130px}
+.bars div{width:6px;background:linear-gradient(to top,var(--bar) var(--h),var(--panel) var(--h));border:1px solid var(--line)}
+.bars + .nums{display:flex;gap:7px}
+.nums span{width:6px;text-align:center}
+.vbars{display:grid;gap:5px}
+.vrow{display:flex;gap:6px;align-items:center}
+.vrow span{width:18px}
+.vrow div{height:6px;flex:1;min-width:80px;background:linear-gradient(to right,var(--bar) var(--h),var(--panel) var(--h));border:1px solid var(--line)}
+/* dialog */
+.dlg{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;max-width:420px;margin:10px auto;display:grid;gap:10px;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.dlg h3{margin:0;text-align:center;font:600 13px var(--sans)}
+.dr{display:grid;grid-template-columns:70px repeat(3,1fr);gap:6px;align-items:center;font-size:13px}
+/* notes */
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.nc{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:grid;gap:6px;align-content:start}
+.nc ul{margin:0;padding-left:18px;display:grid;gap:5px;font-size:13px}
+.chip{font:11px var(--mono);color:var(--warn);border:1px solid var(--warn);border-radius:3px;padding:0 5px}
+[hidden]{display:none!important}
+</style>
+
+<div class="wrap">
+  <div>
+    <h1>FW1814 panel wireframe (PN.1, revision 2)</h1>
+    <p>Redrawn from your v1.9 screenshots. Pick a screen below. The window, tabs and right sidebar follow the reference; only the look will be modernised. Anything I could not see is tagged <span class="chip">inferred</span>.</p>
+  </div>
+
+  <div class="picker">
+    <span class="lab">View</span>
+    <span class="seg" id="sView"></span>
+    <span class="lab" id="lTab">Tab</span>
+    <span class="seg" id="sTab"></span>
+    <span class="lab" id="lIn">Optical in</span>
+    <span class="seg" id="sIn"></span>
+    <span class="lab" id="lOut">Optical out</span>
+    <span class="seg" id="sOut"></span>
+    <span class="lab">Rate</span><span class="seg" id="sRate"></span><span class="seg"><button id="bSm" aria-pressed="false">S/MUX box on (44.1/48)</button><button id="bUs" aria-pressed="false">unsynced</button><button id="bUn" aria-pressed="false">link off</button><button id="bDlg" aria-pressed="false">HP A/B sheet</button></span>
+  </div>
+
+  <div class="cols">
+    <div class="win" id="win"></div>
+    <div class="notes" style="grid-template-columns:1fr" id="notes"></div>
+  </div>
+</div>
+
+<script>
+var S={view:'full',tab:'mixer',oin:'adat',oout:'adat',dlg:false,lc:'out',smux:false,rate:'mid',unsync:false,ma:{},off:{}};
+function eff(side){return S.rate=='mid'&&S[side]=='adat'}
+function dig(){return S.rate!='hi'}
+function ctrlBtn(group,key){var en=S.lc==group;var on=en&&!S.off[key];return '<span class="btn'+(on?' on':'')+(en?'':' dis')+'" data-ctrl="'+(en?key:'')+'" style="cursor:'+(en?'pointer':'default')+'">ctrl</span>'}
+function mbars(n,h){var r='';for(var i=0;i<n;i++)r+='<div style="--h:'+h[i%h.length]+'%"></div>';return '<div class="mini">'+r+'</div>'}
+function busM(title,items){return '<div class="bus"><b>'+title+'</b>'+items.map(function(it){return '<span class="bi'+(it[2]?' gr':'')+'">'+mbars(it[1],[60,48,30,22])+it[0]+'</span>'}).join('')+'</div>'}
+function $(id){return document.getElementById(id)}
+function seg(el,items,key,fn){el.innerHTML='';items.forEach(function(it){var b=document.createElement('button');b.textContent=it[1];b.setAttribute('aria-pressed',S[key]===it[0]);b.onclick=function(){S[key]=it[0];S.dlg=false;render()};el.appendChild(b)})}
+function esc(s){return s}
+function knob(c){return '<div class="knob '+(c||'')+'"></div>'}
+function btn(t,on,dis){return '<span class="btn'+(on?' on':'')+(dis?' dis':'')+'">'+t+'</span>'}
+function radio(t,on,dis,sq){return '<div class="radio'+(dis?' dis':'')+(sq?' sq':'')+'"><i class="'+(on?'on':'')+'"></i>'+t+'</div>'}
+function fad(p1,p2,noctl){var sc=['0','2','5','10','20','30','50'].map(function(x){return '<span>'+x+'</span>'}).join('');
+  return '<div class="fad'+(noctl?' noctl':'')+'">'+(noctl?'':'<div class="t" style="--p:'+p1+'px"></div>')+'<div class="sc">'+sc+'</div>'+(noctl?'':'<div class="t" style="--p:'+p2+'px"></div>')+'</div>'}
+
+function sidebar(){return '<div class="side">'+
+ '<div class="sbox"><b>settings</b><div class="btns">'+btn('load')+btn('save')+btn('reset')+btn('delete',0,1)+'</div></div>'+
+ '<div class="sbox"><b>level controller</b>'+knob('big')+
+   '<div style="display:grid;gap:3px">'+[['sw','sw rtn bus'],['out','output bus'],['in','input bus'],['aux','aux send']].map(function(r){return radio(r[1],S.lc==r[0]).replace('class="radio','data-lc="'+r[0]+'" class="radio')}).join('')+'</div></div>'+
+ '<div class="sbox"><b>main output</b><div class="btns">'+btn('mute')+btn('dim')+'</div></div>'+
+ '<div class="sbox">FireWire 1814</div></div>'}
+
+function inStrip(name){var dis=eff('oin')&&/adat (5\/6|7\/8)/.test(name);if(dis)return offStrip(name);return '<div class="strip"><h4>'+name+'</h4><div class="knobs">'+knob()+knob()+'</div><span>L aux R</span>'+fad(6,6)+
+ '<div class="knobs">'+knob('pan')+knob('pan')+'</div><span>L pan R</span><div class="btns">'+ctrlBtn('in',name)+btn('solo')+btn('link',1)+btn('mute')+'</div><span>out</span>'+btn('1/2',1)+btn('3/4')+'</div>'}
+function offStrip(name){return '<div class="strip" style="opacity:.4;border:1px dashed var(--mute)"><h4>'+name+'</h4><span>greyed:<br>S/MUX</span>'+fad(6,6,1)+'</div>'}
+function rtnStrip(name,o){var k=name;return '<div class="strip"><h4>'+name+'</h4><div class="knobs">'+knob()+knob()+'</div><span>L aux R</span>'+fad(6,6)+
+ '<div class="btns">'+ctrlBtn('sw',k)+btn('solo')+btn('link',1)+btn('mute')+'</div><span>out</span>'+btn('1/2',o==0)+btn('3/4',o==1)+'</div>'}
+function scaleStrip(name,extra){return '<div class="strip scale"><h4>'+name+'</h4>'+(extra||'')+fad(0,0,1)+'</div>'}
+
+function adbus(){return '<span>1 2 3 4 &nbsp;<span class="'+(eff('oout')?'gr':'')+'">5 6 7 8</span></span>'}
+function mixer(){
+ var adIn=S.oin=='adat',adOut=S.oout=='adat';
+ var left='<div class="grp white">'+rtnStrip('1/2 sw rtn',0)+rtnStrip('3/4 sw rtn',1)+(!dig()?'':adOut?scaleStrip('adat rtn bus',adbus()):scaleStrip('spdif sw rtn'))+'</div>';
+ var ins=['analog 1/2 in','analog 3/4 in','analog 5/6 in','analog 7/8 in'];
+ if(!dig())ins=['analog 1/2 in'];else ins=adIn?ins.concat(['adat 1/2 in','adat 3/4 in','adat 5/6 in','adat 7/8 in']):ins.concat(['spdif in']);
+ var right='<div class="grp">'+ins.map(inStrip).join('')+'</div>';
+ var under='<div class="under">'+busM('output bus',[['1/2',2],['3/4',2]])+busM('aux bus',[['',2]])+'</div>';
+ return '<div class="strips">'+left+right+'</div>'+under}
+
+function maBtn(k){var a=S.ma[k];return '<span class="btn '+(a?'g':'on')+'" data-ma="'+k+'" style="cursor:pointer">'+(a?'aux':'main')+'</span>'}
+function outStrip(name,opt){opt=opt||{};var un=opt.unlinked;return '<div class="strip"><h4>'+(opt.label||name)+'</h4><span>bal</span>'+knob()+'<span>'+(un?'R35':'&lt;C&gt;')+'</span>'+(un?fad(6,60):fad(opt.p||6,opt.p||6))+
+ '<div class="btns">'+(opt.noCtl?'':ctrlBtn(opt.grp||'out',name)+btn('solo'))+btn('link',!un)+btn('mute')+'</div>'+(opt.mon?'<span>mon</span>'+btn('1/2',opt.mon==1)+btn('3/4',opt.mon==2)+btn('aux'):'')+(opt.main?maBtn(name):'')+'</div>'}
+function output(){
+ var adOut=S.oout=='adat',adIn=S.oin=='adat';
+ var a='<div class="grp white">'+outStrip('1/2 out',{main:1,ctrlDis:0})+outStrip('3/4 out',{main:1,unlinked:S.unl})+
+  (!dig()?'':adOut?scaleStrip('adat bus',adbus()):'<div class="strip scale"><h4>spdif out</h4>'+fad(0,0,1)+maBtn('spdif out')+'</div>')+'</div>';
+ var b='<div class="grp">'+outStrip('aux',{grp:'aux',label:'aux out bus'})+outStrip('phones 1',{mon:1,p:70,noCtl:1})+outStrip('phones 2',{mon:2,p:70,noCtl:1})+'</div>';
+ var inItems=!dig()?[['1/2',2]]:adIn?[['1/2',2],['3/4',2],['5/6',2],['7/8',2],['adt 1/2',2],['adt 3/4',2],['adt 5/6',2,eff('oin')],['adt 7/8',2,eff('oin')]]:[['1/2',2],['3/4',2],['5/6',2],['7/8',2],['spdif',2]];
+ return '<div class="strips">'+a+b+'</div><div class="under">'+busM('software return bus',[['1/2',2],['3/4',2]])+busM('input bus',inItems)+'</div>'}
+
+function hardware(){
+ return '<div class="hw">'+
+ '<div class="card"><h3>sample settings</h3><div class="lab" style="text-align:center">sample rate</div><div class="disp'+(S.unsync?' red':'')+'">'+({lo:'48000',mid:'96000',hi:'192000'}[S.rate])+' Hz &nbsp;'+(S.unsync?'🔓':'🔒')+'</div><div class="key" style="text-align:center">▲▼ steps through the sample rates. Green + closed lock = synced; red + open lock = not synced</div></div>'+
+ '<div class="card"><h3>sync source</h3>'+radio('internal - digital inputs muted')+radio('internal - digital inputs unmuted',1)+radio('external - digital',0,!dig())+radio('word clock')+'</div>'+
+ '<div class="card"><h3>digital port selection</h3>'+
+   '<div class="radio" style="gap:14px">input '+radio('adat',S.oin=='adat',!dig())+radio('spdif',S.oin!='adat',!dig())+'</div>'+
+   '<div class="radio" style="gap:14px">output '+radio('adat',S.oout=='adat',!dig())+radio('spdif',S.oout!='adat',!dig())+'</div>'+
+   '<div class="radio" style="gap:14px">spdif input port '+radio('optical',0,S.oin=='adat'||!dig())+radio('coaxial',1,S.oin=='adat'||!dig())+'</div>'+
+   radio('adat S/MUX',S.smux||S.rate=='mid',S.oout!='adat'||!dig()||S.rate=='mid',1)+'</div>'+
+ '<div class="card"><h3>monitoring settings</h3><div class="lab" style="text-align:center">a/b switch settings</div>'+
+   radio('direct monitoring')+'<div class="key">A = DM off, LED off<br>B = DM on, LED on</div>'+
+   '<div class="radio">'+'<i class="on"></i>headphone out 1 A/B '+btn('set source')+'</div><div class="key">A = out 1/2, LED off<br>B = out 3/4, LED on</div></div></div>'}
+
+function aboutT(){return '<div class="about"><div class="hero">FireWire 1814</div><div style="display:flex;gap:30px;flex-wrap:wrap"><div style="display:grid;gap:4px;justify-items:start"><span class="lab">web links</span>'+btn('updates')+btn('support')+btn('FAQ')+'</div>'+
+ '<div class="kv"><span>panel:</span><span>1.4</span><span>driver:</span><span>1.9</span><span>build:</span><span>01.09.003</span><span>bootloader:</span><span>date</span><span>firmware:</span><span>date</span><span>hardware:</span><span>model 131 version 1</span><span>GUID:</span><span>0x…</span></div></div></div>'}
+
+function bars(n,hs){var s='';for(var i=0;i<n;i++)s+='<div style="--h:'+hs[i%hs.length]+'%"></div>';return s}
+function nums(a){return a.map(function(x){return '<span>'+x+'</span>'}).join('')}
+function metersH(){var H=[70,64,40,44,20,18,10,12,5,5];
+ function p(t,n){var l=[];for(var i=1;i<=n;i++)l.push(i);l.push('spd');return '<div class="mp"><h4>'+t+'</h4><div class="bars">'+bars(n+1,H)+'</div><div class="nums">'+nums(l)+'</div></div>'}
+ return '<div class="mw">'+p('input',8)+p('sw rtn',4)+p('output',4)+'</div><div class="key">scale 0, 2, 5, 10, 20, 30, 50 dB as in the reference. Wide window.</div>'}
+function metersV(){var H=[70,64,40,44,20,18,10,12,5,5];
+ function p(t,n){var r='';for(var i=1;i<=n;i++)r+='<div class="vrow"><span>'+i+'</span><div style="--h:'+H[i%H.length]+'%"></div></div>';
+  r+='<div class="vrow"><span>sL</span><div style="--h:5%"></div></div><div class="vrow"><span>sR</span><div style="--h:5%"></div></div>';return '<div class="mp"><h4>'+t+'</h4><div class="vbars">'+r+'</div></div>'}
+ return '<div style="max-width:220px;display:grid;gap:8px">'+p('input',8)+p('sw rtn',4)+p('output',4)+'</div><div class="key">Narrow window, bars run horizontally, scale 50 … 0.</div>'}
+
+function dialog(){
+ function row(l,sel,dis){return '<div class="dr"><b>'+l+'</b>'+['Out 1/2','Out 3/4','Aux'].map(function(t,i){return radio(t,sel==i,dis.indexOf(i)>=0)}).join('')+'</div>'}
+ return '<div class="dlg"><h3>Headphone Out 1 A/B Source Settings</h3><p style="font-size:13px">Select the source for the A and B positions of the Headphone Out 1 A/B switch.</p>'+
+  row('A Source:',0,[1])+row('B Source:',1,[0])+'<div class="btns" style="justify-content:flex-end">'+btn('Cancel')+btn('Set',0,1)+'</div>'+
+  '<div class="key">Shown: A = Out 1/2, B = Out 3/4. Each side disables the option the other side holds. Set stays disabled until a choice changes.</div></div>'}
+
+function notes(){
+ var n=[];
+ n.push('<div class="nc"><h2>Structure (from screenshots)</h2><ul><li>Window: tabs mixer, output, hardware, about. Fixed right sidebar on every tab.</li><li>Sidebar: settings (load, save, reset, delete), level controller, main output (mute, dim).</li><li>View switch top right: full, wide meters, narrow meters.</li><li>No buffer size control: on the Mac it is set in the DAW through CoreAudio.</li><li>No Global Settings tab. The rotary assignment is the level controller in the sidebar.</li><li>The panels along the bottom of mixer and output are live meters.</li></ul></div>');
+ n.push('<div class="nc"><h2>ctrl and link</h2><ul><li><b>ctrl</b> lets the front-panel encoder move that strip. The encoder drives one group: sw rtn, output, input or aux send (click the sidebar radios). Strips of the other groups show ctrl greyed; strips of the chosen group are on by default and can be toggled off.</li><li>The <b>aux send</b> group is the single <b>aux out bus</b> strip on the output tab (its ctrl).</li><li><b>link</b> keeps the two faders together. With link off, pulling one fader moves the balance (3/4 out shows R35). Use the &quot;link off&quot; button above.</li></ul></div>');
+ n.push('<div class="nc"><h2>Aux</h2><ul><li>The aux knobs on the mixer strips are sends. Their sum is the aux out bus on the output tab.</li><li>That bus reaches hardware outputs in three ways: the main/aux toggle under 1/2 out, 3/4 out and spdif out (click it), the phones source aux, or phones 1 through the A/B source.</li><li>Aux works at all sample rates (the manual is outdated).</li></ul></div>');
+ n.push('<div class="nc"><h2>Rate behaviour (our panel)</h2><ul><li>The reference panel is inconsistent: it greys ADAT 5-8 only when the S/MUX box is on and changes nothing at 192 kHz, while the Audio MIDI Setup device shows the real channel set. Ours follows the device.</li><li><b>44.1 / 48 kHz:</b> everything available.</li><li><b>88.2 / 96 kHz:</b> ADAT is 4 channels whatever the S/MUX box says. Mixer adat 5/6, 7/8 strips, ADAT bus 5-8 and adt 5/6, 7/8 meters grey out. Sends keep working.</li><li><b>176.4 / 192 kHz:</b> 2 in / 4 out, analog only. All digital ports are off: digital strips and buses are removed, the digital port card and external-digital sync are greyed.</li><li>S/MUX is automatic: at 88.2/96 kHz the box is on and locked. At 44.1/48 kHz you set it. It applies only to ADAT, so it greys (keeping its state) when output is S/PDIF, and at 192 kHz.</li><li>Green + closed lock = synced, red + open lock = not synced.</li></ul></div>');
+ if(S.view=='full'&&S.tab=='mixer')n.push('<div class="nc"><h2>Mixer dependencies</h2><ul><li>Input strips follow optical in; the return bus strip follows optical out.</li><li>sw rtn strips have no pan knobs; input strips do.</li><li>Bottom meters: output bus (1/2, 3/4) and aux bus.</li></ul></div>');
+ if(S.view=='full'&&S.tab=='output')n.push('<div class="nc"><h2>Output dependencies</h2><ul><li>Fourth column is adat bus (scale only) or spdif out.</li><li>phones 1 and 2: balance, faders, link, mute, mon source 1/2, 3/4 or aux. No ctrl.</li><li>Bottom meters: software return bus and input bus (follows optical in).</li></ul></div>');
+ if(S.view=='full'&&S.tab=='hardware')n.push('<div class="nc"><h2>Hardware dependencies</h2><ul><li>spdif input port is greyed when input = adat.</li><li>adat S/MUX is greyed when output = S/PDIF <span class="chip">differs from P5</span> (see P12).</li><li>Direct monitoring and headphone out 1 A/B are two radios that choose what the front-panel A/B switch does; set source opens the sheet.</li></ul></div>');
+ if(S.dlg)n.push('<div class="nc"><h2>A/B sheet</h2><ul><li>Three sources per side. A and B must differ: a source held by one side is greyed on the other.</li><li>Cancel and Set; Set enabled only after a change.</li></ul></div>');
+ n.push('<div class="nc"><h2>Decided</h2><ul><li>At 192 kHz phones 1/2 and the aux out bus stay as drawn; every digital control is greyed or hidden, including external-digital sync.</li><li>S/MUX switches on automatically at 88.2/96 kHz.</li></ul></div>');
+ $('notes').innerHTML=n.join('')}
+
+function render(){
+ seg($('sView'),[['full','full'],['mh','wide meters'],['mv','narrow meters']],'view');
+ seg($('sTab'),[['mixer','mixer'],['output','output'],['hardware','hardware'],['about','about']],'tab');
+ seg($('sRate'),[['lo','44.1/48'],['mid','88.2/96'],['hi','176.4/192']],'rate');
+ seg($('sIn'),[['adat','ADAT'],['spdif','S/PDIF']],'oin');
+ seg($('sOut'),[['adat','ADAT'],['spdif','S/PDIF']],'oout');
+ var full=S.view=='full';
+ ['sTab','lTab'].forEach(function(i){$(i).hidden=!full});
+ var mo=full&&(S.tab=='mixer'||S.tab=='output'||S.tab=='hardware');
+ ['sIn','lIn','sOut','lOut'].forEach(function(i){$(i).hidden=!mo});
+ $('bSm').setAttribute('aria-pressed',S.smux);$('bSm').onclick=function(){S.smux=!S.smux;render()};$('bUs').setAttribute('aria-pressed',S.unsync);$('bUs').onclick=function(){S.unsync=!S.unsync;render()};$('bUn').setAttribute('aria-pressed',!!S.unl);$('bUn').onclick=function(){S.unl=!S.unl;render()};$('bDlg').setAttribute('aria-pressed',S.dlg);$('bDlg').onclick=function(){S.dlg=!S.dlg;S.view='full';S.tab='hardware';render()};
+ var body='';
+ if(!full){body='<div class="bar"><span>FireWire 1814</span><span>view ▢ ▮ ▥</span></div><div class="area">'+(S.view=='mh'?metersH():metersV())+'</div>'}
+ else{
+  var tabs=['mixer','output','hardware','about'].map(function(t){return '<span class="'+(S.tab==t?'on':'')+'">'+t+'</span>'}).join('');
+  var inner=S.tab=='mixer'?mixer():S.tab=='output'?output():S.tab=='hardware'?hardware():aboutT();
+  if(S.dlg&&S.tab=='hardware')inner+=dialog();
+  body='<div class="bar"><span>M-AUDIO FireWire 1814</span><span>view ▣ ▮ ▥</span></div><div class="tabrow">'+tabs+'</div><div class="main"><div class="area">'+inner+'</div>'+sidebar()+'</div>'}
+ $('win').innerHTML=body;notes()}
+$('win').onclick=function(e){var t=e.target.closest('[data-lc]');if(t){S.lc=t.getAttribute('data-lc');render();return}t=e.target.closest('[data-ma]');if(t){var m=t.getAttribute('data-ma');S.ma[m]=!S.ma[m];render();return}t=e.target.closest('[data-ctrl]');if(t&&t.getAttribute('data-ctrl')){var k=t.getAttribute('data-ctrl');S.off[k]=!S.off[k];render()}};
+render();
+</script>

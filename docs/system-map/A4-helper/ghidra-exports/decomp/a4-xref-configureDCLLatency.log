@@ -1,0 +1,5 @@
+SYMBOL -[MAFireWireDeviceInstance_configureDCLLatency] @ 0000290a
+   ref from 0000bab8 in ?
+   ref from 0000ab40 in ?
+SYMBOL s_configureDCLLatency_00006dc7 @ 00006dc7
+   ref from 0000ab38 in ?

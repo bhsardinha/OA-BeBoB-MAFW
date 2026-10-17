@@ -1,0 +1,13 @@
+# capture 83 - M-S: main-engine re-publish at an optical switch, clone on the build PC (2026-10-17)
+# kext = current build staged in /tmp (FW1814Device::RepublishAudioEngine). Tools: maprop (MAClockSource write, same path as the panel), halwatch, aduplex, midiprobe.
+## switch S/PDIF-out -> ADAT-out (MAClockSource 0x4000000b -> 0x4000001b), no client
+kernel log: "OpenAudioFW1814: M-S: re-publishing the audio engine (44100 Hz, mode 0x4000001b)"
+HAL (system_profiler): 16 in / 6 out -> 16 in / 12 out. Audio MIDI Setup (already open, not reopened): sidebar "16 ins / 12 outs", Output tab "12 ch 24-bit Integer", Output ADAT 1-8 listed  -> captures/83a-clone-ams-after-republish-adat.png
+## switch back (0x4000000b) with an aduplex client attached
+HAL 16 / 6; AMS sidebar "16 ins / 6 outs" (not reopened); Input tab shows the 18 'pass' ("Thru") controls + master Thru checked (M-U)  -> 83b-clone-ams-after-republish-spdif.png
+The aduplex client (bound to the old device object) loses the device (halwatch: device 68 gone, 'livn'/'dev#' on the system object): the stream is dropped at the switch, as agreed with the user.
+No panic, no IsochStreamRunning, kextstat/ioreg healthy after each switch.
+## MIDI across the switch (midiprobe loop running + sends before/after)
+send status 0 and "sysex sent (0 bytes unsent)" before, during and after the switch; MIDIServer still lists "FireWire 1814" 1 in / 1 out with the icon. Bytes on the wire NOT verified (no cable).
+## limitation
+dmesg on this box keeps only the tail of the kernel log; the M-S line appeared in 2 of 4 reads, so the HAL counts and the screenshots are the evidence, not the log.

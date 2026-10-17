@@ -1,0 +1,64 @@
+=== 0x00001db7  _MAFireWireMIDIDICE_Start  size=126 ===
+
+undefined8 _MAFireWireMIDIDICE_Start(MIDIDriverInterface **param_1)
+
+{
+  ID IVar1;
+  ID IVar2;
+  
+  IVar1 = NSAutoreleasePool::alloc
+                    ((ID)PTR__OBJC_CLASS___NSAutoreleasePool_0000a6d0,(SEL)&alloc_message_ref);
+  IVar1 = NSAutoreleasePool::init(IVar1,PTR_s_init_0000a3e8);
+  IVar2 = (*alloc_message_ref.imp)(PTR_MAFWMIDIFactoryBeBoB_0000a6d8,&alloc_message_ref);
+  sMIDILoader = MAFWMIDIFactoryBeBoB::initWithDriver_(IVar2,PTR_s_initWithDriver__0000a3f0,param_1);
+  NSAutoreleasePool::release(IVar1,(SEL)&release_message_ref);
+  return 0;
+}
+
+
+
+=== 0x00001e35  _MAFireWireMIDIDICE_Stop  size=120 ===
+
+undefined8 _MAFireWireMIDIDICE_Stop(void)
+
+{
+  ID IVar1;
+  
+  IVar1 = NSAutoreleasePool::alloc
+                    ((ID)PTR__OBJC_CLASS___NSAutoreleasePool_0000a6d0,(SEL)&alloc_message_ref);
+  IVar1 = NSAutoreleasePool::init(IVar1,PTR_s_init_0000a3e8);
+  MAFWMIDIDeviceBeBoB::terminateAllDevices
+            ((ID)PTR_MAFWMIDIDeviceBeBoB_0000a6e0,PTR_s_terminateAllDevices_0000a3f8);
+  (*release_message_ref.imp)(sMIDILoader,&release_message_ref);
+  sMIDILoader = 0;
+  NSAutoreleasePool::release(IVar1,(SEL)&release_message_ref);
+  return 0;
+}
+
+
+
+=== 0x00001ead  _MAFireWireMIDIDICE_Send  size=138 ===
+
+undefined4 _MAFireWireMIDIDICE_Send(undefined8 param_1,long param_2,undefined8 param_3)
+
+{
+  undefined4 uVar1;
+  ID IVar2;
+  
+  IVar2 = NSAutoreleasePool::alloc
+                    ((ID)PTR__OBJC_CLASS___NSAutoreleasePool_0000a6d0,(SEL)&alloc_message_ref);
+  IVar2 = NSAutoreleasePool::init(IVar2,PTR_s_init_0000a3e8);
+  if (param_2 == 0) {
+    _NSLog(&cf_Bogus___nosuchendpoint_lX_,0);
+    uVar1 = 0xffffd5ae;
+  }
+  else {
+    uVar1 = (*(code *)PTR__objc_msgSend_000090a0)
+                      (param_2,PTR_s_send_viaPort__0000a400,param_1,param_3);
+  }
+  NSAutoreleasePool::release(IVar2,(SEL)&release_message_ref);
+  return uVar1;
+}
+
+
+

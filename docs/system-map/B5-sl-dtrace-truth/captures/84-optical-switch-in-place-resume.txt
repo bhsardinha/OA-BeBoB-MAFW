@@ -1,0 +1,6 @@
+# capture 84 - optical switch with the re-publish OFF (reference pause / change / resume), clone on the build PC, 2026-10-17
+# kext = staged build 526D8DC6 (kRepublishAtOpticalSwitch = false); aduplex (duplex client, 16 in / 12 out) running throughout; halwatch on the device
+0x4000001b -> 0x4000000b (ADAT-out -> S/PDIF-out) at t=10 s: callbacks stop for ~4 s (t=11..14), the client's out-ch goes 12 -> 6, callbacks resume by themselves (+70, then 86/s).
+0x4000000b -> 0x4000001b at t=32 s: callbacks stop ~4 s, out-ch 6 -> 12, callbacks resume by themselves.
+The device object (68) stays in the HAL: halwatch shows stream-format / slay notifications only, no device removal; aduplex never has to re-open anything. No panic.
+Cost: AMS sidebar label may stay stale (see R60 correction).

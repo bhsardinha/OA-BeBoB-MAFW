@@ -1,0 +1,453 @@
+=== 0x000038b6  MAFWMIDIFactoryBeBoB::driverInstanceMatched:  size=786 ===
+
+/* Function Stack Size: 0x14 bytes */
+
+void MAFWMIDIFactoryBeBoB::driverInstanceMatched_(ID param_1,SEL param_2,unsigned_int param_3)
+
+{
+  undefined *puVar1;
+  undefined *self;
+  uint uVar2;
+  unsigned_int uVar3;
+  char cVar4;
+  int iVar5;
+  ID IVar6;
+  ID IVar7;
+  ID IVar8;
+  ID IVar9;
+  ID IVar10;
+  undefined8 uVar11;
+  undefined8 uVar12;
+  uint local_74;
+  long local_70;
+  ulong local_68;
+  undefined4 local_60;
+  uint local_54;
+  long local_50;
+  ulong local_48;
+  undefined4 local_40;
+  undefined4 local_38;
+  unsigned_int local_34;
+  
+  puVar1 = PTR__objc_msgSend_000090a0;
+  IVar6 = MAFWBeBoBIOKitService::deviceWithService_
+                    ((ID)PTR_MAFWBeBoBIOKitService_0000a718,PTR_s_deviceWithService__0000a528,
+                     param_3);
+  local_34 = fetchMIDIDeviceForService_(param_1,PTR_s_fetchMIDIDeviceForService__0000a530,IVar6);
+  if (local_34 == 0) {
+    IVar7 = MAFWBeBoBIOKitRegistryNode::propertyForKey_(IVar6,PTR_s_propertyForKey__0000a500,0xaf48)
+    ;
+    IVar8 = MAFWBeBoBIOKitRegistryNode::propertyForKey_(IVar6,PTR_s_propertyForKey__0000a500,0xaf68)
+    ;
+    IVar9 = MAFWBeBoBIOKitRegistryNode::propertyForKey_(IVar6,PTR_s_propertyForKey__0000a500,0xaf88)
+    ;
+    IVar10 = MAFWBeBoBIOKitRegistryNode::propertyForKey_
+                       (IVar6,PTR_s_propertyForKey__0000a500,0xafa8);
+    iVar5 = _MIDIDeviceCreate(*(undefined8 *)(param_1 + fMIDIDriver),IVar7,IVar8,IVar7,&local_34);
+    self = PTR__OBJC_CLASS___NSString_0000a708;
+    if (iVar5 != 0) {
+      return;
+    }
+    IVar8 = MAFWBeBoBIOKitRegistryNode::propertyForKey_(IVar6,PTR_s_propertyForKey__0000a500,0xae28)
+    ;
+    uVar11 = (*(code *)puVar1)(IVar8,PTR_s_unsignedLongLongValue_0000a508);
+    IVar8 = NSString::stringWithFormat_((ID)self,PTR_s_stringWithFormat__0000a510,&cf__llX,uVar11);
+    iVar5 = _MIDIObjectSetStringProperty(local_34,&cf_com_m_audio_FW_GUID,IVar8);
+    uVar3 = local_34;
+    if (iVar5 != 0) {
+      return;
+    }
+    uVar11 = (*count_message_ref.imp)(IVar9,&count_message_ref);
+    uVar12 = (*count_message_ref.imp)(IVar10,&count_message_ref);
+    iVar5 = _MIDIDeviceAddEntity(uVar3,IVar7,0,uVar11,uVar12,&local_38);
+    if (iVar5 != 0) {
+      return;
+    }
+    local_40 = local_38;
+    local_48 = _MIDIEntityGetNumberOfSources();
+    local_50 = 0;
+    if ((1 < local_48) &&
+       (cVar4 = TIterator<unsigned_int,unsigned_int,&MIDIEntityGetNumberOfSources,&MIDIEntityGetSource>
+                ::Next((TIterator<unsigned_int,unsigned_int,&MIDIEntityGetNumberOfSources,&MIDIEntityGetSource>
+                        *)&local_50,&local_54), cVar4 == '\x01')) {
+      uVar11 = *(undefined8 *)PTR__kMIDIPropertyName_00009070;
+      do {
+        uVar2 = local_54;
+        uVar12 = (*objectAtIndex__message_ref.imp)(IVar9,&objectAtIndex__message_ref,local_50 + -1);
+        _MIDIObjectSetStringProperty(uVar2,uVar11,uVar12);
+        cVar4 = TIterator<unsigned_int,unsigned_int,&MIDIEntityGetNumberOfSources,&MIDIEntityGetSource>
+                ::Next((TIterator<unsigned_int,unsigned_int,&MIDIEntityGetNumberOfSources,&MIDIEntityGetSource>
+                        *)&local_50,&local_54);
+      } while (cVar4 != '\0');
+    }
+    local_60 = local_38;
+    local_68 = _MIDIEntityGetNumberOfDestinations();
+    local_70 = 0;
+    if ((1 < local_68) &&
+       (cVar4 = TIterator<unsigned_int,unsigned_int,&MIDIEntityGetNumberOfDestinations,&MIDIEntityGetDestination>
+                ::Next((TIterator<unsigned_int,unsigned_int,&MIDIEntityGetNumberOfDestinations,&MIDIEntityGetDestination>
+                        *)&local_70,&local_74), cVar4 == '\x01')) {
+      uVar11 = *(undefined8 *)PTR__kMIDIPropertyName_00009070;
+      do {
+        uVar2 = local_74;
+        uVar12 = (*objectAtIndex__message_ref.imp)(IVar10,&objectAtIndex__message_ref,local_70 + -1)
+        ;
+        _MIDIObjectSetStringProperty(uVar2,uVar11,uVar12);
+        cVar4 = TIterator<unsigned_int,unsigned_int,&MIDIEntityGetNumberOfDestinations,&MIDIEntityGetDestination>
+                ::Next((TIterator<unsigned_int,unsigned_int,&MIDIEntityGetNumberOfDestinations,&MIDIEntityGetDestination>
+                        *)&local_70,&local_74);
+      } while (cVar4 != '\0');
+    }
+    iVar5 = _MIDISetupAddDevice(local_34);
+    if (iVar5 != 0) {
+      return;
+    }
+    createDeviceProperties_withService_
+              (param_1,PTR_s_createDeviceProperties_withServi_0000a538,local_34,IVar6);
+  }
+  IVar7 = MAFWMIDIDeviceBeBoB::fetchInstanceForDevice_
+                    ((ID)PTR_MAFWMIDIDeviceBeBoB_0000a6e0,PTR_s_fetchInstanceForDevice__0000a448,
+                     local_34);
+  if (IVar7 == 0) {
+    IVar7 = MAFWMIDIDeviceBeBoB::instantiateDriver_withService_withMIDIDevice_
+                      ((ID)PTR_MAFWMIDIDeviceBeBoB_0000a6e0,
+                       PTR_s_instantiateDriver_withService_wi_0000a540,
+                       *(MIDIDriverInterface ***)(param_1 + fMIDIDriver),IVar6,local_34);
+  }
+  setMIDIDevice_offline_(param_1,PTR_s_setMIDIDevice_offline__0000a4f8,local_34,IVar7 == 0);
+  return;
+}
+
+
+
+=== 0x00003bc8  MAFWMIDIFactoryBeBoB::driverInstanceTerminated:  size=103 ===
+
+/* Function Stack Size: 0x14 bytes */
+
+void MAFWMIDIFactoryBeBoB::driverInstanceTerminated_(ID param_1,SEL param_2,unsigned_int param_3)
+
+{
+  unsigned_int uVar1;
+  ID IVar2;
+  
+  IVar2 = MAFWBeBoBIOKitService::deviceWithService_
+                    ((ID)PTR_MAFWBeBoBIOKitService_0000a718,PTR_s_deviceWithService__0000a528,
+                     param_3);
+  uVar1 = fetchMIDIDeviceForService_(param_1,PTR_s_fetchMIDIDeviceForService__0000a530,IVar2);
+  if (uVar1 != 0) {
+    setMIDIDevice_offline_(param_1,PTR_s_setMIDIDevice_offline__0000a4f8,uVar1,'\x01');
+  }
+                    /* WARNING: Could not recover jumptable at 0x00003c29. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (*(code *)PTR__objc_msgSend_000090a0)
+            (PTR_MAFWMIDIDeviceBeBoB_0000a6e0,PTR_s_terminateInstanceOfDevice__0000a548,uVar1);
+  return;
+}
+
+
+
+=== 0x000035ff  MAFWMIDIFactoryBeBoB::fetchMIDIDeviceForService:  size=296 ===
+
+/* Function Stack Size: 0x18 bytes */
+
+unsigned_int MAFWMIDIFactoryBeBoB::fetchMIDIDeviceForService_(ID param_1,SEL param_2,ID param_3)
+
+{
+  undefined *self;
+  unsigned_int uVar1;
+  char cVar2;
+  int iVar3;
+  long lVar4;
+  undefined8 uVar5;
+  ID self_00;
+  ID IVar6;
+  unsigned_int uVar7;
+  undefined8 local_58;
+  unsigned_int local_4c;
+  TDriverMIDIDeviceList local_48 [20];
+  undefined4 local_34;
+  
+  TDriverMIDIDeviceList::TDriverMIDIDeviceList
+            (local_48,*(MIDIDriverInterface ***)(param_1 + fMIDIDriver));
+  lVar4 = (*(code *)PTR__objc_msgSend_000090a0)(param_3,PTR_s_propertyForKey__0000a500,&cf_GUID);
+  self = PTR__OBJC_CLASS___NSString_0000a708;
+  uVar7 = 0;
+  if (lVar4 != 0) {
+    uVar5 = (*(code *)PTR__objc_msgSend_000090a0)(lVar4,PTR_s_unsignedLongLongValue_0000a508);
+    self_00 = NSString::stringWithFormat_((ID)self,PTR_s_stringWithFormat__0000a510,&cf__llX,uVar5);
+    uVar7 = 0;
+    while( true ) {
+      cVar2 = TIterator<unsigned_int,unsigned_int,&MIDIDeviceListGetNumberOfDevices,&MIDIDeviceListGetDevice>
+              ::Next((TIterator<unsigned_int,unsigned_int,&MIDIDeviceListGetNumberOfDevices,&MIDIDeviceListGetDevice>
+                      *)local_48,&local_4c);
+      uVar1 = local_4c;
+      if (cVar2 != '\x01') break;
+      iVar3 = _MIDIObjectGetStringProperty(local_4c,&cf_com_m_audio_FW_GUID,&local_58);
+      if (iVar3 == 0) {
+        IVar6 = NSString::isEqualToString_(self_00,(SEL)&isEqualToString__message_ref,local_58);
+        if ((char)IVar6 != '\0') {
+          uVar7 = uVar1;
+        }
+        (*release_message_ref.imp)(local_58,&release_message_ref);
+      }
+      else if (iVar3 + 0x2a54U < 2) {
+        iVar3 = _MIDIObjectSetStringProperty(uVar1,&cf_com_m_audio_FW_GUID,self_00);
+        if (iVar3 == 0) {
+          uVar7 = uVar1;
+        }
+      }
+    }
+  }
+  _MIDIDeviceListDispose(local_34);
+  return uVar7;
+}
+
+
+
+=== 0x00003743  MAFWMIDIFactoryBeBoB::createDeviceProperties:withService:  size=371 ===
+
+/* Function Stack Size: 0x1c bytes */
+
+void MAFWMIDIFactoryBeBoB::createDeviceProperties_withService_
+               (ID param_1,SEL param_2,unsigned_int param_3,ID param_4)
+
+{
+  undefined *puVar1;
+  ID self;
+  undefined8 uVar2;
+  ID IVar3;
+  ID IVar4;
+  cfstringStruct *pcVar5;
+  cfstringStruct **ppcVar6;
+  cfstringStruct *apcStack_60 [5];
+  long local_38;
+  
+  local_38 = *(long *)PTR____stack_chk_guard_00009030;
+  _MIDIObjectSetIntegerProperty
+            (param_3,*(undefined8 *)PTR__kMIDIPropertyMaxSysExSpeed_00009068,0xc35);
+  _MIDIObjectSetIntegerProperty
+            (param_3,*(undefined8 *)PTR__kMIDIPropertyTransmitChannels_00009088,0xffff);
+  _MIDIObjectSetIntegerProperty
+            (param_3,*(undefined8 *)PTR__kMIDIPropertyReceiveChannels_00009080,0xffff);
+  _MIDIObjectSetIntegerProperty
+            (param_3,*(undefined8 *)PTR__kMIDIPropertyAdvanceScheduleTimeMuSec_00009058,15000);
+  puVar1 = PTR__objc_msgSend_000090a0;
+  self = NSFileManager::defaultManager
+                   ((ID)PTR__OBJC_CLASS___NSFileManager_0000a710,PTR_s_defaultManager_0000a518);
+  uVar2 = (*(code *)puVar1)(param_4,PTR_s_propertyForKey__0000a500,&cf_MAIconName);
+  ppcVar6 = apcStack_60;
+  pcVar5 = &cf_png;
+  apcStack_60[3] = (cfstringStruct *)0x0;
+  apcStack_60[0] = &cf_tif;
+  apcStack_60[1] = &cf_tiff;
+  apcStack_60[2] = &cf_jpg;
+  do {
+    if (pcVar5 == (cfstringStruct *)0x0) {
+LAB_00003892:
+      if (*(long *)PTR____stack_chk_guard_00009030 == local_38) {
+        return;
+      }
+                    /* WARNING: Subroutine does not return */
+      ___stack_chk_fail();
+    }
+    IVar3 = NSString::stringWithFormat_
+                      ((ID)PTR__OBJC_CLASS___NSString_0000a708,PTR_s_stringWithFormat__0000a510,
+                       &cf________,&cf__Library_ApplicationSupport_M_Audio_DeviceIcons_,uVar2);
+    IVar4 = NSFileManager::fileExistsAtPath_(self,PTR_s_fileExistsAtPath__0000a520,IVar3);
+    if ((char)IVar4 != '\0') {
+      _MIDIObjectSetStringProperty(param_3,*(undefined8 *)PTR__kMIDIPropertyImage_00009060,IVar3);
+      goto LAB_00003892;
+    }
+    pcVar5 = *ppcVar6;
+    ppcVar6 = ppcVar6 + 1;
+  } while( true );
+}
+
+
+
+=== 0x00002363  MAFWMIDIDeviceBeBoB::instantiateDriver:withService:withMIDIDevice:  size=144 ===
+
+/* Function Stack Size: 0x24 bytes */
+
+ID MAFWMIDIDeviceBeBoB::instantiateDriver_withService_withMIDIDevice_
+             (ID param_1,SEL param_2,MIDIDriverInterface **param_3,ID param_4,unsigned_int param_5)
+
+{
+  ID IVar1;
+  
+  if (sDrivers == 0) {
+    IVar1 = NSMutableSet::alloc((ID)PTR__OBJC_CLASS___NSMutableSet_0000a6f0,(SEL)&alloc_message_ref)
+    ;
+    sDrivers = NSMutableSet::init(IVar1,PTR_s_init_0000a3e8);
+  }
+  IVar1 = (*alloc_message_ref.imp)(param_1,&alloc_message_ref);
+  IVar1 = initWithDevice_driver_service_
+                    (IVar1,PTR_s_initWithDevice_driver_service__0000a440,param_5,param_3,param_4);
+  IVar1 = (*autorelease_message_ref.imp)(IVar1,&autorelease_message_ref);
+  return IVar1;
+}
+
+
+
+=== 0x00004111  MAFWBeBoBIOKitService::openConnection  size=47 ===
+
+/* Function Stack Size: 0x10 bytes */
+
+int MAFWBeBoBIOKitService::openConnection(ID param_1,SEL param_2)
+
+{
+  int iVar1;
+  
+  iVar1 = _IOServiceOpen(*(undefined4 *)(param_1 + MAFWBeBoBIOKitRegistryNode::fEntry),
+                         *(undefined4 *)PTR__mach_task_self__00009090,0,param_1 + fConnection);
+  return iVar1;
+}
+
+
+
+=== 0x00004140  MAFWBeBoBIOKitService::closeConnection  size=29 ===
+
+/* Function Stack Size: 0x10 bytes */
+
+int MAFWBeBoBIOKitService::closeConnection(ID param_1,SEL param_2)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  
+  uVar1 = *(undefined4 *)(param_1 + fConnection);
+  *(undefined4 *)(param_1 + fConnection) = 0;
+  iVar2 = _IOServiceClose(uVar1);
+  return iVar2;
+}
+
+
+
+=== 0x0000407f  MAFWBeBoBIOKitService::initWithService:  size=82 ===
+
+/* Function Stack Size: 0x14 bytes */
+
+ID MAFWBeBoBIOKitService::initWithService_(ID param_1,SEL param_2,unsigned_int param_3)
+
+{
+  objc_super local_28;
+  
+  local_28.super_class = (class_t *)PTR_MAFWBeBoBIOKitService_0000a780;
+  local_28.receiver = param_1;
+  _objc_msgSendSuper2(&local_28,PTR_s_init_0000a3e8);
+  _IOObjectRetain(param_3);
+  *(unsigned_int *)(param_1 + MAFWBeBoBIOKitRegistryNode::fEntry) = param_3;
+  return param_1;
+}
+
+
+
+=== 0x000040d1  MAFWBeBoBIOKitService::deviceWithService:  size=64 ===
+
+/* Function Stack Size: 0x14 bytes */
+
+ID MAFWBeBoBIOKitService::deviceWithService_(ID param_1,SEL param_2,unsigned_int param_3)
+
+{
+  ID IVar1;
+  
+  IVar1 = (*alloc_message_ref.imp)(param_1,&alloc_message_ref);
+  IVar1 = initWithService_(IVar1,PTR_s_initWithService__0000a578,param_3);
+  IVar1 = (*autorelease_message_ref.imp)(IVar1,&autorelease_message_ref);
+  return IVar1;
+}
+
+
+
+=== 0x0000402b  MAFWBeBoBIOKitService::deviceFromIOKitDevice:connection:  size=84 ===
+
+/* Function Stack Size: 0x18 bytes */
+
+ID MAFWBeBoBIOKitService::deviceFromIOKitDevice_connection_
+             (ID param_1,SEL param_2,unsigned_int param_3,unsigned_int param_4)
+
+{
+  ID IVar1;
+  
+  IVar1 = (*alloc_message_ref.imp)(PTR_MAFWBeBoBIOKitService_0000a718,&alloc_message_ref);
+  IVar1 = MAFWBeBoBIOKitRegistryNode::initWithEntry_(IVar1,PTR_s_initWithEntry__0000a558,param_3);
+  *(unsigned_int *)(IVar1 + fConnection) = param_4;
+  IVar1 = (*autorelease_message_ref.imp)(IVar1,&autorelease_message_ref);
+  return IVar1;
+}
+
+
+
+=== 0x000041ea  MAFWBeBoBIOKitService::dealloc  size=91 ===
+
+/* Function Stack Size: 0x10 bytes */
+
+void MAFWBeBoBIOKitService::dealloc(ID param_1,SEL param_2)
+
+{
+  objc_super local_20;
+  
+  if (*(int *)(param_1 + fConnection) != 0) {
+    _IOServiceClose();
+  }
+  if (*(int *)(param_1 + MAFWBeBoBIOKitRegistryNode::fEntry) != 0) {
+    _IOObjectRelease();
+  }
+  local_20.super_class = (class_t *)PTR_MAFWBeBoBIOKitService_0000a780;
+  local_20.receiver = param_1;
+  _objc_msgSendSuper2(&local_20,PTR_s_dealloc_0000a420);
+  return;
+}
+
+
+
+=== 0x00003532  MAFWMIDIFactoryBeBoB::setMIDIDevice:offline:  size=71 ===
+
+/* Function Stack Size: 0x18 bytes */
+
+void MAFWMIDIFactoryBeBoB::setMIDIDevice_offline_
+               (ID param_1,SEL param_2,unsigned_int param_3,char param_4)
+
+{
+  int iVar1;
+  
+  iVar1 = _MIDIObjectSetIntegerProperty
+                    (param_3,*(undefined8 *)PTR__kMIDIPropertyOffline_00009078,param_4 != '\0');
+  if (iVar1 != 0) {
+    _NSLog(&cf_Error__lX_whilechangingofflinestatusofMIDIdeviceto_d,iVar1,(int)param_4);
+    return;
+  }
+  return;
+}
+
+
+
+=== 0x00003579  MAFWMIDIFactoryBeBoB::setAllDevicesToOffline  size=110 ===
+
+/* Function Stack Size: 0x10 bytes */
+
+void MAFWMIDIFactoryBeBoB::setAllDevicesToOffline(ID param_1,SEL param_2)
+
+{
+  undefined *puVar1;
+  char cVar2;
+  unsigned_int local_44;
+  TDriverMIDIDeviceList local_40 [20];
+  undefined4 local_2c;
+  
+  TDriverMIDIDeviceList::TDriverMIDIDeviceList
+            (local_40,*(MIDIDriverInterface ***)(param_1 + fMIDIDriver));
+  puVar1 = PTR_s_setMIDIDevice_offline__0000a4f8;
+  while( true ) {
+    cVar2 = TIterator<unsigned_int,unsigned_int,&MIDIDeviceListGetNumberOfDevices,&MIDIDeviceListGetDevice>
+            ::Next((TIterator<unsigned_int,unsigned_int,&MIDIDeviceListGetNumberOfDevices,&MIDIDeviceListGetDevice>
+                    *)local_40,&local_44);
+    if (cVar2 != '\x01') break;
+    setMIDIDevice_offline_(param_1,puVar1,local_44,'\x01');
+  }
+  _MIDIDeviceListDispose(local_2c);
+  return;
+}
+
+
+

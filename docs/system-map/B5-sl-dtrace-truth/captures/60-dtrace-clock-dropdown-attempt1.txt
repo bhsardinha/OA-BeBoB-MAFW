@@ -1,0 +1,43 @@
+[2026 Oct  9 12:37:09] is_io_connect_method                          pid=32   exec=ntpd             sel=0x1
+[2026 Oct  9 12:37:12] is_io_connect_method                          pid=552  exec=studioapp        sel=0x4
+[2026 Oct  9 12:37:13] is_io_connect_method                          pid=552  exec=studioapp        sel=0x1
+[2026 Oct  9 12:37:13] is_io_connect_method                          pid=552  exec=studioapp        sel=0x0
+[2026 Oct  9 12:37:13] is_io_connect_method                          pid=552  exec=studioapp        sel=0x1
+[2026 Oct  9 12:37:13] is_io_connect_method                          pid=552  exec=studioapp        sel=0x0
+[2026 Oct  9 12:37:13] is_io_connect_method                          pid=552  exec=studioapp        sel=0x3
+[2026 Oct  9 12:37:13] is_io_connect_method                          pid=462  exec=System Preferen  sel=0x10
+[2026 Oct  9 12:37:14] is_io_connect_method                          pid=552  exec=studioapp        sel=0x4
+[2026 Oct  9 12:37:15] is_io_connect_method                          pid=552  exec=studioapp        sel=0x1
+[2026 Oct  9 12:37:15] is_io_connect_method                          pid=552  exec=studioapp        sel=0x0
+[2026 Oct  9 12:37:15] is_io_connect_method                          pid=552  exec=studioapp        sel=0x1
+[2026 Oct  9 12:37:15] is_io_connect_method                          pid=552  exec=studioapp        sel=0x0
+[2026 Oct  9 12:37:15] is_io_connect_method                          pid=552  exec=studioapp        sel=0x3
+[2026 Oct  9 12:37:15] is_io_connect_method                          pid=462  exec=System Preferen  sel=0x10
+[2026 Oct  9 12:37:16] is_io_connect_method                          pid=552  exec=studioapp        sel=0x4
+[2026 Oct  9 12:37:17] is_io_connect_method                          pid=462  exec=System Preferen  sel=0x10
+[2026 Oct  9 12:37:18] is_io_connect_method                          pid=552  exec=studioapp        sel=0x1
+[2026 Oct  9 12:37:18] is_io_connect_method                          pid=552  exec=studioapp        sel=0x0
+[2026 Oct  9 12:37:18] is_io_connect_method                          pid=552  exec=studioapp        sel=0x1
+[2026 Oct  9 12:37:18] is_io_connect_method                          pid=552  exec=studioapp        sel=0x0
+[2026 Oct  9 12:37:18] is_io_connect_method                          pid=552  exec=studioapp        sel=0x3
+[2026 Oct  9 12:37:19] is_io_connect_method                          pid=552  exec=studioapp        sel=0x4
+[2026 Oct  9 12:37:22] is_io_connect_method                          pid=552  exec=studioapp        sel=0x4
+[2026 Oct  9 12:37:22] is_io_connect_method                          pid=552  exec=studioapp        sel=0x1
+[2026 Oct  9 12:37:22] is_io_connect_method                          pid=552  exec=studioapp        sel=0x0
+[2026 Oct  9 12:37:22] is_io_connect_method                          pid=552  exec=studioapp        sel=0x1
+[2026 Oct  9 12:37:22] is_io_connect_method                          pid=552  exec=studioapp        sel=0x0
+[2026 Oct  9 12:37:22] is_io_connect_method                          pid=552  exec=studioapp        sel=0x3
+[2026 Oct  9 12:37:22] is_io_connect_method                          pid=462  exec=System Preferen  sel=0x10
+[2026 Oct  9 12:37:23] is_io_connect_method                          pid=462  exec=System Preferen  sel=0x10
+[2026 Oct  9 12:37:24] is_io_connect_method                          pid=552  exec=studioapp        sel=0x1
+[2026 Oct  9 12:37:24] is_io_connect_method                          pid=552  exec=studioapp        sel=0x0
+[2026 Oct  9 12:37:24] is_io_connect_method                          pid=552  exec=studioapp        sel=0x1
+[2026 Oct  9 12:37:24] is_io_connect_method                          pid=552  exec=studioapp        sel=0x0
+[2026 Oct  9 12:37:24] is_io_connect_method                          pid=552  exec=studioapp        sel=0x3
+[2026 Oct  9 12:37:26] is_io_connect_method                          pid=462  exec=System Preferen  sel=0x10
+[2026 Oct  9 12:37:25] is_io_connect_method                          pid=552  exec=studioapp        sel=0x4
+[2026 Oct  9 12:37:26] is_io_connect_method                          pid=552  exec=studioapp        sel=0x1
+[2026 Oct  9 12:37:26] is_io_connect_method                          pid=552  exec=studioapp        sel=0x0
+[2026 Oct  9 12:37:26] is_io_connect_method                          pid=552  exec=studioapp        sel=0x1
+[2026 Oct  9 12:37:26] is_io_connect_method                          pid=552  exec=studioapp        sel=0x0
+[2026 Oct  9 12:37:26] is_io_connect_method                          pid=552  exec=studioapp        sel=0x3

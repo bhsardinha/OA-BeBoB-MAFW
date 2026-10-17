@@ -1,0 +1,92 @@
+=== _main @ 0x000021ee ===
+
+undefined4 _main(int param_1,int param_2)
+
+{
+  char *pcVar1;
+  undefined4 uVar2;
+  int iVar3;
+  undefined4 uVar4;
+  undefined4 uVar5;
+  int iVar6;
+  undefined *puVar7;
+  
+  uVar2 = _objc_msgSend(PTR_s_NSAutoreleasePool_0000a004,PTR_s_alloc_0000a078);
+  uVar2 = _objc_msgSend(uVar2,PTR_s_init_0000a07c);
+  puVar7 = _kMAFireWireServerName;
+  iVar3 = _objc_msgSend(PTR_s_MAFireWireCommunicator_0000a000,PTR_s_getServer__0000a074,
+                        _kMAFireWireServerName);
+  if (iVar3 == 0) {
+    uVar4 = _objc_msgSend(PTR_s_NSAutoreleasePool_0000a004,PTR_s_alloc_0000a078,puVar7);
+    uVar4 = _objc_msgSend(uVar4,PTR_s_init_0000a07c);
+    uVar5 = _objc_msgSend(PTR_s_MAFireWireCommunicator_0000a000,PTR_s_alloc_0000a078);
+    iVar3 = _objc_msgSend(uVar5,PTR_s_init_0000a07c);
+    _objc_msgSend(uVar4,PTR_s_release_0000a08c);
+    puVar7 = _kMAFireWireServerName;
+    _objc_msgSend(iVar3,PTR_s_runServer__0000a080,_kMAFireWireServerName);
+  }
+  uVar4 = _objc_msgSend(PTR_s_NSAutoreleasePool_0000a004,PTR_s_alloc_0000a078,puVar7);
+  uVar4 = _objc_msgSend(uVar4,PTR_s_init_0000a07c);
+  if ((1 < param_1) && (iVar3 != 0)) {
+    _NSLog(&cf_Serverrunning);
+    pcVar1 = *(char **)(param_2 + 4);
+    iVar6 = _strcmp(pcVar1,"start");
+    if (iVar6 == 0) {
+      _NSLog(&cf_Startingserver);
+      puVar7 = PTR_s_start_0000a084;
+    }
+    else {
+      iVar6 = _strcmp(pcVar1,"stop");
+      if (iVar6 != 0) goto LAB_00002371;
+      _NSLog(&cf_Stoppingserver);
+      puVar7 = PTR_s_stop_0000a088;
+    }
+    _objc_msgSend(iVar3,puVar7);
+  }
+LAB_00002371:
+  _objc_msgSend(uVar4,PTR_s_release_0000a08c);
+  _objc_msgSend(uVar2,PTR_s_release_0000a08c);
+  return 0;
+}
+
+
+
+=== entry @ 0x000021b0 ===
+
+void entry(void)
+
+{
+  int iVar1;
+  int *piVar2;
+  int unaff_retaddr;
+  
+  piVar2 = (int *)(&stack0x00000004 + (unaff_retaddr + 1) * 4);
+  do {
+    iVar1 = *piVar2;
+    piVar2 = piVar2 + 1;
+  } while (iVar1 != 0);
+  iVar1 = _main();
+                    /* WARNING: Subroutine does not return */
+  _exit(iVar1);
+}
+
+
+
+=== -[MAFireWireCommunicator init] ===
+[not found]
+
+=== -[MAFireWireCommunicator start] ===
+[not found]
+
+=== -[MAFireWireCommunicator stop] ===
+[not found]
+
+=== -[MAFireWireLoader init] ===
+[not found]
+
+=== -[MAFireWireLoader unloadTheDriver] ===
+[not found]
+
+=== -[MAFireWireLoader unloadDriverOnce] ===
+[not found]
+

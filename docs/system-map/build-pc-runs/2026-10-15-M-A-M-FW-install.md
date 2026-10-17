@@ -1,0 +1,28 @@
+# Build-PC runs 2026-10-14/15 — M-A (kext skeleton), M-FW (firmware-state path), install test
+
+**Bundle:** our clone `com.openaudio.OpenAudioFW1814` 0.1.0 (sources `openaudio-fw1814/kext`, built on the build PC with Xcode 9.4.1 / 10.13 SDK, ad-hoc unsigned; `kext-dev-mode=1`, SIP off). **Host:** iMac11,2, macOS 10.13.6 (17G14042), `192.168.100.20`. **Device:** M-Audio FW1814, GUID `0x000d6c040012337f` (runtime), power-cycled by the user (no cable pulls). Times in the kernel log are UTC (local = UTC−3). The reference 2014 kext was never loaded. These are **observations of the clone**, not of the reference; they are the first run-time evidence for the reference's two-round design (Q-SDK5) on 10.13.6.
+
+## Run 1 — M-A, load from `/tmp`, interface off (2026-10-14 ~23:48 local)
+`kextutil -t -n` on the staged copy → `appears to be loadable`; `sudo kextutil /tmp/OpenAudioFW1814.kext` → `kextstat` index 162; `ioreg` shows no instance (no device); `kextunload -b com.openaudio.OpenAudioFW1814` clean (`kextstat` count 0). No panic.
+
+## Run 2 — M-A, interface powered on with the kext loaded (kernel log, UTC)
+```
+02:51:13.435  M-Audio FireWire device found: FW 1814 Bootloader
+02:51:13.435  metanub <ptr> GUID:d6c041012337f product:FW 1814 bootloader:1
+02:51:16.738  M-Audio FireWire device found: FW 1814
+02:51:16.739  metanub <ptr> GUID:d6c040012337f product:FW 1814 bootloader:0
+```
+Registry: runtime `Model_ID = 65649` (0x10071); bootloader nub existed ~3 s earlier with a **different GUID** (`…041…`) and product name `FW 1814 Bootloader`; no `FW1814Device` yet (round 1 rejected by `FWAVCAudioDevice::probe`, as designed). The device left the bootloader **by itself** ~3 s after power-on (no `Go` was sent).
+`MAFirmwareInfo` of the runtime nub (80 B, live): `62 72 69 64 67 65 43 6f` ("bridgeCo") · protocol version `1` · bootloader version `0` · GUID bytes `04 6c 0d 00 7f 33 12 00` · hardware model `0x83` · revision `1` · software date `"20070713"` · time `"080440\0\0"` · base address `0x20080000` · max image length `0x00180000` · bootloader date `"20040330"` / time `"025909"`. This matches the layout of `A1-ghidra/Q-P3-kext-firmware-path.md` §3 (checked there against a live SL value from a different unit, GUID `000d6c040074b9fb`; same firmware date/time and addresses, different GUID/serial bytes).
+Then `MAFirmwareStart` (test tool) → log `02:52:48.715  M-FW: Firmware active: registering metanub.` and `02:52:48.715  FW1814Device initHardware: shell up` (round 2 accepted; the shell sets only names). IORegistry: `IOFireWireDevice@d6c040012337f` → `IOFireWireUnit` (bare) and `com_openaudio_FWMetaNub` → `com_openaudio_FW1814Device` ("IOAudioDeviceName" = "FW 1814", manufacturer "M-Audio"). **No `IOFireWireAVCUnit` / sub-unit and no `AppleFWAudio` anywhere in the tree** (so the go-away personalities `FW1814AppleGoAway1/12` were never exercised). Soak: no reboot, no new panic report (only the old `Kernel_2026-10-05…` and `Kernel_2026-10-14-213705…`) for ≥ 6.5 min after attach (`FW1814Device` alive ~4 min 50 s until the kext was unloaded for the next run).
+
+## Run 3 — M-FW, Halt / Go cycle (kext with firmware-state path, helper run by hand)
+* `MAFirmwareHalt` (Reset, start-mode 1): bootloader nub appeared at `02:58:30.689` (`GUID …041…`, `bootloader:1`), `M-FW: Reregister: device still here, re-registering.` at `02:58:33.938` (2.5 s timer); the device returned to runtime by itself ~3 s after the bootloader appeared.
+* With the helper running as a daemon: Halt → bootloader nub → helper read `MAFirmwareInfo` (state=bootloader, date equal to the bundled `.bcd`) → wrote `MAFirmwareStart` → kernel: `02:59:00.884  M-FW: Bootloader active: starting firmware.` (`Go` 12-byte write returned success), `02:59:04.141 Reregister: device still here`, `02:59:06.641 Reregister: device node vanished` (bootloader nub gone). Final state: runtime nub + `FW1814Device`.
+* **Not distinguishable:** whether the `Go` write or the bootloader's own auto-boot (~3 s) moved the device to runtime. **Unverified:** whether the auto-boot timer is cancelled once a download command arrives — moot, flashing was cut from scope (below).
+
+## Run 4 — scope cut, install and reboot (2026-10-15)
+User decision: the driver never writes the device's flash. Removed from the kext: `MAFirmwareHalt`/`MAFirmwareUpgradeImage` handling, `FirmwareUpdate*`, `Download*`, `FirmwareReadResponse` (binary has 0 strings matching `FirmUp|Download`); the helper only reads `MAFirmwareInfo` and writes `MAFirmwareStart`. Installed (interface OFF, after `kextutil -t -n` on a staged copy): `/Library/Extensions/OpenAudioFW1814.kext`, `/Library/PrivilegedHelperTools/com.openaudio.fw1814.helper`, `/Library/LaunchDaemons/com.openaudio.fw1814.helper.plist`; the pre-pivot LaunchDaemon `com.openaudio.fw1814.fwhelper` (direct IOFireWireLib bootloader writer) was unloaded and moved to `/var/root/oa-old/`. Reboot: up in 43 s, helper running (launchd PID 51), kext not loaded (no device, expected), no panic. Interface powered on: kext 160 auto-loaded, helper log `nub matched: 'FW 1814 Bootloader' state=bootloader … wrote MAFirmwareStart -> 0x0` then `nub matched: 'FW 1814' state=running firmware 20070713 080440 … wrote MAFirmwareStart -> 0x0`; `FW1814Device` present; no `AppleFWAudio`; no panic. This is the M-A (c)+(d) acceptance **and** H.1 end to end with no manual command.
+
+## Not run (by decision)
+The M-B part-1 kext (pool, DCL builder, TX/RX programs, bring-up hook) was built and `kextutil -t -n`-validated on the build PC (staged copy in `/tmp`) but **never loaded**: the user's "airliner" directive (2026-10-15) forbids partial hardware tests. The installed kext remains the M-FW version.

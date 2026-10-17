@@ -1,0 +1,217 @@
+=== +[MAFireWireFirmwareFile firmwareWithPath:] @ 0x00005734 ===
+
+int __MAFireWireFirmwareFile_firmwareWithPath__
+              (undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  
+  uVar1 = _objc_msgSend(param_1,PTR_s_alloc_0000a078);
+  uVar1 = _objc_msgSend(uVar1,PTR_s_init_0000a07c);
+  iVar2 = _objc_msgSend(uVar1,PTR_s_autorelease_0000a0a4);
+  uVar1 = _objc_msgSend(param_3,PTR_s_retain_0000a090);
+  *(undefined4 *)(iVar2 + 0xc) = uVar1;
+  uVar1 = _objc_msgSend(param_3,PTR_s_lastPathComponent_0000a250);
+  uVar1 = _objc_msgSend(uVar1,PTR_s_retain_0000a090);
+  *(undefined4 *)(iVar2 + 8) = uVar1;
+  uVar1 = _objc_msgSend(PTR_s_NSData_0000a068,PTR_s_dataWithContentsOfMappedFile__0000a254,param_3);
+  uVar1 = _objc_msgSend(uVar1,PTR_s_retain_0000a090);
+  *(undefined4 *)(iVar2 + 4) = uVar1;
+  uVar1 = _objc_msgSend(uVar1,PTR_s_bytes_0000a134);
+  *(undefined4 *)(iVar2 + 0x14) = uVar1;
+  return iVar2;
+}
+
+
+
+=== -[MAFireWireFirmwareFile dealloc] @ 0x00005801 ===
+
+void __MAFireWireFirmwareFile_dealloc_(int param_1)
+
+{
+  int local_14;
+  undefined *local_10;
+  
+  _objc_msgSend(*(undefined4 *)(param_1 + 0xc),PTR_s_release_0000a08c);
+  _objc_msgSend(*(undefined4 *)(param_1 + 8),PTR_s_release_0000a08c);
+  _objc_msgSend(*(undefined4 *)(param_1 + 4),PTR_s_release_0000a08c);
+  _objc_msgSend(*(undefined4 *)(param_1 + 0x10),PTR_s_release_0000a08c);
+  local_14 = param_1;
+  local_10 = PTR_s_NSObject_0000a528;
+  _objc_msgSendSuper(&local_14,PTR_s_dealloc_0000a0b0);
+  return;
+}
+
+
+
+=== -[MAFireWireFirmwareFile embeddedCRC] @ 0x00005c7d ===
+
+undefined4 __MAFireWireFirmwareFile_embeddedCRC_(int param_1)
+
+{
+  return *(undefined4 *)(*(int *)(param_1 + 0x14) + 0x3c);
+}
+
+
+
+=== -[MAFireWireFirmwareFile actualCRC] @ 0x00005c8b ===
+
+void __MAFireWireFirmwareFile_actualCRC_(int param_1)
+
+{
+  _objc_msgSend(*(undefined4 *)(param_1 + 4),PTR_s_CRC32WithRange__0000a28c,
+                CONCAT44(*(undefined4 *)(*(int *)(param_1 + 0x14) + 0x38),
+                         *(undefined4 *)(*(int *)(param_1 + 0x14) + 0x30)));
+  return;
+}
+
+
+
+=== -[MAFireWireFirmwareFile data] @ 0x00005f0a ===
+
+undefined4 __MAFireWireFirmwareFile_data_(int param_1)
+
+{
+  return *(undefined4 *)(param_1 + 4);
+}
+
+
+
+=== -[MAFireWireFirmwareFile date] @ 0x00005f15 ===
+
+void __MAFireWireFirmwareFile_date_(int param_1)
+
+{
+  int iVar1;
+  
+  iVar1 = *(int *)(param_1 + 0x14);
+  CalendarDateFromFirmwareDate
+            (*(ulong *)(iVar1 + 8),*(ulong *)(iVar1 + 0xc),*(ulong *)(iVar1 + 0x10),
+             *(ulong *)(iVar1 + 0x14));
+  return;
+}
+
+
+
+=== -[MAFireWireFirmwareFile name] @ 0x00005f48 ===
+
+undefined4 __MAFireWireFirmwareFile_name_(int param_1)
+
+{
+  return *(undefined4 *)(param_1 + 8);
+}
+
+
+
+=== -[MAFireWireFirmwareFile reportCorruptFirmwareToDelegate:format:] @ 0x0000589a ===
+
+void __MAFireWireFirmwareFile_reportCorruptFirmwareToDelegate_format__
+               (int param_1,undefined4 param_2,int param_3,undefined4 param_4)
+
+{
+  undefined4 uVar1;
+  undefined1 *puVar2;
+  
+  puVar2 = &stack0x00000014;
+  uVar1 = _objc_msgSend(PTR_s_NSString_0000a038,PTR_s_alloc_0000a078);
+  uVar1 = _objc_msgSend(uVar1,PTR_s_initWithFormat_arguments__0000a258,param_4,puVar2);
+  if (param_3 == 0) {
+    param_3 = param_1;
+  }
+  _objc_msgSend(param_3,PTR_s_firmwareValidationFailed__0000a25c,uVar1,puVar2);
+  _objc_msgSend(uVar1,PTR_s_release_0000a08c);
+  return;
+}
+
+
+
+=== +[MAFireWireFirmwareFile automaticUpdatesInhibited] @ 0x00005917 ===
+
+int __MAFireWireFirmwareFile_automaticUpdatesInhibited_(void)
+
+{
+  char cVar1;
+  undefined4 uVar2;
+  
+  uVar2 = _objc_msgSend(PTR_s_NSFileManager_0000a040,PTR_s_defaultManager_0000a138);
+  cVar1 = _objc_msgSend(uVar2,PTR_s_fileExistsAtPath__0000a154,
+                        &cf__Library_Preferences_com_m_audio_firewire_firmware_autoupdate_not);
+  return (int)cVar1;
+}
+
+
+
+=== +[MAFireWireFirmwareFile setInhibitAutomaticUpdates:] @ 0x00005956 ===
+
+void __MAFireWireFirmwareFile_setInhibitAutomaticUpdates__
+               (undefined4 param_1,undefined4 param_2,char param_3)
+
+{
+  char cVar1;
+  undefined4 uVar2;
+  undefined *puVar3;
+  cfstringStruct *pcVar4;
+  undefined4 uVar5;
+  
+  uVar2 = _objc_msgSend(PTR_s_NSFileManager_0000a040,PTR_s_defaultManager_0000a138);
+  pcVar4 = &cf__Library_Preferences_com_m_audio_firewire_firmware_autoupdate_not;
+  cVar1 = _objc_msgSend(uVar2,PTR_s_fileExistsAtPath__0000a154,
+                        &cf__Library_Preferences_com_m_audio_firewire_firmware_autoupdate_not);
+  if (param_3 == '\0') {
+    if (cVar1 == '\0') {
+      return;
+    }
+    uVar5 = 0;
+    puVar3 = PTR_s_removeFileAtPath_handler__0000a158;
+  }
+  else {
+    if (cVar1 != '\0') {
+      return;
+    }
+    uVar2 = _objc_msgSend(PTR_s_NSData_0000a068,PTR_s_data_0000a160,pcVar4);
+    uVar5 = 1;
+    puVar3 = PTR_s_writeToFile_atomically__0000a260;
+  }
+  _objc_msgSend(uVar2,puVar3,&cf__Library_Preferences_com_m_audio_firewire_firmware_autoupdate_not,
+                uVar5);
+  return;
+}
+
+
+
+=== +[MAFireWireFirmwareFile forceNextAutomaticUpdate] @ 0x000059f2 ===
+
+int __MAFireWireFirmwareFile_forceNextAutomaticUpdate_(void)
+
+{
+  char cVar1;
+  undefined4 uVar2;
+  
+  uVar2 = _objc_msgSend(PTR_s_NSFileManager_0000a040,PTR_s_defaultManager_0000a138);
+  cVar1 = _objc_msgSend(uVar2,PTR_s_fileExistsAtPath__0000a154,
+                        &cf__Library_Preferences_com_m_audio_firewire_firmware_autoupdate_force);
+  return (int)cVar1;
+}
+
+
+
+=== +[MAFireWireFirmwareFile automaticUpdatedForced] @ 0x00005a31 ===
+
+void __MAFireWireFirmwareFile_automaticUpdatedForced_(undefined4 param_1)
+
+{
+  char cVar1;
+  undefined4 uVar2;
+  
+  uVar2 = _objc_msgSend(PTR_s_NSFileManager_0000a040,PTR_s_defaultManager_0000a138);
+  cVar1 = _objc_msgSend(param_1,PTR_s_forceNextAutomaticUpdate_0000a264);
+  if (cVar1 != '\0') {
+    _objc_msgSend(uVar2,PTR_s_removeFileAtPath_handler__0000a158,
+                  &cf__Library_Preferences_com_m_audio_firewire_firmware_autoupdate_force,0);
+  }
+  return;
+}
+
+
+

@@ -1,0 +1,7 @@
+# capture 80 - SL v1.9 (official), panel path: IORegistryEntrySetCFProperties MASampleRate=44100 while MASampleRate=48000 (idle device), 2026-10-17
+# tool: maprop (MA_CLASS=com_m_audio_FW1814Device); reads of MASampleRate / MARateLocked after the write
+baseline: MASampleRate=48000 MARateLocked=1
++1s .. +29s: MASampleRate=48000 (never updated)  MARateLocked=0
+SL official panel after the write: sample-rate field shows "44100 Hz" in RED (unlocked indicator), it does NOT revert to 48000; SL Audio MIDI Setup shows Format 44100.0 Hz.
+=> the official kext keeps the old MASampleRate and drops the lock; the official panel keeps the user's choice and shows "unlocked" (red). The clone's panel reverts to the kext value.
+clone (same write, 10.13): HAL 44100->96000/48000 at once, MASampleRate stays at the old value (44100) and MARateLocked 0 for 12 s+  (same kext behaviour); panel reverts -> open bug (panel display rule, not kext).

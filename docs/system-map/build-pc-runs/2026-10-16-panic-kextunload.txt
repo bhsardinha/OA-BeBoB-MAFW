@@ -1,0 +1,60 @@
+Anonymous UUID:       F0CB1AC5-2FB0-109D-E9AF-99219BD33B8C
+
+Fri Oct 16 21:01:52 2026
+
+*** Panic Report ***
+panic(cpu 2 caller 0xffffff8019f8687f): Kernel trap at 0xffffff7f9a9ab57d, type 14=page fault, registers:
+CR0: 0x000000008001003b, CR2: 0x0000000000000018, CR3: 0x000000001db72000, CR4: 0x00000000000226e0
+RAX: 0x000000000000ffc7, RBX: 0xffffff8041a3ea00, RCX: 0x0000000000000000, RDX: 0x000000000000001a
+RSP: 0xffffff8da7db3dd0, RBP: 0xffffff8da7db3e40, RSI: 0xffffff81917e65c0, RDI: 0xffffff80331d1000
+R8:  0x0000000000600000, R9:  0x0000000000000001, R10: 0x0000000000000002, R11: 0xffffff7f9b29823c
+R12: 0x000000000000ffc1, R13: 0x0000000000000007, R14: 0x000000000000001b, R15: 0xffffff81917e65c0
+RFL: 0x0000000000010246, RIP: 0xffffff7f9a9ab57d, CS:  0x0000000000000008, SS:  0x0000000000000010
+Fault CR2: 0x0000000000000018, Error code: 0x0000000000000002, Fault CPU: 0x2, PL: 0, VF: 1
+
+Backtrace (CPU 2), Frame : Return Address
+0xffffff8da7db38a0 : 0xffffff8019e6ae76 
+0xffffff8da7db38f0 : 0xffffff8019f94484 
+0xffffff8da7db3930 : 0xffffff8019f86654 
+0xffffff8da7db39a0 : 0xffffff8019e1ce60 
+0xffffff8da7db39c0 : 0xffffff8019e6a8ec 
+0xffffff8da7db3af0 : 0xffffff8019e6a6ac 
+0xffffff8da7db3b50 : 0xffffff8019f8687f 
+0xffffff8da7db3cc0 : 0xffffff8019e1ce60 
+0xffffff8da7db3ce0 : 0xffffff7f9a9ab57d 
+0xffffff8da7db3e40 : 0xffffff7f9b2a78a3 
+0xffffff8da7db3e90 : 0xffffff7f9b29addf 
+0xffffff8da7db3ed0 : 0xffffff801a4988a5 
+0xffffff8da7db3f30 : 0xffffff801a497012 
+0xffffff8da7db3f70 : 0xffffff801a49663c 
+0xffffff8da7db3fa0 : 0xffffff8019e1c557 
+      Kernel Extensions in backtrace:
+         com.apple.iokit.IOFireWireFamily(4.7.2)[35741F64-7484-39D5-81B9-9240CD5A50DB]@0xffffff7f9a9a2000->0xffffff7f9aa14fff
+         com.apple.driver.AppleFWOHCI(5.5.9)[B774B8EA-3452-3A10-A98E-62C53B1BD4D1]@0xffffff7f9b295000->0xffffff7f9b2bafff
+            dependency: com.apple.iokit.IOPCIFamily(2.9)[F763C275-306F-358F-B6B0-0FD93486BD5F]@0xffffff7f9a694000
+            dependency: com.apple.iokit.IOFireWireFamily(4.7.2)[35741F64-7484-39D5-81B9-9240CD5A50DB]@0xffffff7f9a9a2000
+
+BSD process name corresponding to current thread: kernel_task
+
+Mac OS version:
+17G14042
+
+Kernel version:
+Darwin Kernel Version 17.7.0: Fri Oct 30 13:34:27 PDT 2020; root:xnu-4570.71.82.8~1/RELEASE_X86_64
+Kernel UUID: 5E83A13A-32F5-3604-8591-50E2F2F70DC6
+Kernel slide:     0x0000000019c00000
+Kernel text base: 0xffffff8019e00000
+__HIB  text base: 0xffffff8019d00000
+System model name: iMac11,2 (Mac-F2238AC8)
+
+System uptime in nanoseconds: 161379289569585
+last loaded kext at 160404260453775: com.openaudio.OpenAudioFW1814	0.1.0 (addr 0xffffff7f9d255000, size 454656)
+last unloaded kext at 160396857066723: com.openaudio.OpenAudioFW1814	0.1.0 (addr 0xffffff7f9d255000, size 200704)
+loaded kexts:
+com.openaudio.OpenAudioFW1814	0.1.0
+com.paceap.kext.pacesupport.snowleopard	5.8
+com.objective-see.lulu	1.2.3
+tc.tctechnologies.driver.PaeFireStudio	3.5.5 10705
+com.uaudio.driver.UAD2System	11.5.1
+com.apple.filesystems.msdosfs	1.10
+com.apple.filesystems.smbfs	3.2.3

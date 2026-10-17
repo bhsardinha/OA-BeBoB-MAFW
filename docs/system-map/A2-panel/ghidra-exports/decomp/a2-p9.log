@@ -1,0 +1,560 @@
+openjdk version "25.0.4.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Zulu25.36+205-CA (build 25.0.4.1+1-LTS)
+OpenJDK 64-Bit Server VM Zulu25.36+205-CA (build 25.0.4.1+1-LTS, mixed mode)
+INFO  Using log config file: jar:file:/opt/local/share/java/ghidra-12.1.4/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /Users/bernardosardinha/Library/ghidra/ghidra_12.1.4_DEV/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /Users/bernardosardinha/Library/ghidra/ghidra_12.1.4_DEV/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (1364 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (5647 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 59 extension points (20 false positives) (ClassSearcher)  
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldOffset has been called by org.apache.felix.framework.util.SecureAction (file:/opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Base/lib/org.apache.felix.framework-7.0.5.jar)
+WARNING: Please consider reporting this to the maintainers of class org.apache.felix.framework.util.SecureAction
+WARNING: sun.misc.Unsafe::staticFieldOffset will be removed in a future release
+INFO  HEADLESS Script Paths:
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/BSim/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Base/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/PDB/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/8051/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Opening existing project: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/ghidra-project/panel-app (HeadlessAnalyzer)  
+INFO  Opening project: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/ghidra-project/panel-app (HeadlessProject)  
+INFO  REPORT: Processing project file: /Panel (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: DecompA2P9.java  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/scripts/DecompA2P9.java (HeadlessAnalyzer)  
+INFO  DecompA2P9.java> === CMiddleWareDevice::AddMWPollingType @ 000639ea === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* CMiddleWareDevice::AddMWPollingType(unsigned long) */
+
+int __thiscall CMiddleWareDevice::AddMWPollingType(CMiddleWareDevice *this,ulong param_1)
+
+{
+  char cVar1;
+  LPeriodical *this_00;
+  short sVar2;
+  
+  if (param_1 == 0x5e9) {
+    *(short *)(this + 0x56) = *(short *)(this + 0x56) + 1;
+    this[0x54] = (CMiddleWareDevice)0x1;
+  }
+  else if (param_1 == 0x601) {
+    *(short *)(this + 0x5a) = *(short *)(this + 0x5a) + 1;
+    this[0x58] = (CMiddleWareDevice)0x1;
+  }
+  else {
+    sVar2 = -0x32;
+    if (param_1 != 0x5f3) goto LAB_00063a2f;
+    *(short *)(this + 0x52) = *(short *)(this + 0x52) + 1;
+    this[0x50] = (CMiddleWareDevice)0x1;
+  }
+  sVar2 = 0;
+LAB_00063a2f:
+  if (((this[0x50] != (CMiddleWareDevice)0x0) || (this[0x54] != (CMiddleWareDevice)0x0)) ||
+     (this[0x58] != (CMiddleWareDevice)0x0)) {
+    this_00 = (LPeriodical *)(this + 0x30);
+    cVar1 = LPeriodical::IsRepeating(this_00);
+    if (cVar1 == '\0') {
+      (**(code **)(*(int *)this_00 + 0x20))(this_00,0x11111111,0x3fa11111);
+    }
+  }
+  return (int)sVar2;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === CMiddleWareDevice::RemoveMWPollingType @ 00063a72 === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* CMiddleWareDevice::RemoveMWPollingType(unsigned long) */
+
+int __thiscall CMiddleWareDevice::RemoveMWPollingType(CMiddleWareDevice *this,ulong param_1)
+
+{
+  char cVar1;
+  short sVar2;
+  LPeriodical *this_00;
+  short sVar3;
+  
+  if (param_1 == 0x5e9) {
+    sVar3 = 0;
+    if ((*(short *)(this + 0x56) != 0) &&
+       (sVar2 = *(short *)(this + 0x56) + -1, *(short *)(this + 0x56) = sVar2, sVar2 == 0)) {
+      this[0x54] = (CMiddleWareDevice)0x0;
+    }
+  }
+  else if (param_1 == 0x601) {
+    sVar3 = 0;
+    if ((*(short *)(this + 0x5a) != 0) &&
+       (sVar2 = *(short *)(this + 0x5a) + -1, *(short *)(this + 0x5a) = sVar2, sVar2 == 0)) {
+      this[0x58] = (CMiddleWareDevice)0x0;
+    }
+  }
+  else {
+    sVar3 = -0x32;
+    if (param_1 == 0x5f3) {
+      sVar3 = 0;
+      if ((*(short *)(this + 0x52) != 0) &&
+         (sVar2 = *(short *)(this + 0x52) + -1, *(short *)(this + 0x52) = sVar2, sVar2 == 0)) {
+        this[0x50] = (CMiddleWareDevice)0x0;
+      }
+    }
+  }
+  if (((this[0x50] == (CMiddleWareDevice)0x0) && (this[0x54] == (CMiddleWareDevice)0x0)) &&
+     (this[0x58] == (CMiddleWareDevice)0x0)) {
+    this_00 = (LPeriodical *)(this + 0x30);
+    cVar1 = LPeriodical::IsRepeating(this_00);
+    if (cVar1 != '\0') {
+      (**(code **)(*(int *)this_00 + 0x14))(this_00);
+    }
+  }
+  return (int)sVar3;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === CMiddleWareDevice::SuspendAllPolling @ 00063b16 === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* CMiddleWareDevice::SuspendAllPolling() */
+
+undefined4 __thiscall CMiddleWareDevice::SuspendAllPolling(CMiddleWareDevice *this)
+
+{
+  char cVar1;
+  LPeriodical *this_00;
+  
+  this[0x3c] = (CMiddleWareDevice)0x1;
+  this_00 = (LPeriodical *)(this + 0x30);
+  cVar1 = LPeriodical::IsRepeating(this_00);
+  if (cVar1 != '\0') {
+    (**(code **)(*(int *)this_00 + 0x14))(this_00);
+  }
+  return 0;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === CMiddleWareDevice::ResumeAllPolling @ 00063b42 === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* CMiddleWareDevice::ResumeAllPolling() */
+
+undefined4 __thiscall CMiddleWareDevice::ResumeAllPolling(CMiddleWareDevice *this)
+
+{
+  char cVar1;
+  LPeriodical *this_00;
+  
+  this[0x3c] = (CMiddleWareDevice)0x0;
+  if (((this[0x50] != (CMiddleWareDevice)0x0) || (this[0x54] != (CMiddleWareDevice)0x0)) ||
+     (this[0x58] != (CMiddleWareDevice)0x0)) {
+    this_00 = (LPeriodical *)(this + 0x30);
+    cVar1 = LPeriodical::IsRepeating(this_00);
+    if (cVar1 == '\0') {
+      (**(code **)(*(int *)this_00 + 0x20))(this_00,0x11111111,0x3fa11111);
+    }
+  }
+  return 0;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === CDeviceSettings::AddPollingType @ 000663cc === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* CDeviceSettings::AddPollingType(unsigned long) */
+
+int __thiscall CDeviceSettings::AddPollingType(CDeviceSettings *this,ulong param_1)
+
+{
+  short sVar1;
+  
+  sVar1 = (**(code **)(**(int **)(this + 0x68) + 0x38))(*(int **)(this + 0x68),param_1);
+  return (int)sVar1;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === CDeviceSettings::RemovePollingType @ 000663f0 === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* CDeviceSettings::RemovePollingType(unsigned long) */
+
+int __thiscall CDeviceSettings::RemovePollingType(CDeviceSettings *this,ulong param_1)
+
+{
+  short sVar1;
+  
+  sVar1 = (**(code **)(**(int **)(this + 0x68) + 0x3c))(*(int **)(this + 0x68),param_1);
+  return (int)sVar1;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === CSetMgrSubView::StartViewPolling @ 00053104 === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* CSetMgrSubView::StartViewPolling() */
+
+void __thiscall CSetMgrSubView::StartViewPolling(CSetMgrSubView *this)
+
+{
+  this[0x120] = (CSetMgrSubView)0x1;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === CSetMgrSubView::StopViewPolling @ 00053114 === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* CSetMgrSubView::StopViewPolling() */
+
+void __thiscall CSetMgrSubView::StopViewPolling(CSetMgrSubView *this)
+
+{
+  this[0x120] = (CSetMgrSubView)0x0;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === CMetersView::UpdateMixerPeakLevels @ 000d9f8c === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* CMetersView::UpdateMixerPeakLevels(middleWareMessage*) */
+
+void __thiscall CMetersView::UpdateMixerPeakLevels(CMetersView *this,middleWareMessage *param_1)
+
+{
+  int iVar1;
+  int *piVar2;
+  int iVar3;
+  uint uVar4;
+  
+  if ((this[300] != (CMetersView)0x0) && (iVar3 = *(int *)(this + 0x124), *(int *)(iVar3 + 8) != 0))
+  {
+    iVar1 = *(int *)(param_1 + 0xc);
+    uVar4 = 1;
+    do {
+      piVar2 = *(int **)(**(int **)(iVar3 + 0x14) + -4 + uVar4 * 4);
+      if ((piVar2 != (int *)0x0) && (piVar2[10] != 0)) {
+        (**(code **)(*piVar2 + 0x24))(piVar2,*(undefined4 *)(iVar1 + -4 + uVar4 * 4));
+        iVar3 = *(int *)(this + 0x124);
+      }
+      uVar4 = uVar4 + 1;
+    } while (uVar4 <= *(uint *)(iVar3 + 8));
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === CMetersView::UpdateOutputPeakLevels @ 000d9ff0 === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* CMetersView::UpdateOutputPeakLevels(middleWareMessage*) */
+
+void __thiscall CMetersView::UpdateOutputPeakLevels(CMetersView *this,middleWareMessage *param_1)
+
+{
+  int iVar1;
+  int *piVar2;
+  int iVar3;
+  uint uVar4;
+  
+  if ((this[0x12d] != (CMetersView)0x0) &&
+     (iVar3 = *(int *)(this + 0x128), *(int *)(iVar3 + 8) != 0)) {
+    iVar1 = *(int *)(param_1 + 0xc);
+    uVar4 = 1;
+    do {
+      piVar2 = *(int **)(**(int **)(iVar3 + 0x14) + -4 + uVar4 * 4);
+      if ((piVar2 != (int *)0x0) && (piVar2[10] != 0)) {
+        (**(code **)(*piVar2 + 0x24))(piVar2,*(undefined4 *)(iVar1 + -4 + uVar4 * 4));
+        iVar3 = *(int *)(this + 0x128);
+      }
+      uVar4 = uVar4 + 1;
+    } while (uVar4 <= *(uint *)(iVar3 + 8));
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === CMixerView::UpdateOutputPeakLevels @ 000de492 === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* CMixerView::UpdateOutputPeakLevels(middleWareMessage*) */
+
+void __thiscall CMixerView::UpdateOutputPeakLevels(CMixerView *this,middleWareMessage *param_1)
+
+{
+  int iVar1;
+  int *piVar2;
+  int iVar3;
+  uint uVar4;
+  
+  iVar3 = *(int *)(this + 0x128);
+  if (*(int *)(iVar3 + 8) != 0) {
+    iVar1 = *(int *)(param_1 + 0xc);
+    uVar4 = 1;
+    do {
+      piVar2 = *(int **)(**(int **)(iVar3 + 0x14) + -4 + uVar4 * 4);
+      if ((piVar2 != (int *)0x0) && (piVar2[10] != 0)) {
+        (**(code **)(*piVar2 + 0x24))(piVar2,*(undefined4 *)(iVar1 + -4 + uVar4 * 4));
+        iVar3 = *(int *)(this + 0x128);
+      }
+      uVar4 = uVar4 + 1;
+    } while (uVar4 <= *(uint *)(iVar3 + 8));
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === CMixerView::UpdateMixerPairPeakLevels @ 000de4ec === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* CMixerView::UpdateMixerPairPeakLevels(middleWareMessage*) */
+
+void __thiscall CMixerView::UpdateMixerPairPeakLevels(CMixerView *this,middleWareMessage *param_1)
+
+{
+  int iVar1;
+  CMixerChannelPairView *this_00;
+  int iVar2;
+  uint uVar3;
+  ushort local_14;
+  ushort local_12;
+  
+  if (*(int *)(*(int *)(this + 0x124) + 8) != 0) {
+    iVar1 = *(int *)(param_1 + 0xc);
+    uVar3 = 1;
+    do {
+      (**(code **)(**(int **)(this + 0x11c) + 0x1c))
+                (*(int **)(this + 0x11c),uVar3 & 0xffff,&local_12,&local_14);
+      iVar2 = *(int *)(this + 0x124);
+      this_00 = *(CMixerChannelPairView **)(**(int **)(iVar2 + 0x14) + -4 + uVar3 * 4);
+      if ((this_00 != (CMixerChannelPairView *)0x0) && (*(int *)(this_00 + 0x28) != 0)) {
+        CMixerChannelPairView::SetVUMeters
+                  (this_00,*(long *)(iVar1 + -4 + (uint)local_12 * 4),
+                   *(long *)(iVar1 + -4 + (uint)local_14 * 4),'\0');
+        iVar2 = *(int *)(this + 0x124);
+      }
+      uVar3 = uVar3 + 1;
+    } while (uVar3 <= *(uint *)(iVar2 + 8));
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === COutputView::UpdateOutputPairPeakLevels @ 000e1d32 === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* COutputView::UpdateOutputPairPeakLevels(middleWareMessage*) */
+
+void __thiscall
+COutputView::UpdateOutputPairPeakLevels(COutputView *this,middleWareMessage *param_1)
+
+{
+  int iVar1;
+  COutputChannelPairView *this_00;
+  int iVar2;
+  uint uVar3;
+  ushort local_14;
+  ushort local_12;
+  
+  if (*(int *)(*(int *)(this + 0x124) + 8) != 0) {
+    iVar1 = *(int *)(param_1 + 0xc);
+    uVar3 = 1;
+    do {
+      (**(code **)(**(int **)(this + 0x11c) + 0x24))
+                (*(int **)(this + 0x11c),uVar3 & 0xffff,&local_12,&local_14);
+      iVar2 = *(int *)(this + 0x124);
+      this_00 = *(COutputChannelPairView **)(**(int **)(iVar2 + 0x14) + -4 + uVar3 * 4);
+      if ((this_00 != (COutputChannelPairView *)0x0) && (*(int *)(this_00 + 0x28) != 0)) {
+        COutputChannelPairView::SetVUMeters
+                  (this_00,*(long *)(iVar1 + -4 + (uint)local_12 * 4),
+                   *(long *)(iVar1 + -4 + (uint)local_14 * 4),'\0');
+        iVar2 = *(int *)(this + 0x124);
+      }
+      uVar3 = uVar3 + 1;
+    } while (uVar3 <= *(uint *)(iVar2 + 8));
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === COutputView::UpdateMixerPeakLevels @ 000e1dce === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* COutputView::UpdateMixerPeakLevels(middleWareMessage*) */
+
+void __thiscall COutputView::UpdateMixerPeakLevels(COutputView *this,middleWareMessage *param_1)
+
+{
+  int iVar1;
+  int *piVar2;
+  int iVar3;
+  uint uVar4;
+  
+  iVar3 = *(int *)(this + 0x128);
+  if (*(int *)(iVar3 + 8) != 0) {
+    iVar1 = *(int *)(param_1 + 0xc);
+    uVar4 = 1;
+    do {
+      piVar2 = *(int **)(**(int **)(iVar3 + 0x14) + -4 + uVar4 * 4);
+      if ((piVar2 != (int *)0x0) && (piVar2[10] != 0)) {
+        (**(code **)(*piVar2 + 0x24))(piVar2,*(undefined4 *)(iVar1 + -4 + uVar4 * 4));
+        iVar3 = *(int *)(this + 0x128);
+      }
+      uVar4 = uVar4 + 1;
+    } while (uVar4 <= *(uint *)(iVar3 + 8));
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === CXDevice::GetChannelLevelProperty @ 0006d85e === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* CXDevice::GetChannelLevelProperty(NSString*, unsigned long, void*) */
+
+void __thiscall
+CXDevice::GetChannelLevelProperty(CXDevice *this,NSString *param_1,ulong param_2,void *param_3)
+
+{
+  int iVar1;
+  int iVar2;
+  undefined4 uVar3;
+  int local_84 [23];
+  undefined4 local_28;
+  int local_24;
+  undefined4 *local_20;
+  ulong local_1c;
+  NSString *local_18;
+  CXDevice *local_14;
+  
+  local_14 = this;
+  local_18 = param_1;
+  local_1c = param_2;
+  local_20 = param_3;
+  iVar1 = FetchArrayProperty(this,param_1);
+  local_24 = iVar1;
+  if (iVar1 == 0) {
+    *(undefined4 *)param_3 = 0;
+    _NSLog(&cf___nopropertyfound__GetChannelLevelPropkey___channel__lu,param_1,param_2);
+  }
+  else {
+    _objc_exception_try_enter(local_84);
+    iVar2 = __setjmp(local_84);
+    if (iVar2 == 0) {
+      uVar3 = _objc_msgSend(iVar1,PTR_s_objectAtIndex__001d406c,param_2 - 1);
+      local_28 = _objc_msgSend(uVar3,PTR_s_longValue_001d4070);
+      *local_20 = local_28;
+      _objc_exception_try_exit(local_84);
+    }
+    else {
+      uVar3 = _objc_exception_extract(local_84);
+      iVar1 = _objc_exception_match(PTR_s_NSException_001d4790,uVar3);
+      if (iVar1 == 0) {
+        uVar3 = _objc_exception_extract(local_84);
+                    /* WARNING: Subroutine does not return */
+        _objc_exception_throw(uVar3);
+      }
+      _NSLog(&cf___accessbeyondarray__GetChannelLevelPropkey___channel__lu,local_18,local_1c);
+      *local_20 = 0;
+    }
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === CXDevice::GetNumberOfDirectMonitorChannels @ 00072138 === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* CXDevice::GetNumberOfDirectMonitorChannels() */
+
+short __thiscall CXDevice::GetNumberOfDirectMonitorChannels(CXDevice *this)
+
+{
+  short sVar1;
+  short sVar2;
+  
+  sVar1 = (**(code **)(*(int *)this + 0x18))(this);
+  sVar2 = (**(code **)(*(int *)this + 0x60))(this);
+  return (sVar1 + -2) - sVar2;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === CXDevice::GetNumberOfAuxMonitorSwitchChannels @ 00072166 === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* CXDevice::GetNumberOfAuxMonitorSwitchChannels() */
+
+undefined2 __thiscall CXDevice::GetNumberOfAuxMonitorSwitchChannels(CXDevice *this)
+
+{
+  undefined2 uVar1;
+  
+  uVar1 = (**(code **)(*(int *)this + 0x18))(this);
+  return uVar1;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === CXDevice::GetSWReturnPeaksAreEmbedded @ 00072180 === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* CXDevice::GetSWReturnPeaksAreEmbedded() */
+
+undefined4 CXDevice::GetSWReturnPeaksAreEmbedded(void)
+
+{
+  return 1;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === CX1814Device::GetSWReturnPeaksAreEmbedded @ 00072e86 === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* CX1814Device::GetSWReturnPeaksAreEmbedded() */
+
+undefined4 CX1814Device::GetSWReturnPeaksAreEmbedded(void)
+
+{
+  return 0;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === CFW1814MiniMetersView::GetPortSettings @ 0009e236 === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* CFW1814MiniMetersView::GetPortSettings(unsigned short&, unsigned short&) */
+
+void __thiscall
+CFW1814MiniMetersView::GetPortSettings(CFW1814MiniMetersView *this,ushort *param_1,ushort *param_2)
+
+{
+  int *piVar1;
+  
+  *param_1 = 2;
+  *param_2 = 2;
+  piVar1 = *(int **)(this + 0x11c);
+  if (piVar1 != (int *)0x0) {
+    (**(code **)(*piVar1 + 0xc))(piVar1,0x60d,0,2,param_1);
+    (**(code **)(**(int **)(this + 0x11c) + 0xc))(*(int **)(this + 0x11c),0x60e,0,2,param_2);
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9.java> === CFW1814MiniMetersView::AdaptUIElementsToSettings @ 0009e2b0 === (GhidraScript)  
+INFO  DecompA2P9.java> 
+/* CFW1814MiniMetersView::AdaptUIElementsToSettings() */
+
+void __thiscall CFW1814MiniMetersView::AdaptUIElementsToSettings(CFW1814MiniMetersView *this)
+
+{
+  if (this[0x12e] == (CFW1814MiniMetersView)0x0) {
+    (**(code **)(*(int *)this + 500))(this);
+  }
+  CMetersView::AdaptUIElementsToSettings((CMetersView *)this);
+  return;
+}
+
+ (GhidraScript)  
+INFO  REPORT: Save succeeded for processed file: /Panel (HeadlessAnalyzer)  

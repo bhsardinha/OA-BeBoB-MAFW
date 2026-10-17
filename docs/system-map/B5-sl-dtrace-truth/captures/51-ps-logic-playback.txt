@@ -1,0 +1,60 @@
+  PID COMMAND
+    1 /sbin/launchd
+   10 /usr/libexec/kextd
+   11 /usr/sbin/DirectoryService
+   12 /usr/sbin/notifyd
+   13 /usr/sbin/diskarbitrationd
+   14 /usr/libexec/configd
+   15 /usr/sbin/syslogd
+   16 /usr/sbin/distnoted
+   17 /usr/sbin/blued
+   19 /usr/sbin/mDNSResponder -launchd
+   23 /System/Library/CoreServices/coreservicesd
+   26 /usr/sbin/securityd -i
+   32 /usr/sbin/ntpd -c /private/etc/ntp-restrict.conf -n -g -p /var/run/ntpd.pid -f /var/db/ntp.drift
+   33 /usr/sbin/krb5kdc -n
+   37 /System/Library/PrivateFrameworks/MobileDevice.framework/Versions/A/Resources/usbmuxd -launchd
+   38 /sbin/SystemStarter
+   42 /System/Library/CoreServices/RemoteManagement/AppleVNCServer.bundle/Contents/Support/RFBRegisterMDNS
+   44 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Support/mds
+   45 /System/Library/CoreServices/loginwindow.app/Contents/MacOS/loginwindow console
+   46 /usr/sbin/KernelEventAgent
+   48 /usr/libexec/hidd
+   49 /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/Support/fseventsd
+   51 /sbin/dynamic_pager -F /private/var/vm/swapfile
+   58 autofsd
+   62 /System/Library/Extensions/SoundGrid.kext/Contents/MacOS/SGProtocolService runasservice
+   63  
+   64 /Library/StartupItems/M-Audio FireWire Audio Helper/M-Audio FireWire Device Helper start
+   65 /System/Library/Extensions/Line6Audio.kext/Contents/Resources/L6KSettingMgr
+   66 /usr/sbin/qmasterd
+   82 /usr/sbin/nmbd -F
+   86 /System/Library/Frameworks/ApplicationServices.framework/Frameworks/CoreGraphics.framework/Resources/WindowServer -daemon
+   93 /Library/StartupItems/M-Audio Firmware Loader/M-Audio Firmware Loader start
+   97 /Library/StartupItems/MAudioAudiophileUSB/AudiophileCS
+  110 /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/cvmsServ
+  125 /sbin/launchd
+  129 /System/Library/CoreServices/Dock.app/Contents/MacOS/Dock
+  130 /System/Library/CoreServices/SystemUIServer.app/Contents/MacOS/SystemUIServer
+  131 /System/Library/CoreServices/Finder.app/Contents/MacOS/Finder
+  132 /usr/sbin/coreaudiod
+  134 /System/Library/Frameworks/ApplicationServices.framework/Frameworks/ATS.framework/Support/fontd
+  140 /usr/libexec/UserEventAgent -l Aqua
+  143 /System/Library/CoreServices/RemoteManagement/AppleVNCServer.bundle/Contents/MacOS/AppleVNCServer
+  149 /System/Library/CoreServices/AirPort Base Station Agent.app/Contents/MacOS/AirPort Base Station Agent -launchd -allowquit
+  150 /usr/sbin/pboard
+  155 /Applications/iTunes.app/Contents/MacOS/iTunesHelper.app/Contents/MacOS/iTunesHelper -psn_0_36873
+  165 /usr/sbin/smbd -F
+  167 /usr/sbin/smbd -F
+  172 /Applications/M-Audio FireWire.app/Contents/MacOS/Panel -psn_0_61455
+  462 /Applications/System Preferences.app/Contents/MacOS/System Preferences -psn_0_86037
+  530 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdworker MDSImporterWorker com.apple.Spotlight.ImporterWorker.89
+  533 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdworker MDSImporterWorker com.apple.Spotlight.ImporterWorker.501
+  534 /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/cvmsComp_i386 1
+  552 /Applications/Studio One 2.app/Contents/MacOS/studioapp -psn_0_118813
+  556 /System/Library/Frameworks/CoreMIDI.framework/MIDIServer
+  562 /usr/libexec/launchproxy /usr/sbin/sshd -i
+  573 /usr/sbin/sshd -i
+  575 /usr/sbin/sshd -i
+  576 bash -c ioreg -lw0 > /tmp/50-ioreg-logic-playback.txt && ps -ax -o pid,command > /tmp/51-ps-logic-playback.txt && plutil -convert xml1 -o /tmp/52-prefs-logic-playback.xml /Library/Preferences/com.m-audio.device-settings.firewire.plist && wc -l /tmp/5?-*
+  578 ps -ax -o pid,command

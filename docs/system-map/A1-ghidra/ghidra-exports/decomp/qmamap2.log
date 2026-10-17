@@ -1,0 +1,622 @@
+=== m_audio_FWb::BaseChannelGroup::SendAllToDevice @ 0001ee06 ===
+
+/* m_audio_FWb::BaseChannelGroup::SendAllToDevice() */
+
+undefined8 __thiscall m_audio_FWb::BaseChannelGroup::SendAllToDevice(BaseChannelGroup *this)
+
+{
+  (**(code **)(*(long *)this + 0x28))(this,0);
+  return 0;
+}
+
+
+
+=== m_audio_FWb::GroupChannelGroup::SendLevelsToDevice @ 0001ee16 ===
+
+/* m_audio_FWb::GroupChannelGroup::SendLevelsToDevice(int*) */
+
+void m_audio_FWb::GroupChannelGroup::SendLevelsToDevice(int *param_1)
+
+{
+  long *plVar1;
+  
+  plVar1 = *(long **)(param_1 + 0x12);
+  if (plVar1 != (long *)0x0) {
+    (**(code **)(*plVar1 + 0x28))(plVar1,0);
+  }
+  plVar1 = *(long **)(param_1 + 0x14);
+  if (plVar1 != (long *)0x0) {
+    (**(code **)(*plVar1 + 0x28))(plVar1,0);
+  }
+  plVar1 = *(long **)(param_1 + 0x16);
+  if (plVar1 == (long *)0x0) {
+    return;
+  }
+                    /* WARNING: Could not recover jumptable at 0x0001ee63. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(*plVar1 + 0x28))(plVar1,0);
+  return;
+}
+
+
+
+=== m_audio_FWb::BaseChannelGroup::AdjustedLevelForChannel @ 0001ee66 ===
+
+/* m_audio_FWb::BaseChannelGroup::AdjustedLevelForChannel(m_audio_FWb::Channel&, bool, bool, bool)
+    */
+
+int __thiscall
+m_audio_FWb::BaseChannelGroup::AdjustedLevelForChannel
+          (BaseChannelGroup *this,Channel *param_1,bool param_2,bool param_3,bool param_4)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  
+  if ((param_3) || ((param_2 && (*(long *)(param_1 + 0x10) == 0)))) {
+    iVar1 = *(int *)(this + 0x14);
+  }
+  else {
+    if (*(long *)(param_1 + 8) == 0) {
+      iVar1 = *(int *)(param_1 + 4) + *(int *)param_1;
+      iVar3 = *(int *)(this + 0x14);
+      iVar2 = iVar3;
+      if ((iVar3 <= iVar1) && (iVar2 = iVar1, *(int *)(this + 0x18) < iVar1)) {
+        iVar2 = *(int *)(this + 0x18);
+      }
+    }
+    else {
+      iVar3 = *(int *)(this + 0x14);
+      iVar2 = iVar3;
+    }
+    iVar1 = iVar2;
+    if ((param_4) && (iVar1 = iVar2 + -0x14, iVar2 + -0x14 < iVar3)) {
+      iVar1 = iVar3;
+    }
+  }
+  return iVar1;
+}
+
+
+
+=== m_audio_FWb::BaseChannelGroup::SendLevelsToDevice @ 0001ef64 ===
+
+/* m_audio_FWb::BaseChannelGroup::SendLevelsToDevice(int*) */
+
+void m_audio_FWb::BaseChannelGroup::SendLevelsToDevice(int *param_1)
+
+{
+  undefined8 *puVar1;
+  uint uVar2;
+  ushort *puVar3;
+  ulong uVar4;
+  ushort *puVar5;
+  int iVar6;
+  
+  uVar2 = (**(code **)(*(long *)param_1 + 0x10))(param_1);
+  uVar4 = (ulong)uVar2;
+  if (*(long *)(param_1 + 0xe) == 0) {
+    puVar3 = (ushort *)AdjustedLevels((BaseChannelGroup *)param_1);
+    if (puVar3 == (ushort *)0x0) {
+      return;
+    }
+    if (uVar2 != 0) {
+      iVar6 = 1;
+      puVar5 = puVar3;
+      do {
+        puVar1 = *(undefined8 **)(param_1 + 10);
+        if (puVar1 != (undefined8 *)0x0) {
+          (**(code **)*puVar1)(puVar1,iVar6,*(undefined4 *)puVar5);
+        }
+        puVar5 = puVar5 + 2;
+        iVar6 = iVar6 + 1;
+        uVar4 = uVar4 - 1;
+      } while (uVar4 != 0);
+    }
+  }
+  else {
+    puVar3 = (ushort *)AdjustedAndMultipliedLevels((BaseChannelGroup *)param_1);
+    if (puVar3 == (ushort *)0x0) {
+      return;
+    }
+    puVar5 = puVar3;
+    if (uVar2 != 0) {
+      do {
+        *puVar5 = *puVar5 << 8 | *puVar5 >> 8;
+        uVar4 = uVar4 - 1;
+        puVar5 = puVar5 + 1;
+      } while (uVar4 != 0);
+    }
+    uVar2 = (**(code **)(*(long *)param_1 + 0x10))(param_1);
+    (**(code **)**(undefined8 **)(param_1 + 0xe))
+              (*(undefined8 **)(param_1 + 0xe),param_1[0x10],uVar2 >> 1,puVar3);
+  }
+  operator_delete__(puVar3);
+  return;
+}
+
+
+
+=== m_audio_FWb::BaseChannelGroup::AdjustedAndMultipliedLevels @ 0001f246 ===
+
+/* m_audio_FWb::BaseChannelGroup::AdjustedAndMultipliedLevels() */
+
+void * __thiscall m_audio_FWb::BaseChannelGroup::AdjustedAndMultipliedLevels(BaseChannelGroup *this)
+
+{
+  BaseChannelGroup BVar1;
+  BaseChannelGroup BVar2;
+  bool bVar3;
+  short sVar4;
+  uint uVar5;
+  void *pvVar6;
+  Channel *pCVar7;
+  ulong uVar8;
+  BaseChannelGroup *local_40;
+  
+  local_40 = *(BaseChannelGroup **)(this + 8);
+  if (local_40 == (BaseChannelGroup *)0x0) {
+    *(BaseChannelGroup **)(this + 8) = this;
+    local_40 = this;
+  }
+  uVar5 = (**(code **)(*(long *)this + 0x10))(this);
+  pvVar6 = operator_new__((ulong)uVar5 * 2);
+  BVar1 = this[0x10];
+  BVar2 = this[0x11];
+  bVar3 = (bool)Solo(local_40);
+  if ((pvVar6 != (void *)0x0) && (uVar5 != 0)) {
+    uVar8 = 0;
+    do {
+      pCVar7 = (Channel *)(**(code **)(*(long *)this + 0x18))(this,uVar8 & 0xffffffff);
+      sVar4 = AdjustedLevelForChannel(this,pCVar7,bVar3,(bool)BVar2,(bool)BVar1);
+      *(short *)((long)pvVar6 + uVar8 * 2) = sVar4 * (short)*(undefined4 *)(this + 0x44);
+      uVar8 = uVar8 + 1;
+    } while (uVar5 != uVar8);
+  }
+  return pvVar6;
+}
+
+
+
+=== m_audio_FWb::BaseChannelGroup::AdjustedLevels @ 0001f300 ===
+
+/* m_audio_FWb::BaseChannelGroup::AdjustedLevels() */
+
+void * __thiscall m_audio_FWb::BaseChannelGroup::AdjustedLevels(BaseChannelGroup *this)
+
+{
+  BaseChannelGroup BVar1;
+  BaseChannelGroup BVar2;
+  bool bVar3;
+  uint uVar4;
+  undefined4 uVar5;
+  void *pvVar6;
+  Channel *pCVar7;
+  ulong uVar8;
+  BaseChannelGroup *local_40;
+  
+  local_40 = *(BaseChannelGroup **)(this + 8);
+  if (local_40 == (BaseChannelGroup *)0x0) {
+    *(BaseChannelGroup **)(this + 8) = this;
+    local_40 = this;
+  }
+  uVar4 = (**(code **)(*(long *)this + 0x10))(this);
+  pvVar6 = operator_new__((ulong)uVar4 * 4);
+  BVar1 = this[0x10];
+  BVar2 = this[0x11];
+  bVar3 = (bool)Solo(local_40);
+  if ((pvVar6 != (void *)0x0) && (uVar4 != 0)) {
+    uVar8 = 0;
+    do {
+      pCVar7 = (Channel *)(**(code **)(*(long *)this + 0x18))(this,uVar8 & 0xffffffff);
+      uVar5 = AdjustedLevelForChannel(this,pCVar7,bVar3,(bool)BVar2,(bool)BVar1);
+      *(undefined4 *)((long)pvVar6 + uVar8 * 4) = uVar5;
+      uVar8 = uVar8 + 1;
+    } while (uVar4 != uVar8);
+  }
+  return pvVar6;
+}
+
+
+
+=== m_audio_b_FWAVCAudioDevice::CustomMixerWriteQuads @ 00022c7a ===
+
+/* m_audio_b_FWAVCAudioDevice::CustomMixerWriteQuads(unsigned int, unsigned int, void*) */
+
+int __thiscall
+m_audio_b_FWAVCAudioDevice::CustomMixerWriteQuads
+          (m_audio_b_FWAVCAudioDevice *this,uint param_1,uint param_2,void *param_3)
+
+{
+  int iVar1;
+  void *pvVar2;
+  long *plVar3;
+  IOBufferMemoryDescriptor *pIVar4;
+  IOBufferMemoryDescriptor *local_40;
+  undefined2 local_38;
+  undefined2 local_36;
+  int local_34;
+  
+  local_40 = (IOBufferMemoryDescriptor *)0x0;
+  if (*(long *)(this + 0xe0) == 0) {
+    iVar1 = 0;
+    pIVar4 = (IOBufferMemoryDescriptor *)0x0;
+  }
+  else {
+    iVar1 = AllocateCustomMixerWriteBuffer(this,param_2,&local_40);
+    pIVar4 = local_40;
+    if (iVar1 == 0) {
+      pvVar2 = (void *)(**(code **)(*(long *)local_40 + 0x2e0))(local_40);
+      _memcpy(pvVar2,param_3,(ulong)param_2 << 2);
+      local_38 = 0;
+      local_36 = 0xffc7;
+      local_34 = param_1 + 0x700000;
+      plVar3 = (long *)(**(code **)(**(long **)(this + 0xe0) + 0x890))
+                                 (*(long **)(this + 0xe0),&local_38,pIVar4,0,0,0);
+      if (plVar3 == (long *)0x0) {
+        iVar1 = -0x1ffffd42;
+      }
+      else {
+        iVar1 = (**(code **)(*plVar3 + 0x140))(plVar3,0);
+        (**(code **)(*plVar3 + 0x28))(plVar3);
+      }
+    }
+  }
+  ReleaseCustomMixerWriteBuffer(this,pIVar4);
+  return iVar1;
+}
+
+
+
+=== m_audio_FWb::BaseChannelGroup::SetAllLevels @ 000215b0 ===
+
+/* m_audio_FWb::BaseChannelGroup::SetAllLevels(int) */
+
+void m_audio_FWb::BaseChannelGroup::SetAllLevels(int param_1)
+
+{
+  int iVar1;
+  undefined4 *puVar2;
+  undefined4 in_register_0000003c;
+  long *plVar3;
+  int iVar4;
+  
+  plVar3 = (long *)CONCAT44(in_register_0000003c,param_1);
+  iVar1 = (**(code **)(*plVar3 + 0x10))(plVar3);
+  if (iVar1 != 0) {
+    iVar4 = 0;
+    do {
+      puVar2 = (undefined4 *)(**(code **)(*plVar3 + 0x18))(plVar3,iVar4);
+      *puVar2 = 0;
+      iVar4 = iVar4 + 1;
+    } while (iVar1 != iVar4);
+  }
+  return;
+}
+
+
+
+=== m_audio_FWb::BaseChannelGroup::SetAllBalance @ 000215f8 ===
+
+/* m_audio_FWb::BaseChannelGroup::SetAllBalance(int) */
+
+void m_audio_FWb::BaseChannelGroup::SetAllBalance(int param_1)
+
+{
+  int iVar1;
+  long lVar2;
+  undefined4 in_register_0000003c;
+  long *plVar3;
+  int iVar4;
+  
+  plVar3 = (long *)CONCAT44(in_register_0000003c,param_1);
+  iVar1 = (**(code **)(*plVar3 + 0x10))(plVar3);
+  if (iVar1 != 0) {
+    iVar4 = 0;
+    do {
+      lVar2 = (**(code **)(*plVar3 + 0x18))(plVar3,iVar4);
+      *(undefined4 *)(lVar2 + 4) = 0;
+      iVar4 = iVar4 + 1;
+    } while (iVar1 != iVar4);
+  }
+  return;
+}
+
+
+
+=== m_audio_FWb::BaseChannelGroup::SetAllMute @ 00021642 ===
+
+/* m_audio_FWb::BaseChannelGroup::SetAllMute(bool) */
+
+void m_audio_FWb::BaseChannelGroup::SetAllMute(bool param_1)
+
+{
+  int iVar1;
+  long lVar2;
+  undefined7 in_register_00000039;
+  long *plVar3;
+  int iVar4;
+  
+  plVar3 = (long *)CONCAT71(in_register_00000039,param_1);
+  iVar1 = (**(code **)(*plVar3 + 0x10))(plVar3);
+  if (iVar1 != 0) {
+    iVar4 = 0;
+    do {
+      lVar2 = (**(code **)(*plVar3 + 0x18))(plVar3,iVar4);
+      *(undefined8 *)(lVar2 + 8) = 0;
+      iVar4 = iVar4 + 1;
+    } while (iVar1 != iVar4);
+  }
+  return;
+}
+
+
+
+=== m_audio_FWb::BaseChannelGroup::SetAllSolo @ 0002168c ===
+
+/* m_audio_FWb::BaseChannelGroup::SetAllSolo(bool) */
+
+void m_audio_FWb::BaseChannelGroup::SetAllSolo(bool param_1)
+
+{
+  int iVar1;
+  long lVar2;
+  undefined7 in_register_00000039;
+  long *plVar3;
+  int iVar4;
+  
+  plVar3 = (long *)CONCAT71(in_register_00000039,param_1);
+  iVar1 = (**(code **)(*plVar3 + 0x10))(plVar3);
+  if (iVar1 != 0) {
+    iVar4 = 0;
+    do {
+      lVar2 = (**(code **)(*plVar3 + 0x18))(plVar3,iVar4);
+      *(undefined8 *)(lVar2 + 0x10) = 0;
+      iVar4 = iVar4 + 1;
+    } while (iVar1 != iVar4);
+  }
+  return;
+}
+
+
+
+=== m_audio_FWb::BaseChannelGroup::SetAllLinked @ 000216d6 ===
+
+/* m_audio_FWb::BaseChannelGroup::SetAllLinked(bool) */
+
+void m_audio_FWb::BaseChannelGroup::SetAllLinked(bool param_1)
+
+{
+  int iVar1;
+  long lVar2;
+  undefined7 in_register_00000039;
+  long *plVar3;
+  int iVar4;
+  
+  plVar3 = (long *)CONCAT71(in_register_00000039,param_1);
+  iVar1 = (**(code **)(*plVar3 + 0x10))(plVar3);
+  if (iVar1 != 0) {
+    iVar4 = 0;
+    do {
+      lVar2 = (**(code **)(*plVar3 + 0x18))(plVar3,iVar4);
+      *(undefined8 *)(lVar2 + 0x18) = 1;
+      iVar4 = iVar4 + 1;
+    } while (iVar1 != iVar4);
+  }
+  return;
+}
+
+
+
+=== m_audio_b_FWBaseArrayProp::Fill @ 00007da8 ===
+
+/* m_audio_b_FWBaseArrayProp::Fill(unsigned int) */
+
+void __thiscall m_audio_b_FWBaseArrayProp::Fill(m_audio_b_FWBaseArrayProp *this,uint param_1)
+
+{
+  uint uVar1;
+  
+  if (*(int *)(this + 0x2c) != 0) {
+    uVar1 = 0;
+    do {
+      *(uint *)(*(long *)(this + 0x50) + (ulong)uVar1 * 4) = param_1;
+      uVar1 = uVar1 + 1;
+    } while (uVar1 < *(uint *)(this + 0x2c));
+  }
+  return;
+}
+
+
+
+=== m_audio_b_FWBaseArrayProp::SendAllToDevice @ 0000803c ===
+
+/* m_audio_b_FWBaseArrayProp::SendAllToDevice() */
+
+undefined8 __thiscall m_audio_b_FWBaseArrayProp::SendAllToDevice(m_audio_b_FWBaseArrayProp *this)
+
+{
+  uint uVar1;
+  undefined4 uVar2;
+  uint uVar3;
+  
+  if ((*(long *)(this + 0x38) != 0) && (*(int *)(this + 0x2c) != 0)) {
+    uVar3 = 0;
+    do {
+      uVar2 = Get(this,uVar3);
+      uVar1 = uVar3 + 2;
+      uVar3 = uVar3 + 1;
+      (**(code **)**(undefined8 **)(this + 0x38))(*(undefined8 **)(this + 0x38),uVar3,uVar2);
+    } while (uVar1 <= *(uint *)(this + 0x2c));
+  }
+  return 0;
+}
+
+
+
+=== m_audio_b_FWBaseArrayProp::Set @ 00008090 ===
+
+/* m_audio_b_FWBaseArrayProp::Set(unsigned int, unsigned int) */
+
+void __thiscall
+m_audio_b_FWBaseArrayProp::Set(m_audio_b_FWBaseArrayProp *this,uint param_1,uint param_2)
+
+{
+  CheckInvariant(this,param_1);
+  if (param_1 < *(uint *)(this + 0x2c)) {
+    *(uint *)(*(long *)(this + 0x50) + (ulong)param_1 * 4) = param_2;
+  }
+  return;
+}
+
+
+
+=== m_audio_b_FWBaseArrayProp::OSArrayToSeriatimValues @ 000080cc ===
+
+/* m_audio_b_FWBaseArrayProp::OSArrayToSeriatimValues(OSObject*, unsigned int) */
+
+undefined8 __thiscall
+m_audio_b_FWBaseArrayProp::OSArrayToSeriatimValues
+          (m_audio_b_FWBaseArrayProp *this,OSObject *param_1,uint param_2)
+
+{
+  OSMetaClass *pOVar1;
+  code *pcVar2;
+  uint uVar3;
+  undefined4 uVar4;
+  long *plVar5;
+  OSMetaClassBase *pOVar6;
+  long lVar7;
+  
+  plVar5 = (long *)OSMetaClassBase::safeMetaCast
+                             ((OSMetaClassBase *)param_1,*(OSMetaClass **)PTR_metaClass_00030078);
+  uVar3 = (**(code **)(*plVar5 + 0x130))(plVar5);
+  if (uVar3 < param_2) {
+    param_2 = uVar3;
+  }
+  pOVar1 = *(OSMetaClass **)PTR_metaClass_00030080;
+  uVar3 = 0;
+  while( true ) {
+    if (param_2 <= uVar3) {
+      return 0;
+    }
+    pOVar6 = (OSMetaClassBase *)(**(code **)(*plVar5 + 0x1e8))(plVar5,uVar3);
+    if ((pOVar6 == (OSMetaClassBase *)0x0) ||
+       (lVar7 = OSMetaClassBase::safeMetaCast(pOVar6,pOVar1), lVar7 == 0)) break;
+    pcVar2 = *(code **)(*(long *)this + 0x160);
+    uVar4 = (**(code **)(*(long *)pOVar6 + 0x148))(pOVar6);
+    (*pcVar2)(this,uVar3,uVar4);
+    uVar3 = uVar3 + 1;
+  }
+  return 0xe00002c2;
+}
+
+
+
+=== m_audio_b_FWBaseArrayProp::SeriatimValuesToOSArray @ 0000824e ===
+
+/* m_audio_b_FWBaseArrayProp::SeriatimValuesToOSArray(unsigned int, OSObject*&) */
+
+undefined8 __thiscall
+m_audio_b_FWBaseArrayProp::SeriatimValuesToOSArray
+          (m_audio_b_FWBaseArrayProp *this,uint param_1,OSObject **param_2)
+
+{
+  uint uVar1;
+  OSObject *pOVar2;
+  undefined8 uVar3;
+  long *plVar4;
+  uint uVar5;
+  
+  pOVar2 = (OSObject *)OSArray::withCapacity(param_1);
+  if (pOVar2 == (OSObject *)0x0) {
+LAB_00008277:
+    uVar3 = 0xe00002bd;
+  }
+  else {
+    for (uVar5 = 0; uVar5 < param_1; uVar5 = uVar5 + 1) {
+      uVar1 = (**(code **)(*(long *)this + 0x158))(this,uVar5);
+      plVar4 = (long *)OSNumber::withNumber((ulong)uVar1,0x20);
+      if (plVar4 == (long *)0x0) {
+        (**(code **)(*(long *)pOVar2 + 0x28))(pOVar2);
+        pOVar2 = (OSObject *)0x0;
+        goto LAB_00008277;
+      }
+      (**(code **)(*(long *)pOVar2 + 0x1b8))(pOVar2,plVar4);
+      (**(code **)(*plVar4 + 0x28))(plVar4);
+    }
+    uVar3 = 0;
+  }
+  *param_2 = pOVar2;
+  return uVar3;
+}
+
+
+
+=== m_audio_b_FWBaseArrayProp::CallSetter @ 00008188 ===
+
+/* m_audio_b_FWBaseArrayProp::CallSetter(OSSymbol const*, OSObject*) */
+
+int __thiscall
+m_audio_b_FWBaseArrayProp::CallSetter
+          (m_audio_b_FWBaseArrayProp *this,OSSymbol *param_1,OSObject *param_2)
+
+{
+  int iVar1;
+  
+  iVar1 = OSArrayToSeriatimValues(this,param_2,*(uint *)(this + 0x2c));
+  if ((iVar1 == 0) && (*(undefined8 **)(this + 0x48) != (undefined8 *)0x0)) {
+    (**(code **)**(undefined8 **)(this + 0x48))();
+  }
+  return iVar1;
+}
+
+
+
+=== m_audio_b_FWBaseProp::CallSetter @ 00008b36 ===
+
+/* m_audio_b_FWBaseProp::CallSetter(OSSymbol const*, OSObject*) */
+
+undefined8 m_audio_b_FWBaseProp::CallSetter(OSSymbol *param_1,OSObject *param_2)
+
+{
+  return 0xe00002cf;
+}
+
+
+
+=== m_audio_b_FWChannelGroupProperty::Set32BitValueFromArrayElement @ 00009310 ===
+
+/* m_audio_b_FWChannelGroupProperty::Set32BitValueFromArrayElement(unsigned int, unsigned int) */
+
+void __thiscall
+m_audio_b_FWChannelGroupProperty::Set32BitValueFromArrayElement
+          (m_audio_b_FWChannelGroupProperty *this,uint param_1,uint param_2)
+
+{
+  long lVar1;
+  
+  lVar1 = (**(code **)(**(long **)(this + 0x60) + 0x18))();
+  *(int *)(lVar1 + (ulong)*(uint *)(this + 0x68)) = (int)(short)param_2;
+  return;
+}
+
+
+
+=== m_audio_b_FWChannelGroupProperty::Get32BitValueForArrayElement @ 000092ec ===
+
+/* m_audio_b_FWChannelGroupProperty::Get32BitValueForArrayElement(unsigned int) */
+
+undefined4 m_audio_b_FWChannelGroupProperty::Get32BitValueForArrayElement(uint param_1)
+
+{
+  long lVar1;
+  undefined4 in_register_0000003c;
+  
+  lVar1 = (**(code **)(**(long **)(CONCAT44(in_register_0000003c,param_1) + 0x60) + 0x18))();
+  return *(undefined4 *)(lVar1 + (ulong)*(uint *)(CONCAT44(in_register_0000003c,param_1) + 0x68));
+}
+
+
+

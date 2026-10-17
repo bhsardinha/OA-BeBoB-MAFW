@@ -1,0 +1,120 @@
+# Capture 73 — SL Mac Pro 10.6.8, driver v1.9: interface power cycle (user switched the FW1814 off, waited, switched it on), 2026-10-14. NOT a cable pull.
+# Probes: fbt::IOSleep:entry (ms != 14) and fbt::IOLog:entry (format string, unexpanded). Timestamps = wall clock seconds (the leading 1792021xxx.yyy; T0 = 1792021700 below).
+# Order inside a second is not strict (dtrace per-CPU buffers); sorted copy follows the raw dump.
+## Annotated timeline (T = seconds after 1792021700)
+ +08.282  bus reset started            (interface switched off; repeated +10.383)
+ +30.133  device found / metanub GUID  (interface switched on -> bootloader mode)
+ +30.139  "Bootloader active: starting firmware" (kext FirmwareStart path)
+ +30.139..+30.309  ~50 x IOSleep(5) in two interleaved loops (command-completion polling, ~170 ms)
+ +31.792  bus reset started            (firmware boots, device re-enumerates)
+ +33.405  device found again; +33.412 "Firmware active: registering metanub"
+ +33.423  IOSleep(877)                 (computed remainder)
+ +33.427  bus reset started (x2); +33.528 bus reset completed
+ +34.300  IOSleep(127); +34.430 100; +34.531 500; +35.037 500     (stream-start chain, as in capture 72)
+ +35.528  IOSleep(2500); +35.541 IOSleep(1000)
+ +36.564 / +36.865  IOSleep(300) x2   (SetClockSourceInternal); +37.165 IOSleep(2500) (SetBlankSlateClockSource)
+ +38.028  "Reregister: device node vanished"
+ +39.665  "Trying to resend mixer settings too often (within %d second of previous resend)" + IOSleep(1000)
+ +40.672, +40.972, +41.769, +42.069  IOSleep(300) x4  (two SetClockSourceInternal)
+ +41.508  "Firnware active and we already started matching."   (sic)
+ +42.384, .485, .591 IOSleep(100) x3; +42.692 500; +43.195 500; +43.695 100; +43.809 1000   (same chain as a rate change)
+ End of activity ~ +44.8 s: about 14.7 s from power-on to a quiet kext.
+## After: 1 com_m_audio_FW1814Device; FWUserClient creators = helper pid 559 and Panel pid 417 only (11 stale clients present before the cycle are gone); kextstat now also lists com.m-audio.driver.firewire.dice 2.0.1 (id 122).
+## Raw dump (as printed)
+1792021708.282 IOLOG M-FW: FireWire bus reset started%s 
+1792021708.282 IOLOG M-FW: FireWire bus reset started%c
+1792021710.383 IOLOG M-FW: FireWire bus reset started%s 
+1792021710.383 IOLOG M-FW: FireWire bus reset started%c
+1792021730.139 IOLOG M-FW: Bootloader active: starting firmware%c
+1792021730.133 IOLOG M-FW: M-Audio FireWire device found%c
+1792021730.133 IOLOG M-FW: metanub 0x%p GUID:%s
+1792021730.139 SLEEP ms=5
+1792021730.156 SLEEP ms=5
+1792021730.159 SLEEP ms=5
+1792021730.166 SLEEP ms=5
+1792021730.169 SLEEP ms=5
+1792021730.176 SLEEP ms=5
+1792021730.179 SLEEP ms=5
+1792021730.186 SLEEP ms=5
+1792021730.189 SLEEP ms=5
+1792021730.196 SLEEP ms=5
+1792021730.199 SLEEP ms=5
+1792021730.206 SLEEP ms=5
+1792021730.209 SLEEP ms=5
+1792021730.216 SLEEP ms=5
+1792021730.219 SLEEP ms=5
+1792021730.226 SLEEP ms=5
+1792021730.229 SLEEP ms=5
+1792021730.236 SLEEP ms=5
+1792021730.239 SLEEP ms=5
+1792021730.246 SLEEP ms=5
+1792021730.249 SLEEP ms=5
+1792021730.256 SLEEP ms=5
+1792021730.259 SLEEP ms=5
+1792021730.269 SLEEP ms=5
+1792021730.274 SLEEP ms=5
+1792021730.144 SLEEP ms=5
+1792021730.149 SLEEP ms=5
+1792021730.154 SLEEP ms=5
+1792021730.161 SLEEP ms=5
+1792021730.164 SLEEP ms=5
+1792021730.171 SLEEP ms=5
+1792021730.174 SLEEP ms=5
+1792021730.181 SLEEP ms=5
+1792021730.184 SLEEP ms=5
+1792021730.191 SLEEP ms=5
+1792021730.194 SLEEP ms=5
+1792021730.201 SLEEP ms=5
+1792021730.204 SLEEP ms=5
+1792021730.211 SLEEP ms=5
+1792021730.214 SLEEP ms=5
+1792021730.221 SLEEP ms=5
+1792021730.224 SLEEP ms=5
+1792021730.231 SLEEP ms=5
+1792021730.234 SLEEP ms=5
+1792021730.241 SLEEP ms=5
+1792021730.244 SLEEP ms=5
+1792021730.251 SLEEP ms=5
+1792021730.254 SLEEP ms=5
+1792021730.261 SLEEP ms=5
+1792021730.264 SLEEP ms=5
+1792021730.279 SLEEP ms=5
+1792021730.284 SLEEP ms=5
+1792021730.289 SLEEP ms=5
+1792021730.299 SLEEP ms=5
+1792021730.294 SLEEP ms=5
+1792021730.304 SLEEP ms=5
+1792021730.309 SLEEP ms=5
+1792021731.792 IOLOG M-FW: FireWire bus reset started%s 
+1792021733.405 IOLOG M-FW: M-Audio FireWire device found%c
+1792021733.406 IOLOG M-FW: metanub 0x%p GUID:%s
+1792021733.412 IOLOG M-FW: Firmware active: registering metanub%c
+1792021733.423 SLEEP ms=877
+1792021733.427 IOLOG M-FW: FireWire bus reset started%s 
+1792021733.427 IOLOG M-FW: FireWire bus reset started%s 
+1792021733.528 IOLOG M-FW: FireWire bus reset completed%s
+1792021733.300 IOLOG M-FW: FireWire bus reset started%s 
+1792021734.300 SLEEP ms=127
+1792021734.531 SLEEP ms=500
+1792021735.037 SLEEP ms=500
+1792021734.430 SLEEP ms=100
+1792021735.528 SLEEP ms=2500
+1792021735.541 SLEEP ms=1000
+1792021736.564 SLEEP ms=300
+1792021737.165 SLEEP ms=2500
+1792021736.865 SLEEP ms=300
+1792021738.028 IOLOG M-FW: Reregister: device node vanished%c
+1792021739.665 IOLOG M-FW: Trying to resend mixer settings too often (within %d second of previous resend)
+1792021739.665 SLEEP ms=1000
+1792021740.672 SLEEP ms=300
+1792021740.972 SLEEP ms=300
+1792021741.769 SLEEP ms=300
+1792021742.069 SLEEP ms=300
+1792021741.508 IOLOG M-FW: Firnware active and we already started matching.%c
+1792021742.384 SLEEP ms=100
+1792021742.485 SLEEP ms=100
+1792021742.591 SLEEP ms=100
+1792021742.692 SLEEP ms=500
+1792021743.195 SLEEP ms=500
+1792021743.695 SLEEP ms=100
+1792021743.809 SLEEP ms=1000

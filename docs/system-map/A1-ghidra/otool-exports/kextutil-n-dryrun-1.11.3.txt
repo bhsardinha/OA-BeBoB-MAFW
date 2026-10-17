@@ -1,0 +1,32 @@
+# kextutil -n -t -v 6 dry run — build PC (10.13.6, SIP disabled), 2026-10-14. Kext = _extracted/kext/M-AudioFireWireBeBoB.kext (bundle 1.11.3, sha256 5532c6e8…ceb17), staged in /tmp/maudio-stage (root:wheel), NOT in /Library/Extensions. -n = do not load. After the run: kextstat shows 0 M-Audio kexts; /Library/Extensions has 0 M-Audio entries.
+# command: cd /tmp/maudio-stage && sudo kextutil -n -t -v 6 M-AudioFireWireBeBoB.kext
+Kext user-space log filter changed from 0xff2 to 0xfff.
+Kext kernel-space log filter changed from 0xff2 to 0xfff.
+Kext library architecture set to x86_64.
+Can't stat /AppleInternal - No such file or directory.
+Defaulting to kernel file '/System/Library/Kernels/kernel'
+Kext library recording diagnostics for: validation authentication dependencies warnings.
+Reading loaded kext info from kernel.
+(kernel) User-space log flags changed from 0x0 to 0xfff.
+(kernel) Received 'Get Loaded Kext Info' request from user space.
+(kernel) Returning loaded kext info.
+Loaded kext info:
+{
+}
+
+Reading loaded kext info from kernel.
+(kernel) User-space log flags changed from 0x0 to 0xfff.
+(kernel) Received 'Get Loaded Kext Info' request from user space.
+(kernel) Returning loaded kext info.
+Loaded kext info:
+{
+}
+
+/private/tmp/maudio-stage/M-AudioFireWireBeBoB.kext does not appear in strict exception list for architecture: x86_64
+Kext with invalid signatured (-67007) allowed: <OSKext 0x7f8729c17040 [0x7fff9a89ec30]> { URL = "file:///private/tmp/maudio-stage/M-AudioFireWireBeBoB.kext/", ID = "com.m-audio.driver.firewire" }
+Code Signing Failure: code signature is invalid
+/private/tmp/maudio-stage/M-AudioFireWireBeBoB.kext appears to be loadable (including linkage for on-disk libraries).
+EXIT=0
+--loaded after:
+0
+0

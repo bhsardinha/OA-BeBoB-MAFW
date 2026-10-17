@@ -1,0 +1,191 @@
+address	size	name	signature	calls_count
+000021b0	61	entry	undefined entry()	2
+000021ee	434	_main	undefined _main()	3
+000023a0	418	+[MAFireWireDeviceInstance_deviceInstanceForService:]	undefined +[MAFireWireDeviceInstance_deviceInstanceForService:]()	6
+00002542	127	CanonicalGUIDForDevice	undefined CanonicalGUIDForDevice(uint param_1)	2
+000025c1	44	-[MAFireWireDeviceInstance_breakRetainCycles]	undefined -[MAFireWireDeviceInstance_breakRetainCycles]()	1
+000025ed	231	-[MAFireWireDeviceInstance_dealloc]	undefined -[MAFireWireDeviceInstance_dealloc]()	4
+000026d4	11	-[MAFireWireDeviceInstance_IOKitService]	undefined -[MAFireWireDeviceInstance_IOKitService]()	0
+000026df	285	-[MAFireWireDeviceInstance_receivedPropertyChangeMessage:]	undefined -[MAFireWireDeviceInstance_receivedPropertyChangeMessage:]()	3
+000027fc	45	-[MAFireWireDeviceInstance_port:sentAsyncMessage:ofSize:]	undefined -[MAFireWireDeviceInstance_port:sentAsyncMessage:ofSize:]()	1
+00002829	105	-[MAFireWireDeviceInstance_defaultsForUser:]	undefined -[MAFireWireDeviceInstance_defaultsForUser:]()	1
+00002892	120	-[MAFireWireDeviceInstance_commitSettings:]	undefined -[MAFireWireDeviceInstance_commitSettings:]()	4
+0000290a	500	-[MAFireWireDeviceInstance_configureDCLLatency]	undefined -[MAFireWireDeviceInstance_configureDCLLatency]()	7
+00002afe	277	-[MAFireWireDeviceInstance_loadPrefsForUser:]	undefined -[MAFireWireDeviceInstance_loadPrefsForUser:]()	4
+00002c13	42	-[MAFireWireDeviceInstance_service:changedProperties:]	undefined -[MAFireWireDeviceInstance_service:changedProperties:]()	1
+00002c3d	303	-[MAFireWireLoader_init]	undefined -[MAFireWireLoader_init]()	3
+00002d6c	59	-[MAFireWireLoader_unloadDriverOnce]	undefined -[MAFireWireLoader_unloadDriverOnce]()	2
+00002da7	255	-[MAFireWireLoader_unloadTheDriver]	undefined -[MAFireWireLoader_unloadTheDriver]()	2
+00002ea6	92	-[MAFireWireLoader_dealloc]	undefined -[MAFireWireLoader_dealloc]()	2
+00002f02	104	-[MAFireWireLoader_statusAppPath]	undefined -[MAFireWireLoader_statusAppPath]()	1
+00002f6a	259	-[MAFireWireLoader_updateViewForDevice:]	undefined -[MAFireWireLoader_updateViewForDevice:]()	2
+0000306d	126	-[MAFireWireLoader_quitView]	undefined -[MAFireWireLoader_quitView]()	2
+000030eb	1110	-[MAFireWireLoader_deviceMatched:]	undefined -[MAFireWireLoader_deviceMatched:]()	4
+00003541	148	-[MAFireWireLoader_deviceForService:]	undefined -[MAFireWireLoader_deviceForService:]()	1
+000035d5	143	-[MAFireWireLoader_driverInstanceMatched:]	undefined -[MAFireWireLoader_driverInstanceMatched:]()	2
+00003664	102	-[MAFireWireLoader_driverInstanceTerminated:]	undefined -[MAFireWireLoader_driverInstanceTerminated:]()	2
+000036ca	12	-[MAFireWireLoader_systemWillSleep]	undefined -[MAFireWireLoader_systemWillSleep]()	0
+000036d6	290	-[MAFireWireLoader_systemWokeUp]	undefined -[MAFireWireLoader_systemWokeUp]()	2
+000037f8	71	-[MAFireWireLoader_userDidLogIn:withUID:withGID:]	undefined -[MAFireWireLoader_userDidLogIn:withUID:withGID:]()	1
+0000383f	54	-[MAFireWireLoader_userDidLogOut:withUID:withGID:]	undefined -[MAFireWireLoader_userDidLogOut:withUID:withGID:]()	1
+00003875	388	_InstallLoginLogoutNotifiers	undefined _InstallLoginLogoutNotifiers()	9
+000039f9	95	_LoginLogoutProxyCallBackFunction	undefined _LoginLogoutProxyCallBackFunction()	2
+00003a58	111	-[MACommunicator_serve]	undefined -[MACommunicator_serve]()	1
+00003ac7	203	+[MACommunicator_serve:forName:]	undefined +[MACommunicator_serve:forName:]()	2
+00003b92	62	-[MACommunicator_runServer:]	undefined -[MACommunicator_runServer:]()	1
+00003bd0	12	-[MACommunicator_stopServer]	undefined -[MACommunicator_stopServer]()	0
+00003bdc	108	+[MACommunicator_getServer:]	undefined +[MACommunicator_getServer:]()	2
+00003c48	66	-[MAFireWireCommunicator_init]	undefined -[MAFireWireCommunicator_init]()	2
+00003c8a	78	-[MAFireWireCommunicator_start]	undefined -[MAFireWireCommunicator_start]()	2
+00003cd8	56	-[MAFireWireCommunicator_stop]	undefined -[MAFireWireCommunicator_stop]()	2
+00003d10	60	+[NSException(Midiman)_initializeStackTraces]	undefined +[NSException(Midiman)_initializeStackTraces]()	1
+00003d4c	520	-[NSException(Midiman)_printStackTrace]	undefined -[NSException(Midiman)_printStackTrace]()	7
+00003f54	83	+[MAIOKitService_deviceFromIOKitDevice:connection:]	undefined +[MAIOKitService_deviceFromIOKitDevice:connection:]()	1
+00003fa7	65	-[MAIOKitService_initWithService:]	undefined -[MAIOKitService_initWithService:]()	2
+00003fe8	74	+[MAIOKitService_deviceWithService:]	undefined +[MAIOKitService_deviceWithService:]()	1
+00004032	52	-[MAIOKitService_openConnection]	undefined -[MAIOKitService_openConnection]()	1
+00004066	32	-[MAIOKitService_closeConnection]	undefined -[MAIOKitService_closeConnection]()	1
+00004086	11	-[MAIOKitService_service]	undefined -[MAIOKitService_service]()	0
+00004091	11	-[MAIOKitService_connection]	undefined -[MAIOKitService_connection]()	0
+0000409c	178	-[MAIOKitService_parent]	undefined -[MAIOKitService_parent]()	3
+0000414e	77	-[MAIOKitService_dealloc]	undefined -[MAIOKitService_dealloc]()	3
+0000419b	11	-[MAServiceNotification_type]	undefined -[MAServiceNotification_type]()	0
+000041a6	46	-[MAServiceNotification_dispatch:]	undefined -[MAServiceNotification_dispatch:]()	1
+000041d4	102	+[MAServiceNotification_notificationWithDictionary:port:type:target:selector:]	undefined +[MAServiceNotification_notificationWithDictionary:port:type:target:selector:]()	1
+0000423a	264	-[MAServiceNotification_initWithDictionary:port:type:target:selector:]	undefined -[MAServiceNotification_initWithDictionary:port:type:target:selector:]()	5
+00004342	302	ServiceDispatchCallback	undefined ServiceDispatchCallback(void * param_1, uint param_2)	9
+00004470	83	-[MAServiceNotification_dealloc]	undefined -[MAServiceNotification_dealloc]()	3
+000044c3	60	+[MAServiceNotification_observeServiceTerminated:target:selector:]	undefined +[MAServiceNotification_observeServiceTerminated:target:selector:]()	1
+000044ff	60	+[MAServiceNotification_observeServiceMatched:target:selector:]	undefined +[MAServiceNotification_observeServiceMatched:target:selector:]()	1
+0000453b	60	+[MAServiceNotification_observeServiceFirstMatched:target:selector:]	undefined +[MAServiceNotification_observeServiceFirstMatched:target:selector:]()	1
+00004577	34	+[MAServiceNotification_stopObserving]	undefined +[MAServiceNotification_stopObserving]()	1
+00004599	696	+[MAServiceNotification_observe:dictionary:target:selector:]	undefined +[MAServiceNotification_observe:dictionary:target:selector:]()	5
+00004851	256	+[MAServiceNotification_perform:target:forEveryServiceMatching:]	undefined +[MAServiceNotification_perform:target:forEveryServiceMatching:]()	5
+00004951	674	-[MAAsyncNotification_initWithType:connection:runLoop:target:selector:]	undefined -[MAAsyncNotification_initWithType:connection:runLoop:target:selector:]()	10
+00004bf3	241	StaticHandleMachMessage	undefined StaticHandleMachMessage(__CFMachPort * param_1, void * param_2, long param_3, void * param_4)	7
+00004ce4	102	+[MAAsyncNotification_userClientNotificationOfType:connection:runLoop:target:selector:]	undefined +[MAAsyncNotification_userClientNotificationOfType:connection:runLoop:target:selector:]()	1
+00004d4a	69	+[MAAsyncNotification_userClientNotificationOfType:connection:target:selector:]	undefined +[MAAsyncNotification_userClientNotificationOfType:connection:target:selector:]()	2
+00004d8f	150	-[MAAsyncNotification_dealloc]	undefined -[MAAsyncNotification_dealloc]()	6
+00004e25	11	-[MAAsyncNotification_target]	undefined -[MAAsyncNotification_target]()	0
+00004e30	11	-[MAAsyncNotification_action]	undefined -[MAAsyncNotification_action]()	0
+00004e3c	240	+[MAConsoleUser_startObservingLogins:runLoop:]	undefined +[MAConsoleUser_startObservingLogins:runLoop:]()	6
+00004f2c	263	LoginFunction	undefined LoginFunction(__CFString * param_1, uint param_2, uint param_3)	2
+00005033	249	LogoutFunction	undefined LogoutFunction(void)	1
+0000512c	48	+[MAConsoleUser_startObservingLogins:]	undefined +[MAConsoleUser_startObservingLogins:]()	2
+0000515c	41	+[MAConsoleUser_stopObservingLogins:]	undefined +[MAConsoleUser_stopObservingLogins:]()	1
+00005185	10	+[MAConsoleUser_currentUserName]	undefined +[MAConsoleUser_currentUserName]()	0
+0000518f	21	+[MAConsoleUser_isUserLoggedIn]	undefined +[MAConsoleUser_isUserLoggedIn]()	0
+000051a4	9	WithCurrentEffectiveUserAndGroup::WithCurrentEffectiveUserAndGroup	undefined WithCurrentEffectiveUserAndGroup(WithCurrentEffectiveUserAndGroup * this)	1
+000051ae	55	WithCurrentEffectiveUserAndGroup::WithCurrentEffectiveUserAndGroup	undefined WithCurrentEffectiveUserAndGroup(WithCurrentEffectiveUserAndGroup * this)	4
+000051e6	35	WithCurrentEffectiveUserAndGroup::~WithCurrentEffectiveUserAndGroup	undefined ~WithCurrentEffectiveUserAndGroup(WithCurrentEffectiveUserAndGroup * this)	2
+0000520a	102	-[NSData(MAudioAdditions)_CRC32]	undefined -[NSData(MAudioAdditions)_CRC32]()	2
+00005270	85	-[NSData(MAudioAdditions)_CRC32WithRange:]	undefined -[NSData(MAudioAdditions)_CRC32WithRange:]()	2
+000052c5	136	+[MAPowerNotification_stopObserving]	undefined +[MAPowerNotification_stopObserving]()	5
+0000534d	186	+[MAPowerNotification_observeSleepNotifications:]	undefined +[MAPowerNotification_observeSleepNotifications:]()	5
+00005407	501	_SleepNotificationCallback	undefined _SleepNotificationCallback()	9
+000055fc	278	CalendarDateFromFirmwareDate	undefined CalendarDateFromFirmwareDate(ulong param_1, ulong param_2, ulong param_3, ulong param_4)	2
+00005712	34	+[MAFireWireFirmwareFile_initialize]	undefined +[MAFireWireFirmwareFile_initialize]()	1
+00005734	205	+[MAFireWireFirmwareFile_firmwareWithPath:]	undefined +[MAFireWireFirmwareFile_firmwareWithPath:]()	1
+00005801	131	-[MAFireWireFirmwareFile_dealloc]	undefined -[MAFireWireFirmwareFile_dealloc]()	2
+00005884	22	-[MAFireWireFirmwareFile_firmwareValidationFailed:]	undefined -[MAFireWireFirmwareFile_firmwareValidationFailed:]()	1
+0000589a	125	-[MAFireWireFirmwareFile_reportCorruptFirmwareToDelegate:format:]	undefined -[MAFireWireFirmwareFile_reportCorruptFirmwareToDelegate:format:]()	1
+00005917	63	+[MAFireWireFirmwareFile_automaticUpdatesInhibited]	undefined +[MAFireWireFirmwareFile_automaticUpdatesInhibited]()	1
+00005956	156	+[MAFireWireFirmwareFile_setInhibitAutomaticUpdates:]	undefined +[MAFireWireFirmwareFile_setInhibitAutomaticUpdates:]()	1
+000059f2	63	+[MAFireWireFirmwareFile_forceNextAutomaticUpdate]	undefined +[MAFireWireFirmwareFile_forceNextAutomaticUpdate]()	1
+00005a31	95	+[MAFireWireFirmwareFile_automaticUpdatedForced]	undefined +[MAFireWireFirmwareFile_automaticUpdatedForced]()	1
+00005a90	493	+[MAFireWireFirmwareFile_firmwareFilesAtPath:forDevice:]	undefined +[MAFireWireFirmwareFile_firmwareFilesAtPath:forDevice:]()	1
+00005c7d	14	-[MAFireWireFirmwareFile_embeddedCRC]	undefined -[MAFireWireFirmwareFile_embeddedCRC]()	0
+00005c8b	61	-[MAFireWireFirmwareFile_actualCRC]	undefined -[MAFireWireFirmwareFile_actualCRC]()	1
+00005cc8	578	-[MAFireWireFirmwareFile_validateFirmwareUpdate:]	undefined -[MAFireWireFirmwareFile_validateFirmwareUpdate:]()	3
+00005f0a	11	-[MAFireWireFirmwareFile_data]	undefined -[MAFireWireFirmwareFile_data]()	0
+00005f15	51	-[MAFireWireFirmwareFile_date]	undefined -[MAFireWireFirmwareFile_date]()	1
+00005f48	11	-[MAFireWireFirmwareFile_name]	undefined -[MAFireWireFirmwareFile_name]()	0
+00005f53	8	-[MAFireWireFirmwareFile_.cxx_construct]	undefined -[MAFireWireFirmwareFile_.cxx_construct]()	0
+00005f5b	48	+[MAIOKitRegistryNode_rootNode]	undefined +[MAIOKitRegistryNode_rootNode]()	2
+00005f8b	77	+[MAIOKitRegistryNode_nodeWithEntry:]	undefined +[MAIOKitRegistryNode_nodeWithEntry:]()	1
+00005fd8	55	-[MAIOKitRegistryNode_initWithEntry:]	undefined -[MAIOKitRegistryNode_initWithEntry:]()	1
+0000600f	142	-[MAIOKitRegistryNode_parent]	undefined -[MAIOKitRegistryNode_parent]()	3
+0000609d	204	-[MAIOKitRegistryNode_children]	undefined -[MAIOKitRegistryNode_children]()	4
+00006169	178	-[MAIOKitRegistryNode_name]	undefined -[MAIOKitRegistryNode_name]()	4
+0000621b	79	-[MAIOKitRegistryNode_description]	undefined -[MAIOKitRegistryNode_description]()	1
+0000626a	54	-[MAIOKitRegistryNode_conformsTo:]	undefined -[MAIOKitRegistryNode_conformsTo:]()	2
+000062a0	66	-[MAIOKitRegistryNode_propertyForKey:]	undefined -[MAIOKitRegistryNode_propertyForKey:]()	2
+000062e2	96	-[MAIOKitRegistryNode_properties]	undefined -[MAIOKitRegistryNode_properties]()	3
+00006342	39	-[MAIOKitRegistryNode_setProperty:forKey:]	undefined -[MAIOKitRegistryNode_setProperty:forKey:]()	1
+00006369	32	-[MAIOKitRegistryNode_setProperties:]	undefined -[MAIOKitRegistryNode_setProperties:]()	1
+00006389	11	-[MAIOKitRegistryNode_entry]	undefined -[MAIOKitRegistryNode_entry]()	0
+00006394	6	___error	int * ___error(void)	0
+0000639a	6	___stack_chk_fail	undefined ___stack_chk_fail()	0
+000063a0	6	___udivdi3	undefined ___udivdi3()	0
+000063a6	6	__setjmp	int __setjmp(int * param_1)	0
+000063ac	6	_exit	void _exit(int param_1)	0
+000063b2	6	_fprintf	int _fprintf(FILE * param_1, char * param_2, ...)	0
+000063b8	6	_fread	size_t _fread(void * param_1, size_t param_2, size_t param_3, FILE * param_4)	0
+000063be	6	_fwrite$UNIX2003	undefined _fwrite$UNIX2003()	0
+000063c4	6	_getegid	gid_t _getegid(void)	0
+000063ca	6	_geteuid	uid_t _geteuid(void)	0
+000063d0	6	_malloc	void * _malloc(size_t param_1)	0
+000063d6	6	_pclose	int _pclose(FILE * param_1)	0
+000063dc	6	_popen$UNIX2003	undefined _popen$UNIX2003()	0
+000063e2	6	_setegid	int _setegid(gid_t param_1)	0
+000063e8	6	_seteuid	int _seteuid(uid_t param_1)	0
+000063ee	6	_strcmp	int _strcmp(char * param_1, char * param_2)	0
+000063f4	6	_sysctlbyname	int _sysctlbyname(char * param_1, void * param_2, size_t * param_3, void * param_4, size_t param_5)	0
+000063fa	6	_system$UNIX2003	undefined _system$UNIX2003()	0
+00006400	6	_NSLog	undefined _NSLog()	0
+00006406	6	_IOAllowPowerChange	undefined _IOAllowPowerChange()	0
+0000640c	6	_IOCFUnserialize	undefined _IOCFUnserialize()	0
+00006412	6	_IOCatalogueTerminate	undefined _IOCatalogueTerminate()	0
+00006418	6	_IOConnectSetNotificationPort	undefined _IOConnectSetNotificationPort()	0
+0000641e	6	_IODeregisterForSystemPower	undefined _IODeregisterForSystemPower()	0
+00006424	6	_IOIteratorNext	undefined _IOIteratorNext()	0
+0000642a	6	_IOMasterPort	undefined _IOMasterPort()	0
+00006430	6	_IONotificationPortCreate	undefined _IONotificationPortCreate()	0
+00006436	6	_IONotificationPortDestroy	undefined _IONotificationPortDestroy()	0
+0000643c	6	_IONotificationPortGetMachPort	undefined _IONotificationPortGetMachPort()	0
+00006442	6	_IONotificationPortGetRunLoopSource	undefined _IONotificationPortGetRunLoopSource()	0
+00006448	6	_IOObjectConformsTo	undefined _IOObjectConformsTo()	0
+0000644e	6	_IOObjectRelease	undefined _IOObjectRelease()	0
+00006454	6	_IOObjectRetain	undefined _IOObjectRetain()	0
+0000645a	6	_IORegisterForSystemPower	undefined _IORegisterForSystemPower()	0
+00006460	6	_IORegistryEntryCreateCFProperties	undefined _IORegistryEntryCreateCFProperties()	0
+00006466	6	_IORegistryEntryCreateCFProperty	undefined _IORegistryEntryCreateCFProperty()	0
+0000646c	6	_IORegistryEntryGetChildIterator	undefined _IORegistryEntryGetChildIterator()	0
+00006472	6	_IORegistryEntryGetName	undefined _IORegistryEntryGetName()	0
+00006478	6	_IORegistryEntryGetParentEntry	undefined _IORegistryEntryGetParentEntry()	0
+0000647e	6	_IORegistryEntrySetCFProperties	undefined _IORegistryEntrySetCFProperties()	0
+00006484	6	_IORegistryEntrySetCFProperty	undefined _IORegistryEntrySetCFProperty()	0
+0000648a	6	_IORegistryGetRootEntry	undefined _IORegistryGetRootEntry()	0
+00006490	6	_IOServiceAddMatchingNotification	undefined _IOServiceAddMatchingNotification()	0
+00006496	6	_IOServiceClose	undefined _IOServiceClose()	0
+0000649c	6	_IOServiceGetMatchingServices	undefined _IOServiceGetMatchingServices()	0
+000064a2	6	_IOServiceMatching	undefined _IOServiceMatching()	0
+000064a8	6	_IOServiceOpen	undefined _IOServiceOpen()	0
+000064ae	6	_SCDynamicStoreCopyConsoleUser	undefined _SCDynamicStoreCopyConsoleUser()	0
+000064b4	6	_SCDynamicStoreCreate	undefined _SCDynamicStoreCreate()	0
+000064ba	6	_SCDynamicStoreCreateRunLoopSource	undefined _SCDynamicStoreCreateRunLoopSource()	0
+000064c0	6	_SCDynamicStoreKeyCreateConsoleUser	undefined _SCDynamicStoreKeyCreateConsoleUser()	0
+000064c6	6	_SCDynamicStoreSetNotificationKeys	undefined _SCDynamicStoreSetNotificationKeys()	0
+000064cc	6	_CFArrayAppendValue	undefined _CFArrayAppendValue()	0
+000064d2	6	_CFArrayCreateMutable	undefined _CFArrayCreateMutable()	0
+000064d8	6	_CFMachPortCreateRunLoopSource	undefined _CFMachPortCreateRunLoopSource()	0
+000064de	6	_CFMachPortCreateWithPort	undefined _CFMachPortCreateWithPort()	0
+000064e4	6	_CFMachPortGetPort	undefined _CFMachPortGetPort()	0
+000064ea	6	_CFMachPortInvalidate	undefined _CFMachPortInvalidate()	0
+000064f0	6	_CFPreferencesCopyValue	undefined _CFPreferencesCopyValue()	0
+000064f6	6	_CFPreferencesSetValue	undefined _CFPreferencesSetValue()	0
+000064fc	6	_CFPreferencesSynchronize	undefined _CFPreferencesSynchronize()	0
+00006502	6	_CFRelease	undefined _CFRelease()	0
+00006508	6	_CFRunLoopAddSource	undefined _CFRunLoopAddSource()	0
+0000650e	6	_CFRunLoopGetCurrent	undefined _CFRunLoopGetCurrent()	0
+00006514	6	_CFRunLoopRemoveSource	undefined _CFRunLoopRemoveSource()	0
+0000651a	6	_CFStringCreateCopy	undefined _CFStringCreateCopy()	0
+00006520	6	_crc32	uLong _crc32(uLong crc, Bytef * buf, uInt len)	0
+00006526	6	_objc_exception_extract	undefined _objc_exception_extract()	0
+0000652c	6	_objc_exception_match	undefined _objc_exception_match()	0
+00006532	6	_objc_exception_throw	undefined _objc_exception_throw()	0
+00006538	6	_objc_exception_try_enter	undefined _objc_exception_try_enter()	0
+0000653e	6	_objc_exception_try_exit	undefined _objc_exception_try_exit()	0
+00006544	6	_objc_msgSend	undefined _objc_msgSend()	0
+0000654a	6	_objc_msgSendSuper	undefined _objc_msgSendSuper()	0
+00006550	6	_DebugAssert	undefined _DebugAssert()	0

@@ -1,0 +1,719 @@
+openjdk version "25.0.4.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Zulu25.36+205-CA (build 25.0.4.1+1-LTS)
+OpenJDK 64-Bit Server VM Zulu25.36+205-CA (build 25.0.4.1+1-LTS, mixed mode)
+INFO  Using log config file: jar:file:/opt/local/share/java/ghidra-12.1.4/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /Users/bernardosardinha/Library/ghidra/ghidra_12.1.4_DEV/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /Users/bernardosardinha/Library/ghidra/ghidra_12.1.4_DEV/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (1990 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (5903 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 59 extension points (20 false positives) (ClassSearcher)  
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldOffset has been called by org.apache.felix.framework.util.SecureAction (file:/opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Base/lib/org.apache.felix.framework-7.0.5.jar)
+WARNING: Please consider reporting this to the maintainers of class org.apache.felix.framework.util.SecureAction
+WARNING: sun.misc.Unsafe::staticFieldOffset will be removed in a future release
+INFO  HEADLESS Script Paths:
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/BSim/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Base/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/PDB/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/8051/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A1-ghidra/scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Opening existing project: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A1-ghidra/ghidra-project/fw1814-kext (HeadlessAnalyzer)  
+INFO  Opening project: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A1-ghidra/ghidra-project/fw1814-kext (HeadlessProject)  
+INFO  REPORT: Processing project file: /M-AudioFireWireBeBoB.x86_64-slice (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: DecompFollowups1.java  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A1-ghidra/scripts/DecompFollowups1.java (HeadlessAnalyzer)  
+INFO  DecompFollowups1.java> === com_m_audio_FW1814Device::SetInputPan @ 0000dd3e === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* com_m_audio_FW1814Device::SetInputPan(unsigned int, unsigned int) */
+
+undefined8 __thiscall
+com_m_audio_FW1814Device::SetInputPan(com_m_audio_FW1814Device *this,uint param_1,uint param_2)
+
+{
+  undefined *puVar1;
+  uint uVar2;
+  undefined8 uVar3;
+  ulong uVar4;
+  
+  uVar2 = param_1 - 1;
+  if (uVar2 < 0x12) {
+    uVar4 = (ulong)uVar2;
+    *(ushort *)(this + (long)(&UNK_000012b8 + uVar4 * 2)) =
+         ((ushort)(-param_2 >> 1) & 0xff) + (short)param_2 * -0x8000;
+    if ((param_1 & 1) == 0) {
+      puVar1 = &UNK_000012b6 + uVar4 * 2;
+    }
+    else {
+      puVar1 = &UNK_000012b8 + uVar4 * 2;
+      uVar2 = param_1;
+    }
+                    /* WARNING: Could not recover jumptable at 0x0000dd94. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+    uVar3 = (**(code **)(*(long *)this + 0xba8))(this,uVar2 * 2 + 0x3e,1,this + (long)puVar1);
+    return uVar3;
+  }
+  return 0xe00002c2;
+}
+
+ (GhidraScript)  
+INFO  DecompFollowups1.java> === com_m_audio_FW1814Device::SetInputRouting @ 0000dbea === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* com_m_audio_FW1814Device::SetInputRouting(unsigned int, unsigned int) */
+
+undefined8 __thiscall
+com_m_audio_FW1814Device::SetInputRouting(com_m_audio_FW1814Device *this,uint param_1,uint param_2)
+
+{
+  char cVar1;
+  uint uVar2;
+  uint uVar3;
+  
+  if ((param_1 == 0) ||
+     (uVar2 = (**(code **)(*(long *)(this + 0x13e0) + 0x10))(this + 0x13e0), uVar2 >> 1 < param_1))
+  {
+    return 0xe00002c2;
+  }
+  cVar1 = (char)param_1;
+  if (param_1 < 5) {
+    uVar2 = 1 << (cVar1 - 1U & 0x1f);
+    uVar2 = uVar2 >> 0x18 | (uVar2 & 0xff0000) >> 8 | (uVar2 & 0xff00) << 8 | uVar2 << 0x18;
+    if ((param_2 & 1) == 0) {
+      uVar2 = ~uVar2 & *(uint *)(this + 0x1308);
+    }
+    else {
+      uVar2 = uVar2 | *(uint *)(this + 0x1308);
+    }
+    *(uint *)(this + 0x1308) = uVar2;
+    uVar3 = 1 << (cVar1 + 3U & 0x1f);
+    uVar3 = uVar3 >> 0x18 | (uVar3 & 0xff0000) >> 8 | (uVar3 & 0xff00) << 8 | uVar3 << 0x18;
+    if ((param_2 & 2) == 0) {
+      uVar3 = ~uVar3 & uVar2;
+    }
+    else {
+      uVar3 = uVar3 | uVar2;
+    }
+  }
+  else {
+    if (5 < param_1) {
+      if (param_1 < 10) {
+        uVar2 = 1 << (cVar1 + 2U & 0x1f);
+        uVar2 = uVar2 >> 0x18 | (uVar2 & 0xff0000) >> 8 | (uVar2 & 0xff00) << 8 | uVar2 << 0x18;
+        if ((param_2 & 1) == 0) {
+          uVar2 = ~uVar2 & *(uint *)(this + 0x1308);
+        }
+        else {
+          uVar2 = uVar2 | *(uint *)(this + 0x1308);
+        }
+        *(uint *)(this + 0x1308) = uVar2;
+        uVar3 = 1 << (cVar1 + 6U & 0x1f);
+        uVar3 = uVar3 >> 0x18 | (uVar3 & 0xff0000) >> 8 | (uVar3 & 0xff00) << 8 | uVar3 << 0x18;
+        if ((param_2 & 2) == 0) {
+          uVar3 = ~uVar3 & uVar2;
+        }
+        else {
+          uVar3 = uVar3 | uVar2;
+        }
+        *(uint *)(this + 0x1308) = uVar3;
+      }
+      goto LAB_0000dd0d;
+    }
+    uVar2 = *(uint *)(this + 0x1308) | 0x100;
+    if ((param_2 & 1) == 0) {
+      uVar2 = *(uint *)(this + 0x1308) & 0xfffffeff;
+    }
+    uVar3 = uVar2 | 0x200;
+    if ((param_2 & 2) == 0) {
+      uVar3 = uVar2 & 0xfffffdff;
+    }
+  }
+  *(uint *)(this + 0x1308) = uVar3;
+LAB_0000dd0d:
+  (**(code **)(*(long *)this + 0xba8))(this,0x90,1,this + 0x1308);
+  return 0;
+}
+
+ (GhidraScript)  
+INFO  DecompFollowups1.java> === com_m_audio_FW1814Device::SetAuxMonitor @ 0000cfc4 === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* com_m_audio_FW1814Device::SetAuxMonitor(unsigned int, unsigned int) */
+
+void __thiscall
+com_m_audio_FW1814Device::SetAuxMonitor(com_m_audio_FW1814Device *this,uint param_1,uint param_2)
+
+{
+  uint uVar1;
+  
+  uVar1 = (uint)(1L << ((char)param_1 - 1U & 0x3f));
+  uVar1 = uVar1 >> 0x18 | (uVar1 & 0xff0000) >> 8 | (uVar1 & 0xff00) << 8 | uVar1 << 0x18;
+  if (param_2 == 0) {
+    uVar1 = *(uint *)(this + 0x1314) & ~uVar1;
+  }
+  else {
+    uVar1 = uVar1 | *(uint *)(this + 0x1314);
+  }
+  *(uint *)(this + 0x1314) = uVar1;
+                    /* WARNING: Could not recover jumptable at 0x0000d012. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(*(long *)this + 0xba8))(this,0x9c,1,this + 0x1314);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompFollowups1.java> === m_audio_FWb::BaseChannelGroup::AdjustedLevels @ 0001f300 === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* m_audio_FWb::BaseChannelGroup::AdjustedLevels() */
+
+void * __thiscall m_audio_FWb::BaseChannelGroup::AdjustedLevels(BaseChannelGroup *this)
+
+{
+  BaseChannelGroup BVar1;
+  BaseChannelGroup BVar2;
+  bool bVar3;
+  uint uVar4;
+  undefined4 uVar5;
+  void *pvVar6;
+  Channel *pCVar7;
+  ulong uVar8;
+  BaseChannelGroup *local_40;
+  
+  local_40 = *(BaseChannelGroup **)(this + 8);
+  if (local_40 == (BaseChannelGroup *)0x0) {
+    *(BaseChannelGroup **)(this + 8) = this;
+    local_40 = this;
+  }
+  uVar4 = (**(code **)(*(long *)this + 0x10))(this);
+  pvVar6 = operator_new__((ulong)uVar4 * 4);
+  BVar1 = this[0x10];
+  BVar2 = this[0x11];
+  bVar3 = (bool)Solo(local_40);
+  if ((pvVar6 != (void *)0x0) && (uVar4 != 0)) {
+    uVar8 = 0;
+    do {
+      pCVar7 = (Channel *)(**(code **)(*(long *)this + 0x18))(this,uVar8 & 0xffffffff);
+      uVar5 = AdjustedLevelForChannel(this,pCVar7,bVar3,(bool)BVar2,(bool)BVar1);
+      *(undefined4 *)((long)pvVar6 + uVar8 * 4) = uVar5;
+      uVar8 = uVar8 + 1;
+    } while (uVar4 != uVar8);
+  }
+  return pvVar6;
+}
+
+ (GhidraScript)  
+INFO  DecompFollowups1.java> === m_audio_b_FWBaseArrayProp::OSArrayToSeriatimValues @ 000080cc === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* m_audio_b_FWBaseArrayProp::OSArrayToSeriatimValues(OSObject*, unsigned int) */
+
+undefined8 __thiscall
+m_audio_b_FWBaseArrayProp::OSArrayToSeriatimValues
+          (m_audio_b_FWBaseArrayProp *this,OSObject *param_1,uint param_2)
+
+{
+  OSMetaClass *pOVar1;
+  code *pcVar2;
+  uint uVar3;
+  undefined4 uVar4;
+  long *plVar5;
+  OSMetaClassBase *pOVar6;
+  long lVar7;
+  
+  plVar5 = (long *)OSMetaClassBase::safeMetaCast
+                             ((OSMetaClassBase *)param_1,*(OSMetaClass **)PTR_metaClass_00030078);
+  uVar3 = (**(code **)(*plVar5 + 0x130))(plVar5);
+  if (uVar3 < param_2) {
+    param_2 = uVar3;
+  }
+  pOVar1 = *(OSMetaClass **)PTR_metaClass_00030080;
+  uVar3 = 0;
+  while( true ) {
+    if (param_2 <= uVar3) {
+      return 0;
+    }
+    pOVar6 = (OSMetaClassBase *)(**(code **)(*plVar5 + 0x1e8))(plVar5,uVar3);
+    if ((pOVar6 == (OSMetaClassBase *)0x0) ||
+       (lVar7 = OSMetaClassBase::safeMetaCast(pOVar6,pOVar1), lVar7 == 0)) break;
+    pcVar2 = *(code **)(*(long *)this + 0x160);
+    uVar4 = (**(code **)(*(long *)pOVar6 + 0x148))(pOVar6);
+    (*pcVar2)(this,uVar3,uVar4);
+    uVar3 = uVar3 + 1;
+  }
+  return 0xe00002c2;
+}
+
+ (GhidraScript)  
+INFO  DecompFollowups1.java> === m_audio_b_FWBaseArrayProp::SeriatimValuesToOSArray @ 0000824e === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* m_audio_b_FWBaseArrayProp::SeriatimValuesToOSArray(unsigned int, OSObject*&) */
+
+undefined8 __thiscall
+m_audio_b_FWBaseArrayProp::SeriatimValuesToOSArray
+          (m_audio_b_FWBaseArrayProp *this,uint param_1,OSObject **param_2)
+
+{
+  uint uVar1;
+  OSObject *pOVar2;
+  undefined8 uVar3;
+  long *plVar4;
+  uint uVar5;
+  
+  pOVar2 = (OSObject *)OSArray::withCapacity(param_1);
+  if (pOVar2 == (OSObject *)0x0) {
+LAB_00008277:
+    uVar3 = 0xe00002bd;
+  }
+  else {
+    for (uVar5 = 0; uVar5 < param_1; uVar5 = uVar5 + 1) {
+      uVar1 = (**(code **)(*(long *)this + 0x158))(this,uVar5);
+      plVar4 = (long *)OSNumber::withNumber((ulong)uVar1,0x20);
+      if (plVar4 == (long *)0x0) {
+        (**(code **)(*(long *)pOVar2 + 0x28))(pOVar2);
+        pOVar2 = (OSObject *)0x0;
+        goto LAB_00008277;
+      }
+      (**(code **)(*(long *)pOVar2 + 0x1b8))(pOVar2,plVar4);
+      (**(code **)(*plVar4 + 0x28))(plVar4);
+    }
+    uVar3 = 0;
+  }
+  *param_2 = pOVar2;
+  return uVar3;
+}
+
+ (GhidraScript)  
+INFO  DecompFollowups1.java> === m_audio_b_FWDiscreteEngine::ClipSubEngineOutput @ 00018884 === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* m_audio_b_FWDiscreteEngine::ClipSubEngineOutput(unsigned int, unsigned int, unsigned int,
+   _IOAudioStreamFormat const*, IOAudioStream*) */
+
+undefined8 __thiscall
+m_audio_b_FWDiscreteEngine::ClipSubEngineOutput
+          (m_audio_b_FWDiscreteEngine *this,uint param_1,uint param_2,uint param_3,
+          _IOAudioStreamFormat *param_4,IOAudioStream *param_5)
+
+{
+  uint uVar1;
+  undefined8 uVar2;
+  
+  uVar1 = *(uint *)(this + 300);
+  *(uint *)(this + 300) = param_1 | uVar1;
+  if (((param_1 | uVar1) & *(uint *)(this + 0x128)) != *(uint *)(this + 0x128)) {
+    return 0;
+  }
+  *(undefined4 *)(this + 300) = 0;
+                    /* WARNING: Could not recover jumptable at 0x000188c3. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  uVar2 = (**(code **)(*(long *)this + 0xc38))(this,param_2,param_3,param_4,param_5);
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DecompFollowups1.java> === m_audio_b_FWDiscreteEngine::ConvertSubEngineInput @ 000188e4 === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* m_audio_b_FWDiscreteEngine::ConvertSubEngineInput(unsigned int, unsigned int, unsigned int,
+   _IOAudioStreamFormat const*, IOAudioStream*) */
+
+undefined8
+m_audio_b_FWDiscreteEngine::ConvertSubEngineInput
+          (uint param_1,uint param_2,uint param_3,_IOAudioStreamFormat *param_4,
+          IOAudioStream *param_5)
+
+{
+  uint uVar1;
+  undefined4 in_register_0000003c;
+  long *plVar2;
+  
+  plVar2 = (long *)CONCAT44(in_register_0000003c,param_1);
+  uVar1 = *(uint *)(plVar2 + 0x26);
+  if (uVar1 == 0) {
+    (**(code **)(*plVar2 + 0xc40))(plVar2,param_3,(ulong)param_4 & 0xffffffff);
+    uVar1 = *(uint *)(plVar2 + 0x26);
+  }
+  *(uint *)(plVar2 + 0x26) = uVar1 | param_2;
+  if (((uVar1 | param_2) & *(uint *)(plVar2 + 0x25)) == *(uint *)(plVar2 + 0x25)) {
+    *(undefined4 *)(plVar2 + 0x26) = 0;
+  }
+  return 0;
+}
+
+ (GhidraScript)  
+INFO  DecompFollowups1.java> === m_audio_b_FWDiscreteEngine::ActivateSubEngine @ 00018c44 === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* m_audio_b_FWDiscreteEngine::ActivateSubEngine(unsigned int) */
+
+int __thiscall
+m_audio_b_FWDiscreteEngine::ActivateSubEngine(m_audio_b_FWDiscreteEngine *this,uint param_1)
+
+{
+  uint uVar1;
+  long *plVar2;
+  int iVar3;
+  
+  iVar3 = *(int *)(this + 0x128);
+  plVar2 = (long *)OSMetaClassBase::safeMetaCast
+                             (*(OSMetaClassBase **)(this + 0xb8),
+                              (OSMetaClass *)m_audio_b_FWDiscreteDevice::metaClass);
+  if (plVar2 == (long *)0x0) {
+    iVar3 = -0x1ffffd3e;
+  }
+  else {
+    uVar1 = *(uint *)(this + 0x128);
+    *(uint *)(this + 0x128) = uVar1 | param_1;
+    if ((((uVar1 | param_1) != 0) && (iVar3 == 0)) || (*(int *)(this + 0xa8) == 3)) {
+      if (param_1 != 1) {
+        (**(code **)(*plVar2 + 0xa10))(plVar2);
+      }
+      (**(code **)(PTR_vtable_000300b0 + 0xa38))(this);
+      if (*(int *)(this + 0xa8) != 2) {
+        iVar3 = (**(code **)(*(long *)this + 0xc18))(this);
+        if (iVar3 != 0) {
+          if (param_1 == 1) {
+            return iVar3;
+          }
+          (**(code **)(*plVar2 + 0xa18))(plVar2);
+          return iVar3;
+        }
+        if (param_1 == 1) {
+          return 0;
+        }
+        (**(code **)(*(long *)this + 0xb50))(this,1);
+        (**(code **)(*(long *)this + 0xba8))(this,3);
+        return 0;
+      }
+    }
+    iVar3 = 0;
+  }
+  return iVar3;
+}
+
+ (GhidraScript)  
+INFO  DecompFollowups1.java> === m_audio_b_FWDiscreteEngine::DeactivateSubEngine @ 00018b1e === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* m_audio_b_FWDiscreteEngine::DeactivateSubEngine(unsigned int) */
+
+void __thiscall
+m_audio_b_FWDiscreteEngine::DeactivateSubEngine(m_audio_b_FWDiscreteEngine *this,uint param_1)
+
+{
+  int iVar1;
+  uint uVar2;
+  long *plVar3;
+  
+  iVar1 = *(int *)(this + 0x128);
+  plVar3 = (long *)OSMetaClassBase::safeMetaCast
+                             (*(OSMetaClassBase **)(this + 0xb8),
+                              (OSMetaClass *)m_audio_b_FWDiscreteDevice::metaClass);
+  if (((plVar3 != (long *)0x0) &&
+      (uVar2 = *(uint *)(this + 0x128), *(uint *)(this + 0x128) = ~param_1 & uVar2,
+      (~param_1 & uVar2) == 0)) && (iVar1 != 0)) {
+    (**(code **)(*(long *)this + 0xc20))(this);
+    if (param_1 != 1) {
+      (**(code **)(*(long *)this + 0xb50))(this,0);
+      (**(code **)(*(long *)this + 0xba8))(this,4);
+                    /* WARNING: Could not recover jumptable at 0x00018bb6. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      (**(code **)(*plVar3 + 0xa18))(plVar3);
+      return;
+    }
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompFollowups1.java> === com_m_audio_FWUserClient::ActionStartMIDI @ 00007492 === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* com_m_audio_FWUserClient::ActionStartMIDI(m_audio_b_FWBaseEngine*) */
+
+void com_m_audio_FWUserClient::ActionStartMIDI(m_audio_b_FWBaseEngine *param_1)
+
+{
+  CoreStartMIDI(param_1);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompFollowups1.java> === com_m_audio_FWUserClient::ActionSendMIDI @ 00007574 === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* com_m_audio_FWUserClient::ActionSendMIDI(m_audio_b_FWBaseEngine*, MAMIDIPacket*, unsigned int*)
+    */
+
+void com_m_audio_FWUserClient::ActionSendMIDI
+               (m_audio_b_FWBaseEngine *param_1,MAMIDIPacket *param_2,uint *param_3)
+
+{
+  m_audio_b_FWBaseEngine::SendMIDI((MAMIDIPacket *)param_1,(uint *)param_2);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompFollowups1.java> === com_m_audio_FWUserClient::CoreStartMIDI @ 0000717c === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* com_m_audio_FWUserClient::CoreStartMIDI(m_audio_b_FWBaseEngine*) */
+
+undefined8 com_m_audio_FWUserClient::CoreStartMIDI(m_audio_b_FWBaseEngine *param_1)
+
+{
+  undefined8 uVar1;
+  
+  if ((0 < *(int *)(param_1 + 0x234)) && (param_1[0x230] == (m_audio_b_FWBaseEngine)0x0)) {
+    param_1[0x230] = (m_audio_b_FWBaseEngine)0x1;
+    return 0;
+  }
+                    /* WARNING: Could not recover jumptable at 0x000071a1. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  uVar1 = (**(code **)(*(long *)param_1 + 0xcf0))();
+  return uVar1;
+}
+
+ (GhidraScript)  
+INFO  DecompFollowups1.java> === com_m_audio_FWUserClient::CoreStopMIDI @ 0000714a === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* com_m_audio_FWUserClient::CoreStopMIDI(m_audio_b_FWBaseEngine*) */
+
+void com_m_audio_FWUserClient::CoreStopMIDI(m_audio_b_FWBaseEngine *param_1)
+
+{
+  if (param_1[0x298] == (m_audio_b_FWBaseEngine)0x0) {
+    if ((0 < *(int *)(param_1 + 0x234)) && (param_1[0x230] != (m_audio_b_FWBaseEngine)0x0)) {
+      param_1[0x230] = (m_audio_b_FWBaseEngine)0x0;
+    }
+    return;
+  }
+                    /* WARNING: Could not recover jumptable at 0x00007176. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(*(long *)param_1 + 0xd00))();
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompFollowups1.java> === m_audio_b_FWHSCI::HSCIReadComplete @ 0001d80e === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* m_audio_b_FWHSCI::HSCIReadComplete(int) */
+
+void __thiscall m_audio_b_FWHSCI::HSCIReadComplete(m_audio_b_FWHSCI *this,int param_1)
+
+{
+  undefined8 uVar1;
+  TFunctor<void,m_audio_FWb::FunctorNilArgument,m_audio_FWb::FunctorNilArgument,m_audio_FWb::FunctorNilArgument>
+  *this_00;
+  
+  if (param_1 != 0) {
+                    /* WARNING: Could not recover jumptable at 0x0001d860. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+    (**(code **)(**(long **)(this + 0x30) + 0x1d0))(*(long **)(this + 0x30),1000);
+    return;
+  }
+  uVar1 = *(undefined8 *)(this + 0xa8);
+  this_00 = operator_new(0x20);
+  if (this_00 ==
+      (TFunctor<void,m_audio_FWb::FunctorNilArgument,m_audio_FWb::FunctorNilArgument,m_audio_FWb::FunctorNilArgument>
+       *)0x0) {
+    return;
+  }
+  *(undefined ***)this_00 = &PTR__TFunctor_00046dd0;
+  *(undefined8 *)(this_00 + 8) = 0;
+  *(m_audio_b_FWHSCI **)(this_00 + 0x18) = this;
+  *(undefined8 *)(this_00 + 0x10) = uVar1;
+  m_audio_FWb::
+  TFunctor<void,m_audio_FWb::FunctorNilArgument,m_audio_FWb::FunctorNilArgument,m_audio_FWb::FunctorNilArgument>
+  ::Init<m_audio_b_FWHSCI*,void(m_audio_b_FWHSCI::*)()>(this_00,this,HSCISafelyComplete);
+  m_audio_FWb::UKernelCallHelpers::InvokeOnNewThread((CallCenter *)this_00);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompFollowups1.java> === com_m_audio_FWMetaNub::FirmwareCacheInfoRegisters @ 0001cc9e === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* com_m_audio_FWMetaNub::FirmwareCacheInfoRegisters(IOService*) */
+
+undefined4 com_m_audio_FWMetaNub::FirmwareCacheInfoRegisters(IOService *param_1)
+
+{
+  IOService *pIVar1;
+  undefined4 uVar2;
+  long *plVar3;
+  undefined2 local_28;
+  undefined2 local_26;
+  undefined4 local_24;
+  
+  local_28 = 0;
+  local_26 = 0xdead;
+  local_24 = 0xcafebabe;
+  if (*(long *)(param_1 + 0xe0) == 0) {
+    uVar2 = 0xe00002bc;
+  }
+  else {
+    pIVar1 = param_1 + 0x90;
+    _bzero(pIVar1,0x50);
+    local_26 = 0xffff;
+    local_24 = 0xc8020000;
+    uVar2 = FireWireReadCommand((com_m_audio_FWMetaNub *)param_1,(FWAddressStruct *)&local_28,0x50,
+                                pIVar1);
+    param_1[0xf0] = (IOService)(*(int *)(param_1 + 0x9c) != 0);
+    plVar3 = (long *)OSData::withBytes(pIVar1,0x50);
+    if (plVar3 != (long *)0x0) {
+      (**(code **)(*(long *)param_1 + 0x268))(param_1,"MAFirmwareInfo",plVar3);
+      (**(code **)(*plVar3 + 0x28))(plVar3);
+    }
+  }
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DecompFollowups1.java> === m_audio_b_FWAVCAudioDevice::setProperties @ 00022e28 === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* m_audio_b_FWAVCAudioDevice::setProperties(OSObject*) */
+
+undefined8 __thiscall
+m_audio_b_FWAVCAudioDevice::setProperties(m_audio_b_FWAVCAudioDevice *this,OSObject *param_1)
+
+{
+  int iVar1;
+  long *plVar2;
+  OSMetaClassBase *pOVar3;
+  undefined8 uVar4;
+  
+  if ((*(long *)(this + 0xf8) != 0) && (*(long *)(this + 0xe8) != 0)) {
+    plVar2 = (long *)OSMetaClassBase::safeMetaCast
+                               ((OSMetaClassBase *)param_1,*(OSMetaClass **)PTR_metaClass_00030008);
+    if (plVar2 == (long *)0x0) {
+      return 0;
+    }
+    pOVar3 = (OSMetaClassBase *)(**(code **)(*plVar2 + 0x208))(plVar2,"MASampleRate");
+    plVar2 = (long *)OSMetaClassBase::safeMetaCast(pOVar3,*(OSMetaClass **)PTR_metaClass_00030080);
+    if (plVar2 != (long *)0x0) {
+      iVar1 = (**(code **)(*plVar2 + 0x148))(plVar2);
+      if (*(int *)(*(long *)(this + 0xe8) + 0x8c) != iVar1) {
+        (**(code **)(*(long *)this + 0xa78))(this,iVar1);
+      }
+    }
+  }
+  uVar4 = (*(code *)PTR_setProperties_00031470)(this,param_1);
+  return uVar4;
+}
+
+ (GhidraScript)  
+INFO  DecompFollowups1.java> === com_m_audio_FWEngine2::StartAC3Output @ 0001185e === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* com_m_audio_FWEngine2::StartAC3Output() */
+
+void __thiscall com_m_audio_FWEngine2::StartAC3Output(com_m_audio_FWEngine2 *this)
+
+{
+  if (this[0x298] != (com_m_audio_FWEngine2)0x0) {
+    (**(code **)(*(long *)this + 0xcf8))(this);
+  }
+                    /* WARNING: Could not recover jumptable at 0x0001188b. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(*(long *)this + 0xd18))(this);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompFollowups1.java> === com_m_audio_FWUserClient::start @ 000076de === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* com_m_audio_FWUserClient::start(IOService*) */
+
+undefined1 __thiscall
+com_m_audio_FWUserClient::start(com_m_audio_FWUserClient *this,IOService *param_1)
+
+{
+  char cVar1;
+  undefined1 uVar2;
+  long lVar3;
+  
+  cVar1 = (*(code *)PTR_start_0003d8e0)(this,param_1);
+  if (cVar1 == '\0') {
+    uVar2 = 0;
+  }
+  else {
+    lVar3 = OSMetaClassBase::safeMetaCast
+                      ((OSMetaClassBase *)param_1,(OSMetaClass *)m_audio_b_FWAudioDevice::metaClass)
+    ;
+    *(long *)(this + 0x290) = lVar3;
+    if (lVar3 == 0) {
+      *(undefined8 *)(this + 0x290) = 0;
+      uVar2 = 0;
+    }
+    else {
+      uVar2 = 1;
+    }
+  }
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DecompFollowups1.java> === com_m_audio_FWUserClient::clientMemoryForType @ 00007220 === (GhidraScript)  
+INFO  DecompFollowups1.java> 
+/* com_m_audio_FWUserClient::clientMemoryForType(unsigned int, unsigned int*, IOMemoryDescriptor**)
+    */
+
+undefined8 __thiscall
+com_m_audio_FWUserClient::clientMemoryForType
+          (com_m_audio_FWUserClient *this,uint param_1,uint *param_2,IOMemoryDescriptor **param_3)
+
+{
+  IOMemoryDescriptor *pIVar1;
+  long lVar2;
+  undefined8 uVar3;
+  
+  *param_3 = (IOMemoryDescriptor *)0x0;
+  if (param_1 == 1) {
+    pIVar1 = *(IOMemoryDescriptor **)(*(long *)(this + 0x290) + 0x100);
+    *param_3 = pIVar1;
+    if (pIVar1 == (IOMemoryDescriptor *)0x0) {
+      return 0xe00002bc;
+    }
+    (**(code **)(*(long *)pIVar1 + 0x20))();
+    *param_2 = 0x1000;
+    return 0;
+  }
+  lVar2 = *(long *)(*(long *)(this + 0x290) + 0xe8);
+  if (param_1 < 0x800) {
+    if ((0x3ff < param_1) && (param_1 - 0x400 < *(uint *)(lVar2 + 0x29c))) {
+      *param_3 = *(IOMemoryDescriptor **)
+                  (*(long *)(lVar2 + 0x2b0) + 0x20 + (ulong)(param_1 - 0x400) * 0x28);
+      *param_2 = 0x1000;
+      goto LAB_000072dd;
+    }
+  }
+  else if (param_1 - 0x800 < *(uint *)(lVar2 + 0x2a0)) {
+    *param_3 = *(IOMemoryDescriptor **)
+                (*(long *)(lVar2 + 0x2a8) + 0x20 + (ulong)(param_1 - 0x800) * 0x28);
+    *param_2 = 0;
+LAB_000072dd:
+    uVar3 = 0;
+    goto LAB_000072df;
+  }
+  uVar3 = 0xe00002c7;
+LAB_000072df:
+  if (*param_3 != (IOMemoryDescriptor *)0x0) {
+    (**(code **)(*(long *)*param_3 + 0x20))();
+  }
+  return uVar3;
+}
+
+ (GhidraScript)  
+INFO  REPORT: Save succeeded for processed file: /M-AudioFireWireBeBoB.x86_64-slice (HeadlessAnalyzer)  

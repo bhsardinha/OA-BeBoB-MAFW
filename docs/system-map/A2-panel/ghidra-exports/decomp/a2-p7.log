@@ -1,0 +1,1289 @@
+openjdk version "25.0.4.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Zulu25.36+205-CA (build 25.0.4.1+1-LTS)
+OpenJDK 64-Bit Server VM Zulu25.36+205-CA (build 25.0.4.1+1-LTS, mixed mode)
+INFO  Using log config file: jar:file:/opt/local/share/java/ghidra-12.1.4/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /Users/bernardosardinha/Library/ghidra/ghidra_12.1.4_DEV/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /Users/bernardosardinha/Library/ghidra/ghidra_12.1.4_DEV/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (1471 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (6159 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 59 extension points (20 false positives) (ClassSearcher)  
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldOffset has been called by org.apache.felix.framework.util.SecureAction (file:/opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Base/lib/org.apache.felix.framework-7.0.5.jar)
+WARNING: Please consider reporting this to the maintainers of class org.apache.felix.framework.util.SecureAction
+WARNING: sun.misc.Unsafe::staticFieldOffset will be removed in a future release
+INFO  HEADLESS Script Paths:
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/BSim/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Base/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/PDB/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/8051/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Opening existing project: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/ghidra-project/panel-app (HeadlessAnalyzer)  
+INFO  Opening project: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/ghidra-project/panel-app (HeadlessProject)  
+INFO  REPORT: Processing project file: /Panel (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: DecompA2P7.java  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/scripts/DecompA2P7.java (HeadlessAnalyzer)  
+INFO  DecompA2P7.java> === CDeviceSettings::GetSetting @ 00065970 === (GhidraScript)  
+INFO  DecompA2P7.java> 
+/* CDeviceSettings::GetSetting(unsigned long, unsigned short, unsigned long, void*) */
+
+undefined2 __thiscall
+CDeviceSettings::GetSetting
+          (CDeviceSettings *this,ulong param_1,ushort param_2,ulong param_3,void *param_4)
+
+{
+  undefined2 uVar1;
+  
+  uVar1 = 2;
+  if (param_4 != (void *)0x0) {
+    uVar1 = (**(code **)(*(int *)this + 0xac))(this,param_1,param_2,param_3,param_4);
+  }
+  return uVar1;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P7.java> === CDeviceSettings::UpdateSettingAndHW @ 000658a2 === (GhidraScript)  
+INFO  DecompA2P7.java> 
+/* CDeviceSettings::UpdateSettingAndHW(unsigned long, unsigned short, unsigned long, void*, bool) */
+
+short __thiscall
+CDeviceSettings::UpdateSettingAndHW
+          (CDeviceSettings *this,ulong param_1,ushort param_2,ulong param_3,void *param_4,
+          bool param_5)
+
+{
+  int *piVar1;
+  short sVar2;
+  ulong local_24;
+  ushort local_20;
+  ulong local_1c;
+  void *local_18;
+  undefined2 local_14;
+  
+  sVar2 = (**(code **)(*(int *)this + 0x14))(this,param_1,param_2,param_3,param_4);
+  if (sVar2 == 0) {
+    piVar1 = *(int **)(this + 0x68);
+    if (param_2 == 0) {
+      sVar2 = (**(code **)(*piVar1 + 0x28))(piVar1,param_1,param_3,param_4);
+    }
+    else {
+      sVar2 = (**(code **)(*piVar1 + 0x2c))(piVar1,param_1,param_2,param_3,param_4);
+    }
+    if (param_5) {
+      local_24 = param_1;
+      local_20 = param_2;
+      local_1c = param_3;
+      local_18 = param_4;
+      local_14 = 0;
+      LBroadcaster::BroadcastMessage((LBroadcaster *)(this + 0x30),param_1,&local_24);
+    }
+  }
+  return sVar2;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P7.java> === CDeviceSettings::UpdateSetting @ 000657f0 === (GhidraScript)  
+INFO  DecompA2P7.java> 
+/* CDeviceSettings::UpdateSetting(unsigned long, unsigned short, unsigned long, void*) */
+
+short __thiscall
+CDeviceSettings::UpdateSetting
+          (CDeviceSettings *this,ulong param_1,ushort param_2,ulong param_3,void *param_4)
+
+{
+  short sVar1;
+  char local_d;
+  
+  local_d = '\x01';
+  sVar1 = (**(code **)(*(int *)this + 0xa8))(this,param_1,param_2,param_3,param_4,&local_d);
+  if (((sVar1 == 0) && (local_d != '\0')) && (this[0x5d] != (CDeviceSettings)0x1)) {
+    this[0x5d] = (CDeviceSettings)0x1;
+    LBroadcaster::BroadcastMessage((LBroadcaster *)(this + 0x30),0x3fd,(void *)0x0);
+  }
+  return sVar1;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P7.java> === CDeviceSettings::ListenToMessage @ 00065750 === (GhidraScript)  
+INFO  DecompA2P7.java> 
+/* CDeviceSettings::ListenToMessage(long, void*) */
+
+void __thiscall CDeviceSettings::ListenToMessage(CDeviceSettings *this,long param_1,void *param_2)
+
+{
+  short sVar1;
+  undefined2 uVar2;
+  
+  if (param_1 == 0x3f2) {
+    sVar1 = (**(code **)(*(int *)this + 0x14))
+                      (this,*(undefined4 *)param_2,*(undefined2 *)((int)param_2 + 4),
+                       *(undefined4 *)((int)param_2 + 8),*(undefined4 *)((int)param_2 + 0xc));
+    *(short *)((int)param_2 + 0x10) = sVar1;
+    if (sVar1 == 0) {
+      LBroadcaster::BroadcastMessage((LBroadcaster *)(this + 0x30),*(long *)param_2,param_2);
+    }
+  }
+  else if (param_1 == 0x3f3) {
+    uVar2 = (**(code **)(*(int *)this + 0xc))
+                      (this,*(undefined4 *)param_2,*(undefined2 *)((int)param_2 + 4),
+                       *(undefined4 *)((int)param_2 + 8),*(undefined4 *)((int)param_2 + 0xc));
+    *(undefined2 *)((int)param_2 + 0x10) = uVar2;
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P7.java> === CFW1814DeviceSettings::SetSettingData @ 00059836 === (GhidraScript)  
+INFO  DecompA2P7.java> 
+/* CFW1814DeviceSettings::SetSettingData(unsigned long, unsigned short, unsigned long, void*, bool&)
+    */
+
+undefined4 __thiscall
+CFW1814DeviceSettings::SetSettingData
+          (CFW1814DeviceSettings *this,ulong param_1,ushort param_2,ulong param_3,void *param_4,
+          bool *param_5)
+
+{
+  undefined4 uVar1;
+  uint uVar2;
+  int iVar3;
+  uint uVar4;
+  int iVar5;
+  undefined4 uVar6;
+  bool local_4d;
+  undefined8 local_4c;
+  undefined8 local_44;
+  uint local_3c;
+  int local_34;
+  int local_30;
+  ushort local_2a;
+  ushort local_28;
+  ushort local_26;
+  undefined8 local_24;
+  undefined8 local_1c;
+  uint local_14;
+  
+  if (0x33 < param_1 - 0x5e2) {
+switchD_0005986b_caseD_5e8:
+    local_4d = true;
+    uVar6 = 1;
+    goto switchD_0005986b_caseD_5e3;
+  }
+  uVar4 = (uint)param_2;
+  local_4d = false;
+  uVar6 = 0;
+  switch(param_1) {
+  case 0x5e2:
+    local_4d = param_3 == 1;
+    goto LAB_00059ab8;
+  case 0x5e3:
+    goto switchD_0005986b_caseD_5e3;
+  case 0x5e4:
+    if (param_3 == 8) {
+      *(undefined4 *)(this + 0x84) = 0;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    goto LAB_00059f52;
+  case 0x5e5:
+    local_4d = true;
+    if (param_3 == 2) {
+      *(undefined2 *)(this + 0x88) = *(undefined2 *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x5e6:
+    if (param_3 == 1) {
+      this[0x8a] = *(CFW1814DeviceSettings *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    goto LAB_00059f52;
+  case 0x5e7:
+    if (param_3 == 1) {
+      this[0x8b] = *(CFW1814DeviceSettings *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    goto LAB_00059f52;
+  default:
+    goto switchD_0005986b_caseD_5e8;
+  case 0x5e9:
+    local_4d = param_3 == 0x80;
+    goto LAB_00059ab8;
+  case 0x5ea:
+    local_4d = true;
+    if (((param_3 == 4) && (param_2 != 0)) && (param_2 < 0x17)) {
+      *(undefined4 *)(this + uVar4 * 4 + 0x88) = *(undefined4 *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x5eb:
+    local_4d = true;
+    if (((param_3 == 4) && (param_2 != 0)) && (param_2 < 0x13)) {
+      *(undefined4 *)(this + uVar4 * 4 + 0x108) = *(undefined4 *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x5ec:
+    local_4d = true;
+    if (((param_3 == 4) && (param_2 != 0)) && (param_2 < 0x17)) {
+      *(undefined4 *)(this + uVar4 * 4 + 0x188) = *(undefined4 *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x5ed:
+    local_4d = true;
+    if (((param_3 == 1) && (param_2 != 0)) && (param_2 < 0xc)) {
+      this[uVar4 + 0x20b] = *(CFW1814DeviceSettings *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x5ee:
+    local_4d = true;
+    if (((param_3 == 1) && (param_2 != 0)) && (param_2 < 0xc)) {
+      this[uVar4 + 0x21b] = *(CFW1814DeviceSettings *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x5ef:
+    local_4d = true;
+    if (((param_3 == 1) && (param_2 != 0)) && (param_2 < 0xc)) {
+      this[uVar4 + 0x22b] = *(CFW1814DeviceSettings *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x5f0:
+    local_4d = true;
+    if (((param_3 == 1) && (param_2 != 0)) && (param_2 < 0xc)) {
+      this[uVar4 + 0x23b] = *(CFW1814DeviceSettings *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x5f1:
+    local_4d = true;
+    if (((param_3 == 2) && (param_2 != 0)) && (param_2 < 0xc)) {
+      iVar3 = 0;
+      do {
+        this[iVar3 + uVar4 * 2 + 0x24a] = *(CFW1814DeviceSettings *)((int)param_4 + iVar3);
+        iVar3 = iVar3 + 1;
+      } while ((short)iVar3 != 2);
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x5f3:
+    local_4d = param_3 == 0x50;
+LAB_00059ab8:
+    uVar6 = 3;
+    if (local_4d) {
+      uVar6 = 0;
+    }
+    local_4d = !local_4d;
+    goto switchD_0005986b_caseD_5e3;
+  case 0x5f4:
+    local_4d = true;
+    if ((param_3 == 4) && ((param_2 != 0 && param_2 < 5 || ((ushort)(param_2 - 0xf) < 6)))) {
+      local_14 = DAT_000f8720;
+      local_1c = DAT_000f8718;
+      local_24 = DAT_000f8710;
+      uVar1 = *(undefined4 *)param_4;
+      *(undefined4 *)(this + uVar4 * 4 + 0x268) = uVar1;
+      *(undefined4 *)(this + uVar4 * 4 + 0x2b8) = uVar1;
+      (**(code **)(*(int *)this + 0x28))(this,uVar4,&local_26);
+      uVar1 = CalculateOutputPairBalanceLevel(this,local_26);
+      *(undefined4 *)(this + (uint)local_26 * 4 + 0x308) = uVar1;
+      local_1c = CONCAT44(this + (uint)local_26 * 4 + 0x308,(undefined4)local_1c);
+      local_14 = local_14 & 0xffff0000;
+      local_24._0_6_ = CONCAT24(local_26,(undefined4)local_24);
+      LBroadcaster::BroadcastMessage((LBroadcaster *)(this + 0x30),0x5f6,&local_24);
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x5f6:
+    local_4d = true;
+    if ((param_3 == 4) && ((param_2 != 0 && param_2 < 3 || ((ushort)(param_2 - 8) < 3)))) {
+      local_3c = DAT_000f8734;
+      local_44 = DAT_000f872c;
+      local_4c = DAT_000f8724;
+      *(undefined4 *)(this + uVar4 * 4 + 0x308) = *(undefined4 *)param_4;
+      (**(code **)(*(int *)this + 0x24))(this,uVar4,&local_28,&local_2a);
+      uVar2 = (uint)local_28;
+      local_34 = *(int *)(this + (uint)local_2a * 4 + 0x2b8);
+      if (*(int *)(this + (uint)local_2a * 4 + 0x2b8) <= *(int *)(this + uVar2 * 4 + 0x2b8)) {
+        local_34 = *(int *)(this + uVar2 * 4 + 0x2b8);
+      }
+      iVar3 = *(int *)(this + uVar4 * 4 + 0x308);
+      iVar5 = (*(int *)(this + 0x3f4) - *(int *)(this + 0x3f0)) / 2 + *(int *)(this + 0x3f0);
+      local_30 = local_34;
+      if (iVar3 < iVar5) {
+        local_34 = (iVar3 - iVar5) + local_34;
+        if (local_34 < *(int *)(this + 0x3e4)) {
+          local_34 = *(int *)(this + 0x3e4);
+        }
+      }
+      else if (iVar3 - iVar5 != 0 && iVar5 <= iVar3) {
+        local_30 = (iVar5 - iVar3) + local_34;
+        if (local_30 < *(int *)(this + 0x3e4)) {
+          local_30 = *(int *)(this + 0x3e4);
+        }
+      }
+      *(int *)(this + uVar2 * 4 + 0x268) = local_30;
+      *(int *)(this + (uint)local_2a * 4 + 0x268) = local_34;
+      (**(code **)(**(int **)(this + 0x68) + 0x2c))(*(int **)(this + 0x68),0x5f4,uVar2,4,&local_30);
+      (**(code **)(**(int **)(this + 0x68) + 0x2c))
+                (*(int **)(this + 0x68),0x5f4,local_2a,4,&local_34);
+      local_44 = CONCAT44(&local_30,4);
+      local_3c = local_3c & 0xffff0000;
+      local_4c._0_6_ = CONCAT24(local_28,(undefined4)local_4c);
+      LBroadcaster::BroadcastMessage((LBroadcaster *)(this + 0x30),0x5f4,&local_4c);
+      local_44 = CONCAT44(&local_34,4);
+      local_3c = local_3c & 0xffff0000;
+      local_4c._0_6_ = CONCAT24(local_2a,(undefined4)local_4c);
+      LBroadcaster::BroadcastMessage((LBroadcaster *)(this + 0x30),0x5f4,&local_4c);
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x5f7:
+    local_4d = true;
+    if ((param_3 == 1) && ((param_2 != 0 && param_2 < 3 || (param_2 == 10)))) {
+      this[uVar4 + 0x333] = *(CFW1814DeviceSettings *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x5f8:
+    local_4d = true;
+    if ((param_3 == 1) && ((param_2 != 0 && param_2 < 3 || ((ushort)(param_2 - 8) < 3)))) {
+      this[uVar4 + 0x33d] = *(CFW1814DeviceSettings *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x5f9:
+    local_4d = true;
+    if ((param_3 == 1) && ((ushort)(param_2 - 1) < 2)) {
+      this[uVar4 + 0x347] = *(CFW1814DeviceSettings *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x5fa:
+    local_4d = true;
+    if ((param_3 == 1) && ((param_2 != 0 && param_2 < 3 || ((ushort)(param_2 - 8) < 3)))) {
+      this[uVar4 + 0x351] = *(CFW1814DeviceSettings *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x5fb:
+    local_4d = true;
+    if (((param_3 == 2) && (param_2 != 0)) && (param_2 < 4)) {
+      *(undefined2 *)(this + uVar4 * 2 + 0x35a) = *(undefined2 *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x5fd:
+    local_4d = true;
+    if ((param_3 == 2) && ((ushort)(param_2 - 8) < 2)) {
+      if (param_2 == 8) {
+        *(undefined2 *)(this + 0x370) = *(undefined2 *)param_4;
+      }
+      else {
+        *(undefined2 *)(this + 0x372) = *(undefined2 *)param_4;
+      }
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x5fe:
+    local_4d = true;
+    if (param_3 == 1) {
+      this[0x374] = *(CFW1814DeviceSettings *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x5ff:
+    local_4d = true;
+    if (param_3 == 2) {
+      *(undefined2 *)(this + 900) = *(undefined2 *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x601:
+    local_4d = true;
+    if (param_3 == 4) {
+      *(undefined4 *)(this + 0x378) = *(undefined4 *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x602:
+    if (param_3 == 2) {
+      *(undefined2 *)(this + 0x37c) = *(undefined2 *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    goto LAB_00059f52;
+  case 0x605:
+    local_4d = true;
+    if (param_3 == 4) {
+      *(undefined4 *)(this + 0x380) = *(undefined4 *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x608:
+    local_4d = true;
+    if (param_3 == 2) {
+      *(undefined2 *)(this + 0x392) = *(undefined2 *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x609:
+    local_4d = true;
+    if (param_3 == 6) {
+      iVar3 = 0;
+      do {
+        *(undefined2 *)(this + iVar3 * 2 + 0x394) = *(undefined2 *)((int)param_4 + iVar3 * 2);
+        iVar3 = iVar3 + 1;
+      } while ((short)iVar3 != 3);
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x60a:
+    local_4d = true;
+    if (param_3 == 2) {
+      *(undefined2 *)(this + 0x37e) = *(undefined2 *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x60d:
+    local_4d = true;
+    if (param_3 == 2) {
+      *(undefined2 *)(this + 0x38c) = *(undefined2 *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x60e:
+    local_4d = true;
+    if (param_3 == 2) {
+      *(undefined2 *)(this + 0x38e) = *(undefined2 *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x60f:
+    local_4d = true;
+    if (param_3 == 2) {
+      *(undefined2 *)(this + 0x390) = *(undefined2 *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x610:
+    local_4d = true;
+    if (param_3 == 1) {
+      this[0x39a] = *(CFW1814DeviceSettings *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x611:
+    local_4d = true;
+    if (param_3 == 1) {
+      this[0x39b] = *(CFW1814DeviceSettings *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+    break;
+  case 0x615:
+    if (param_3 == 4) {
+      *(undefined4 *)(this + 0x388) = *(undefined4 *)param_4;
+      goto switchD_0005986b_caseD_5e3;
+    }
+LAB_00059f52:
+    uVar6 = 3;
+    local_4d = true;
+    goto switchD_0005986b_caseD_5e3;
+  }
+  local_4d = true;
+  uVar6 = 3;
+switchD_0005986b_caseD_5e3:
+  *param_5 = local_4d;
+  return uVar6;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P7.java> === CFW1814DeviceSettings::GetSettingData @ 0005a19c === (GhidraScript)  
+INFO  DecompA2P7.java> 
+/* CFW1814DeviceSettings::GetSettingData(unsigned long, unsigned short, unsigned long, void*) */
+
+undefined2 __thiscall
+CFW1814DeviceSettings::GetSettingData
+          (CFW1814DeviceSettings *this,ulong param_1,ushort param_2,ulong param_3,void *param_4)
+
+{
+  CFW1814DeviceSettings CVar1;
+  undefined2 uVar2;
+  undefined4 uVar3;
+  uint uVar4;
+  int iVar5;
+  
+  uVar2 = 1;
+  if (0x37 < param_1 - 0x5de) {
+    return 1;
+  }
+  uVar4 = (uint)param_2;
+  switch(param_1) {
+  case 0x5de:
+    uVar2 = (**(code **)(**(int **)(this + 0x68) + 0x20))
+                      (*(int **)(this + 0x68),0x5de,param_3,param_4);
+    return uVar2;
+  case 0x5df:
+    uVar2 = (**(code **)(**(int **)(this + 0x68) + 0x20))
+                      (*(int **)(this + 0x68),0x5df,param_3,param_4);
+    return uVar2;
+  case 0x5e0:
+    uVar2 = (**(code **)(**(int **)(this + 0x68) + 0x20))
+                      (*(int **)(this + 0x68),0x5e0,param_3,param_4);
+    return uVar2;
+  case 0x5e1:
+    uVar2 = (**(code **)(**(int **)(this + 0x68) + 0x20))
+                      (*(int **)(this + 0x68),0x5e1,param_3,param_4);
+    return uVar2;
+  default:
+    goto switchD_0005a1d5_caseD_5e2;
+  case 0x5e4:
+    if (param_3 != 8) {
+      return 3;
+    }
+    *(undefined4 *)param_4 = *(undefined4 *)(this + 0x84);
+    *(undefined4 *)((int)param_4 + 4) = 0;
+    goto LAB_0005a755;
+  case 0x5e5:
+    if (param_3 != 2) {
+      return 3;
+    }
+    uVar2 = *(undefined2 *)(this + 0x88);
+    goto LAB_0005a752;
+  case 0x5e6:
+    if (param_3 != 1) {
+      return 3;
+    }
+    CVar1 = this[0x8a];
+    break;
+  case 0x5e7:
+    if (param_3 != 1) {
+      return 3;
+    }
+    CVar1 = this[0x8b];
+    break;
+  case 0x5ea:
+    if (param_3 != 4) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (0x16 < param_2) {
+      return 3;
+    }
+    uVar3 = *(undefined4 *)(this + uVar4 * 4 + 0x88);
+    goto LAB_0005a741;
+  case 0x5eb:
+    if (param_3 != 4) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (0x12 < param_2) {
+      return 3;
+    }
+    uVar3 = *(undefined4 *)(this + uVar4 * 4 + 0x108);
+    goto LAB_0005a741;
+  case 0x5ec:
+    if (param_3 != 4) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (0x16 < param_2) {
+      return 3;
+    }
+    uVar3 = *(undefined4 *)(this + uVar4 * 4 + 0x188);
+    goto LAB_0005a741;
+  case 0x5ed:
+    if (param_3 != 1) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (0xb < param_2) {
+      return 3;
+    }
+    CVar1 = this[uVar4 + 0x20b];
+    break;
+  case 0x5ee:
+    if (param_3 != 1) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (0xb < param_2) {
+      return 3;
+    }
+    CVar1 = this[uVar4 + 0x21b];
+    break;
+  case 0x5ef:
+    if (param_3 != 1) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (0xb < param_2) {
+      return 3;
+    }
+    CVar1 = this[uVar4 + 0x22b];
+    break;
+  case 0x5f0:
+    if (param_3 != 1) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (0xb < param_2) {
+      return 3;
+    }
+    CVar1 = this[uVar4 + 0x23b];
+    break;
+  case 0x5f1:
+    if (param_3 != 2) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (0xb < param_2) {
+      return 3;
+    }
+    iVar5 = 0;
+    do {
+      *(CFW1814DeviceSettings *)((int)param_4 + iVar5) = this[iVar5 + uVar4 * 2 + 0x24a];
+      iVar5 = iVar5 + 1;
+    } while ((short)iVar5 != 2);
+    return 0;
+  case 0x5f4:
+    if (param_3 != 4) {
+      return 3;
+    }
+    if ((param_2 == 0 || 4 < param_2) && (5 < (ushort)(param_2 - 0xf))) {
+      return 3;
+    }
+    uVar3 = *(undefined4 *)(this + uVar4 * 4 + 0x268);
+    goto LAB_0005a741;
+  case 0x5f6:
+    if (param_3 != 4) {
+      return 3;
+    }
+    if ((param_2 == 0 || 2 < param_2) && (2 < (ushort)(param_2 - 8))) {
+      return 3;
+    }
+    uVar3 = *(undefined4 *)(this + uVar4 * 4 + 0x308);
+    goto LAB_0005a741;
+  case 0x5f7:
+    if (param_3 != 1) {
+      return 3;
+    }
+    if ((param_2 == 0 || 2 < param_2) && (param_2 != 10)) {
+      return 3;
+    }
+    CVar1 = this[uVar4 + 0x333];
+    break;
+  case 0x5f8:
+    if (param_3 != 1) {
+      return 3;
+    }
+    if ((param_2 == 0 || 2 < param_2) && (2 < (ushort)(param_2 - 8))) {
+      return 3;
+    }
+    CVar1 = this[uVar4 + 0x33d];
+    break;
+  case 0x5f9:
+    if (param_3 != 1) {
+      return 3;
+    }
+    if (1 < (ushort)(param_2 - 1)) {
+      return 3;
+    }
+    CVar1 = this[uVar4 + 0x347];
+    break;
+  case 0x5fa:
+    if (param_3 != 1) {
+      return 3;
+    }
+    if ((param_2 == 0 || 2 < param_2) && (2 < (ushort)(param_2 - 8))) {
+      return 3;
+    }
+    CVar1 = this[uVar4 + 0x351];
+    break;
+  case 0x5fb:
+    if (param_3 != 2) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (3 < param_2) {
+      return 3;
+    }
+    uVar2 = *(undefined2 *)(this + uVar4 * 2 + 0x35a);
+    goto LAB_0005a752;
+  case 0x5fd:
+    if (param_3 != 2) {
+      return 3;
+    }
+    if (param_2 == 9) {
+      uVar2 = *(undefined2 *)(this + 0x372);
+    }
+    else {
+      if (param_2 != 8) {
+        return 3;
+      }
+      uVar2 = *(undefined2 *)(this + 0x370);
+    }
+    goto LAB_0005a752;
+  case 0x5fe:
+    if (param_3 != 1) {
+      return 3;
+    }
+    CVar1 = this[0x374];
+    break;
+  case 0x5ff:
+    if (param_3 != 2) {
+      return 3;
+    }
+    uVar2 = *(undefined2 *)(this + 900);
+    goto LAB_0005a752;
+  case 0x601:
+    if (param_3 != 4) {
+      return 3;
+    }
+    uVar3 = *(undefined4 *)(this + 0x378);
+    goto LAB_0005a741;
+  case 0x602:
+    if (param_3 != 2) {
+      return 3;
+    }
+    uVar2 = *(undefined2 *)(this + 0x37c);
+    goto LAB_0005a752;
+  case 0x605:
+    if (param_3 != 4) {
+      return 3;
+    }
+    uVar3 = *(undefined4 *)(this + 0x380);
+    goto LAB_0005a741;
+  case 0x608:
+    if (param_3 != 2) {
+      return 3;
+    }
+    uVar2 = *(undefined2 *)(this + 0x392);
+    goto LAB_0005a752;
+  case 0x609:
+    if (param_3 != 6) {
+      return 3;
+    }
+    iVar5 = 0;
+    do {
+      *(undefined2 *)((int)param_4 + iVar5 * 2) = *(undefined2 *)(this + iVar5 * 2 + 0x394);
+      iVar5 = iVar5 + 1;
+    } while ((short)iVar5 != 3);
+    return 0;
+  case 0x60a:
+    if (param_3 != 2) {
+      return 3;
+    }
+    uVar2 = *(undefined2 *)(this + 0x37e);
+    goto LAB_0005a752;
+  case 0x60d:
+    if (param_3 != 2) {
+      return 3;
+    }
+    uVar2 = *(undefined2 *)(this + 0x38c);
+    goto LAB_0005a752;
+  case 0x60e:
+    if (param_3 != 2) {
+      return 3;
+    }
+    uVar2 = *(undefined2 *)(this + 0x38e);
+    goto LAB_0005a752;
+  case 0x60f:
+    if (param_3 != 2) {
+      return 3;
+    }
+    uVar2 = *(undefined2 *)(this + 0x390);
+LAB_0005a752:
+    *(undefined2 *)param_4 = uVar2;
+    goto LAB_0005a755;
+  case 0x610:
+    if (param_3 != 1) {
+      return 3;
+    }
+    CVar1 = this[0x39a];
+    break;
+  case 0x611:
+    if (param_3 != 1) {
+      return 3;
+    }
+    CVar1 = this[0x39b];
+    break;
+  case 0x615:
+    if (param_3 != 4) {
+      return 3;
+    }
+    uVar3 = *(undefined4 *)(this + 0x388);
+LAB_0005a741:
+    *(undefined4 *)param_4 = uVar3;
+    goto LAB_0005a755;
+  }
+  *(CFW1814DeviceSettings *)param_4 = CVar1;
+LAB_0005a755:
+  uVar2 = 0;
+switchD_0005a1d5_caseD_5e2:
+  return uVar2;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P7.java> === CFW1814DeviceSettings::ReadSettingsFromHardware @ 0005b5f8 === (GhidraScript)  
+INFO  DecompA2P7.java> 
+/* CFW1814DeviceSettings::ReadSettingsFromHardware() */
+
+undefined4 __thiscall CFW1814DeviceSettings::ReadSettingsFromHardware(CFW1814DeviceSettings *this)
+
+{
+  short sVar1;
+  CFW1814DeviceSettings CVar2;
+  short sVar3;
+  undefined4 uVar4;
+  undefined2 uVar5;
+  ushort uVar6;
+  CFW1814DeviceSettings *pCVar7;
+  int iVar8;
+  uint uVar9;
+  uint uVar10;
+  bool bVar11;
+  CFW1814DeviceSettings *local_28;
+  undefined4 local_24;
+  undefined2 local_20;
+  undefined2 local_1e;
+  undefined4 local_1c;
+  undefined4 local_18;
+  undefined2 local_14;
+  CFW1814DeviceSettings local_11;
+  
+  local_11 = (CFW1814DeviceSettings)0x0;
+  local_14 = 0;
+  local_18 = 0;
+  local_1c = 0;
+  local_1e = 0;
+  local_20 = DAT_000f873c;
+  local_24 = DAT_000f8738;
+  (**(code **)(**(int **)(this + 0x68) + 0x24))(*(int **)(this + 0x68),0x5e9,this + 0x3a8);
+  (**(code **)(**(int **)(this + 0x68) + 0x24))(*(int **)(this + 0x68),0x5ea,this + 0x3b4);
+  (**(code **)(**(int **)(this + 0x68) + 0x24))(*(int **)(this + 0x68),0x5eb,this + 0x3c0);
+  (**(code **)(**(int **)(this + 0x68) + 0x24))(*(int **)(this + 0x68),0x5ec,this + 0x3cc);
+  (**(code **)(**(int **)(this + 0x68) + 0x24))(*(int **)(this + 0x68),0x5f3,this + 0x3d8);
+  (**(code **)(**(int **)(this + 0x68) + 0x24))(*(int **)(this + 0x68),0x5f4,this + 0x3e4);
+  *(undefined4 *)(this + 0x3f0) = 0;
+  *(int *)(this + 0x3f4) = (*(int *)(this + 1000) - *(int *)(this + 0x3e4)) * 2;
+  *(undefined4 *)(this + 0x3f8) = *(undefined4 *)(this + 0x3ec);
+  sVar3 = CDeviceSettings::LoadSupportedSampleRates((CDeviceSettings *)this);
+  if ((sVar3 == 0) && (*(int *)(this + 0x7c) != 0)) {
+    *(undefined4 *)(this + 0x414) = 1;
+    *(int *)(this + 0x418) = *(int *)(this + 0x7c);
+  }
+  else {
+    *(undefined4 *)(this + 0x414) = 0;
+    *(undefined4 *)(this + 0x418) = 0;
+  }
+  *(undefined4 *)(this + 0x41c) = 0x3f800000;
+  *(undefined4 *)(this + 0x84) = 0;
+  sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x5e5,2,&local_14);
+  uVar5 = 2;
+  if (sVar3 == 0) {
+    uVar5 = local_14;
+  }
+  *(undefined2 *)(this + 0x88) = uVar5;
+  sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x5e6,1,&local_11);
+  CVar2 = local_11;
+  if (sVar3 != 0) {
+    CVar2 = (CFW1814DeviceSettings)0x0;
+  }
+  this[0x8a] = CVar2;
+  sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x5e7,1,&local_11);
+  CVar2 = (CFW1814DeviceSettings)0x0;
+  if (sVar3 == 0) {
+    CVar2 = local_11;
+  }
+  this[0x8b] = CVar2;
+  iVar8 = 99;
+  do {
+    uVar10 = iVar8 - 0x62;
+    sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                      (*(int **)(this + 0x68),0x5ea,uVar10 & 0xffff,4,&local_1c);
+    uVar4 = local_1c;
+    if (sVar3 != 0) {
+      uVar4 = 0xffffffc0;
+    }
+    *(undefined4 *)(this + iVar8 * 4 + -0x100) = uVar4;
+    if ((ushort)uVar10 < 0x13) {
+      sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                        (*(int **)(this + 0x68),0x5eb,uVar10 & 0xffff,4,&local_1c);
+      uVar4 = local_1c;
+      if (sVar3 != 0) {
+        uVar4 = 0;
+      }
+      *(undefined4 *)(this + iVar8 * 4 + -0x80) = uVar4;
+    }
+    sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                      (*(int **)(this + 0x68),0x5ec,uVar10 & 0xffff,4,&local_1c);
+    uVar4 = local_1c;
+    if (sVar3 != 0) {
+      uVar4 = 0xffffffc0;
+    }
+    *(undefined4 *)(this + iVar8 * 4) = uVar4;
+    iVar8 = iVar8 + 1;
+  } while ((short)iVar8 != 0x79);
+  local_28 = this + 0x24c;
+  uVar10 = 1;
+  do {
+    uVar9 = uVar10 & 0xffff;
+    sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                      (*(int **)(this + 0x68),0x5ed,uVar9,1,&local_11);
+    CVar2 = local_11;
+    if (sVar3 != 0) {
+      CVar2 = (CFW1814DeviceSettings)0x0;
+    }
+    this[uVar10 + 0x20b] = CVar2;
+    sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                      (*(int **)(this + 0x68),0x5ee,uVar9,1,&local_11);
+    CVar2 = local_11;
+    if (sVar3 != 0) {
+      CVar2 = (CFW1814DeviceSettings)0x0;
+    }
+    this[uVar10 + 0x21b] = CVar2;
+    sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                      (*(int **)(this + 0x68),0x5ef,uVar9,1,&local_11);
+    CVar2 = local_11;
+    if (sVar3 != 0) {
+      CVar2 = (CFW1814DeviceSettings)0x0;
+    }
+    this[uVar10 + 0x22b] = CVar2;
+    sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                      (*(int **)(this + 0x68),0x5f0,uVar9,1,&local_11);
+    CVar2 = local_11;
+    if (sVar3 != 0) {
+      CVar2 = (CFW1814DeviceSettings)0x0;
+    }
+    this[uVar10 + 0x23b] = CVar2;
+    sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                      (*(int **)(this + 0x68),0x5f1,uVar9,2,&local_1e);
+    iVar8 = 0;
+    pCVar7 = local_28;
+    do {
+      CVar2 = (CFW1814DeviceSettings)0x0;
+      if (sVar3 == 0) {
+        CVar2 = *(CFW1814DeviceSettings *)((int)&local_1e + iVar8);
+      }
+      *pCVar7 = CVar2;
+      pCVar7 = pCVar7 + 1;
+      iVar8 = iVar8 + 1;
+    } while ((short)iVar8 != 2);
+    local_28 = local_28 + 2;
+    uVar10 = uVar10 + 1;
+  } while ((short)uVar10 != 0xc);
+  bVar11 = true;
+  iVar8 = 0x9b;
+  do {
+    uVar6 = (ushort)(iVar8 - 0x9aU);
+    if ((uVar6 < 5) || ((0xe < uVar6 && (!(bool)(bVar11 ^ 1))))) {
+      sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                        (*(int **)(this + 0x68),0x5f4,iVar8 - 0x9aU & 0xffff,4,&local_1c);
+      uVar4 = local_1c;
+      if (sVar3 != 0) {
+        uVar4 = 0xffffffc0;
+      }
+      *(undefined4 *)(this + iVar8 * 4) = uVar4;
+      *(undefined4 *)(this + iVar8 * 4 + 0x50) = uVar4;
+    }
+    bVar11 = (ushort)((short)iVar8 - 0x99U) < 0x15;
+    iVar8 = iVar8 + 1;
+  } while ((short)iVar8 != 0xaf);
+  bVar11 = true;
+  uVar10 = 0;
+  do {
+    uVar9 = uVar10 + 1;
+    uVar6 = (ushort)uVar9;
+    if ((uVar6 < 3) || ((7 < uVar6 && (!(bool)(bVar11 ^ 1))))) {
+      uVar4 = CalculateOutputPairBalanceLevel(this,uVar6);
+      *(undefined4 *)(this + uVar10 * 4 + 0x30c) = uVar4;
+      sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                        (*(int **)(this + 0x68),0x5f8,uVar9 & 0xffff,1,&local_11);
+      CVar2 = local_11;
+      if (sVar3 != 0) {
+        CVar2 = (CFW1814DeviceSettings)0x0;
+      }
+      this[uVar10 + 0x33e] = CVar2;
+      sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                        (*(int **)(this + 0x68),0x5fa,uVar9 & 0xffff,1,&local_11);
+      CVar2 = local_11;
+      if (sVar3 != 0) {
+        CVar2 = (CFW1814DeviceSettings)0x0;
+      }
+      this[uVar10 + 0x352] = CVar2;
+    }
+    if ((uVar6 < 0xb) && ((0x407U >> (uVar9 & 0x1f) & 1) != 0)) {
+      sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                        (*(int **)(this + 0x68),0x5f7,uVar9 & 0xffff,1,&local_11);
+      CVar2 = local_11;
+      if (sVar3 != 0) {
+        CVar2 = (CFW1814DeviceSettings)0x0;
+      }
+      this[uVar10 + 0x334] = CVar2;
+    }
+    if (uVar6 < 3) {
+      sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                        (*(int **)(this + 0x68),0x5f9,uVar9 & 0xffff,1,&local_11);
+      CVar2 = local_11;
+      if (sVar3 != 0) {
+        CVar2 = (CFW1814DeviceSettings)0x0;
+      }
+      this[uVar10 + 0x348] = CVar2;
+    }
+    if (uVar6 < 4) {
+      sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                        (*(int **)(this + 0x68),0x5fb,uVar9 & 0xffff,2,&local_14);
+      uVar5 = local_14;
+      if (sVar3 != 0) {
+        uVar5 = 1;
+      }
+      *(undefined2 *)(this + uVar10 * 2 + 0x35c) = uVar5;
+    }
+    bVar11 = (ushort)((short)uVar10 + 2U) < 0xb;
+    uVar10 = uVar9;
+  } while (uVar6 != 10);
+  sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x30))(*(int **)(this + 0x68),0x5fd,8,2,&local_14);
+  uVar5 = local_14;
+  if (sVar3 != 0) {
+    uVar5 = 1;
+  }
+  *(undefined2 *)(this + 0x370) = uVar5;
+  sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x30))(*(int **)(this + 0x68),0x5fd,9,2,&local_14);
+  uVar5 = 2;
+  if (sVar3 == 0) {
+    uVar5 = local_14;
+  }
+  *(undefined2 *)(this + 0x372) = uVar5;
+  sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x5fe,1,&local_11);
+  CVar2 = local_11;
+  if (sVar3 != 0) {
+    CVar2 = (CFW1814DeviceSettings)0x1;
+  }
+  this[0x374] = CVar2;
+  sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x5ff,2,&local_14);
+  uVar5 = 0;
+  if (sVar3 == 0) {
+    uVar5 = local_14;
+  }
+  *(undefined2 *)(this + 900) = uVar5;
+  sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x601,4,&local_18);
+  iVar8 = 0;
+  uVar4 = local_18;
+  if (sVar3 != 0) {
+    uVar4 = 0;
+  }
+  *(undefined4 *)(this + 0x378) = uVar4;
+  sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x602,2,&local_14);
+  uVar5 = local_14;
+  if (sVar3 != 0) {
+    uVar5 = 1;
+  }
+  *(undefined2 *)(this + 0x37c) = uVar5;
+  sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x615,4,&local_18);
+  uVar4 = 48000;
+  if (sVar3 == 0) {
+    uVar4 = local_18;
+  }
+  *(undefined4 *)(this + 0x388) = uVar4;
+  sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x60d,2,&local_14);
+  uVar5 = local_14;
+  if (sVar3 != 0) {
+    uVar5 = 1;
+  }
+  *(undefined2 *)(this + 0x38c) = uVar5;
+  sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x60e,2,&local_14);
+  uVar5 = local_14;
+  if (sVar3 != 0) {
+    uVar5 = 1;
+  }
+  *(undefined2 *)(this + 0x38e) = uVar5;
+  sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x611,1,&local_11);
+  CVar2 = local_11;
+  if (sVar3 != 0) {
+    CVar2 = (CFW1814DeviceSettings)0x0;
+  }
+  this[0x39b] = CVar2;
+  sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x60f,2,&local_14);
+  uVar5 = local_14;
+  if (sVar3 != 0) {
+    uVar5 = 1;
+  }
+  *(undefined2 *)(this + 0x390) = uVar5;
+  sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x608,2,&local_14);
+  uVar5 = 1;
+  if (sVar3 == 0) {
+    uVar5 = local_14;
+  }
+  *(undefined2 *)(this + 0x392) = uVar5;
+  sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x609,6,&local_24);
+  do {
+    sVar1 = (short)iVar8;
+    if (sVar3 == 0) {
+      *(undefined2 *)(this + iVar8 * 2 + 0x394) = *(undefined2 *)((int)&local_24 + iVar8 * 2);
+    }
+    else {
+      *(short *)(this + iVar8 * 2 + 0x394) = sVar1 + 1;
+    }
+    iVar8 = iVar8 + 1;
+  } while (sVar1 != 2);
+  return 0;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P7.java> === CFW1814DeviceSettings::WriteSettingsToHardware @ 0005bf10 === (GhidraScript)  
+INFO  DecompA2P7.java> 
+/* CFW1814DeviceSettings::WriteSettingsToHardware() */
+
+undefined4 __thiscall CFW1814DeviceSettings::WriteSettingsToHardware(CFW1814DeviceSettings *this)
+
+{
+  ushort uVar1;
+  uint uVar2;
+  short sVar3;
+  uint uVar4;
+  ushort uVar5;
+  CFW1814DeviceSettings *pCVar6;
+  uint uVar7;
+  int iVar8;
+  bool bVar9;
+  CFW1814DeviceSettings *local_18;
+  CFW1814DeviceSettings local_11;
+  
+  local_11 = (CFW1814DeviceSettings)0x0;
+  (**(code **)(**(int **)(this + 0x68) + 0x28))(*(int **)(this + 0x68),0x5e5,2,this + 0x88);
+  (**(code **)(**(int **)(this + 0x68) + 0x28))(*(int **)(this + 0x68),0x5e6,1,this + 0x8a);
+  (**(code **)(**(int **)(this + 0x68) + 0x28))(*(int **)(this + 0x68),0x5e7,1,this + 0x8b);
+  pCVar6 = this + 0x10c;
+  uVar5 = 1;
+  do {
+    (**(code **)(**(int **)(this + 0x68) + 0x2c))
+              (*(int **)(this + 0x68),0x5ea,uVar5,4,pCVar6 + -0x80);
+    if (uVar5 < 0x13) {
+      (**(code **)(**(int **)(this + 0x68) + 0x2c))(*(int **)(this + 0x68),0x5eb,uVar5,4,pCVar6);
+    }
+    (**(code **)(**(int **)(this + 0x68) + 0x2c))
+              (*(int **)(this + 0x68),0x5ec,uVar5,4,pCVar6 + 0x80);
+    uVar5 = uVar5 + 1;
+    pCVar6 = pCVar6 + 4;
+  } while (uVar5 != 0x17);
+  local_18 = this + 0x24c;
+  uVar4 = 0;
+  do {
+    uVar2 = uVar4 + 1;
+    uVar7 = uVar2 & 0xffff;
+    (**(code **)(**(int **)(this + 0x68) + 0x2c))
+              (*(int **)(this + 0x68),0x5ed,uVar7,1,this + uVar4 + 0x20c);
+    (**(code **)(**(int **)(this + 0x68) + 0x2c))
+              (*(int **)(this + 0x68),0x5ee,uVar7,1,this + uVar4 + 0x21c);
+    (**(code **)(**(int **)(this + 0x68) + 0x2c))
+              (*(int **)(this + 0x68),0x5ef,uVar7,1,this + uVar4 + 0x22c);
+    (**(code **)(**(int **)(this + 0x68) + 0x2c))
+              (*(int **)(this + 0x68),0x5f0,uVar7,1,this + uVar4 + 0x23c);
+    (**(code **)(**(int **)(this + 0x68) + 0x2c))(*(int **)(this + 0x68),0x5f1,uVar7,2,local_18);
+    local_18 = local_18 + 2;
+    uVar4 = uVar2;
+  } while ((short)uVar2 != 0xb);
+  pCVar6 = this + 0x26c;
+  bVar9 = true;
+  uVar5 = 2;
+  do {
+    uVar1 = uVar5 - 1;
+    if ((uVar1 < 5) || ((0xe < uVar1 && (!(bool)(bVar9 ^ 1))))) {
+      (**(code **)(**(int **)(this + 0x68) + 0x2c))(*(int **)(this + 0x68),0x5f4,uVar1,4,pCVar6);
+    }
+    uVar1 = uVar5 + 1;
+    pCVar6 = pCVar6 + 4;
+    bVar9 = uVar5 < 0x15;
+    uVar5 = uVar1;
+  } while (uVar1 != 0x16);
+  bVar9 = true;
+  iVar8 = 0x35c;
+  uVar4 = 0;
+  do {
+    uVar2 = uVar4 + 1;
+    uVar5 = (ushort)uVar2;
+    if ((uVar5 < 3) || ((7 < uVar5 && (!(bool)(bVar9 ^ 1))))) {
+      (**(code **)(**(int **)(this + 0x68) + 0x2c))
+                (*(int **)(this + 0x68),0x5f8,uVar2 & 0xffff,1,this + uVar4 + 0x33e);
+      (**(code **)(**(int **)(this + 0x68) + 0x2c))
+                (*(int **)(this + 0x68),0x5fa,uVar2 & 0xffff,1,this + uVar4 + 0x352);
+    }
+    if ((uVar5 < 0xb) && ((0x407U >> (uVar2 & 0x1f) & 1) != 0)) {
+      (**(code **)(**(int **)(this + 0x68) + 0x2c))
+                (*(int **)(this + 0x68),0x5f7,uVar2 & 0xffff,1,this + uVar4 + 0x334);
+    }
+    if (uVar5 < 3) {
+      (**(code **)(**(int **)(this + 0x68) + 0x2c))
+                (*(int **)(this + 0x68),0x5f9,uVar2 & 0xffff,1,this + uVar4 + 0x348);
+    }
+    if (uVar5 < 4) {
+      (**(code **)(**(int **)(this + 0x68) + 0x2c))
+                (*(int **)(this + 0x68),0x5fb,uVar2 & 0xffff,2,this + iVar8);
+    }
+    iVar8 = iVar8 + 2;
+    bVar9 = (ushort)((short)uVar4 + 2U) < 0xb;
+    uVar4 = uVar2;
+  } while (uVar5 != 10);
+  (**(code **)(**(int **)(this + 0x68) + 0x2c))(*(int **)(this + 0x68),0x5fd,8,2,this + 0x370);
+  (**(code **)(**(int **)(this + 0x68) + 0x2c))(*(int **)(this + 0x68),0x5fd,9,2,this + 0x372);
+  (**(code **)(**(int **)(this + 0x68) + 0x28))(*(int **)(this + 0x68),0x5ff,2,this + 900);
+  (**(code **)(**(int **)(this + 0x68) + 0x28))(*(int **)(this + 0x68),0x601,4,this + 0x378);
+  (**(code **)(**(int **)(this + 0x68) + 0x28))(*(int **)(this + 0x68),0x60d,2,this + 0x38c);
+  (**(code **)(**(int **)(this + 0x68) + 0x28))(*(int **)(this + 0x68),0x60e,2,this + 0x38e);
+  (**(code **)(**(int **)(this + 0x68) + 0x28))(*(int **)(this + 0x68),0x611,1,this + 0x39b);
+  (**(code **)(**(int **)(this + 0x68) + 0x28))(*(int **)(this + 0x68),0x60f,2,this + 0x390);
+  (**(code **)(**(int **)(this + 0x68) + 0x28))(*(int **)(this + 0x68),0x608,2,this + 0x392);
+  (**(code **)(**(int **)(this + 0x68) + 0x28))(*(int **)(this + 0x68),0x609,6,this + 0x394);
+  sVar3 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x5fe,1,&local_11);
+  if (sVar3 != 0) {
+    local_11 = (CFW1814DeviceSettings)0x1;
+  }
+  this[0x374] = local_11;
+  return 0;
+}
+
+ (GhidraScript)  
+INFO  REPORT: Save succeeded for processed file: /Panel (HeadlessAnalyzer)  

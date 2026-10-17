@@ -1,0 +1,95 @@
+# capture 76 - SL v1.9 (official): HAL notifications + duplex stream during an optical ADAT set / restore (2026-10-17)
+# tools: openaudio-fw1814/tools/halwatch.c, aduplex.c, maprop.c (MA_CLASS=com_m_audio_FW1814Device); SL was already 16/12 at start, so the real change is the restore at t=24 s (16/12 -> 10/6)
+## halwatch
+device 263 "FireWire 1814 Multichannel"
+   0.861   [snapshot start] streams: in:264(16ch) out:265(12ch)   device in/out channels: 16 / 12
+   0.861   object 263  (device)  selector 'gone' scope 'glob' element 0
+   5.861   [snapshot tick] streams: in:264(16ch) out:265(12ch)   device in/out channels: 16 / 12
+   8.008   object 263  (device)  selector 'gone' scope 'glob' element 0
+   8.687   object 1    (system)  selector 'dIn ' scope 'glob' element 0
+   8.687   object 1    (system)  selector 'dOut' scope 'glob' element 0
+   8.687   object 1    (system)  selector 'sOut' scope 'glob' element 0
+   8.687   object 263  (device)  selector 'diff' scope 'glob' element 0
+   8.687   object 263  (device)  selector 'gone' scope 'glob' element 0
+  10.862   [snapshot tick] streams: in:264(16ch) out:265(12ch)   device in/out channels: 16 / 12
+  15.863   [snapshot tick] streams: in:264(16ch) out:265(12ch)   device in/out channels: 16 / 12
+  20.863   [snapshot tick] streams: in:264(16ch) out:265(12ch)   device in/out channels: 16 / 12
+  24.023   object 263  (device)  selector 'gone' scope 'glob' element 0
+  28.005   object 263  (device)  selector 'ownd' scope 'glob' element 0
+  28.005   object 264  (stream)  selector 'pft ' scope 'glob' element 0
+  28.005   object 264  (stream)  selector 'sfmt' scope 'glob' element 0
+  28.005   object 265  (stream)  selector 'pft ' scope 'glob' element 0
+  28.005   object 265  (stream)  selector 'sfmt' scope 'glob' element 0
+  28.005   object 1    (system)  selector 'dIn ' scope 'glob' element 0
+  28.005   object 1    (system)  selector 'dOut' scope 'glob' element 0
+  28.005   object 1    (system)  selector 'sOut' scope 'glob' element 0
+  28.005   object 263  (device)  selector 'srnd' scope 'inpt' element 0
+  28.005   object 263  (device)  selector 'pft ' scope 'inpt' element 1
+  28.005   object 263  (device)  selector 'pft ' scope 'inpt' element 0
+  28.005   object 263  (device)  selector 'nsr#' scope 'glob' element 0
+  28.005   object 263  (device)  selector 'sfmt' scope 'inpt' element 1
+  28.005   object 263  (device)  selector 'sfmt' scope 'inpt' element 0
+  28.005   object 263  (device)  selector 'slay' scope 'inpt' element 0
+  28.005   object 263  (device)  selector 'srnd' scope 'outp' element 0
+  28.005   object 263  (device)  selector 'pft ' scope 'outp' element 1
+  28.005   object 263  (device)  selector 'pft ' scope 'outp' element 0
+  28.005   object 263  (device)  selector 'sfmt' scope 'outp' element 1
+  28.005   object 263  (device)  selector 'sfmt' scope 'outp' element 0
+  28.005   object 263  (device)  selector 'slay' scope 'outp' element 0
+  28.005   object 263  (device)  selector 'diff' scope 'glob' element 0
+  28.005   object 263  (device)  selector 'gone' scope 'glob' element 0
+  29.005   [snapshot tick] streams: in:264(10ch) out:265(6ch)   device in/out channels: 10 / 6
+  34.006   [snapshot tick] streams: in:264(10ch) out:265(6ch)   device in/out channels: 10 / 6
+  39.006   [snapshot tick] streams: in:264(10ch) out:265(6ch)   device in/out channels: 10 / 6
+  44.007   [snapshot tick] streams: in:264(10ch) out:265(6ch)   device in/out channels: 10 / 6
+  49.008   [snapshot tick] streams: in:264(10ch) out:265(6ch)   device in/out channels: 10 / 6
+  50.008   [snapshot end] streams: in:264(10ch) out:265(6ch)   device in/out channels: 10 / 6
+## aduplex
+device 263 "FireWire 1814 Multichannel"
+streaming (silence out, input monitored)
+t= 1s calls +79 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00071
+t= 2s calls +93 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00019
+t= 3s calls +94 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00007
+t= 4s calls +94 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00004
+t= 5s calls +94 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t= 6s calls +93 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00002
+t= 7s calls +94 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00002
+t= 8s calls +15 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t= 9s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=10s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=11s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=12s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=13s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=14s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=15s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=16s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=17s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=18s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=19s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=20s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=21s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=22s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=23s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=24s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=25s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=26s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=27s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=28s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=29s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=30s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=31s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=32s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=33s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=34s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=35s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=36s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=37s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=38s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=39s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=40s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=41s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=42s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=43s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=44s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=45s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=46s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003

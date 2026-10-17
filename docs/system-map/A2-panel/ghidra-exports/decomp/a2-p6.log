@@ -1,0 +1,491 @@
+openjdk version "25.0.4.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Zulu25.36+205-CA (build 25.0.4.1+1-LTS)
+OpenJDK 64-Bit Server VM Zulu25.36+205-CA (build 25.0.4.1+1-LTS, mixed mode)
+INFO  Using log config file: jar:file:/opt/local/share/java/ghidra-12.1.4/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /Users/bernardosardinha/Library/ghidra/ghidra_12.1.4_DEV/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /Users/bernardosardinha/Library/ghidra/ghidra_12.1.4_DEV/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (2126 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (5864 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 59 extension points (20 false positives) (ClassSearcher)  
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldOffset has been called by org.apache.felix.framework.util.SecureAction (file:/opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Base/lib/org.apache.felix.framework-7.0.5.jar)
+WARNING: Please consider reporting this to the maintainers of class org.apache.felix.framework.util.SecureAction
+WARNING: sun.misc.Unsafe::staticFieldOffset will be removed in a future release
+INFO  HEADLESS Script Paths:
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/BSim/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Base/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/PDB/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/8051/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Opening existing project: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/ghidra-project/panel-app (HeadlessAnalyzer)  
+INFO  Opening project: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/ghidra-project/panel-app (HeadlessProject)  
+INFO  REPORT: Processing project file: /Panel (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: DecompA2P6.java  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/scripts/DecompA2P6.java (HeadlessAnalyzer)  
+INFO  DecompA2P6.java> === CFW1814MixerChannelPairView::LoadUIElements @ 00055414 === (GhidraScript)  
+INFO  DecompA2P6.java> 
+/* CFW1814MixerChannelPairView::LoadUIElements() */
+
+void __thiscall CFW1814MixerChannelPairView::LoadUIElements(CFW1814MixerChannelPairView *this)
+
+{
+  int iVar1;
+  
+  CMixerChannelPairView::LoadUIElements((CMixerChannelPairView *)this);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x83);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0xf4) = 0;
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163038,0xffffffff);
+    *(int *)(this + 0xf4) = iVar1;
+    if (iVar1 != 0) goto LAB_000554a3;
+  }
+  UDebugging::DebugThrow
+            (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011db9c,0x3b);
+LAB_000554a3:
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x84);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0xf8) = 0;
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163038,0xffffffff);
+    *(int *)(this + 0xf8) = iVar1;
+    if (iVar1 != 0) {
+      return;
+    }
+  }
+  UDebugging::DebugThrow
+            (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011db9c,0x3e);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P6.java> === CFW1814MixerChannelPairView::ListenToUIElements @ 00055520 === (GhidraScript)  
+INFO  DecompA2P6.java> 
+/* CFW1814MixerChannelPairView::ListenToUIElements() */
+
+void __thiscall CFW1814MixerChannelPairView::ListenToUIElements(CFW1814MixerChannelPairView *this)
+
+{
+  CMixerChannelPairView::ListenToUIElements((CMixerChannelPairView *)this);
+  LBroadcaster::AddListener
+            ((LBroadcaster *)(*(int *)(this + 0xf4) + 0x30),(LListener *)(this + 0x88));
+  LBroadcaster::AddListener
+            ((LBroadcaster *)(*(int *)(this + 0xf8) + 0x30),(LListener *)(this + 0x88));
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P6.java> === CFW1814MixerChannelPairView::ListenToMessage @ 0005556a === (GhidraScript)  
+INFO  DecompA2P6.java> 
+/* CFW1814MixerChannelPairView::ListenToMessage(long, void*) */
+
+void __thiscall
+CFW1814MixerChannelPairView::ListenToMessage
+          (CFW1814MixerChannelPairView *this,long param_1,void *param_2)
+
+{
+  CFW1814MixerChannelPairView CVar1;
+  short sVar2;
+  int iVar3;
+  uint uVar4;
+  int iVar5;
+  char local_12 [2];
+  
+  if (param_1 == 0x5f1) {
+    iVar3 = *(int *)((int)param_2 + 0xc);
+    CVar1 = this[0xb4];
+    if (CVar1 != (CFW1814MixerChannelPairView)0x0) {
+      this[0xb4] = (CFW1814MixerChannelPairView)0x0;
+    }
+    iVar5 = 0;
+    do {
+      (**(code **)(**(int **)(this + iVar5 * 4 + 0xf4) + 0x24))
+                (*(int **)(this + iVar5 * 4 + 0xf4),*(undefined1 *)(iVar3 + iVar5));
+      iVar5 = iVar5 + 1;
+    } while ((short)iVar5 != 2);
+    if (CVar1 != (CFW1814MixerChannelPairView)0x0) {
+      this[0xb4] = (CFW1814MixerChannelPairView)0x1;
+    }
+  }
+  else if (param_1 - 0x83U < 2) {
+    uVar4 = (uint)(param_1 == 0x84);
+    iVar3 = (**(code **)(**(int **)(this + uVar4 * 4 + 0xf4) + 0x20))
+                      (*(int **)(this + uVar4 * 4 + 0xf4));
+    sVar2 = (**(code **)(**(int **)(this + 0xc0) + 0xc))
+                      (*(int **)(this + 0xc0),0x5f1,*(undefined2 *)(this + 0xb6),2,local_12);
+    if ((sVar2 == 0) && ((bool)local_12[uVar4] != (iVar3 == 1))) {
+      local_12[uVar4] = iVar3 == 1;
+      (**(code **)(**(int **)(this + 0xc0) + 0x18))
+                (*(int **)(this + 0xc0),0x5f1,*(undefined2 *)(this + 0xb6),2,local_12,0);
+    }
+  }
+  else {
+    CMixerChannelPairView::ListenToMessage((CMixerChannelPairView *)this,param_1,param_2);
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P6.java> === CFW1814MixerChannelPairView::MapMessageToHWPairID @ 000556a8 === (GhidraScript)  
+INFO  DecompA2P6.java> 
+/* CFW1814MixerChannelPairView::MapMessageToHWPairID(long) */
+
+char __thiscall
+CFW1814MixerChannelPairView::MapMessageToHWPairID(CFW1814MixerChannelPairView *this,long param_1)
+
+{
+  return (param_1 == 0x84) + '\x01';
+}
+
+ (GhidraScript)  
+INFO  DecompA2P6.java> === CFW1814MixerChannelPairView::AdaptUIElementsToSettings @ 000556e8 === (GhidraScript)  
+INFO  DecompA2P6.java> 
+/* CFW1814MixerChannelPairView::AdaptUIElementsToSettings() */
+
+void __thiscall
+CFW1814MixerChannelPairView::AdaptUIElementsToSettings(CFW1814MixerChannelPairView *this)
+
+{
+  short sVar1;
+  undefined1 uVar2;
+  int iVar3;
+  undefined1 local_12 [2];
+  
+  CMixerChannelPairView::AdaptUIElementsToSettings((CMixerChannelPairView *)this);
+  sVar1 = (**(code **)(**(int **)(this + 0xc0) + 0xc))
+                    (*(int **)(this + 0xc0),0x5f1,*(undefined2 *)(this + 0xb6),2,local_12);
+  iVar3 = 0;
+  do {
+    uVar2 = 0;
+    if (sVar1 == 0) {
+      uVar2 = local_12[iVar3];
+    }
+    (**(code **)(**(int **)(this + iVar3 * 4 + 0xf4) + 0x24))
+              (*(int **)(this + iVar3 * 4 + 0xf4),uVar2);
+    iVar3 = iVar3 + 1;
+  } while ((short)iVar3 != 2);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P6.java> === CFW1814MixerView::GetPortSettings @ 00056a7e === (GhidraScript)  
+INFO  DecompA2P6.java> 
+/* CFW1814MixerView::GetPortSettings(unsigned short&, unsigned short&) */
+
+void __thiscall
+CFW1814MixerView::GetPortSettings(CFW1814MixerView *this,ushort *param_1,ushort *param_2)
+
+{
+  int *piVar1;
+  
+  *param_1 = 2;
+  *param_2 = 2;
+  piVar1 = *(int **)(this + 0x11c);
+  if (piVar1 != (int *)0x0) {
+    (**(code **)(*piVar1 + 0xc))(piVar1,0x60d,0,2,param_1);
+    (**(code **)(**(int **)(this + 0x11c) + 0xc))(*(int **)(this + 0x11c),0x60e,0,2,param_2);
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P6.java> === CFW1814MixerView::MapSettingsToChannelViewID @ 00056af8 === (GhidraScript)  
+INFO  DecompA2P6.java> 
+/* CFW1814MixerView::MapSettingsToChannelViewID(unsigned short, unsigned short) */
+
+undefined2 __thiscall
+CFW1814MixerView::MapSettingsToChannelViewID(CFW1814MixerView *this,ushort param_1,ushort param_2)
+
+{
+  undefined2 uVar1;
+  undefined2 uVar2;
+  
+  if (param_1 == 1) {
+    uVar2 = 0xbec;
+    uVar1 = 0xbee;
+  }
+  else {
+    uVar2 = 0xbed;
+    uVar1 = 0xbeb;
+  }
+  if (param_2 == 1) {
+    uVar1 = uVar2;
+  }
+  return uVar1;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P6.java> === CFW1814MixerView::ListenToMessage @ 00056ce6 === (GhidraScript)  
+INFO  DecompA2P6.java> 
+/* CFW1814MixerView::ListenToMessage(long, void*) */
+
+void __thiscall CFW1814MixerView::ListenToMessage(CFW1814MixerView *this,long param_1,void *param_2)
+
+{
+  CFW1814MixerView CVar1;
+  bool bVar2;
+  char cVar3;
+  int iVar4;
+  bool bVar5;
+  ushort local_18;
+  ushort local_16;
+  ushort local_14;
+  ushort local_12;
+  
+  CVar1 = this[0xb4];
+  if (param_1 == 0x611) {
+    bVar2 = *(bool *)*(undefined4 *)((int)param_2 + 0xc);
+    if (CVar1 != (CFW1814MixerView)0x0) {
+      this[0xb4] = (CFW1814MixerView)0x0;
+    }
+    GetPortSettings(this,&local_16,&local_18);
+    if ((local_16 != 2) && (bVar5 = local_18 != 2, local_18 = 2, bVar5)) goto LAB_00056df4;
+    AdaptAdatChannelsToSMUX(this,local_16,local_18,bVar2);
+    iVar4 = *(int *)this;
+    param_1 = 0x611;
+  }
+  else {
+    if (param_1 == 0x601) {
+      AdaptToClockRate(this,**(ulong **)((int)param_2 + 0xc));
+      return;
+    }
+    if (1 < param_1 - 0x60dU) {
+      CMixerView::ListenToMessage((CMixerView *)this,param_1,param_2);
+      return;
+    }
+    if (CVar1 != (CFW1814MixerView)0x0) {
+      this[0xb4] = (CFW1814MixerView)0x0;
+    }
+    GetPortSettings(this,&local_12,&local_14);
+    cVar3 = AdaptChannelsToPortSettings(this,local_12,local_14);
+    if (cVar3 != '\0') goto LAB_00056df4;
+    iVar4 = *(int *)this;
+  }
+  (**(code **)(iVar4 + 0x21c))(this,param_1,param_2);
+LAB_00056df4:
+  if (CVar1 != (CFW1814MixerView)0x0) {
+    this[0xb4] = (CFW1814MixerView)0x1;
+  }
+  *PTR_sUpdateCommandStatus_0016302c = 1;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P6.java> === CFW1814MixerView::AdaptChannelsToPortSettings @ 00056e38 === (GhidraScript)  
+INFO  DecompA2P6.java> 
+/* CFW1814MixerView::AdaptChannelsToPortSettings(unsigned short, unsigned short) */
+
+undefined4 __thiscall
+CFW1814MixerView::AdaptChannelsToPortSettings(CFW1814MixerView *this,ushort param_1,ushort param_2)
+
+{
+  CFW1814MixerView CVar1;
+  CFW1814MixerView CVar2;
+  int iVar3;
+  undefined4 uVar4;
+  short sVar5;
+  short sVar6;
+  
+  if (param_1 == 1) {
+    sVar6 = 0xbec;
+    sVar5 = 0xbee;
+  }
+  else {
+    sVar6 = 0xbed;
+    sVar5 = 0xbeb;
+  }
+  if (param_2 == 1) {
+    sVar5 = sVar6;
+  }
+  uVar4 = 0;
+  if (sVar5 != *(short *)(this + 0x130)) {
+    CVar1 = this[0x120];
+    CVar2 = this[0xb4];
+    iVar3 = *(int *)(this + 0x20);
+    (**(code **)(*(int *)this + 0x1e8))(this);
+    if (CVar2 != (CFW1814MixerView)0x0) {
+      this[0xb4] = (CFW1814MixerView)0x0;
+    }
+    if (CVar1 != (CFW1814MixerView)0x0) {
+      (**(code **)(*(int *)this + 0x204))(this);
+    }
+    if (iVar3 == 2) {
+      (**(code **)(*(int *)this + 0xbc))(this);
+      (**(code **)(*(int *)this + 0x14c))(this);
+      (**(code **)(*(int *)this + 0xb8))(this);
+    }
+    else {
+      (**(code **)(*(int *)this + 0x14c))(this);
+    }
+    if (CVar1 != (CFW1814MixerView)0x0) {
+      (**(code **)(*(int *)this + 0x200))(this);
+    }
+    uVar4 = 1;
+    if (CVar2 != (CFW1814MixerView)0x0) {
+      this[0xb4] = (CFW1814MixerView)0x1;
+    }
+  }
+  return uVar4;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P6.java> === CFW1814MixerView::AdaptAdatChannelsToSMUX @ 00056f04 === (GhidraScript)  
+INFO  DecompA2P6.java> 
+/* CFW1814MixerView::AdaptAdatChannelsToSMUX(unsigned short, unsigned short, bool) */
+
+uint __thiscall
+CFW1814MixerView::AdaptAdatChannelsToSMUX
+          (CFW1814MixerView *this,ushort param_1,ushort param_2,bool param_3)
+
+{
+  int *piVar1;
+  int iVar2;
+  uint uVar3;
+  
+  uVar3 = (uint)param_3;
+  if (param_1 == 2) {
+    iVar2 = **(int **)(*(int *)(this + 0x124) + 0x14);
+    piVar1 = *(int **)(iVar2 + 0x1c);
+    if (param_3) {
+      if (piVar1 != (int *)0x0) {
+        (**(code **)(*piVar1 + 0xcc))(piVar1);
+        iVar2 = **(int **)(*(int *)(this + 0x124) + 0x14);
+      }
+      piVar1 = *(int **)(iVar2 + 0x20);
+      uVar3 = 0x101;
+      if (piVar1 != (int *)0x0) {
+        (**(code **)(*piVar1 + 0xcc))(piVar1);
+      }
+    }
+    else {
+      if (piVar1 != (int *)0x0) {
+        (**(code **)(*piVar1 + 200))(piVar1);
+        iVar2 = **(int **)(*(int *)(this + 0x124) + 0x14);
+      }
+      piVar1 = *(int **)(iVar2 + 0x20);
+      uVar3 = (uint)CONCAT11(1,param_3);
+      if (piVar1 != (int *)0x0) {
+        (**(code **)(*piVar1 + 200))(piVar1);
+      }
+    }
+  }
+  if (param_2 == 2) {
+    iVar2 = **(int **)(*(int *)(this + 0x124) + 0x14);
+    piVar1 = *(int **)(iVar2 + 0x38);
+    if ((char)uVar3 == '\x01') {
+      if (piVar1 != (int *)0x0) {
+        (**(code **)(*piVar1 + 0xcc))(piVar1);
+        iVar2 = **(int **)(*(int *)(this + 0x124) + 0x14);
+      }
+      piVar1 = *(int **)(iVar2 + 0x3c);
+      uVar3 = 0x100;
+      if (piVar1 != (int *)0x0) {
+        (**(code **)(*piVar1 + 0xcc))(piVar1);
+      }
+    }
+    else {
+      if (piVar1 != (int *)0x0) {
+        (**(code **)(*piVar1 + 200))(piVar1);
+        iVar2 = **(int **)(*(int *)(this + 0x124) + 0x14);
+      }
+      piVar1 = *(int **)(iVar2 + 0x3c);
+      uVar3 = 0x100;
+      if (piVar1 != (int *)0x0) {
+        (**(code **)(*piVar1 + 200))(piVar1);
+      }
+    }
+  }
+  return uVar3 >> 8;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P6.java> === CFW1814MixerView::AdaptToClockRate @ 00057012 === (GhidraScript)  
+INFO  DecompA2P6.java> 
+/* CFW1814MixerView::AdaptToClockRate(unsigned long) */
+
+void __thiscall CFW1814MixerView::AdaptToClockRate(CFW1814MixerView *this,ulong param_1)
+
+{
+  int *piVar1;
+  short sVar2;
+  uint local_c;
+  
+  piVar1 = *(int **)(*(int *)(this + 300) + 0xbc);
+  if (piVar1 != (int *)0x0) {
+    local_c = 48000;
+    sVar2 = (**(code **)(**(int **)(this + 0x11c) + 0xc))
+                      (*(int **)(this + 0x11c),0x615,0,4,&local_c);
+    if ((sVar2 == 0) && (param_1 <= local_c)) {
+      (**(code **)(*piVar1 + 200))(piVar1);
+    }
+    else {
+      (**(code **)(*piVar1 + 0xcc))(piVar1);
+    }
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P6.java> === CFW1814MixerView::AdaptUIElementsToSettings @ 000570b4 === (GhidraScript)  
+INFO  DecompA2P6.java> 
+/* CFW1814MixerView::AdaptUIElementsToSettings() */
+
+void __thiscall CFW1814MixerView::AdaptUIElementsToSettings(CFW1814MixerView *this)
+
+{
+  char cVar1;
+  short sVar2;
+  ulong uVar3;
+  char local_15;
+  ushort local_14;
+  ushort local_12;
+  ulong local_10;
+  
+  local_10 = 0;
+  GetPortSettings(this,&local_12,&local_14);
+  cVar1 = AdaptChannelsToPortSettings(this,local_12,local_14);
+  if (cVar1 == '\0') {
+    local_15 = '\0';
+    sVar2 = (**(code **)(**(int **)(this + 0x11c) + 0xc))
+                      (*(int **)(this + 0x11c),0x611,0,1,&local_15);
+    AdaptAdatChannelsToSMUX(this,local_12,local_14,sVar2 == 0 && local_15 != '\0');
+    sVar2 = (**(code **)(**(int **)(this + 0x11c) + 0xc))
+                      (*(int **)(this + 0x11c),0x601,0,4,&local_10);
+    uVar3 = 0;
+    if (sVar2 == 0) {
+      uVar3 = local_10;
+    }
+    AdaptToClockRate(this,uVar3);
+    CMixerView::AdaptUIElementsToSettings((CMixerView *)this);
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  REPORT: Save succeeded for processed file: /Panel (HeadlessAnalyzer)  

@@ -1,0 +1,7 @@
+#!/bin/bash
+# Stop the helper first (it holds a user client on the device until it sees the device terminate; kextunload refuses while it does),
+# then unload an older copy of the kext. Nothing here may fail the install.
+/bin/launchctl unload /Library/LaunchDaemons/com.openaudio.fw1814.helper.plist 2>/dev/null
+/usr/bin/pkill -f "OpenAudio FW1814.app" 2>/dev/null
+for try in 1 2 3 4; do /sbin/kextunload -b com.openaudio.OpenAudioFW1814 2>/dev/null && break || sleep 3; done
+exit 0

@@ -1,0 +1,102 @@
+# Decompiled method index
+
+- **MISS** `FWDCLInputProgram::Initialize`
+- **MISS** `FWDCLInputProgram::ReconnectAfterBusReset`
+- **MISS** `FWDCLInputProgram::AddTimestampedTransferPackets`
+- [`FWDCLBuilder::AddTransferPackets`](FWDCLBuilder__AddTransferPackets.c) @ `0x00006b5a`
+- [`FWDCLBuilder::ModifyJumpLabel`](FWDCLBuilder__ModifyJumpLabel.c) @ `0x00006734`
+- [`FWDCLBuilder::CheckDCLOverrun`](FWDCLBuilder__CheckDCLOverrun.c) @ `0x000067b0`
+- [`InputDCLCallback`](InputDCLCallback.c) @ `0x0002533a`
+- [`InputDCLStaticCallback`](InputDCLStaticCallback.c) @ `0x00025abe`
+- [`InputDCLStaticOverrunCallback`](InputDCLStaticOverrunCallback.c) @ `0x00025340`
+- [`InputDCLCallbackOverrun`](InputDCLCallbackOverrun.c) @ `0x0002533a`
+- [`FWDCLProgram::CreateIsochChannelAndPorts`](FWDCLProgram__CreateIsochChannelAndPorts.c) @ `0x000255c2`
+- **MISS** `FWDCLProgram::Disassemble`
+- [`FWDCLOutputProgram::Connect`](FWDCLOutputProgram__Connect.c) @ `0x00025790`
+- [`FWDCLInputProgram::Connect`](FWDCLInputProgram__Connect.c) @ `0x000257a4`
+- [`FWDCLProgram::SetupCIP`](FWDCLProgram__SetupCIP.c) @ `0x00027102`
+- [`FWDCLProgram::CalcIsochPacketHeaders`](FWDCLProgram__CalcIsochPacketHeaders.c) @ `0x0002519c`
+- [`FW1814Device::SetupAudioEngine`](FW1814Device__SetupAudioEngine.c) @ `0x0000ed34`
+- [`FWAudiophileDevice::SetupAudioEngine`](FWAudiophileDevice__SetupAudioEngine.c) @ `0x0000bb9a`
+- [`FWEngine2::ConnectAllPlugs`](FWEngine2__ConnectAllPlugs.c) @ `0x00012476`
+- [`FWEngine2::ConnectAudioMIDIChannels`](FWEngine2__ConnectAudioMIDIChannels.c) @ `0x00012156`
+- [`FWEngine2::initHardware`](FWEngine2__initHardware.c) @ `0x00012622`
+- [`FW1814Device::ReconnectP2P`](FW1814Device__ReconnectP2P.c) @ `0x0000e1ea`
+- [`FW1814Device::BusReset`](FW1814Device__BusReset.c) @ `0x0000e53a`
+- [`FWBaseEngine::ReconnectAfterBusReset`](FWBaseEngine__ReconnectAfterBusReset.c) @ `0x0000394a`
+- [`FW1814Device::SetClockSourceInternal`](FW1814Device__SetClockSourceInternal.c) @ `0x0000e25c`
+- [`FW1814Device::SetBlankSlateClockSource`](FW1814Device__SetBlankSlateClockSource.c) @ `0x0000e4f0`
+- [`FWAudiophileDevice::SetClockSourceInternal`](FWAudiophileDevice__SetClockSourceInternal.c) @ `0x0000b9d4`
+- [`FWHSCI::Pause`](FWHSCI__Pause.c) @ `0x0001d3fc`
+- [`FWHSCI::Resume`](FWHSCI__Resume.c) @ `0x0001d424`
+- [`FWHSCI::HSCITimerFired`](FWHSCI__HSCITimerFired.c) @ `0x0001d600`
+- [`FWHSCI::HSCIReadComplete`](FWHSCI__HSCIReadComplete.c) @ `0x0001d80e`
+- **MISS** `FWHSCI::FWHSCIDeviceCallback`
+- [`FWHSCI::HSCISafelyComplete`](FWHSCI__HSCISafelyComplete.c) @ `0x0001d4d6`
+- [`FWHSCI::Start`](FWHSCI__Start.c) @ `0x0001d94e`
+- [`FWHSCI::Stop`](FWHSCI__Stop.c) @ `0x0001d8fe`
+- [`FWMetaNub::StateString`](FWMetaNub__StateString.c) @ `0x0001b81e`
+- [`FWMetaNub::message`](FWMetaNub__message.c) @ `0x0001b9d6`
+- [`FWMetaNub::stop`](FWMetaNub__stop.c) @ `0x0001ba84`
+- [`FWMetaNub::ReregisterDeviceAfterFirmwareReset`](FWMetaNub__ReregisterDeviceAfterFirmwareReset.c) @ `0x0001bba6`
+- [`FWMetaNub::ReregisterDeviceTimerFired`](FWMetaNub__ReregisterDeviceTimerFired.c) @ `0x0001bc5e`
+- [`FWMetaNub::RegregisterDeviceThread`](FWMetaNub__RegregisterDeviceThread.c) @ `0x0001bcc2`
+- [`FWMetaNub::FireWireWriteCommand`](FWMetaNub__FireWireWriteCommand.c) @ `0x0001bd3e`
+- [`FWMetaNub::FireWireReadCommand`](FWMetaNub__FireWireReadCommand.c) @ `0x0001c06e`
+- [`FWMetaNub::FirmwareWriteCommand`](FWMetaNub__FirmwareWriteCommand.c) @ `0x0001be3c`
+- [`FWMetaNub::FirmwareStart`](FWMetaNub__FirmwareStart.c) @ `0x0001beb4`
+- [`FWMetaNub::FirmwareReset`](FWMetaNub__FirmwareReset.c) @ `0x0001bf92`
+- [`FWMetaNub::FirmwareHalt`](FWMetaNub__FirmwareHalt.c) @ `0x0001bff2`
+- [`FWMetaNub::DownloadStop`](FWMetaNub__DownloadStop.c) @ `0x0001c28c`
+- [`FWMetaNub::DownloadSendNextBlock`](FWMetaNub__DownloadSendNextBlock.c) @ `0x0001c332`
+- [`FWMetaNub::DownloadSectionStart`](FWMetaNub__DownloadSectionStart.c) @ `0x0001c468`
+- [`FWMetaNub::FirmwareUpdateBeBoB32`](FWMetaNub__FirmwareUpdateBeBoB32.c) @ `0x0001c5f2`
+- [`FWMetaNub::FirmwareUpdateBeBoB251`](FWMetaNub__FirmwareUpdateBeBoB251.c) @ `0x0001c75a`
+- [`FWMetaNub::FirmwareCacheInfoRegisters`](FWMetaNub__FirmwareCacheInfoRegisters.c) @ `0x0001cc9e`
+- [`MakeAppleFWAudioGoAway::probe`](MakeAppleFWAudioGoAway__probe.c) @ `0x000129cc`
+- [`FW1814Device::WorkaroundFor1814InputDelay`](FW1814Device__WorkaroundFor1814InputDelay.c) @ `0x0000cba4`
+- [`FW1814Device::ResetRearrangementProcs`](FW1814Device__ResetRearrangementProcs.c) @ `0x0000cad4`
+- [`FW1814Device::GetRoundTripLatencyForFDF`](FW1814Device__GetRoundTripLatencyForFDF.c) @ `0x0000cf30`
+- [`FWAudiophileDevice::GetRoundTripLatencyForFDF`](FWAudiophileDevice__GetRoundTripLatencyForFDF.c) @ `0x0000afde`
+- [`FWUserClient::getTargetAndMethodForIndex`](FWUserClient__getTargetAndMethodForIndex.c) @ `0x000072f6`
+- [`FWUserClient::EntryStartMIDI`](FWUserClient__EntryStartMIDI.c) @ `0x0000732c`
+- [`FWUserClient::EntryStopMIDI`](FWUserClient__EntryStopMIDI.c) @ `0x00007398`
+- [`FWUserClient::EntrySendMIDI`](FWUserClient__EntrySendMIDI.c) @ `0x000073fa`
+- [`FWUserClient::EntryDiceSetRequest`](FWUserClient__EntryDiceSetRequest.c) @ `0x0000746a`
+- [`FWUserClient::EntryDiceGetRequest`](FWUserClient__EntryDiceGetRequest.c) @ `0x00007476`
+- [`FWUserClient::ActionStartMIDI`](FWUserClient__ActionStartMIDI.c) @ `0x00007492`
+- [`FWUserClient::ActionStopMIDI`](FWUserClient__ActionStopMIDI.c) @ `0x0000749c`
+- [`FWUserClient::ActionSendMIDI`](FWUserClient__ActionSendMIDI.c) @ `0x00007574`
+- [`FWUserClient::CoreStartMIDI`](FWUserClient__CoreStartMIDI.c) @ `0x0000717c`
+- [`FWUserClient::CoreStopMIDI`](FWUserClient__CoreStopMIDI.c) @ `0x0000714a`
+- [`FWUserClient::clientMemoryForType`](FWUserClient__clientMemoryForType.c) @ `0x00007220`
+- [`FWUserClient::clientClose`](FWUserClient__clientClose.c) @ `0x000071a8`
+- [`FWEngine2::ActivateAC3Output`](FWEngine2__ActivateAC3Output.c) @ `0x00011fee`
+- [`FWEngine2::DeactivateAC3Output`](FWEngine2__DeactivateAC3Output.c) @ `0x00011fc6`
+- [`FWEngine2::SetAC3OutputState`](FWEngine2__SetAC3OutputState.c) @ `0x00011f28`
+- [`FWEngine2::ClipAC3Output`](FWEngine2__ClipAC3Output.c) @ `0x00011c44`
+- [`FWEngine2::StartAC3Output`](FWEngine2__StartAC3Output.c) @ `0x0001185e`
+- [`FWBaseEngine::AddAC3Format`](FWBaseEngine__AddAC3Format.c) @ `0x000039a0`
+- [`FWBaseEngine::EnableAC3Format`](FWBaseEngine__EnableAC3Format.c) @ `0x0000445e`
+- [`FWBaseEngine::DisableAC3Format`](FWBaseEngine__DisableAC3Format.c) @ `0x0000596a`
+- **MISS** `FW1814Device::start`
+- [`FW1814Device::stop`](FW1814Device__stop.c) @ `0x0000d9ce`
+- **MISS** `FW1814Device::init`
+- **MISS** `FW1814Nub::probe`
+- **MISS** `FW1814Nub::start`
+- **MISS** `FW1814Nub::matchPropertyTable`
+- **MISS** `FW1814Bootloader::probe`
+- **MISS** `FWEngine2::performAudioEngineStart`
+- **MISS** `FWEngine2::performAudioEngineStop`
+- **MISS** `FWEngine2::performFormatChange`
+- **MISS** `FWEngine2::clipOutputSamples`
+- **MISS** `FWEngine2::convertInputSamples`
+- [`FWEngine2::StartAudio`](FWEngine2__StartAudio.c) @ `0x00012024`
+- [`FWEngine2::StopAudio`](FWEngine2__StopAudio.c) @ `0x00011ab2`
+- [`FWEngine2::DisconnectAllPlugs`](FWEngine2__DisconnectAllPlugs.c) @ `0x00011bfa`
+- **MISS** `FWEngine2::ConvertSampleRate`
+- [`FWAVCAudioDevice::AVCVendorCommand`](FWAVCAudioDevice__AVCVendorCommand.c) @ `0x00023970`
+- [`FWAVCAudioDevice::AVCSelectorCommand`](FWAVCAudioDevice__AVCSelectorCommand.c) @ `0x00023074`
+- **MISS** `FWAVCAudioDevice::IsAC3Supported`
+
+**80 hit, 18 miss.**

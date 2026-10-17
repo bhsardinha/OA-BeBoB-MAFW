@@ -1,0 +1,725 @@
+=== 0x00002d47  MAFWMIDIDeviceBeBoB::start  size=417 ===
+
+/* Function Stack Size: 0x10 bytes */
+
+int MAFWMIDIDeviceBeBoB::start(ID param_1,SEL param_2)
+
+{
+  undefined *puVar1;
+  long lVar2;
+  int error_value;
+  undefined4 uVar3;
+  char *pcVar4;
+  uint uVar5;
+  bool bVar6;
+  undefined8 uVar7;
+  undefined8 local_58;
+  ID local_50;
+  undefined8 local_48;
+  undefined8 local_40;
+  undefined8 local_38;
+  
+  local_58 = 0;
+  local_38 = 0;
+  local_40 = 0;
+  local_48 = 0;
+  local_50 = param_1;
+  error_value = rebuildEndpointArray(param_1,PTR_s_rebuildEndpointArray_0000a4b8);
+  lVar2 = fKitDevice;
+  if ((error_value == 0) && (error_value = 0xe00002c2, *(char *)(param_1 + fStatusRunning) == '\0'))
+  {
+    uVar3 = (*(code *)PTR__objc_msgSend_000090a0)
+                      (*(undefined8 *)(param_1 + fKitDevice),PTR_s_connection_0000a4b0);
+    error_value = _IOConnectCallScalarMethod(uVar3,500,0,0,0,0);
+    puVar1 = PTR_s_connection_0000a4b0;
+    if (error_value == 0xe00002d8) {
+      uVar5 = 1;
+      do {
+        _sleep(2);
+        uVar3 = (*(code *)PTR__objc_msgSend_000090a0)(*(undefined8 *)(param_1 + lVar2),puVar1);
+        error_value = _IOConnectCallScalarMethod(uVar3,500,0,0,0,0);
+        if (error_value != 0xe00002d8) break;
+        bVar6 = uVar5 < 0x1e;
+        uVar5 = uVar5 + 1;
+      } while (bVar6);
+    }
+    if (error_value == 0) {
+      *(undefined1 *)(param_1 + fStatusRunning) = 1;
+      uVar7 = _CFAbsoluteTimeGetCurrent();
+      uVar7 = _CFRunLoopTimerCreate(uVar7,DAT_00007470,0,0,0,HandleMIDIInputCallout,&local_58);
+      lVar2 = fDataInputTimer;
+      *(undefined8 *)(param_1 + fDataInputTimer) = uVar7;
+      if (*(long *)(param_1 + lVar2) == 0) {
+        return 0;
+      }
+      uVar7 = _MIDIGetDriverIORunLoop();
+      _CFRunLoopAddTimer(uVar7,*(undefined8 *)(param_1 + lVar2),
+                         *(undefined8 *)PTR__kCFRunLoopDefaultMode_00009048);
+      _CFRelease(*(undefined8 *)(param_1 + lVar2));
+      (*retain_message_ref.imp)(*(undefined8 *)(param_1 + fAsyncNotification),&retain_message_ref);
+      return 0;
+    }
+  }
+  pcVar4 = _mach_error_string(error_value);
+  _NSLog(&cf_CannotstartMIDI__lX___s,error_value,pcVar4);
+  return error_value;
+}
+
+
+
+=== 0x00002682  MAFWMIDIDeviceBeBoB::dealloc  size=166 ===
+
+/* Function Stack Size: 0x10 bytes */
+
+void MAFWMIDIDeviceBeBoB::dealloc(ID param_1,SEL param_2)
+
+{
+  long lVar1;
+  ID local_28;
+  undefined *local_20;
+  
+  if (*(char *)(param_1 + fStatusRunning) != '\0') {
+    stop(param_1,PTR_s_stop_0000a478);
+  }
+  if (*(void **)(param_1 + fSourceEndpointArray) != (void *)0x0) {
+    _free(*(void **)(param_1 + fSourceEndpointArray));
+  }
+  if (*(void **)(param_1 + fDestinationEndpointArray) != (void *)0x0) {
+    _free(*(void **)(param_1 + fDestinationEndpointArray));
+  }
+  lVar1 = fKitDevice;
+  (*(code *)PTR__objc_msgSend_000090a0)
+            (*(undefined8 *)(param_1 + fKitDevice),PTR_s_closeConnection_0000a4a8);
+  (*release_message_ref.imp)(*(undefined8 *)(param_1 + lVar1),&release_message_ref);
+  local_20 = PTR_MAFWMIDIDeviceBeBoB_0000a768;
+  local_28 = param_1;
+  NSObject::dealloc((ID)&local_28,PTR_s_dealloc_0000a420);
+  return;
+}
+
+
+
+=== 0x00002f7d  MAFWMIDIDeviceBeBoB::send:viaPort:  size=753 ===
+
+/* Function Stack Size: 0x20 bytes */
+
+int MAFWMIDIDeviceBeBoB::send_viaPort_
+              (ID param_1,SEL param_2,const_MIDIPacketList__ param_3,unsigned_long_long param_4)
+
+{
+  ushort uVar1;
+  long lVar2;
+  long lVar3;
+  long lVar4;
+  uint uVar5;
+  ulong uVar6;
+  long lVar7;
+  long lVar8;
+  uint uVar9;
+  uint uVar10;
+  int *piVar11;
+  char cVar12;
+  int iVar13;
+  uint uVar14;
+  long lVar15;
+  MIDIPacket *pMVar16;
+  int iVar17;
+  undefined4 uStack_34;
+  
+  lVar4 = fDestPortCurrentTimestamp;
+  lVar3 = fDestinationPorts;
+  lVar2 = fStatusRunning;
+  if (param_3->field0_0x0 != 0) {
+    lVar8 = *(long *)(param_1 + fDestPortInSysex);
+    uVar10 = 0;
+    cVar12 = *(char *)(lVar8 + param_4);
+    pMVar16 = param_3->field1_0x4;
+    do {
+      uVar1 = pMVar16->field1_0x8;
+      uVar14 = (uint)uVar1;
+      if ((cVar12 != '\0') && (pMVar16->field2_0xa[0] < '\0')) {
+        *(undefined1 *)(lVar8 + param_4) = 0;
+      }
+      if (pMVar16->field2_0xa[0] == -0x10) {
+        *(undefined1 *)(lVar8 + param_4) = 1;
+      }
+      uVar9 = uVar10;
+      if (uVar1 != 0) {
+        lVar8 = 0;
+        do {
+          uVar6 = _AudioConvertHostTimeToNanos(pMVar16->field0_0x0);
+          uVar5 = uVar14;
+          if (3 < (int)uVar14) {
+            uVar5 = 3;
+          }
+          _memcpy(&uStack_34,pMVar16->field2_0xa + lVar8,(ulong)uVar5);
+          lVar7 = *(long *)(param_1 + lVar3);
+          if (uVar6 < *(ulong *)(*(long *)(param_1 + lVar4) + param_4 * 8)) {
+            lVar15 = param_4 * 0x240;
+            piVar11 = *(int **)(lVar7 + 0x18 + lVar15);
+            iVar13 = *piVar11;
+            iVar17 = 100;
+            if (0x7d < (uint)((iVar13 - piVar11[1]) % 0x80)) {
+              do {
+                _usleep(10000);
+                iVar17 = iVar17 + -1;
+                if (iVar17 < 1) break;
+                piVar11 = *(int **)(*(long *)(param_1 + lVar3) + 0x18 + lVar15);
+              } while (0x7d < (uint)((*piVar11 - piVar11[1]) % 0x80));
+              uVar9 = 0xffffff;
+              if (*(char *)(param_1 + lVar2) == '\0') break;
+              lVar7 = *(long *)(param_1 + lVar3);
+              piVar11 = *(int **)(lVar7 + 0x18 + lVar15);
+              iVar13 = *piVar11;
+            }
+            *(ulong *)(piVar11 + (long)iVar13 * 4 + 4) = CONCAT44(uStack_34,uVar5);
+            *(ulong *)(piVar11 + (long)iVar13 * 4 + 2) = uVar6;
+            piVar11 = *(int **)(lVar7 + 0x18 + lVar15);
+            iVar13 = *piVar11;
+            *piVar11 = (iVar13 + 1) -
+                       (iVar13 + 1 + ((uint)(iVar13 + 1 >> 0x1f) >> 0x19) & 0xffffff80);
+          }
+          else {
+            lVar15 = param_4 * 0x240;
+            piVar11 = *(int **)(lVar7 + 0x10 + lVar15);
+            iVar13 = *piVar11;
+            iVar17 = 100;
+            if (0x7d < (uint)((iVar13 - piVar11[1]) % 0x80)) {
+              do {
+                _usleep(10000);
+                iVar17 = iVar17 + -1;
+                if (iVar17 < 1) break;
+                piVar11 = *(int **)(*(long *)(param_1 + lVar3) + 0x10 + lVar15);
+              } while (0x7d < (uint)((*piVar11 - piVar11[1]) % 0x80));
+              uVar9 = 0xffffff;
+              if (*(char *)(param_1 + lVar2) == '\0') break;
+              lVar7 = *(long *)(param_1 + lVar3);
+              piVar11 = *(int **)(lVar7 + 0x10 + lVar15);
+              iVar13 = *piVar11;
+            }
+            *(ulong *)(piVar11 + (long)iVar13 * 4 + 4) = CONCAT44(uStack_34,uVar5);
+            *(ulong *)(piVar11 + (long)iVar13 * 4 + 2) = uVar6;
+            piVar11 = *(int **)(lVar7 + 0x10 + lVar15);
+            iVar13 = *piVar11;
+            *piVar11 = (iVar13 + 1) -
+                       (iVar13 + 1 + ((uint)(iVar13 + 1 >> 0x1f) >> 0x19) & 0xffffff80);
+            *(ulong *)(*(long *)(param_1 + lVar4) + param_4 * 8) = uVar6;
+          }
+          lVar8 = lVar8 + 3;
+          uVar14 = uVar14 - 3;
+          uVar9 = uVar10;
+        } while (0 < (int)uVar14);
+      }
+      lVar8 = *(long *)(param_1 + fDestPortInSysex);
+      cVar12 = *(char *)(lVar8 + param_4);
+      uVar1 = pMVar16->field1_0x8;
+      if (cVar12 == '\0') {
+LAB_00003248:
+        cVar12 = '\0';
+      }
+      else if (pMVar16->field2_0xa[(ulong)uVar1 - 1] == -9) {
+        *(undefined1 *)(lVar8 + param_4) = 0;
+        goto LAB_00003248;
+      }
+      pMVar16 = (MIDIPacket *)(pMVar16->field2_0xa + uVar1);
+      uVar10 = uVar9 + 1;
+    } while (uVar10 < param_3->field0_0x0);
+  }
+  return 0;
+}
+
+
+
+=== 0x00002b1b  MAFWMIDIDeviceBeBoB::checkForMIDIInput  size=556 ===
+
+/* Function Stack Size: 0x10 bytes */
+
+void MAFWMIDIDeviceBeBoB::checkForMIDIInput(ID param_1,SEL param_2)
+
+{
+  MIDIPacket *pMVar1;
+  MIDIPacket *pMVar2;
+  uchar uVar3;
+  long lVar4;
+  char cVar5;
+  unsigned_long_long uVar6;
+  uint uVar7;
+  uint uVar8;
+  ulong uVar9;
+  ulong uVar10;
+  uint uVar11;
+  long lVar12;
+  ulong uVar13;
+  bool local_87a;
+  bool local_879;
+  uint local_878 [2];
+  uint local_870 [2];
+  long local_868 [3];
+  TMIDIPacketList local_850 [2048];
+  TMIDIPacketList *local_50;
+  undefined4 local_48;
+  undefined8 local_40;
+  long local_38;
+  
+  local_38 = *(long *)PTR____stack_chk_guard_00009030;
+  if (*(int *)(param_1 + fSourceEndpointCount) != 0) {
+    uVar9 = 0;
+    do {
+      lVar4 = *(long *)(param_1 + fSourcePorts);
+      local_48 = *(undefined4 *)(*(long *)(param_1 + fSourceEndpointArray) + uVar9 * 4);
+      local_50 = local_850;
+      local_40 = _MIDIPacketListInit();
+      lVar12 = uVar9 * 0x240;
+      cVar5 = com_m_audio::TMIDIPort::CheckForNewBytes
+                        ((TMIDIPort *)(lVar4 + lVar12),(MIDIMemVector *)local_878,0xffffffff);
+      if (cVar5 != '\0') {
+        if (local_878[0] != 0) {
+          pMVar2 = (MIDIPacket *)(lVar4 + 0x130 + lVar12);
+          pMVar1 = (MIDIPacket *)(lVar4 + 0x24 + lVar12);
+          uVar7 = 0;
+          uVar8 = local_878[0];
+          do {
+            uVar10 = (ulong)uVar7;
+            if (local_870[uVar10 * 4] != 0) {
+              uVar13 = 0;
+              do {
+                local_879 = false;
+                local_87a = false;
+                uVar3 = *(uchar *)(local_868[uVar10 * 2] + uVar13);
+                do {
+                  cVar5 = com_m_audio::TMIDIParser::ReceiveMIDIByte
+                                    ((TMIDIParser *)(lVar4 + 0x20 + lVar12),uVar3,&local_879,
+                                     &local_87a);
+                  if (local_879 != false) {
+                    uVar6 = _AudioGetCurrentHostTime();
+                    pMVar2->field0_0x0 = uVar6;
+                    TMIDIPacketList::AddPacket(local_850,pMVar2);
+                    *(undefined2 *)(lVar4 + 0x138 + lVar12) = 0;
+                  }
+                  if (local_87a != false) {
+                    uVar6 = _AudioGetCurrentHostTime();
+                    pMVar1->field0_0x0 = uVar6;
+                    TMIDIPacketList::AddPacket(local_850,pMVar1);
+                    *(undefined2 *)(lVar4 + 0x2c + lVar12) = 0;
+                  }
+                } while (cVar5 != '\0');
+                uVar11 = (int)uVar13 + 1;
+                uVar13 = (ulong)uVar11;
+                uVar8 = local_878[0];
+              } while (uVar11 < local_870[uVar10 * 4]);
+            }
+            uVar7 = uVar7 + 1;
+          } while (uVar7 < uVar8);
+        }
+        _MIDIReceived(local_48,local_50);
+      }
+      uVar8 = (int)uVar9 + 1;
+      uVar9 = (ulong)uVar8;
+    } while (uVar8 < *(uint *)(param_1 + fSourceEndpointCount));
+  }
+  if (*(long *)PTR____stack_chk_guard_00009030 != local_38) {
+                    /* WARNING: Subroutine does not return */
+    ___stack_chk_fail();
+  }
+  return;
+}
+
+
+
+=== 0x00001f37  MAFWBeBoBAsyncNotification::initWithType:connection:runLoop:target:selector:  size=455 ===
+
+/* Function Stack Size: 0x30 bytes */
+
+ID MAFWBeBoBAsyncNotification::initWithType_connection_runLoop_target_selector_
+             (ID param_1,SEL param_2,unsigned_int param_3,unsigned_int param_4,__CFRunLoop *param_5,
+             ID param_6,SEL param_7)
+
+{
+  long lVar1;
+  uint uVar2;
+  int iVar3;
+  ID self;
+  undefined8 uVar4;
+  undefined8 local_68;
+  ID local_60;
+  undefined8 local_58;
+  undefined8 local_50;
+  undefined8 local_48;
+  ID local_40;
+  undefined *local_38;
+  
+  local_38 = PTR_MAFWBeBoBAsyncNotification_0000a760;
+  local_40 = param_1;
+  self = NSObject::init((ID)&local_40,PTR_s_init_0000a3e8);
+  uVar4 = (*retain_message_ref.imp)(param_6,&retain_message_ref);
+  *(undefined8 *)(param_1 + fTarget) = uVar4;
+  *(SEL *)(param_1 + fAction) = param_7;
+  *(__CFRunLoop **)(param_1 + fRunLoop) = param_5;
+  if ((sMasterPort == 0) && (uVar2 = _IOMasterPort(0,&sMasterPort), uVar2 != 0)) {
+    NSException::raise_format_
+              ((ID)PTR__OBJC_CLASS___NSException_0000a6e8,PTR_s_raise_format__0000a408,
+               &cf_BogusErrorFroMIOMasterPort,&cf_ErrorfromIOMasterPort_0x_X,(ulong)uVar2);
+  }
+  uVar4 = _IONotificationPortCreate(sMasterPort);
+  lVar1 = fNotificationIOKitPort;
+  *(undefined8 *)(param_1 + fNotificationIOKitPort) = uVar4;
+  if ((*(long *)(param_1 + lVar1) != 0) && (iVar3 = _IONotificationPortGetMachPort(), iVar3 != 0)) {
+    local_68 = 0;
+    local_48 = 0;
+    local_50 = 0;
+    local_58 = 0;
+    local_60 = param_1;
+    uVar4 = _CFMachPortCreateWithPort(0,iVar3,StaticHandleMachMessage,&local_68,0);
+    lVar1 = fNotificationCFMachPort;
+    *(undefined8 *)(param_1 + fNotificationCFMachPort) = uVar4;
+    if (*(long *)(param_1 + lVar1) != 0) {
+      uVar4 = _CFMachPortCreateRunLoopSource(0,*(long *)(param_1 + lVar1),0);
+      lVar1 = fMachPortRunLoopSource;
+      *(undefined8 *)(param_1 + fMachPortRunLoopSource) = uVar4;
+      if (*(long *)(param_1 + lVar1) != 0) {
+        _CFRunLoopAddSource(param_5,*(long *)(param_1 + lVar1),
+                            *(undefined8 *)PTR__kCFRunLoopDefaultMode_00009048);
+        _IOConnectSetNotificationPort(param_4,param_3,iVar3,0);
+        return self;
+      }
+    }
+  }
+  NSObject::release(self,(SEL)&release_message_ref);
+  NSException::raise_format_
+            ((ID)PTR__OBJC_CLASS___NSException_0000a6e8,PTR_s_raise_format__0000a408,
+             &cf_SeriousFailure,&cf_FailedMostHeinously);
+  return 0;
+}
+
+
+
+=== 0x000021d4  MAFWBeBoBAsyncNotification::userClientNotificationOfType:connection:runLoop:target:selector:  size=105 ===
+
+/* Function Stack Size: 0x30 bytes */
+
+ID MAFWBeBoBAsyncNotification::userClientNotificationOfType_connection_runLoop_target_selector_
+             (ID param_1,SEL param_2,unsigned_int param_3,unsigned_int param_4,__CFRunLoop *param_5,
+             ID param_6,SEL param_7)
+
+{
+  ID IVar1;
+  
+  IVar1 = (*alloc_message_ref.imp)(param_1,&alloc_message_ref);
+  IVar1 = initWithType_connection_runLoop_target_selector_
+                    (IVar1,PTR_s_initWithType_connection_runLoop__0000a410,param_3,param_4,param_5,
+                     param_6,param_7);
+  IVar1 = (*autorelease_message_ref.imp)(IVar1,&autorelease_message_ref);
+  return IVar1;
+}
+
+
+
+=== 0x0000228e  MAFWBeBoBAsyncNotification::dealloc  size=179 ===
+
+/* Function Stack Size: 0x10 bytes */
+
+void MAFWBeBoBAsyncNotification::dealloc(ID param_1,SEL param_2)
+
+{
+  long lVar1;
+  ID local_28;
+  undefined *local_20;
+  
+  if (*(long *)(param_1 + fRunLoop) != 0) {
+    _CFRunLoopRemoveSource
+              (*(long *)(param_1 + fRunLoop),*(undefined8 *)(param_1 + fMachPortRunLoopSource),
+               *(undefined8 *)PTR__kCFRunLoopDefaultMode_00009048);
+  }
+  lVar1 = fNotificationCFMachPort;
+  if (*(long *)(param_1 + fNotificationCFMachPort) != 0) {
+    _CFMachPortInvalidate();
+    _CFRelease(*(undefined8 *)(param_1 + lVar1));
+  }
+  if (*(long *)(param_1 + fNotificationIOKitPort) != 0) {
+    _IONotificationPortDestroy();
+  }
+  lVar1 = fTarget;
+  (*release_message_ref.imp)(*(undefined8 *)(param_1 + fTarget),&release_message_ref);
+  *(undefined8 *)(param_1 + lVar1) = 0;
+  local_20 = PTR_MAFWBeBoBAsyncNotification_0000a760;
+  local_28 = param_1;
+  NSObject::dealloc((ID)&local_28,PTR_s_dealloc_0000a420);
+  return;
+}
+
+
+
+=== 0x00004b9c  com_m_audio::TMIDIParser::ParseMIDIByte  size=360 ===
+
+/* com_m_audio::TMIDIParser::ParseMIDIByte(unsigned char, unsigned int&, unsigned char&, bool&,
+   bool&, MIDIPacket*, MIDIPacket*) */
+
+undefined8 __thiscall
+com_m_audio::TMIDIParser::ParseMIDIByte
+          (TMIDIParser *this,uchar param_1,uint *param_2,uchar *param_3,bool *param_4,bool *param_5,
+          MIDIPacket *param_6,MIDIPacket *param_7)
+
+{
+  ushort uVar1;
+  uint uVar2;
+  undefined7 in_register_00000031;
+  
+  *param_4 = false;
+  *param_5 = false;
+  if ((param_1 & 0x80) == 0) {
+    if (*param_2 == 0) {
+      if (*param_3 == '\0') {
+        return 0;
+      }
+      param_6->field1_0x8 = 2;
+      param_6->field2_0xa[0] = *param_3;
+      param_6->field2_0xa[1] = param_1;
+      if ((*param_3 & 0xe0) != 0xc0) goto switchD_00004cde_caseD_f1;
+    }
+    else {
+      param_6->field2_0xa[param_6->field1_0x8] = param_1;
+      uVar1 = param_6->field1_0x8 + 1;
+      param_6->field1_0x8 = uVar1;
+      *param_2 = *param_2 - 1;
+      if ((*param_2 != 0) && (uVar1 < 0x100)) {
+        return 0;
+      }
+    }
+    *param_4 = true;
+  }
+  else {
+    uVar2 = (uint)CONCAT71(in_register_00000031,param_1);
+    if (0xf7 < param_1) {
+      if (7 < uVar2 - 0xf8) {
+        return 0;
+      }
+      if ((0xddU >> (uVar2 - 0xf8 & 0x1f) & 1) == 0) {
+        return 0;
+      }
+      param_7->field1_0x8 = 1;
+      param_7->field2_0xa[0] = param_1;
+      *param_5 = true;
+      return 0;
+    }
+    uVar1 = param_6->field1_0x8;
+    if (0x100 < *param_2) {
+      param_6->field2_0xa[uVar1] = -9;
+      uVar1 = param_6->field1_0x8 + 1;
+      param_6->field1_0x8 = uVar1;
+      *param_4 = true;
+      *param_2 = 0;
+      if (param_1 == 0xf7) {
+        return 0;
+      }
+    }
+    if (uVar1 != 0) {
+      *param_4 = true;
+      *param_2 = 0;
+      return 1;
+    }
+    param_6->field1_0x8 = 1;
+    param_6->field2_0xa[0] = param_1;
+    if (param_1 < 0xf0) {
+      *param_3 = param_1;
+      *param_2 = ((uVar2 & 0xe0) != 0xc0) + 1;
+      return 0;
+    }
+    *param_3 = '\0';
+    switch(uVar2) {
+    case 0xf0:
+      *param_2 = 0xffffff;
+      break;
+    case 0xf1:
+    case 0xf3:
+switchD_00004cde_caseD_f1:
+      *param_2 = 1;
+      return 0;
+    case 0xf2:
+      *param_2 = 2;
+      break;
+    case 0xf6:
+      *param_4 = true;
+      *param_2 = 0;
+    }
+  }
+  return 0;
+}
+
+
+
+=== 0x00004d20  com_m_audio::TMIDIParser::ReceiveMIDIByte  size=80 ===
+
+/* com_m_audio::TMIDIParser::ReceiveMIDIByte(unsigned char, bool&, bool&) */
+
+void __thiscall
+com_m_audio::TMIDIParser::ReceiveMIDIByte
+          (TMIDIParser *this,uchar param_1,bool *param_2,bool *param_3)
+
+{
+  if (*param_2 != false) {
+    *param_2 = false;
+  }
+  if (*param_3 != false) {
+    *param_3 = false;
+  }
+  ParseMIDIByte(this,param_1,(uint *)this,(uchar *)(this + 0x21c),param_2,param_3,
+                (MIDIPacket *)(this + 0x110),(MIDIPacket *)(this + 4));
+  return;
+}
+
+
+
+=== 0x00004d70  com_m_audio::TUserMIDIPort::Init  size=120 ===
+
+/* com_m_audio::TUserMIDIPort::Init(unsigned int, bool, unsigned int) */
+
+ulong __thiscall
+com_m_audio::TUserMIDIPort::Init(TUserMIDIPort *this,uint param_1,bool param_2,uint param_3)
+
+{
+  int iVar1;
+  ulong uVar2;
+  ulong uVar3;
+  undefined8 local_20;
+  undefined4 *local_18;
+  
+  iVar1 = 0x800;
+  if (param_2) {
+    iVar1 = 0x400;
+  }
+  local_18 = (undefined4 *)0x0;
+  local_20 = 0;
+  uVar2 = _IOConnectMapMemory(param_1,iVar1 + param_3,*(undefined4 *)PTR__mach_task_self__00009090,
+                              &local_18,&local_20,1);
+  uVar3 = uVar2 & 0xffffffffffffff00;
+  if ((int)uVar2 == 0) {
+    *(undefined4 **)this = local_18;
+    *(undefined4 *)(this + 8) = *local_18;
+    *(undefined4 **)(this + 0x10) = local_18;
+    *(undefined4 **)(this + 0x18) = local_18 + 0x202;
+    uVar3 = CONCAT71((int7)((ulong)(local_18 + 0x202) >> 8),1);
+  }
+  return uVar3;
+}
+
+
+
+=== 0x00004de8  com_m_audio::TMIDIPort::CheckForNewBytes  size=166 ===
+
+/* com_m_audio::TMIDIPort::CheckForNewBytes(com_m_audio::MIDIMemVector&, unsigned int) */
+
+ulong __thiscall
+com_m_audio::TMIDIPort::CheckForNewBytes(TMIDIPort *this,MIDIMemVector *param_1,uint param_2)
+
+{
+  uint uVar1;
+  uint *puVar2;
+  ulong in_RAX;
+  ulong uVar3;
+  long lVar4;
+  uint uVar5;
+  uint uVar6;
+  
+  puVar2 = *(uint **)this;
+  uVar1 = *puVar2;
+  *(undefined4 *)param_1 = 0;
+  *(undefined4 *)(param_1 + 8) = 0;
+  *(undefined4 *)(param_1 + 0x18) = 0;
+  uVar6 = *(uint *)(this + 8);
+  uVar3 = in_RAX & 0xffffffffffffff00;
+  uVar5 = uVar1 - uVar6;
+  if (uVar5 != 0) {
+    if (uVar1 < uVar6) {
+      uVar5 = uVar1 + 1 + ~uVar6;
+    }
+    if (0x200 < uVar5) {
+      uVar5 = 0x200;
+    }
+    if (param_2 < uVar5) {
+      uVar5 = param_2;
+    }
+    uVar6 = uVar6 & 0x1ff;
+    if (uVar5 + uVar6 < 0x201) {
+      *(undefined4 *)param_1 = 1;
+      *(uint *)(param_1 + 8) = uVar5;
+      lVar4 = (long)puVar2 + (ulong)uVar6 + 4;
+      *(long *)(param_1 + 0x10) = lVar4;
+      *(undefined4 *)(param_1 + 0x18) = 0;
+    }
+    else {
+      *(undefined4 *)param_1 = 2;
+      *(uint *)(param_1 + 8) = 0x200 - uVar6;
+      *(ulong *)(param_1 + 0x10) = (long)puVar2 + (ulong)uVar6 + 4;
+      *(uint *)(param_1 + 0x18) = uVar5 - (0x200 - uVar6);
+      lVar4 = *(long *)this + 4;
+      *(long *)(param_1 + 0x20) = lVar4;
+    }
+    *(uint *)(this + 8) = uVar1;
+    uVar3 = CONCAT71((int7)((ulong)lVar4 >> 8),1);
+  }
+  return uVar3;
+}
+
+
+
+=== 0x00004e8e  com_m_audio::TMIDIPort::CheckForNewRealtimePacket  size=70 ===
+
+/* com_m_audio::TMIDIPort::CheckForNewRealtimePacket(DigiFWMIDIPacket*&) */
+
+ulong __thiscall
+com_m_audio::TMIDIPort::CheckForNewRealtimePacket(TMIDIPort *this,DigiFWMIDIPacket **param_1)
+
+{
+  int iVar1;
+  int iVar2;
+  int *piVar3;
+  ulong uVar4;
+  
+  piVar3 = *(int **)(this + 0x18);
+  iVar1 = piVar3[1];
+  if (*piVar3 == iVar1) {
+    uVar4 = (ulong)piVar3 & 0xffffffffffffff00;
+  }
+  else {
+    *param_1 = (DigiFWMIDIPacket *)(piVar3 + (long)iVar1 * 4 + 2);
+    iVar2 = *(int *)(*(long *)(this + 0x18) + 4);
+    uVar4 = CONCAT71((int7)((ulong)(piVar3 + (long)iVar1 * 4 + 2) >> 8),1);
+    *(uint *)(*(long *)(this + 0x18) + 4) =
+         (iVar2 + 1) - (iVar2 + 1 + ((uint)(iVar2 + 1 >> 0x1f) >> 0x19) & 0xffffff80);
+  }
+  return uVar4;
+}
+
+
+
+=== 0x00004ed4  com_m_audio::TMIDIPort::CheckForNewTimestampedPacket  size=83 ===
+
+/* com_m_audio::TMIDIPort::CheckForNewTimestampedPacket(DigiFWMIDIPacket*&, unsigned long long,
+   unsigned long long) */
+
+ulong __thiscall
+com_m_audio::TMIDIPort::CheckForNewTimestampedPacket
+          (TMIDIPort *this,DigiFWMIDIPacket **param_1,ulonglong param_2,ulonglong param_3)
+
+{
+  int iVar1;
+  int *piVar2;
+  ulong in_RAX;
+  ulong uVar3;
+  
+  piVar2 = *(int **)(this + 0x10);
+  iVar1 = piVar2[1];
+  uVar3 = in_RAX & 0xffffffffffffff00;
+  if ((*piVar2 != iVar1) &&
+     (*param_1 = (DigiFWMIDIPacket *)(piVar2 + (long)iVar1 * 4 + 2),
+     (long)(*(long *)(piVar2 + (long)iVar1 * 4 + 2) - param_2) < (long)param_3)) {
+    iVar1 = *(int *)(*(long *)(this + 0x10) + 4);
+    uVar3 = 1;
+    *(uint *)(*(long *)(this + 0x10) + 4) =
+         (iVar1 + 1) - (iVar1 + 1 + ((uint)(iVar1 + 1 >> 0x1f) >> 0x19) & 0xffffff80);
+  }
+  return uVar3;
+}
+
+
+

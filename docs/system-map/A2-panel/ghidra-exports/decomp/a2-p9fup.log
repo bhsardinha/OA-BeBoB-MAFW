@@ -1,0 +1,110 @@
+openjdk version "25.0.4.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Zulu25.36+205-CA (build 25.0.4.1+1-LTS)
+OpenJDK 64-Bit Server VM Zulu25.36+205-CA (build 25.0.4.1+1-LTS, mixed mode)
+INFO  Using log config file: jar:file:/opt/local/share/java/ghidra-12.1.4/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /Users/bernardosardinha/Library/ghidra/ghidra_12.1.4_DEV/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /Users/bernardosardinha/Library/ghidra/ghidra_12.1.4_DEV/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (2946 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (7807 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 59 extension points (20 false positives) (ClassSearcher)  
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldOffset has been called by org.apache.felix.framework.util.SecureAction (file:/opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Base/lib/org.apache.felix.framework-7.0.5.jar)
+WARNING: Please consider reporting this to the maintainers of class org.apache.felix.framework.util.SecureAction
+WARNING: sun.misc.Unsafe::staticFieldOffset will be removed in a future release
+INFO  HEADLESS Script Paths:
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/BSim/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Base/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/PDB/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/8051/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Opening existing project: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/ghidra-project/panel-app (HeadlessAnalyzer)  
+INFO  Opening project: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/ghidra-project/panel-app (HeadlessProject)  
+INFO  REPORT: Processing project file: /Panel (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: DecompA2P9fup.java  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/scripts/DecompA2P9fup.java (HeadlessAnalyzer)  
+INFO  DecompA2P9fup.java> --- XREFS TO 000f4e48 (_IOConnectMapMemory) --- (GhidraScript)  
+INFO  DecompA2P9fup.java>   00163738  <outside func> (GhidraScript)  
+INFO  DecompA2P9fup.java>   0006c54a  CXDevice::CXDevice (GhidraScript)  
+INFO  DecompA2P9fup.java>   000f4e48  _IOConnectMapMemory (GhidraScript)  
+INFO  DecompA2P9fup.java> --- XREFS TO 000f4e4e (_IOConnectMethodScalarIScalarO) --- (GhidraScript)  
+INFO  DecompA2P9fup.java>   0016373c  <outside func> (GhidraScript)  
+INFO  DecompA2P9fup.java>   0006d148  CXDevice::TerminationWaitThread (GhidraScript)  
+INFO  DecompA2P9fup.java>   000f4e4e  _IOConnectMethodScalarIScalarO (GhidraScript)  
+INFO  DecompA2P9fup.java> --- XREFS TO 000f4e5a (_IOConnectUnmapMemory) --- (GhidraScript)  
+INFO  DecompA2P9fup.java>   00163744  <outside func> (GhidraScript)  
+INFO  DecompA2P9fup.java>   0006d256  CXDevice::~CXDevice (GhidraScript)  
+INFO  DecompA2P9fup.java>   000f4e5a  _IOConnectUnmapMemory (GhidraScript)  
+INFO  DecompA2P9fup.java> === TTimerTask<CXDevice>::DoTask @ 000721f2 === (GhidraScript)  
+INFO  DecompA2P9fup.java> 
+/* TTimerTask<CXDevice>::DoTask() */
+
+void __thiscall TTimerTask<CXDevice>::DoTask(TTimerTask<CXDevice> *this)
+
+{
+  int *piVar1;
+  code *pcVar2;
+  
+  if ((*(int *)(this + 0xc) != 0) && (pcVar2 = *(code **)(this + 0x10), pcVar2 != (code *)0x0)) {
+    piVar1 = (int *)(*(int *)(this + 0xc) + *(int *)(this + 0x14));
+    if (((uint)pcVar2 & 1) != 0) {
+      pcVar2 = *(code **)(pcVar2 + *piVar1 + -1);
+    }
+    (*pcVar2)(piVar1,this);
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9fup.java> === CX1814Device::CX1814Device @ 000e9d2c === (GhidraScript)  
+INFO  DecompA2P9fup.java> 
+/* CX1814Device::CX1814Device(MAIOKitService*) */
+
+void __thiscall CX1814Device::CX1814Device(CX1814Device *this,MAIOKitService *param_1)
+
+{
+  CXDevice::CXDevice((CXDevice *)this,param_1,true);
+  *(undefined ***)this = &PTR__CX1814Device_001ccd98;
+  *(undefined ***)(this + 0x30) = &PTR__CX1814Device_001cce20;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P9fup.java> === CX1814Device::CX1814Device @ 000e9d6c === (GhidraScript)  
+INFO  DecompA2P9fup.java> 
+/* CX1814Device::CX1814Device(MAIOKitService*) */
+
+void __thiscall CX1814Device::CX1814Device(CX1814Device *this,MAIOKitService *param_1)
+
+{
+  CXDevice::CXDevice((CXDevice *)this,param_1,true);
+  *(undefined ***)this = &PTR__CX1814Device_001ccd98;
+  *(undefined ***)(this + 0x30) = &PTR__CX1814Device_001cce20;
+  return;
+}
+
+ (GhidraScript)  
+INFO  REPORT: Save succeeded for processed file: /Panel (HeadlessAnalyzer)  

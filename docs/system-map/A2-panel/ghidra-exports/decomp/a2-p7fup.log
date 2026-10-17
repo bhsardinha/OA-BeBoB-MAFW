@@ -1,0 +1,640 @@
+openjdk version "25.0.4.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Zulu25.36+205-CA (build 25.0.4.1+1-LTS)
+OpenJDK 64-Bit Server VM Zulu25.36+205-CA (build 25.0.4.1+1-LTS, mixed mode)
+INFO  Using log config file: jar:file:/opt/local/share/java/ghidra-12.1.4/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /Users/bernardosardinha/Library/ghidra/ghidra_12.1.4_DEV/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /Users/bernardosardinha/Library/ghidra/ghidra_12.1.4_DEV/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (2401 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (6218 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 59 extension points (20 false positives) (ClassSearcher)  
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldOffset has been called by org.apache.felix.framework.util.SecureAction (file:/opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Base/lib/org.apache.felix.framework-7.0.5.jar)
+WARNING: Please consider reporting this to the maintainers of class org.apache.felix.framework.util.SecureAction
+WARNING: sun.misc.Unsafe::staticFieldOffset will be removed in a future release
+INFO  HEADLESS Script Paths:
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/BSim/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Base/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/PDB/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Processors/8051/ghidra_scripts
+    /opt/local/share/java/ghidra-12.1.4/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Opening existing project: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/ghidra-project/panel-app (HeadlessAnalyzer)  
+INFO  Opening project: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/ghidra-project/panel-app (HeadlessProject)  
+INFO  REPORT: Processing project file: /Panel (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: DecompA2P7fup.java  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/bernardosardinha/Documents/firewireDriver/docs/system-map/A2-panel/scripts/DecompA2P7fup.java (HeadlessAnalyzer)  
+INFO  DecompA2P7fup.java> === CXDevice::SetHWSetting @ 0006f436 === (GhidraScript)  
+INFO  DecompA2P7fup.java> 
+/* CXDevice::SetHWSetting(unsigned long, unsigned long, void*) */
+
+undefined4 __thiscall
+CXDevice::SetHWSetting(CXDevice *this,ulong param_1,ulong param_2,void *param_3)
+
+{
+  bool bVar1;
+  ushort uVar2;
+  CXDevice *this_00;
+  undefined4 uVar3;
+  undefined4 uVar4;
+  OpaqueEventLoopRef *pOVar5;
+  int iVar6;
+  undefined4 uVar7;
+  
+  this_00 = (CXDevice *)_objc_msgSend(PTR_s_NSAutoreleasePool_001d47a4,PTR_s_alloc_001d401c);
+  uVar3 = _objc_msgSend(this_00,PTR_s_init_001d4000);
+  uVar7 = 1;
+  if (param_1 < 0x5ff) {
+    switch(param_1) {
+    case 0x5e2:
+      if (param_2 != 1) {
+        OSXLog("Incorrect size:%d expected:%d File:%s Line:%d Func:%s",param_2,1,
+               "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+               ,0x527,"SetHWSetting");
+        UDebugging::DebugThrow
+                  (0x61737274,"SetHWSetting",
+                   (uchar *)
+                   "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+                   ,0x527);
+      }
+      this[0x7c] = *(CXDevice *)param_3;
+      uVar7 = 0;
+      break;
+    case 0x5e3:
+      _objc_msgSend(*(undefined4 *)(this + 0x6c),PTR_s_removeAllObjects_001d4094);
+      uVar7 = 0;
+      Set32BitNumberProperty(this,(NSString *)&cf_MAMetaResetToFactorySettings,1);
+      break;
+    case 0x5e4:
+      if (param_2 != 8) {
+        OSXLog("Incorrect size:%d expected:%d File:%s Line:%d Func:%s",param_2,8,
+               "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+               ,0x52d,"SetHWSetting");
+        UDebugging::DebugThrow
+                  (0x61737274,"SetHWSetting",
+                   (uchar *)
+                   "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+                   ,0x52d);
+      }
+      iVar6 = 1;
+      if (*(uint *)((int)param_3 + 4) < 0x4e) {
+        iVar6 = 0xd - *(uint *)((int)param_3 + 4) / 6;
+      }
+      uVar7 = 0;
+      if (iVar6 != 0) {
+        Set32BitNumberProperty
+                  (this,(NSString *)&cf_MAMetaVirtualRotateDataKnob,iVar6 * *(int *)param_3);
+      }
+      break;
+    case 0x5e5:
+      if (param_2 != 2) {
+        OSXLog("Incorrect size:%d expected:%d File:%s Line:%d Func:%s",param_2,2,
+               "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+               ,0x535,"SetHWSetting");
+        UDebugging::DebugThrow
+                  (0x61737274,"SetHWSetting",
+                   (uchar *)
+                   "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+                   ,0x535);
+      }
+      uVar4 = 0;
+      if (*(ushort *)param_3 - 1 < 5) {
+        uVar4 = *(undefined4 *)("8CXDevice" + (uint)*(ushort *)param_3 * 8 + 8);
+      }
+      uVar7 = 0;
+      Set64BitNumberProperty((NSString *)this,CONCAT44(uVar4,&cf_MARotaryControlV2));
+      break;
+    case 0x5e6:
+      if (param_2 != 1) {
+        OSXLog("Incorrect size:%d expected:%d File:%s Line:%d Func:%s",param_2,1,
+               "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+               ,0x517,"SetHWSetting");
+        UDebugging::DebugThrow
+                  (0x61737274,"SetHWSetting",
+                   (uchar *)
+                   "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+                   ,0x517);
+      }
+      uVar7 = 0;
+      Set32BitNumberProperty(this,(NSString *)&cf_MAGlobalMute,(uint)*(byte *)param_3);
+      break;
+    case 0x5e7:
+      if (param_2 != 1) {
+        OSXLog("Incorrect size:%d expected:%d File:%s Line:%d Func:%s",param_2,1,
+               "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+               ,0x51f,"SetHWSetting");
+        UDebugging::DebugThrow
+                  (0x61737274,"SetHWSetting",
+                   (uchar *)
+                   "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+                   ,0x51f);
+      }
+      uVar7 = 0;
+      Set32BitNumberProperty(this,(NSString *)&cf_MAGlobalDim,(uint)*(byte *)param_3);
+    }
+  }
+  else {
+    switch(param_1) {
+    case 0x5ff:
+      uVar2 = ExtractParamValue<unsigned_short>(this_00,param_2,param_3);
+      if (3 < uVar2) {
+        UDebugging::DebugThrow
+                  (0x61737274,"SetHWSetting",
+                   (uchar *)
+                   "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+                   ,0x566);
+      }
+      uVar7 = 0;
+      ChangeDigitalSourceAttribute
+                (this,3,*(ulong *)(&DAT_000f8b50 + (uint)uVar2 * 4),true,0x40000000);
+      break;
+    case 0x600:
+      uVar2 = ExtractParamValue<unsigned_short>(this_00,param_2,param_3);
+      uVar7 = 0;
+      ChangeDigitalSourceAttribute(this,4,4,uVar2 == 1,0x40000000);
+      break;
+    case 0x601:
+      if (param_2 != 4) {
+        OSXLog("Incorrect size:%d expected:%d File:%s Line:%d Func:%s",param_2,4,
+               "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+               ,0x59b,"SetHWSetting");
+        UDebugging::DebugThrow
+                  (0x61737274,"SetHWSetting",
+                   (uchar *)
+                   "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+                   ,0x59b);
+      }
+      *(undefined4 *)(this + 0x84) = *(undefined4 *)param_3;
+      pOVar5 = (OpaqueEventLoopRef *)_GetMainEventLoop();
+      uVar7 = 0;
+      LTimerTask::Install((LTimerTask *)(this + 0xf8),pOVar5,1.0,1.0);
+      break;
+    case 0x60d:
+      uVar2 = ExtractParamValue<unsigned_short>(this_00,param_2,param_3);
+      uVar7 = 0;
+      ChangeDigitalSourceAttribute(this,8,8,uVar2 == 2,0x40000000);
+      break;
+    case 0x60e:
+      uVar2 = ExtractParamValue<unsigned_short>(this_00,param_2,param_3);
+      uVar7 = 0;
+      ChangeDigitalSourceAttribute(this,0x10,0x10,uVar2 == 2,0x40000000);
+      break;
+    case 0x60f:
+      uVar2 = ExtractParamValue<unsigned_short>(this_00,param_2,param_3);
+      uVar7 = 0;
+      ChangeDigitalSourceAttribute(this,4,4,uVar2 == 1,0x40000000);
+      break;
+    case 0x611:
+      bVar1 = ExtractParamValue<bool>(this_00,param_2,param_3);
+      uVar7 = 0;
+      ChangeDigitalSourceAttribute(this,0x20,0x20,bVar1,0x40000000);
+      break;
+    case 0x612:
+      if (param_2 != 2) {
+        OSXLog("Incorrect size:%d expected:%d File:%s Line:%d Func:%s",param_2,2,
+               "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+               ,0x592,"SetHWSetting");
+        UDebugging::DebugThrow
+                  (0x61737274,"SetHWSetting",
+                   (uchar *)
+                   "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+                   ,0x592);
+      }
+      uVar7 = 0;
+      Set32BitNumberProperty(this,(NSString *)&cf_MASPDIFMixerBypass,(uint)(*(short *)param_3 == 0))
+      ;
+      break;
+    case 0x614:
+      if (param_2 != 1) {
+        OSXLog("Incorrect size:%d expected:%d File:%s Line:%d Func:%s",param_2,1,
+               "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+               ,0x504,"SetHWSetting");
+        UDebugging::DebugThrow
+                  (0x61737274,"SetHWSetting",
+                   (uchar *)
+                   "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+                   ,0x504);
+      }
+      uVar7 = 0;
+      Set32BitNumberProperty(this,(NSString *)&cf_MAEnableStereoPairEngines,(uint)*(byte *)param_3);
+    }
+  }
+  if ((this[0x7c] == (CXDevice)0x0) &&
+     (iVar6 = _objc_msgSend(*(undefined4 *)(this + 0x70),PTR_s_count_001d4080), iVar6 != 0)) {
+    SendQueuedProperties(this);
+  }
+  _objc_msgSend(uVar3,PTR_s_release_001d4048);
+  return uVar7;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P7fup.java> === CXDevice::SetHWIndexedSetting @ 000704bc === (GhidraScript)  
+INFO  DecompA2P7fup.java> 
+/* CXDevice::SetHWIndexedSetting(unsigned long, unsigned short, unsigned long, void*) */
+
+undefined2 __thiscall
+CXDevice::SetHWIndexedSetting
+          (CXDevice *this,ulong param_1,ushort param_2,ulong param_3,void *param_4)
+
+{
+  ushort uVar1;
+  ushort uVar2;
+  short sVar3;
+  short sVar4;
+  undefined4 uVar5;
+  uint uVar6;
+  uint uVar7;
+  int iVar8;
+  OpaqueEventLoopRef *pOVar9;
+  uint uVar10;
+  undefined2 local_2c;
+  uint local_24;
+  uint local_20;
+  ulong local_1c;
+  NSString *local_18;
+  ushort local_12;
+  
+  local_12 = param_2;
+  uVar5 = _objc_msgSend(PTR_s_NSAutoreleasePool_001d47a4,PTR_s_alloc_001d401c);
+  uVar5 = _objc_msgSend(uVar5,PTR_s_init_001d4000);
+  if (param_4 == (void *)0x0) {
+    UDebugging::DebugThrow
+              (0x6e696c50,"SetHWIndexedSetting",
+               (uchar *)
+               "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+               ,0x6c1);
+  }
+  uVar1 = local_12;
+  local_2c = 1;
+  switch(param_1) {
+  case 0x5ea:
+    if (param_3 != 4) {
+      OSXLog("Incorrect size:%d expected:%d File:%s Line:%d Func:%s",param_3,4,
+             "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+             ,0x74f,"SetHWIndexedSetting");
+      UDebugging::DebugThrow
+                (0x61737274,"SetHWIndexedSetting",
+                 (uchar *)
+                 "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+                 ,0x74f);
+    }
+    local_2c = 0;
+    SetChannelLevelProperty(this,(NSString *)&cf_MAAuxSendLevels,param_4,1,(uint)local_12);
+    break;
+  case 0x5eb:
+    if ((local_12 != 0) && (uVar2 = (**(code **)(*(int *)this + 0x5c))(this), uVar1 <= uVar2)) {
+      local_2c = 0;
+      SetChannelLevelProperty(this,(NSString *)&cf_MAInputPan2,param_4,1,(uint)local_12);
+    }
+    break;
+  case 0x5ec:
+    if (param_3 != 4) {
+      OSXLog("Incorrect size:%d expected:%d File:%s Line:%d Func:%s",param_3,4,
+             "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+             ,0x747,"SetHWIndexedSetting");
+      UDebugging::DebugThrow
+                (0x61737274,"SetHWIndexedSetting",
+                 (uchar *)
+                 "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+                 ,0x747);
+    }
+    ChooseMixerBusAndChannelIndex(this,(NSString *)&cf_Levels,&local_18,&local_12);
+    local_2c = 0;
+    SetChannelLevelProperty(this,local_18,param_4,1,(uint)local_12);
+    break;
+  case 0x5ed:
+  case 0x5f7:
+    if (param_3 != 1) {
+      OSXLog("Incorrect size:%d expected:%d File:%s Line:%d Func:%s",param_3,1,
+             "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+             ,0x6c9,"SetHWIndexedSetting");
+      UDebugging::DebugThrow
+                (0x61737274,"SetHWIndexedSetting",
+                 (uchar *)
+                 "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+                 ,0x6c9);
+    }
+    uVar7 = Get64BitNumberProperty(this,(NSString *)&cf_MARotaryControlV2);
+    ChooseRotaryPairPhaseAndBitIndex(this,param_1,&local_12,&local_1c);
+    uVar6 = 1 << ((byte)(local_12 + local_1c) & 0x1f);
+    if ((local_12 + local_1c & 0x20) != 0) {
+      uVar6 = 0;
+    }
+    if (*(char *)param_4 == '\0') {
+      uVar6 = ~uVar6 & uVar7;
+    }
+    else {
+      uVar6 = uVar6 | uVar7;
+    }
+    local_2c = 0;
+    Set64BitNumberProperty
+              ((NSString *)this,
+               CONCAT26((short)(uVar6 >> 0x10),CONCAT24((short)uVar6,&cf_MARotaryControlV2)));
+    break;
+  case 0x5ee:
+    local_2c = 0;
+    SetMixerPairBooleanProperty(this,(NSString *)&cf_Link,local_12,param_3,param_4);
+    break;
+  case 0x5ef:
+    local_2c = 0;
+    SetMixerPairBooleanProperty(this,(NSString *)&cf_Solo,local_12,param_3,param_4);
+    break;
+  case 0x5f0:
+    local_2c = 0;
+    SetMixerPairBooleanProperty(this,(NSString *)&cf_Mute,local_12,param_3,param_4);
+    break;
+  case 0x5f1:
+    local_24 = 0;
+    if (param_3 != 0) {
+      uVar7 = 0;
+      uVar6 = 0;
+      do {
+        if (*(char *)((int)param_4 + uVar6) != '\0') {
+          uVar10 = 1 << ((byte)uVar6 & 0x1f);
+          if ((uVar6 & 0x20) != 0) {
+            uVar10 = 0;
+          }
+          uVar7 = uVar7 | uVar10;
+          local_24 = uVar7;
+        }
+        uVar6 = uVar6 + 1;
+      } while (param_3 != uVar6);
+    }
+    ChooseMixerBusAndChannelPair(this,(NSString *)&cf_RoutingV2,&local_18,&local_12);
+    local_2c = 0;
+    SetChannelLevelProperty(this,local_18,&local_24,1,(uint)local_12);
+    break;
+  case 0x5f4:
+    if (param_3 != 4) {
+      OSXLog("Incorrect size:%d expected:%d File:%s Line:%d Func:%s",param_3,4,
+             "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+             ,0x757,"SetHWIndexedSetting");
+      UDebugging::DebugThrow
+                (0x61737274,"SetHWIndexedSetting",
+                 (uchar *)
+                 "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+                 ,0x757);
+    }
+    ChooseOutputBusAndChannelIndex(this,(NSString *)&cf_Levels,&local_18,&local_12);
+    local_2c = 0;
+    SetChannelLevelProperty(this,local_18,param_4,1,(uint)local_12);
+    break;
+  case 0x5f5:
+    uVar6 = (uint)local_12;
+    uVar7 = (**(code **)(*(int *)this + 0x18))(this);
+    uVar1 = local_12;
+    if (((int)((uVar7 & 0xffff) - 2) <= (int)uVar6) &&
+       (uVar2 = (**(code **)(*(int *)this + 0x18))(this), uVar1 <= uVar2)) {
+      uVar7 = (uint)local_12;
+      iVar8 = (**(code **)(*(int *)this + 0x18))(this);
+      local_2c = 0;
+      SetChannelLevelProperty
+                (this,(NSString *)&cf_MAAuxOutputPan2,param_4,1,uVar7 - (iVar8 - 2U & 0xffff));
+    }
+    break;
+  case 0x5f8:
+    if (param_3 != 1) {
+      OSXLog("Incorrect size:%d expected:%d File:%s Line:%d Func:%s",param_3,1,
+             "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+             ,0x719,"SetHWIndexedSetting");
+      UDebugging::DebugThrow
+                (0x61737274,"SetHWIndexedSetting",
+                 (uchar *)
+                 "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+                 ,0x719);
+    }
+    ChooseOutputBusAndChannelPair(this,(NSString *)&cf_Link,&local_18,&local_12);
+    local_2c = 0;
+    SetPairBooleanProperty(this,local_18,local_12,param_3,param_4);
+    break;
+  case 0x5f9:
+    if (param_3 != 1) {
+      OSXLog("Incorrect size:%d expected:%d File:%s Line:%d Func:%s",param_3,1,
+             "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+             ,0x703,"SetHWIndexedSetting");
+      UDebugging::DebugThrow
+                (0x61737274,"SetHWIndexedSetting",
+                 (uchar *)
+                 "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+                 ,0x703);
+    }
+    uVar1 = local_12;
+    if (local_12 != 0) {
+      sVar3 = (**(code **)(*(int *)this + 0x18))(this);
+      sVar4 = (**(code **)(*(int *)this + 0x60))(this);
+      if (uVar1 <= (ushort)((sVar3 + -2) - sVar4)) {
+        local_2c = 0;
+        SetPairBooleanProperty(this,(NSString *)&cf_MAOutputSolo,local_12,param_3,param_4);
+      }
+    }
+    break;
+  case 0x5fa:
+    if (param_3 != 1) {
+      OSXLog("Incorrect size:%d expected:%d File:%s Line:%d Func:%s",param_3,1,
+             "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+             ,0x710,"SetHWIndexedSetting");
+      UDebugging::DebugThrow
+                (0x61737274,"SetHWIndexedSetting",
+                 (uchar *)
+                 "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+                 ,0x710);
+    }
+    ChooseOutputBusAndChannelPair(this,(NSString *)&cf_Mute,&local_18,&local_12);
+    local_2c = 0;
+    SetPairBooleanProperty(this,local_18,local_12,param_3,param_4);
+    break;
+  case 0x5fb:
+    if (param_3 != 2) {
+      OSXLog("Incorrect size:%d expected:%d File:%s Line:%d Func:%s",param_3,2,
+             "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+             ,0x6ed,"SetHWIndexedSetting");
+      UDebugging::DebugThrow
+                (0x61737274,"SetHWIndexedSetting",
+                 (uchar *)
+                 "i/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CXDevice.mm"
+                 ,0x6ed);
+    }
+    uVar1 = local_12;
+    if ((local_12 != 0) &&
+       (uVar7 = (**(code **)(*(int *)this + 0x68))(this), uVar1 <= (ushort)((uVar7 & 0xfffe) >> 1)))
+    {
+      local_20 = (uint)(*(short *)param_4 != 1);
+      local_2c = 0;
+      SetChannelLevelProperty(this,(NSString *)&cf_MAMonitorAuxOnOutput,&local_20,1,(uint)local_12);
+    }
+  }
+  if ((this[0x7c] == (CXDevice)0x0) &&
+     (iVar8 = _objc_msgSend(*(undefined4 *)(this + 0x70),PTR_s_count_001d4080), iVar8 != 0)) {
+    SendQueuedProperties(this);
+  }
+  pOVar9 = (OpaqueEventLoopRef *)_GetMainEventLoop();
+  LTimerTask::Install((LTimerTask *)(this + 0xe0),pOVar9,1.0,1.0);
+  _objc_msgSend(uVar5,PTR_s_release_001d4048);
+  return local_2c;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P7fup.java> === CXDevice::InstallPropertyChangeHandlers @ 0006ca12 === (GhidraScript)  
+INFO  DecompA2P7fup.java> 
+/* CXDevice::InstallPropertyChangeHandlers() */
+
+void __thiscall CXDevice::InstallPropertyChangeHandlers(CXDevice *this)
+
+{
+  undefined4 uVar1;
+  undefined4 uVar2;
+  
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,
+                        ReceiveSWReturnLevelChange);
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MASWReturnLevels);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,
+                        ReceiveInputLevelChange);
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MAInputLevels);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,
+                        ReceiveOutputLevelChange);
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MAOutputLevels);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,
+                        ReceiveHeadphonesLevelChange);
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MAHeadphoneLevels);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,
+                        ReceiveAuxOutputLevelChange);
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MAAuxOutputLevels);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,
+                        ReceiveAuxSendLevelChange);
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MAAuxSendLevels);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,ReceiveSWReturnSolo)
+  ;
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MASWReturnSolo);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,ReceiveSWReturnMute)
+  ;
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MASWReturnMute);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,ReceiveInputSolo);
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MAInputSolo);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,ReceiveInputMute);
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MAInputMute);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,ReceiveOutputSolo);
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MAOutputSolo);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,ReceiveOutputMute);
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MAOutputMute);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,ReceiveHeadphoneMute
+                       );
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MAHeadphoneMute);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,ReceiveAuxOutputMute
+                       );
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MAAuxOutputMute);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,
+                        ReceiveMonitorAuxOnOutput);
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MAMonitorAuxOnOutput);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,
+                        ReceiveSWReturnRouting);
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MASWReturnRoutingV2);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,ReceiveInputRouting)
+  ;
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MAInputRoutingV2);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,
+                        ReceiveHeadphoneSource);
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MAHeadphoneSourceV2);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,ReceiveClockSource);
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MAClockSource);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,ReceiveRateLocked);
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MARateLocked);
+  uVar1 = *(undefined4 *)(this + 0x74);
+  uVar2 = _objc_msgSend(PTR_s_NSValue_001d4798,PTR_s_valueWithPointer__001d40b8,ReceiveChannelMask);
+  _objc_msgSend(uVar1,PTR_s_setObject_forKey__001d4050,uVar2,&cf_MARotaryControlV2);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P7fup.java> === CXDevice::ReceiveSampleRate @ 00071a9e === (GhidraScript)  
+INFO  DecompA2P7fup.java> 
+/* CXDevice::ReceiveSampleRate(CXDevice*, NSString*, objc_object*) */
+
+void CXDevice::ReceiveSampleRate(CXDevice *param_1,NSString *param_2,objc_object *param_3)
+
+{
+  undefined4 local_8;
+  
+  local_8 = _objc_msgSend(param_3,PTR_s_unsignedLongValue_001d4058);
+  (**(code **)(*(int *)param_1 + 0x4c))(param_1,0x601,4,&local_8);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P7fup.java> === CXDevice::ReceiveClockSource @ 00071b40 === (GhidraScript)  
+INFO  DecompA2P7fup.java> 
+/* CXDevice::ReceiveClockSource(CXDevice*, NSString*, objc_object*) */
+
+void CXDevice::ReceiveClockSource(CXDevice *param_1,NSString *param_2,objc_object *param_3)
+
+{
+  (**(code **)(*(int *)param_1 + 0x74))(param_1,param_2,param_3,0);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2P7fup.java> === CXDevice::ReceiveOnePropertyChange @ 00071b6c === (GhidraScript)  
+INFO  DecompA2P7fup.java> 
+/* CXDevice::ReceiveOnePropertyChange(NSString*, objc_object*) */
+
+void __thiscall
+CXDevice::ReceiveOnePropertyChange(CXDevice *this,NSString *param_1,objc_object *param_2)
+
+{
+  int iVar1;
+  code *pcVar2;
+  NSString *pNVar3;
+  
+  pNVar3 = param_1;
+  iVar1 = _objc_msgSend(*(undefined4 *)(this + 0x74),PTR_s_objectForKey__001d4014,param_1);
+  if (iVar1 != 0) {
+    pcVar2 = (code *)_objc_msgSend(iVar1,PTR_s_pointerValue_001d40b4,pNVar3);
+    (*pcVar2)(this,param_1,param_2);
+    _objc_msgSend(*(undefined4 *)(this + 0x6c),PTR_s_setObject_forKey__001d4050,param_2,param_1);
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  REPORT: Save succeeded for processed file: /Panel (HeadlessAnalyzer)  

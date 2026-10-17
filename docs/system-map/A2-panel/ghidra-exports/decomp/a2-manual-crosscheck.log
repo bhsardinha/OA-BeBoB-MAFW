@@ -1,0 +1,840 @@
+[[line 1 not recovered — original /tmp log lost 2026-10-14]]
+[[line 2 not recovered — original /tmp log lost 2026-10-14]]
+[[line 3 not recovered — original /tmp log lost 2026-10-14]]
+[[line 4 not recovered — original /tmp log lost 2026-10-14]]
+[[line 5 not recovered — original /tmp log lost 2026-10-14]]
+[[line 6 not recovered — original /tmp log lost 2026-10-14]]
+[[line 7 not recovered — original /tmp log lost 2026-10-14]]
+[[line 8 not recovered — original /tmp log lost 2026-10-14]]
+[[line 9 not recovered — original /tmp log lost 2026-10-14]]
+[[line 10 not recovered — original /tmp log lost 2026-10-14]]
+[[line 11 not recovered — original /tmp log lost 2026-10-14]]
+[[line 12 not recovered — original /tmp log lost 2026-10-14]]
+[[line 13 not recovered — original /tmp log lost 2026-10-14]]
+[[line 14 not recovered — original /tmp log lost 2026-10-14]]
+[[line 15 not recovered — original /tmp log lost 2026-10-14]]
+[[line 16 not recovered — original /tmp log lost 2026-10-14]]
+[[line 17 not recovered — original /tmp log lost 2026-10-14]]
+[[line 18 not recovered — original /tmp log lost 2026-10-14]]
+[[line 19 not recovered — original /tmp log lost 2026-10-14]]
+[[line 20 not recovered — original /tmp log lost 2026-10-14]]
+[[line 21 not recovered — original /tmp log lost 2026-10-14]]
+[[line 22 not recovered — original /tmp log lost 2026-10-14]]
+[[line 23 not recovered — original /tmp log lost 2026-10-14]]
+[[line 24 not recovered — original /tmp log lost 2026-10-14]]
+[[line 25 not recovered — original /tmp log lost 2026-10-14]]
+[[line 26 not recovered — original /tmp log lost 2026-10-14]]
+[[line 27 not recovered — original /tmp log lost 2026-10-14]]
+[[line 28 not recovered — original /tmp log lost 2026-10-14]]
+[[line 29 not recovered — original /tmp log lost 2026-10-14]]
+[[line 30 not recovered — original /tmp log lost 2026-10-14]]
+[[line 31 not recovered — original /tmp log lost 2026-10-14]]
+[[line 32 not recovered — original /tmp log lost 2026-10-14]]
+[[line 33 not recovered — original /tmp log lost 2026-10-14]]
+[[line 34 not recovered — original /tmp log lost 2026-10-14]]
+[[line 35 not recovered — original /tmp log lost 2026-10-14]]
+[[line 36 not recovered — original /tmp log lost 2026-10-14]]
+[[line 37 not recovered — original /tmp log lost 2026-10-14]]
+[[line 38 not recovered — original /tmp log lost 2026-10-14]]
+[[line 39 not recovered — original /tmp log lost 2026-10-14]]
+[[line 40 not recovered — original /tmp log lost 2026-10-14]]
+[[line 41 not recovered — original /tmp log lost 2026-10-14]]
+[[line 42 not recovered — original /tmp log lost 2026-10-14]]
+[[line 43 not recovered — original /tmp log lost 2026-10-14]]
+[[line 44 not recovered — original /tmp log lost 2026-10-14]]
+[[line 45 not recovered — original /tmp log lost 2026-10-14]]
+[[line 46 not recovered — original /tmp log lost 2026-10-14]]
+[[line 47 not recovered — original /tmp log lost 2026-10-14]]
+[[line 48 not recovered — original /tmp log lost 2026-10-14]]
+INFO  DecompA2ManualCrossCheck.java> === CFW1814HardwareView::AdaptPortsToSettings @ 0005299e === (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> 
+/* CFW1814HardwareView::AdaptPortsToSettings(unsigned short, unsigned short, bool) */
+
+void __thiscall
+CFW1814HardwareView::AdaptPortsToSettings
+          (CFW1814HardwareView *this,ushort param_1,ushort param_2,bool param_3)
+
+{
+  int iVar1;
+  int *piVar2;
+  
+  piVar2 = *(int **)(this + 0x174);
+  if (param_3) {
+    (**(code **)(*piVar2 + 200))(piVar2);
+    (**(code **)(**(int **)(this + 0x180) + 200))(*(int **)(this + 0x180));
+    piVar2 = *(int **)(this + 400);
+    if (param_1 == 2) {
+      (**(code **)(*piVar2 + 0xcc))(piVar2);
+      piVar2 = *(int **)(this + 0x18c);
+      iVar1 = *piVar2;
+    }
+    else {
+      (**(code **)(*piVar2 + 200))(piVar2);
+      piVar2 = *(int **)(this + 0x18c);
+      iVar1 = *piVar2;
+      if (param_2 != 2) {
+        (**(code **)(iVar1 + 0xcc))(piVar2);
+        return;
+      }
+    }
+    (**(code **)(iVar1 + 200))(piVar2);
+  }
+  else {
+    (**(code **)(*piVar2 + 0xcc))(piVar2);
+    (**(code **)(**(int **)(this + 0x180) + 0xcc))(*(int **)(this + 0x180));
+    (**(code **)(**(int **)(this + 400) + 0xcc))(*(int **)(this + 400));
+    (**(code **)(**(int **)(this + 0x18c) + 0xcc))(*(int **)(this + 0x18c));
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> === CFW1814MixerView::AdaptToClockRate @ 00057012 === (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> 
+/* CFW1814MixerView::AdaptToClockRate(unsigned long) */
+
+void __thiscall CFW1814MixerView::AdaptToClockRate(CFW1814MixerView *this,ulong param_1)
+
+{
+  int *piVar1;
+  short sVar2;
+  uint local_c;
+  
+  piVar1 = *(int **)(*(int *)(this + 300) + 0xbc);
+  if (piVar1 != (int *)0x0) {
+    local_c = 48000;
+    sVar2 = (**(code **)(**(int **)(this + 0x11c) + 0xc))
+                      (*(int **)(this + 0x11c),0x615,0,4,&local_c);
+    if ((sVar2 == 0) && (param_1 <= local_c)) {
+      (**(code **)(*piVar1 + 200))(piVar1);
+    }
+    else {
+      (**(code **)(*piVar1 + 0xcc))(piVar1);
+    }
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> === CFW1814HPOutChannelPairView::AdaptToClockRate @ 0005502e === (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> 
+/* CFW1814HPOutChannelPairView::AdaptToClockRate(unsigned long) */
+
+void __thiscall
+CFW1814HPOutChannelPairView::AdaptToClockRate(CFW1814HPOutChannelPairView *this,ulong param_1)
+
+{
+  int *piVar1;
+  short sVar2;
+  uint local_c;
+  
+  local_c = 48000;
+  sVar2 = (**(code **)(**(int **)(this + 0xc0) + 0xc))(*(int **)(this + 0xc0),0x615,0,4,&local_c);
+  piVar1 = *(int **)(this + 0x100);
+  if ((sVar2 == 0) && (param_1 <= local_c)) {
+    (**(code **)(*piVar1 + 200))(piVar1);
+  }
+  else {
+    (**(code **)(*piVar1 + 0xcc))(piVar1);
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> === CFW1814OutputView::AdaptToClockRate @ 000590bc === (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> 
+/* CFW1814OutputView::AdaptToClockRate(unsigned long) */
+
+void __thiscall CFW1814OutputView::AdaptToClockRate(CFW1814OutputView *this,ulong param_1)
+
+{
+  COutputChannelPairView *this_00;
+  short sVar1;
+  uint local_c;
+  
+  this_00 = *(COutputChannelPairView **)(**(int **)(*(int *)(this + 0x124) + 0x14) + 0x24);
+  if (this_00 != (COutputChannelPairView *)0x0) {
+    local_c = 48000;
+    sVar1 = (**(code **)(**(int **)(this + 0x11c) + 0xc))
+                      (*(int **)(this + 0x11c),0x615,0,4,&local_c);
+    if ((sVar1 == 0) && (param_1 <= local_c)) {
+      (**(code **)(*(int *)this_00 + 200))(this_00);
+    }
+    else {
+      (**(code **)(*(int *)this_00 + 0xcc))(this_00);
+      COutputChannelPairView::ClearVUMeters(this_00);
+    }
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> === CFW1814HPABSourceDialog::ShowHPABSourceDialog @ 00053124 === (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> 
+/* CFW1814HPABSourceDialog::ShowHPABSourceDialog(LCommander*, CDeviceSettings*) */
+
+int * CFW1814HPABSourceDialog::ShowHPABSourceDialog(LCommander *param_1,CDeviceSettings *param_2)
+
+{
+  char cVar1;
+  int iVar2;
+  int *piVar3;
+  undefined4 uVar4;
+  
+  iVar2 = LWindow::FindWindowByID(0x170c);
+  if ((iVar2 != 0) &&
+     (piVar3 = (int *)___dynamic_cast(iVar2,PTR_typeinfo_001630a0,&typeinfo,0xffffffff),
+     piVar3 != (int *)0x0)) {
+    (**(code **)(*piVar3 + 0x274))(piVar3,param_2);
+    (**(code **)(*piVar3 + 0xb8))(piVar3);
+    (**(code **)(*piVar3 + 200))(piVar3);
+    (**(code **)(*piVar3 + 0x1e8))(piVar3);
+    uVar4 = (**(code **)(*piVar3 + 0x18))(piVar3);
+    cVar1 = _IsWindowCollapsed(uVar4);
+    if (cVar1 == '\0') {
+      return piVar3;
+    }
+    uVar4 = (**(code **)(*piVar3 + 0x18))(piVar3);
+    _CollapseWindow(uVar4,0);
+    return piVar3;
+  }
+  iVar2 = LWindow::CreateWindow(0x170c,param_1);
+  if ((iVar2 == 0) ||
+     (piVar3 = (int *)___dynamic_cast(iVar2,PTR_typeinfo_001630a0,&typeinfo,0xffffffff),
+     piVar3 == (int *)0x0)) {
+    UDebugging::DebugThrow
+              (0x6e696c50,"ShowHPABSourceDialog",
+               (uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011da4a,0x25);
+    piVar3 = (int *)0x0;
+  }
+  (**(code **)(*piVar3 + 0x274))(piVar3,param_2);
+  (**(code **)(*piVar3 + 0xb8))(piVar3);
+  return piVar3;
+}
+
+ (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> === CFW1814HPABSourceDialog::FinishCreateSelf @ 00053840 === (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> 
+/* CFW1814HPABSourceDialog::FinishCreateSelf() */
+
+void __thiscall CFW1814HPABSourceDialog::FinishCreateSelf(CFW1814HPABSourceDialog *this)
+
+{
+  int iVar1;
+  LListener *pLVar2;
+  
+  LWindow::FinishCreateSelf((LWindow *)this);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x1722);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x164) = 0;
+LAB_000538b4:
+    UDebugging::DebugThrow
+              (0x6e696c50,"FinishCreateSelf",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011da4a,
+               0x89);
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630fc,0xffffffff);
+    *(int *)(this + 0x164) = iVar1;
+    if (iVar1 == 0) goto LAB_000538b4;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x1721);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x168) = 0;
+LAB_00053939:
+    UDebugging::DebugThrow
+              (0x6e696c50,"FinishCreateSelf",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011da4a,
+               0x8c);
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630fc,0xffffffff);
+    *(int *)(this + 0x168) = iVar1;
+    if (iVar1 == 0) goto LAB_00053939;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x170d);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x16c) = 0;
+LAB_000539b2:
+    UDebugging::DebugThrow
+              (0x6e696c50,"FinishCreateSelf",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011da4a,
+               0x90);
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630f0,0xffffffff);
+    *(int *)(this + 0x16c) = iVar1;
+    if (iVar1 == 0) goto LAB_000539b2;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x170e);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x170) = 0;
+LAB_00053a34:
+    UDebugging::DebugThrow
+              (0x6e696c50,"FinishCreateSelf",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011da4a,
+               0x93);
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630ec,0xffffffff);
+    *(int *)(this + 0x170) = iVar1;
+    if (iVar1 == 0) goto LAB_00053a34;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x170f);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x174) = 0;
+LAB_00053ab9:
+    UDebugging::DebugThrow
+              (0x6e696c50,"FinishCreateSelf",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011da4a,
+               0x96);
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630ec,0xffffffff);
+    *(int *)(this + 0x174) = iVar1;
+    if (iVar1 == 0) goto LAB_00053ab9;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x1711);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x178) = 0;
+LAB_00053b3e:
+    UDebugging::DebugThrow
+              (0x6e696c50,"FinishCreateSelf",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011da4a,
+               0x99);
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630ec,0xffffffff);
+    *(int *)(this + 0x178) = iVar1;
+    if (iVar1 == 0) goto LAB_00053b3e;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x1717);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x17c) = 0;
+LAB_00053bb7:
+    UDebugging::DebugThrow
+              (0x6e696c50,"FinishCreateSelf",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011da4a,
+               0x9d);
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630f0,0xffffffff);
+    *(int *)(this + 0x17c) = iVar1;
+    if (iVar1 == 0) goto LAB_00053bb7;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,&section_00001718);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x180) = 0;
+LAB_00053c39:
+    UDebugging::DebugThrow
+              (0x6e696c50,"FinishCreateSelf",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011da4a,
+               0xa0);
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630ec,0xffffffff);
+    *(int *)(this + 0x180) = iVar1;
+    if (iVar1 == 0) goto LAB_00053c39;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x1719);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x184) = 0;
+LAB_00053cbe:
+    UDebugging::DebugThrow
+              (0x6e696c50,"FinishCreateSelf",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011da4a,
+               0xa3);
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630ec,0xffffffff);
+    *(int *)(this + 0x184) = iVar1;
+    if (iVar1 == 0) goto LAB_00053cbe;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x171b);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x188) = 0;
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630ec,0xffffffff);
+    *(int *)(this + 0x188) = iVar1;
+    if (iVar1 != 0) goto LAB_00053d6b;
+  }
+  UDebugging::DebugThrow
+            (0x6e696c50,"FinishCreateSelf",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011da4a,0xa6
+            );
+LAB_00053d6b:
+  RestorePrefs(this);
+  pLVar2 = (LListener *)(this + 0x124);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0x164) + 0x30),pLVar2);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0x168) + 0x30),pLVar2);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0x170) + 0x30),pLVar2);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0x174) + 0x30),pLVar2);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0x178) + 0x30),pLVar2);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0x180) + 0x30),pLVar2);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0x184) + 0x30),pLVar2);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0x188) + 0x30),pLVar2);
+  *PTR_sUpdateCommandStatus_0016302c = 1;
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> === CFW1814HPABSourceDialog::ListenToMessage @ 00053f52 === (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> 
+/* CFW1814HPABSourceDialog::ListenToMessage(long, void*) */
+
+void __thiscall
+CFW1814HPABSourceDialog::ListenToMessage(CFW1814HPABSourceDialog *this,long param_1,void *param_2)
+
+{
+  CFW1814HPABSourceDialog CVar1;
+  ushort uVar2;
+  short sVar3;
+  int iVar4;
+  ulong uVar5;
+  undefined4 uVar6;
+  section *psVar7;
+  ushort *puVar8;
+  undefined4 local_28;
+  undefined2 local_24;
+  ulong local_20;
+  ulong local_1c;
+  ushort local_16;
+  undefined2 local_14;
+  
+  if ((uint)param_1 < 0x3f5) {
+    if (param_1 == 900) {
+      this[0x150] = (CFW1814HPABSourceDialog)0x0;
+      (**(code **)(*(int *)this + 0x27c))(this);
+    }
+    else if (param_1 != 0x385) {
+      return;
+    }
+  }
+  else {
+    if (0x600 < (uint)param_1) {
+      if (0x170c < (uint)param_1) {
+        if ((param_1 != 0x170d) && (param_1 != 0x1717)) {
+          return;
+        }
+        local_1c = 0;
+        iVar4 = (**(code **)(**(int **)(this + 0x16c) + 0x1e8))(*(int **)(this + 0x16c));
+        local_14 = 1;
+        local_16 = 1;
+        if (iVar4 - 0x170eU < 0xe) {
+          local_16 = *(ushort *)(_LSOpenCFURLRef + iVar4 * 2 + 4);
+        }
+        iVar4 = (**(code **)(**(int **)(this + 0x17c) + 0x1e8))(*(int **)(this + 0x17c));
+        if (iVar4 - 0x170eU < 0xe) {
+          local_14 = *(undefined2 *)(_LSOpenCFURLRef + iVar4 * 2 + 4);
+        }
+        sVar3 = (**(code **)(**(int **)(this + 0x154) + 0xc))
+                          (*(int **)(this + 0x154),0x601,0,4,&local_1c);
+        uVar5 = 0;
+        if (sVar3 == 0) {
+          uVar5 = local_1c;
+        }
+        puVar8 = &local_16;
+LAB_0005416a:
+        UpdateHPSourceButtons(this,puVar8,uVar5);
+        return;
+      }
+      CVar1 = this[0x150];
+      if (param_1 == 0x601) {
+        uVar5 = **(ulong **)((int)param_2 + 0xc);
+        local_24 = DAT_000f866e;
+        local_28 = DAT_000f866a;
+        if (CVar1 == (CFW1814HPABSourceDialog)0x0) {
+          puVar8 = (ushort *)&local_28;
+          (**(code **)(**(int **)(this + 0x154) + 0xc))(*(int **)(this + 0x154),0x609,0,6,puVar8);
+          goto LAB_0005416a;
+        }
+        this[0x150] = (CFW1814HPABSourceDialog)0x0;
+        (**(code **)(**(int **)(this + 0x154) + 0xc))(*(int **)(this + 0x154),0x609,0,6,&local_28);
+        UpdateHPSourceButtons(this,(ushort *)&local_28,uVar5);
+      }
+      else {
+        if (param_1 != 0x609) {
+          return;
+        }
+        puVar8 = *(ushort **)((int)param_2 + 0xc);
+        local_20 = 0;
+        if (CVar1 != (CFW1814HPABSourceDialog)0x0) {
+          this[0x150] = (CFW1814HPABSourceDialog)0x0;
+        }
+        uVar2 = *puVar8;
+        if (uVar2 == 4) {
+          uVar6 = 0x1711;
+        }
+        else if (uVar2 == 2) {
+          uVar6 = 0x170f;
+        }
+        else {
+          uVar6 = 0;
+          if (uVar2 == 1) {
+            uVar6 = 0x170e;
+          }
+        }
+        (**(code **)(**(int **)(this + 0x16c) + 0x1ec))(*(int **)(this + 0x16c),uVar6);
+        uVar2 = puVar8[1];
+        if (uVar2 == 4) {
+          psVar7 = (section *)0x171b;
+        }
+        else if (uVar2 == 2) {
+          psVar7 = (section *)0x1719;
+        }
+        else {
+          psVar7 = (section *)0x0;
+          if (uVar2 == 1) {
+            psVar7 = &section_00001718;
+          }
+        }
+        (**(code **)(**(int **)(this + 0x17c) + 0x1ec))(*(int **)(this + 0x17c),psVar7);
+        sVar3 = (**(code **)(**(int **)(this + 0x154) + 0xc))
+                          (*(int **)(this + 0x154),0x601,0,4,&local_20);
+        uVar5 = 0;
+        if (sVar3 == 0) {
+          uVar5 = local_20;
+        }
+        UpdateHPSourceButtons(this,puVar8,uVar5);
+        if (CVar1 == (CFW1814HPABSourceDialog)0x0) {
+          return;
+        }
+      }
+      this[0x150] = (CFW1814HPABSourceDialog)0x1;
+      return;
+    }
+    if (param_1 != 0x3f5) {
+      return;
+    }
+  }
+  (**(code **)(*(int *)this + 0x240))(this);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> === CFW1814HPABSourceDialog::SaveSettings @ 0005486c === (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> 
+/* CFW1814HPABSourceDialog::SaveSettings() */
+
+void __thiscall CFW1814HPABSourceDialog::SaveSettings(CFW1814HPABSourceDialog *this)
+
+{
+  int *piVar1;
+  short sVar2;
+  int iVar3;
+  short sVar4;
+  short sVar5;
+  short local_16;
+  short local_14;
+  
+  iVar3 = (**(code **)(**(int **)(this + 0x16c) + 0x1e8))(*(int **)(this + 0x16c));
+  sVar5 = 1;
+  sVar4 = 1;
+  if (iVar3 - 0x170eU < 0xe) {
+    sVar4 = *(short *)(_LSOpenCFURLRef + iVar3 * 2 + 4);
+  }
+  iVar3 = (**(code **)(**(int **)(this + 0x17c) + 0x1e8))(*(int **)(this + 0x17c));
+  if (iVar3 - 0x170eU < 0xe) {
+    sVar5 = *(short *)(_LSOpenCFURLRef + iVar3 * 2 + 4);
+  }
+  piVar1 = *(int **)(this + 0x154);
+  if (piVar1 != (int *)0x0) {
+    sVar2 = (**(code **)(*piVar1 + 0xc))(piVar1,0x609,0,6,&local_16);
+    if ((sVar2 == 0) && ((sVar4 != local_16 || (sVar5 != local_14)))) {
+      local_16 = sVar4;
+      local_14 = sVar5;
+      if (this[0x150] == (CFW1814HPABSourceDialog)0x0) {
+        (**(code **)(**(int **)(this + 0x154) + 0x18))
+                  (*(int **)(this + 0x154),0x609,0,6,&local_16,1);
+      }
+      else {
+        this[0x150] = (CFW1814HPABSourceDialog)0x0;
+        (**(code **)(**(int **)(this + 0x154) + 0x18))
+                  (*(int **)(this + 0x154),0x609,0,6,&local_16,1);
+        this[0x150] = (CFW1814HPABSourceDialog)0x1;
+      }
+    }
+  }
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> === CFW1814HPABSourceDialog::LoadSettings @ 00054746 === (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> 
+/* CFW1814HPABSourceDialog::LoadSettings() */
+
+void __thiscall CFW1814HPABSourceDialog::LoadSettings(CFW1814HPABSourceDialog *this)
+
+{
+  short sVar1;
+  ulong uVar2;
+  undefined4 uVar3;
+  section *psVar4;
+  uint uVar5;
+  ulong local_1c;
+  undefined4 local_18;
+  undefined2 local_14;
+  
+  local_14 = DAT_000f866e;
+  local_18 = DAT_000f866a;
+  local_1c = 0;
+  (**(code **)(**(int **)(this + 0x154) + 0xc))(*(int **)(this + 0x154),0x609,0,6,&local_18);
+  uVar5 = local_18 & 0xffff;
+  if (uVar5 == 4) {
+    uVar3 = 0x1711;
+  }
+  else if (uVar5 == 2) {
+    uVar3 = 0x170f;
+  }
+  else {
+    uVar3 = 0;
+    if (uVar5 == 1) {
+      uVar3 = 0x170e;
+    }
+  }
+  (**(code **)(**(int **)(this + 0x16c) + 0x1ec))(*(int **)(this + 0x16c),uVar3);
+  if (local_18._2_2_ == 4) {
+    psVar4 = (section *)0x171b;
+  }
+  else if (local_18._2_2_ == 2) {
+    psVar4 = (section *)0x1719;
+  }
+  else {
+    psVar4 = (section *)0x0;
+    if (local_18._2_2_ == 1) {
+      psVar4 = &section_00001718;
+    }
+  }
+  (**(code **)(**(int **)(this + 0x17c) + 0x1ec))(*(int **)(this + 0x17c),psVar4);
+  sVar1 = (**(code **)(**(int **)(this + 0x154) + 0xc))(*(int **)(this + 0x154),0x601,0,4,&local_1c)
+  ;
+  uVar2 = 0;
+  if (sVar1 == 0) {
+    uVar2 = local_1c;
+  }
+  UpdateHPSourceButtons(this,(ushort *)&local_18,uVar2);
+  return;
+}
+
+ (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> === CFW1814HPABSourceDialog::SavePrefs @ 00053730 === (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> 
+/* CFW1814HPABSourceDialog::SavePrefs() */
+
+void __thiscall CFW1814HPABSourceDialog::SavePrefs(CFW1814HPABSourceDialog *this)
+
+{
+  undefined4 uVar1;
+  undefined *puVar2;
+  undefined4 uVar3;
+  undefined4 local_20;
+  undefined4 local_1c;
+  undefined4 local_18;
+  int local_14;
+  
+  puVar2 = PTR____stack_chk_guard_00163028;
+  local_14 = *(int *)PTR____stack_chk_guard_00163028;
+  local_18 = *(undefined4 *)PTR__Point_00_001630b4;
+  (**(code **)(*(int *)this + 0x144))(this,&local_18);
+  local_20 = _CFNumberCreate(0,8,&local_18);
+  local_1c = _CFNumberCreate(0,8,(int)&local_18 + 2);
+  uVar3 = _CFArrayCreate(0,&local_20,2,PTR__kCFTypeArrayCallBacks_0016310c);
+  uVar1 = *(undefined4 *)PTR__kCFPreferencesCurrentApplication_00163104;
+  _CFPreferencesSetValue
+            (&cf_HeadphoneABSourceDialogPosition,uVar3,uVar1,
+             *(undefined4 *)PTR__kCFPreferencesCurrentUser_00163108,
+             *(undefined4 *)PTR__kCFPreferencesAnyHost_00163100);
+  _CFRelease(uVar3);
+  _CFRelease(local_20);
+  _CFRelease(local_1c);
+  _CFPreferencesAppSynchronize(uVar1);
+  if (*(int *)puVar2 == local_14) {
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  ___stack_chk_fail();
+}
+
+ (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> === CFW1814HPABSourceDialog::RestorePrefs @ 00053e28 === (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> 
+/* CFW1814HPABSourceDialog::RestorePrefs() */
+
+void __thiscall CFW1814HPABSourceDialog::RestorePrefs(CFW1814HPABSourceDialog *this)
+
+{
+  undefined *puVar1;
+  int iVar2;
+  undefined8 local_34;
+  undefined4 local_2c;
+  undefined4 uStack_28;
+  undefined4 local_24;
+  undefined4 local_20;
+  short local_1c;
+  short local_1a;
+  int local_14;
+  
+  puVar1 = PTR____stack_chk_guard_00163028;
+  local_14 = *(int *)PTR____stack_chk_guard_00163028;
+  iVar2 = _CFPreferencesCopyValue
+                    (&cf_HeadphoneABSourceDialogPosition,
+                     *(undefined4 *)PTR__kCFPreferencesCurrentApplication_00163104,
+                     *(undefined4 *)PTR__kCFPreferencesCurrentUser_00163108,
+                     *(undefined4 *)PTR__kCFPreferencesAnyHost_00163100);
+  if (iVar2 != 0) {
+    local_2c = 0;
+    uStack_28 = 2;
+    _CFArrayGetValues(iVar2,0x200000000,&local_24);
+    _CFNumberGetValue(local_24,8);
+    _CFNumberGetValue(local_20,8);
+    _CFRelease(iVar2);
+    LWindow::MoveWindowTo((LWindow *)this,local_1a,local_1c);
+    local_34 = UWindows::GetWindowStructureRect(*(OpaqueWindowPtr **)(this + 0xe8));
+    iVar2 = UWindows::FindDominantDevice((Rect *)&local_34);
+    if (iVar2 == 0) {
+      UWindows::RepositionWindow(*(OpaqueWindowPtr **)(this + 0xe8),(OpaqueWindowPtr *)0x0,7);
+    }
+  }
+  if (*(int *)puVar1 == local_14) {
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  ___stack_chk_fail();
+}
+
+ (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> === CFW1814HPABSourceDialog::MapHPSourceButtonToSetting @ 0005422e === (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> 
+/* CFW1814HPABSourceDialog::MapHPSourceButtonToSetting(long) */
+
+undefined2 __thiscall
+CFW1814HPABSourceDialog::MapHPSourceButtonToSetting(CFW1814HPABSourceDialog *this,long param_1)
+
+{
+  if (param_1 - 0x170eU < 0xe) {
+    return *(undefined2 *)(_LSOpenCFURLRef + param_1 * 2 + 4);
+  }
+  return 1;
+}
+
+ (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> === CFW1814HPABSourceDialog::MapHPSourceSettingToButton @ 00054476 === (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> 
+/* CFW1814HPABSourceDialog::MapHPSourceSettingToButton(unsigned short*, unsigned short) */
+
+section * __thiscall
+CFW1814HPABSourceDialog::MapHPSourceSettingToButton
+          (CFW1814HPABSourceDialog *this,ushort *param_1,ushort param_2)
+
+{
+  ushort uVar1;
+  section *psVar2;
+  
+  psVar2 = (section *)0x0;
+  if (param_2 == 1) {
+    uVar1 = param_1[1];
+    if (uVar1 == 4) {
+      psVar2 = (section *)0x171b;
+    }
+    else if (uVar1 == 2) {
+      psVar2 = (section *)0x1719;
+    }
+    else if (uVar1 == 1) {
+      psVar2 = &section_00001718;
+    }
+  }
+  else if (param_2 == 0) {
+    uVar1 = *param_1;
+    if (uVar1 == 4) {
+      psVar2 = (section *)0x1711;
+    }
+    else if (uVar1 == 2) {
+      psVar2 = (section *)0x170f;
+    }
+    else if (uVar1 == 1) {
+      psVar2 = (section *)0x170e;
+    }
+  }
+  return psVar2;
+}
+
+ (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> === CFW1814HPABSourceDialog::UpdateHPSourceButtons @ 00054256 === (GhidraScript)  
+INFO  DecompA2ManualCrossCheck.java> 
+/* CFW1814HPABSourceDialog::UpdateHPSourceButtons(unsigned short*, unsigned long) */
+
+void __thiscall
+CFW1814HPABSourceDialog::UpdateHPSourceButtons
+          (CFW1814HPABSourceDialog *this,ushort *param_1,ulong param_2)
+
+{
+  ushort uVar1;
+  short sVar2;
+  int *piVar3;
+  ushort *local_20;
+  uint local_1c;
+  undefined4 local_18;
+  undefined2 local_14;
+  
+  if (((*(ushort *)(this + 0x158) == *param_1) && (*(ushort *)(this + 0x15a) == param_1[1])) &&
+     (*(ulong *)(this + 0x160) == param_2)) {
+    return;
+  }
+  local_20 = param_1 + 1;
+  local_14 = DAT_000f866e;
+  local_18 = DAT_000f866a;
+  local_1c = 48000;
+  (**(code **)(**(int **)(this + 0x154) + 0xc))(*(int **)(this + 0x154),0x615,0,4,&local_1c);
+  *(ushort *)(this + 0x158) = *param_1;
+  *(ushort *)(this + 0x15a) = *local_20;
+  *(ulong *)(this + 0x160) = param_2;
+  (**(code **)(**(int **)(this + 0x170) + 200))(*(int **)(this + 0x170));
+  (**(code **)(**(int **)(this + 0x174) + 200))(*(int **)(this + 0x174));
+  piVar3 = *(int **)(this + 0x178);
+  if (local_1c < param_2) {
+    (**(code **)(*piVar3 + 0xcc))(piVar3);
+  }
+  else {
+    (**(code **)(*piVar3 + 200))(piVar3);
+  }
+  (**(code **)(**(int **)(this + 0x180) + 200))(*(int **)(this + 0x180));
+  (**(code **)(**(int **)(this + 0x184) + 200))(*(int **)(this + 0x184));
+  piVar3 = *(int **)(this + 0x188);
+  if (local_1c < param_2) {
+    (**(code **)(*piVar3 + 0xcc))(piVar3);
+  }
+  else {
+    (**(code **)(*piVar3 + 200))(piVar3);
+  }
+  uVar1 = *param_1;
+  if (uVar1 == 4) {
+    piVar3 = *(int **)(this + 0x188);
+LAB_000543c1:
+    (**(code **)(*piVar3 + 0xcc))(piVar3);
+  }
+  else {
+    if (uVar1 == 2) {
+      piVar3 = *(int **)(this + 0x184);
+      goto LAB_000543c1;
+    }
+    if (uVar1 == 1) {
+      piVar3 = *(int **)(this + 0x180);
+      goto LAB_000543c1;
+    }
+  }
+  uVar1 = *local_20;
+  if (uVar1 == 4) {
+    piVar3 = *(int **)(this + 0x178);
+  }
+  else if (uVar1 == 2) {
+    piVar3 = *(int **)(this + 0x174);
+  }
+  else {
+    if (uVar1 != 1) goto LAB_00054402;
+    piVar3 = *(int **)(this + 0x170);
+  }
+  (**(code **)(*piVar3 + 0xcc))(piVar3);
+LAB_00054402:
+  sVar2 = (**(code **)(**(int **)(this + 0x154) + 0xc))(*(int **)(this + 0x154),0x609,0,6,&local_18)
+  ;
+  if ((sVar2 == 0) && (((ushort)local_18 != *param_1 || (local_18._2_2_ != *local_20)))) {
+    (**(code **)(**(int **)(this + 0x164) + 200))(*(int **)(this + 0x164));
+  }
+  else {
+    (**(code **)(**(int **)(this + 0x164) + 0xcc))(*(int **)(this + 0x164));
+  }
+  return;
+}
+
+ (GhidraScript)  

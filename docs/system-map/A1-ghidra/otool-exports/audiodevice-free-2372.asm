@@ -1,0 +1,24 @@
+0000000000002372	pushq	%rbp
+0000000000002373	movq	%rsp, %rbp
+0000000000002376	pushq	%rbx
+0000000000002377	subq	$0x8, %rsp
+000000000000237b	movq	0x100(%rdi), %rax
+0000000000002382	testq	%rax, %rax
+0000000000002385	movq	%rdi, %rbx
+0000000000002388	je	0x23b0
+000000000000238a	movq	(%rax), %rcx
+000000000000238d	xorl	%esi, %esi
+000000000000238f	movq	%rax, %rdi
+0000000000002392	callq	*0x1f8(%rcx)
+0000000000002398	movq	0x100(%rbx), %rdi
+000000000000239f	movq	(%rdi), %rax
+00000000000023a2	callq	*0x28(%rax)
+00000000000023a5	movq	$0x0, 0x100(%rbx)
+00000000000023b0	movq	0x110(%rbx), %rdi
+00000000000023b7	callq	__ZdlPv
+00000000000023bc	movq	%rbx, %rdi
+00000000000023bf	leaq	__ZTV26m_audio_b_FWDiscreteDevice(%rip), %rax ## vtable for m_audio_b_FWDiscreteDevice
+00000000000023c6	addq	$0x8, %rsp
+00000000000023ca	popq	%rbx
+00000000000023cb	popq	%rbp
+00000000000023cc	jmpq	*0xa0(%rax)

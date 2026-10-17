@@ -1,0 +1,235 @@
+=== DAT_00007470 (CFRunLoopTimer interval) ===
+  raw: 0x3f45d867c3ece2a5  double: 6.666666666666666E-4 seconds
+
+=== 0x00002728  MAFWMIDIDeviceBeBoB::rebuildEndpointArray  size=1011 ===
+
+/* Function Stack Size: 0x10 bytes */
+
+int MAFWMIDIDeviceBeBoB::rebuildEndpointArray(ID param_1,SEL param_2)
+
+{
+  uint uVar1;
+  long lVar2;
+  long lVar3;
+  long lVar4;
+  long lVar5;
+  char cVar6;
+  undefined4 uVar7;
+  uint uVar8;
+  int iVar9;
+  undefined8 uVar10;
+  undefined8 uVar11;
+  void *pvVar12;
+  undefined4 *puVar13;
+  ulong uVar14;
+  uint uVar15;
+  ulong uVar16;
+  undefined8 local_68;
+  undefined8 local_60;
+  undefined4 local_58;
+  long local_50;
+  undefined8 local_48;
+  undefined4 local_40;
+  uint local_34;
+  
+  lVar2 = fSourceEndpointArray;
+  if (*(void **)(param_1 + fSourceEndpointArray) != (void *)0x0) {
+    _free(*(void **)(param_1 + fSourceEndpointArray));
+  }
+  if (*(void **)(param_1 + fDestinationEndpointArray) != (void *)0x0) {
+    _free(*(void **)(param_1 + fDestinationEndpointArray));
+  }
+  if (*(void **)(param_1 + fSourcePorts) != (void *)0x0) {
+    operator_delete__(*(void **)(param_1 + fSourcePorts));
+  }
+  if (*(void **)(param_1 + fDestinationPorts) != (void *)0x0) {
+    operator_delete__(*(void **)(param_1 + fDestinationPorts));
+  }
+  if (*(void **)(param_1 + fDestPortInSysex) != (void *)0x0) {
+    operator_delete__(*(void **)(param_1 + fDestPortInSysex));
+  }
+  if (*(void **)(param_1 + fDestPortCurrentTimestamp) != (void *)0x0) {
+    operator_delete__(*(void **)(param_1 + fDestPortCurrentTimestamp));
+  }
+  *(undefined8 *)(param_1 + fSourcePorts) = 0;
+  *(undefined8 *)(param_1 + fDestinationPorts) = 0;
+  *(undefined8 *)(param_1 + fDestPortInSysex) = 0;
+  *(undefined8 *)(param_1 + fDestPortCurrentTimestamp) = 0;
+  uVar7 = _MIDIDeviceGetEntity(*(undefined4 *)(param_1 + fDevice),0);
+  uVar8 = (*(code *)PTR__objc_msgSend_000090a0)
+                    (*(undefined8 *)(param_1 + fKitDevice),PTR_s_connection_0000a4b0);
+  local_40 = uVar7;
+  uVar10 = _MIDIEntityGetNumberOfSources(uVar7);
+  local_50 = 0;
+  local_58 = uVar7;
+  local_48 = uVar10;
+  uVar11 = _MIDIEntityGetNumberOfDestinations(uVar7);
+  lVar4 = fSourceEndpointCount;
+  local_68 = 0;
+  *(int *)(param_1 + fSourceEndpointCount) = (int)uVar10;
+  local_60 = uVar11;
+  pvVar12 = _calloc(4,(ulong)*(uint *)(param_1 + lVar4));
+  *(void **)(param_1 + lVar2) = pvVar12;
+  lVar5 = fDestinationEndpointCount;
+  *(int *)(param_1 + fDestinationEndpointCount) = (int)uVar11;
+  pvVar12 = _calloc(4,(ulong)*(uint *)(param_1 + lVar5));
+  lVar3 = fDestinationEndpointArray;
+  iVar9 = 0xffffff94;
+  *(void **)(param_1 + fDestinationEndpointArray) = pvVar12;
+  pvVar12 = *(void **)(param_1 + lVar2);
+  if (pvVar12 == (void *)0x0) {
+    return 0xffffff94;
+  }
+  if (*(long *)(param_1 + lVar3) != 0) {
+    uVar16 = (ulong)*(uint *)(param_1 + lVar4);
+    uVar14 = uVar16 * 0x240;
+    pvVar12 = operator_new__(uVar14);
+    if (uVar16 != 0) {
+      puVar13 = (undefined4 *)((long)pvVar12 + 0x20);
+      do {
+        *puVar13 = 0;
+        *(undefined1 *)(puVar13 + 0x87) = 0;
+        *(undefined2 *)(puVar13 + 0x46) = 0;
+        *(undefined2 *)(puVar13 + 3) = 0;
+        puVar13 = puVar13 + 0x90;
+        uVar14 = uVar14 - 0x240;
+      } while (uVar14 != 0);
+    }
+    *(void **)(param_1 + fSourcePorts) = pvVar12;
+    uVar1 = *(uint *)(param_1 + lVar5);
+    uVar14 = (ulong)uVar1 * 0x240;
+    pvVar12 = operator_new__(uVar14);
+    if ((ulong)uVar1 != 0) {
+      puVar13 = (undefined4 *)((long)pvVar12 + 0x20);
+      do {
+        *puVar13 = 0;
+        *(undefined1 *)(puVar13 + 0x87) = 0;
+        *(undefined2 *)(puVar13 + 0x46) = 0;
+        *(undefined2 *)(puVar13 + 3) = 0;
+        puVar13 = puVar13 + 0x90;
+        uVar14 = uVar14 - 0x240;
+      } while (uVar14 != 0);
+    }
+    *(void **)(param_1 + fDestinationPorts) = pvVar12;
+    pvVar12 = operator_new__((ulong)*(uint *)(param_1 + lVar5));
+    *(void **)(param_1 + fDestPortInSysex) = pvVar12;
+    pvVar12 = operator_new__((ulong)*(uint *)(param_1 + lVar5) << 3);
+    *(void **)(param_1 + fDestPortCurrentTimestamp) = pvVar12;
+    cVar6 = TIterator<unsigned_int,unsigned_int,&MIDIEntityGetNumberOfSources,&MIDIEntityGetSource>
+            ::Next((TIterator<unsigned_int,unsigned_int,&MIDIEntityGetNumberOfSources,&MIDIEntityGetSource>
+                    *)&local_50,&local_34);
+    if (cVar6 == '\x01') {
+      do {
+        uVar1 = local_34;
+        uVar16 = local_50 + 0xffffffff;
+        uVar14 = uVar16 & 0xffffffff;
+        iVar9 = _MIDIEndpointSetRefCons(local_34,param_1,uVar14);
+        if (iVar9 != 0) goto LAB_00002ae6;
+        *(uint *)(*(long *)(param_1 + fSourceEndpointArray) + uVar14 * 4) = uVar1;
+        com_m_audio::TUserMIDIPort::Init
+                  ((TUserMIDIPort *)(uVar14 * 0x240 + *(long *)(param_1 + fSourcePorts)),uVar8,true,
+                   (uint)uVar16);
+        cVar6 = TIterator<unsigned_int,unsigned_int,&MIDIEntityGetNumberOfSources,&MIDIEntityGetSource>
+                ::Next((TIterator<unsigned_int,unsigned_int,&MIDIEntityGetNumberOfSources,&MIDIEntityGetSource>
+                        *)&local_50,&local_34);
+      } while (cVar6 != '\0');
+    }
+    cVar6 = TIterator<unsigned_int,unsigned_int,&MIDIEntityGetNumberOfDestinations,&MIDIEntityGetDestination>
+            ::Next((TIterator<unsigned_int,unsigned_int,&MIDIEntityGetNumberOfDestinations,&MIDIEntityGetDestination>
+                    *)&local_68,&local_34);
+    uVar1 = local_34;
+    while( true ) {
+      if (cVar6 == '\0') {
+        return 0;
+      }
+      uVar15 = (int)local_68 - 1;
+      uVar14 = (ulong)uVar15;
+      local_34 = uVar1;
+      iVar9 = _MIDIEndpointSetRefCons(uVar1,param_1,uVar14);
+      if (iVar9 != 0) break;
+      *(uint *)(*(long *)(param_1 + fDestinationEndpointArray) + uVar14 * 4) = uVar1;
+      com_m_audio::TUserMIDIPort::Init
+                ((TUserMIDIPort *)(uVar14 * 0x240 + *(long *)(param_1 + fDestinationPorts)),uVar8,
+                 false,uVar15);
+      *(undefined1 *)(*(long *)(param_1 + fDestPortInSysex) + uVar14) = 0;
+      *(undefined8 *)(*(long *)(param_1 + fDestPortCurrentTimestamp) + uVar14 * 8) = 0;
+      cVar6 = TIterator<unsigned_int,unsigned_int,&MIDIEntityGetNumberOfDestinations,&MIDIEntityGetDestination>
+              ::Next((TIterator<unsigned_int,unsigned_int,&MIDIEntityGetNumberOfDestinations,&MIDIEntityGetDestination>
+                      *)&local_68,&local_34);
+      uVar1 = local_34;
+    }
+LAB_00002ae6:
+    _free(*(void **)(param_1 + fSourceEndpointArray));
+    pvVar12 = *(void **)(param_1 + fDestinationEndpointArray);
+  }
+  _free(pvVar12);
+  return iVar9;
+}
+
+
+
+=== 0x00002ee8  HandleMIDIInputCallout  size=24 ===
+
+/* HandleMIDIInputCallout(__CFRunLoopTimer*, void*) */
+
+void HandleMIDIInputCallout(__CFRunLoopTimer *param_1,void *param_2)
+
+{
+                    /* WARNING: Could not recover jumptable at 0x00002efa. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (*(code *)PTR__objc_msgSend_000090a0)(param_2,PTR_s_checkForMIDIInput_0000a4c0);
+  return;
+}
+
+
+
+=== 0x000020fe  StaticHandleMachMessage  size=171 ===
+
+/* WARNING: Removing unreachable block (ram,0x000021b8) */
+/* StaticHandleMachMessage(__CFMachPort*, void*, long, void*) */
+
+void StaticHandleMachMessage(__CFMachPort *param_1,void *param_2,long param_3,void *param_4)
+
+{
+  undefined *puVar1;
+  undefined4 uVar2;
+  ID self;
+  undefined8 uVar3;
+  undefined8 uVar4;
+  
+  puVar1 = PTR__objc_msgSend_000090a0;
+  self = NSAutoreleasePool::new((ID)PTR__OBJC_CLASS___NSAutoreleasePool_0000a6d0,PTR_s_new_0000a428)
+  ;
+  uVar3 = (*(code *)puVar1)(param_4,PTR_s_target_0000a430);
+  uVar4 = (*(code *)PTR__objc_msgSend_000090a0)(param_4,PTR_s_action_0000a438);
+  uVar2 = _CFMachPortGetPort(param_1);
+  (*(code *)PTR__objc_msgSend_000090a0)(uVar3,uVar4,uVar2,param_2,param_3);
+  NSAutoreleasePool::release(self,(SEL)&release_message_ref);
+  return;
+}
+
+
+
+=== 0x00002f00  MAFWMIDIDeviceBeBoB::stop  size=125 ===
+
+/* Function Stack Size: 0x10 bytes */
+
+void MAFWMIDIDeviceBeBoB::stop(ID param_1,SEL param_2)
+
+{
+  undefined4 uVar1;
+  
+  if (*(char *)(param_1 + fStatusRunning) != '\0') {
+    *(undefined1 *)(param_1 + fStatusRunning) = 0;
+    _CFRunLoopTimerInvalidate(*(undefined8 *)(param_1 + fDataInputTimer));
+    (*release_message_ref.imp)(*(undefined8 *)(param_1 + fAsyncNotification),&release_message_ref);
+    uVar1 = (*(code *)PTR__objc_msgSend_000090a0)
+                      (*(undefined8 *)(param_1 + fKitDevice),PTR_s_connection_0000a4b0);
+    _IOConnectCallScalarMethod(uVar1,0x1f5,0,0,0,0);
+    return;
+  }
+  return;
+}
+
+
+

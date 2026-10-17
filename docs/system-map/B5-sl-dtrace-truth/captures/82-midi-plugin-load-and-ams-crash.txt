@@ -1,0 +1,21 @@
+# capture 82 - reference MIDI plug-in on 10.13.6 (build PC), M-U control counts, AMS "Show MIDI Studio" crash (2026-10-17)
+# tool: openaudio-fw1814/tools/midiprobe.c (CoreMIDI list/send/listen/loop); kext = current build staged in /tmp (M-U included); plug-in = _extracted/midi/MAudioFireWireMIDI.plugin copied unchanged to /Library/Audio/MIDI Drivers
+
+## 1. plug-in load (after `sudo killall MIDIServer`; launchd restarts it on demand)
+device 10 "FireWire 1814" manufacturer "M-Audio" driver "com.m-audio.midiplug.fw410"   (online; every other M-Audio/3rd-party driver on the box is [offline])
+   entity "FireWire 1814": 1 in-sources, 1 out-destinations
+source 0 "FireWire 1814" / destination 0 "FireWire 1814"
+kext registry: MAMIDIInputPorts = ("1"), MAMIDIOutputPorts = ("1")   (matches the SL ioreg: 1 MIDI in + 1 MIDI out)
+
+## 2. TX smoke test (no cable attached): midiprobe send 0 90 3C 64 / 80 3C 00 / F0 7D 01 02 03 F7, then `loop` for 3 s
+send status 0 (x3); "sysex sent (0 bytes unsent)" (x4); the kext logged the isoch bring-up the MIDI start triggers (TPacketPool, TX program 1492 DCLs, RX chain 64 x 4, AVC 0x18/0x19 stream kick accepted); no panic, no dmesg error.
+NOT verified: bytes on the wire (needs a DIN cable OUT -> IN or a MIDI monitor).
+
+## 3. M-U: CoreAudio controls by usage after the kext reload (ioreg -a -r -c <class>, parsed)
+IOAudioLevelControl 'pass' = 18, IOAudioToggleControl 'pass' = 1  (SL v1.9: 18 + 1, capture 81)
+
+## 4. Audio MIDI Setup crash when the user chose "Show MIDI Studio" (~/Library/Logs/DiagnosticReports/Audio MIDI Setup_2026-10-17-090331_iMac-de-Sardinha.crash, 09:03:30)
+Exception EXC_BAD_ACCESS (SIGSEGV) at 0x2ba00000020 on the main thread, "Performing @selector(toggleMIDIWindow:)". Thread 0: libobjc object_isClass <- Foundation KVO <- QuartzCore CA::Layer::set_bit_int <- CAObject_initWithCoder <- NSKeyedUnarchiver <- CAPackage packageWithData <- coreui CUIThemeFacet _makeLayerFromCAPackageData / CreateOrUpdateVisualEffectLayer.
+No frame belongs to the kext, the panel, a MIDI plug-in or any M-Audio code; the MIDI plug-in was NOT installed at that time (/Library/Audio/MIDI Drivers had no MAudioFireWireMIDI.plugin). Reading: Apple CoreUI/QuartzCore failed decoding a visual-effect layer asset while building the MIDI Studio window. One report only - not reproduced.
+
+## 5. user observation (not a capture): after the kext reload the AMS sidebar label showed 16 ins / 12 outs (interface was already in ADAT, device freshly added) - see Q-AVC-unit-and-O1 section 3.

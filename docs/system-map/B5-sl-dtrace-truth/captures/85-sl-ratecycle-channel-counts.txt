@@ -1,0 +1,14 @@
+# capture 85 - SL rig (official driver v1.9, 10.6.8), CoreAudio rate changes while idle, channel counts after each (2026-10-17)
+# tool: openaudio-fw1814/tools/ratecycle.c (x86_64 build kept on the SL at ~/fw1814-captures/tools/ratecycle; source in the repo; recipe in tools/README.md)
+# SL state: S/PDIF mode, panel + Audio MIDI Setup open (no I/O), IOAudioEngineState 0, IOAudioEngineNumActiveUserClients 0.
+# NOTE: the SL HAL applies a rate request only while the client's run loop spins; with sleep() the request returned status 0 but the rate did not change until the process exited.
+start: rate 48000  in 10  out 6
+-> 48000: status 0  after 0 s: rate 48000  in 10  out 6
+-> 192000: status 0  after 1 s: rate 192000  in 2  out 4
+-> 48000: status 0  after 1 s: rate 48000  in 10  out 6
+-> 96000: status 0  after 1 s: rate 96000  in 10  out 6
+-> 192000: status 0  after 1 s: rate 192000  in 2  out 4
+-> 44100: status 0  after 1 s: rate 44100  in 10  out 6
+-> 48000: status 0  after 1 s: rate 48000  in 10  out 6
+# Reading: the official driver changes BOTH the input and the output stream on every transition, in both directions; 192 kHz = 2 in / 4 out analog only (digital off).
+# The clone (build PC, same tool or looplat/halinfo) left the OUTPUT stream stale: 48 -> 96 -> 192 gave in 2 / out 6, then 192 -> 48 gave in 10 / out 4, and CoreAudio then refused rate changes with '!dat'.

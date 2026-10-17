@@ -1,0 +1,65 @@
+# Capture 72 — SL Mac Pro 10.6.8, driver v1.9, device idle, 2026-10-14. Rate sweep via CoreAudio AudioObjectSetPropertyData(nominal rate) on 'FireWire 1814 Multichannel' (MAClockSource 0x40000014, i.e. internal clock; opt-out ADAT, opt-in S/PDIF). SNAP = ioreg -r -c com_m_audio_FWEngine2. SLEEP lines = dtrace fbt::IOSleep:entry (ms != 14). HAL 'nominal' readback lags (stays 44100 in this process); the ioreg engineRate is the authoritative value.
+START 1792021537.187 nominal=44100.0
+SNAP SampleOffset=40 InputSampleLatency=32 OutputSampleLatency=216 State=0 NumActiveUserClients=0 engineRate=44100 streams=dir0:12ch,dir1:10ch
+MARK 1792021537.266 set 88200.0 ret=0
+MARK 1792021545.278 after nominal=44100.0
+SNAP SampleOffset=88 InputSampleLatency=64 OutputSampleLatency=352 State=0 NumActiveUserClients=0 engineRate=88200 streams=dir0:8ch,dir1:10ch
+MARK 1792021545.353 set 96000.0 ret=0
+MARK 1792021553.389 after nominal=44100.0
+SNAP SampleOffset=96 InputSampleLatency=64 OutputSampleLatency=387 State=0 NumActiveUserClients=0 engineRate=96000 streams=dir0:8ch,dir1:10ch
+MARK 1792021553.464 set 176400.0 ret=0
+MARK 1792021560.892 after nominal=44100.0
+SNAP SampleOffset=176 InputSampleLatency=128 OutputSampleLatency=387 State=0 NumActiveUserClients=0 engineRate=176400 streams=dir0:4ch,dir1:2ch
+MARK 1792021560.957 set 192000.0 ret=0
+MARK 1792021568.291 after nominal=44100.0
+SNAP SampleOffset=192 InputSampleLatency=128 OutputSampleLatency=387 State=0 NumActiveUserClients=0 engineRate=192000 streams=dir0:4ch,dir1:2ch
+MARK 1792021568.355 set 48000.0 ret=0
+MARK 1792021576.305 after nominal=44100.0
+SNAP SampleOffset=48 InputSampleLatency=32 OutputSampleLatency=231 State=0 NumActiveUserClients=0 engineRate=48000 streams=dir0:12ch,dir1:10ch
+MARK 1792021576.380 set 44100.0 ret=0
+MARK 1792021584.399 after nominal=44100.0
+SNAP SampleOffset=40 InputSampleLatency=32 OutputSampleLatency=216 State=0 NumActiveUserClients=0 engineRate=44100 streams=dir0:12ch,dir1:10ch
+##### IOSleep (ms != 14) from fbt::IOSleep, sorted per capture window
+
+SLEEP 1792021537.276 ms=100
+SLEEP 1792021537.379 ms=100
+SLEEP 1792021537.484 ms=100
+SLEEP 1792021537.585 ms=500
+SLEEP 1792021538.288 ms=500
+SLEEP 1792021538.791 ms=100
+SLEEP 1792021539.777 ms=1000
+SLEEP 1792021545.362 ms=100
+SLEEP 1792021545.466 ms=100
+SLEEP 1792021545.570 ms=100
+SLEEP 1792021545.671 ms=500
+SLEEP 1792021546.391 ms=500
+SLEEP 1792021546.895 ms=100
+SLEEP 1792021547.888 ms=1000
+SLEEP 1792021553.474 ms=100
+SLEEP 1792021553.578 ms=100
+SLEEP 1792021553.681 ms=100
+SLEEP 1792021553.782 ms=500
+SLEEP 1792021554.423 ms=500
+SLEEP 1792021554.925 ms=100
+SLEEP 1792021555.391 ms=1000
+SLEEP 1792021560.968 ms=100
+SLEEP 1792021561.071 ms=100
+SLEEP 1792021561.175 ms=100
+SLEEP 1792021561.275 ms=500
+SLEEP 1792021561.821 ms=500
+SLEEP 1792021562.323 ms=100
+SLEEP 1792021562.790 ms=1000
+SLEEP 1792021568.361 ms=100
+SLEEP 1792021568.463 ms=100
+SLEEP 1792021568.570 ms=100
+SLEEP 1792021568.670 ms=500
+SLEEP 1792021569.305 ms=500
+SLEEP 1792021569.808 ms=100
+SLEEP 1792021570.803 ms=1000
+SLEEP 1792021576.388 ms=100
+SLEEP 1792021576.492 ms=100
+SLEEP 1792021576.598 ms=100
+SLEEP 1792021576.699 ms=500
+SLEEP 1792021577.411 ms=500
+SLEEP 1792021577.914 ms=100
+SLEEP 1792021578.898 ms=1000

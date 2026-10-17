@@ -1,0 +1,98 @@
+# capture 77 - clone (build PC 10.13.6): HAL notifications + duplex stream during an optical ADAT set / restore (2026-10-17), same script as 76
+## halwatch
+device 68 "FireWire 1814 Multichannel"
+   0.053   [snapshot start] streams: in:70(16ch) out:69(12ch)   device in/out channels: 16 / 12
+   0.055   object 68   (device)  selector 'gone' scope 'glob' element 0
+   5.065   [snapshot tick] streams: in:70(16ch) out:69(12ch)   device in/out channels: 16 / 12
+  10.070   [snapshot tick] streams: in:70(16ch) out:69(12ch)   device in/out channels: 16 / 12
+  13.722   object 68   (device)  selector 'diff' scope 'glob' element 0
+  13.725   object 68   (device)  selector 'gone' scope 'glob' element 0
+  15.072   [snapshot tick] streams: in:70(16ch) out:69(12ch)   device in/out channels: 16 / 12
+  20.074   [snapshot tick] streams: in:70(16ch) out:69(12ch)   device in/out channels: 16 / 12
+  25.076   [snapshot tick] streams: in:70(16ch) out:69(12ch)   device in/out channels: 16 / 12
+  30.078   [snapshot tick] streams: in:70(16ch) out:69(12ch)   device in/out channels: 16 / 12
+  35.080   [snapshot tick] streams: in:70(16ch) out:69(12ch)   device in/out channels: 16 / 12
+  37.228   object 68   (device)  selector 'ownd' scope 'glob' element 0
+  37.229   object 68   (device)  selector 'gone' scope 'glob' element 0
+  37.234   object 68   (device)  selector 'slay' scope 'inpt' element 0
+  37.234   object 68   (device)  selector 'slay' scope 'outp' element 0
+  37.234   object 68   (device)  selector 'ctrl' scope 'glob' element 0
+  37.234   object 68   (device)  selector 'diff' scope 'glob' element 0
+  37.234   object 68   (device)  selector 'pft ' scope 'outp' element 0
+  37.234   object 68   (device)  selector 'pft ' scope 'outp' element 1
+  37.234   object 68   (device)  selector 'pfta' scope 'outp' element 0
+  37.234   object 68   (device)  selector 'pfta' scope 'outp' element 1
+  37.234   object 68   (device)  selector 'sfm#' scope 'outp' element 0
+  37.234   object 68   (device)  selector 'sfm#' scope 'outp' element 1
+  37.234   object 68   (device)  selector 'sfmt' scope 'outp' element 0
+  37.234   object 68   (device)  selector 'sfmt' scope 'outp' element 1
+  37.234   object 68   (device)  selector 'pft ' scope 'inpt' element 0
+  37.234   object 68   (device)  selector 'pft ' scope 'inpt' element 1
+  37.234   object 68   (device)  selector 'pfta' scope 'inpt' element 0
+  37.234   object 68   (device)  selector 'pfta' scope 'inpt' element 1
+  37.234   object 68   (device)  selector 'sfm#' scope 'inpt' element 0
+  37.234   object 68   (device)  selector 'sfm#' scope 'inpt' element 1
+  37.234   object 68   (device)  selector 'sfmt' scope 'inpt' element 0
+  37.234   object 68   (device)  selector 'sfmt' scope 'inpt' element 1
+  37.234   object 69   (stream)  selector 'pft ' scope 'glob' element 0
+  37.234   object 69   (stream)  selector 'pfta' scope 'glob' element 0
+  37.234   object 69   (stream)  selector 'sfma' scope 'glob' element 0
+  37.234   object 69   (stream)  selector 'sfm#' scope 'glob' element 0
+  37.234   object 69   (stream)  selector 'sfmt' scope 'glob' element 0
+  37.234   object 70   (stream)  selector 'pft ' scope 'glob' element 0
+  37.234   object 70   (stream)  selector 'pfta' scope 'glob' element 0
+  37.234   object 70   (stream)  selector 'sfma' scope 'glob' element 0
+  37.234   object 70   (stream)  selector 'sfm#' scope 'glob' element 0
+  37.234   object 70   (stream)  selector 'sfmt' scope 'glob' element 0
+  40.081   [snapshot tick] streams: in:70(10ch) out:69(6ch)   device in/out channels: 10 / 6
+  45.083   [snapshot tick] streams: in:70(10ch) out:69(6ch)   device in/out channels: 10 / 6
+  46.084   [snapshot end] streams: in:70(10ch) out:69(6ch)   device in/out channels: 10 / 6
+## aduplex
+device 68 "FireWire 1814 Multichannel"
+streaming (silence out, input monitored)
+t= 1s calls +22 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t= 2s calls +87 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00002
+t= 3s calls +86 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00002
+t= 4s calls +87 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t= 5s calls +87 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t= 6s calls +87 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00002
+t= 7s calls +86 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t= 8s calls +78 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t= 9s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=10s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=11s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=12s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=13s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=14s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=15s calls +86 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=16s calls +87 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00002
+t=17s calls +87 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=18s calls +88 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=19s calls +86 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=20s calls +87 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00002
+t=21s calls +88 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=22s calls +86 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=23s calls +87 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00002
+t=24s calls +41 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=25s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=26s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=27s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=28s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=29s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=30s calls +0 in-ch 16 out-ch 12 in-bufs 1 out-bufs 1 peak 0.00003
+t=31s calls +5 in-ch 10 out-ch 6 in-bufs 1 out-bufs 1 peak 0.00003
+t=32s calls +86 in-ch 10 out-ch 6 in-bufs 1 out-bufs 1 peak 0.00003
+t=33s calls +86 in-ch 10 out-ch 6 in-bufs 1 out-bufs 1 peak 0.00003
+t=34s calls +87 in-ch 10 out-ch 6 in-bufs 1 out-bufs 1 peak 0.00002
+t=35s calls +87 in-ch 10 out-ch 6 in-bufs 1 out-bufs 1 peak 0.00003
+t=36s calls +86 in-ch 10 out-ch 6 in-bufs 1 out-bufs 1 peak 0.00003
+t=37s calls +86 in-ch 10 out-ch 6 in-bufs 1 out-bufs 1 peak 0.00003
+t=38s calls +87 in-ch 10 out-ch 6 in-bufs 1 out-bufs 1 peak 0.00002
+t=39s calls +86 in-ch 10 out-ch 6 in-bufs 1 out-bufs 1 peak 0.00002
+t=40s calls +86 in-ch 10 out-ch 6 in-bufs 1 out-bufs 1 peak 0.00002
+t=41s calls +87 in-ch 10 out-ch 6 in-bufs 1 out-bufs 1 peak 0.00003
+t=42s calls +86 in-ch 10 out-ch 6 in-bufs 1 out-bufs 1 peak 0.00003
+t=43s calls +86 in-ch 10 out-ch 6 in-bufs 1 out-bufs 1 peak 0.00002
+t=44s calls +87 in-ch 10 out-ch 6 in-bufs 1 out-bufs 1 peak 0.00003
+t=45s calls +86 in-ch 10 out-ch 6 in-bufs 1 out-bufs 1 peak 0.00003
+t=46s calls +86 in-ch 10 out-ch 6 in-bufs 1 out-bufs 1 peak 0.00002

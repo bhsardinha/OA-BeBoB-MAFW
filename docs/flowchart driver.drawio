@@ -1,0 +1,399 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="stmo22H9D2xKklc1lezS" name="Página-1">
+    <mxGraphModel dx="759" dy="506" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0" adaptiveColors="auto">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="res" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;Research phase — complete&lt;/b&gt;&lt;br&gt;Phase 0 pivot · Part A (105/106) · Part B · Part C map (bodies consolidated, P5)&lt;br&gt;Audit: 7 flags still need hardware, labelled unverified" vertex="1">
+          <mxGeometry height="80" width="300" x="825.33" y="425" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;dashed=1;fontColor=#777777;" value="D1 / D3 &lt;b&gt;withdrawn&lt;/b&gt;" vertex="1">
+          <mxGeometry height="45" width="170" x="674.33" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;Part D — D2 chosen&lt;/b&gt;&lt;br&gt;full clone from the map (2026-10-14)&lt;br&gt;mirror v1.11.x; deviate only if 10.13.6 forces" vertex="1">
+          <mxGeometry height="70" width="250" x="808.67" y="537" as="geometry" />
+        </mxCell>
+        <mxCell id="pre" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=8;" value="&lt;b&gt;Static pre-work P1–P6 — ALL DONE 2026-10-14&lt;/b&gt;&lt;br&gt;P1 DCL acceptance: 6 constraints (R36)&lt;br&gt;P2 pool memory: mask / KMA_LOMEM / sizes (R36)&lt;br&gt;P3 kext firmware path, 80-B info blob (R37)&lt;br&gt;P4 CMP per-rate + mixer power-on (R38)&lt;br&gt;P5 C1–C6 consolidated (R35)&lt;br&gt;P6 verification oracle spec (R39)" vertex="1">
+          <mxGeometry height="130" width="320" x="773.67" y="637" as="geometry" />
+        </mxCell>
+        <mxCell id="open" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="&lt;b&gt;Still open, carried into build&lt;/b&gt;&lt;br&gt;P4: pan order, 0x98 image, 2 AV/C frames → resolve at M-E&lt;br&gt;HSCI bytes 10–15 · 0xCF effect · run-time DCL/pool acceptance → verify at M-B" vertex="1">
+          <mxGeometry height="80" width="320" x="544.33" y="799" as="geometry" />
+        </mxCell>
+        <mxCell id="g1" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;GATE G1 — PASSED 2026-10-14&lt;/b&gt;&lt;br&gt;plan approved by the user;&lt;br&gt;still open: panel wireframe (PN.1), Developer ID, SIP-on check" vertex="1">
+          <mxGeometry height="130" width="260" x="574.33" y="909" as="geometry" />
+        </mxCell>
+        <mxCell id="frz" parent="1" style="text;html=1;whiteSpace=wrap;fontStyle=1;fontColor=#82b366;align=center;" value="BUILD IN PROGRESS (G1 passed 2026-10-14) — AIRLINER RULE: NO PARTIAL HARDWARE TESTS; ONE INTEGRATED RUN WHEN EVERY PART EXISTS" vertex="1">
+          <mxGeometry height="40" width="260" x="461" as="geometry" />
+        </mxCell>
+        <mxCell id="oracle" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;Oracle (P6)&lt;/b&gt;&lt;br&gt;SL rig v1.9 captures 62–75&lt;br&gt;harness IN.2 compares clone vs capture" vertex="1">
+          <mxGeometry height="105" width="200" x="887" y="1321.33" as="geometry" />
+        </mxCell>
+        <mxCell id="sip" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;IN.1 SIP-on signing check&lt;/b&gt;&lt;br&gt;csrutil status + kextutil -n -t&lt;br&gt;(user, Recovery) — before installer is promised" vertex="1">
+          <mxGeometry height="75" width="260" x="12" y="1569.5" as="geometry" />
+        </mxCell>
+        <mxCell id="h1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;H.1 Minimal helper — DONE&lt;/b&gt;&lt;br&gt;LaunchDaemon writes MAFirmwareStart on every match;&lt;br&gt;verified at boot and on power-on" vertex="1">
+          <mxGeometry height="75" width="260" x="512.33" y="1091" as="geometry" />
+        </mxCell>
+        <mxCell id="ma" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;M-A Skeleton — DONE 2026-10-15&lt;/b&gt;&lt;br&gt;plist, FWMetaNub (IOService, 6 states), two-round probe,&lt;br&gt;NULL-safe free()/dtors. Verified on 10.13.6: no panic,&lt;br&gt;round 2 → FW1814Device, survives install + reboot" vertex="1">
+          <mxGeometry height="90" width="270" x="602.33" y="1198" as="geometry" />
+        </mxCell>
+        <mxCell id="g2" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;b&gt;GATE G2&lt;/b&gt;&lt;br&gt;user present&lt;br&gt;power-cycle only, no hot-plug" vertex="1">
+          <mxGeometry height="110" width="220" x="627.33" y="1318" as="geometry" />
+        </mxCell>
+        <mxCell id="mfw" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;M-FW Firmware path — DONE (reduced) 2026-10-15&lt;/b&gt;&lt;br&gt;MAFirmwareInfo/Start/Go + 2500 ms re-register.&lt;br&gt;NO flash writes (scope cut); Halt/Upgrade removed" vertex="1">
+          <mxGeometry height="75" width="260" x="607.33" y="1460" as="geometry" />
+        </mxCell>
+        <mxCell id="mb" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="&lt;b&gt;M-B DCL + packet pool — IN PROGRESS&lt;/b&gt;&lt;br&gt;decoded (Q-MB, R41); pool/CIP/builder/shared-sync written;&lt;br&gt;FWDCLProgram.cpp port pending (tree does not build yet)" vertex="1">
+          <mxGeometry height="80" width="270" x="740.33" y="1567" as="geometry" />
+        </mxCell>
+        <mxCell id="mc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;M-C CMP + stream start&lt;/b&gt;&lt;br&gt;IRM, oPCR/iPCR, AV/C, reference start order&lt;br&gt;locks; stable 5 min @ 48k/512" vertex="1">
+          <mxGeometry height="75" width="260" x="745.33" y="1679.5" as="geometry" />
+        </mxCell>
+        <mxCell id="md" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;M-D All 6 rates&lt;/b&gt;&lt;br&gt;44.1–192 kHz, FDF/SYT, format change&lt;br&gt;latency vs capture 72" vertex="1">
+          <mxGeometry height="70" width="250" x="750.33" y="1787" as="geometry" />
+        </mxCell>
+        <mxCell id="me" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;M-E Mixer + HSCI&lt;/b&gt;&lt;br&gt;FWPropertyDict, CustomMixerWriteQuads, factory reset&lt;br&gt;byte-identical to SL captures" vertex="1">
+          <mxGeometry height="75" width="260" x="847" y="1889" as="geometry" />
+        </mxCell>
+        <mxCell id="mf" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;M-F User client&lt;/b&gt;&lt;br&gt;selectors 500–507, peak[52], notifications 0/1" vertex="1">
+          <mxGeometry height="60" width="260" x="847" y="1994" as="geometry" />
+        </mxCell>
+        <mxCell id="mh" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;M-H MIDI&lt;/b&gt;&lt;br&gt;reuse ref plug-in if it loads (unverified) else rewrite from A3" vertex="1">
+          <mxGeometry height="70" width="230" x="940" y="2203" as="geometry" />
+        </mxCell>
+        <mxCell id="mi" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;M-I AC3 passthrough&lt;/b&gt;" vertex="1">
+          <mxGeometry height="50" width="180" x="839" y="2108.5" as="geometry" />
+        </mxCell>
+        <mxCell id="mj" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;M-J 4-engine family&lt;/b&gt;&lt;br&gt;+ stereo-pair engines" vertex="1">
+          <mxGeometry height="55" width="180" x="629" y="2106" as="geometry" />
+        </mxCell>
+        <mxCell id="mk" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;M-K Multi-interface&lt;/b&gt;&lt;br&gt;needs 2nd unit" vertex="1">
+          <mxGeometry height="55" width="180" x="629" y="2210.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ml" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;M-L Latency validation&lt;/b&gt;&lt;br&gt;≤ reference (C6 §9), loopback jig" vertex="1">
+          <mxGeometry height="60" width="230" x="814" y="2315" as="geometry" />
+        </mxCell>
+        <mxCell id="mm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;M-M Modernisation&lt;/b&gt;&lt;br&gt;UX only, no regressions" vertex="1">
+          <mxGeometry height="55" width="200" x="829" y="2405" as="geometry" />
+        </mxCell>
+        <mxCell id="hfull" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="&lt;b&gt;Helper, full (H.3–H.6)&lt;/b&gt;&lt;br&gt;sleep/login gating · settings replay · LaunchDaemon packaging&lt;br&gt;(H.2 update dispatch and H.5 status UI CANCELLED: no flashing)" vertex="1">
+          <mxGeometry height="80" width="290" x="153" y="1677" as="geometry" />
+        </mxCell>
+        <mxCell id="wf" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="&lt;b&gt;PN.1 Wireframe sign-off&lt;/b&gt;&lt;br&gt;(user) before panel work" vertex="1">
+          <mxGeometry height="60" width="210" x="353.33" y="1213" as="geometry" />
+        </mxCell>
+        <mxCell id="panel" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="&lt;b&gt;Panel PN.2–PN.7 (AppKit/Swift)&lt;/b&gt;&lt;br&gt;46-key parity map · mixer/routing · meters ·&lt;br&gt;Hardware tab (composite clock) · notifications ·&lt;br&gt;visual modernisation; starts after M-F" vertex="1">
+          <mxGeometry height="90" width="290" x="309" y="2193" as="geometry" />
+        </mxCell>
+        <mxCell id="t6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;IN.4 Parity run (T6)&lt;/b&gt;&lt;br&gt;100% of checklist" vertex="1">
+          <mxGeometry height="60" width="210" x="349" y="2492" as="geometry" />
+        </mxCell>
+        <mxCell id="inst" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;Installer IN.5–IN.6&lt;/b&gt;&lt;br&gt;.pkg with postinstall kextutil -n -t gate ·&lt;br&gt;uninstall · Developer ID · UAKEL notes" vertex="1">
+          <mxGeometry height="80" width="280" x="267.33" y="2584" as="geometry" />
+        </mxCell>
+        <mxCell id="done" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;Delivered&lt;/b&gt;&lt;br&gt;full-parity driver, 10.13.6" vertex="1">
+          <mxGeometry height="80" width="190" x="312.33" y="2694" as="geometry" />
+        </mxCell>
+        <mxCell id="rule" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=8;fillColor=none;strokeColor=#82b366;dashed=1;" value="&lt;b&gt;Per-milestone loop (IN.3)&lt;/b&gt;&lt;br&gt;build on build PC → stage in /tmp → kextutil -n -t → load only on green → acceptance test → close-item.&lt;br&gt;Never /Library/Extensions before a staged test passes." vertex="1">
+          <mxGeometry height="85" width="340" x="421" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="risk" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=8;fillColor=none;strokeColor=#b85450;dashed=1;" value="&lt;b&gt;Top risks&lt;/b&gt;&lt;br&gt;D2-1 reimplementation error · D2-2 DCL/phys. memory on 10.13.6&lt;br&gt;D2-3 map holes · D2-4 SIP-on signing · D2-5 AppleFWAudio · D2-6 kernel C++ scope" vertex="1">
+          <mxGeometry height="75" width="340" x="421" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="leg" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=8;fillColor=none;strokeColor=#999999;" value="&lt;b&gt;Legend&lt;/b&gt;&lt;br&gt;green done · yellow in progress · grey planned (skeleton stubs exist) · purple parallel track&lt;br&gt;red diamond = user gate · dashed grey = withdrawn&lt;br&gt;Sources: docs/BUILD-PLAN.md (§0 rules, §8 progress), NEXT_STEPS.md, PROVENANCE-MATRIX.xlsx (Build tab: 38 tasks). Updated 2026-10-15" vertex="1">
+          <mxGeometry height="90" width="340" x="421" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="res" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.6666;entryY=0;" target="d2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="975.33" y="521" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="d1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;strokeColor=#999999;curved=0;exitX=0.5;exitY=1;entryX=0.3333;entryY=0;" target="d2" value="superseded">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-11.33" y="-56" as="offset" />
+            <Array as="points">
+              <mxPoint x="759.33" y="521" />
+              <mxPoint x="892" y="521" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="d2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="pre">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="933.67" y="622" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="pre" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.3333;exitY=1;entryX=0.5;entryY=0;" target="open">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="880.33" y="783" />
+              <mxPoint x="704.33" y="783" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="open" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="g1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="704.33" y="894" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="pre" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.6667;exitY=1;entryX=0.5;entryY=0;" target="oracle">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="987" y="839" />
+              <mxPoint x="987" y="1243" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="g1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.6;exitY=0.9;entryX=0.5;entryY=0;" target="h1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="730.33" y="1075" />
+              <mxPoint x="642.33" y="1075" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="g1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.2;exitY=0.7;entryX=0.5;entryY=0;" target="sip">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="626.33" y="1055" />
+              <mxPoint x="142" y="1055" />
+              <mxPoint x="142" y="1497.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="g1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.8;exitY=0.7;entryX=0.6667;entryY=0;" target="ma">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="782.33" y="1128.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="h1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.3333;entryY=0;" target="ma">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="642.33" y="1182" />
+              <mxPoint x="692.33" y="1182" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="ma" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="g2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="737.33" y="1303" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="g2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="mfw">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="737.33" y="1444" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="mfw" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.6667;exitY=1;entryX=0.3333;entryY=0;" target="mb">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780.67" y="1551" />
+              <mxPoint x="830.33" y="1551" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="mb" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="mc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="875.33" y="1663.25" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="mc" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="md">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="875.33" y="1770.75" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="md" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.3333;entryY=0;" target="me">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="875.33" y="1873" />
+              <mxPoint x="933.67" y="1873" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="me" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="mf">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="977" y="1979" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e18" edge="1" parent="1" source="mf" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.8;exitY=1;entryX=0.5;entryY=0;" target="mh">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1055" y="2133.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e19" edge="1" parent="1" source="mf" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.6;exitY=1;entryX=0.5;entryY=0;" target="mi">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1003" y="2090" />
+              <mxPoint x="929" y="2090" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e20" edge="1" parent="1" source="mf" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.4;exitY=1;entryX=0.5;entryY=0;" target="mj">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="951" y="2080" />
+              <mxPoint x="719" y="2080" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e21" edge="1" parent="1" source="mj" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="mk">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="719" y="2185.75" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e22" edge="1" parent="1" source="mh" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.75;entryY=0;" target="ml">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1055" y="2299" />
+              <mxPoint x="986.5" y="2299" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e23" edge="1" parent="1" source="mi" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="ml">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="929" y="2238" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e24" edge="1" parent="1" source="mk" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.25;entryY=0;" target="ml">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="719" y="2299" />
+              <mxPoint x="871.5" y="2299" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e25" edge="1" parent="1" source="ml" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="mm">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="929" y="2390" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e26" edge="1" parent="1" source="mfw" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.3333;exitY=1;entryX=0.5;entryY=0;" target="hfull">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="694" y="1551" />
+              <mxPoint x="298" y="1551" />
+              <mxPoint x="298" y="1607" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e27" edge="1" parent="1" source="g1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.4;exitY=0.9;entryX=0.5;entryY=0;" target="wf">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="678.33" y="1065" />
+              <mxPoint x="458.33" y="1065" />
+              <mxPoint x="458.33" y="1128.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e28" edge="1" parent="1" source="wf" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.3333;entryY=0;" target="panel">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="458.33" y="1373" />
+              <mxPoint x="458.33" y="2177" />
+              <mxPoint x="405.67" y="2177" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e29" edge="1" parent="1" source="mf" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.2;exitY=1;entryX=0.6667;entryY=0;" target="panel" value="after M-F">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-144.83" y="63.5" as="offset" />
+            <Array as="points">
+              <mxPoint x="899" y="2070" />
+              <mxPoint x="502.33" y="2070" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e30" edge="1" parent="1" source="mm" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.75;entryY=0;" target="t6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="929" y="2476" />
+              <mxPoint x="506.5" y="2476" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e31" edge="1" parent="1" source="panel" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="t6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="454" y="2345" />
+              <mxPoint x="454" y="2432.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e32" edge="1" parent="1" source="hfull" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.25;entryY=0;" target="t6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="298" y="1822" />
+              <mxPoint x="298" y="2476" />
+              <mxPoint x="401.5" y="2476" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e33" edge="1" parent="1" source="t6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.6667;entryY=0;" target="inst">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="454" y="2568" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e34" edge="1" parent="1" source="sip" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.3334;entryY=0;" target="inst">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="142" y="1717" />
+              <mxPoint x="142" y="2568" />
+              <mxPoint x="360.67" y="2568" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e35" edge="1" parent="1" source="inst" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;curved=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="done">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="407.33" y="2679" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e36" edge="1" parent="1" source="oracle" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;strokeColor=#6c8ebf;curved=0;exitX=0.3333;exitY=1;entryX=0.6667;entryY=0;" target="mb" value="verify">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="17.51" as="offset" />
+            <Array as="points">
+              <mxPoint x="953.67" y="1444" />
+              <mxPoint x="920.33" y="1444" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e37" edge="1" parent="1" source="oracle" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;strokeColor=#6c8ebf;curved=0;exitX=0.6667;exitY=1;entryX=0.6667;entryY=0;" target="me">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1020.33" y="1497.5" />
+              <mxPoint x="1020.33" y="1822" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

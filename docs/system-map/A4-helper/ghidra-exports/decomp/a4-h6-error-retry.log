@@ -1,0 +1,290 @@
+=== -[MAFireWireLoader deviceMatched:] @ 0x000030eb ===
+
+void __MAFireWireLoader_deviceMatched__(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  bool bVar1;
+  char cVar2;
+  undefined4 uVar3;
+  undefined *puVar4;
+  int iVar5;
+  undefined4 uVar6;
+  undefined4 uVar7;
+  undefined4 uVar8;
+  undefined4 uVar9;
+  int iVar10;
+  int iVar11;
+  ulong uVar12;
+  undefined *puVar13;
+  cfstringStruct *pcVar14;
+  cfstringStruct *pcVar15;
+  undefined4 local_18;
+  
+  if (__ZL15sSystemSleeping_b != '\0') {
+    return;
+  }
+  cVar2 = _objc_msgSend(PTR_s_MAConsoleUser_0000a010,PTR_s_isUserLoggedIn_0000a0b4);
+  if (cVar2 == '\0') {
+    return;
+  }
+  uVar3 = _objc_msgSend(PTR_s_MAIOKitService_0000a03c,PTR_s_deviceWithService__0000a12c,param_3);
+  _objc_msgSend(uVar3,PTR_s_propertyForKey__0000a11c,&cf_FireWireVendorName);
+  _objc_msgSend(uVar3,PTR_s_propertyForKey__0000a11c,&cf_FireWireProductName);
+  puVar4 = (undefined *)_objc_msgSend(uVar3,PTR_s_propertyForKey__0000a11c,&cf_MAActualProductName);
+  pcVar14 = &cf_MAFirmwareInfo;
+  iVar5 = _objc_msgSend(uVar3,PTR_s_propertyForKey__0000a11c,&cf_MAFirmwareInfo);
+  if (iVar5 == 0) {
+    _NSLog(&cf_Firmwareinfonotavailablefromdevice);
+    uVar3 = _objc_msgSend(uVar3,PTR_s_properties_0000a130,pcVar14);
+    _NSLog(&cf_Deviceproperties___,uVar3);
+    return;
+  }
+  iVar5 = _objc_msgSend(iVar5,PTR_s_bytes_0000a134,pcVar14);
+  uVar6 = _objc_msgSend(PTR_s_NSBundle_0000a034,PTR_s_mainBundle_0000a108);
+  uVar6 = _objc_msgSend(uVar6,PTR_s_resourcePath_0000a10c);
+  uVar7 = _objc_msgSend(uVar6,PTR_s_stringByAppendingPathComponent__0000a110,&cf_Firmware);
+  uVar8 = _objc_msgSend(PTR_s_NSFileManager_0000a040,PTR_s_defaultManager_0000a138);
+  uVar12 = *(ulong *)(iVar5 + 0x20);
+  uVar9 = CalendarDateFromFirmwareDate
+                    (uVar12,*(ulong *)(iVar5 + 0x24),*(ulong *)(iVar5 + 0x28),
+                     *(ulong *)(iVar5 + 0x2c));
+  uVar6 = CanonicalGUIDForDevice(uVar12);
+  _NSLog(&cf_Loading__withGUID__,puVar4,uVar6);
+  uVar6 = uVar3;
+  iVar10 = _objc_msgSend(PTR_s_MAFireWireFirmwareFile_0000a044,
+                         PTR_s_firmwareFilesAtPath_forDevice__0000a13c,uVar7,uVar3);
+  local_18 = 0;
+  bVar1 = false;
+  if ((iVar10 != 0) &&
+     (iVar11 = _objc_msgSend(iVar10,PTR_s_count_0000a140,uVar7,uVar6), iVar11 != 0)) {
+    local_18 = _objc_msgSend(iVar10,PTR_s_objectAtIndex__0000a144,0,uVar6);
+    uVar7 = 0;
+    puVar13 = PTR_s_validateFirmwareUpdate__0000a148;
+    cVar2 = _objc_msgSend(local_18,PTR_s_validateFirmwareUpdate__0000a148,0);
+    if (cVar2 == '\0') {
+      pcVar14 = &cf_Corruptfirmwarefile__notupdating;
+    }
+    else {
+      uVar7 = _objc_msgSend(local_18,PTR_s_date_0000a14c,uVar7,uVar6);
+      cVar2 = _objc_msgSend(uVar7,PTR_s_isEqual__0000a150,uVar9);
+      if (cVar2 == '\0') {
+        _NSLog(&cf_Dateofcurrentfirmware___,uVar7);
+        _NSLog(&cf_Dateoffirmwareondevice_____needsupdate,uVar9);
+        bVar1 = true;
+        goto LAB_0000339b;
+      }
+      pcVar14 = &cf___firmwareiscurrent____;
+      puVar13 = puVar4;
+    }
+    _NSLog(pcVar14,puVar13,uVar7);
+  }
+LAB_0000339b:
+  cVar2 = _objc_msgSend(uVar8,PTR_s_fileExistsAtPath__0000a154,_kMAOneShotUpdatePath,uVar6);
+  if (cVar2 == '\0') {
+    if (bVar1) goto LAB_000033d7;
+  }
+  else {
+    _NSLog(&cf_One_shotfirmwareupdateactivated);
+LAB_000033d7:
+    cVar2 = _objc_msgSend(uVar8,PTR_s_fileExistsAtPath__0000a154,_kMAInhibitUpdatesFilePath,uVar6);
+    if (cVar2 == '\0') {
+      if (*(int *)(iVar5 + 0xc) != 0) {
+        _NSLog(&cf_Startingfirmwareupdate);
+        _objc_msgSend(uVar8,PTR_s_removeFileAtPath_handler__0000a158,_kMAOneShotUpdatePath,0);
+        _objc_msgSend(param_1,PTR_s_updateViewForDevice__0000a15c,uVar3);
+        pcVar14 = (cfstringStruct *)_objc_msgSend(local_18,PTR_s_data_0000a160);
+        pcVar15 = &cf_MAFirmwareUpgradeImage;
+        iVar5 = _objc_msgSend(uVar3,PTR_s_setProperty_forKey__0000a164,pcVar14,
+                              &cf_MAFirmwareUpgradeImage);
+        if (iVar5 == 0) {
+          _NSLog(&cf_Firmwareupdateattemptfailed);
+        }
+        else {
+          _NSLog(&cf_Startingthefirmwareaftersuccessfulupdate);
+          pcVar15 = &cf_MAFirmwareStart;
+          pcVar14 = &cf_YES;
+          _objc_msgSend(uVar3,PTR_s_setProperty_forKey__0000a164,&cf_YES,&cf_MAFirmwareStart);
+        }
+        _objc_msgSend(param_1,PTR_s_quitView_0000a168,pcVar14,pcVar15);
+        return;
+      }
+      _NSLog(&cf_Firmwareisrunning__shuttingdownthefirmware);
+      pcVar14 = &cf_MAFirmwareHalt;
+      goto LAB_0000342c;
+    }
+    _NSLog(&cf_Firmwareupdateinhibited);
+  }
+  _NSLog(&cf_Starting__,puVar4);
+  pcVar14 = &cf_MAFirmwareStart;
+LAB_0000342c:
+  _objc_msgSend(uVar3,PTR_s_setProperty_forKey__0000a164,&cf_YES,pcVar14);
+  return;
+}
+
+
+
+=== -[MAFireWireLoader updateViewForDevice:] @ 0x00002f6a ===
+
+void __MAFireWireLoader_updateViewForDevice__
+               (undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  undefined *puVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  undefined4 uVar4;
+  undefined4 uVar5;
+  undefined4 uVar6;
+  undefined8 uVar7;
+  
+  uVar2 = _objc_msgSend(param_1,PTR_s_statusAppPath_0000a118);
+  uVar3 = _objc_msgSend(param_3,PTR_s_propertyForKey__0000a11c,&cf_MAActualProductName);
+  uVar4 = _objc_msgSend(param_3,PTR_s_propertyForKey__0000a11c,&cf_MAIconName);
+  uVar5 = _objc_msgSend(param_3,PTR_s_propertyForKey__0000a11c,&cf_GUID);
+  puVar1 = PTR_s_NSString_0000a038;
+  uVar6 = _objc_msgSend(PTR_s_MAConsoleUser_0000a010,PTR_s_currentUserName_0000a09c);
+  uVar7 = _objc_msgSend(uVar5,PTR_s_unsignedLongLongValue_0000a120);
+  uVar2 = _objc_msgSend(puVar1,PTR_s_stringWithFormat__0000a124,
+                        &cf_sudo_u______launch__________llX__,uVar6,uVar2,uVar4,uVar3,uVar7);
+  uVar2 = _objc_msgSend(uVar2,PTR_s_UTF8String_0000a128);
+  _system_UNIX2003(uVar2);
+  return;
+}
+
+
+
+=== -[MAFireWireLoader driverInstanceTerminated:] @ 0x00003664 ===
+
+void __MAFireWireLoader_driverInstanceTerminated__
+               (int param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = _objc_msgSend(param_1,PTR_s_deviceForService__0000a178,param_3);
+  _NSLog(&cf_driverinstanceremoved__lX_,uVar1);
+  _objc_msgSend(uVar1,PTR_s_breakRetainCycles_0000a17c);
+  _objc_msgSend(*(undefined4 *)(param_1 + 4),PTR_s_removeObject__0000a180,uVar1);
+  return;
+}
+
+
+
+=== -[MAFireWireLoader driverInstanceMatched:] @ 0x000035d5 ===
+
+void __MAFireWireLoader_driverInstanceMatched__(int param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  int iVar3;
+  
+  iVar1 = _objc_msgSend(PTR_s_MAFireWireDeviceInstance_0000a008,
+                        PTR_s_deviceInstanceForService__0000a170,param_3);
+  _NSLog(&cf_driverinstancecreated__lX_,iVar1);
+  iVar3 = *(int *)(param_1 + 4);
+  if (iVar3 == 0) {
+    uVar2 = _objc_msgSend(PTR_s_NSMutableArray_0000a048,PTR_s_alloc_0000a078,param_3);
+    iVar3 = _objc_msgSend(uVar2,PTR_s_init_0000a07c);
+    *(int *)(param_1 + 4) = iVar3;
+  }
+  if (iVar1 != 0) {
+    _objc_msgSend(iVar3,PTR_s_addObject__0000a174,iVar1);
+  }
+  return;
+}
+
+
+
+=== -[MAFireWireLoader unloadTheDriver] @ 0x00002da7 ===
+
+void __MAFireWireLoader_unloadTheDriver_(undefined4 param_1)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  int iVar4;
+  int iVar5;
+  bool bVar6;
+  cfstringStruct *pcVar7;
+  
+  iVar1 = _objc_msgSend(param_1,PTR_s_unloadDriverOnce_0000a0f4);
+  _NSLog(&cf_unloadingM_AudioFireWire__X,iVar1);
+  iVar5 = 3;
+  if (iVar1 == -0x23ffbffe) {
+    do {
+      _NSLog(&cf_retryingunload__lu_,iVar5);
+      uVar2 = _objc_msgSend(PTR_s_NSRunLoop_0000a02c,PTR_s_currentRunLoop_0000a0f8);
+      uVar3 = _objc_msgSend(PTR_s_NSDate_0000a030,PTR_s_dateWithTimeIntervalSinceNow__0000a0fc,0,
+                            0x40000000);
+      _objc_msgSend(uVar2,PTR_s_runUntilDate__0000a100,uVar3);
+      iVar4 = iVar5 + -1;
+      iVar1 = _objc_msgSend(param_1,PTR_s_unloadDriverOnce_0000a0f4);
+      if (iVar1 != -0x23ffbffe) break;
+      bVar6 = iVar5 != 1;
+      iVar5 = iVar4;
+    } while (bVar6);
+  }
+  else {
+    iVar4 = 3;
+  }
+  if (iVar1 == 0) {
+    pcVar7 = &cf_unloadedaudiodeviceatcount___lu_;
+  }
+  else {
+    pcVar7 = &cf_failedtounloaddevice_error__X_;
+    iVar4 = iVar1;
+  }
+  _NSLog(pcVar7,iVar4);
+  return;
+}
+
+
+
+=== -[MAFireWireLoader unloadDriverOnce] @ 0x00002d6c ===
+
+void __MAFireWireLoader_unloadDriverOnce_(void)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = _objc_msgSend(&cf_com_m_audio_driver_firewire,PTR_s_cString_0000a0f0);
+  _IOCatalogueTerminate(*(undefined4 *)PTR__kIOMasterPortDefault_0000900c,1,uVar1);
+  return;
+}
+
+
+
+=== -[MAFireWireLoader quitView] @ 0x0000306d ===
+
+void __MAFireWireLoader_quitView_(undefined4 param_1)
+
+{
+  undefined *puVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  
+  uVar2 = _objc_msgSend(param_1,PTR_s_statusAppPath_0000a118);
+  puVar1 = PTR_s_NSString_0000a038;
+  uVar3 = _objc_msgSend(PTR_s_MAConsoleUser_0000a010,PTR_s_currentUserName_0000a09c);
+  uVar2 = _objc_msgSend(puVar1,PTR_s_stringWithFormat__0000a124,&cf_sudo_u______quit_,uVar3,uVar2);
+  uVar2 = _objc_msgSend(uVar2,PTR_s_UTF8String_0000a128);
+  _system_UNIX2003(uVar2);
+  return;
+}
+
+
+
+=== -[MAFireWireFirmwareFile firmwareValidationFailed:] @ 0x00005884 ===
+
+void __MAFireWireFirmwareFile_firmwareValidationFailed__
+               (undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  _NSLog(param_3);
+  return;
+}
+
+
+

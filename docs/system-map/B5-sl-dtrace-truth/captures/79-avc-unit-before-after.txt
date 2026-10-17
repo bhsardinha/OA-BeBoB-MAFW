@@ -1,0 +1,29 @@
+# capture 79 - clone AV/C layer before / after the FWAVCUnit fix (build PC 10.13.6, 2026-10-17; OA_LOG in FWAvc.cpp; registry on both machines)
+
+## registry (ioreg -c IOFireWireAVCUnit -r)
+SL v1.9 (official):  +-o m_audio_b_FWAVCUnit  <registered, matched, active>   parent = com_m_audio_FW1814Device (IOService plane), props = copy of the FireWire nub's
+                     (FireWire Device ROM, Vendor Name, Model_ID, GUID, IOUserClientClass ...). The device's Unit_Spec_ID/Unit_SW_Version = 41005/81921 (0xA02D/0x14001),
+                     not Apple's AV/C 0x10001, so Apple's own IOFireWireAVCUnit never attaches; the driver builds its own.
+clone before:        (no IOFireWireAVCUnit object at all)           -> IOFireWireAVCUnit::AVCResponse probe (fbt) never fired
+clone after:         +-o com_openaudio_FWAvcUnit <registered, matched, active>  -> the probe fires
+
+## clone before (bare OSObject + IOFireWireAVCCommand::withNub): every command times out
+AVC 00 08 b8 80 04 10 len 12 -> r=0xe00002d6 resp0 f0 respLen 12   1272 ms    (selector)
+AVC 00 08 b8 82 01 10 len 16 -> r=0xe00002d6 resp0 00 respLen 16   1269 ms    (mixer connect, src 1 dst 1)   -> pair builder stopped after the first single
+AVC 00 08 b8 81 09 10 len 12 -> r=0xe00002d6 resp0 f0 respLen 12   1268 ms    (aux feature block)
+AVC 00 ff 19 00 90 02 len 8  -> r=0xe00002d6 resp0 00 respLen 8    1263 ms    (plug signal format)
+AVC 00 ff 00 04 00 04 len 16 -> r=0xe00002d6 resp0 30/00 respLen 16 1256 ms   (HSCI vendor frame)
+initHardware up after ~23 s.
+
+## clone after step 1 (IOFireWireAVCUnit subclass + async queue, sync path still without fCommand): async commands answered (AVCResponse fires), sync ones still time out
+initHardware up after 18 s; user: SW return 1/2 -> out 3/4 works.
+
+## clone after step 2 (sync command stores the command in the unit's inherited fCommand under avcLock/cmdLock, as asm 0x1594):
+AVC 00 ff 00 03 00 01 len 8 -> r=0x0 resp0 09 respLen 8   22 ms      (ACCEPTED)
+initHardware up after 13 s.  Rate change via CoreAudio: MASampleRate follows after ~4-5 s (was 8-12 s), MARateLocked 1.
+
+## reference evidence
+asm 0x23c72 AllocateConnectionManager: nub=[dev+0xe0]; props=nub->vt[0x2f0]; new 0xF8 B; unit->vt[0x248](props) init; unit->vt[0x670](dev) attach; unit->vt[0x28]() release; unit->vt[0x5c0](nub) start.
+asm 0x1692 start / 0x165e stop (flag byte [+0xe0], base-class calls), 0x13cc updateSubUnits (empty), 0x17fc AVCCommand (async list, head [+0xe8] tail [+0xf0], next [+0x98], unit [+0xa0]),
+0x16c8 FinishAsyncCommand, 0x1726 FWAVCAsyncCommandCallback, 0x1594 AVCCommandExtendedTimeout (sets [+0xa0]=cmd under [+0x98]; clears under [+0xd0]).
+Selector, feature block and mixer connect use vt[0x8b0] (async, no response look-up); plug format and the HSCI frame use vt[0x8b8].

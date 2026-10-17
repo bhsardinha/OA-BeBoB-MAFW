@@ -1,0 +1,1047 @@
+# AppleFWOHCI 5.5.9 (10.13.6 build PC, /System/Library/Extensions/IOFireWireFamily.kext/Contents/PlugIns/AppleFWOHCI.kext/Contents/MacOS/AppleFWOHCI), sha256 3d66e5db6d1b5ab051fd9c5bafad1cc66ecca63495e335c38d61c74f37bca243
+# otool -tvV excerpts, extracted 2026-10-14. Sections: translateLegacyProgram 0x8d5e-0x9290 (+ jump table @0x9284), setDCLNeedsInterrupt, SendDCL::compile/checkForInterrupt/interrupt, ReceiveDCL::compile
+##### translateLegacyProgram
+__ZN22AppleFWOHCI_DCLProgram22translateLegacyProgramEP16DCLCommandStruct:
+0000000000008d5e	pushq	%rbp
+0000000000008d5f	movq	%rsp, %rbp
+0000000000008d62	pushq	%r15
+0000000000008d64	pushq	%r14
+0000000000008d66	pushq	%r13
+0000000000008d68	pushq	%r12
+0000000000008d6a	pushq	%rbx
+0000000000008d6b	subq	$0x38, %rsp
+0000000000008d6f	movq	%rsi, %r15
+0000000000008d72	movq	%rdi, -0x50(%rbp)
+0000000000008d76	movq	0x58(%rdi), %rdi
+0000000000008d7a	movq	(%rdi), %rax
+0000000000008d7d	xorl	%ebx, %ebx
+0000000000008d7f	xorl	%esi, %esi
+0000000000008d81	callq	*0x960(%rax)
+0000000000008d87	movq	%rax, -0x38(%rbp)
+0000000000008d8b	testq	%rax, %rax
+0000000000008d8e	je	0x9261
+0000000000008d94	testq	%r15, %r15
+0000000000008d97	je	0x9231
+0000000000008d9d	xorl	%eax, %eax
+0000000000008d9f	movq	%rax, -0x58(%rbp)
+0000000000008da3	movq	%r15, %r13
+0000000000008da6	xorl	%r12d, %r12d
+0000000000008da9	xorl	%eax, %eax
+0000000000008dab	movq	%rax, -0x30(%rbp)
+0000000000008daf	xorl	%ebx, %ebx
+0000000000008db1	movzwl	0x10(%r13), %eax
+0000000000008db6	decl	%eax
+0000000000008db8	movzwl	%ax, %eax
+0000000000008dbb	cmpl	$0xe, %eax
+0000000000008dbe	ja	0x9246
+0000000000008dc4	leaq	0x4b9(%rip), %rcx
+0000000000008dcb	movslq	(%rcx,%rax,4), %rax
+0000000000008dcf	addq	%rcx, %rax
+0000000000008dd2	jmpq	*%rax
+0000000000008dd4	movq	-0x30(%rbp), %rax
+0000000000008dd8	leal	-0x1(%rax), %eax
+0000000000008ddb	cmpl	$0x2, %eax
+0000000000008dde	jb	0x9246
+0000000000008de4	movq	0x18(%r13), %rax
+0000000000008de8	movq	%rax, -0x48(%rbp)
+0000000000008dec	movl	0x20(%r13), %eax
+0000000000008df0	movq	%rax, -0x40(%rbp)
+0000000000008df4	movq	-0x38(%rbp), %rdi
+0000000000008df8	movq	(%rdi), %rax
+0000000000008dfb	xorl	%esi, %esi
+0000000000008dfd	movl	$0x1, %edx
+0000000000008e02	leaq	-0x48(%rbp), %rcx
+0000000000008e06	callq	*0x130(%rax)
+0000000000008e0c	movq	%rax, %r12
+0000000000008e0f	movq	%r12, %rdi
+0000000000008e12	callq	__ZNK7IOFWDCL8getFlagsEv
+0000000000008e17	orl	$0x40000, %eax                  ## imm = 0x40000
+0000000000008e1c	movq	%r12, %rdi
+0000000000008e1f	movl	%eax, %esi
+0000000000008e21	callq	__ZN7IOFWDCL8setFlagsEj
+0000000000008e26	movq	-0x50(%rbp), %rax
+0000000000008e2a	cmpb	$0x0, 0xe3(%rax)
+0000000000008e31	je	0x8e4a
+0000000000008e33	movq	%r12, %rdi
+0000000000008e36	callq	__ZNK7IOFWDCL8getFlagsEv
+0000000000008e3b	orl	$0x80000, %eax                  ## imm = 0x80000
+0000000000008e40	movq	%r12, %rdi
+0000000000008e43	movl	%eax, %esi
+0000000000008e45	callq	__ZN7IOFWDCL8setFlagsEj
+0000000000008e4a	testq	%rbx, %rbx
+0000000000008e4d	jne	0x8e64
+0000000000008e4f	jmp	0x90b9
+0000000000008e54	movzwl	0x10(%rbx), %eax
+0000000000008e58	cmpl	$0x9, %eax
+0000000000008e5b	jne	0x8e61
+0000000000008e5d	movq	%r12, 0x8(%rbx)
+0000000000008e61	movq	(%rbx), %rbx
+0000000000008e64	cmpq	%r13, %rbx
+0000000000008e67	jne	0x8e54
+0000000000008e69	jmp	0x90b9
+0000000000008e6e	movq	-0x30(%rbp), %rax
+0000000000008e72	leal	-0x1(%rax), %eax
+0000000000008e75	cmpl	$0x2, %eax
+0000000000008e78	jae	0x8f37
+0000000000008e7e	jmp	0x9246
+0000000000008e83	cmpl	$0x3, -0x30(%rbp)
+0000000000008e87	je	0x9276
+0000000000008e8d	movl	0x20(%r13), %eax
+0000000000008e91	testq	%rax, %rax
+0000000000008e94	je	0x9246
+0000000000008e9a	movq	0x18(%r13), %rcx
+0000000000008e9e	movq	%rcx, -0x48(%rbp)
+0000000000008ea2	movq	%rax, -0x40(%rbp)
+0000000000008ea6	movq	-0x38(%rbp), %rdi
+0000000000008eaa	movq	(%rdi), %rax
+0000000000008ead	xorl	%esi, %esi
+0000000000008eaf	movl	$0x4, %edx
+0000000000008eb4	movl	$0x1, %ecx
+0000000000008eb9	leaq	-0x48(%rbp), %r8
+0000000000008ebd	callq	*0x128(%rax)
+0000000000008ec3	movq	%rax, %r12
+0000000000008ec6	movq	%r12, %rdi
+0000000000008ec9	callq	__ZNK7IOFWDCL8getFlagsEv
+0000000000008ece	orl	$0x40000, %eax                  ## imm = 0x40000
+0000000000008ed3	movq	%r12, %rdi
+0000000000008ed6	movl	%eax, %esi
+0000000000008ed8	callq	__ZN7IOFWDCL8setFlagsEj
+0000000000008edd	movq	-0x50(%rbp), %rax
+0000000000008ee1	cmpb	$0x0, 0xe3(%rax)
+0000000000008ee8	je	0x8f01
+0000000000008eea	movq	%r12, %rdi
+0000000000008eed	callq	__ZNK7IOFWDCL8getFlagsEv
+0000000000008ef2	orl	$0x80000, %eax                  ## imm = 0x80000
+0000000000008ef7	movq	%r12, %rdi
+0000000000008efa	movl	%eax, %esi
+0000000000008efc	callq	__ZN7IOFWDCL8setFlagsEj
+0000000000008f01	testq	%rbx, %rbx
+0000000000008f04	jne	0x8f18
+0000000000008f06	jmp	0x8f1d
+0000000000008f08	movzwl	0x10(%rbx), %eax
+0000000000008f0c	cmpl	$0x9, %eax
+0000000000008f0f	jne	0x8f15
+0000000000008f11	movq	%r12, 0x8(%rbx)
+0000000000008f15	movq	(%rbx), %rbx
+0000000000008f18	cmpq	%r13, %rbx
+0000000000008f1b	jne	0x8f08
+0000000000008f1d	movq	%r12, 0x8(%r13)
+0000000000008f21	xorl	%ebx, %ebx
+0000000000008f23	movl	$0x2, %eax
+0000000000008f28	jmp	0x90c4
+0000000000008f2d	cmpl	$0x3, -0x30(%rbp)
+0000000000008f31	je	0x9276
+0000000000008f37	testq	%r12, %r12
+0000000000008f3a	je	0x9246
+0000000000008f40	movq	0x18(%r13), %rax
+0000000000008f44	movq	%rax, -0x48(%rbp)
+0000000000008f48	movl	0x20(%r13), %eax
+0000000000008f4c	movq	%rax, -0x40(%rbp)
+0000000000008f50	movq	(%r12), %rax
+0000000000008f54	movq	%r12, %rdi
+0000000000008f57	leaq	-0x48(%rbp), %rsi
+0000000000008f5b	callq	*0x120(%rax)
+0000000000008f61	movl	%eax, %r14d
+0000000000008f64	jmp	0x9031
+0000000000008f69	xorl	%r14d, %r14d
+0000000000008f6c	testq	%r12, %r12
+0000000000008f6f	je	0x903a
+0000000000008f75	movq	%r12, %rdi
+0000000000008f78	callq	__ZNK7IOFWDCL11getCallbackEv
+0000000000008f7d	testq	%rax, %rax
+0000000000008f80	jne	0x9031
+0000000000008f86	movq	0x18(%r13), %rsi
+0000000000008f8a	movq	%r12, %rdi
+0000000000008f8d	callq	__ZN7IOFWDCL11setCallbackEPFvPvE
+0000000000008f92	movq	%r12, %rdi
+0000000000008f95	movq	%r13, %rsi
+0000000000008f98	callq	__ZN7IOFWDCL9setRefconEPv
+0000000000008f9d	jmp	0x9031
+0000000000008fa2	testq	%rbx, %rbx
+0000000000008fa5	cmoveq	%r13, %rbx
+0000000000008fa9	xorl	%r14d, %r14d
+0000000000008fac	movq	%r14, 0x8(%r13)
+0000000000008fb0	jmp	0x90cb
+0000000000008fb5	xorl	%r14d, %r14d
+0000000000008fb8	testq	%r12, %r12
+0000000000008fbb	jne	0x9031
+0000000000008fbd	jmp	0x903a
+0000000000008fbf	movq	-0x38(%rbp), %rdi
+0000000000008fc3	movq	(%rdi), %rax
+0000000000008fc6	movzbl	0x16(%r13), %edx
+0000000000008fcb	movzbl	0x14(%r13), %esi
+0000000000008fd0	callq	*0x120(%rax)
+0000000000008fd6	movq	$0x0, 0x8(%r13)
+0000000000008fde	jmp	0x90c8
+0000000000008fe3	xorl	%r14d, %r14d
+0000000000008fe6	testq	%r12, %r12
+0000000000008fe9	je	0x903a
+0000000000008feb	movq	%r12, %rdi
+0000000000008fee	callq	__ZNK7IOFWDCL11getCallbackEv
+0000000000008ff3	testq	%rax, %rax
+0000000000008ff6	jne	0x9031
+0000000000008ff8	movq	%r12, %rdi
+0000000000008ffb	callq	__ZNK7IOFWDCL8getFlagsEv
+0000000000009000	orl	$0x4, %eax
+0000000000009003	movq	%r12, %rdi
+0000000000009006	movl	%eax, %esi
+0000000000009008	callq	__ZN7IOFWDCL8setFlagsEj
+000000000000900d	jmp	0x9031
+000000000000900f	xorl	%r14d, %r14d
+0000000000009012	testq	%r12, %r12
+0000000000009015	je	0x903a
+0000000000009017	leaq	0x14(%r13), %rsi
+000000000000901b	jmp	0x9029
+000000000000901d	xorl	%r14d, %r14d
+0000000000009020	testq	%r12, %r12
+0000000000009023	je	0x903a
+0000000000009025	movq	0x18(%r13), %rsi
+0000000000009029	movq	%r12, %rdi
+000000000000902c	callq	__ZN7IOFWDCL15setTimeStampPtrEPj
+0000000000009031	movq	%r12, 0x8(%r13)
+0000000000009035	jmp	0x90cb
+000000000000903a	xorl	%r12d, %r12d
+000000000000903d	jmp	0x90cb
+0000000000009042	movq	-0x30(%rbp), %rax
+0000000000009046	leal	-0x1(%rax), %eax
+0000000000009049	cmpl	$0x2, %eax
+000000000000904c	jb	0x9246
+0000000000009052	movq	-0x38(%rbp), %rdi
+0000000000009056	movq	(%rdi), %rax
+0000000000009059	callq	*0x138(%rax)
+000000000000905f	movq	%rax, %r12
+0000000000009062	movq	%r12, %rdi
+0000000000009065	callq	__ZNK7IOFWDCL8getFlagsEv
+000000000000906a	orl	$0x40000, %eax                  ## imm = 0x40000
+000000000000906f	movq	%r12, %rdi
+0000000000009072	movl	%eax, %esi
+0000000000009074	callq	__ZN7IOFWDCL8setFlagsEj
+0000000000009079	movq	-0x50(%rbp), %rax
+000000000000907d	cmpb	$0x0, 0xe3(%rax)
+0000000000009084	je	0x909d
+0000000000009086	movq	%r12, %rdi
+0000000000009089	callq	__ZNK7IOFWDCL8getFlagsEv
+000000000000908e	orl	$0x80000, %eax                  ## imm = 0x80000
+0000000000009093	movq	%r12, %rdi
+0000000000009096	movl	%eax, %esi
+0000000000009098	callq	__ZN7IOFWDCL8setFlagsEj
+000000000000909d	testq	%rbx, %rbx
+00000000000090a0	jne	0x90b4
+00000000000090a2	jmp	0x90b9
+00000000000090a4	movzwl	0x10(%rbx), %eax
+00000000000090a8	cmpl	$0x9, %eax
+00000000000090ab	jne	0x90b1
+00000000000090ad	movq	%r12, 0x8(%rbx)
+00000000000090b1	movq	(%rbx), %rbx
+00000000000090b4	cmpq	%r13, %rbx
+00000000000090b7	jne	0x90a4
+00000000000090b9	movq	%r12, 0x8(%r13)
+00000000000090bd	xorl	%ebx, %ebx
+00000000000090bf	movl	$0x3, %eax
+00000000000090c4	movq	%rax, -0x30(%rbp)
+00000000000090c8	xorl	%r14d, %r14d
+00000000000090cb	testl	%r14d, %r14d
+00000000000090ce	jne	0x90dd
+00000000000090d0	movq	(%r13), %r13
+00000000000090d4	testq	%r13, %r13
+00000000000090d7	jne	0x8db1
+00000000000090dd	testl	%r14d, %r14d
+00000000000090e0	sete	%al
+00000000000090e3	jne	0x9229
+00000000000090e9	testq	%r15, %r15
+00000000000090ec	je	0x9229
+00000000000090f2	movl	$0x2035, %r14d                  ## imm = 0x2035
+00000000000090f8	movzwl	0x10(%r15), %eax
+00000000000090fd	cmpl	$0xc, %eax
+0000000000009100	je	0x916d
+0000000000009102	movzwl	%ax, %eax
+0000000000009105	cmpl	$0xa, %eax
+0000000000009108	movl	$0x0, %r12d
+000000000000910e	jne	0x9215
+0000000000009114	movq	0x18(%r15), %rax
+0000000000009118	testq	%rax, %rax
+000000000000911b	movl	$0x0, %r12d
+0000000000009121	je	0x9215
+0000000000009127	movzwl	0x10(%rax), %ecx
+000000000000912b	cmpl	$0x9, %ecx
+000000000000912e	movl	$0x0, %r12d
+0000000000009134	jne	0x9215
+000000000000913a	movq	0x8(%rax), %rsi
+000000000000913e	testq	%rsi, %rsi
+0000000000009141	movl	$0x0, %r12d
+0000000000009147	je	0x9215
+000000000000914d	movq	0x8(%r15), %rdi
+0000000000009151	testq	%rdi, %rdi
+0000000000009154	movl	$0x0, %r12d
+000000000000915a	je	0x9215
+0000000000009160	callq	__ZN7IOFWDCL9setBranchEPS_
+0000000000009165	xorl	%r12d, %r12d
+0000000000009168	jmp	0x9215
+000000000000916d	movq	0x8(%r15), %rdi
+0000000000009171	testq	%rdi, %rdi
+0000000000009174	movl	$0x0, %r12d
+000000000000917a	je	0x9215
+0000000000009180	callq	__ZNK7IOFWDCL13getUpdateListEv
+0000000000009185	movq	%rax, %r13
+0000000000009188	testq	%r13, %r13
+000000000000918b	je	0x9199
+000000000000918d	movq	(%r13), %rax
+0000000000009191	movq	%r13, %rdi
+0000000000009194	callq	*0x20(%rax)
+0000000000009197	jmp	0x91aa
+0000000000009199	movl	0x20(%r15), %edi
+000000000000919d	callq	__ZN5OSSet12withCapacityEj
+00000000000091a2	movq	%rax, %r13
+00000000000091a5	testq	%r13, %r13
+00000000000091a8	je	0x9202
+00000000000091aa	cmpl	$0x0, 0x20(%r15)
+00000000000091af	je	0x91ec
+00000000000091b1	xorl	%ebx, %ebx
+00000000000091b3	movq	0x18(%r15), %rax
+00000000000091b7	movl	%ebx, %ecx
+00000000000091b9	movq	(%rax,%rcx,8), %rax
+00000000000091bd	movq	0x8(%rax), %rsi
+00000000000091c1	testq	%rsi, %rsi
+00000000000091c4	jne	0x91d7
+00000000000091c6	movzwl	0x10(%rax), %eax
+00000000000091ca	decl	%eax
+00000000000091cc	cmpl	$0xd, %eax
+00000000000091cf	ja	0x91d7
+00000000000091d1	btl	%eax, %r14d
+00000000000091d5	jb	0x91e4
+00000000000091d7	movq	(%r13), %rax
+00000000000091db	movq	%r13, %rdi
+00000000000091de	callq	*0x1c0(%rax)
+00000000000091e4	incl	%ebx
+00000000000091e6	cmpl	0x20(%r15), %ebx
+00000000000091ea	jb	0x91b3
+00000000000091ec	movq	0x8(%r15), %rdi
+00000000000091f0	xorl	%r12d, %r12d
+00000000000091f3	testq	%rdi, %rdi
+00000000000091f6	je	0x920b
+00000000000091f8	movq	%r13, %rsi
+00000000000091fb	callq	__ZN7IOFWDCL13setUpdateListEP5OSSet
+0000000000009200	jmp	0x920b
+0000000000009202	movl	$0xe00002bd, %r12d              ## imm = 0xE00002BD
+0000000000009208	xorl	%r13d, %r13d
+000000000000920b	movq	(%r13), %rax
+000000000000920f	movq	%r13, %rdi
+0000000000009212	callq	*0x28(%rax)
+0000000000009215	testl	%r12d, %r12d
+0000000000009218	sete	%al
+000000000000921b	jne	0x9229
+000000000000921d	movq	(%r15), %r15
+##### setDCLNeedsInterrupt
+__ZN22AppleFWOHCI_DCLProgram20setDCLNeedsInterruptEP7IOFWDCLb:
+000000000000a07a	pushq	%rbp
+000000000000a07b	movq	%rsp, %rbp
+000000000000a07e	pushq	%r15
+000000000000a080	pushq	%r14
+000000000000a082	pushq	%rbx
+000000000000a083	pushq	%rax
+000000000000a084	movl	%edx, %ebx
+000000000000a086	movq	%rsi, %r14
+000000000000a089	movq	%rdi, %r15
+000000000000a08c	movq	0xd8(%r15), %rdi
+000000000000a093	movq	(%rdi), %rax
+000000000000a096	xorl	%edx, %edx
+000000000000a098	callq	*0x1f8(%rax)
+000000000000a09e	testb	%bl, %bl
+000000000000a0a0	je	0xa0bb
+000000000000a0a2	testl	%eax, %eax
+000000000000a0a4	jns	0xa0de
+000000000000a0a6	movq	0xd8(%r15), %rdi
+000000000000a0ad	movq	(%rdi), %rax
+000000000000a0b0	movq	%r14, %rsi
+000000000000a0b3	callq	*0x1b8(%rax)
+000000000000a0b9	jmp	0xa0de
+000000000000a0bb	testl	%eax, %eax
+000000000000a0bd	js	0xa0de
+000000000000a0bf	movq	0xd8(%r15), %rdi
+000000000000a0c6	movq	(%rdi), %rcx
+000000000000a0c9	movq	0x1d8(%rcx), %rcx
+000000000000a0d0	movl	%eax, %esi
+000000000000a0d2	addq	$0x8, %rsp
+000000000000a0d6	popq	%rbx
+000000000000a0d7	popq	%r14
+000000000000a0d9	popq	%r15
+000000000000a0db	popq	%rbp
+000000000000a0dc	jmpq	*%rcx
+000000000000a0de	addq	$0x8, %rsp
+000000000000a0e2	popq	%rbx
+000000000000a0e3	popq	%r14
+000000000000a0e5	popq	%r15
+000000000000a0e7	popq	%rbp
+000000000000a0e8	retq
+##### SendDCL::compile + checkForInterrupt + interrupt
+__ZN19AppleFWOHCI_SendDCL7compileER12IODCLProgramRb:
+000000000000d3da	pushq	%rbp
+000000000000d3db	movq	%rsp, %rbp
+000000000000d3de	pushq	%r15
+000000000000d3e0	pushq	%r14
+000000000000d3e2	pushq	%r12
+000000000000d3e4	pushq	%rbx
+000000000000d3e5	subq	$0x90, %rsp
+000000000000d3ec	movq	%rdx, %rbx
+000000000000d3ef	movq	%rsi, %r15
+000000000000d3f2	movq	%rdi, %r14
+000000000000d3f5	movq	0x12cfc(%rip), %rax
+000000000000d3fc	movq	(%rax), %rax
+000000000000d3ff	movq	%rax, -0x28(%rbp)
+000000000000d403	movq	0x58(%r15), %rax
+000000000000d407	movq	%rax, 0xb0(%r14)
+000000000000d40e	xorl	%eax, %eax
+000000000000d410	cmpq	$0x0, 0x88(%r15)
+000000000000d418	je	0xd67e
+000000000000d41e	cmpq	$0x0, 0x68(%r15)
+000000000000d423	je	0xd67e
+000000000000d429	movq	0x60(%r14), %rax
+000000000000d42d	movb	$0x0, 0x49(%rax)
+000000000000d431	leaq	-0xa4(%rbp), %r8
+000000000000d438	movl	$0x0, (%r8)
+000000000000d43f	movq	0x30(%r14), %rsi
+000000000000d443	movl	0x28(%r14), %edx
+000000000000d447	leaq	-0xa0(%rbp), %rcx
+000000000000d44e	movl	$0x5, %r9d
+000000000000d454	movq	%r15, %rdi
+000000000000d457	callq	__ZN22AppleFWOHCI_DCLProgram17virtualToPhysicalEP14IOVirtualRangejPN14IOMemoryCursor15PhysicalSegmentERjj ## AppleFWOHCI_DCLProgram::virtualToPhysical(IOVirtualRange*, unsigned int, IOMemoryCursor::PhysicalSegment*, unsigned int&, unsigned int)
+000000000000d45c	testl	%eax, %eax
+000000000000d45e	jne	0xd67e
+000000000000d464	movl	-0xa4(%rbp), %r9d
+000000000000d46b	movq	%rbx, (%rsp)
+000000000000d46f	movl	$0x2, %edx
+000000000000d474	movl	$0x2, %ecx
+000000000000d479	movq	%r15, %rdi
+000000000000d47c	movq	%r14, %rsi
+000000000000d47f	callq	__ZN13IOFWDCLFriend19allocDCLDescriptorsER22AppleFWOHCI_DCLProgramP7IOFWDCLjjPN14IOMemoryCursor15PhysicalSegmentEjRb ## IOFWDCLFriend::allocDCLDescriptors(AppleFWOHCI_DCLProgram&, IOFWDCL*, unsigned int, unsigned int, IOMemoryCursor::PhysicalSegment*, unsigned int, bool&)
+000000000000d484	testl	%eax, %eax
+000000000000d486	jne	0xd67e
+000000000000d48c	movq	0x60(%r14), %rax
+000000000000d490	movq	0x8(%rax), %r12
+000000000000d494	cmpl	$0x0, -0xa4(%rbp)
+000000000000d49b	je	0xd52c
+000000000000d4a1	movl	$0x2000008, (%r12)              ## imm = 0x2000008
+000000000000d4a9	movq	(%r14), %rax
+000000000000d4ac	movq	%r14, %rdi
+000000000000d4af	callq	*0x148(%rax)
+000000000000d4b5	movq	0x68(%r15), %rcx
+000000000000d4b9	movl	0x24(%rcx), %edx
+000000000000d4bc	movl	0x28(%rcx), %ecx
+000000000000d4bf	shll	$0x10, %edx
+000000000000d4c2	movzbl	0x91(%r14), %esi
+000000000000d4ca	andl	$0x3, %esi
+000000000000d4cd	shll	$0xe, %esi
+000000000000d4d0	shll	$0x8, %ecx
+000000000000d4d3	movzbl	0x90(%r14), %edi
+000000000000d4db	andl	$0xf, %edi
+000000000000d4de	orl	%edx, %ecx
+000000000000d4e0	orl	%esi, %ecx
+000000000000d4e2	leal	0xa0(%rcx,%rdi), %ecx
+000000000000d4e9	movl	%ecx, 0x94(%r14)
+000000000000d4f0	movl	%eax, %edx
+000000000000d4f2	shll	$0x10, %edx
+000000000000d4f5	movl	%edx, 0x98(%r14)
+000000000000d4fc	movl	%ecx, 0x10(%r12)
+000000000000d501	movl	0x98(%r14), %ecx
+000000000000d508	movl	%ecx, 0x14(%r12)
+000000000000d50d	testq	%rax, %rax
+000000000000d510	je	0xd590
+000000000000d512	addq	$0x20, %r12
+000000000000d516	movl	-0xa4(%rbp), %eax
+000000000000d51c	cmpl	$0x1, %eax
+000000000000d51f	jne	0xd5a8
+000000000000d525	xorl	%ebx, %ebx
+000000000000d527	jmp	0xd5db
+000000000000d52c	movl	$0xe0008101, %eax               ## imm = 0xE0008101
+000000000000d531	cmpq	$0x0, 0x80(%r14)
+000000000000d539	jne	0xd67e
+000000000000d53f	movq	0x18(%r14), %rbx
+000000000000d543	testq	%rbx, %rbx
+000000000000d546	jne	0xd560
+000000000000d548	cmpq	$0x0, 0x48(%r14)
+000000000000d54d	jne	0xd560
+000000000000d54f	movq	%r14, %rdi
+000000000000d552	callq	__ZNK7IOFWDCL8getFlagsEv
+000000000000d557	testb	$0x2, %al
+000000000000d559	movl	$0x120c0008, %eax               ## imm = 0x120C0008
+000000000000d55e	je	0xd565
+000000000000d560	movl	$0x1a0c0008, %eax               ## imm = 0x1A0C0008
+000000000000d565	xorl	%ecx, %ecx
+000000000000d567	testq	%rbx, %rbx
+000000000000d56a	setne	%dl
+000000000000d56d	movl	$0x300000, %esi                 ## imm = 0x300000
+000000000000d572	cmovel	%ecx, %esi
+000000000000d575	orl	%eax, %esi
+000000000000d577	movl	%esi, (%r12)
+000000000000d57b	movl	$0x0, 0x4(%r12)
+000000000000d584	movq	0x60(%r14), %rax
+000000000000d588	orb	%dl, 0x49(%rax)
+000000000000d58b	jmp	0xd4a9
+000000000000d590	movq	0x60(%r14), %rax
+000000000000d594	movq	0x8(%rax), %r12
+000000000000d598	addq	$0xc, %r12
+000000000000d59c	movq	%r12, 0x20(%rax)
+000000000000d5a0	movb	0x49(%rax), %cl
+000000000000d5a3	jmp	0xd65a
+000000000000d5a8	decl	%eax
+000000000000d5aa	leaq	-0x98(%rbp), %rcx
+000000000000d5b1	xorl	%ebx, %ebx
+000000000000d5b3	movzwl	(%rcx), %edx
+000000000000d5b6	movl	%edx, (%r12)
+000000000000d5ba	movl	-0x8(%rcx), %edx
+000000000000d5bd	movl	%edx, 0x4(%r12)
+000000000000d5c2	movl	$0x0, 0x8(%r12)
+000000000000d5cb	addq	$0x10, %r12
+000000000000d5cf	incq	%rbx
+000000000000d5d2	addq	$0x10, %rcx
+000000000000d5d6	cmpq	%rax, %rbx
+000000000000d5d9	jb	0xd5b3
+000000000000d5db	movb	$0x1, %cl
+000000000000d5dd	cmpq	$0x0, 0x18(%r14)
+000000000000d5e2	jne	0xd610
+000000000000d5e4	cmpq	$0x0, 0x38(%r14)
+000000000000d5e9	jne	0xd610
+000000000000d5eb	cmpq	$0x0, 0x80(%r14)
+000000000000d5f3	jne	0xd610
+000000000000d5f5	cmpq	$0x0, 0x78(%r14)
+000000000000d5fa	jne	0xd610
+000000000000d5fc	cmpq	$0x0, 0x20(%r14)
+000000000000d601	jne	0xd60e
+000000000000d603	cmpq	$0x0, 0x48(%r14)
+000000000000d608	je	0xd69e
+000000000000d60e	xorl	%ecx, %ecx
+000000000000d610	movq	%rbx, %rax
+000000000000d613	shlq	$0x4, %rax
+000000000000d617	movzwl	-0x98(%rbp,%rax), %eax
+000000000000d61f	movl	$0x180c0000, %edx               ## imm = 0x180C0000
+000000000000d624	xorl	%esi, %esi
+000000000000d626	testb	%cl, %cl
+000000000000d628	movl	$0x300000, %edi                 ## imm = 0x300000
+000000000000d62d	cmovel	%esi, %edi
+000000000000d630	orl	%edx, %edi
+000000000000d632	orl	%eax, %edi
+000000000000d634	movl	%edi, (%r12)
+000000000000d638	shlq	$0x4, %rbx
+000000000000d63c	movl	-0xa0(%rbp,%rbx), %eax
+000000000000d643	movl	%eax, 0x4(%r12)
+000000000000d648	movq	0x60(%r14), %rax
+000000000000d64c	orb	0x49(%rax), %cl
+000000000000d64f	movb	%cl, 0x49(%rax)
+000000000000d652	addq	$0xc, %r12
+000000000000d656	movq	%r12, 0x20(%rax)
+000000000000d65a	movl	$0x0, (%r12)
+000000000000d662	movzbl	%cl, %edx
+000000000000d665	movq	%r15, %rdi
+000000000000d668	movq	%r14, %rsi
+000000000000d66b	callq	__ZN22AppleFWOHCI_DCLProgram20setDCLNeedsInterruptEP7IOFWDCLb ## AppleFWOHCI_DCLProgram::setDCLNeedsInterrupt(IOFWDCL*, bool)
+000000000000d670	movq	(%r14), %rax
+000000000000d673	movq	%r14, %rdi
+000000000000d676	callq	*0x150(%rax)
+000000000000d67c	xorl	%eax, %eax
+000000000000d67e	movq	0x12a73(%rip), %rcx
+000000000000d685	movq	(%rcx), %rcx
+000000000000d688	cmpq	-0x28(%rbp), %rcx
+000000000000d68c	jne	0xd6c9
+000000000000d68e	addq	$0x90, %rsp
+000000000000d695	popq	%rbx
+000000000000d696	popq	%r12
+000000000000d698	popq	%r14
+000000000000d69a	popq	%r15
+000000000000d69c	popq	%rbp
+000000000000d69d	retq
+000000000000d69e	movq	%r14, %rdi
+000000000000d6a1	callq	__ZNK7IOFWDCL8getFlagsEv
+000000000000d6a6	movq	%rbx, %rdx
+000000000000d6a9	shlq	$0x4, %rdx
+000000000000d6ad	xorl	%ecx, %ecx
+000000000000d6af	testb	$0x2, %al
+000000000000d6b1	movzwl	-0x98(%rbp,%rdx), %eax
+000000000000d6b9	jne	0xd61f
+000000000000d6bf	movl	$0x100c0000, %edx               ## imm = 0x100C0000
+000000000000d6c4	jmp	0xd624
+000000000000d6c9	callq	___stack_chk_fail
+__ZN19AppleFWOHCI_SendDCL4linkEv:
+000000000000d6ce	pushq	%rbp
+000000000000d6cf	movq	%rsp, %rbp
+000000000000d6d2	cmpq	$0x0, 0x80(%rdi)
+000000000000d6da	je	0xd6eb
+000000000000d6dc	cmpq	$0x0, 0x78(%rdi)
+000000000000d6e1	jne	0xd6eb
+000000000000d6e3	movq	0x10(%rdi), %rax
+000000000000d6e7	movq	%rax, 0x78(%rdi)
+000000000000d6eb	movq	0x60(%rdi), %rax
+000000000000d6ef	cmpq	$0x0, 0x8(%rax)
+000000000000d6f4	je	0xd85a
+000000000000d6fa	cmpl	$0x0, 0x18(%rax)
+000000000000d6fe	je	0xd85a
+000000000000d704	movq	0xa0(%rdi), %rax
+000000000000d70b	testq	%rax, %rax
+000000000000d70e	je	0xd71c
+000000000000d710	xorl	%ecx, %ecx
+000000000000d712	movq	%rcx, (%rax)
+000000000000d715	movq	%rcx, 0xa0(%rdi)
+000000000000d71c	movq	0xa8(%rdi), %rax
+000000000000d723	testq	%rax, %rax
+000000000000d726	je	0xd734
+000000000000d728	xorl	%ecx, %ecx
+000000000000d72a	movq	%rcx, (%rax)
+000000000000d72d	movq	%rcx, 0xa8(%rdi)
+000000000000d734	movq	0x10(%rdi), %rcx
+000000000000d738	movq	0x60(%rdi), %r8
+000000000000d73c	movl	0x18(%r8), %edx
+000000000000d740	movq	0x8(%r8), %rsi
+000000000000d744	leal	-0x1(%rdx), %eax
+000000000000d747	shlq	$0x4, %rax
+000000000000d74b	addq	%rsi, %rax
+000000000000d74e	cmpl	$0x2, %edx
+000000000000d751	cmoveq	%rsi, %rax
+000000000000d755	testq	%rcx, %rcx
+000000000000d758	je	0xd79c
+000000000000d75a	movq	0x60(%rcx), %r9
+000000000000d75e	movzbl	0x18(%r9), %ecx
+000000000000d763	orl	0x10(%r9), %ecx
+000000000000d767	movl	%ecx, 0x8(%rax)
+000000000000d76a	leaq	0x28(%r9), %rsi
+000000000000d76e	xorl	%eax, %eax
+000000000000d770	xorl	%ecx, %ecx
+000000000000d772	movq	(%rsi), %rdx
+000000000000d775	cmpq	%rdi, %rdx
+000000000000d778	je	0xd7a5
+000000000000d77a	testq	%rdx, %rdx
+000000000000d77d	cmoveq	%rsi, %rcx
+000000000000d781	incq	%rax
+000000000000d784	addq	$0x8, %rsi
+000000000000d788	cmpq	$0x4, %rax
+000000000000d78c	jb	0xd772
+000000000000d78e	testq	%rcx, %rcx
+000000000000d791	je	0xd7aa
+000000000000d793	movq	%rdi, (%rcx)
+000000000000d796	movq	0x60(%rdi), %r8
+000000000000d79a	jmp	0xd7b1
+000000000000d79c	movl	$0x0, 0x8(%rax)
+000000000000d7a3	jmp	0xd7b8
+000000000000d7a5	movq	%rsi, %rcx
+000000000000d7a8	jmp	0xd7b1
+000000000000d7aa	movb	$0x1, 0x48(%r9)
+000000000000d7af	xorl	%ecx, %ecx
+000000000000d7b1	movq	%rcx, 0xa0(%rdi)
+000000000000d7b8	movl	0x18(%r8), %eax
+000000000000d7bc	cmpl	$0x3, %eax
+000000000000d7bf	jb	0xd85a
+000000000000d7c5	movq	0x8(%r8), %rcx
+000000000000d7c9	movq	0x78(%rdi), %rdx
+000000000000d7cd	testq	%rdx, %rdx
+000000000000d7d0	je	0xd83b
+000000000000d7d2	movq	0x60(%rdx), %r8
+000000000000d7d6	movzbl	0x18(%r8), %eax
+000000000000d7db	orl	0x10(%r8), %eax
+000000000000d7df	movl	%eax, 0x8(%rcx)
+000000000000d7e2	movq	0x8(%r8), %rax
+000000000000d7e6	movl	0x18(%r8), %edx
+000000000000d7ea	leal	-0x1(%rdx), %esi
+000000000000d7ed	xorl	%ecx, %ecx
+000000000000d7ef	cmpl	$0x2, %edx
+000000000000d7f2	cmoveq	%rcx, %rsi
+000000000000d7f6	shlq	$0x4, %rsi
+000000000000d7fa	movl	$0xffcffffc, %edx               ## imm = 0xFFCFFFFC
+000000000000d7ff	andl	(%rax,%rsi), %edx
+000000000000d802	orl	$0x3, %edx
+000000000000d805	movl	%edx, (%rax,%rsi)
+000000000000d808	orl	$0x8000000, (%rax,%rsi)         ## imm = 0x8000000
+000000000000d80f	leaq	0x28(%r8), %rsi
+000000000000d813	xorl	%edx, %edx
+000000000000d815	movq	(%rsi), %rax
+000000000000d818	cmpq	%rdi, %rax
+000000000000d81b	je	0xd847
+000000000000d81d	testq	%rax, %rax
+000000000000d820	cmoveq	%rsi, %rdx
+000000000000d824	incq	%rcx
+000000000000d827	addq	$0x8, %rsi
+000000000000d82b	cmpq	$0x4, %rcx
+000000000000d82f	jb	0xd815
+000000000000d831	testq	%rdx, %rdx
+000000000000d834	je	0xd84c
+000000000000d836	movq	%rdi, (%rdx)
+000000000000d839	jmp	0xd853
+000000000000d83b	movzbl	%al, %eax
+000000000000d83e	orl	0x10(%r8), %eax
+000000000000d842	movl	%eax, 0x8(%rcx)
+000000000000d845	jmp	0xd85a
+000000000000d847	movq	%rsi, %rdx
+000000000000d84a	jmp	0xd853
+000000000000d84c	movb	$0x1, 0x48(%r8)
+000000000000d851	xorl	%edx, %edx
+000000000000d853	movq	%rdx, 0xa8(%rdi)
+000000000000d85a	popq	%rbp
+000000000000d85b	retq
+__ZN19AppleFWOHCI_SendDCL17checkForInterruptEv:
+000000000000d85c	pushq	%rbp
+000000000000d85d	movq	%rsp, %rbp
+000000000000d860	movq	0x60(%rdi), %rcx
+000000000000d864	movq	0x20(%rcx), %rax
+000000000000d868	movl	(%rax), %edx
+000000000000d86a	movl	%edx, 0x4c(%rcx)
+000000000000d86d	testl	%edx, %edx
+000000000000d86f	je	0xd87b
+000000000000d871	movl	$0x0, (%rax)
+000000000000d877	movb	$0x1, %al
+000000000000d879	jmp	0xd886
+000000000000d87b	movq	0x78(%rdi), %rax
+000000000000d87f	testq	%rax, %rax
+000000000000d882	jne	0xd888
+000000000000d884	xorl	%eax, %eax
+000000000000d886	popq	%rbp
+000000000000d887	retq
+000000000000d888	movq	0x60(%rax), %rax
+000000000000d88c	movq	0x20(%rax), %rax
+000000000000d890	movl	(%rax), %eax
+000000000000d892	movl	%eax, 0x9c(%rdi)
+000000000000d898	jmp	0xd884
+__ZN19AppleFWOHCI_SendDCL9interruptERbRP7IOFWDCL:
+000000000000d89a	pushq	%rbp
+000000000000d89b	movq	%rsp, %rbp
+000000000000d89e	pushq	%r15
+000000000000d8a0	pushq	%r14
+000000000000d8a2	pushq	%rbx
+000000000000d8a3	pushq	%rax
+000000000000d8a4	movq	%rdx, %r14
+000000000000d8a7	movq	%rsi, %r15
+000000000000d8aa	movq	%rdi, %rbx
+000000000000d8ad	movq	0x60(%rbx), %rax
+000000000000d8b1	cmpl	$0x0, 0x4c(%rax)
+000000000000d8b5	je	0xd959
+000000000000d8bb	cmpq	$0x0, 0x38(%rbx)
+000000000000d8c0	je	0xd8f5
+000000000000d8c2	testb	$0x4, 0x58(%rbx)
+000000000000d8c6	je	0xd8f5
+000000000000d8c8	movq	0x40(%rbx), %rdi
+000000000000d8cc	movq	(%rdi), %rax
+000000000000d8cf	callq	*0x118(%rax)
+000000000000d8d5	jmp	0xd8e3
+000000000000d8d7	movq	(%rax), %rcx
+000000000000d8da	movq	%rax, %rdi
+000000000000d8dd	callq	*0x150(%rcx)
+000000000000d8e3	movq	0x40(%rbx), %rdi
+000000000000d8e7	movq	(%rdi), %rax
+000000000000d8ea	callq	*0x128(%rax)
+000000000000d8f0	testq	%rax, %rax
+000000000000d8f3	jne	0xd8d7
+000000000000d8f5	movq	0x18(%rbx), %rax
+000000000000d8f9	testq	%rax, %rax
+000000000000d8fc	je	0xd904
+000000000000d8fe	movq	0x50(%rbx), %rdi
+000000000000d902	callq	*%rax
+000000000000d904	cmpq	$0x0, 0x38(%rbx)
+000000000000d909	je	0xd941
+000000000000d90b	testl	$0x40004, 0x58(%rbx)            ## imm = 0x40004
+000000000000d912	jne	0xd941
+000000000000d914	movq	0x40(%rbx), %rdi
+000000000000d918	movq	(%rdi), %rax
+000000000000d91b	callq	*0x118(%rax)
+000000000000d921	jmp	0xd92f
+000000000000d923	movq	(%rax), %rcx
+000000000000d926	movq	%rax, %rdi
+000000000000d929	callq	*0x150(%rcx)
+000000000000d92f	movq	0x40(%rbx), %rdi
+000000000000d933	movq	(%rdi), %rax
+000000000000d936	callq	*0x128(%rax)
+000000000000d93c	testq	%rax, %rax
+000000000000d93f	jne	0xd923
+000000000000d941	movq	0x60(%rbx), %rax
+000000000000d945	movl	$0x0, 0x4c(%rax)
+000000000000d94c	movb	$0x1, (%r15)
+000000000000d950	movq	0x10(%rbx), %rax
+000000000000d954	movq	%rax, (%r14)
+000000000000d957	jmp	0xd992
+000000000000d959	cmpl	$0x0, 0x9c(%rbx)
+000000000000d960	je	0xd98e
+000000000000d962	movq	0x80(%rbx), %rax
+000000000000d969	testq	%rax, %rax
+000000000000d96c	je	0xd977
+000000000000d96e	movq	0x88(%rbx), %rdi
+000000000000d975	callq	*%rax
+000000000000d977	movl	$0x0, 0x9c(%rbx)
+000000000000d981	movb	$0x1, (%r15)
+000000000000d985	movq	0x78(%rbx), %rax
+000000000000d989	movq	%rax, (%r14)
+000000000000d98c	jmp	0xd992
+000000000000d98e	movb	$0x0, (%r15)
+000000000000d992	movb	$0x1, %al
+000000000000d994	addq	$0x8, %rsp
+000000000000d998	popq	%rbx
+000000000000d999	popq	%r14
+000000000000d99b	popq	%r15
+000000000000d99d	popq	%rbp
+000000000000d99e	retq
+000000000000d99f	nop
+__ZN19AppleFWOHCI_SendDCL8finalizeER12IODCLProgram:
+##### ReceiveDCL::compile
+__ZN22AppleFWOHCI_ReceiveDCL7compileER12IODCLProgramRb:
+000000000000cc2c	pushq	%rbp
+000000000000cc2d	movq	%rsp, %rbp
+000000000000cc30	pushq	%r15
+000000000000cc32	pushq	%r14
+000000000000cc34	pushq	%r13
+000000000000cc36	pushq	%r12
+000000000000cc38	pushq	%rbx
+000000000000cc39	subq	$0x98, %rsp
+000000000000cc40	movq	%rdx, %r12
+000000000000cc43	movq	%rsi, %rbx
+000000000000cc46	movq	%rdi, %r13
+000000000000cc49	movq	0x134a8(%rip), %rax
+000000000000cc50	movq	(%rax), %rax
+000000000000cc53	movq	%rax, -0x30(%rbp)
+000000000000cc57	movl	0x28(%r13), %edx
+000000000000cc5b	testl	%edx, %edx
+000000000000cc5d	je	0xcc79
+000000000000cc5f	cmpq	$0x0, 0x88(%rbx)
+000000000000cc67	je	0xcc84
+000000000000cc69	cmpl	$0x2, 0x60(%rbx)
+000000000000cc6d	jne	0xcc8c
+000000000000cc6f	cmpb	$0x8, 0x68(%r13)
+000000000000cc74	setb	%al
+000000000000cc77	jmp	0xcc8e
+000000000000cc79	movl	$0xe0008101, %r14d              ## imm = 0xE0008101
+000000000000cc7f	jmp	0xceef
+000000000000cc84	xorl	%r14d, %r14d
+000000000000cc87	jmp	0xceef
+000000000000cc8c	xorl	%eax, %eax
+000000000000cc8e	movzbl	%al, %r8d
+000000000000cc92	movl	0x80(%r13), %r9d
+000000000000cc99	movl	%r9d, -0xa8(%rbp)
+000000000000cca0	movl	%r8d, %eax
+000000000000cca3	xorl	$0x7, %eax
+000000000000cca6	movl	$0xe00002d4, %r14d              ## imm = 0xE00002D4
+000000000000ccac	cmpl	%eax, %r9d
+000000000000ccaf	ja	0xceef
+000000000000ccb5	movq	0x78(%r13), %r15
+000000000000ccb9	testq	%r15, %r15
+000000000000ccbc	je	0xccff
+000000000000ccbe	movq	%r12, (%rsp)
+000000000000ccc2	movl	$0x1, %ecx
+000000000000ccc7	movq	%rbx, %rdi
+000000000000ccca	movq	%r13, %rsi
+000000000000cccd	movl	%r8d, %r12d
+000000000000ccd0	movl	%r8d, %edx
+000000000000ccd3	callq	__ZN13IOFWDCLFriend19allocDCLDescriptorsER22AppleFWOHCI_DCLProgramP7IOFWDCLjjPN14IOMemoryCursor15PhysicalSegmentEjRb ## IOFWDCLFriend::allocDCLDescriptors(AppleFWOHCI_DCLProgram&, IOFWDCL*, unsigned int, unsigned int, IOMemoryCursor::PhysicalSegment*, unsigned int, bool&)
+000000000000ccd8	movl	%eax, %r14d
+000000000000ccdb	testl	%r14d, %r14d
+000000000000ccde	jne	0xceef
+000000000000cce4	movq	%rbx, %r14
+000000000000cce7	movb	$0x1, %r10b
+000000000000ccea	cmpq	$0x0, 0x18(%r13)
+000000000000ccef	je	0xcd45
+000000000000ccf1	movb	$0x1, %r9b
+000000000000ccf4	movb	$0x1, %r11b
+000000000000ccf7	movq	%r14, %rdi
+000000000000ccfa	movl	%r12d, %ecx
+000000000000ccfd	jmp	0xcd67
+000000000000ccff	movl	%r8d, -0xac(%rbp)
+000000000000cd06	movq	0x30(%r13), %rsi
+000000000000cd0a	leaq	-0xa0(%rbp), %r15
+000000000000cd11	leaq	-0xa8(%rbp), %r8
+000000000000cd18	movq	%rbx, %rdi
+000000000000cd1b	movq	%r15, %rcx
+000000000000cd1e	movl	%eax, %r9d
+000000000000cd21	callq	__ZN22AppleFWOHCI_DCLProgram17virtualToPhysicalEP14IOVirtualRangejPN14IOMemoryCursor15PhysicalSegmentERjj ## AppleFWOHCI_DCLProgram::virtualToPhysical(IOVirtualRange*, unsigned int, IOMemoryCursor::PhysicalSegment*, unsigned int&, unsigned int)
+000000000000cd26	movl	%eax, %r14d
+000000000000cd29	testl	%r14d, %r14d
+000000000000cd2c	jne	0xceef
+000000000000cd32	movl	-0xa8(%rbp), %r9d
+000000000000cd39	movl	-0xac(%rbp), %r8d
+000000000000cd40	jmp	0xccbe
+000000000000cd45	cmpq	$0x0, 0x38(%r13)
+000000000000cd4a	setne	%r9b
+000000000000cd4e	movq	%r14, %rdi
+000000000000cd51	movl	%r12d, %ecx
+000000000000cd54	je	0xcd5b
+000000000000cd56	movb	$0x1, %r11b
+000000000000cd59	jmp	0xcd67
+000000000000cd5b	cmpq	$0x0, 0x48(%r13)
+000000000000cd60	setne	%r11b
+000000000000cd64	xorl	%r10d, %r10d
+000000000000cd67	movq	0x60(%r13), %rax
+000000000000cd6b	movq	0x8(%rax), %rbx
+000000000000cd6f	testl	%ecx, %ecx
+000000000000cd71	je	0xce10
+000000000000cd77	movq	0x90(%r13), %rax
+000000000000cd7e	testq	%rax, %rax
+000000000000cd81	jne	0xcdc2
+000000000000cd83	movq	0x88(%rdi), %rdi
+000000000000cd8a	leaq	0x98(%r13), %rsi
+000000000000cd91	movl	%r9d, %r12d
+000000000000cd94	movl	%r10d, -0xac(%rbp)
+000000000000cd9b	movb	%r11b, -0xa1(%rbp)
+000000000000cda2	callq	__ZN26AppleFWOHCI_DescriptorPool15allocDescriptorEPy ## AppleFWOHCI_DescriptorPool::allocDescriptor(unsigned long long*)
+000000000000cda7	movb	-0xa1(%rbp), %r11b
+000000000000cdae	movl	-0xac(%rbp), %r10d
+000000000000cdb5	movl	%r12d, %r9d
+000000000000cdb8	movq	%r14, %rdi
+000000000000cdbb	movq	%rax, 0x90(%r13)
+000000000000cdc2	movq	%rax, 0x70(%r13)
+000000000000cdc6	movzbl	0x68(%r13), %eax
+000000000000cdcb	movl	$0x8, %ecx
+000000000000cdd0	subl	%eax, %ecx
+000000000000cdd2	testb	%r11b, %r11b
+000000000000cdd5	movl	$0x28000000, %eax               ## imm = 0x28000000
+000000000000cdda	movl	$0x20000000, %edx               ## imm = 0x20000000
+000000000000cddf	cmovnel	%eax, %edx
+000000000000cde2	xorl	%eax, %eax
+000000000000cde4	cmpb	%al, 0x69(%r13)
+000000000000cde8	movl	$0x30000, %esi                  ## imm = 0x30000
+000000000000cded	cmovel	%eax, %esi
+000000000000cdf0	orl	%edx, %esi
+000000000000cdf2	movzwl	%cx, %eax
+000000000000cdf5	orl	%esi, %eax
+000000000000cdf7	movl	%eax, (%rbx)
+000000000000cdf9	movl	0x98(%r13), %eax
+000000000000ce00	movl	%eax, 0x4(%rbx)
+000000000000ce03	movl	$0x0, 0xc(%rbx)
+000000000000ce0a	addq	$0x10, %rbx
+000000000000ce0e	jmp	0xce1b
+000000000000ce10	movq	0x30(%r13), %rax
+000000000000ce14	movq	(%rax), %rax
+000000000000ce17	movq	%rax, 0x70(%r13)
+000000000000ce1b	xorl	%eax, %eax
+000000000000ce1d	cmpl	$0x2, -0xa8(%rbp)
+000000000000ce24	jb	0xce6c
+000000000000ce26	testb	%r11b, %r11b
+000000000000ce29	movl	$0x28000000, %edx               ## imm = 0x28000000
+000000000000ce2e	movl	$0x20000000, %r8d               ## imm = 0x20000000
+000000000000ce34	cmovneq	%rdx, %r8
+000000000000ce38	xorl	%edx, %edx
+000000000000ce3a	movl	%edx, %esi
+000000000000ce3c	shlq	$0x4, %rsi
+000000000000ce40	movzwl	0x8(%r15,%rsi), %ecx
+000000000000ce46	orl	%r8d, %ecx
+000000000000ce49	movl	%ecx, (%rbx)
+000000000000ce4b	movl	(%r15,%rsi), %esi
+000000000000ce4f	movl	%esi, 0x4(%rbx)
+000000000000ce52	movl	%eax, 0x8(%rbx)
+000000000000ce55	movl	%eax, 0xc(%rbx)
+000000000000ce58	addq	$0x10, %rbx
+000000000000ce5c	incl	%edx
+000000000000ce5e	movl	-0xa8(%rbp), %esi
+000000000000ce64	decl	%esi
+000000000000ce66	cmpl	%esi, %edx
+000000000000ce68	jb	0xce3a
+000000000000ce6a	movl	%edx, %eax
+000000000000ce6c	shlq	$0x4, %rax
+000000000000ce70	leaq	(%r15,%rax), %rcx
+000000000000ce74	movq	0x8(%r15,%rax), %rdx
+000000000000ce79	testq	%rdx, %rdx
+000000000000ce7c	je	0xce86
+000000000000ce7e	movq	(%rcx), %rax
+000000000000ce81	movzwl	%dx, %ecx
+000000000000ce84	jmp	0xcea1
+000000000000ce86	leaq	0x8(%r15,%rax), %rax
+000000000000ce8b	movq	$0x4, (%rax)
+000000000000ce92	movq	0x98(%rdi), %rax
+000000000000ce99	movq	%rax, (%rcx)
+000000000000ce9c	movl	$0x4, %ecx
+000000000000cea1	xorl	%r14d, %r14d
+000000000000cea4	testb	%r10b, %r10b
+000000000000cea7	movl	$0x300000, %edx                 ## imm = 0x300000
+000000000000ceac	cmovel	%r14d, %edx
+000000000000ceb0	testb	%r11b, %r11b
+000000000000ceb3	movl	$0x380c0000, %r8d               ## imm = 0x380C0000
+000000000000ceb9	movl	$0x300c0000, %esi               ## imm = 0x300C0000
+000000000000cebe	cmovnel	%r8d, %esi
+000000000000cec2	orl	%edx, %esi
+000000000000cec4	orl	%esi, %ecx
+000000000000cec6	movl	%ecx, (%rbx)
+000000000000cec8	movl	%eax, 0x4(%rbx)
+000000000000cecb	movl	%r14d, 0xc(%rbx)
+000000000000cecf	addq	$0xc, %rbx
+000000000000ced3	movq	0x60(%r13), %rax
+000000000000ced7	movq	%rbx, 0x20(%rax)
+000000000000cedb	movb	%r9b, 0x49(%rax)
+000000000000cedf	movl	%r14d, 0x50(%rax)
+000000000000cee3	movzbl	%r10b, %edx
+000000000000cee7	movq	%r13, %rsi
+000000000000ceea	callq	__ZN22AppleFWOHCI_DCLProgram20setDCLNeedsInterruptEP7IOFWDCLb ## AppleFWOHCI_DCLProgram::setDCLNeedsInterrupt(IOFWDCL*, bool)
+000000000000ceef	movq	0x13202(%rip), %rax
+000000000000cef6	movq	(%rax), %rax
+000000000000cef9	cmpq	-0x30(%rbp), %rax
+000000000000cefd	jne	0xcf14
+000000000000ceff	movl	%r14d, %eax
+000000000000cf02	addq	$0x98, %rsp
+000000000000cf09	popq	%rbx
+000000000000cf0a	popq	%r12
+000000000000cf0c	popq	%r13
+000000000000cf0e	popq	%r14
+000000000000cf10	popq	%r15
+000000000000cf12	popq	%rbp
+000000000000cf13	retq
+000000000000cf14	callq	___stack_chk_fail
+000000000000cf19	nop
+__ZN22AppleFWOHCI_ReceiveDCL4linkEv:
+000000000000cf1a	pushq	%rbp
+000000000000cf1b	movq	%rsp, %rbp
+000000000000cf1e	movq	0x60(%rdi), %rax
+000000000000cf22	movq	0x8(%rax), %rcx
+000000000000cf26	testq	%rcx, %rcx
+000000000000cf29	je	0xcfb9
+000000000000cf2f	movl	0x18(%rax), %edx
+000000000000cf32	decl	%edx
+000000000000cf34	movq	0x88(%rdi), %rax
+000000000000cf3b	testq	%rax, %rax
+000000000000cf3e	je	0xcf4c
+000000000000cf40	xorl	%esi, %esi
+000000000000cf42	movq	%rsi, (%rax)
+000000000000cf45	movq	%rsi, 0x88(%rdi)
+000000000000cf4c	movq	0x10(%rdi), %rax
+000000000000cf50	testq	%rax, %rax
+000000000000cf53	je	0xcf98
+000000000000cf55	movq	0x60(%rax), %r8
+000000000000cf59	movzbl	0x18(%r8), %eax
+000000000000cf5e	shlq	$0x4, %rdx
+000000000000cf62	orl	0x10(%r8), %eax
+000000000000cf66	movl	%eax, 0x8(%rcx,%rdx)
+000000000000cf6a	leaq	0x28(%r8), %rdx
+000000000000cf6e	xorl	%esi, %esi
+000000000000cf70	xorl	%ecx, %ecx
+000000000000cf72	movq	(%rdx), %rax
+000000000000cf75	cmpq	%rdi, %rax
+000000000000cf78	je	0xcfa6
+000000000000cf7a	testq	%rax, %rax
+000000000000cf7d	cmoveq	%rdx, %rcx
+000000000000cf81	incq	%rsi
+000000000000cf84	addq	$0x8, %rdx
+000000000000cf88	cmpq	$0x4, %rsi
+000000000000cf8c	jb	0xcf72
+000000000000cf8e	testq	%rcx, %rcx
+000000000000cf91	je	0xcfab
+000000000000cf93	movq	%rdi, (%rcx)
+000000000000cf96	jmp	0xcfb2
+000000000000cf98	shlq	$0x4, %rdx
+000000000000cf9c	movl	$0x0, 0x8(%rcx,%rdx)
+000000000000cfa4	jmp	0xcfb9
+000000000000cfa6	movq	%rdx, %rcx
+000000000000cfa9	jmp	0xcfb2
+000000000000cfab	movb	$0x1, 0x48(%r8)
+000000000000cfb0	xorl	%ecx, %ecx
+000000000000cfb2	movq	%rcx, 0x88(%rdi)
+000000000000cfb9	popq	%rbp
+000000000000cfba	retq
+000000000000cfbb	nop
+__ZN22AppleFWOHCI_ReceiveDCL17checkForInterruptEv:
+000000000000cfbc	pushq	%rbp
+000000000000cfbd	movq	%rsp, %rbp
+000000000000cfc0	movq	0x60(%rdi), %rax
+000000000000cfc4	movq	0x20(%rax), %rcx
+000000000000cfc8	movl	(%rcx), %edx
+000000000000cfca	movl	%edx, 0x4c(%rax)
+000000000000cfcd	testl	%edx, %edx
+000000000000cfcf	jne	0xcfdf
+000000000000cfd1	addq	$-0x10, %rcx
+000000000000cfd5	cmpq	0x8(%rax), %rcx
+000000000000cfd9	ja	0xcfc8
+000000000000cfdb	xorl	%eax, %eax
+000000000000cfdd	jmp	0xcfea
+000000000000cfdf	movl	%edx, 0x50(%rax)
+000000000000cfe2	movl	$0x0, (%rcx)
+000000000000cfe8	movb	$0x1, %al
+000000000000cfea	popq	%rbp
+000000000000cfeb	retq
+__ZN22AppleFWOHCI_ReceiveDCL9interruptERbRP7IOFWDCL:

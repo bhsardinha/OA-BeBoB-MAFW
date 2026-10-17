@@ -1,0 +1,12 @@
+# capture 86 - clone (build PC, 10.13.6) with tools/ratecycle, S/PDIF mode, idle, 2026-10-17 (compare capture 85, official driver)
+## before the fix (kext with MADebugTrace only)
+start: rate 48000  in 10  out 6
+-> 96000: status 0  rate 96000  in 10  out 6
+-> 192000: status 0  rate 192000  in 2  out 6        <- output stream NOT updated (should be 4)
+-> 48000: status 560226676 ('!dat', refused by CoreAudio, no kernel call)  rate stays 192000  in 2  out 6
+MADebugTrace (registry): ... "PerformFormatChange: fmt 6 ch rate 192000 (engine rate 96000)" / "SetIOFormat start: want in 2 out 4 ...; streams now in 10 out 6" /
+                           "SetIOFormat done: result 0x0; streams now in 2 out 4"   -> the driver DID set 4 output channels; they were overwritten afterwards.
+## after the fix (VerifyStreamFormats re-applies the row's formats after IOAudioStream::setFormat released the gate)
+S/PDIF mode:  48000 in10/out6, 96000 in10/out6, 192000 in2/out4, 48000 in10/out6, 192000 in2/out4, 44100 in10/out6, 48000 in10/out6   (all status 0, same as the SL)
+ADAT mode (MAClockSource 0x4000001b): 48000 in16/out12, 96000 in12/out8, 192000 in2/out4, 48000 in16/out12
+Mode afterwards restored to 0x40000003 (S/PDIF), rate 48000.

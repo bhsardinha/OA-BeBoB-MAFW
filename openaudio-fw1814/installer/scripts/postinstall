@@ -1,0 +1,16 @@
+#!/bin/bash
+# Gate: the installed kext must pass kextutil -t -n (static load test, nothing is loaded). A kext that fails it must never stay in
+# /Library/Extensions (autoload boot loop, memory feedback_stage_kext_before_autoload), so it is removed and the install fails.
+KEXT=/Library/Extensions/OpenAudioFW1814.kext
+/usr/sbin/chown -R root:wheel "$KEXT" "/Library/Audio/MIDI Drivers/MAudioFireWireMIDI.plugin" /Library/PrivilegedHelperTools/com.openaudio.fw1814.helper \
+    /Library/LaunchDaemons/com.openaudio.fw1814.helper.plist "/Library/Application Support/M-Audio/DeviceIcons"
+if ! /usr/bin/kextutil -t -n "$KEXT" >/tmp/openaudio-kextutil.log 2>&1; then
+  /bin/rm -rf "$KEXT"
+  echo "kextutil -t -n failed; kext removed. See /tmp/openaudio-kextutil.log" >&2
+  exit 1
+fi
+/usr/sbin/kextcache -system-caches >/dev/null 2>&1
+/bin/launchctl load -w /Library/LaunchDaemons/com.openaudio.fw1814.helper.plist 2>/dev/null
+# CoreMIDI reads its driver folder at MIDIServer start; launchd restarts it on demand.
+/usr/bin/killall MIDIServer 2>/dev/null
+exit 0

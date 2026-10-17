@@ -1,0 +1,778 @@
+0x000018c0	string	/usr/lib/dyld
+0x00001960	string	/usr/lib/libSystem.B.dylib
+0x00001994	string	/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation
+0x000019f4	string	/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
+0x00001a48	string	/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration
+0x00001ab8	string	/System/Library/Frameworks/Carbon.framework/Versions/A/Carbon
+0x00001b10	string	/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
+0x00001b78	string	/System/Library/Frameworks/ExceptionHandling.framework/Versions/A/ExceptionHandling
+0x00001be4	string	/System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio
+0x00001c40	string	/usr/lib/libz.1.dylib
+0x00001c70	string	/usr/lib/libobjc.A.dylib
+0x00001ca4	string	/usr/lib/libstdc++.6.dylib
+0x00001cd8	string	/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices
+0x00006852	TerminatedCString	MAudioFireWireHelper
+0x00006867	TerminatedCString	MAFireWireCommunicator
+0x0000687e	TerminatedCString	getServer:
+0x00006889	TerminatedCString	alloc
+0x0000688f	TerminatedCString	init
+0x00006894	TerminatedCString	runServer:
+0x0000689f	TerminatedCString	Server running
+0x000068ae	TerminatedCString	start
+0x000068b4	TerminatedCString	Starting server
+0x000068c4	TerminatedCString	stop
+0x000068c9	TerminatedCString	Stopping server
+0x000068d9	TerminatedCString	release
+0x000068e1	TerminatedCString	NSAutoreleasePool
+0x000068f4	TerminatedCString	com.m-audio.device-settings.firewire
+0x00006919	TerminatedCString	/Library/Application Support/M-Audio/ForceFirmwareUpdate
+0x00006952	TerminatedCString	/Library/Application Support/M-Audio/InhibitFirmwareUpdate
+0x0000698d	TerminatedCString	MAFireWireDeviceInstance
+0x000069a6	TerminatedCString	IOServiceOpen status 0x%lX
+0x000069c1	TerminatedCString	Third Party Client: status == 0 
+0x000069e2	TerminatedCString	CannotOpenConnection
+0x000069f7	TerminatedCString	/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/DeviceHelper/MAFireWireLoader.mm
+0x00006a5b	TerminatedCString	retain
+0x00006a62	TerminatedCString	MAAsyncNotification
+0x00006a76	TerminatedCString	port:sentAsyncMessage:ofSize:
+0x00006a94	TerminatedCString	userClientNotificationOfType:connection:target:selector:
+0x00006acd	TerminatedCString	MAConsoleUser
+0x00006adb	TerminatedCString	currentUserName
+0x00006aeb	TerminatedCString	loadPrefsForUser:
+0x00006afd	TerminatedCString	No user logged in
+0x00006b0f	TerminatedCString	autorelease
+0x00006b1b	TerminatedCString	NSObject
+0x00006b24	TerminatedCString	commitSettings:
+0x00006b34	TerminatedCString	cancelPreviousPerformRequestsWithTarget:selector:object:
+0x00006b6d	TerminatedCString	dealloc
+0x00006b75	TerminatedCString	isUserLoggedIn
+0x00006b84	TerminatedCString	Changed property set:NULL errorString:%@
+0x00006bad	TerminatedCString	addEntriesFromDictionary:
+0x00006bc7	TerminatedCString	performSelector:withObject:afterDelay:
+0x00006bee	TerminatedCString	receivedPropertyChangeMessage:
+0x00006c0d	TerminatedCString	NSUserDefaults
+0x00006c1c	TerminatedCString	initWithUser:
+0x00006c2a	TerminatedCString	addSuiteNamed:
+0x00006c39	TerminatedCString	hw.cpufrequency
+0x00006c49	TerminatedCString	Exit
+0x00006c4e	TerminatedCString	hw.cpusubtype
+0x00006c5c	TerminatedCString	Pre-G3 %d MHz packets:%lu
+0x00006c76	TerminatedCString	G3 %d MHz packets:%lu
+0x00006c8c	TerminatedCString	G4 %d MHz packets:%lu
+0x00006ca2	TerminatedCString	G5 %d MHz packets:%lu
+0x00006cb8	TerminatedCString	MAMetaConfigureDCLLatency
+0x00006cd2	TerminatedCString	NSNumber
+0x00006cdb	TerminatedCString	numberWithUnsignedLong:
+0x00006cf3	TerminatedCString	NSMutableDictionary
+0x00006d07	TerminatedCString	initWithDictionary:copyItems:
+0x00006d25	TerminatedCString	MAMetaAllProperties
+0x00006d39	TerminatedCString	breakRetainCycles
+0x00006d4b	TerminatedCString	v8@0:4
+0x00006d52	TerminatedCString	IOKitService
+0x00006d5f	TerminatedCString	I8@0:4
+0x00006d66	TerminatedCString	v12@0:4^{MAudioSettingsMessage=IIIIIiIII}8
+0x00006d91	TerminatedCString	v20@0:4I8^v12l16
+0x00006da2	TerminatedCString	defaultsForUser:
+0x00006db3	TerminatedCString	@12@0:4@8
+0x00006dbd	TerminatedCString	v12@0:4@8
+0x00006dc7	TerminatedCString	configureDCLLatency
+0x00006ddb	TerminatedCString	service:changedProperties:
+0x00006df6	TerminatedCString	v16@0:4I8@12
+0x00006e03	TerminatedCString	deviceInstanceForService:
+0x00006e1d	TerminatedCString	@12@0:4I8
+0x00006e27	TerminatedCString	fService
+0x00006e32	TerminatedCString	fConnection
+0x00006e3e	TerminatedCString	fSettings
+0x00006e48	TerminatedCString	@"NSMutableDictionary"
+0x00006e5f	TerminatedCString	fUniqueIDName
+0x00006e6d	TerminatedCString	@"NSString"
+0x00006e79	TerminatedCString	fAsyncNotifier
+0x00006e88	TerminatedCString	@"MAAsyncNotification"
+0x00006e9f	TerminatedCString	fPendingCommit
+0x00006eb0	TerminatedCString	com_m_audio_FWMetaNub
+0x00006ec6	TerminatedCString	MAServiceNotification
+0x00006edc	TerminatedCString	deviceMatched:
+0x00006eeb	TerminatedCString	observeServiceMatched:target:selector:
+0x00006f12	TerminatedCString	driverInstanceMatched:
+0x00006f29	TerminatedCString	driverInstanceTerminated:
+0x00006f43	TerminatedCString	observeServiceTerminated:target:selector:
+0x00006f6d	TerminatedCString	MAPowerNotification
+0x00006f81	TerminatedCString	observeSleepNotifications:
+0x00006f9c	TerminatedCString	startObservingLogins:
+0x00006fb2	TerminatedCString	com.m-audio.driver.firewire
+0x00006fce	TerminatedCString	cString
+0x00006fd6	TerminatedCString	unloadDriverOnce
+0x00006fe7	TerminatedCString	unloading M-Audio FireWire:%X
+0x00007005	TerminatedCString	retrying unload(%lu)
+0x0000701a	TerminatedCString	NSRunLoop
+0x00007024	TerminatedCString	currentRunLoop
+0x00007033	TerminatedCString	NSDate
+0x0000703a	TerminatedCString	dateWithTimeIntervalSinceNow:
+0x00007058	TerminatedCString	runUntilDate:
+0x00007066	TerminatedCString	unloaded audio device at count:(%lu)
+0x0000708b	TerminatedCString	failed to unload device (error:%X)
+0x000070ae	TerminatedCString	unloadTheDriver
+0x000070be	TerminatedCString	NSBundle
+0x000070c7	TerminatedCString	mainBundle
+0x000070d2	TerminatedCString	resourcePath
+0x000070df	TerminatedCString	FirmwareStatusWindow.app
+0x000070f8	TerminatedCString	stringByAppendingPathComponent:
+0x00007118	TerminatedCString	/Contents/MacOS/FirmwareStatusWindow
+0x0000713d	TerminatedCString	stringByAppendingString:
+0x00007156	TerminatedCString	statusAppPath
+0x00007164	TerminatedCString	MAActualProductName
+0x00007178	TerminatedCString	propertyForKey:
+0x00007188	TerminatedCString	MAIconName
+0x00007193	TerminatedCString	GUID
+0x00007198	TerminatedCString	NSString
+0x000071a1	TerminatedCString	sudo -u %@ "%@" launch "%@" "%@" "%llX" &
+0x000071cb	TerminatedCString	unsignedLongLongValue
+0x000071e1	TerminatedCString	stringWithFormat:
+0x000071f3	TerminatedCString	UTF8String
+0x000071fe	TerminatedCString	sudo -u %@ "%@" quit &
+0x00007215	TerminatedCString	MAIOKitService
+0x00007224	TerminatedCString	deviceWithService:
+0x00007237	TerminatedCString	FireWire Vendor Name
+0x0000724c	TerminatedCString	FireWire Product Name
+0x00007262	TerminatedCString	MAFirmwareInfo
+0x00007271	TerminatedCString	Firmware info not available from device
+0x00007299	TerminatedCString	Device properties: %@
+0x000072af	TerminatedCString	properties
+0x000072ba	TerminatedCString	bytes
+0x000072c0	TerminatedCString	Firmware
+0x000072c9	TerminatedCString	NSFileManager
+0x000072d7	TerminatedCString	defaultManager
+0x000072e6	TerminatedCString	Loading %@ with GUID %@
+0x000072fe	TerminatedCString	MAFireWireFirmwareFile
+0x00007315	TerminatedCString	firmwareFilesAtPath:forDevice:
+0x00007334	TerminatedCString	count
+0x0000733a	TerminatedCString	objectAtIndex:
+0x00007349	TerminatedCString	validateFirmwareUpdate:
+0x00007361	TerminatedCString	date
+0x00007366	TerminatedCString	isEqual:
+0x0000736f	TerminatedCString	%@ firmware is current (%@)
+0x0000738b	TerminatedCString	Date of current firmware: %@
+0x000073a8	TerminatedCString	Date of firmware on device: %@ -- needs update
+0x000073d7	TerminatedCString	Corrupt firmware file -- not updating
+0x000073fd	TerminatedCString	fileExistsAtPath:
+0x0000740f	TerminatedCString	One-shot firmware update activated
+0x00007432	TerminatedCString	Firmware update inhibited
+0x0000744c	TerminatedCString	Starting firmware update
+0x00007465	TerminatedCString	removeFileAtPath:handler:
+0x0000747f	TerminatedCString	updateViewForDevice:
+0x00007494	TerminatedCString	data
+0x00007499	TerminatedCString	MAFirmwareUpgradeImage
+0x000074b0	TerminatedCString	setProperty:forKey:
+0x000074c4	TerminatedCString	Starting the firmware after successful update
+0x000074f2	TerminatedCString	YES
+0x000074f6	TerminatedCString	MAFirmwareStart
+0x00007506	TerminatedCString	Firmware update attempt failed
+0x00007525	TerminatedCString	quitView
+0x0000752e	TerminatedCString	Firmware is running -- shutting down the firmware
+0x00007560	TerminatedCString	MAFirmwareHalt
+0x0000756f	TerminatedCString	Starting %@
+0x0000757b	TerminatedCString	driver instance created (%lX) 
+0x0000759a	TerminatedCString	NSMutableArray
+0x000075a9	TerminatedCString	addObject:
+0x000075b4	TerminatedCString	deviceForService:
+0x000075c6	TerminatedCString	driver instance removed (%lX) 
+0x000075e5	TerminatedCString	removeObject:
+0x000075f3	TerminatedCString	perform:target:forEveryServiceMatching:
+0x0000761b	TerminatedCString	removeAllObjects
+0x0000762c	TerminatedCString	systemWokeUp
+0x00007639	TerminatedCString	makeObjectsPerformSelector:withObject:
+0x00007660	TerminatedCString	@8@0:4
+0x00007667	TerminatedCString	i8@0:4
+0x0000766e	TerminatedCString	v12@0:4I8
+0x00007678	TerminatedCString	systemWillSleep
+0x00007688	TerminatedCString	userDidLogIn:withUID:withGID:
+0x000076a6	TerminatedCString	v20@0:4@8I12I16
+0x000076b6	TerminatedCString	userDidLogOut:withUID:withGID:
+0x000076d5	TerminatedCString	MAFireWireLoader
+0x000076e6	TerminatedCString	fDeviceInstances
+0x000076f7	TerminatedCString	@"NSMutableArray"
+0x00007709	TerminatedCString	com_m_audio_FW410Device
+0x00007721	TerminatedCString	com_m_audio_FWAudiophileDevice
+0x00007740	TerminatedCString	com_m_audio_FW1814Device
+0x00007759	TerminatedCString	com_m_audio_FWSoloDevice
+0x00007772	TerminatedCString	com_m_audio_FWOzonicDevice
+0x0000778d	TerminatedCString	com_m_audio_FWNRV10Device
+0x000077a7	TerminatedCString	com_m_audio_FWProjectMixDevice
+0x000077c6	TerminatedCString	com_m_audio_FWLightbridgeDevice
+0x000077e6	TerminatedCString	%llX
+0x000077eb	TerminatedCString	distantFuture
+0x000077f9	TerminatedCString	runMode:beforeDate:
+0x0000780d	TerminatedCString	NSConnection
+0x0000781a	TerminatedCString	setRootObject:
+0x00007829	TerminatedCString	registerName:
+0x00007837	TerminatedCString	%@ -- could not register server.  Is one already running?\n
+0x00007872	TerminatedCString	%@ -- started server
+0x00007887	TerminatedCString	serve
+0x0000788d	TerminatedCString	%@ -- stopped server
+0x000078a2	TerminatedCString	class
+0x000078a8	TerminatedCString	serve:forName:
+0x000078b7	TerminatedCString	connectionWithRegisteredName:host:
+0x000078da	TerminatedCString	%@ server: could not find server.  You need to start one on this machine first.
+0x0000792a	TerminatedCString	rootProxy
+0x00007934	TerminatedCString	%@ server: could not get proxy.  This should not happen.
+0x0000796d	TerminatedCString	stopServer
+0x00007978	TerminatedCString	c16@0:4@8@12
+0x00007985	TerminatedCString	MACommunicator
+0x00007994	TerminatedCString	fServerRunning
+0x000079a3	TerminatedCString	starting
+0x000079ac	TerminatedCString	stopping
+0x000079b5	TerminatedCString	fObject
+0x000079bf	TerminatedCString	NSExceptionHandler
+0x000079d2	TerminatedCString	defaultExceptionHandler
+0x000079ea	TerminatedCString	setExceptionHandlingMask:
+0x00007a04	TerminatedCString	userInfo
+0x00007a0d	TerminatedCString	objectForKey:
+0x00007a1b	TerminatedCString	/usr/bin/atos -p %d %@ | tail -n +3 | head -n +%d | c++filt | cat -n
+0x00007a60	TerminatedCString	NSProcessInfo
+0x00007a6e	TerminatedCString	processInfo
+0x00007a7a	TerminatedCString	processIdentifier
+0x00007a8c	TerminatedCString	  
+0x00007a8f	TerminatedCString	componentsSeparatedByString:
+0x00007aae	TerminatedCString	An exception of type %s occured.\n%s\n
+0x00007ad3	TerminatedCString	name
+0x00007ad8	TerminatedCString	reason
+0x00007adf	TerminatedCString	Stack trace:\n
+0x00007aed	TerminatedCString	printStackTrace
+0x00007afd	TerminatedCString	initializeStackTraces
+0x00007b13	TerminatedCString	Midiman
+0x00007b1b	TerminatedCString	NSException
+0x00007b27	TerminatedCString	initWithEntry:
+0x00007b36	TerminatedCString	initWithService:
+0x00007b47	TerminatedCString	IOService
+0x00007b51	TerminatedCString	/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/DeviceHelper/../Shared/IOKitCocoa/MAIOKitService.m
+0x00007bc7	TerminatedCString	openConnection
+0x00007bd6	TerminatedCString	closeConnection
+0x00007be6	TerminatedCString	service
+0x00007bee	TerminatedCString	connection
+0x00007bf9	TerminatedCString	parent
+0x00007c00	TerminatedCString	deviceFromIOKitDevice:connection:
+0x00007c22	TerminatedCString	@16@0:4I8I12
+0x00007c2f	TerminatedCString	MAIOKitRegistryNode
+0x00007c43	TerminatedCString	initWithDictionary:port:type:target:selector:
+0x00007c71	TerminatedCString	IOProviderClass
+0x00007c81	TerminatedCString	IOServiceAddMatchingNotification: %lx
+0x00007ca7	TerminatedCString	IOServiceAddMatchingNotification problem
+0x00007cd0	TerminatedCString	raise:format:
+0x00007cde	TerminatedCString	IOServiceTerminate
+0x00007cf1	TerminatedCString	observe:dictionary:target:selector:
+0x00007d15	TerminatedCString	IOServiceMatched
+0x00007d26	TerminatedCString	IOServiceFirstMatch
+0x00007d3a	TerminatedCString	NSAssertionHandler
+0x00007d4d	TerminatedCString	currentHandler
+0x00007d5c	TerminatedCString	/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/DeviceHelper/../Shared/IOKitCocoa/MAServiceNotification.mm
+0x00007dda	TerminatedCString	stringWithUTF8String:
+0x00007df0	TerminatedCString	Invalid parameter not satisfying: %s
+0x00007e15	TerminatedCString	sServiceNotifiers != NULL
+0x00007e2f	TerminatedCString	handleFailureInMethod:object:file:lineNumber:description:
+0x00007e69	TerminatedCString	sNotifyPort != NULL
+0x00007e7d	TerminatedCString	runLoopSource != NULL
+0x00007e93	TerminatedCString	notificationWithDictionary:port:type:target:selector:
+0x00007ec9	TerminatedCString	sending %s to %@ for service %lX
+0x00007eea	TerminatedCString	error from IOServiceGetMatchingServices: %lX
+0x00007f17	TerminatedCString	type
+0x00007f1c	TerminatedCString	r*8@0:4
+0x00007f24	TerminatedCString	dispatch:
+0x00007f2e	TerminatedCString	@28@0:4@8^{IONotificationPort=}12r*16@20:24
+0x00007f5a	TerminatedCString	v20@0:4@8@12:16
+0x00007f6a	TerminatedCString	observeServiceFirstMatched:target:selector:
+0x00007f96	TerminatedCString	stopObserving
+0x00007fa4	TerminatedCString	v24@0:4r*8@12@16:20
+0x00007fb8	TerminatedCString	v20@0:4:8@12@16
+0x00007fc8	TerminatedCString	fServiceIterator
+0x00007fd9	TerminatedCString	fTarget
+0x00007fe1	TerminatedCString	fAction
+0x00007feb	TerminatedCString	fType
+0x00007ff1	TerminatedCString	r*
+0x00007ff4	TerminatedCString	fServiceMatchingName
+0x00008009	TerminatedCString	new
+0x0000800d	TerminatedCString	Caught %@
+0x00008017	TerminatedCString	BogusErrorFroMIOMasterPort
+0x00008032	TerminatedCString	Error from IOMasterPort:0x%X
+0x0000804f	TerminatedCString	Third Party Client: fNotificationIOKitPort != 0
+0x0000807f	TerminatedCString	/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/DeviceHelper/../Shared/IOKitCocoa/MAAsyncNotification.mm
+0x000080fb	TerminatedCString	Third Party Client: notificationMachPort != 0
+0x00008129	TerminatedCString	Third Party Client: fNotificationCFMachPort != 0
+0x0000815a	TerminatedCString	Third Party Client: fMachPortRunLoopSource != 0
+0x0000818a	TerminatedCString	SeriousFailure
+0x00008199	TerminatedCString	Failed Most Heinously
+0x000081af	TerminatedCString	initWithType:connection:runLoop:target:selector:
+0x000081e0	TerminatedCString	userClientNotificationOfType:connection:runLoop:target:selector:
+0x00008221	TerminatedCString	@28@0:4L8I12^{__CFRunLoop=}16@20:24
+0x00008245	TerminatedCString	target
+0x0000824c	TerminatedCString	action
+0x00008253	TerminatedCString	:8@0:4
+0x0000825a	TerminatedCString	@24@0:4L8I12@16:20
+0x0000826d	TerminatedCString	fNotificationIOKitPort
+0x00008284	TerminatedCString	^{IONotificationPort=}
+0x0000829b	TerminatedCString	fNotificationCFMachPort
+0x000082b3	TerminatedCString	^{__CFMachPort=}
+0x000082c4	TerminatedCString	fRunLoop
+0x000082cd	TerminatedCString	^{__CFRunLoop=}
+0x000082dd	TerminatedCString	fMachPortRunLoopSource
+0x000082f4	TerminatedCString	^{__CFRunLoopSource=}
+0x0000830a	TerminatedCString	M-Audio Component
+0x0000831c	TerminatedCString	startObservingLogins:runLoop:
+0x0000833a	TerminatedCString	v16@0:4@8^{__CFRunLoop=}12
+0x00008355	TerminatedCString	stopObservingLogins:
+0x0000836a	TerminatedCString	c8@0:4
+0x00008371	TerminatedCString	User login: %@ (UID:%d GID:%d)
+0x00008390	TerminatedCString	copy
+0x00008395	TerminatedCString	length
+0x0000839c	TerminatedCString	CRC32
+0x000083a2	TerminatedCString	L8@0:4
+0x000083a9	TerminatedCString	CRC32WithRange:
+0x000083b9	TerminatedCString	L16@0:4{_NSRange=II}8
+0x000083cf	TerminatedCString	MAudioAdditions
+0x000083df	TerminatedCString	NSData
+0x000083e6	TerminatedCString	no sleep port!
+0x000083f5	TerminatedCString	system sleep
+0x00008402	TerminatedCString	respondsToSelector:
+0x00008416	TerminatedCString	%@ responds to system sleep
+0x00008432	TerminatedCString	%@ doesn't respond to system sleep
+0x00008455	TerminatedCString	allow power change
+0x00008468	TerminatedCString	system wake
+0x00008474	TerminatedCString	%@ responds to system wake
+0x0000848f	TerminatedCString	%@ doesn't respond to system wake
+0x000084b1	TerminatedCString	stringWithCString:
+0x000084c4	TerminatedCString	NSCalendarDate
+0x000084d3	TerminatedCString	%Y %m%d %H%M %S
+0x000084e3	TerminatedCString	dateWithString:calendarFormat:
+0x00008502	TerminatedCString	calendarDate
+0x0000850f	TerminatedCString	calendarFormat
+0x0000851e	TerminatedCString	setCalendarFormat:
+0x00008531	TerminatedCString	lastPathComponent
+0x00008543	TerminatedCString	dataWithContentsOfMappedFile:
+0x00008561	TerminatedCString	initWithFormat:arguments:
+0x0000857b	TerminatedCString	firmwareValidationFailed:
+0x00008595	TerminatedCString	writeToFile:atomically:
+0x000085ad	TerminatedCString	forceNextAutomaticUpdate
+0x000085c6	TerminatedCString	array
+0x000085cc	TerminatedCString	 Bootloader
+0x000085d8	TerminatedCString	rangeOfString:
+0x000085e7	TerminatedCString	substringToIndex:
+0x000085f9	TerminatedCString	FW
+0x000085fc	TerminatedCString	isEqualToString:
+0x0000860d	TerminatedCString	FW 410
+0x00008614	TerminatedCString	FWSolo
+0x0000861b	TerminatedCString	FW Solo
+0x00008623	TerminatedCString	stringByStandardizingPath
+0x0000863d	TerminatedCString	subpathsAtPath:
+0x0000864d	TerminatedCString	NSArray
+0x00008655	TerminatedCString	bcd
+0x00008659	TerminatedCString	arrayWithObject:
+0x0000866a	TerminatedCString	pathsMatchingExtensions:
+0x00008683	TerminatedCString	firmwareWithPath:
+0x00008695	TerminatedCString	/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/DeviceHelper/MAFireWireFirmwareFile.mm
+0x000086ff	TerminatedCString	fFirmwareData != nil
+0x00008714	TerminatedCString	No updated firmware
+0x00008728	TerminatedCString	Corrupt: Should be at least %lu bytes long, but is actually %d bytes long.
+0x00008773	TerminatedCString	reportCorruptFirmwareToDelegate:format:
+0x0000879b	TerminatedCString	Corrupt: Embedded length is %lu bytes, but is actually %d bytes long.
+0x000087e1	TerminatedCString	actualCRC
+0x000087eb	TerminatedCString	embeddedCRC
+0x000087f7	TerminatedCString	Corrupt: CRC checksum failed -- expected:0x%lX actual:0x%lX
+0x00008833	TerminatedCString	yearOfCommonEra
+0x00008843	TerminatedCString	Corrupt: Year %d ?
+0x00008856	TerminatedCString	v12@0:4@"NSString"8
+0x0000886a	TerminatedCString	MAFirmwareValidation
+0x0000887f	TerminatedCString	v16@0:4@8@12
+0x0000888c	TerminatedCString	c12@0:4@8
+0x00008896	TerminatedCString	.cxx_construct
+0x000088a5	TerminatedCString	initialize
+0x000088b0	TerminatedCString	automaticUpdatesInhibited
+0x000088ca	TerminatedCString	setInhibitAutomaticUpdates:
+0x000088e6	TerminatedCString	v12@0:4c8
+0x000088f0	TerminatedCString	automaticUpdatedForced
+0x00008907	TerminatedCString	@16@0:4@8@12
+0x00008914	TerminatedCString	fFirmwareData
+0x00008922	TerminatedCString	@"NSData"
+0x0000892c	TerminatedCString	fFileName
+0x00008936	TerminatedCString	fPathName
+0x00008940	TerminatedCString	fBCDDate
+0x00008949	TerminatedCString	@"NSCalendarDate"
+0x0000895b	TerminatedCString	fBCDFile
+0x00008964	TerminatedCString	^{?=IIIIIIIIIIIIIIIIIIIIIIII}
+0x00008982	TerminatedCString	fInfoRegisters
+0x00008991	TerminatedCString	{?="bridgeCoID"Q"protocolVersion"I"bootloaderVersion"I"guid"Q"hardwareModelID"I"hardwareVersion"I"firmwareCreationDateHigh"I"firmwareCreationDateLow"I"firmwareCreationTimeHigh"I"firmwareCreationTimeLow"I"softwareIdentification"I"softwareVersion"I"baseAddress"I"maxImageLength"I"bootloaderCreationDateHigh"I"bootloaderCreationDateLow"I"bootloaderCreationTimeHigh"I"bootloaderCreationTimeLow"I}
+0x00008b1a	TerminatedCString	fAlreadyCachedRegisters
+0x00008b32	TerminatedCString	fAlreadyValidated
+0x00008b44	TerminatedCString	fIsValid
+0x00008b4d	TerminatedCString	/Library/Preferences/com.m-audio.firewire.firmware.autoupdate.force
+0x00008b91	TerminatedCString	/Library/Preferences/com.m-audio.firewire.firmware.autoupdate.not
+0x00008bd3	TerminatedCString	nodeWithEntry:
+0x00008be2	TerminatedCString	/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/DeviceHelper/../Shared/IOKitCocoa/MAIOKitRegistryNode.mm
+0x00008c5e	TerminatedCString	<unknown>
+0x00008c68	TerminatedCString	%s
+0x00008c6b	TerminatedCString	0x%lX "%@"
+0x00008c76	TerminatedCString	IORegistryEntryCreateCFProperties error %lX
+0x00008ca2	TerminatedCString	children
+0x00008cab	TerminatedCString	description
+0x00008cb7	TerminatedCString	conformsTo:
+0x00008cc3	TerminatedCString	i16@0:4@8@12
+0x00008cd0	TerminatedCString	setProperties:
+0x00008cdf	TerminatedCString	i12@0:4@8
+0x00008ce9	TerminatedCString	entry
+0x00008cef	TerminatedCString	rootNode
+0x00008cf8	TerminatedCString	fEntry
+0x0000b002	string	___stack_chk_guard
+0x0000b01a	string	___stderrp
+0x0000b027	string	_mach_task_self_
+0x0000b045	string	dyld_stub_binder
+0x0000b064	string	_kIOMasterPortDefault
+0x0000b07f	string	_NSDefaultRunLoopMode
+0x0000b099	string	___CFConstantStringClassReference
+0x0000b0c3	string	_kCFPreferencesAnyHost
+0x0000b0e7	string	_kCFRunLoopCommonModes
+0x0000b102	string	_kCFRunLoopDefaultMode
+0x0000b126	string	_kCFTypeArrayCallBacks
+0x0000b14b	string	_NSStackTraceKey
+0x0000b164	string	___error
+0x0000b173	string	___stack_chk_fail
+0x0000b18b	string	___udivdi3
+0x0000b19c	string	__setjmp
+0x0000b1ab	string	_exit
+0x0000b1b7	string	_fprintf
+0x0000b1c6	string	_fread
+0x0000b1d3	string	_fwrite$UNIX2003
+0x0000b1ea	string	_getegid
+0x0000b1f9	string	_geteuid
+0x0000b208	string	_malloc
+0x0000b216	string	_pclose
+0x0000b224	string	_popen$UNIX2003
+0x0000b23a	string	_setegid
+0x0000b249	string	_seteuid
+0x0000b258	string	_strcmp
+0x0000b266	string	_sysctlbyname
+0x0000b27a	string	_system$UNIX2003
+0x0000b291	string	_NSLog
+0x0000b29e	string	_IOAllowPowerChange
+0x0000b2b9	string	_IOCFUnserialize
+0x0000b2d1	string	_IOCatalogueTerminate
+0x0000b2ee	string	_IOConnectSetNotificationPort
+0x0000b313	string	_IODeregisterForSystemPower
+0x0000b336	string	_IOIteratorNext
+0x0000b34d	string	_IOMasterPort
+0x0000b362	string	_IONotificationPortCreate
+0x0000b383	string	_IONotificationPortDestroy
+0x0000b3a5	string	_IONotificationPortGetMachPort
+0x0000b3cb	string	_IONotificationPortGetRunLoopSource
+0x0000b3f6	string	_IOObjectConformsTo
+0x0000b411	string	_IOObjectRelease
+0x0000b429	string	_IOObjectRetain
+0x0000b440	string	_IORegisterForSystemPower
+0x0000b461	string	_IORegistryEntryCreateCFProperties
+0x0000b48b	string	_IORegistryEntryCreateCFProperty
+0x0000b4b3	string	_IORegistryEntryGetChildIterator
+0x0000b4db	string	_IORegistryEntryGetName
+0x0000b4fa	string	_IORegistryEntryGetParentEntry
+0x0000b520	string	_IORegistryEntrySetCFProperties
+0x0000b547	string	_IORegistryEntrySetCFProperty
+0x0000b56c	string	_IORegistryGetRootEntry
+0x0000b58b	string	_IOServiceAddMatchingNotification
+0x0000b5b4	string	_IOServiceClose
+0x0000b5cb	string	_IOServiceGetMatchingServices
+0x0000b5f0	string	_IOServiceMatching
+0x0000b60a	string	_IOServiceOpen
+0x0000b620	string	_SCDynamicStoreCopyConsoleUser
+0x0000b646	string	_SCDynamicStoreCreate
+0x0000b663	string	_SCDynamicStoreCreateRunLoopSource
+0x0000b68d	string	_SCDynamicStoreKeyCreateConsoleUser
+0x0000b6b8	string	_SCDynamicStoreSetNotificationKeys
+0x0000b6e2	string	_CFArrayAppendValue
+0x0000b6fd	string	_CFArrayCreateMutable
+0x0000b71a	string	_CFMachPortCreateRunLoopSource
+0x0000b740	string	_CFMachPortCreateWithPort
+0x0000b761	string	_CFMachPortGetPort
+0x0000b77b	string	_CFMachPortInvalidate
+0x0000b798	string	_CFPreferencesCopyValue
+0x0000b7b7	string	_CFPreferencesSetValue
+0x0000b7d5	string	_CFPreferencesSynchronize
+0x0000b7f6	string	_CFRelease
+0x0000b808	string	_CFRunLoopAddSource
+0x0000b823	string	_CFRunLoopGetCurrent
+0x0000b83f	string	_CFRunLoopRemoveSource
+0x0000b85d	string	_CFStringCreateCopy
+0x0000b878	string	_crc32
+0x0000b886	string	_objc_exception_extract
+0x0000b8a5	string	_objc_exception_match
+0x0000b8c2	string	_objc_exception_throw
+0x0000b8df	string	_objc_exception_try_enter
+0x0000b900	string	_objc_exception_try_exit
+0x0000b920	string	_objc_msgSend
+0x0000b935	string	_objc_msgSendSuper
+0x0000b94f	string	_DebugAssert
+0x0000b962	string	__mh_execute_header
+0x0000b977	string	start
+0x0000b97e	string	.objc_class_name_MA
+0x0000b99e	string	FireWire
+0x0000b9a9	string	Co
+0x0000b9ae	string	IOKit
+0x0000b9b6	string	ServiceNotification
+0x0000b9cc	string	AsyncNotification
+0x0000b9e0	string	PowerNotification
+0x0000b9f6	string	DeviceInstance
+0x0000ba07	string	Loader
+0x0000ba10	string	Communicator
+0x0000ba1f	string	FirmwareFile
+0x0000ba3c	string	mmunicator
+0x0000ba49	string	nsoleUser
+0x0000ba63	string	Service
+0x0000ba6d	string	RegistryNode
+0x0000c99e	string	_main
+0x0000c9a4	string	+[MAFireWireDeviceInstance deviceInstanceForService:]
+0x0000c9da	string	__ZL22CanonicalGUIDForDevicej
+0x0000c9f8	string	-[MAFireWireDeviceInstance breakRetainCycles]
+0x0000ca26	string	-[MAFireWireDeviceInstance dealloc]
+0x0000ca4a	string	-[MAFireWireDeviceInstance IOKitService]
+0x0000ca73	string	-[MAFireWireDeviceInstance receivedPropertyChangeMessage:]
+0x0000caae	string	-[MAFireWireDeviceInstance port:sentAsyncMessage:ofSize:]
+0x0000cae8	string	-[MAFireWireDeviceInstance defaultsForUser:]
+0x0000cb15	string	-[MAFireWireDeviceInstance commitSettings:]
+0x0000cb41	string	-[MAFireWireDeviceInstance configureDCLLatency]
+0x0000cb71	string	-[MAFireWireDeviceInstance loadPrefsForUser:]
+0x0000cb9f	string	-[MAFireWireDeviceInstance service:changedProperties:]
+0x0000cbd6	string	-[MAFireWireLoader init]
+0x0000cbef	string	-[MAFireWireLoader unloadDriverOnce]
+0x0000cc14	string	-[MAFireWireLoader unloadTheDriver]
+0x0000cc38	string	-[MAFireWireLoader dealloc]
+0x0000cc54	string	-[MAFireWireLoader statusAppPath]
+0x0000cc76	string	-[MAFireWireLoader updateViewForDevice:]
+0x0000cc9f	string	-[MAFireWireLoader quitView]
+0x0000ccbc	string	-[MAFireWireLoader deviceMatched:]
+0x0000ccdf	string	-[MAFireWireLoader deviceForService:]
+0x0000cd05	string	-[MAFireWireLoader driverInstanceMatched:]
+0x0000cd30	string	-[MAFireWireLoader driverInstanceTerminated:]
+0x0000cd5e	string	-[MAFireWireLoader systemWillSleep]
+0x0000cd82	string	-[MAFireWireLoader systemWokeUp]
+0x0000cda3	string	-[MAFireWireLoader userDidLogIn:withUID:withGID:]
+0x0000cdd5	string	-[MAFireWireLoader userDidLogOut:withUID:withGID:]
+0x0000ce08	string	_InstallLoginLogoutNotifiers
+0x0000ce25	string	_LoginLogoutProxyCallBackFunction
+0x0000ce47	string	-[MACommunicator serve]
+0x0000ce5f	string	+[MACommunicator serve:forName:]
+0x0000ce80	string	-[MACommunicator runServer:]
+0x0000ce9d	string	-[MACommunicator stopServer]
+0x0000ceba	string	+[MACommunicator getServer:]
+0x0000ced7	string	-[MAFireWireCommunicator init]
+0x0000cef6	string	-[MAFireWireCommunicator start]
+0x0000cf16	string	-[MAFireWireCommunicator stop]
+0x0000cf35	string	+[NSException(Midiman) initializeStackTraces]
+0x0000cf63	string	-[NSException(Midiman) printStackTrace]
+0x0000cf8b	string	+[MAIOKitService deviceFromIOKitDevice:connection:]
+0x0000cfbf	string	-[MAIOKitService initWithService:]
+0x0000cfe2	string	+[MAIOKitService deviceWithService:]
+0x0000d007	string	-[MAIOKitService openConnection]
+0x0000d028	string	-[MAIOKitService closeConnection]
+0x0000d04a	string	-[MAIOKitService service]
+0x0000d064	string	-[MAIOKitService connection]
+0x0000d081	string	-[MAIOKitService parent]
+0x0000d09a	string	-[MAIOKitService dealloc]
+0x0000d0b4	string	-[MAServiceNotification type]
+0x0000d0d2	string	-[MAServiceNotification dispatch:]
+0x0000d0f5	string	+[MAServiceNotification notificationWithDictionary:port:type:target:selector:]
+0x0000d144	string	-[MAServiceNotification initWithDictionary:port:type:target:selector:]
+0x0000d18b	string	__ZL23ServiceDispatchCallbackPvj
+0x0000d1ac	string	-[MAServiceNotification dealloc]
+0x0000d1cd	string	+[MAServiceNotification observeServiceTerminated:target:selector:]
+0x0000d210	string	+[MAServiceNotification observeServiceMatched:target:selector:]
+0x0000d250	string	+[MAServiceNotification observeServiceFirstMatched:target:selector:]
+0x0000d295	string	+[MAServiceNotification stopObserving]
+0x0000d2bc	string	+[MAServiceNotification observe:dictionary:target:selector:]
+0x0000d2f9	string	+[MAServiceNotification perform:target:forEveryServiceMatching:]
+0x0000d33a	string	-[MAAsyncNotification initWithType:connection:runLoop:target:selector:]
+0x0000d382	string	__ZL23StaticHandleMachMessageP12__CFMachPortPvlS1_
+0x0000d3b5	string	+[MAAsyncNotification userClientNotificationOfType:connection:runLoop:target:selector:]
+0x0000d40d	string	+[MAAsyncNotification userClientNotificationOfType:connection:target:selector:]
+0x0000d45d	string	-[MAAsyncNotification dealloc]
+0x0000d47c	string	-[MAAsyncNotification target]
+0x0000d49a	string	-[MAAsyncNotification action]
+0x0000d4b8	string	+[MAConsoleUser startObservingLogins:runLoop:]
+0x0000d4e7	string	__ZL13LoginFunctionPK10__CFStringjj
+0x0000d50b	string	__ZL14LogoutFunctionv
+0x0000d521	string	+[MAConsoleUser startObservingLogins:]
+0x0000d548	string	+[MAConsoleUser stopObservingLogins:]
+0x0000d56e	string	+[MAConsoleUser currentUserName]
+0x0000d58f	string	+[MAConsoleUser isUserLoggedIn]
+0x0000d5af	string	__ZN32WithCurrentEffectiveUserAndGroupC1Ev
+0x0000d5da	string	__ZN32WithCurrentEffectiveUserAndGroupC2Ev
+0x0000d605	string	__ZN32WithCurrentEffectiveUserAndGroupD1Ev
+0x0000d630	string	-[NSData(MAudioAdditions) CRC32]
+0x0000d651	string	-[NSData(MAudioAdditions) CRC32WithRange:]
+0x0000d67c	string	+[MAPowerNotification stopObserving]
+0x0000d6a1	string	+[MAPowerNotification observeSleepNotifications:]
+0x0000d6d3	string	_SleepNotificationCallback
+0x0000d6ee	string	__Z28CalendarDateFromFirmwareDatemmmm
+0x0000d714	string	+[MAFireWireFirmwareFile initialize]
+0x0000d739	string	+[MAFireWireFirmwareFile firmwareWithPath:]
+0x0000d765	string	-[MAFireWireFirmwareFile dealloc]
+0x0000d787	string	-[MAFireWireFirmwareFile firmwareValidationFailed:]
+0x0000d7bb	string	-[MAFireWireFirmwareFile reportCorruptFirmwareToDelegate:format:]
+0x0000d7fd	string	+[MAFireWireFirmwareFile automaticUpdatesInhibited]
+0x0000d831	string	+[MAFireWireFirmwareFile setInhibitAutomaticUpdates:]
+0x0000d867	string	+[MAFireWireFirmwareFile forceNextAutomaticUpdate]
+0x0000d89a	string	+[MAFireWireFirmwareFile automaticUpdatedForced]
+0x0000d8cb	string	+[MAFireWireFirmwareFile firmwareFilesAtPath:forDevice:]
+0x0000d904	string	-[MAFireWireFirmwareFile embeddedCRC]
+0x0000d92a	string	-[MAFireWireFirmwareFile actualCRC]
+0x0000d94e	string	-[MAFireWireFirmwareFile validateFirmwareUpdate:]
+0x0000d980	string	-[MAFireWireFirmwareFile data]
+0x0000d99f	string	-[MAFireWireFirmwareFile date]
+0x0000d9be	string	-[MAFireWireFirmwareFile name]
+0x0000d9dd	string	-[MAFireWireFirmwareFile .cxx_construct]
+0x0000da06	string	+[MAIOKitRegistryNode rootNode]
+0x0000da26	string	+[MAIOKitRegistryNode nodeWithEntry:]
+0x0000da4c	string	-[MAIOKitRegistryNode initWithEntry:]
+0x0000da72	string	-[MAIOKitRegistryNode parent]
+0x0000da90	string	-[MAIOKitRegistryNode children]
+0x0000dab0	string	-[MAIOKitRegistryNode name]
+0x0000dacc	string	-[MAIOKitRegistryNode description]
+0x0000daef	string	-[MAIOKitRegistryNode conformsTo:]
+0x0000db12	string	-[MAIOKitRegistryNode propertyForKey:]
+0x0000db39	string	-[MAIOKitRegistryNode properties]
+0x0000db5b	string	-[MAIOKitRegistryNode setProperty:forKey:]
+0x0000db86	string	-[MAIOKitRegistryNode setProperties:]
+0x0000dbac	string	-[MAIOKitRegistryNode entry]
+0x0000dbc9	string	_kMAFireWireServerName
+0x0000dbe0	string	_kMAOneShotUpdatePath
+0x0000dbf6	string	_kMAInhibitUpdatesFilePath
+0x0000dc11	string	__ZL16kUserClientNames
+0x0000dc28	string	__ZL15sSystemSleeping.b
+0x0000dc40	string	__ZL17sServiceNotifiers
+0x0000dc58	string	__ZL11sNotifyPort
+0x0000dc6a	string	__ZL8sRunLoop
+0x0000dc78	string	__ZL11sMasterPort
+0x0000dc8a	string	__ZZ46+[MAConsoleUser startObservingLogins:runLoop:]E20sRegisteredForLogins.b
+0x0000dcd8	string	__ZL16sObjectsToNotify
+0x0000dcef	string	__ZL12sCurrentUser
+0x0000dd02	string	__ZL11sCurrentUID
+0x0000dd14	string	__ZL11sCurrentGID
+0x0000dd26	string	_sSleepNotifyToken
+0x0000dd39	string	_sSleepRunLoop
+0x0000dd48	string	_sSleepNotifyPort
+0x0000dd5a	string	_sSleepConnection
+0x0000dd6c	string	_sTarget
+0x0000dd75	string	.objc_class_name_MAAsyncNotification
+0x0000dd9a	string	.objc_class_name_MACommunicator
+0x0000ddba	string	.objc_class_name_MAConsoleUser
+0x0000ddd9	string	.objc_class_name_MAFireWireCommunicator
+0x0000de01	string	.objc_class_name_MAFireWireDeviceInstance
+0x0000de2b	string	.objc_class_name_MAFireWireFirmwareFile
+0x0000de53	string	.objc_class_name_MAFireWireLoader
+0x0000de75	string	.objc_class_name_MAIOKitRegistryNode
+0x0000de9a	string	.objc_class_name_MAIOKitService
+0x0000deba	string	.objc_class_name_MAPowerNotification
+0x0000dedf	string	.objc_class_name_MAServiceNotification
+0x0000df06	string	__mh_execute_header
+0x0000df1a	string	start
+0x0000df20	string	.objc_class_name_NSArray
+0x0000df39	string	.objc_class_name_NSAssertionHandler
+0x0000df5d	string	.objc_class_name_NSAutoreleasePool
+0x0000df80	string	.objc_class_name_NSBundle
+0x0000df9a	string	.objc_class_name_NSCalendarDate
+0x0000dfba	string	.objc_class_name_NSConnection
+0x0000dfd8	string	.objc_class_name_NSData
+0x0000dff0	string	.objc_class_name_NSDate
+0x0000e008	string	.objc_class_name_NSException
+0x0000e025	string	.objc_class_name_NSExceptionHandler
+0x0000e049	string	.objc_class_name_NSFileManager
+0x0000e068	string	.objc_class_name_NSMutableArray
+0x0000e088	string	.objc_class_name_NSMutableDictionary
+0x0000e0ad	string	.objc_class_name_NSNumber
+0x0000e0c7	string	.objc_class_name_NSObject
+0x0000e0e1	string	.objc_class_name_NSProcessInfo
+0x0000e100	string	.objc_class_name_NSRunLoop
+0x0000e11b	string	.objc_class_name_NSString
+0x0000e135	string	.objc_class_name_NSUserDefaults
+0x0000e155	string	_CFArrayAppendValue
+0x0000e169	string	_CFArrayCreateMutable
+0x0000e17f	string	_CFMachPortCreateRunLoopSource
+0x0000e19e	string	_CFMachPortCreateWithPort
+0x0000e1b8	string	_CFMachPortGetPort
+0x0000e1cb	string	_CFMachPortInvalidate
+0x0000e1e1	string	_CFPreferencesCopyValue
+0x0000e1f9	string	_CFPreferencesSetValue
+0x0000e210	string	_CFPreferencesSynchronize
+0x0000e22a	string	_CFRelease
+0x0000e235	string	_CFRunLoopAddSource
+0x0000e249	string	_CFRunLoopGetCurrent
+0x0000e25e	string	_CFRunLoopRemoveSource
+0x0000e275	string	_CFStringCreateCopy
+0x0000e289	string	_DebugAssert
+0x0000e296	string	_IOAllowPowerChange
+0x0000e2aa	string	_IOCFUnserialize
+0x0000e2bb	string	_IOCatalogueTerminate
+0x0000e2d1	string	_IOConnectSetNotificationPort
+0x0000e2ef	string	_IODeregisterForSystemPower
+0x0000e30b	string	_IOIteratorNext
+0x0000e31b	string	_IOMasterPort
+0x0000e329	string	_IONotificationPortCreate
+0x0000e343	string	_IONotificationPortDestroy
+0x0000e35e	string	_IONotificationPortGetMachPort
+0x0000e37d	string	_IONotificationPortGetRunLoopSource
+0x0000e3a1	string	_IOObjectConformsTo
+0x0000e3b5	string	_IOObjectRelease
+0x0000e3c6	string	_IOObjectRetain
+0x0000e3d6	string	_IORegisterForSystemPower
+0x0000e3f0	string	_IORegistryEntryCreateCFProperties
+0x0000e413	string	_IORegistryEntryCreateCFProperty
+0x0000e434	string	_IORegistryEntryGetChildIterator
+0x0000e455	string	_IORegistryEntryGetName
+0x0000e46d	string	_IORegistryEntryGetParentEntry
+0x0000e48c	string	_IORegistryEntrySetCFProperties
+0x0000e4ac	string	_IORegistryEntrySetCFProperty
+0x0000e4ca	string	_IORegistryGetRootEntry
+0x0000e4e2	string	_IOServiceAddMatchingNotification
+0x0000e504	string	_IOServiceClose
+0x0000e514	string	_IOServiceGetMatchingServices
+0x0000e532	string	_IOServiceMatching
+0x0000e545	string	_IOServiceOpen
+0x0000e554	string	_NSDefaultRunLoopMode
+0x0000e56a	string	_NSLog
+0x0000e571	string	_NSStackTraceKey
+0x0000e582	string	_SCDynamicStoreCopyConsoleUser
+0x0000e5a1	string	_SCDynamicStoreCreate
+0x0000e5b7	string	_SCDynamicStoreCreateRunLoopSource
+0x0000e5da	string	_SCDynamicStoreKeyCreateConsoleUser
+0x0000e5fe	string	_SCDynamicStoreSetNotificationKeys
+0x0000e621	string	___CFConstantStringClassReference
+0x0000e643	string	___error
+0x0000e64c	string	___stack_chk_fail
+0x0000e65e	string	___stack_chk_guard
+0x0000e671	string	___stderrp
+0x0000e67c	string	___udivdi3
+0x0000e687	string	__setjmp
+0x0000e690	string	_crc32
+0x0000e697	string	_exit
+0x0000e69d	string	_fprintf
+0x0000e6a6	string	_fread
+0x0000e6ad	string	_fwrite$UNIX2003
+0x0000e6be	string	_getegid
+0x0000e6c7	string	_geteuid
+0x0000e6d0	string	_kCFPreferencesAnyHost
+0x0000e6e7	string	_kCFRunLoopCommonModes
+0x0000e6fe	string	_kCFRunLoopDefaultMode
+0x0000e715	string	_kCFTypeArrayCallBacks
+0x0000e72c	string	_kIOMasterPortDefault
+0x0000e742	string	_mach_task_self_
+0x0000e753	string	_malloc
+0x0000e75b	string	_objc_exception_extract
+0x0000e773	string	_objc_exception_match
+0x0000e789	string	_objc_exception_throw
+0x0000e79f	string	_objc_exception_try_enter
+0x0000e7b9	string	_objc_exception_try_exit
+0x0000e7d2	string	_objc_msgSend
+0x0000e7e0	string	_objc_msgSendSuper
+0x0000e7f3	string	_pclose
+0x0000e7fb	string	_popen$UNIX2003
+0x0000e80b	string	_setegid
+0x0000e814	string	_seteuid
+0x0000e81d	string	_strcmp
+0x0000e825	string	_sysctlbyname
+0x0000e833	string	_system$UNIX2003
+0x0000e844	string	dyld_stub_binder
+0x0000e8b4	string	com.m-audio.firewire.helper

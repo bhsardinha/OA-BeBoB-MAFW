@@ -1,0 +1,465 @@
+0x000018c0	string	/usr/lib/dyld
+0x00001960	string	/System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa
+0x000019b4	string	/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore
+0x00001a14	string	/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation
+0x00001a74	string	/usr/lib/libobjc.A.dylib
+0x00001aa8	string	/usr/lib/libSystem.B.dylib
+0x00001adc	string	/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
+0x00001b44	string	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices
+0x00001bb4	string	/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit
+0x00005b1d	TerminatedCString	initWithContentRect:styleMask:backing:defer:
+0x00005b4a	TerminatedCString	NSColor
+0x00005b52	TerminatedCString	clearColor
+0x00005b5d	TerminatedCString	setBackgroundColor:
+0x00005b71	TerminatedCString	setOpaque:
+0x00005b7c	TerminatedCString	NSScreen
+0x00005b85	TerminatedCString	mainScreen
+0x00005b90	TerminatedCString	visibleFrame
+0x00005b9d	TerminatedCString	frame
+0x00005ba3	TerminatedCString	mouseLocationOutsideOfEventStream
+0x00005bc5	TerminatedCString	convertBaseToScreen:
+0x00005bda	TerminatedCString	setFrameOrigin:
+0x00005bea	TerminatedCString	locationInWindow
+0x00005bfb	TerminatedCString	@36@0:4{_NSRect={_NSPoint=ff}{_NSSize=ff}}8I24I28c32
+0x00005c30	TerminatedCString	mouseDragged:
+0x00005c3e	TerminatedCString	v12@0:4@8
+0x00005c48	TerminatedCString	mouseDown:
+0x00005c53	TerminatedCString	constrainToMainScreen
+0x00005c69	TerminatedCString	v8@0:4
+0x00005c70	TerminatedCString	NSObject
+0x00005c79	TerminatedCString	NSPanel
+0x00005c81	TerminatedCString	TransparentWindow
+0x00005c93	TerminatedCString	fInitialPosition
+0x00005ca4	TerminatedCString	{_NSPoint="x"f"y"f}
+0x00005cb8	TerminatedCString	retain
+0x00005cbf	TerminatedCString	release
+0x00005cc7	TerminatedCString	CXShading
+0x00005cd1	TerminatedCString	bounds
+0x00005cd8	TerminatedCString	colorWithDeviceWhite:alpha:
+0x00005cf4	TerminatedCString	imageOfRect:withVerticalLinearShadingFromColor:toColor:
+0x00005d2c	TerminatedCString	colorWithPatternImage:
+0x00005d43	TerminatedCString	set
+0x00005d47	TerminatedCString	NSBezierPath
+0x00005d54	TerminatedCString	fillRect:
+0x00005d5e	TerminatedCString	isAnimating
+0x00005d6a	TerminatedCString	drawBackground:
+0x00005d7a	TerminatedCString	draw:
+0x00005d80	TerminatedCString	window
+0x00005d87	TerminatedCString	hasShadow
+0x00005d91	TerminatedCString	invalidateShadow
+0x00005da2	TerminatedCString	isFlipped
+0x00005dac	TerminatedCString	c8@0:4
+0x00005db3	TerminatedCString	setTransition:
+0x00005dc2	TerminatedCString	v24@0:4{_NSRect={_NSPoint=ff}{_NSSize=ff}}8
+0x00005dee	TerminatedCString	drawRect:
+0x00005df8	TerminatedCString	NSView
+0x00005dff	TerminatedCString	ContentView
+0x00005e0b	TerminatedCString	fTransition
+0x00005e17	TerminatedCString	@"CXCoreImageTransition"
+0x00005e30	TerminatedCString	NSFileManager
+0x00005e3e	TerminatedCString	defaultManager
+0x00005e4d	TerminatedCString	/Library/Application Support/M-Audio/DeviceIcons/
+0x00005e7f	TerminatedCString	png
+0x00005e83	TerminatedCString	tif
+0x00005e87	TerminatedCString	tiff
+0x00005e8c	TerminatedCString	jpg
+0x00005e90	TerminatedCString	NSString
+0x00005e99	TerminatedCString	%@%@.%@
+0x00005ea1	TerminatedCString	stringWithFormat:
+0x00005eb3	TerminatedCString	fileExistsAtPath:
+0x00005ec5	TerminatedCString	NSImage
+0x00005ecd	TerminatedCString	alloc
+0x00005ed3	TerminatedCString	initByReferencingFile:
+0x00005eea	TerminatedCString	GenericDevice
+0x00005ef8	TerminatedCString	imageNamed:
+0x00005f04	TerminatedCString	autorelease
+0x00005f10	TerminatedCString	isEqualToString:
+0x00005f21	TerminatedCString	deviceIconWithName:
+0x00005f35	TerminatedCString	setImage:
+0x00005f3f	TerminatedCString	M-Audio %@
+0x00005f4a	TerminatedCString	setStringValue:
+0x00005f5a	TerminatedCString	GUID: %@
+0x00005f63	TerminatedCString	setEnabled:
+0x00005f6f	TerminatedCString	setHidden:
+0x00005f7a	TerminatedCString	makeKeyWindow
+0x00005f88	TerminatedCString	setHidesOnDeactivate:
+0x00005f9e	TerminatedCString	orderFrontRegardless
+0x00005fb3	TerminatedCString	activateIgnoringOtherApps:
+0x00005fce	TerminatedCString	CXCoreImageTransition
+0x00005fe4	TerminatedCString	isSupported
+0x00005ff0	TerminatedCString	transitionWithDelegate:
+0x00006008	TerminatedCString	setStyle:direction:
+0x0000601c	TerminatedCString	setInitialView:
+0x0000602c	TerminatedCString	setFinalView:
+0x0000603a	TerminatedCString	start
+0x00006040	TerminatedCString	setNeedsDisplay:
+0x00006051	TerminatedCString	terminate:
+0x0000605c	TerminatedCString	NSProcessInfo
+0x0000606a	TerminatedCString	processInfo
+0x00006076	TerminatedCString	arguments
+0x00006080	TerminatedCString	checkForServer
+0x0000608f	TerminatedCString	objectAtIndex:
+0x0000609e	TerminatedCString	startServer
+0x000060aa	TerminatedCString	launch
+0x000060b1	TerminatedCString	showWindowWithDeviceIcon:name:GUID:
+0x000060d5	TerminatedCString	quit
+0x000060da	TerminatedCString	terminate
+0x000060e4	TerminatedCString	progress
+0x000060ed	TerminatedCString	indeterminate
+0x000060fb	TerminatedCString	setProgressIndicatorCurrent:maximum:
+0x00006120	TerminatedCString	intValue
+0x00006129	TerminatedCString	startAnimation:
+0x00006139	TerminatedCString	setIndeterminate:
+0x0000614b	TerminatedCString	stopAnimation:
+0x0000615a	TerminatedCString	isIndeterminate
+0x0000616a	TerminatedCString	setMaxValue:
+0x00006177	TerminatedCString	setDoubleValue:
+0x00006187	TerminatedCString	@12@0:4@8
+0x00006191	TerminatedCString	v20@0:4@8@12@16
+0x000061a1	TerminatedCString	Vv8@0:4
+0x000061a9	TerminatedCString	applicationDidFinishLaunching:
+0x000061c8	TerminatedCString	v16@0:4L8L12
+0x000061d5	TerminatedCString	applicationWillTerminate:
+0x000061ef	TerminatedCString	awakeFromNib
+0x000061fc	TerminatedCString	FirmwareAppDelegate
+0x00006210	TerminatedCString	fFirmwareStatusWindow
+0x00006226	TerminatedCString	@"TransparentWindow"
+0x0000623b	TerminatedCString	fTitleField
+0x00006247	TerminatedCString	@"NSTextField"
+0x00006256	TerminatedCString	fGUIDField
+0x00006261	TerminatedCString	fDeviceIconView
+0x00006271	TerminatedCString	@"NSImageView"
+0x00006280	TerminatedCString	fProgressIndicator
+0x00006293	TerminatedCString	@"NSProgressIndicator"
+0x000062aa	TerminatedCString	fContentView
+0x000062b7	TerminatedCString	@"ContentView"
+0x000062c6	TerminatedCString	fViewContainer
+0x000062d5	TerminatedCString	@"NSView"
+0x000062df	TerminatedCString	fIsAnimatingProgress
+0x000062f6	TerminatedCString	MAudioFireWireFirmwareStatus
+0x00006313	TerminatedCString	NSConnection
+0x00006320	TerminatedCString	connectionWithRegisteredName:host:
+0x00006343	TerminatedCString	got connection %@
+0x00006355	TerminatedCString	rootProxy
+0x0000635f	TerminatedCString	%@ server: could not get proxy.  This should not happen.
+0x00006398	TerminatedCString	%@ server: found (%@)
+0x000063ae	TerminatedCString	init
+0x000063b3	TerminatedCString	%@ starting server\n
+0x000063c7	TerminatedCString	setRootObject:
+0x000063d6	TerminatedCString	registerName:
+0x000063e4	TerminatedCString	%@ server: could not register server.  Is one already running?\n
+0x00006424	TerminatedCString	%@ server: started\n
+0x00006438	TerminatedCString	@8@0:4
+0x0000643f	TerminatedCString	Messaging
+0x0000644b	TerminatedCString	shadingFunctionForColorspace:info:
+0x0000646e	TerminatedCString	initWithAxialFromPoint:toPoint:withTarget:selector:
+0x000064a2	TerminatedCString	dealloc
+0x000064aa	TerminatedCString	colorUsingColorSpaceName:
+0x000064c4	TerminatedCString	getRed:green:blue:alpha:
+0x000064dd	TerminatedCString	linearInterpolationFunction:toColor:
+0x00006502	TerminatedCString	linearShadingFromPoint:toPoint:withStartColor:endColor:
+0x0000653a	TerminatedCString	setSize:
+0x00006543	TerminatedCString	lockFocus
+0x0000654d	TerminatedCString	unlockFocus
+0x00006559	TerminatedCString	colorWithDeviceRed:green:blue:alpha:
+0x0000657e	TerminatedCString	strokeLineFromPoint:toPoint:
+0x0000659b	TerminatedCString	NSGraphicsContext
+0x000065ad	TerminatedCString	currentContext
+0x000065bc	TerminatedCString	graphicsPort
+0x000065c9	TerminatedCString	saveGraphicsState
+0x000065db	TerminatedCString	clipRect:
+0x000065e5	TerminatedCString	fill
+0x000065ea	TerminatedCString	restoreGraphicsState
+0x000065ff	TerminatedCString	addClip
+0x00006607	TerminatedCString	^{CGFunction=}16@0:4^{CGColorSpace=}8^v12
+0x00006631	TerminatedCString	@32@0:4{_NSPoint=ff}8{_NSPoint=ff}16@24:28
+0x0000665c	TerminatedCString	v16@0:4r^f8^f12
+0x0000666c	TerminatedCString	fillPath:
+0x00006676	TerminatedCString	axialShadingFromPoint:toPoint:withTarget:selector:
+0x000066a9	TerminatedCString	@32@0:4{_NSPoint=ff}8{_NSPoint=ff}16@24@28
+0x000066d4	TerminatedCString	fillRect:withLinearShadingFromColor:toColor:
+0x00006701	TerminatedCString	v32@0:4{_NSRect={_NSPoint=ff}{_NSSize=ff}}8@24@28
+0x00006733	TerminatedCString	fillRect:withVerticalLinearShadingFromColor:toColor:
+0x00006768	TerminatedCString	@32@0:4{_NSRect={_NSPoint=ff}{_NSSize=ff}}8@24@28
+0x0000679a	TerminatedCString	fillRect:withActiveSourceListHighlight:
+0x000067c2	TerminatedCString	v28@0:4{_NSRect={_NSPoint=ff}{_NSSize=ff}}8c24
+0x000067f1	TerminatedCString	fShading
+0x000067fa	TerminatedCString	^{CGShading=}
+0x00006808	TerminatedCString	fMethod
+0x00006810	TerminatedCString	{?="target"@"selector":}
+0x00006829	TerminatedCString	fLinearShadingColors
+0x0000683e	TerminatedCString	{?="from"[4f]"to"[4f]}
+0x00006855	TerminatedCString	CXCoreImageContext
+0x00006868	TerminatedCString	context
+0x00006870	TerminatedCString	startDrawingInRect:
+0x00006884	TerminatedCString	mutableBytes
+0x00006891	TerminatedCString	length
+0x00006898	TerminatedCString	completeDrawing
+0x000068a8	TerminatedCString	NSMutableData
+0x000068b6	TerminatedCString	dataWithLength:
+0x000068c6	TerminatedCString	graphicsContextWithGraphicsPort:flipped:
+0x000068ef	TerminatedCString	setCurrentContext:
+0x00006902	TerminatedCString	CIImage
+0x0000690a	TerminatedCString	initWithBitmapData:bytesPerRow:size:format:colorSpace:
+0x00006941	TerminatedCString	transparentImageForRect:
+0x0000695a	TerminatedCString	@24@0:4{_NSRect={_NSPoint=ff}{_NSSize=ff}}8
+0x00006986	TerminatedCString	fCGContext
+0x00006991	TerminatedCString	^{CGContext=}
+0x0000699f	TerminatedCString	fCIContext
+0x000069aa	TerminatedCString	@"CIContext"
+0x000069b7	TerminatedCString	fRect
+0x000069bd	TerminatedCString	{_NSRect="origin"{_NSPoint="x"f"y"f}"size"{_NSSize="width"f"height"f}}
+0x00006a04	TerminatedCString	fBytesPerRow
+0x00006a13	TerminatedCString	fBitmapData
+0x00006a1f	TerminatedCString	@"NSMutableData"
+0x00006a30	TerminatedCString	fBitmapSizeInBytes
+0x00006a45	TerminatedCString	initWithDelegate:shadingImage:
+0x00006a64	TerminatedCString	reset
+0x00006a6a	TerminatedCString	bitmapImageRepForCachingDisplayInRect:
+0x00006a91	TerminatedCString	cacheDisplayInRect:toBitmapImageRep:
+0x00006ab6	TerminatedCString	addRepresentation:
+0x00006ac9	TerminatedCString	imageFromView:
+0x00006ad8	TerminatedCString	compositeToPoint:operation:
+0x00006af4	TerminatedCString	coreImageFromView:
+0x00006b07	TerminatedCString	coreImageForEndpoint:
+0x00006b1d	TerminatedCString	CIFilter
+0x00006b26	TerminatedCString	CIVector
+0x00006b2f	TerminatedCString	CIColor
+0x00006b37	TerminatedCString	CICopyMachineTransition
+0x00006b4f	TerminatedCString	filterWithName:
+0x00006b5f	TerminatedCString	setDefaults
+0x00006b6b	TerminatedCString	vectorWithX:Y:Z:W:
+0x00006b7e	TerminatedCString	inputExtent
+0x00006b8a	TerminatedCString	setValue:forKey:
+0x00006b9b	TerminatedCString	inputImage
+0x00006ba6	TerminatedCString	colorWithRed:green:blue:
+0x00006bbf	TerminatedCString	inputColor
+0x00006bca	TerminatedCString	inputTargetImage
+0x00006bdb	TerminatedCString	CIDissolveTransition
+0x00006bf0	TerminatedCString	CIFlashTransition
+0x00006c02	TerminatedCString	vectorWithX:Y:
+0x00006c11	TerminatedCString	inputCenter
+0x00006c1d	TerminatedCString	CIModTransition
+0x00006c2d	TerminatedCString	CIPageCurlTransition
+0x00006c42	TerminatedCString	NSNumber
+0x00006c4b	TerminatedCString	numberWithFloat:
+0x00006c5c	TerminatedCString	inputAngle
+0x00006c67	TerminatedCString	inputBacksideImage
+0x00006c7a	TerminatedCString	inputShadingImage
+0x00006c8c	TerminatedCString	CISwipeTransition
+0x00006c9e	TerminatedCString	CIPerspectiveTransform
+0x00006cb5	TerminatedCString	CIZoomBlur
+0x00006cc0	TerminatedCString	CIRippleTransition
+0x00006cd3	TerminatedCString	TransitionAnimation
+0x00006ce7	TerminatedCString	initWithDuration:animationCurve:
+0x00006d08	TerminatedCString	setDelegate:
+0x00006d15	TerminatedCString	startAnimation
+0x00006d24	TerminatedCString	%d frames
+0x00006d2e	TerminatedCString	inputTopRight
+0x00006d3c	TerminatedCString	inputTopLeft
+0x00006d49	TerminatedCString	inputBottomRight
+0x00006d5a	TerminatedCString	inputBottomLeft
+0x00006d6a	TerminatedCString	currentValue
+0x00006d77	TerminatedCString	updatePerspectiveFilter:px1:pz1:px2:pz2:dist:width:height:
+0x00006db2	TerminatedCString	inputAmount
+0x00006dbe	TerminatedCString	inputTime
+0x00006dc8	TerminatedCString	outputImage
+0x00006dd4	TerminatedCString	valueForKey:
+0x00006de1	TerminatedCString	drawInRect:fromRect:operation:fraction:
+0x00006e09	TerminatedCString	@16@0:4@8@12
+0x00006e16	TerminatedCString	v16@0:4i8f12
+0x00006e23	TerminatedCString	v40@0:4@8f12f16f20f24f28f32f36
+0x00006e42	TerminatedCString	style
+0x00006e48	TerminatedCString	direction
+0x00006e54	TerminatedCString	finalImage
+0x00006e5f	TerminatedCString	@"CIImage"
+0x00006e6a	TerminatedCString	initialImage
+0x00006e77	TerminatedCString	transitionFilter
+0x00006e88	TerminatedCString	@"CIFilter"
+0x00006e94	TerminatedCString	transitionFilter2
+0x00006ea6	TerminatedCString	chaining
+0x00006eaf	TerminatedCString	animation
+0x00006eb9	TerminatedCString	@"NSAnimation"
+0x00006ec8	TerminatedCString	delegate
+0x00006ed3	TerminatedCString	frames
+0x00006edc	TerminatedCString	setCurrentProgress:
+0x00006ef0	TerminatedCString	display
+0x00006ef8	TerminatedCString	v12@0:4f8
+0x00006f02	TerminatedCString	NSAnimation
+0x000073f4	char *32 *32	00000000
+0x000073f8	char *32 *32	00000000
+0x000073fc	char *32	00000000
+0x00009002	string	_kCIFormatARGB8
+0x00009018	string	_NSZeroPoint
+0x00009033	string	dyld_stub_binder
+0x00009052	string	___CFConstantStringClassReference
+0x0000907d	string	_kCGColorSpaceGenericRGB
+0x000090a4	string	_NSApp
+0x000090b8	string	_NSDeviceRGBColorSpace
+0x000090d4	string	_NSClassFromString
+0x000090ed	string	_NSIntersectionRect
+0x00009107	string	_NSLog
+0x00009114	string	_objc_msgSend
+0x00009128	string	_objc_msgSendSuper
+0x00009141	string	_objc_msgSend_fpret
+0x0000915b	string	_objc_msgSend_stret
+0x00009175	string	___bzero
+0x00009184	string	_acos
+0x00009190	string	_asin
+0x0000919c	string	_cos
+0x000091a7	string	_exit
+0x000091b3	string	_sin
+0x000091be	string	_NSApplicationMain
+0x000091d7	string	_CGBitmapContextCreate
+0x000091f4	string	_CGColorSpaceCreateDeviceRGB
+0x00009217	string	_CGColorSpaceCreateWithName
+0x00009239	string	_CGColorSpaceGetNumberOfComponents
+0x00009262	string	_CGColorSpaceRelease
+0x0000927d	string	_CGContextDrawShading
+0x0000929a	string	_CGContextRelease
+0x000092b3	string	_CGContextScaleCTM
+0x000092cd	string	_CGContextSetPatternPhase
+0x000092ee	string	_CGContextTranslateCTM
+0x0000930c	string	_CGFunctionCreate
+0x00009325	string	_CGFunctionRelease
+0x0000933f	string	_CGShadingCreateAxial
+0x0000935c	string	_CGShadingRelease
+0x00009375	string	start
+0x0000937c	string	.objc_class_name_
+0x00009394	string	NXArg
+0x0000939b	string	environ
+0x000093a6	string	mh_execute_header
+0x000093b9	string	_progname
+0x000093ef	string	Trans
+0x000093fb	string	FirmwareAppDelegate
+0x00009413	string	parentWindow
+0x00009422	string	itionAnimation
+0x0000943b	string	ontentView
+0x0000945a	string	Shading
+0x00009464	string	CoreImage
+0x00009478	string	Context
+0x00009482	string	Transition
+0x00009bbe	string	_main
+0x00009bc4	string	-[TransparentWindow initWithContentRect:styleMask:backing:defer:]
+0x00009c06	string	-[TransparentWindow mouseDragged:]
+0x00009c29	string	-[TransparentWindow mouseDown:]
+0x00009c49	string	-[TransparentWindow constrainToMainScreen]
+0x00009c74	string	-[ContentView isFlipped]
+0x00009c8d	string	-[ContentView setTransition:]
+0x00009cab	string	-[ContentView drawBackground:]
+0x00009cca	string	-[ContentView drawRect:]
+0x00009ce3	string	-[FirmwareAppDelegate deviceIconWithName:]
+0x00009d0e	string	-[FirmwareAppDelegate showWindowWithDeviceIcon:name:GUID:]
+0x00009d49	string	-[FirmwareAppDelegate terminate]
+0x00009d6a	string	-[FirmwareAppDelegate applicationDidFinishLaunching:]
+0x00009da0	string	-[FirmwareAppDelegate setProgressIndicatorCurrent:maximum:]
+0x00009ddc	string	-[FirmwareAppDelegate applicationWillTerminate:]
+0x00009e0d	string	-[FirmwareAppDelegate awakeFromNib]
+0x00009e31	string	-[FirmwareAppDelegate(Messaging) checkForServer]
+0x00009e62	string	-[FirmwareAppDelegate(Messaging) startServer]
+0x00009e90	string	-[CXShading shadingFunctionForColorspace:info:]
+0x00009ec0	string	_ShadingFunction
+0x00009ed1	string	-[CXShading initWithAxialFromPoint:toPoint:withTarget:selector:]
+0x00009f12	string	+[CXShading axialShadingFromPoint:toPoint:withTarget:selector:]
+0x00009f52	string	-[CXShading dealloc]
+0x00009f67	string	-[CXShading linearInterpolationFunction:toColor:]
+0x00009f99	string	+[CXShading linearShadingFromPoint:toPoint:withStartColor:endColor:]
+0x00009fde	string	+[CXShading fillRect:withLinearShadingFromColor:toColor:]
+0x0000a018	string	+[CXShading fillRect:withVerticalLinearShadingFromColor:toColor:]
+0x0000a05a	string	+[CXShading imageOfRect:withVerticalLinearShadingFromColor:toColor:]
+0x0000a09f	string	+[CXShading fillRect:withActiveSourceListHighlight:]
+0x0000a0d4	string	-[CXShading fill]
+0x0000a0e6	string	-[CXShading fillRect:]
+0x0000a0fd	string	-[CXShading fillPath:]
+0x0000a114	string	+[CXCoreImageContext transparentImageForRect:]
+0x0000a143	string	+[CXCoreImageContext context]
+0x0000a161	string	-[CXCoreImageContext startDrawingInRect:]
+0x0000a18b	string	-[CXCoreImageContext completeDrawing]
+0x0000a1b1	string	+[CXCoreImageTransition isSupported]
+0x0000a1d6	string	+[CXCoreImageTransition transitionWithDelegate:]
+0x0000a207	string	-[CXCoreImageTransition initWithDelegate:shadingImage:]
+0x0000a23f	string	-[CXCoreImageTransition reset]
+0x0000a25e	string	-[CXCoreImageTransition dealloc]
+0x0000a27f	string	-[CXCoreImageTransition setStyle:direction:]
+0x0000a2ac	string	-[CXCoreImageTransition imageFromView:]
+0x0000a2d4	string	-[CXCoreImageTransition coreImageFromView:]
+0x0000a300	string	-[CXCoreImageTransition coreImageForEndpoint:]
+0x0000a32f	string	-[CXCoreImageTransition setInitialView:]
+0x0000a358	string	-[CXCoreImageTransition setFinalView:]
+0x0000a37f	string	-[CXCoreImageTransition isAnimating]
+0x0000a3a4	string	-[CXCoreImageTransition start]
+0x0000a3c3	string	+[CXCoreImageTransition updatePerspectiveFilter:px1:pz1:px2:pz2:dist:width:height:]
+0x0000a417	string	-[CXCoreImageTransition draw:]
+0x0000a436	string	-[TransitionAnimation setCurrentProgress:]
+0x0000a461	string	-[CXShading shadingFunctionForColorspace:info:].inputValueRange
+0x0000a4a1	string	-[CXShading shadingFunctionForColorspace:info:].outputValueRanges
+0x0000a4e3	string	-[FirmwareAppDelegate deviceIconWithName:].possibleSuffixes
+0x0000a51f	string	-[CXShading shadingFunctionForColorspace:info:].callbacks
+0x0000a559	string	_sPreviousGUID
+0x0000a568	string	_kServerName
+0x0000a575	string	_sWindowVisible.b
+0x0000a587	string	_sColorSpace
+0x0000a594	string	.objc_class_name_CXCoreImageContext
+0x0000a5b8	string	.objc_class_name_CXCoreImageTransition
+0x0000a5df	string	.objc_class_name_CXShading
+0x0000a5fa	string	.objc_class_name_ContentView
+0x0000a617	string	.objc_class_name_FirmwareAppDelegate
+0x0000a63c	string	.objc_class_name_TransitionAnimation
+0x0000a661	string	.objc_class_name_TransparentWindow
+0x0000a684	string	_NXArgc
+0x0000a68c	string	_NXArgv
+0x0000a694	string	___progname
+0x0000a6a0	string	__mh_execute_header
+0x0000a6b4	string	_environ
+0x0000a6bd	string	start
+0x0000a6c3	string	.objc_class_name_NSAnimation
+0x0000a6e0	string	.objc_class_name_NSBezierPath
+0x0000a6fe	string	.objc_class_name_NSColor
+0x0000a717	string	.objc_class_name_NSConnection
+0x0000a735	string	.objc_class_name_NSFileManager
+0x0000a754	string	.objc_class_name_NSGraphicsContext
+0x0000a777	string	.objc_class_name_NSImage
+0x0000a790	string	.objc_class_name_NSMutableData
+0x0000a7af	string	.objc_class_name_NSNumber
+0x0000a7c9	string	.objc_class_name_NSObject
+0x0000a7e3	string	.objc_class_name_NSPanel
+0x0000a7fc	string	.objc_class_name_NSProcessInfo
+0x0000a81b	string	.objc_class_name_NSScreen
+0x0000a835	string	.objc_class_name_NSString
+0x0000a84f	string	.objc_class_name_NSView
+0x0000a867	string	_CGBitmapContextCreate
+0x0000a87e	string	_CGColorSpaceCreateDeviceRGB
+0x0000a89b	string	_CGColorSpaceCreateWithName
+0x0000a8b7	string	_CGColorSpaceGetNumberOfComponents
+0x0000a8da	string	_CGColorSpaceRelease
+0x0000a8ef	string	_CGContextDrawShading
+0x0000a905	string	_CGContextRelease
+0x0000a917	string	_CGContextScaleCTM
+0x0000a92a	string	_CGContextSetPatternPhase
+0x0000a944	string	_CGContextTranslateCTM
+0x0000a95b	string	_CGFunctionCreate
+0x0000a96d	string	_CGFunctionRelease
+0x0000a980	string	_CGShadingCreateAxial
+0x0000a996	string	_CGShadingRelease
+0x0000a9a8	string	_NSApp
+0x0000a9af	string	_NSApplicationMain
+0x0000a9c2	string	_NSClassFromString
+0x0000a9d5	string	_NSDeviceRGBColorSpace
+0x0000a9ec	string	_NSIntersectionRect
+0x0000aa00	string	_NSLog
+0x0000aa07	string	_NSZeroPoint
+0x0000aa14	string	___CFConstantStringClassReference
+0x0000aa36	string	___bzero
+0x0000aa3f	string	_acos
+0x0000aa45	string	_asin
+0x0000aa4b	string	_cos
+0x0000aa50	string	_exit
+0x0000aa56	string	_kCGColorSpaceGenericRGB
+0x0000aa6f	string	_kCIFormatARGB8
+0x0000aa7f	string	_objc_msgSend
+0x0000aa8d	string	_objc_msgSendSuper
+0x0000aaa0	string	_objc_msgSend_fpret
+0x0000aab4	string	_objc_msgSend_stret
+0x0000aac8	string	_sin
+0x0000aacd	string	dyld_stub_binder
+0x0000ab34	string	com.m-audio.firewire.app.firmwarestatus
