@@ -122,3 +122,6 @@ Re-publish verified (R60). Open: MIDI bytes after a re-publish (cable), repeated
 ## 2026-10-17 (night, last)
 **Correction (2026-10-17, later):** the re-publish is switched OFF by default (`kRepublishAtOpticalSwitch = false` in `FWAudioDeviceChain.cpp`). Reason: reAMP froze when the engine was replaced during playback - a re-publish removes the device from CoreAudio and clients that do not re-attach lose their stream. User decision: follow the reference/official behaviour - pause the stream, change the formats in place, resume (the clients' I/O continues after a short interruption). Consequence accepted: the 10.13 Audio MIDI Setup sidebar label can stay stale after an optical switch. The re-publish code and its idle-only deferral (`RepublishIfIdle`) stay in the tree, hardware-verified for the label (capture 83) but not for client survival.
 Next: load the staged build (re-publish off) and re-test the optical switch with reAMP/aduplex playing: the stream must pause and resume by itself.
+
+## 2026-10-17 (evening) - second Mac
+R72: clean-Mac install over a Thunderbolt-to-FireWire adapter worked (MacBook Air, SIP off). Remaining install-side gaps: SIP enabled / Developer ID (IN.1, IN.6). Push the public repo and attach the rebuilt .dmg.

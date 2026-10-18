@@ -326,3 +326,6 @@ ADAT bus meters on the Mixer page / Meters window were 2 slots early (4 + n inst
 
 ## 2026-10-17 (afternoon) - stale output format fixed, dmg
 Stale output-stream channel count fixed (R68, captures 85/86). Package with the fix installed on the build PC; `dist/OpenAudioFW1814-0.1.0.dmg` (installer + Uninstall app, custom layout) built by `installer/make-dmg.sh` (R69). Still open: streaming-client check of the format fix, the 11:23 mixOutputSamples panic (may be the same stale state), sleep/wake, MIDI on the wire, reboot autoload, clean-machine install, signing.
+
+## 2026-10-17 (evening) - second Mac
+R72: rebuilt 0.1.0 disk image installed on a MacBook Air (10.13.6, SIP off) through Apple's Thunderbolt-to-FireWire adapter: install, restart, driver load, panel - worked (user). README updated (two Macs, adapter). Open: SIP enabled, signing.
