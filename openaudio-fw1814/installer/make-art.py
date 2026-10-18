@@ -65,7 +65,7 @@ def background(scale):
     d.text((170 * s, 322 * s), "", font=font(12 * s))
     d.text((170 * s, 146 * s), "1  INSTALL", font=font(12 * s, True), fill=RED, anchor="mt")
     d.text((470 * s, 146 * s), "REMOVE", font=font(12 * s, True), fill=GREY, anchor="mt")
-    note = "If macOS blocks the driver: System Preferences ▸ Security & Privacy ▸ Allow, then restart."
+    note = "Experimental and unsigned: it needs System Integrity Protection disabled (csrutil disable)."
     d.text((W // 2, 376 * s), note, font=font(12 * s), fill=GREY, anchor="mt")
     d.text((W // 2, 396 * s), "Quit audio and MIDI applications before installing or removing.", font=font(12 * s), fill=GREY, anchor="mt")
     return im

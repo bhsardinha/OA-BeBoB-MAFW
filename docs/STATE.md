@@ -329,3 +329,6 @@ Stale output-stream channel count fixed (R68, captures 85/86). Package with the 
 
 ## 2026-10-17 (evening) - second Mac
 R72: rebuilt 0.1.0 disk image installed on a MacBook Air (10.13.6, SIP off) through Apple's Thunderbolt-to-FireWire adapter: install, restart, driver load, panel - worked (user). README updated (two Macs, adapter). Open: SIP enabled, signing.
+
+## 2026-10-17 (night) - decision: homebrew, unsigned, SIP off (R73)
+No signing, no notarisation, no SIP-enabled support, ever; docs and installer text updated; IN.1/IN.6 cancelled.

@@ -8,6 +8,8 @@ The FireWire 1814 is a 18-in / 14-out FireWire audio interface (BridgeCo BeBoB /
 
 > **Who this is for.** Only people who own an **M-Audio FireWire 1814** (and, one day, other M-Audio FireWire interfaces). M-Audio ended support for these interfaces more than a decade ago and their last driver does not work on current macOS; this project exists solely to keep that hardware usable. It does nothing without the interface. The original M-Audio software belongs to M-Audio / inMusic — see [`NOTICE.md`](NOTICE.md).
 
+> **Homebrew and experimental.** This is a hobby project for tinkering, not a product: the kernel extension is **unsigned and will stay unsigned**, so it only runs on a Mac with **System Integrity Protection disabled**, and nothing is promised or supported.
+
 > **Status: early, working, 1814-only.** This is version 0.1.0 (tag `v0.1.0-first-working-2026-10-17`). It plays and records audio, the panel controls the interface and the original M-Audio MIDI plug-in loads. It has been tested on **one FireWire 1814, on two Macs running macOS 10.13.6 (an iMac with a native FireWire 800 port and a MacBook Air through Apple's Thunderbolt-to-FireWire adapter), with System Integrity Protection disabled on both**. Nothing else has been tested. Please read [Known issues](#known-issues) before installing it.
 
 ---
@@ -53,13 +55,13 @@ The FireWire 1814 is a 18-in / 14-out FireWire audio interface (BridgeCo BeBoB /
 | **Interface** | **M-Audio FireWire 1814 only.** It is the only hardware the author owns, so it is the only one that has been tested. The code is written so other BeBoB-based M-Audio devices could be added (see [Roadmap](#roadmap)), but none is implemented. |
 | **macOS** | **10.13.6 High Sierra only** (64-bit kext, 10.13 SDK, Xcode 9.4.1). Other versions are untested and almost certainly unsupported. |
 | **Mac** | Tested on two Macs: an iMac (iMac11,2) with a native FireWire 800 port, and a MacBook Air (MacBookAir5,1) through Apple's **Thunderbolt-to-FireWire adapter**, where a fresh install from the disk image worked. Other Macs, other adapters and FireWire 400 are untested. |
-| **Security** | The kext is **not signed with a Developer ID** and has only been tested with **SIP disabled** (on both test Macs). See below. |
+| **Security** | The kext is **unsigned, always** (homebrew project, no Developer ID, no notarisation). **System Integrity Protection must be disabled** (in Recovery: `csrutil disable`); that is the only configuration it has been tested in, on both test Macs. |
 
 ## Install
 
 1. Quit audio and MIDI applications. Remove the official M-Audio (and Avid/DICE) FireWire drivers first; they conflict.
 2. Open the `.dmg`, run **Install OpenAudio FW1814.pkg**, restart. (The released package contains M-Audio's CoreMIDI plug-in unmodified, so that MIDI works; see [`NOTICE.md`](NOTICE.md).)
-3. If macOS blocks the extension, allow it in *System Preferences ▸ Security & Privacy*. Whether an unsigned kext can be approved at all with SIP enabled has not been tested; both test Macs have SIP disabled.
+3. Disable System Integrity Protection first if it is on (Recovery mode, `csrutil disable`); an unsigned kext cannot be used otherwise.
 4. Power on the 1814. It appears as **FireWire 1814 Multichannel** in Audio MIDI Setup; the panel is in `/Applications`.
 
 To remove everything run **Uninstall OpenAudio FW1814** from the disk image (it asks for your administrator password).
@@ -90,19 +92,17 @@ These are real, observed or expected, and ordered roughly by how much they matte
 
 1. **Kernel panic seen once during playback.** On 2026-10-17 the kernel panicked inside Apple's IOAudioFamily (`IOAudioStream::mixOutputSamples`, reached from `coreaudiod`) while Studio One was playing at 48 kHz / 64 frames. The report is in [`docs/system-map/build-pc-panics/`](docs/system-map/build-pc-panics/). The cause is not proven; the likely reason is a stale stream format after a rate change, which was found and fixed the same day — but nobody has confirmed that the fix removes the panic. Treat the driver as **unsafe for work you cannot afford to lose**.
 2. **Do not change the rate or the digital mode while audio is playing.** The original driver panics when you do this, and this driver only protects the panel's own rate write. Stop playback first.
-3. **Unsigned, SIP-off only.** No Developer ID signature and no test with SIP enabled. (A fresh install on a second Mac, restart included, did work — with SIP disabled there too.)
-4. **The Audio MIDI Setup sidebar label ("N ins / M outs") can be stale** after an S/PDIF ↔ ADAT switch. The real channel counts, the device pane and every application are correct; only the label is built by AMS when the device is added. A fix exists in the code (re-publishing the device) but it drops running applications' audio, so it is switched off.
-5. **An S/PDIF ↔ ADAT switch interrupts audio for about 4 seconds** (as the original driver does) and applications keep running.
-6. **MIDI is only checked up to the plug-in.** The plug-in loads, the ports appear and sends return success; MIDI bytes on the wire, SysEx round trips and MIDI after sleep have not been verified (needs a DIN loopback cable).
-7. **Untested paths exist in the code:** sleep/wake, recovery after a FireWire bus reset (power-cycle), AC3 / IEC 61937 pass-through, the stereo-pair engines option, multiple interfaces, long (hours) streaming.
-8. **No firmware update.** The driver starts the firmware that is already in the interface; it never writes flash. The original driver's firmware updater is not implemented, on purpose.
-9. **At 176.4 / 192 kHz** the digital ports and the internal DSP mixer are off (hardware); the panel shows only output levels and the phones. A loopback test of analog *inputs* at 192 kHz read silence in this project's tests and is not explained yet.
-10. **Rough edges:** diagnostic logging is still compiled into the kext, the panel is English-only, there is no preference pane or status-bar item, the uninstaller's *Uninstall* button and the disk image's Finder layout have not been exercised end to end.
+3. **The Audio MIDI Setup sidebar label ("N ins / M outs") can be stale** after an S/PDIF ↔ ADAT switch. The real channel counts, the device pane and every application are correct; only the label is built by AMS when the device is added. A fix exists in the code (re-publishing the device) but it drops running applications' audio, so it is switched off.
+4. **An S/PDIF ↔ ADAT switch interrupts audio for about 4 seconds** (as the original driver does) and applications keep running.
+5. **MIDI is only checked up to the plug-in.** The plug-in loads, the ports appear and sends return success; MIDI bytes on the wire, SysEx round trips and MIDI after sleep have not been verified (needs a DIN loopback cable).
+6. **Untested paths exist in the code:** sleep/wake, recovery after a FireWire bus reset (power-cycle), AC3 / IEC 61937 pass-through, the stereo-pair engines option, multiple interfaces, long (hours) streaming.
+7. **No firmware update.** The driver starts the firmware that is already in the interface; it never writes flash. The original driver's firmware updater is not implemented, on purpose.
+8. **At 176.4 / 192 kHz** the digital ports and the internal DSP mixer are off (hardware); the panel shows only output levels and the phones. A loopback test of analog *inputs* at 192 kHz read silence in this project's tests and is not explained yet.
+9. **Rough edges:** diagnostic logging is still compiled into the kext, the panel is English-only, there is no preference pane or status-bar item, the uninstaller's *Uninstall* button and the disk image's Finder layout have not been exercised end to end.
 
 ## Points to be fixed (next)
 
 - Confirm or remove the playback panic: long streaming runs, rate changes with a client attached (lock the format change against client I/O).
-- Signing and approval: Developer ID signature and a test with SIP enabled.
 - Verify MIDI on the wire; sleep/wake; bus-reset recovery; AC3 pass-through; multi-interface.
 - Remove the debug logging, finish the installer/uninstaller tests.
 - Latency checks at every rate and in both digital modes with a loopback jig.
@@ -111,7 +111,6 @@ These are real, observed or expected, and ordered roughly by how much they matte
 
 - **Other M-Audio BeBoB interfaces.** The original driver is a family (FireWire 410, Audiophile, Ozonic, ProFire Lightbridge, ProjectMix I/O, …) and this project mirrors its class structure, so adding a device is mostly a table of channels and plug maps plus testing. **None of this exists yet and it needs people who own the hardware** — issues and pull requests with captures from other interfaces are very welcome.
 - A transport-agnostic protocol library so a future macOS 10.15+ `AudioServerPlugIn` port can reuse the AV/C and mixer code (see `docs/Proposal.md`).
-- A signed, notarised release.
 
 ---
 

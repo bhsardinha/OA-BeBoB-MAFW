@@ -125,3 +125,6 @@ Next: load the staged build (re-publish off) and re-test the optical switch with
 
 ## 2026-10-17 (evening) - second Mac
 R72: clean-Mac install over a Thunderbolt-to-FireWire adapter worked (MacBook Air, SIP off). Remaining install-side gaps: SIP enabled / Developer ID (IN.1, IN.6). Push the public repo and attach the rebuilt .dmg.
+
+## 2026-10-17 (night) - decision (R73)
+Signing / notarisation / SIP-enabled operation are out of scope: homebrew, always unsigned, SIP disabled. Ignore earlier next steps about Developer ID, UAKEL or a SIP-on test.
