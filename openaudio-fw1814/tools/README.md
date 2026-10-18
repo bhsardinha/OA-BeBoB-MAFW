@@ -16,6 +16,9 @@ binary built inside `~/oa-build/tools`, so rebuild after each sync**):
 | `midiprobe` | CoreMIDI list/send/listen/loop, shows the device image path, `removedev` drops a stale device from the MIDI setup |
 | `mafw-start.c` | firmware start helper from the early bring-up |
 
+## Running on the MacBook Air (`192.168.100.22`, 10.13.6)
+The Air has no Xcode and `sudo` there needs a password. Build the tools on the build PC (`cc -w -mmacosx-version-min=10.13 -o <name> <name>.c -framework CoreAudio -framework CoreFoundation -framework IOKit -framework CoreMIDI`), copy the binaries to `~/fw1814-captures/tools/` on the Air (persistent, not `/tmp`) and run them over SSH. They need no root; loading kexts and installing packages does (the user does that locally).
+
 ## Running on the Snow Leopard rig (`ssh fw1814-sl`, official driver v1.9, 10.6.8, no compiler)
 Build on the build PC (Xcode 9.4.1 still targets 10.6 for x86_64; i386 is gone):
 
