@@ -121,6 +121,10 @@ public:
     void AdjustOutputDCL(UInt32 bank, UInt32 unused);                                  // ref @0x2636e
     // M-H: MIDI scheduling into the TX packets (ScheduleMidiPacket @0x26ab2, ProcessCompoundMIDIOutput @0x26be6).
     virtual int ProcessCompoundMIDIOutput(UInt32 maxBytes);
+    // Clone bench aid (2026-10-17, "audio loops ~200 ms when a second client starts"): timing of the TX bank callbacks, read on demand through the
+    // device property MADebugTxStats (no registry mutation from the callback). Gap = time since the previous bank callback, dur = time spent inside it.
+    void ResetTxStats();
+    void TxStatsString(char *out, size_t n) const;
     UInt32 ScheduleMidiPacket(void *slot, UInt32 port, UInt32 mode, UInt64 nowNanos);           // ref @0x26ab2
     SInt64 ConvertTimestampNanosToAbsPacketIndex(UInt64 stampNanos, UInt64 nowNanos);          // ref @0x26a06
 protected:
@@ -129,6 +133,7 @@ protected:
     IOReturn BuildTransmittingDCLProgram();                                            // ref @0x25ae4
 
     struct History { UInt32 bank; UInt64 nanos; UInt64 lap; };
+    struct TxStats { UInt64 start, last, maxGap, minGap, maxDur; UInt32 calls, over100, over200, nev; struct { UInt32 gapMs, bank, atMs; } ev[8]; } fStats;
     UInt64   fLap;                         // [+0x518]
     History  fHist[2];                     // [+0x520], [+0x538]
     UInt32   fHistIdx;                     // [+0x550]

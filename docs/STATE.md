@@ -332,3 +332,12 @@ R72: rebuilt 0.1.0 disk image installed on a MacBook Air (10.13.6, SIP off) thro
 
 ## 2026-10-17 (night) - decision: homebrew, unsigned, SIP off (R73)
 No signing, no notarisation, no SIP-enabled support, ever; docs and installer text updated; IN.1/IN.6 cancelled.
+
+## 2026-10-17 (night) - MacBook Air reachable
+SSH key auth to the MacBook Air (192.168.100.22) set up by the user (Remote Login + ssh-copy-id); bench tools copied to ~/fw1814-captures/tools/ there. `sudo` needs a password on the Air. Engine was running (1 client) when checked, so no rate change was made.
+
+## 2026-10-17 (late) - second-client loop fixed (R75)
+performErase now clears the mix buffer like the reference; loopcheck shows no breaks with four second-client events on the MacBook Air (test kext loaded from /tmp there). Next: rebuild/ship pkg+dmg, install on the Air, replace the release asset.
+
+## 2026-10-17 (late) - meters clear on stop (R76); pkg + dmg rebuilt with R75 + R76
+Test kext FC8AD9DA verified on the MacBook Air by the user. Release asset must be replaced by the user (new sha256 in the build report).

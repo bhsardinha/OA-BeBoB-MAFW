@@ -1,0 +1,13 @@
+# capture 88 - the ~200 ms loop when a second audio client plays over a running stream, and the fix (MacBook Air, 10.13.6, 44.1 kHz, 512 frames), 2026-10-17
+# tools: tools/loopcheck (1 kHz on Out 3 -> In 1 analog loopback, break/dropout detector on the sine; quiet 440 Hz on outputs 1/2), tools/stutter, MADebugTxStats (kext counters), afplay of the Finder trash sounds as the second client
+## before the fix (kext 8C5E7A5C / 1981D75D)
+user: the sound froze and repeated a ~200 ms loop 3-4 times when the Finder's delete sound played over Spotify / the test tone (heard on the headphones)
+host side (stutter): HAL IOProc callbacks steady, longest gap 11.9 ms, no sample-time jumps  -> not an audio-host stall
+driver side (MADebugTxStats): TX bank callbacks 46 ms apart, min = max = 46 ms, none over 100 ms, callback body <= 168 us  -> the refill callback did not stall
+clip requests (CLIP counters): contiguous; one 108-frame backward overlap at the instant the second client starts -> not a replay of old positions
+loopcheck run 1 (trash sound at 22:08:37): BREAK every 186 ms (22:08:37.700, .886, 38.072 ... = 8192 frames at 44.1 kHz = one engine buffer) for 2.7 s, 44 events, level up to 0.73 on a 0.50 signal (old audio summed in), dropouts
+## cause (official driver decompile)
+FWBaseEngine::performErase @0x4e08 (docs/system-map/A1-ghidra/ghidra-exports/decomp/FWBaseEngine__performErase.c) zeroes the stream buffer at vt[0xa00] with size vt[0xa08] between the erase head and the current frame;
+vt[0xa00] is IOAudioStream::getMixBuffer (Q-MD2 2: the buffer MainEngineClipOutputSamples @0x3ed4 clips from). The clone zeroed getSampleBuffer(), so the MIX buffer was never erased.
+## after the fix (performErase uses getMixBuffer/getMixBufferSize; kext 243F3F22)
+loopcheck run 3, 34 s: trash sound, empty trash, Funk, Funk + Glass together: events 0 (no break, no dropout); loop level 0.498; clip requests 3583, 5 harmless backward overlaps (second client starts); TX callbacks still 46 ms.

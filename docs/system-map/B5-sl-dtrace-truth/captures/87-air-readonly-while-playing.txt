@@ -1,0 +1,7 @@
+# capture 87 - MacBook Air (10.13.6, MacBookAir5,1, SIP off, FW1814 via Thunderbolt-to-FireWire adapter), read-only checks while the user played Spotify, 2026-10-17 ~21:50
+# tools: ~/fw1814-captures/tools (halinfo, maprop, ioreg); no rate change, no extra audio client
+engine: IOAudioEngineState 1 (running), NumActiveUserClients 1; HAL rate 44100, buffer 512, 10 in / 6 out (S/PDIF mode), default output = FireWire 1814 Multichannel
+HAL latency: input/output device latency 105 frames, safety offset 44 (iMac at 44.1 kHz reports the same 105 / 44)
+properties: MAClockSource 0x40000003 (S/PDIF), MASampleRate 44100, MARateLocked 1
+kext: com.openaudio.OpenAudioFW1814 0.1.0, UUID C703D75F (the rebuilt 0.1.0 package of 2026-10-17), uptime 1:18, load 1.4, no panic reports in /Library/Logs/DiagnosticReports
+meters (shared peak page, 3 reads): inputs all 0; outputs 1/2 ~ 20000-32700 raw (about -4 to 0 dBFS) mirrored on the phones slots (outputs 15/16); software-return slots 1/2 carry the same program: the output path carries Spotify's stereo signal at high level

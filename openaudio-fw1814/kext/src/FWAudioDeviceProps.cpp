@@ -99,6 +99,14 @@ OSObject *com_openaudio_FWAudioDevice::getProperty(const char *aKey) const
 
 OSObject *com_openaudio_FWAudioDevice::copyProperty(const char *aKey) const
 {
+    if (aKey && !strcmp(aKey, "MADebugTxStats")) {                              // bench aid, built on demand
+        char buf[900] = "no engine";
+        if (fMainEngine && fMainEngine->txProgram()) {
+            fMainEngine->txProgram()->TxStatsString(buf, 400);
+            size_t l = strlen(buf); if (l + 2 < sizeof(buf)) { buf[l++] = '\n'; fMainEngine->ClipStatsString(buf + l, sizeof(buf) - l); }
+        }
+        return OSString::withCString(buf);
+    }
     OSObject *o = HandleDigiHandshakeProperty(aKey);
     if (!o && fPropDict) o = fPropDict->CopyProperty(aKey);
     if (o) return o;

@@ -119,9 +119,10 @@ IOReturn com_openaudio_FWBaseEngine::performAudioEngineStart()
 IOReturn com_openaudio_FWBaseEngine::performAudioEngineStop()
 {
     DeactivateSubEngine(1);
-    if (fDevice && status) {
-        // ref: clears the device's two peak-meter arrays ([device+0x108/+0x110], length GetPeakLevelCount) -- the meter page is M-F.
-    }
+    // ref performAudioEngineStop @0x543c: after DeactivateSubEngine it zeroes both peak arrays of the device ([+0x108] the shared meter page,
+    // [+0x110] the software peaks, GetPeakLevelCount x 4 bytes) = FWAudioDevice::ClearPeakMeters @0xda1e. Correction (2026-10-17): the first port left this
+    // as an empty comment (the meter page did not exist yet), so the panel's meters stayed frozen at their last value after the audio stopped (R76).
+    if (fDevice) fDevice->ClearPeakMeters();
     return kIOReturnSuccess;
 }
 
@@ -174,8 +175,28 @@ IOReturn com_openaudio_FWBaseEngine::MainEngineClipOutputSamples(UInt32 first, U
     char *mix = (char *)fOutStream->getMixBuffer();                          // stream vt[0xa00]
     if (!of || !inf || !mix) return kIOReturnSuccess;
     if (fOutStreamChannels != of->fNumChannels || fInStreamChannels != inf->fNumChannels) return kIOReturnSuccess;
+    {   // bench aid: are the clip requests contiguous? (a request that starts BEFORE the previous one ended = old audio converted again)
+        AbsoluteTime tn; clock_get_uptime(&tn); UInt64 ns; absolutetime_to_nanoseconds(tn, &ns);
+        ClipStats &c = fClip;
+        if (!c.start) { c.start = ns; c.minNum = ~0u; }
+        if (c.have && first != c.expect) {
+            const UInt32 kind = ((first - c.expect) & 0x1fff) > 0x1000 ? 1 : 2;           // 1 = back (re-clip), 2 = forward (skip), modulo the 8192-frame ring
+            if (kind == 1) c.back++; else c.fwd++;
+            if (c.nev < 10) { c.ev[c.nev].atMs = (UInt32)((ns - c.start) / 1000000); c.ev[c.nev].expect = c.expect; c.ev[c.nev].first = first; c.ev[c.nev].num = num; c.ev[c.nev].kind = kind; c.nev++; }
+        }
+        c.have = true; c.expect = (first + num) & 0x1fff; c.calls++;
+        if (num > c.maxNum) c.maxNum = num; if (num < c.minNum) c.minNum = num;
+    }
     if (of->fIsMixable) mix += (size_t)of->fNumChannels * first * 4;         // ref: stream[0xc0] = format.fIsMixable
     return ClipOutputSamplesWithMixPtrAdjusted((const float *)mix, (SInt32 *)fOutSampleRing.data, first, num, fmt, stream);
+}
+
+void com_openaudio_FWBaseEngine::ClipStatsString(char *out, size_t n) const
+{
+    const ClipStats &c = fClip;
+    int w = snprintf(out, n, "CLIP requests %u: frames/request %u..%u, jumps back %u forward %u; first jumps (ms@t expect->first n kind 1=back 2=fwd):",
+                     (unsigned)c.calls, c.calls ? (unsigned)c.minNum : 0u, (unsigned)c.maxNum, (unsigned)c.back, (unsigned)c.fwd);
+    for (UInt32 i = 0; i < c.nev && w > 0 && (size_t)w < n; i++) w += snprintf(out + w, n - w, " %u@%u %u->%u n%u k%u;", i, (unsigned)c.ev[i].atMs, (unsigned)c.ev[i].expect, (unsigned)c.ev[i].first, (unsigned)c.ev[i].num, (unsigned)c.ev[i].kind);
 }
 
 // ref ClipOutputSamplesWithMixPtrAdjusted @0x40aa (vt[0xc90])
@@ -233,7 +254,11 @@ void com_openaudio_FWBaseEngine::ConvertInputSampleData(UInt32 num, const UInt32
     FWInt24ScaledToFloat32(scratch, dst, fInStreamChannels * num);
 }
 
-// ref performErase @0x4e08: zero the output sample buffers between the erase head and the current frame.
+// ref performErase @0x4e08: zero the output stream's MIX buffer (stream vt[0xa00] = getMixBuffer, vt[0xa08] = getMixBufferSize - the same slots
+// MainEngineClipOutputSamples @0x3ed4 reads the audio from, Q-MD2 2) between the erase head and the current frame.
+// Correction (2026-10-17): the first port zeroed getSampleBuffer(), which is not what is clipped or played. The mix buffer was therefore never erased:
+// while a second client mixed in (e.g. the Finder's trash sound over a playing stream) old laps of the 8192-frame buffer were converted again - a ~186 ms
+// loop in the output, levels above the signal, meters stuck (capture 88, R75).
 void com_openaudio_FWBaseEngine::performErase()
 {
     if (!getRunEraseHead() || getState() != kIOAudioEngineRunning || !outputStreams) return;
@@ -244,9 +269,9 @@ void com_openaudio_FWBaseEngine::performErase()
     com_openaudio_FWStream *s;
     while ((s = OSDynamicCast(com_openaudio_FWStream, it->getNextObject()))) {
         s->lockStreamForIO();
-        UInt8 *buf = static_cast<UInt8 *>(s->getSampleBuffer());
+        UInt8 *buf = static_cast<UInt8 *>(s->getMixBuffer());
         const UInt32 bpf = s->getFormat()->fNumChannels * 4;
-        const UInt32 size = s->getSampleBufferSize();
+        const UInt32 size = s->getMixBufferSize();
         if (cur < erase) {                                            // the head wrapped: clear [0, cur) and [erase, end)
             if (cur * bpf <= size && numSampleFramesPerBuffer * bpf <= size && buf && bpf) {
                 bzero(buf, cur * bpf);
@@ -519,6 +544,7 @@ IOReturn com_openaudio_FWBaseEngine::StartIsochStreams()
 {
     if (!fConnected) return kErrNotReady;
     if (fIsochRefs++ == 0) {
+        bzero(&fClip, sizeof(fClip));                                        // bench aid
         fShared.resyncRequested = false;                                     // ref [+0x250]
         fShared.resyncPending = false;                                       // ref [+0x251]
         fShared.lastBank = 0;                                                // ref [+0x248]

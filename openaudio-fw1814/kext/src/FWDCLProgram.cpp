@@ -406,8 +406,32 @@ void com_openaudio_FWDCLOutputProgram::OutputDCLStaticCallback(DCLCommand *cmd)
     if (!cmd) return;
     void **d = static_cast<void **>(reinterpret_cast<DCLCallProc *>(cmd)->procData);
     if (!d || !d[0]) return;
-    static_cast<com_openaudio_FWDCLOutputProgram *>(static_cast<com_openaudio_FWDCLProgram *>(d[0]))
-        ->OutputDCLCallback((UInt32)(uintptr_t)d[1], false);
+    com_openaudio_FWDCLOutputProgram *p = static_cast<com_openaudio_FWDCLOutputProgram *>(static_cast<com_openaudio_FWDCLProgram *>(d[0]));
+    AbsoluteTime t0; clock_get_uptime(&t0);
+    p->OutputDCLCallback((UInt32)(uintptr_t)d[1], false);
+    AbsoluteTime t1; clock_get_uptime(&t1);
+    UInt64 n0, n1; absolutetime_to_nanoseconds(t0, &n0); absolutetime_to_nanoseconds(t1, &n1);
+    TxStats &st = p->fStats;
+    if (st.last) {
+        const UInt64 gap = n0 - st.last;
+        if (gap > st.maxGap) st.maxGap = gap;
+        if (gap < st.minGap) st.minGap = gap;
+        if (gap > 100000000ULL) st.over100++;
+        if (gap > 200000000ULL) st.over200++;
+        if (gap > 80000000ULL && st.nev < 8) { st.ev[st.nev].gapMs = (UInt32)(gap / 1000000); st.ev[st.nev].bank = (UInt32)(uintptr_t)d[1]; st.ev[st.nev].atMs = (UInt32)((n0 - st.start) / 1000000); st.nev++; }
+    } else st.start = n0;
+    if (n1 - n0 > st.maxDur) st.maxDur = n1 - n0;
+    st.last = n0; st.calls++;
+}
+
+void com_openaudio_FWDCLOutputProgram::ResetTxStats() { bzero(&fStats, sizeof(fStats)); fStats.minGap = ~0ULL; }
+
+void com_openaudio_FWDCLOutputProgram::TxStatsString(char *out, size_t n) const
+{
+    const TxStats &s = fStats;
+    int w = snprintf(out, n, "TX bank callbacks %u: gap min %u ms max %u ms, >100 ms: %u, >200 ms: %u, longest callback body %u us; gaps >80 ms (ms@t,bank):",
+                     (unsigned)s.calls, s.calls > 1 ? (unsigned)(s.minGap / 1000000) : 0u, (unsigned)(s.maxGap / 1000000), (unsigned)s.over100, (unsigned)s.over200, (unsigned)(s.maxDur / 1000));
+    for (UInt32 i = 0; i < s.nev && w > 0 && (size_t)w < n; i++) w += snprintf(out + w, n - w, " %u@%u,b%u", (unsigned)s.ev[i].gapMs, (unsigned)s.ev[i].atMs, (unsigned)s.ev[i].bank);
 }
 
 // ref AdjustOutputDCL @0x2636e: unused < 5 -> re-point the jump that PRECEDES bank b at label 5*b + unused. Bank 0's
@@ -552,6 +576,7 @@ void com_openaudio_FWDCLOutputProgram::OutputDCLCallback(UInt32 bank, bool prime
 // (MIDI schedule words +0x558.. / +0x5d8.. are cleared by M-H, which owns them.)
 IOReturn com_openaudio_FWDCLOutputProgram::Start()
 {
+    ResetTxStats();
     fHist[0].bank = 3;
     fHist[0].nanos = fShared ? fShared->startNanos : 0;
     fHist[0].lap = 0;

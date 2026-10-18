@@ -163,6 +163,9 @@ public:
     // (registering the streams); coreaudiod then never listed the device. IOAudioEngine::registerService is the reference behaviour.
     virtual void registerService(IOOptionBits options = 0) APPLE_KEXT_OVERRIDE { (void)options; }
     void ReallyRegisterService() { IOAudioEngine::registerService(0); }
+    // Bench aid: continuity of the clip requests IOAudioFamily makes (position `first`, `num` frames); read through MADebugTxStats.
+    void ClipStatsString(char *out, size_t n) const;
+    com_openaudio_FWDCLOutputProgram *txProgram() const { return fTx; }              // bench aid: TX callback timing (MADebugTxStats)
     bool externalSync() const { return fExternalSync; }                              // [+0x2d0]
     // vt[0xb00] / [0xb08] / [0xb10] of IOAudioEngine, public for the device (ref calls them through the engine's vtable)
     void BeginConfigChange()    { beginConfigurationChange(); }
@@ -221,6 +224,7 @@ protected:
     com_openaudio_FWDCLInputProgram  *fRx;         // [+0x358]
     // sample rings (ResetSampleBuffers @0x57f8): sizes (channels + midi) * 0x8000 bytes
     TRingBuffer fOutSampleRing;                    // [+0x1e0] output stream sample buffer
+    struct ClipStats { bool have; UInt32 expect, calls, back, fwd, maxNum, minNum; UInt64 start; UInt32 nev; struct { UInt32 atMs, expect, first, num, kind; } ev[10]; } fClip;
     TRingBuffer fOutMixRing;                       // [+0x148] output stream mix buffer
     TRingBuffer fInRing180;                        // [+0x180]
     TRingBuffer fInRing1b0;                        // [+0x1b0]
