@@ -91,17 +91,19 @@ Bench tools (latency loopback, CoreAudio rate walker, MIDI probe, …) are descr
 These are real, observed or expected, and ordered roughly by how much they matter.
 
 1. **Kernel panic seen once during playback.** On 2026-10-17 the kernel panicked inside Apple's IOAudioFamily (`IOAudioStream::mixOutputSamples`, reached from `coreaudiod`) while Studio One was playing at 48 kHz / 64 frames. The report is in [`docs/system-map/build-pc-panics/`](docs/system-map/build-pc-panics/). The cause is not proven; the likely reason is a stale stream format after a rate change, which was found and fixed the same day — but nobody has confirmed that the fix removes the panic. Treat the driver as **unsafe for work you cannot afford to lose**.
-2. **Do not change the rate or the digital mode while audio is playing.** The original driver panics when you do this, and this driver only protects the panel's own rate write. Stop playback first.
-3. **The Audio MIDI Setup sidebar label ("N ins / M outs") can be stale** after an S/PDIF ↔ ADAT switch. The real channel counts, the device pane and every application are correct; only the label is built by AMS when the device is added. A fix exists in the code (re-publishing the device) but it drops running applications' audio, so it is switched off.
-4. **An S/PDIF ↔ ADAT switch interrupts audio for about 4 seconds** (as the original driver does) and applications keep running.
-5. **MIDI is only checked up to the plug-in.** The plug-in loads, the ports appear and sends return success; MIDI bytes on the wire, SysEx round trips and MIDI after sleep have not been verified (needs a DIN loopback cable).
-6. **Untested paths exist in the code:** sleep/wake, recovery after a FireWire bus reset (power-cycle), AC3 / IEC 61937 pass-through, the stereo-pair engines option, multiple interfaces, long (hours) streaming.
-7. **No firmware update.** The driver starts the firmware that is already in the interface; it never writes flash. The original driver's firmware updater is not implemented, on purpose.
-8. **At 176.4 / 192 kHz** the digital ports and the internal DSP mixer are off (hardware); the panel shows only output levels and the phones. A loopback test of analog *inputs* at 192 kHz read silence in this project's tests and is not explained yet.
-9. **Rough edges:** diagnostic logging is still compiled into the kext, the panel is English-only, there is no preference pane or status-bar item, the uninstaller's *Uninstall* button and the disk image's Finder layout have not been exercised end to end.
+2. **Audio can stutter under heavy system activity.** Reported once: deleting a file while audio was playing froze the sound and repeated a ~200 ms loop three or four times before playback resumed. The loop length equals the driver's output ring (4 banks of 2048 frames, about 170 ms at 48 kHz), so the ring was replayed while the code that refills it did not run for roughly 0.6–0.8 s. The cause (a stall in a kernel thread, in the audio host, or in the driver) is not found yet.
+3. **Do not change the rate or the digital mode while audio is playing.** The original driver panics when you do this, and this driver only protects the panel's own rate write. Stop playback first.
+4. **The Audio MIDI Setup sidebar label ("N ins / M outs") can be stale** after an S/PDIF ↔ ADAT switch. The real channel counts, the device pane and every application are correct; only the label is built by AMS when the device is added. A fix exists in the code (re-publishing the device) but it drops running applications' audio, so it is switched off.
+5. **An S/PDIF ↔ ADAT switch interrupts audio for about 4 seconds** (as the original driver does) and applications keep running.
+6. **MIDI is only checked up to the plug-in.** The plug-in loads, the ports appear and sends return success; MIDI bytes on the wire, SysEx round trips and MIDI after sleep have not been verified (needs a DIN loopback cable).
+7. **Untested paths exist in the code:** sleep/wake, recovery after a FireWire bus reset (power-cycle), AC3 / IEC 61937 pass-through, the stereo-pair engines option, multiple interfaces, long (hours) streaming.
+8. **No firmware update.** The driver starts the firmware that is already in the interface; it never writes flash. The original driver's firmware updater is not implemented, on purpose.
+9. **At 176.4 / 192 kHz** the digital ports and the internal DSP mixer are off (hardware); the panel shows only output levels and the phones. A loopback test of analog *inputs* at 192 kHz read silence in this project's tests and is not explained yet.
+10. **Rough edges:** diagnostic logging is still compiled into the kext, the panel is English-only, there is no preference pane or status-bar item, the uninstaller's *Uninstall* button and the disk image's Finder layout have not been exercised end to end.
 
 ## Points to be fixed (next)
 
+- Find out why a heavy file operation can stall the output ring's refill (see Known issues 2); measure the gap between refill callbacks.
 - Confirm or remove the playback panic: long streaming runs, rate changes with a client attached (lock the format change against client I/O).
 - Verify MIDI on the wire; sleep/wake; bus-reset recovery; AC3 pass-through; multi-interface.
 - Remove the debug logging, finish the installer/uninstaller tests.
