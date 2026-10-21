@@ -115,16 +115,15 @@ Never copy an untested kext into `/Library/Extensions` (a panicking kext there b
 
 ## Known issues
 
-1. **Kernel panic seen once during playback with 0.1.0** (2026-10-17, inside Apple's IOAudioFamily `mixOutputSamples`, FireWire 1814, Studio One). A likely cause was fixed the same day; it has not been seen since, but it is not proven gone. Treat the driver as **unsafe for work you cannot afford to lose**.
-2. **Do not change the rate or the digital mode while audio is playing.** The original driver panics there; this driver gates only the panel's own rate change. Stop playback first.
-3. **Never unload the driver while a unit is attached** (`kextunload`): the official design does not free a FireWire resource on unload, and a later bus reset can panic. This driver frees it, but the installer and uninstaller still never unload — they ask for a restart.
-4. **Front-panel knobs can lose clicks on fast turns** — the interface reports only a direction per read (about every 50 ms), as with the official driver.
-5. **FW1814: the Audio MIDI Setup sidebar label can be stale** after an S/PDIF ↔ ADAT switch (the real channel counts are correct), and the switch interrupts audio for about 4 s.
-6. **New and not fully exercised yet:** the Uninstall app's button on a real install; every status-menu item against real units (the menu and the big meter have been checked in demo mode and on a MacBook Air, not item by item with both interfaces). Updating in place worked once (0.2.1 -> 0.2.2 on the Air).
-7. **Not verified yet:** MIDI bytes on the wire and SysEx (needs a DIN loopback cable), AC-3 pass-through on the wire, Audiophile S/PDIF external sync lock/unlock, sleep/wake, long (hours) streaming, the full 0.1.0 test ladder of the FW1814 on the new driver.
-8. **No firmware update.** The driver starts the firmware already in the interface; the panel's firmware check only reads it. Nothing writes flash.
-9. **FW1814 at 176.4 / 192 kHz:** digital ports and the DSP mixer are off (hardware); a loopback of analog inputs at 192 kHz read silence once, unexplained.
-10. **Rough edges:** diagnostic logging is still compiled in; English only.
+1. **Do not change the rate or the digital mode while audio is playing.** The original driver panics there; this driver gates only the panel's own rate change. Stop playback first.
+2. **Never unload the driver while a unit is attached** (`kextunload`): the official design does not free a FireWire resource on unload, and a later bus reset can panic. This driver frees it, but the installer and uninstaller still never unload — they ask for a restart.
+3. **Front-panel knobs can lose clicks on fast turns** — the interface reports only a direction per read (about every 50 ms), as with the official driver.
+4. **FW1814: the Audio MIDI Setup sidebar label can be stale** after an S/PDIF ↔ ADAT switch (the real channel counts are correct), and the switch interrupts audio for about 4 s.
+5. **New and not fully exercised yet:** the Uninstall app's button on a real install; every status-menu item against real units (the menu and the big meter have been checked in demo mode and on a MacBook Air, not item by item with both interfaces). Updating in place worked once (0.2.1 -> 0.2.2 on the Air).
+6. **Not verified yet:** MIDI bytes on the wire and SysEx (needs a DIN loopback cable), AC-3 pass-through on the wire, Audiophile S/PDIF external sync lock/unlock, sleep/wake, long (hours) streaming, the full 0.1.0 test ladder of the FW1814 on the new driver.
+7. **No firmware update.** The driver starts the firmware already in the interface; the panel's firmware check only reads it. Nothing writes flash.
+8. **FW1814 at 176.4 / 192 kHz:** digital ports and the DSP mixer are off (hardware); a loopback of analog inputs at 192 kHz read silence once, unexplained.
+9. **Rough edges:** diagnostic logging is still compiled in; English only.
 
 ## Roadmap
 
