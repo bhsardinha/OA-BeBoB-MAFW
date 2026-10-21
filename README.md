@@ -41,6 +41,30 @@ The FireWire 1814 (18 in / 14 out) and the FireWire Audiophile (4 in / 6 out) ar
 
 **Light on the CPU:** the meters are GPU-composited layers redrawn only when a segment changes (the official panel's method); with moving meters the panel uses about 2 % of a core on a 2010 iMac.
 
+### Menu bar and big meter (new in 0.2)
+
+<table>
+<tr>
+<td valign="top" width="300"><img src="docs/images/status-menu.png" width="290" alt="Status menu of OA BeBoB MAFW"></td>
+<td valign="top">
+
+**Status menu.** The panel can live in the **menu bar**, the **Dock**, or both, and can **launch at login** (choose under *Show Panel In*). The icon shows the selected interface at a glance — **online**, **muted** or **not locked** (no sync), dimmed when no interface is connected — and its menu acts on the unit checked at the top:
+
+- output and phones volume sliders (monitor law), **mute**, **dim**, headphones **A / B**;
+- **sample rate** (greyed while an application streams) and **sync source** with the lock state;
+- **presets** that fit that interface, the hardware **level knob** step;
+- the **big meter**, the full panel, Audio MIDI Setup and the **firmware check**.
+
+</td>
+</tr>
+</table>
+
+<p align="center"><img src="docs/images/big-meter.png" width="820" alt="Big meter"></p>
+
+**Big meter.** A horizontal peak meter about 80 % of the screen wide, segmented like an old stereo deck: **80 LED blocks over −60 … 0 dBFS** (0.75 dB each), green up to −18, amber up to −6, red above, unlit blocks faintly visible, a **peak-hold** block (about 2 s) and large peak readouts. Source: **SW 1/2** (default), **Out 1/2**, **Phones** or **In 1/2** of the selected unit. Right-click it (or use the status menu) for: **always on top**, **pin** to the top or bottom of the screen or move it freely, **transparent**, **click-through**. *View › Big Meter* (⌘B) toggles it. Peak only, from the driver's meter page — no RMS or loudness. Both pictures above are the panel's demo mode on a MacBook Air.
+
+### Panel pages
+
 <table>
 <tr>
 <td align="center"><img src="docs/images/panel-audiophile-mixer.png" width="400" alt="Audiophile mixer page"><br><sub>FireWire Audiophile: mixer (demo mode render)</sub></td>
@@ -96,7 +120,7 @@ Never copy an untested kext into `/Library/Extensions` (a panicking kext there b
 3. **Never unload the driver while a unit is attached** (`kextunload`): the official design does not free a FireWire resource on unload, and a later bus reset can panic. This driver frees it, but the installer and uninstaller still never unload — they ask for a restart.
 4. **Front-panel knobs can lose clicks on fast turns** — the interface reports only a direction per read (about every 50 ms), as with the official driver.
 5. **FW1814: the Audio MIDI Setup sidebar label can be stale** after an S/PDIF ↔ ADAT switch (the real channel counts are correct), and the switch interrupts audio for about 4 s.
-6. **New in 0.2.2 and not exercised yet:** updating in place over an earlier install, and the Uninstall app's button on a real install.
+6. **New and not fully exercised yet:** the Uninstall app's button on a real install; every status-menu item against real units (the menu and the big meter have been checked in demo mode and on a MacBook Air, not item by item with both interfaces). Updating in place worked once (0.2.1 -> 0.2.2 on the Air).
 7. **Not verified yet:** MIDI bytes on the wire and SysEx (needs a DIN loopback cable), AC-3 pass-through on the wire, Audiophile S/PDIF external sync lock/unlock, sleep/wake, long (hours) streaming, the full 0.1.0 test ladder of the FW1814 on the new driver.
 8. **No firmware update.** The driver starts the firmware already in the interface; the panel's firmware check only reads it. Nothing writes flash.
 9. **FW1814 at 176.4 / 192 kHz:** digital ports and the DSP mixer are off (hardware); a loopback of analog inputs at 192 kHz read silence once, unexplained.

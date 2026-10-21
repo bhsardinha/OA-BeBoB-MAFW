@@ -101,6 +101,9 @@ final class StatusMenuController: NSObject, NSMenuDelegate {
         timer = t
     }
 
+    /// Screenshot aid (demo `--open-status-menu`): opens the menu as a click on the icon would.
+    func openForCapture() { item?.button?.performClick(nil) }
+
     func remove() {
         timer?.invalidate(); timer = nil
         if let it = item { NSStatusBar.system.removeStatusItem(it) }

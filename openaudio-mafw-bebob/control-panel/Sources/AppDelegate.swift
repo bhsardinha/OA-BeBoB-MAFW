@@ -46,7 +46,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                        : DemoBackend(id: UInt64(k + 1), rate: 44100, adat: false, guid: guids[k], profile: profile(k))
             }
             sync()
-            // Bench aid (CPU measurements): `--big-meter` opens the big meter on the first unit; `--no-panel` hides the panel windows.
+            // Bench / screenshot aids: `--status-item` puts the status menu in the menu bar for the demo units (`--open-status-menu` also opens it
+            // after 1.5 s, for a screen capture); `--big-meter` opens the big meter on the first unit; `--no-panel` hides the panel windows.
+            if args.contains("--status-item") {
+                status.units = { [weak self] in self?.ordered ?? [] }
+                status.front = { [weak self] in self?.front }
+                status.onFirmwareCheck = { [weak self] in self?.showFirmwareCheck() }
+                bigMeter.unit = { [weak self] in self?.status.selected }
+                status.install()
+                if args.contains("--open-status-menu") {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in self?.status.openForCapture() }
+                }
+            }
             if args.contains("--big-meter") { bigMeter.unit = { [weak self] in self?.ordered.first }; bigMeter.show() }
             if args.contains("--no-panel") { DispatchQueue.main.async { [weak self] in self?.ordered.forEach { $0.hideAll() } } }
             if let i = args.index(of: "--snapshot"), i + 1 < args.count {
