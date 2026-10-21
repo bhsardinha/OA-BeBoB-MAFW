@@ -1,0 +1,12 @@
+<html><body style="font-family:-apple-system,Helvetica;font-size:13px">
+<h2>OpenAudio BeBoB MAFW @VERSION@</h2>
+<p>A native driver stack for the M-Audio FireWire 1814 and FireWire Audiophile on macOS 10.13.6 High Sierra. This installs:</p>
+<ul>
+<li>the audio driver <b>@DRIVER@</b> (<code>/Library/Extensions/OpenAudioBeBoBMAFW.kext</code>)</li>
+<li>a firmware-start and settings helper (a LaunchDaemon)</li>
+<li>the <b>OA BeBoB MAFW</b> control panel <b>@PANEL@</b> in <code>/Applications</code>, with a read-only firmware check</li>
+<li>the M-Audio CoreMIDI driver and the device icons</li>
+</ul>
+<p>Any earlier version (OpenAudio FW1814 0.1.0, OpenAudio BeBoB MAFW 0.2.x) is replaced: there is no need to uninstall it first, and your settings are kept. Nothing is unloaded while it runs: the Mac must be restarted at the end.</p>
+<p><b>Note:</b> this is an experimental, <b>unsigned</b> driver. It only loads on a Mac with System Integrity Protection disabled (Recovery mode, <code>csrutil disable</code>). Quit audio and MIDI applications before installing. The M-Audio/Avid FireWire driver must not be installed at the same time.</p>
+</body></html>

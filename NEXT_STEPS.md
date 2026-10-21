@@ -4,6 +4,45 @@
 
 Read this first after a context clear, then `NEW_PLAN.md` → `docs/STATE.md` → `docs/BUILD-MANUAL.md` §0 → `docs/system-map/README.md`.
 
+## 2026-10-21 (late morning) — READ THIS FIRST: package 0.2.2
+Package **0.2.2** = driver 0.2.0, panel **1.3** (renamed `OA BeBoB MAFW.app`, firmware check inside the panel), OA names under icons, update-in-place installer, uninstall self-kill fix (R121; versions R120; CPU R119). Built: `openaudio-mafw-bebob/dist/OA-BeBoB-MAFW-0.2.2.dmg`. Next: user installs it on the Air over 0.2.0/0.2.1 (first real update test: no manual uninstall, settings and launch at login kept, About shows package 0.2.2 / panel 1.3 / driver 0.2.0, CPU with panel + big meter, the Uninstall app's button later); AP-8.3 drafts must follow the new names (no separate Firmware Tool).
+
+## 2026-10-21 (later) — READ THIS FIRST: 0.2.1
+0.2.0 installed and working on the MacBook Air (user, 2026-10-21). Panel CPU fixed and big meter segmented (R119); version **0.2.1** (user), package + dmg rebuilt. Next: install 0.2.1 on the Air and look at CPU in Activity Monitor with the panel and the big meter open (Metal-capable GPU; not measured yet); then the items below (AP-5.5/5.6 on hardware, AP-5.3b, AP-8.3 docs — the README draft must say 0.2.1).
+
+## 2026-10-21 — READ THIS FIRST: 0.2.0 wrap-up
+Plan **`docs/BUILD_AUDIOPHILE_PLAN_v8.md`**; resolutions up to **R118**. Done: two units on the iMac (R117); menu bar mode AP-5.5 and big meter AP-5.6 coded, panel tests pass; package/dmg 0.2.0 built (`openaudio-mafw-bebob/dist/`, git-ignored) and checked statically (R118).
+Next, in order:
+1. **AP-8.2 on the MacBook Air (user):** copy the dmg, run the installer (sudo password), before restarting read `/var/log` helper output / `ps` for the helper (R118 hypothesis), restart, then FW1814 through the Thunderbolt adapter: device in AMS, `loopcheck`, panel, Firmware Tool, Uninstall app button on a real install, dmg window layout.
+2. **AP-5.5/5.6 on the hardware (user):** every status-menu item on the checked unit, icon online/muted/no sync, big meter with music.
+3. **AP-5.3b:** device-menu checklist with both units (one window, `unit n` entries, ⌘n, size follows model).
+4. **AP-8.3:** drafts `docs/README_0.2.0_v1.md` + `docs/NOTICE_0.2.0_v1.md` written 2026-10-21; close their [pending] lines after steps 1-3 and AP-8.1, take the screenshots, then public sync only on your go-ahead. AP-8.4 release (user).
+Still open from the ladder (equipment): AP-6.2 MIDI DIN loopback, AP-7.5 S/PDIF sync lock/unlock, AP-7.8 sleep/wake, power-cycle bus reset (done once, R117), 1 h soak, AP-3.9 kextunload x5, AP-8.1 full 1814 ladder on 0.2.0.
+
+## 2026-10-20 (night, 23:30) — READ THIS FIRST: 0.2.0 state and next steps
+Plan **`docs/BUILD_AUDIOPHILE_PLAN_v7.md`** (v7 = v6 + AP-5.4 monitor level law). Resolutions up to **R116**; capture 96 = the Audiophile-alone run. Session script `openaudio-mafw-bebob/tests/hw-smoke/phase7.sh` (+ `p7util.py`; `ma-watch` records MA* changes). Tracker Build: 45/56 done.
+Done on the hardware (Audiophile alone, R115): bring-up, channel order, rates 44.1-96, factory = official, AC-3 formats, MIDI plug-in, Firmware Tool, persistence, panel, front panel. Done in the session (R116): headphone safety (helper + panel reset), monitor law for output / phones / aux-out (dB-linear 72 dB, centre -36, bottom off; knob 1.5 dB per click by default, 3 dB or official selectable). Kext with factory 1.5 dB: UUID `B034F8E6…` (staged in /tmp before the shutdown; `stage` again after boot).
+Next, in order (user, 2026-10-20: finish 0.2.0, then two units, then the Air):
+1. ~~Two units together on the iMac~~ **done (R117, capture 97)**: panic of the installed 0.1.0 on unload (leaked host PCR plug; reference has the same leak, it never unloads) → 0.2.0 fix `FreeHostPlugs` (kext `78A039D0…`); iMac cleaned (0.1.0 uninstalled, settings in `~/oa-backup/`); both units up from scratch, both Current, 1814 six rates, both streaming 30 s, power-cycles recovered. The iMac now runs NOTHING installed: the 0.2.0 test kext from /tmp + helper from `~/oa-build-mafw` (a reboot leaves it without any driver).
+2. **AP-8.2 installer 0.2.0**: package with kext, helper, panel, Firmware Tool (check only, no images), MIDI plug-in; removes the 0.1.0 kext/helper/panel files; **never unloads a running driver (R117): install/uninstall ask for a restart**; uninstaller; dmg; `check-self-contained.sh`. Build on the iMac.
+3. **Install on the MacBook Air** (user runs the installer: sudo there needs a password); clean-install check with the FW1814 through the Thunderbolt adapter.
+4. AP-8.3 README/NOTICE (monitor law, headphone safety, Firmware Tool check-only), AP-8.4 release (user), AP-8.5 panel manual later.
+Later (equipment): MIDI DIN loopback, AC-3 to an S/PDIF receiver, S/PDIF sync lock/unlock, sleep/wake, bus reset by power-cycle, 1 h soak. Known issue: encoder clicks can be lost on fast turns (direction-only status per 50 ms read, official behaviour; worn encoders); measured software path ~65 ms worst case.
+Side items: update the iMac's installed 0.1.0 kext to the current 0.1.0 source (R75/R76) when the user wants; the 1814 aux could get dual-mono pan like the Audiophile if the user asks (official 1814 has bal only).
+
+## 2026-10-19 (night) — plan v3 phase 1 done (AP-1.1…1.4); next AP-2.1
+Capture 95/R94: renamed driver on the iMac behaves like 0.1.0. Next: AP-2.1 (kDeviceSpecs 8 rows + personalities), then AP-2.2…2.4, no hardware. **Separate pending item:** the iMac's installed 0.1.0 kext is older than the 0.1.0 source (lacks R75/R76: second-client loop, frozen meters) — update it via stage-kext + install.sh in `openaudio-fw1814/` when the user wants.
+
+## 2026-10-19 (evening) — Audiophile plan v3 waiting for approval
+Plan: **`docs/BUILD_AUDIOPHILE_PLAN_v3.md`** (v2 kept as `_v2.md`). Product OpenAudio BeBoB MAFW 0.2.0, one driver for 1814 + Audiophile, official class hierarchy for multi-device, panel = new 1814 panel extended, first load on the iMac. On approval: start AP-1.1; no code before.
+
+## 2026-10-19 (later) — Audiophile: static phase 0 done; next = SL rig session (user), then plan v3
+1. AP-0.9 on the SL rig (user present): each panel control one at a time (setProperties capture), FWDJ screenshots, factory reset values (−6 dB question), ioreg at 44.1/48/88.2/96, listen for mixing without streaming. Optional read-only reads (user OK): `0xFFC7:0x00600000` with S/PDIF sync (rate byte), `EXTENDED PLUG INFO` (channel order).
+2. ~~Write plan v3~~ done: `docs/BUILD_AUDIOPHILE_PLAN_v3.md`, written from the tracker (reuse map, new work list, task order, acceptance) for approval. No code before approval.
+
+## 2026-10-19 — Audiophile phase 0 (branch `audiophile-phase0`)
+1814 work is unchanged (entries below). Audiophile: follow `docs/BUILD_AUDIOPHILE_PLAN_v2.md` §11 (superseded by `_v3.md`) and the `Painel` of `PROVENANCE-MATRIX-AUDIOPHILE.xlsx`. Next, in order: AP-0.4 (asm of `ReadHSCIData @0xba92`, LED vendor command, HSCI period) → AP-0.3 (AV/C function-block bytes from the settings classes) → AP-0.5/0.6/0.7 → helper `.bcd` reader and MIDI plug-in mapping → AP-0.9 on the SL rig with the user → final plan for approval. **No code until the plan is approved.**
+
 ## 2026-10-17 (evening) — read this first
 M-U done (verified), panel rate list done, MIDI plug-in installed and loading (capture 82, R58). Next: (1) **MIDI loopback** — connect a DIN cable from the 1814 MIDI OUT to its MIDI IN, then `tools/midiprobe loop 0 5` and a SysEx round trip (M-H/M-H2/M-V); (2) M-S: decide on a HAL re-publish at optical switches (the label is only right for a freshly added device); (3) install.sh with the current kext + installer copies the plug-in (IN.5); (4) sleep/wake and bus-reset tests.
 

@@ -1,0 +1,4 @@
+click tab-output 92 66
+shot restore-output
+click tab-mixer 37 66
+shot restore-mixer

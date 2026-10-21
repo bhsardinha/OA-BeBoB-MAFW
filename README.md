@@ -1,16 +1,16 @@
-# OpenAudio FW1814
+# OpenAudio BeBoB MAFW
 
-**A native driver, control panel and installer for the M-Audio FireWire 1814 on macOS 10.13.6 High Sierra.**
+**A native driver, control panel and installer for the M-Audio FireWire 1814 and FireWire Audiophile on macOS 10.13.6 High Sierra.**
 
-The FireWire 1814 is a 18-in / 14-out FireWire audio interface (BridgeCo BeBoB / DM1000) that M-Audio stopped supporting years ago. The last official driver (1.11.x, 2014) kernel-panics on macOS 10.13.6 as soon as the interface is attached, and its Carbon control panel is 32-bit only. OpenAudio FW1814 is a from-scratch replacement: a 64-bit kernel extension, a helper daemon, a modern AppKit control panel and an installer, built by reverse engineering the official driver and checking every behaviour against the real hardware.
+The FireWire 1814 (18 in / 14 out) and the FireWire Audiophile (4 in / 6 out) are BridgeCo BeBoB FireWire interfaces that M-Audio stopped supporting years ago. The last official driver (1.11.x, 2014) kernel-panics on macOS 10.13.6, and its Carbon control panel is 32-bit only. OpenAudio BeBoB MAFW is a from-scratch replacement — a 64-bit kernel extension, a helper daemon, a modern AppKit control panel (**OA BeBoB MAFW**) and an installer — built by reverse engineering the official driver and checking every behaviour against the real hardware. It succeeds **OpenAudio FW1814 0.1.0** (FireWire 1814 only), which its installer replaces.
 
-<p align="center"><img src="docs/images/panel-mixer.png" width="820" alt="Mixer page of the OpenAudio FW1814 control panel"></p>
+<p align="center"><img src="docs/images/panel-mixer.png" width="820" alt="Mixer page of the control panel with a FireWire 1814"></p>
 
-> **Who this is for.** Only people who own an **M-Audio FireWire 1814** (and, one day, other M-Audio FireWire interfaces). M-Audio ended support for these interfaces more than a decade ago and their last driver does not work on current macOS; this project exists solely to keep that hardware usable. It does nothing without the interface. The original M-Audio software belongs to M-Audio / inMusic — see [`NOTICE.md`](NOTICE.md).
+> **Who this is for.** Only people who own an **M-Audio FireWire 1814 or FireWire Audiophile**. It does nothing without the interface. The original M-Audio software belongs to M-Audio / inMusic — see [`NOTICE.md`](NOTICE.md).
 
-> **Homebrew and experimental.** This is a hobby project for tinkering, not a product: the kernel extension is **unsigned and will stay unsigned**, so it only runs on a Mac with **System Integrity Protection disabled**, and nothing is promised or supported.
+> **Homebrew and experimental.** A hobby project, not a product: the kernel extension is **unsigned and will stay unsigned**, so it runs only with **System Integrity Protection disabled**, and nothing is promised or supported.
 
-> **Status: early, working, 1814-only.** This is version 0.1.0 (tag `v0.1.0-first-working-2026-10-17`). It plays and records audio, the panel controls the interface and the original M-Audio MIDI plug-in loads. It has been tested on **one FireWire 1814, on two Macs running macOS 10.13.6 (an iMac with a native FireWire 800 port and a MacBook Air through Apple's Thunderbolt-to-FireWire adapter), with System Integrity Protection disabled on both**. Nothing else has been tested. Please read [Known issues](#known-issues) before installing it.
+> **Status: package 0.2.2** (driver 0.2.0, panel 1.3; see [`CHANGELOG.md`](openaudio-mafw-bebob/CHANGELOG.md)). Tested with **one FireWire 1814 and one FireWire Audiophile, alone and together on the same bus, on an iMac (iMac11,2, native FireWire 800)**, and installed from the disk image on a **MacBook Air (MacBookAir5,1) through Apple's Thunderbolt-to-FireWire adapter** — both on macOS 10.13.6 with SIP disabled. Nothing else has been tested. Read [Known issues](#known-issues) before installing.
 
 ---
 
@@ -18,31 +18,37 @@ The FireWire 1814 is a 18-in / 14-out FireWire audio interface (BridgeCo BeBoB /
 
 | Component | What it does |
 |---|---|
-| **Kernel extension** (`com.openaudio.OpenAudioFW1814`) | Matches the interface on the FireWire bus, brings it up (AV/C, CMP, isochronous streams with classic DCL programs), publishes a CoreAudio device (`FireWire 1814 Multichannel`) with all channels at 44.1 – 192 kHz, the hardware mixer properties, peak meters and the MIDI ports. |
-| **Helper daemon** (LaunchDaemon) | Starts the interface firmware after power-up and remembers your settings (levels, routing, clock) per interface, replaying them when the driver attaches. It never writes the interface's flash. |
-| **Control panel** (`OpenAudio FW1814.app`) | Mixer, output, hardware and meter views, presets, level-control knob. Talks to the kext through registry properties, like the original panel. |
-| **MIDI** | The original M-Audio CoreMIDI plug-in is reused **unmodified**; the kext provides what it expects. |
-| **Installer** | `.pkg` (kext, helper, panel, MIDI plug-in, icons), a one-window **Uninstall** app and a `.dmg` that holds both. |
+| **Kernel extension** (`com.openaudio.OpenAudioBeBoBMAFW`) | Matches the interfaces on the FireWire bus, brings them up (AV/C, CMP, isochronous streams with classic DCL programs) and publishes a CoreAudio device per unit with the hardware mixer properties, peak meters and MIDI ports. One driver for both models, structured like the official driver's class family: a shared base plus one module per model. |
+| **Helper daemon** (LaunchDaemon) | Starts the interface firmware after power-up (the Audiophile waits in its bootloader until told to start) and remembers your settings per unit, replaying them when the driver attaches. A unit with no saved settings gets its headphone level lowered to −43 dB. It never writes the interface's flash. |
+| **Control panel** (`OA BeBoB MAFW.app`) | Mixer, output, hardware and meter views for each model, presets, level knob, a device menu for several units, an optional **menu bar mode** with a status menu, a segmented **big meter**, and a read-only **firmware check** (is each unit running the official 1.11.2 firmware of its model?). Talks to the driver through registry properties, like the original panel. |
+| **MIDI** | The original M-Audio CoreMIDI plug-in is reused **unmodified**. |
+| **Installer** | `Install OA BeBoB MAFW.pkg`, a one-window **Uninstall OA BeBoB MAFW** app and a `.dmg` holding both. It **updates any earlier version in place** (0.1.0 or 0.2.x, no manual uninstall; settings kept) and asks for a restart; nothing is unloaded while it runs. |
 
-### What works (checked on the interface)
-- **Audio through Core Audio** in Studio One, Audio MIDI Setup and reAMP: 16 in / 12 out in ADAT mode, 10 in / 6 out in S/PDIF mode, 2 in / 4 out analog at 176.4 and 192 kHz (the digital ports are off at those rates — a hardware limit).
-- **Real round-trip latency 9.3 ms at 48 kHz / 64 frames** (measured with an analog loopback; it matches what the driver reports). The same measurement tool runs against the original driver on a Snow Leopard machine for comparison.
-- **Rates** 44.1 / 48 / 88.2 / 96 / 176.4 / 192 kHz, changed from the panel or any Core Audio app; S/PDIF ↔ ADAT switching with the stream resuming by itself after about 4 s.
-- **Panel**: faders, pan, aux sends, mute/solo/link, routing, A/B switch, headphone sources, clock source and digital ports, ADAT S/MUX, main level knob, presets, live meters, saved settings.
-- **MIDI**: the M-Audio plug-in loads in `MIDIServer` and lists the FireWire 1814 ports with its device icon.
-- **Core Audio controls** in Audio MIDI Setup: per-channel volume/mute and the "Thru" controls, as the older 1.9 driver exposed them.
+### What works (checked on the interfaces)
+
+**FireWire 1814:** 16 in / 12 out (ADAT), 10 in / 6 out (S/PDIF), 2 in / 4 out analog at 176.4 / 192 kHz (the digital ports are off at those rates — a hardware limit); all six rates; panel, saved settings, MIDI plug-in; real round-trip latency 9.3 ms at 48 kHz / 64 frames (analog loopback).
+
+**FireWire Audiophile**
+- **4 in / 6 out at 44.1 / 48 / 88.2 / 96 kHz**; channel order confirmed with a tone per channel and the device's own meters.
+- **Round-trip latency 9.1 ms at 48 kHz / 64 frames** (analog loopback), matching what the driver reports.
+- **Panel**: three software-return strips, two input strips, aux bus, outputs, phones, routing, sync, headphone A/B source matrix; a factory reset gives exactly the official driver's factory state.
+- **Front panel**: Level Controller, headphone knob, A/B switch and its LEDs.
+- **MIDI**: the M-Audio plug-in lists the Audiophile, 1 in / 1 out. Settings survive a driver reload.
+
+**Both units on one bus:** both come up, both stream, both recover after the interfaces are power-cycled; the panel switches between them; the firmware check reports both as current.
+
+**Monitor level law (this project's choice, not the official one).** Output, phones and aux-out faders are dB-linear over 72 dB (centre = −36 dB, bottom = off); the hardware knobs move those levels 1.5 dB per click by default (3 dB or the official law selectable per unit). Mixer faders keep the official console law.
+
+**Light on the CPU:** the meters are GPU-composited layers redrawn only when a segment changes (the official panel's method); with moving meters the panel uses about 2 % of a core on a 2010 iMac.
 
 <table>
 <tr>
-<td align="center"><img src="docs/images/panel-output.png" width="400" alt="Output page"><br><sub>Output page (outputs, aux out, phones)</sub></td>
-<td align="center"><img src="docs/images/panel-hardware.png" width="400" alt="Hardware page"><br><sub>Hardware page (rate, sync, digital ports, A/B switch)</sub></td>
+<td align="center"><img src="docs/images/panel-audiophile-mixer.png" width="400" alt="Audiophile mixer page"><br><sub>FireWire Audiophile: mixer (demo mode render)</sub></td>
+<td align="center"><img src="docs/images/panel-audiophile-output.png" width="400" alt="Audiophile output page"><br><sub>FireWire Audiophile: output page</sub></td>
 </tr>
 <tr>
-<td align="center"><img src="docs/images/panel-output-192k.png" width="400" alt="Output page at 192 kHz"><br><sub>At 176.4/192 kHz: outputs and phones only (the DSP mixer is off)</sub></td>
-<td align="center"><img src="docs/images/panel-about.png" width="400" alt="About page"><br><sub>About page</sub></td>
-</tr>
-<tr>
-<td align="center"><img src="docs/images/panel-meters.png" width="400" alt="Meter window"><br><sub>Meter window</sub></td>
+<td align="center"><img src="docs/images/panel-output.png" width="400" alt="FW1814 output page"><br><sub>FireWire 1814: output page</sub></td>
+<td align="center"><img src="docs/images/panel-hardware.png" width="400" alt="FW1814 hardware page"><br><sub>FireWire 1814: hardware page (rate, sync, digital ports, A/B switch)</sub></td>
 </tr>
 </table>
 
@@ -52,81 +58,72 @@ The FireWire 1814 is a 18-in / 14-out FireWire audio interface (BridgeCo BeBoB /
 
 | | |
 |---|---|
-| **Interface** | **M-Audio FireWire 1814 only.** It is the only hardware the author owns, so it is the only one that has been tested. The code is written so other BeBoB-based M-Audio devices could be added (see [Roadmap](#roadmap)), but none is implemented. |
-| **macOS** | **10.13.6 High Sierra only** (64-bit kext, 10.13 SDK, Xcode 9.4.1). Other versions are untested and almost certainly unsupported. |
-| **Mac** | Tested on two Macs: an iMac (iMac11,2) with a native FireWire 800 port, and a MacBook Air (MacBookAir5,1) through Apple's **Thunderbolt-to-FireWire adapter**, where a fresh install from the disk image worked. Other Macs, other adapters and FireWire 400 are untested. |
-| **Security** | The kext is **unsigned, always** (homebrew project, no Developer ID, no notarisation). **System Integrity Protection must be disabled** (in Recovery: `csrutil disable`); that is the only configuration it has been tested in, on both test Macs. |
+| **Interfaces** | **M-Audio FireWire 1814 and FireWire Audiophile only** — the hardware the author owns. The other models of the official driver (FireWire 410, FireWire Solo, Ozonic, ProFire Lightbridge, ProjectMix I/O, NRV10) are not implemented; the structure for them exists (see [Roadmap](#roadmap)). |
+| **macOS** | **10.13.6 High Sierra only** (64-bit kext, 10.13 SDK, Xcode 9.4.1). |
+| **Mac** | iMac11,2 with native FireWire 800; MacBook Air (MacBookAir5,1) through Apple's **Thunderbolt-to-FireWire adapter**. Other Macs, adapters and FireWire 400 are untested. |
+| **Security** | **Unsigned, always**; **System Integrity Protection must be disabled** (Recovery, `csrutil disable`). |
 
 ## Install
 
-1. Quit audio and MIDI applications. Remove the official M-Audio (and Avid/DICE) FireWire drivers first; they conflict.
-2. Open the `.dmg`, run **Install OpenAudio FW1814.pkg**, restart. (The released package contains M-Audio's CoreMIDI plug-in unmodified, so that MIDI works; see [`NOTICE.md`](NOTICE.md).)
-3. Disable System Integrity Protection first if it is on (Recovery mode, `csrutil disable`); an unsigned kext cannot be used otherwise.
-4. Power on the 1814. It appears as **FireWire 1814 Multichannel** in Audio MIDI Setup; the panel is in `/Applications`.
+1. Download the `.dmg` from the [Releases](https://github.com/bhsardinha/openaudio-fw1814/releases) page.
+2. Quit audio and MIDI applications. Remove the official M-Audio (and Avid/DICE) FireWire drivers first; they conflict. An earlier OpenAudio version does **not** need to be removed: the installer replaces it and keeps your settings.
+3. Disable System Integrity Protection if it is on (Recovery mode, `csrutil disable`).
+4. Open the `.dmg`, run **Install OA BeBoB MAFW.pkg**, **restart**. (The package contains M-Audio's CoreMIDI plug-in unmodified, so that MIDI works; see [`NOTICE.md`](NOTICE.md).)
+5. Power on the interface. It appears in Audio MIDI Setup; the panel **OA BeBoB MAFW** is in `/Applications`.
 
-To remove everything run **Uninstall OpenAudio FW1814** from the disk image (it asks for your administrator password).
+To remove everything run **Uninstall OA BeBoB MAFW** from the disk image and restart.
 
 ## Build from source
 
-You need a Mac running **10.13.6 with Xcode 9.4.1** (the last Xcode with the 10.13 SDK; newer toolchains cannot build the kext).
+You need **macOS 10.13.6 with Xcode 9.4.1** (the last Xcode with the 10.13 SDK).
 
 ```sh
-cd openaudio-fw1814
-make -C kext                 # kext/build/OpenAudioFW1814.kext
+cd openaudio-mafw-bebob
+make -C kext                 # kext/build/OpenAudioBeBoBMAFW.kext
 make -C firmware-helper      # firmware-helper/build/oa-fwhelper
-make -C control-panel app    # control-panel/build/OpenAudio FW1814.app   (make -C control-panel test: logic tests)
+make -C control-panel app    # control-panel/build/OA BeBoB MAFW.app   (make -C control-panel test: logic tests)
 scripts/stage-kext.sh        # copy to /tmp and run kextutil -t -n (static check; loads nothing)
 ```
 
-Never copy an untested kext into `/Library/Extensions` (a panicking kext there boot-loops). Load a staged copy with `kextutil` and keep `sudo dmesg` handy.
-
-The installer additionally needs the **M-Audio CoreMIDI plug-in** (`MAudioFireWireMIDI.plugin`) from your own copy of the official M-Audio FireWire 1.11.2 installer, placed in `openaudio-fw1814/installer/assets/` (see the README there). It is M-Audio's file and is not part of this repository; the device icons it uses are included. `installer/make-pkg.sh` builds the package; `installer/make-dmg.sh` builds the disk image (needs `installer/.venv`, see `installer/requirements.txt`).
-
-Bench tools (latency loopback, CoreAudio rate walker, MIDI probe, …) are described in [`openaudio-fw1814/tools/README.md`](openaudio-fw1814/tools/README.md).
+Never copy an untested kext into `/Library/Extensions` (a panicking kext there boot-loops). The installer also needs M-Audio's `MAudioFireWireMIDI.plugin` from your own copy of the official 1.11.2 installer, placed in `openaudio-mafw-bebob/installer/assets/` (see the README there); `installer/make-dmg.sh` builds the package and the disk image. Version numbers: the package has its own number (`VERSION`), the driver and the panel keep theirs (see the top of [`CHANGELOG.md`](openaudio-mafw-bebob/CHANGELOG.md)). Bench tools are described in [`openaudio-mafw-bebob/tools/README.md`](openaudio-mafw-bebob/tools/README.md).
 
 ---
 
 ## Known issues
 
-These are real, observed or expected, and ordered roughly by how much they matter.
-
-1. **Kernel panic seen once during playback.** (A stale mix buffer that made a second audio client, such as the system's delete sound, loop the output for a moment was found and fixed the same day; it is a possible contributor, not a proven one.) On 2026-10-17 the kernel panicked inside Apple's IOAudioFamily (`IOAudioStream::mixOutputSamples`, reached from `coreaudiod`) while Studio One was playing at 48 kHz / 64 frames. The report is in [`docs/system-map/build-pc-panics/`](docs/system-map/build-pc-panics/). The cause is not proven; the likely reason is a stale stream format after a rate change, which was found and fixed the same day — but nobody has confirmed that the fix removes the panic. Treat the driver as **unsafe for work you cannot afford to lose**.
-2. **Do not change the rate or the digital mode while audio is playing.** The original driver panics when you do this, and this driver only protects the panel's own rate write. Stop playback first.
-3. **The Audio MIDI Setup sidebar label ("N ins / M outs") can be stale** after an S/PDIF ↔ ADAT switch. The real channel counts, the device pane and every application are correct; only the label is built by AMS when the device is added. A fix exists in the code (re-publishing the device) but it drops running applications' audio, so it is switched off.
-4. **An S/PDIF ↔ ADAT switch interrupts audio for about 4 seconds** (as the original driver does) and applications keep running.
-5. **MIDI is only checked up to the plug-in.** The plug-in loads, the ports appear and sends return success; MIDI bytes on the wire, SysEx round trips and MIDI after sleep have not been verified (needs a DIN loopback cable).
-6. **Untested paths exist in the code:** sleep/wake, recovery after a FireWire bus reset (power-cycle), AC3 / IEC 61937 pass-through, the stereo-pair engines option, multiple interfaces, long (hours) streaming.
-7. **No firmware update.** The driver starts the firmware that is already in the interface; it never writes flash. The original driver's firmware updater is not implemented, on purpose.
-8. **At 176.4 / 192 kHz** the digital ports and the internal DSP mixer are off (hardware); the panel shows only output levels and the phones. A loopback test of analog *inputs* at 192 kHz read silence in this project's tests and is not explained yet.
-9. **Rough edges:** diagnostic logging is still compiled into the kext, the panel is English-only, there is no preference pane or status-bar item, the uninstaller's *Uninstall* button and the disk image's Finder layout have not been exercised end to end.
-
-## Points to be fixed (next)
-
-- Confirm or remove the playback panic: long streaming runs, rate changes with a client attached (lock the format change against client I/O).
-- Verify MIDI on the wire; sleep/wake; bus-reset recovery; AC3 pass-through; multi-interface.
-- Remove the debug logging, finish the installer/uninstaller tests.
-- Latency checks at every rate and in both digital modes with a loopback jig.
+1. **Kernel panic seen once during playback with 0.1.0** (2026-10-17, inside Apple's IOAudioFamily `mixOutputSamples`, FireWire 1814, Studio One). A likely cause was fixed the same day; it has not been seen since, but it is not proven gone. Treat the driver as **unsafe for work you cannot afford to lose**.
+2. **Do not change the rate or the digital mode while audio is playing.** The original driver panics there; this driver gates only the panel's own rate change. Stop playback first.
+3. **Never unload the driver while a unit is attached** (`kextunload`): the official design does not free a FireWire resource on unload, and a later bus reset can panic. This driver frees it, but the installer and uninstaller still never unload — they ask for a restart.
+4. **Front-panel knobs can lose clicks on fast turns** — the interface reports only a direction per read (about every 50 ms), as with the official driver.
+5. **FW1814: the Audio MIDI Setup sidebar label can be stale** after an S/PDIF ↔ ADAT switch (the real channel counts are correct), and the switch interrupts audio for about 4 s.
+6. **New in 0.2.2 and not exercised yet:** updating in place over an earlier install, and the Uninstall app's button on a real install.
+7. **Not verified yet:** MIDI bytes on the wire and SysEx (needs a DIN loopback cable), AC-3 pass-through on the wire, Audiophile S/PDIF external sync lock/unlock, sleep/wake, long (hours) streaming, the full 0.1.0 test ladder of the FW1814 on the new driver.
+8. **No firmware update.** The driver starts the firmware already in the interface; the panel's firmware check only reads it. Nothing writes flash.
+9. **FW1814 at 176.4 / 192 kHz:** digital ports and the DSP mixer are off (hardware); a loopback of analog inputs at 192 kHz read silence once, unexplained.
+10. **Rough edges:** diagnostic logging is still compiled in; English only.
 
 ## Roadmap
 
-- **Other M-Audio BeBoB interfaces.** The original driver is a family (FireWire 410, Audiophile, Ozonic, ProFire Lightbridge, ProjectMix I/O, …) and this project mirrors its class structure, so adding a device is mostly a table of channels and plug maps plus testing. **None of this exists yet and it needs people who own the hardware** — issues and pull requests with captures from other interfaces are very welcome.
-- A transport-agnostic protocol library so a future macOS 10.15+ `AudioServerPlugIn` port can reuse the AV/C and mixer code (see `docs/Proposal.md`).
+- **Other M-Audio BeBoB interfaces.** Each is a model module (tables, mixer map, status decode) on the shared base — [`docs/ARCHITECTURE_MAFW_v1.md`](docs/ARCHITECTURE_MAFW_v1.md) has the checklist. It needs people who own the hardware: captures, issues and pull requests are welcome.
+- A guide for building the panel on other systems.
 
 ---
 
+## Repository map
+
+| Path | What |
+|---|---|
+| [`openaudio-mafw-bebob/`](openaudio-mafw-bebob/) | **Current code (0.2.x):** `kext/` (`src/base/` + `src/models/<Model>/`), `firmware-helper/`, `control-panel/`, `installer/`, `tools/`, `tests/`, `scripts/`, `CHANGELOG.md`, `VERSION` |
+| [`openaudio-fw1814/`](openaudio-fw1814/) | The 0.1.0 tree (FireWire 1814 only), kept as released (tag `v0.1.0`) |
+| [`docs/system-map/`](docs/system-map/README.md) | Reverse-engineering notes: class chain, DCL rings, clocking, AV/C and HSCI commands, mixer model, panel, MIDI plug-in, helper, captures |
+| [`docs/system-map/PROVENANCE-RESOLUTIONS.md`](docs/system-map/PROVENANCE-RESOLUTIONS.md) | Dated log of every finding, correction and test result (R1 … R121) |
+| [`docs/ARCHITECTURE_MAFW_v1.md`](docs/ARCHITECTURE_MAFW_v1.md), [`docs/BUILD_AUDIOPHILE_PLAN_v8.md`](docs/BUILD_AUDIOPHILE_PLAN_v8.md) | Driver layers and how a model plugs in; the 0.2 plan |
+| [`docs/STATE.md`](docs/STATE.md), [`NEXT_STEPS.md`](NEXT_STEPS.md) | Current state and what is next |
+| `PROVENANCE-MATRIX*.xlsx` | Project trackers (tasks, per-claim evidence, dashboards; in Portuguese) |
+
 ## How it was made
 
-Everything the driver does is traced to evidence. The reference was the official 2014 driver (kext, panel, MIDI plug-in, helper, firmware loader), analysed statically with **Ghidra** and `otool`, plus live **DTrace**, `ioreg` and FCP captures from a Snow Leopard Mac running the official driver against a real FireWire 1814. The wire protocol was cross-checked with [FFADO](https://github.com/ojsl1/libffado), the Linux [snd-bebob](https://github.com/torvalds/linux/tree/master/sound/firewire/bebob) driver, [snd-firewire-ctl-services](https://github.com/alsa-project/snd-firewire-ctl-services) and [macfw](https://github.com/mbprado/macfw). Where the original and the 10.13 kernel disagree, the original is mirrored and the difference is commented in the code with what forced it.
-
-For people who want the details:
-
-| | |
-|---|---|
-| [`docs/system-map/`](docs/system-map/README.md) | The reverse-engineering notes: kext class chain, DCL rings, clocking, AV/C and HSCI commands, mixer property model, panel, MIDI plug-in, helper, captures. |
-| [`docs/system-map/PROVENANCE-RESOLUTIONS.md`](docs/system-map/PROVENANCE-RESOLUTIONS.md) | Dated log of every finding, correction and test result (R1 … R69). |
-| [`docs/BUILD-PLAN.md`](docs/BUILD-PLAN.md), [`docs/STATE.md`](docs/STATE.md), [`NEXT_STEPS.md`](NEXT_STEPS.md) | Plan, current state and what is next. |
-| [`PROVENANCE-MATRIX.xlsx`](PROVENANCE-MATRIX.xlsx) | Project tracker: task list, per-claim evidence, dashboard. |
-| `openaudio-fw1814/` | `kext/`, `firmware-helper/`, `control-panel/`, `installer/`, `tools/`, `tests/`, `scripts/`. |
+Everything the driver does is traced to evidence: the official 2014 driver (kext, panel, MIDI plug-in, helper, firmware loader) analysed with **Ghidra** and `otool`, plus live **DTrace**, `ioreg` and FCP captures from a Snow Leopard Mac running the official driver against both interfaces. The wire protocol was cross-checked with [FFADO](https://github.com/ojsl1/libffado), the Linux [snd-bebob](https://github.com/torvalds/linux/tree/master/sound/firewire/bebob) driver, [snd-firewire-ctl-services](https://github.com/alsa-project/snd-firewire-ctl-services) and [macfw](https://github.com/mbprado/macfw). Where the original and the 10.13 kernel disagree, the original is mirrored and the difference is commented in the code with what forced it.
 
 Created by Bernardo Sardinha, with Claude (Anthropic).
 

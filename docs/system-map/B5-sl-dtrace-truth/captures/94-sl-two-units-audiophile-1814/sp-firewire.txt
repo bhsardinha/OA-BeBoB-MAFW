@@ -1,0 +1,35 @@
+FireWire:
+
+    FireWire Bus:
+
+      Maximum Speed: Up to 800 Mb/sec
+
+        FW Audiophile:
+
+          Manufacturer: M-Audio
+          Model: 0x10060
+          GUID: 0xD6C0300211D54
+          Maximum Speed: Up to 400 Mb/sec
+          Connection Speed: Up to 400 Mb/sec
+          Sub-units:
+            FW Audiophile Unit:
+              Unit Software Version: 0x14001
+              Unit Spec ID: 0xA02D
+
+        Built-in Hub:
+
+          Maximum Speed: Up to 800 Mb/sec
+          Connection Speed: Up to 800 Mb/sec
+
+        FW 1814:
+
+          Manufacturer: M-AUDIO
+          Model: 0x10071
+          GUID: 0xD6C040012337F
+          Maximum Speed: Up to 400 Mb/sec
+          Connection Speed: Up to 400 Mb/sec
+          Sub-units:
+            FW 1814 Unit:
+              Unit Software Version: 0x14001
+              Unit Spec ID: 0xA02D
+

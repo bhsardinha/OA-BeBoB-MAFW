@@ -1,0 +1,24 @@
+== 48000-internal (MASampleRate 48000, MARateLocked 1)
+  0 peaks     0     0     0     0     0     0     0     0     0     0     0     0     0     0  status w0..w3 = 00 00 02 01
+  1 peaks     0     0     0     0     0     0     0     0     0     0     0     0     0     0  status w0..w3 = 00 00 02 01
+== 44100-internal (MASampleRate 44100, MARateLocked 1)
+  0 peaks     0     0     0     0     0     0     0     0     0     0     0     0     0     0  status w0..w3 = 00 00 01 01
+  1 peaks     1     0     0     0     0     0     0     0     0     0     0     0     0     0  status w0..w3 = 00 00 01 01
+== 88200-internal (MASampleRate 88200, MARateLocked 1)
+  0 peaks     1     0     0     0     0     0     0     0     0     0     0     0     0     0  status w0..w3 = 00 00 03 01
+  1 peaks     0     0     0     0     0     0     0     0     0     0     0     0     0     0  status w0..w3 = 00 00 03 01
+== 96000-internal (MASampleRate 96000, MARateLocked 1)
+  0 peaks     1     0     0     0     0     0     0     0     0     0     0     0     0     0  status w0..w3 = 00 00 04 01
+  1 peaks     1     1     0     0     0     0     0     0     0     0     0     0     0     0  status w0..w3 = 00 00 04 01
+== 96000-external (MASampleRate 96000, MARateLocked 0)
+  0 peaks     0     0     0     0     0     0     0     0     0     0     0     0     0     0  status w0..w3 = 00 00 ff 00
+  1 peaks     0     0     0     0     0     0     0     0     0     0     0     0     0     0  status w0..w3 = 00 00 ff 00
+== 48000-internal-end (MASampleRate 48000, MARateLocked 1)
+  0 peaks     1     1     0     0     0     0     0     0     0     0     0     0     0     0  status w0..w3 = 00 00 02 01
+  1 peaks     1     1     0     0     0     0     0     0     0     0     0     0     0     0  status w0..w3 = 00 00 02 01
+== 48000-external (MASampleRate 48000, MARateLocked 0)
+  0 peaks     0     0     0     0     0     0     0     0     0     0     0     0     0     0  status w0..w3 = 00 00 ff 00
+  1 peaks     0     0     0     0     0     0     0     0     0     0     0     0     0     0  status w0..w3 = 00 00 ff 00
+== 48000-internal-restored (MASampleRate 48000, MARateLocked 1)
+  0 peaks     0     1     0     0     0     0     0     0     0     0     0     0     0     0  status w0..w3 = 00 00 02 01
+  1 peaks     0     0     0     0     0     0     0     0     0     0     0     0     0     0  status w0..w3 = 00 00 02 01

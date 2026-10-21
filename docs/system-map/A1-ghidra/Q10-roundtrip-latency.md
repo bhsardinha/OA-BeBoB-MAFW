@@ -1,5 +1,8 @@
 # Q10 — `GetRoundTripLatencyForFDF` — per-rate reported latency
 
+> **Correction (2026-10-19, R77):** line 11's "a soft indicator that the Audiophile is only truly supported at 48k/88.2k/96k" is an inference without evidence: the default 182 covers FDF1 (44.1 kHz), and both the manual and the SL v1.9 registry (capture 89) list 44.1-96 kHz. Values confirmed in asm `0xafde-0xb00c` (196/330/354, default 182). See [Q-AP0-nub-and-rev2.md](Q-AP0-nub-and-rev2.md) §2.4, which also records the v1.9 registry latency (210/32/48 at 48 kHz) as an open item.
+
+
 > **Correction (2026-10-15, M-D / R45):** `GetSafetyOffsetForFDF @0x1d58` (feeds `setSampleOffset` in `ResetLatency`) = 44/44/48/88/96/176/192 frames for FDF 0..6 (default `0x2c`); the round-trip value is split `out = rt >> 1`, `in = (rt + 1) >> 1`. See [`Q-MD-engine-rate-chain.md`](Q-MD-engine-rate-chain.md).
 
 **Status:** done.

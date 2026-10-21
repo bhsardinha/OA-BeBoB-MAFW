@@ -1,0 +1,14 @@
+1792448213554 click tab-hardware 148 66
+1792448224434 snapshot 48000-start "MASampleRate" = 48000
+1792448225523 click rate-down 104 168
+1792448236464 snapshot 44100 "MASampleRate" = 44100
+1792448237550 click rate-up 104 153
+1792448248419 snapshot 48000 "MASampleRate" = 48000
+1792448249504 click rate-up 104 153
+1792448260370 snapshot 88200 "MASampleRate" = 88200
+1792448261456 click rate-up 104 153
+1792448272329 snapshot 96000 "MASampleRate" = 96000
+1792448273420 click rate-down 104 168
+1792448284285 snapshot 88200-back "MASampleRate" = 88200
+1792448285373 click rate-down 104 168
+1792448296265 snapshot 48000-end "MASampleRate" = 48000

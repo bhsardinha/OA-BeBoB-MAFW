@@ -1,0 +1,314 @@
+[wall=1792448226650 pid=169 exec=Panel size=966]
+
+             0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f  0123456789abcdef
+         0: 03 00 00 00 00 00 00 00 00 00 00 00 c6 03 00 00  ................
+        10: 00 00 00 00 34 38 ce 21 fa 03 00 00 00 00 00 00  ....48.!........
+        20: 3e 00 00 00 02 00 00 00 00 00 00 00 19 00 63 00  >.............c.
+        30: 6f 00 6d 00 3c 64 69 63 74 3e 3c 6b 65 79 3e 49  o.m.<dict><key>I
+        40: 4f 41 75 64 69 6f 53 74 72 65 61 6d 46 6f 72 6d  OAudioStreamForm
+        50: 61 74 3c 2f 6b 65 79 3e 3c 64 69 63 74 3e 3c 6b  at</key><dict><k
+        60: 65 79 3e 49 4f 41 75 64 69 6f 53 74 72 65 61 6d  ey>IOAudioStream
+        70: 42 69 74 44 65 70 74 68 3c 2f 6b 65 79 3e 3c 69  BitDepth</key><i
+        80: 6e 74 65 67 65 72 20 73 69 7a 65 3d 22 33 32 22  nteger size="32"
+        90: 3e 30 78 31 38 3c 2f 69 6e 74 65 67 65 72 3e 3c  >0x18</integer><
+        a0: 6b 65 79 3e 49 4f 41 75 64 69 6f 53 74 72 65 61  key>IOAudioStrea
+        b0: 6d 42 69 74 57 69 64 74 68 3c 2f 6b 65 79 3e 3c  mBitWidth</key><
+        c0: 69 6e 74 65 67 65 72 20 73 69 7a 65 3d 22 33 32  integer size="32
+        d0: 22 3e 30 78 32 30 3c 2f 69 6e 74 65 67 65 72 3e  ">0x20</integer>
+        e0: 3c 6b 65 79 3e 49 4f 41 75 64 69 6f 53 74 72 65  <key>IOAudioStre
+        f0: 61 6d 42 79 74 65 73 50 65 72 50 61 63 6b 65 74  amBytesPerPacket
+       100: 3c 2f 6b 65 79 3e 3c 69 6e 74 65 67 65 72 20 73  </key><integer s
+       110: 69 7a 65 3d 22 33 32 22 3e 30 78 31 38 3c 2f 69  ize="32">0x18</i
+       120: 6e 74 65 67 65 72 3e 3c 6b 65 79 3e 49 4f 41 75  nteger><key>IOAu
+       130: 64 69 6f 53 74 72 65 61 6d 46 72 61 6d 65 73 50  dioStreamFramesP
+       140: 65 72 50 61 63 6b 65 74 3c 2f 6b 65 79 3e 3c 69  erPacket</key><i
+       150: 6e 74 65 67 65 72 20 49 44 3d 22 35 22 20 73 69  nteger ID="5" si
+       160: 7a 65 3d 22 33 32 22 3e 30 78 31 3c 2f 69 6e 74  ze="32">0x1</int
+       170: 65 67 65 72 3e 3c 6b 65 79 3e 49 4f 41 75 64 69  eger><key>IOAudi
+       180: 6f 53 74 72 65 61 6d 4e 75 6d 65 72 69 63 52 65  oStreamNumericRe
+       190: 70 72 65 73 65 6e 74 61 74 69 6f 6e 3c 2f 6b 65  presentation</ke
+       1a0: 79 3e 3c 69 6e 74 65 67 65 72 20 73 69 7a 65 3d  y><integer size=
+       1b0: 22 33 32 22 3e 30 78 37 33 36 39 36 65 37 34 3c  "32">0x73696e74<
+       1c0: 2f 69 6e 74 65 67 65 72 3e 3c 6b 65 79 3e 49 4f  /integer><key>IO
+       1d0: 41 75 64 69 6f 53 74 72 65 61 6d 4e 75 6d 43 68  AudioStreamNumCh
+       1e0: 61 6e 6e 65 6c 73 3c 2f 6b 65 79 3e 3c 69 6e 74  annels</key><int
+       1f0: 65 67 65 72 20 73 69 7a 65 3d 22 33 32 22 3e 30  eger size="32">0
+       200: 78 36 3c 2f 69 6e 74 65 67 65 72 3e 3c 6b 65 79  x6</integer><key
+       210: 3e 49 4f 41 75 64 69 6f 53 74 72 65 61 6d 46 6f  >IOAudioStreamFo
+       220: 72 6d 61 74 46 6c 61 67 73 3c 2f 6b 65 79 3e 3c  rmatFlags</key><
+       230: 69 6e 74 65 67 65 72 20 49 44 3d 22 38 22 20 73  integer ID="8" s
+       240: 69 7a 65 3d 22 33 32 22 3e 30 78 30 3c 2f 69 6e  ize="32">0x0</in
+       250: 74 65 67 65 72 3e 3c 6b 65 79 3e 49 4f 41 75 64  teger><key>IOAud
+       260: 69 6f 53 61 6d 70 6c 65 52 61 74 65 3c 2f 6b 65  ioSampleRate</ke
+       270: 79 3e 3c 64 69 63 74 3e 3c 6b 65 79 3e 49 4f 41  y><dict><key>IOA
+       280: 75 64 69 6f 53 61 6d 70 6c 65 52 61 74 65 46 72  udioSampleRateFr
+       290: 61 63 74 69 6f 6e 3c 2f 6b 65 79 3e 3c 69 6e 74  action</key><int
+       2a0: 65 67 65 72 20 49 44 52 45 46 3d 22 38 22 2f 3e  eger IDREF="8"/>
+       2b0: 3c 6b 65 79 3e 49 4f 41 75 64 69 6f 53 61 6d 70  <key>IOAudioSamp
+       2c0: 6c 65 52 61 74 65 57 68 6f 6c 65 4e 75 6d 62 65  leRateWholeNumbe
+       2d0: 72 3c 2f 6b 65 79 3e 3c 69 6e 74 65 67 65 72 20  r</key><integer 
+       2e0: 73 69 7a 65 3d 22 36 34 22 3e 30 78 61 63 34 34  size="64">0xac44
+       2f0: 3c 2f 69 6e 74 65 67 65 72 3e 3c 2f 64 69 63 74  </integer></dict
+
+[wall=1792448238709 pid=169 exec=Panel size=966]
+
+             0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f  0123456789abcdef
+         0: 03 00 00 00 00 00 00 00 00 00 00 00 c6 03 00 00  ................
+        10: 00 00 00 00 34 2c cc 21 fa 03 00 00 00 00 00 00  ....4,.!........
+        20: 35 00 00 00 00 00 00 00 00 00 00 00 02 00 00 00  5...............
+        30: 8b 83 20 81 3c 64 69 63 74 3e 3c 6b 65 79 3e 49  .. .<dict><key>I
+        40: 4f 41 75 64 69 6f 53 74 72 65 61 6d 46 6f 72 6d  OAudioStreamForm
+        50: 61 74 3c 2f 6b 65 79 3e 3c 64 69 63 74 3e 3c 6b  at</key><dict><k
+        60: 65 79 3e 49 4f 41 75 64 69 6f 53 74 72 65 61 6d  ey>IOAudioStream
+        70: 42 69 74 44 65 70 74 68 3c 2f 6b 65 79 3e 3c 69  BitDepth</key><i
+        80: 6e 74 65 67 65 72 20 73 69 7a 65 3d 22 33 32 22  nteger size="32"
+        90: 3e 30 78 31 38 3c 2f 69 6e 74 65 67 65 72 3e 3c  >0x18</integer><
+        a0: 6b 65 79 3e 49 4f 41 75 64 69 6f 53 74 72 65 61  key>IOAudioStrea
+        b0: 6d 42 69 74 57 69 64 74 68 3c 2f 6b 65 79 3e 3c  mBitWidth</key><
+        c0: 69 6e 74 65 67 65 72 20 73 69 7a 65 3d 22 33 32  integer size="32
+        d0: 22 3e 30 78 32 30 3c 2f 69 6e 74 65 67 65 72 3e  ">0x20</integer>
+        e0: 3c 6b 65 79 3e 49 4f 41 75 64 69 6f 53 74 72 65  <key>IOAudioStre
+        f0: 61 6d 42 79 74 65 73 50 65 72 50 61 63 6b 65 74  amBytesPerPacket
+       100: 3c 2f 6b 65 79 3e 3c 69 6e 74 65 67 65 72 20 73  </key><integer s
+       110: 69 7a 65 3d 22 33 32 22 3e 30 78 31 38 3c 2f 69  ize="32">0x18</i
+       120: 6e 74 65 67 65 72 3e 3c 6b 65 79 3e 49 4f 41 75  nteger><key>IOAu
+       130: 64 69 6f 53 74 72 65 61 6d 46 72 61 6d 65 73 50  dioStreamFramesP
+       140: 65 72 50 61 63 6b 65 74 3c 2f 6b 65 79 3e 3c 69  erPacket</key><i
+       150: 6e 74 65 67 65 72 20 49 44 3d 22 35 22 20 73 69  nteger ID="5" si
+       160: 7a 65 3d 22 33 32 22 3e 30 78 31 3c 2f 69 6e 74  ze="32">0x1</int
+       170: 65 67 65 72 3e 3c 6b 65 79 3e 49 4f 41 75 64 69  eger><key>IOAudi
+       180: 6f 53 74 72 65 61 6d 4e 75 6d 65 72 69 63 52 65  oStreamNumericRe
+       190: 70 72 65 73 65 6e 74 61 74 69 6f 6e 3c 2f 6b 65  presentation</ke
+       1a0: 79 3e 3c 69 6e 74 65 67 65 72 20 73 69 7a 65 3d  y><integer size=
+       1b0: 22 33 32 22 3e 30 78 37 33 36 39 36 65 37 34 3c  "32">0x73696e74<
+       1c0: 2f 69 6e 74 65 67 65 72 3e 3c 6b 65 79 3e 49 4f  /integer><key>IO
+       1d0: 41 75 64 69 6f 53 74 72 65 61 6d 4e 75 6d 43 68  AudioStreamNumCh
+       1e0: 61 6e 6e 65 6c 73 3c 2f 6b 65 79 3e 3c 69 6e 74  annels</key><int
+       1f0: 65 67 65 72 20 73 69 7a 65 3d 22 33 32 22 3e 30  eger size="32">0
+       200: 78 36 3c 2f 69 6e 74 65 67 65 72 3e 3c 6b 65 79  x6</integer><key
+       210: 3e 49 4f 41 75 64 69 6f 53 74 72 65 61 6d 46 6f  >IOAudioStreamFo
+       220: 72 6d 61 74 46 6c 61 67 73 3c 2f 6b 65 79 3e 3c  rmatFlags</key><
+       230: 69 6e 74 65 67 65 72 20 49 44 3d 22 38 22 20 73  integer ID="8" s
+       240: 69 7a 65 3d 22 33 32 22 3e 30 78 30 3c 2f 69 6e  ize="32">0x0</in
+       250: 74 65 67 65 72 3e 3c 6b 65 79 3e 49 4f 41 75 64  teger><key>IOAud
+       260: 69 6f 53 61 6d 70 6c 65 52 61 74 65 3c 2f 6b 65  ioSampleRate</ke
+       270: 79 3e 3c 64 69 63 74 3e 3c 6b 65 79 3e 49 4f 41  y><dict><key>IOA
+       280: 75 64 69 6f 53 61 6d 70 6c 65 52 61 74 65 46 72  udioSampleRateFr
+       290: 61 63 74 69 6f 6e 3c 2f 6b 65 79 3e 3c 69 6e 74  action</key><int
+       2a0: 65 67 65 72 20 49 44 52 45 46 3d 22 38 22 2f 3e  eger IDREF="8"/>
+       2b0: 3c 6b 65 79 3e 49 4f 41 75 64 69 6f 53 61 6d 70  <key>IOAudioSamp
+       2c0: 6c 65 52 61 74 65 57 68 6f 6c 65 4e 75 6d 62 65  leRateWholeNumbe
+       2d0: 72 3c 2f 6b 65 79 3e 3c 69 6e 74 65 67 65 72 20  r</key><integer 
+       2e0: 73 69 7a 65 3d 22 36 34 22 3e 30 78 62 62 38 30  size="64">0xbb80
+       2f0: 3c 2f 69 6e 74 65 67 65 72 3e 3c 2f 64 69 63 74  </integer></dict
+
+[wall=1792448250590 pid=169 exec=Panel size=967]
+
+             0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f  0123456789abcdef
+         0: 03 00 00 00 00 00 00 00 00 00 00 00 c7 03 00 00  ................
+        10: 00 00 00 00 34 e8 e3 21 fb 03 00 00 80 b9 b6 21  ....4..!.......!
+        20: 80 ef d8 21 80 bb e0 21 80 c8 f1 21 00 01 f7 21  ...!...!...!...!
+        30: 80 5f 3b 22 3c 64 69 63 74 3e 3c 6b 65 79 3e 49  ._;"<dict><key>I
+        40: 4f 41 75 64 69 6f 53 74 72 65 61 6d 46 6f 72 6d  OAudioStreamForm
+        50: 61 74 3c 2f 6b 65 79 3e 3c 64 69 63 74 3e 3c 6b  at</key><dict><k
+        60: 65 79 3e 49 4f 41 75 64 69 6f 53 74 72 65 61 6d  ey>IOAudioStream
+        70: 42 69 74 44 65 70 74 68 3c 2f 6b 65 79 3e 3c 69  BitDepth</key><i
+        80: 6e 74 65 67 65 72 20 73 69 7a 65 3d 22 33 32 22  nteger size="32"
+        90: 3e 30 78 31 38 3c 2f 69 6e 74 65 67 65 72 3e 3c  >0x18</integer><
+        a0: 6b 65 79 3e 49 4f 41 75 64 69 6f 53 74 72 65 61  key>IOAudioStrea
+        b0: 6d 42 69 74 57 69 64 74 68 3c 2f 6b 65 79 3e 3c  mBitWidth</key><
+        c0: 69 6e 74 65 67 65 72 20 73 69 7a 65 3d 22 33 32  integer size="32
+        d0: 22 3e 30 78 32 30 3c 2f 69 6e 74 65 67 65 72 3e  ">0x20</integer>
+        e0: 3c 6b 65 79 3e 49 4f 41 75 64 69 6f 53 74 72 65  <key>IOAudioStre
+        f0: 61 6d 42 79 74 65 73 50 65 72 50 61 63 6b 65 74  amBytesPerPacket
+       100: 3c 2f 6b 65 79 3e 3c 69 6e 74 65 67 65 72 20 73  </key><integer s
+       110: 69 7a 65 3d 22 33 32 22 3e 30 78 31 38 3c 2f 69  ize="32">0x18</i
+       120: 6e 74 65 67 65 72 3e 3c 6b 65 79 3e 49 4f 41 75  nteger><key>IOAu
+       130: 64 69 6f 53 74 72 65 61 6d 46 72 61 6d 65 73 50  dioStreamFramesP
+       140: 65 72 50 61 63 6b 65 74 3c 2f 6b 65 79 3e 3c 69  erPacket</key><i
+       150: 6e 74 65 67 65 72 20 49 44 3d 22 35 22 20 73 69  nteger ID="5" si
+       160: 7a 65 3d 22 33 32 22 3e 30 78 31 3c 2f 69 6e 74  ze="32">0x1</int
+       170: 65 67 65 72 3e 3c 6b 65 79 3e 49 4f 41 75 64 69  eger><key>IOAudi
+       180: 6f 53 74 72 65 61 6d 4e 75 6d 65 72 69 63 52 65  oStreamNumericRe
+       190: 70 72 65 73 65 6e 74 61 74 69 6f 6e 3c 2f 6b 65  presentation</ke
+       1a0: 79 3e 3c 69 6e 74 65 67 65 72 20 73 69 7a 65 3d  y><integer size=
+       1b0: 22 33 32 22 3e 30 78 37 33 36 39 36 65 37 34 3c  "32">0x73696e74<
+       1c0: 2f 69 6e 74 65 67 65 72 3e 3c 6b 65 79 3e 49 4f  /integer><key>IO
+       1d0: 41 75 64 69 6f 53 74 72 65 61 6d 4e 75 6d 43 68  AudioStreamNumCh
+       1e0: 61 6e 6e 65 6c 73 3c 2f 6b 65 79 3e 3c 69 6e 74  annels</key><int
+       1f0: 65 67 65 72 20 73 69 7a 65 3d 22 33 32 22 3e 30  eger size="32">0
+       200: 78 36 3c 2f 69 6e 74 65 67 65 72 3e 3c 6b 65 79  x6</integer><key
+       210: 3e 49 4f 41 75 64 69 6f 53 74 72 65 61 6d 46 6f  >IOAudioStreamFo
+       220: 72 6d 61 74 46 6c 61 67 73 3c 2f 6b 65 79 3e 3c  rmatFlags</key><
+       230: 69 6e 74 65 67 65 72 20 49 44 3d 22 38 22 20 73  integer ID="8" s
+       240: 69 7a 65 3d 22 33 32 22 3e 30 78 30 3c 2f 69 6e  ize="32">0x0</in
+       250: 74 65 67 65 72 3e 3c 6b 65 79 3e 49 4f 41 75 64  teger><key>IOAud
+       260: 69 6f 53 61 6d 70 6c 65 52 61 74 65 3c 2f 6b 65  ioSampleRate</ke
+       270: 79 3e 3c 64 69 63 74 3e 3c 6b 65 79 3e 49 4f 41  y><dict><key>IOA
+       280: 75 64 69 6f 53 61 6d 70 6c 65 52 61 74 65 46 72  udioSampleRateFr
+       290: 61 63 74 69 6f 6e 3c 2f 6b 65 79 3e 3c 69 6e 74  action</key><int
+       2a0: 65 67 65 72 20 49 44 52 45 46 3d 22 38 22 2f 3e  eger IDREF="8"/>
+       2b0: 3c 6b 65 79 3e 49 4f 41 75 64 69 6f 53 61 6d 70  <key>IOAudioSamp
+       2c0: 6c 65 52 61 74 65 57 68 6f 6c 65 4e 75 6d 62 65  leRateWholeNumbe
+       2d0: 72 3c 2f 6b 65 79 3e 3c 69 6e 74 65 67 65 72 20  r</key><integer 
+       2e0: 73 69 7a 65 3d 22 36 34 22 3e 30 78 31 35 38 38  size="64">0x1588
+       2f0: 38 3c 2f 69 6e 74 65 67 65 72 3e 3c 2f 64 69 63  8</integer></dic
+
+[wall=1792448262542 pid=169 exec=Panel size=967]
+
+             0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f  0123456789abcdef
+         0: 03 00 00 00 00 00 00 00 00 00 00 00 c7 03 00 00  ................
+        10: 00 00 00 00 34 dc ca 21 fb 03 00 00 80 b9 b6 21  ....4..!.......!
+        20: 80 ef d8 21 80 bb e0 21 80 c8 f1 21 00 01 f7 21  ...!...!...!...!
+        30: 80 5f 3b 22 3c 64 69 63 74 3e 3c 6b 65 79 3e 49  ._;"<dict><key>I
+        40: 4f 41 75 64 69 6f 53 74 72 65 61 6d 46 6f 72 6d  OAudioStreamForm
+        50: 61 74 3c 2f 6b 65 79 3e 3c 64 69 63 74 3e 3c 6b  at</key><dict><k
+        60: 65 79 3e 49 4f 41 75 64 69 6f 53 74 72 65 61 6d  ey>IOAudioStream
+        70: 42 69 74 44 65 70 74 68 3c 2f 6b 65 79 3e 3c 69  BitDepth</key><i
+        80: 6e 74 65 67 65 72 20 73 69 7a 65 3d 22 33 32 22  nteger size="32"
+        90: 3e 30 78 31 38 3c 2f 69 6e 74 65 67 65 72 3e 3c  >0x18</integer><
+        a0: 6b 65 79 3e 49 4f 41 75 64 69 6f 53 74 72 65 61  key>IOAudioStrea
+        b0: 6d 42 69 74 57 69 64 74 68 3c 2f 6b 65 79 3e 3c  mBitWidth</key><
+        c0: 69 6e 74 65 67 65 72 20 73 69 7a 65 3d 22 33 32  integer size="32
+        d0: 22 3e 30 78 32 30 3c 2f 69 6e 74 65 67 65 72 3e  ">0x20</integer>
+        e0: 3c 6b 65 79 3e 49 4f 41 75 64 69 6f 53 74 72 65  <key>IOAudioStre
+        f0: 61 6d 42 79 74 65 73 50 65 72 50 61 63 6b 65 74  amBytesPerPacket
+       100: 3c 2f 6b 65 79 3e 3c 69 6e 74 65 67 65 72 20 73  </key><integer s
+       110: 69 7a 65 3d 22 33 32 22 3e 30 78 31 38 3c 2f 69  ize="32">0x18</i
+       120: 6e 74 65 67 65 72 3e 3c 6b 65 79 3e 49 4f 41 75  nteger><key>IOAu
+       130: 64 69 6f 53 74 72 65 61 6d 46 72 61 6d 65 73 50  dioStreamFramesP
+       140: 65 72 50 61 63 6b 65 74 3c 2f 6b 65 79 3e 3c 69  erPacket</key><i
+       150: 6e 74 65 67 65 72 20 49 44 3d 22 35 22 20 73 69  nteger ID="5" si
+       160: 7a 65 3d 22 33 32 22 3e 30 78 31 3c 2f 69 6e 74  ze="32">0x1</int
+       170: 65 67 65 72 3e 3c 6b 65 79 3e 49 4f 41 75 64 69  eger><key>IOAudi
+       180: 6f 53 74 72 65 61 6d 4e 75 6d 65 72 69 63 52 65  oStreamNumericRe
+       190: 70 72 65 73 65 6e 74 61 74 69 6f 6e 3c 2f 6b 65  presentation</ke
+       1a0: 79 3e 3c 69 6e 74 65 67 65 72 20 73 69 7a 65 3d  y><integer size=
+       1b0: 22 33 32 22 3e 30 78 37 33 36 39 36 65 37 34 3c  "32">0x73696e74<
+       1c0: 2f 69 6e 74 65 67 65 72 3e 3c 6b 65 79 3e 49 4f  /integer><key>IO
+       1d0: 41 75 64 69 6f 53 74 72 65 61 6d 4e 75 6d 43 68  AudioStreamNumCh
+       1e0: 61 6e 6e 65 6c 73 3c 2f 6b 65 79 3e 3c 69 6e 74  annels</key><int
+       1f0: 65 67 65 72 20 73 69 7a 65 3d 22 33 32 22 3e 30  eger size="32">0
+       200: 78 36 3c 2f 69 6e 74 65 67 65 72 3e 3c 6b 65 79  x6</integer><key
+       210: 3e 49 4f 41 75 64 69 6f 53 74 72 65 61 6d 46 6f  >IOAudioStreamFo
+       220: 72 6d 61 74 46 6c 61 67 73 3c 2f 6b 65 79 3e 3c  rmatFlags</key><
+       230: 69 6e 74 65 67 65 72 20 49 44 3d 22 38 22 20 73  integer ID="8" s
+       240: 69 7a 65 3d 22 33 32 22 3e 30 78 30 3c 2f 69 6e  ize="32">0x0</in
+       250: 74 65 67 65 72 3e 3c 6b 65 79 3e 49 4f 41 75 64  teger><key>IOAud
+       260: 69 6f 53 61 6d 70 6c 65 52 61 74 65 3c 2f 6b 65  ioSampleRate</ke
+       270: 79 3e 3c 64 69 63 74 3e 3c 6b 65 79 3e 49 4f 41  y><dict><key>IOA
+       280: 75 64 69 6f 53 61 6d 70 6c 65 52 61 74 65 46 72  udioSampleRateFr
+       290: 61 63 74 69 6f 6e 3c 2f 6b 65 79 3e 3c 69 6e 74  action</key><int
+       2a0: 65 67 65 72 20 49 44 52 45 46 3d 22 38 22 2f 3e  eger IDREF="8"/>
+       2b0: 3c 6b 65 79 3e 49 4f 41 75 64 69 6f 53 61 6d 70  <key>IOAudioSamp
+       2c0: 6c 65 52 61 74 65 57 68 6f 6c 65 4e 75 6d 62 65  leRateWholeNumbe
+       2d0: 72 3c 2f 6b 65 79 3e 3c 69 6e 74 65 67 65 72 20  r</key><integer 
+       2e0: 73 69 7a 65 3d 22 36 34 22 3e 30 78 31 37 37 30  size="64">0x1770
+       2f0: 30 3c 2f 69 6e 74 65 67 65 72 3e 3c 2f 64 69 63  0</integer></dic
+
+[wall=1792448274506 pid=169 exec=Panel size=967]
+
+             0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f  0123456789abcdef
+         0: 03 00 00 00 00 00 00 00 00 00 00 00 c7 03 00 00  ................
+        10: 00 00 00 00 34 34 ce 21 fb 03 00 00 80 b9 b6 21  ....44.!.......!
+        20: 80 ef d8 21 80 bb e0 21 80 c8 f1 21 00 01 f7 21  ...!...!...!...!
+        30: 80 5f 3b 22 3c 64 69 63 74 3e 3c 6b 65 79 3e 49  ._;"<dict><key>I
+        40: 4f 41 75 64 69 6f 53 74 72 65 61 6d 46 6f 72 6d  OAudioStreamForm
+        50: 61 74 3c 2f 6b 65 79 3e 3c 64 69 63 74 3e 3c 6b  at</key><dict><k
+        60: 65 79 3e 49 4f 41 75 64 69 6f 53 74 72 65 61 6d  ey>IOAudioStream
+        70: 42 69 74 44 65 70 74 68 3c 2f 6b 65 79 3e 3c 69  BitDepth</key><i
+        80: 6e 74 65 67 65 72 20 73 69 7a 65 3d 22 33 32 22  nteger size="32"
+        90: 3e 30 78 31 38 3c 2f 69 6e 74 65 67 65 72 3e 3c  >0x18</integer><
+        a0: 6b 65 79 3e 49 4f 41 75 64 69 6f 53 74 72 65 61  key>IOAudioStrea
+        b0: 6d 42 69 74 57 69 64 74 68 3c 2f 6b 65 79 3e 3c  mBitWidth</key><
+        c0: 69 6e 74 65 67 65 72 20 73 69 7a 65 3d 22 33 32  integer size="32
+        d0: 22 3e 30 78 32 30 3c 2f 69 6e 74 65 67 65 72 3e  ">0x20</integer>
+        e0: 3c 6b 65 79 3e 49 4f 41 75 64 69 6f 53 74 72 65  <key>IOAudioStre
+        f0: 61 6d 42 79 74 65 73 50 65 72 50 61 63 6b 65 74  amBytesPerPacket
+       100: 3c 2f 6b 65 79 3e 3c 69 6e 74 65 67 65 72 20 73  </key><integer s
+       110: 69 7a 65 3d 22 33 32 22 3e 30 78 31 38 3c 2f 69  ize="32">0x18</i
+       120: 6e 74 65 67 65 72 3e 3c 6b 65 79 3e 49 4f 41 75  nteger><key>IOAu
+       130: 64 69 6f 53 74 72 65 61 6d 46 72 61 6d 65 73 50  dioStreamFramesP
+       140: 65 72 50 61 63 6b 65 74 3c 2f 6b 65 79 3e 3c 69  erPacket</key><i
+       150: 6e 74 65 67 65 72 20 49 44 3d 22 35 22 20 73 69  nteger ID="5" si
+       160: 7a 65 3d 22 33 32 22 3e 30 78 31 3c 2f 69 6e 74  ze="32">0x1</int
+       170: 65 67 65 72 3e 3c 6b 65 79 3e 49 4f 41 75 64 69  eger><key>IOAudi
+       180: 6f 53 74 72 65 61 6d 4e 75 6d 65 72 69 63 52 65  oStreamNumericRe
+       190: 70 72 65 73 65 6e 74 61 74 69 6f 6e 3c 2f 6b 65  presentation</ke
+       1a0: 79 3e 3c 69 6e 74 65 67 65 72 20 73 69 7a 65 3d  y><integer size=
+       1b0: 22 33 32 22 3e 30 78 37 33 36 39 36 65 37 34 3c  "32">0x73696e74<
+       1c0: 2f 69 6e 74 65 67 65 72 3e 3c 6b 65 79 3e 49 4f  /integer><key>IO
+       1d0: 41 75 64 69 6f 53 74 72 65 61 6d 4e 75 6d 43 68  AudioStreamNumCh
+       1e0: 61 6e 6e 65 6c 73 3c 2f 6b 65 79 3e 3c 69 6e 74  annels</key><int
+       1f0: 65 67 65 72 20 73 69 7a 65 3d 22 33 32 22 3e 30  eger size="32">0
+       200: 78 36 3c 2f 69 6e 74 65 67 65 72 3e 3c 6b 65 79  x6</integer><key
+       210: 3e 49 4f 41 75 64 69 6f 53 74 72 65 61 6d 46 6f  >IOAudioStreamFo
+       220: 72 6d 61 74 46 6c 61 67 73 3c 2f 6b 65 79 3e 3c  rmatFlags</key><
+       230: 69 6e 74 65 67 65 72 20 49 44 3d 22 38 22 20 73  integer ID="8" s
+       240: 69 7a 65 3d 22 33 32 22 3e 30 78 30 3c 2f 69 6e  ize="32">0x0</in
+       250: 74 65 67 65 72 3e 3c 6b 65 79 3e 49 4f 41 75 64  teger><key>IOAud
+       260: 69 6f 53 61 6d 70 6c 65 52 61 74 65 3c 2f 6b 65  ioSampleRate</ke
+       270: 79 3e 3c 64 69 63 74 3e 3c 6b 65 79 3e 49 4f 41  y><dict><key>IOA
+       280: 75 64 69 6f 53 61 6d 70 6c 65 52 61 74 65 46 72  udioSampleRateFr
+       290: 61 63 74 69 6f 6e 3c 2f 6b 65 79 3e 3c 69 6e 74  action</key><int
+       2a0: 65 67 65 72 20 49 44 52 45 46 3d 22 38 22 2f 3e  eger IDREF="8"/>
+       2b0: 3c 6b 65 79 3e 49 4f 41 75 64 69 6f 53 61 6d 70  <key>IOAudioSamp
+       2c0: 6c 65 52 61 74 65 57 68 6f 6c 65 4e 75 6d 62 65  leRateWholeNumbe
+       2d0: 72 3c 2f 6b 65 79 3e 3c 69 6e 74 65 67 65 72 20  r</key><integer 
+       2e0: 73 69 7a 65 3d 22 36 34 22 3e 30 78 31 35 38 38  size="64">0x1588
+       2f0: 38 3c 2f 69 6e 74 65 67 65 72 3e 3c 2f 64 69 63  8</integer></dic
+
+[wall=1792448286459 pid=169 exec=Panel size=966]
+
+             0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f  0123456789abcdef
+         0: 03 00 00 00 00 00 00 00 00 00 00 00 c6 03 00 00  ................
+        10: 00 00 00 00 34 78 cd 21 fa 03 00 00 80 b9 b6 21  ....4x.!.......!
+        20: 80 ef d8 21 80 bb e0 21 80 c8 f1 21 00 01 f7 21  ...!...!...!...!
+        30: 80 5f 3b 22 3c 64 69 63 74 3e 3c 6b 65 79 3e 49  ._;"<dict><key>I
+        40: 4f 41 75 64 69 6f 53 74 72 65 61 6d 46 6f 72 6d  OAudioStreamForm
+        50: 61 74 3c 2f 6b 65 79 3e 3c 64 69 63 74 3e 3c 6b  at</key><dict><k
+        60: 65 79 3e 49 4f 41 75 64 69 6f 53 74 72 65 61 6d  ey>IOAudioStream
+        70: 42 69 74 44 65 70 74 68 3c 2f 6b 65 79 3e 3c 69  BitDepth</key><i
+        80: 6e 74 65 67 65 72 20 73 69 7a 65 3d 22 33 32 22  nteger size="32"
+        90: 3e 30 78 31 38 3c 2f 69 6e 74 65 67 65 72 3e 3c  >0x18</integer><
+        a0: 6b 65 79 3e 49 4f 41 75 64 69 6f 53 74 72 65 61  key>IOAudioStrea
+        b0: 6d 42 69 74 57 69 64 74 68 3c 2f 6b 65 79 3e 3c  mBitWidth</key><
+        c0: 69 6e 74 65 67 65 72 20 73 69 7a 65 3d 22 33 32  integer size="32
+        d0: 22 3e 30 78 32 30 3c 2f 69 6e 74 65 67 65 72 3e  ">0x20</integer>
+        e0: 3c 6b 65 79 3e 49 4f 41 75 64 69 6f 53 74 72 65  <key>IOAudioStre
+        f0: 61 6d 42 79 74 65 73 50 65 72 50 61 63 6b 65 74  amBytesPerPacket
+       100: 3c 2f 6b 65 79 3e 3c 69 6e 74 65 67 65 72 20 73  </key><integer s
+       110: 69 7a 65 3d 22 33 32 22 3e 30 78 31 38 3c 2f 69  ize="32">0x18</i
+       120: 6e 74 65 67 65 72 3e 3c 6b 65 79 3e 49 4f 41 75  nteger><key>IOAu
+       130: 64 69 6f 53 74 72 65 61 6d 46 72 61 6d 65 73 50  dioStreamFramesP
+       140: 65 72 50 61 63 6b 65 74 3c 2f 6b 65 79 3e 3c 69  erPacket</key><i
+       150: 6e 74 65 67 65 72 20 49 44 3d 22 35 22 20 73 69  nteger ID="5" si
+       160: 7a 65 3d 22 33 32 22 3e 30 78 31 3c 2f 69 6e 74  ze="32">0x1</int
+       170: 65 67 65 72 3e 3c 6b 65 79 3e 49 4f 41 75 64 69  eger><key>IOAudi
+       180: 6f 53 74 72 65 61 6d 4e 75 6d 65 72 69 63 52 65  oStreamNumericRe
+       190: 70 72 65 73 65 6e 74 61 74 69 6f 6e 3c 2f 6b 65  presentation</ke
+       1a0: 79 3e 3c 69 6e 74 65 67 65 72 20 73 69 7a 65 3d  y><integer size=
+       1b0: 22 33 32 22 3e 30 78 37 33 36 39 36 65 37 34 3c  "32">0x73696e74<
+       1c0: 2f 69 6e 74 65 67 65 72 3e 3c 6b 65 79 3e 49 4f  /integer><key>IO
+       1d0: 41 75 64 69 6f 53 74 72 65 61 6d 4e 75 6d 43 68  AudioStreamNumCh
+       1e0: 61 6e 6e 65 6c 73 3c 2f 6b 65 79 3e 3c 69 6e 74  annels</key><int
+       1f0: 65 67 65 72 20 73 69 7a 65 3d 22 33 32 22 3e 30  eger size="32">0
+       200: 78 36 3c 2f 69 6e 74 65 67 65 72 3e 3c 6b 65 79  x6</integer><key
+       210: 3e 49 4f 41 75 64 69 6f 53 74 72 65 61 6d 46 6f  >IOAudioStreamFo
+       220: 72 6d 61 74 46 6c 61 67 73 3c 2f 6b 65 79 3e 3c  rmatFlags</key><
+       230: 69 6e 74 65 67 65 72 20 49 44 3d 22 38 22 20 73  integer ID="8" s
+       240: 69 7a 65 3d 22 33 32 22 3e 30 78 30 3c 2f 69 6e  ize="32">0x0</in
+       250: 74 65 67 65 72 3e 3c 6b 65 79 3e 49 4f 41 75 64  teger><key>IOAud
+       260: 69 6f 53 61 6d 70 6c 65 52 61 74 65 3c 2f 6b 65  ioSampleRate</ke
+       270: 79 3e 3c 64 69 63 74 3e 3c 6b 65 79 3e 49 4f 41  y><dict><key>IOA
+       280: 75 64 69 6f 53 61 6d 70 6c 65 52 61 74 65 46 72  udioSampleRateFr
+       290: 61 63 74 69 6f 6e 3c 2f 6b 65 79 3e 3c 69 6e 74  action</key><int
+       2a0: 65 67 65 72 20 49 44 52 45 46 3d 22 38 22 2f 3e  eger IDREF="8"/>
+       2b0: 3c 6b 65 79 3e 49 4f 41 75 64 69 6f 53 61 6d 70  <key>IOAudioSamp
+       2c0: 6c 65 52 61 74 65 57 68 6f 6c 65 4e 75 6d 62 65  leRateWholeNumbe
+       2d0: 72 3c 2f 6b 65 79 3e 3c 69 6e 74 65 67 65 72 20  r</key><integer 
+       2e0: 73 69 7a 65 3d 22 36 34 22 3e 30 78 62 62 38 30  size="64">0xbb80
+       2f0: 3c 2f 69 6e 74 65 67 65 72 3e 3c 2f 64 69 63 74  </integer></dict
+
+
+

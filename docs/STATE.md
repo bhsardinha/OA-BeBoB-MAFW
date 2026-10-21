@@ -6,6 +6,36 @@ Snapshot as of **2026-10-16**. Updated with each Part A/B/C/D commit and each bu
 
 Resume anchor: `/NEW_PLAN.md` → this file → `system-map/README.md` → the in-progress Part N.
 
+## 2026-10-21 (late morning) — package 0.2.2 (R120, R121)
+Separate version numbers (package / driver / panel) with CHANGELOG.md; installer updates in place; panel renamed OA BeBoB MAFW with the firmware check built in; OA names under icons; dmg background for both models; uninstall no longer matches the Uninstall app's own process. Driver unchanged (0.2.0).
+
+## 2026-10-21 (later) — 0.2.1: panel CPU fix, segmented big meter (R119)
+0.2.0 worked on the MacBook Air (user), but the panel / big meter used 30-40 % CPU. Meters are now GPU-composited layers with cached segment images (official CMAVUMeter method); panel 95 % -> 2 %, big meter 20 % -> 1.4 % on the iMac. Version 0.2.1 (user), panel 1.2; release notes `openaudio-mafw-bebob/installer/release-notes-0.2.1.md`.
+
+## 2026-10-21 — panel menu bar mode + big meter (AP-5.5/5.6), installer 0.2.0 built and checked statically (R118)
+Panel host tests pass; the package holds kext, helper, panel, Firmware Tool (check only), M-Audio MIDI plug-in, icons and uninstaller; it removes 0.1.0, never unloads, asks for a restart; self-contained guard passes. Not yet on any Mac: install on the MacBook Air (user), menu/meter on the hardware. Next: Air install, then AP-8.3 docs.
+
+## 2026-10-20 (night) — phase 7 with the Audiophile alone (R115, capture 96); monitor law + headphone safety (R116, plan v7 AP-5.4)
+The 0.2.0 driver ran the FireWire Audiophile on the iMac: bootloader 0x10060 -> runtime, channel order confirmed (device meters + receiver), loopback 9.1 ms, rates 44.1-96, factory state = official (34/34), persistence, panel and front panel checked by the user. New, user-requested: helper/panel headphone ceiling, dB-linear monitor law for output-tab levels with a per-unit knob step (1.5 dB default). Next: both units together, then installer 0.2.0 and the MacBook Air.
+
+## 2026-10-20 (later) — phase 7 preparation done (R114)
+Session script `openaudio-mafw-bebob/tests/hw-smoke/phase7.sh` + `p7util.py` (recorders for bus nodes and `MADebugTrace`), `OA_DEV` unit selection in the bench tools, `maprop setxml` (settings write-back, used by the factory and persistence tests). Dry run of the read-only steps on the iMac OK; the state-changing steps are unexercised until the session. Open: AppleFWAudio vs the Audiophile on 10.13 (checked by `pre`/`bringup`); cabling topology (user).
+
+## 2026-10-20 (late) — plan v6: Firmware Tool is check-only; phase 9 closed at AP-9.1 (R113)
+User decision: the Firmware Tool is an add-on that checks a unit against the official 1.11.2 build of its model; AP-9.2…AP-9.5 (kext update path, update flow, re-flash test, public image source) are shelved (`docs/BUILD_AUDIOPHILE_PLAN_v6.md`). Finding (R113): the official driver has **no minimum firmware**; its helper re-flashes automatically, without asking, whenever the unit's date is not equal to the bundled `.bcd` (`isEqual:`), on by default (the official pkg installs no inhibit file). Tool "Older"/"Newer" notes and the panel About tooltip reworded; host tests, panel `make test`, tool `make test` ALL PASS on the iMac; demo snapshot `~/oa-snap/fwtool/v6-demo.png`. Audiophile live check = new AP-7.9. Custom firmware: not justified (no observed defect is the firmware's).
+
+## 2026-10-19 (night) — plan v3 approved; AP-1.1 done
+`openaudio-mafw-bebob/` now holds the 0.1.0 tree renamed to **OpenAudio BeBoB MAFW** (kext `com.openaudio.OpenAudioBeBoBMAFW` 0.2.0, helper/panel/pkg/uninstaller ids `com.openaudio.bebobmafw.*`, panel 1.1). Builds on the iMac in `~/oa-build-mafw` (kext, helper, panel; panel tests ALL PASS). `openaudio-fw1814/` unchanged. Next: AP-1.2 scripts, AP-1.3 staging. AP-1.4 needs the 0.1.0 kext unloaded first (same `com_openaudio_*` class names) and the user's OK.
+
+## 2026-10-19 (later) — Audiophile phase 0: static mapping complete (R77-R89)
+Write-ups: `A1-ghidra/Q-AP0-nub-and-rev2.md` (nub, Rev2, clock, layout, start-up/sleep, channel table, generic paths), `Q-AP0-status-packet-front-panel.md` (status packet, encoders, A/B, LEDs, Level Controller), `Q-AP0-avc-mixer.md` (AV/C frames, function-block map, routes, keys, factory state), `Q-AP0-converters.md`, `A2-panel/PNAP-control-key-map.md` (panel FWDJ = Audiophile, cookies, meters), `A4-helper/HAP-helper-firmware-midi-audiophile.md`. Tracker `PROVENANCE-MATRIX-AUDIOPHILE.xlsx`: 55 items (47 closed), 0 open flags. Key reuse finding: the 1814 clone already has the AV/C function-block builders, the channel-group engine and the property framework; new work = Rev2 base (0x2F, SIGNAL SOURCE, control packets, blank-slate clock), Audiophile tables/settings classes, converters, status packet, LED, panel descriptor.
+Remaining before the final plan: AP-0.9 on the SL rig with the user (+ two read-only reads if authorised); decisions Q1-Q5 and the AP-4.1/4.4 scope cut. Hardware-only items: bootloader Model_ID, physical channel order, boot from flash, SW-return level blocks.
+
+## 2026-10-19 — Audiophile phase 0 started (branch `audiophile-phase0`; read this first for Audiophile work)
+Plan `docs/BUILD_AUDIOPHILE_PLAN_v2.md`; tracker **`PROVENANCE-MATRIX-AUDIOPHILE.xlsx`** (separate from the 1814 workbook; status script `openaudio-mafw-bebob/scripts/ap-status.py`). **User rule:** map and disassemble everything, organize it in the xlsx, plan approved — **no code before approval**; the official v1.11.2 driver is the main reference.
+* Done (R77, `system-map/A1-ghidra/Q-AP0-nub-and-rev2.md`): AP-0.1 (device table, nub selection by product name) and AP-0.2 (Rev2 base: `0x2F` stream format, SIGNAL SOURCE sync, Audiophile clock = internal / S/PDIF only, latencies) — verified in asm, cross-checked with FFADO and ctl-services. 141 new decompiles (tag `ap0`). Corrections in Q16, Q10, `audiophile-manual-reference.md`.
+* The Audiophile is attached to the SL rig (official v1.9); captures 89/89b/90 exist. Open: AP-0.3 mixer bytes, AP-0.4 status packet asm + LED, AP-0.5-0.7, helper/firmware, AP-0.9 rig captures (needs the user).
+
 ## 2026-10-17 (later) — PN.8, helper verified, gap analysis (read this first)
 Details: `system-map/GAP-ANALYSIS-2026-10-17.md` (official vs clone, every difference with a status), `PROVENANCE-RESOLUTIONS.md` §R57, captures `79`-`81`.
 * **PN.8 closed:** the panel sets the rate through CoreAudio (`setNominalSampleRate:` after 1 s) and shows CoreAudio's rate, as the reference (P8 §6); user-confirmed.

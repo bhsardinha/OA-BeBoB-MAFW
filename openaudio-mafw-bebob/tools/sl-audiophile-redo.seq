@@ -1,0 +1,5 @@
+# redo of two drags that missed in sl-audiophile-controls.seq (user report: the sw rtn fader click landed between the faders)
+click tab-mixer 37 66
+drag mix-sw12-faderL-cap-down 50 170 50 205
+drag mix-ain-panL-knob-toward-center 383 322 383 300
+shot m-redo

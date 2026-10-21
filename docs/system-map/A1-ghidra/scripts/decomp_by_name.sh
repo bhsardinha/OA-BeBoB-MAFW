@@ -21,6 +21,6 @@ for i in range(1,len(parts),3):
     fn=name.replace('m_audio_b_','').replace('com_m_audio_','').replace('::','__').replace('<','').replace('>','')
     path=f'ghidra-exports/decomp/{fn}.c'
     if os.path.exists(path) and not open(path).read().startswith(f'// {name}\n// Entry: {addr}'): path=f'ghidra-exports/decomp/{fn}_{addr}.c'
-    open(path,'w').write(f'// {name}\n// Entry: {addr}\n// Source: Ghidra 12.1.4 headless DecompList.java, 2026-10-15 ({tag})\n\n{body.strip()}\n'); seen[path]=1
+    open(path,'w').write(f'// {name}\n// Entry: {addr}\n// Source: Ghidra 12.1.4 headless DecompList.java, {os.environ.get("DECOMP_DATE","2026-10-15")} ({tag})\n\n{body.strip()}\n'); seen[path]=1
 print(len(seen),'functions written')
 PY

@@ -1,0 +1,5 @@
+1792448175896 click tab-mixer 37 66
+1792448177340 drag mix-sw12-faderL-cap-down 50 170 50 205
+1792448179272 drag mix-ain-panL-knob-toward-center 383 322 383 300
+1792448181203 shot m-redo
+/Users/bernardosardinha/fw1814-captures/2026-10-19-audiophile/controls/m-redo.png

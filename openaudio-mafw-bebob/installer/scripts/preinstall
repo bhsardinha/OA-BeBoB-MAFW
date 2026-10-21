@@ -1,0 +1,8 @@
+#!/bin/bash
+# Install and update (user, 2026-10-21): runs this package's own uninstall.sh in update mode, which removes the files of EVERY earlier release
+# (0.1.0 "OpenAudio FW1814" and every 0.2.x layout; the script keeps the paths of all releases) and keeps the user's settings. The new files
+# are then installed into a clean system. No kext is unloaded here (R117, capture 97: unloading a running driver with a unit attached can leave
+# a host PCR plug registered and panic at the next bus reset); the old kext leaves memory at the restart the package asks for.
+# Nothing here may fail the install.
+"$(dirname "$0")/uninstall.sh" --update || true
+exit 0

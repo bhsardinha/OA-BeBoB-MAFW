@@ -1,0 +1,9 @@
+271  Built-in Line Input          uid=AppleHDAEngineInput:1B,0,1,0:3             rate=48000.0 in=2  out=0 
+269  Built-in Digital Input       uid=AppleHDAEngineInput:1B,0,1,1:4             rate=44100.0 in=2  out=0 
+277  Built-in Output              uid=AppleHDAEngineOutput:1B,0,1,2:0            rate=44100.0 in=0  out=2 
+275  Built-in Line Output         uid=AppleHDAEngineOutput:1B,0,1,3:1            rate=44100.0 in=0  out=2 
+273  Built-in Digital Output      uid=AppleHDAEngineOutput:1B,0,1,4:2            rate=44100.0 in=0  out=2 
+258  HD 450BT                     uid=IOBluetoothSCOAudioEngine:00-1b-66-04-6b-45 rate=8000.0  in=1  out=1 
+261  HD 450BT                     uid=com_apple_driver_IOBluetoothA2DPAudioEngine:0x2297dc00 rate=44100.0 in=0  out=2 
+266  FireWire Audiophile Multichannel uid=com_m_audio_FWEngine2:0xD6C0300211D54      rate=48000.0 in=4  out=6  defaultOut defaultIn
+263  FireWire 1814 Multichannel   uid=com_m_audio_FWEngine2:0xD6C040012337F      rate=48000.0 in=16 out=12

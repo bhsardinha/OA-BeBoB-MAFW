@@ -1,0 +1,12 @@
+# Capture 94 — official driver and panel with two units (FW1814 + Audiophile) on one bus (SL rig, 2026-10-19)
+
+Rig `fw1814-sl` (10.6.8, official driver 1.9 / panel 1.4). Units connected and powered by the user: **FW Audiophile** GUID `0xD6C0300211D54` (Model `0x10060`, vendor text "M-Audio") and **FW 1814** GUID `0xD6C040012337F` (Model `0x10071`, vendor text "M-AUDIO"), both 400 Mb/s on the Mac Pro's bus behind its built-in hub (`sp-firewire.txt`). No audio client. Tools: `openaudio-mafw-bebob/tools/slpanel.py`, `slsetprops.d`, `slhal.py` (CoreAudio device list via ctypes).
+
+Findings:
+* **Driver:** one `com_m_audio_FWMetaNub` per unit, each with its own device object (`FWAudiophileDevice` / `FW1814Device`) and its own `FWEngine2`, UID `com_m_audio_FWEngine2:0x<GUID>` (`ioreg-nubs.txt`, `ioreg-engines.txt`). Both at 48 kHz; bandwidth `MABytesPerCycle` 400 (Audiophile) + 976 (1814, ADAT mode) coexist. The two vendor spellings are exactly the two the official nub accepts (R77).
+* **CoreAudio** (`coreaudio-devices.txt`): two independent devices, "FireWire Audiophile Multichannel" 4 in / 6 out (current default in/out) and "FireWire 1814 Multichannel" 16 in / 12 out.
+* **Panel:** one main window; the **Device** menu lists `unit 1 – FireWire Audiophile ⌘1` and `unit 2 – FireWire 1814 ⌘2` (check mark on the shown unit, `01-device-menu.png`); the right column shows a picture per unit (`FireWire Audiophile - 1`, `FireWire 1814 - 2`) that also switches; the window title is `M-Audio FireWire <model> - unit <n>`; the window resizes per model (694×489 Audiophile, 1084×489 1814) at the same origin (`actions-switch.txt`). Unit numbers: the Audiophile (attached first) is unit 1, the 1814 unit 2 — **hypothesis:** numbering by discovery order (not checked by re-plugging).
+* **Switching units writes nothing to the drivers:** 0 `setProperties` records over three switches (`setprops-switch.txt`) — the switch is purely the panel's view.
+* **Persistence:** the helper's `com.m-audio.device-settings.firewire.plist` keeps one 39-key settings dict **per GUID** — three GUIDs here: the Audiophile, this 1814, and an older 1814 `D6C040074B9FB` from an earlier session (entries are never pruned). The panel's own preferences (`appc-MAfw.plist`: last tab, window/mini-meter positions, splash, tooltips) are global, not per unit.
+
+Rig state left by this capture: both units attached and idle, panel showing unit 1; nothing changed in either unit's settings.

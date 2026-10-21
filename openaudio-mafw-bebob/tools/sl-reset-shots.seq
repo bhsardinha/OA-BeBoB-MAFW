@@ -1,0 +1,7 @@
+click tab-mixer 37 66
+shot reset-mixer
+click tab-output 92 66
+shot reset-output
+click tab-hardware 148 66
+shot reset-hardware
+click tab-mixer 37 66

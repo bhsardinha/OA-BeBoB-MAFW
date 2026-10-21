@@ -1,5 +1,7 @@
 # C1 — Lifecycle state machine
 
+> **Correction (2026-10-20, R113):** where this file says the helper halts the firmware when it is "older than the bundled one" (§ paths A/B/C and the NUB_ROUND1 transition row), the helper's test is **not equal**, not older: `[fwFile date] isEqual: deviceDate` (`A4-helper/ghidra-exports/decomp/a4-h2-bootloader-detection.log:160`). A newer firmware is re-flashed too. There is no minimum firmware version in the official driver.
+
 > **Correction (2026-10-15, live, R40):** observed lifecycle on 10.13.6 (clone, build PC): power-on enumerates a **bootloader** `IOFireWireDevice` (Model_ID `0x10070`, GUID …041…) then, ~3 s later and without any `Go`, a separate **runtime** device (`0x10071`, GUID …040…); the nub is created for both; the product class starts only after `MAFirmwareStart` (written by the LaunchDaemon helper on every first match). `Halt` is a ~3 s detour (bootloader nub, then back to runtime by itself). The firmware **update** branch of the reference lifecycle (Halt -> `UpgradeImage` -> Start) is out of scope for the clone (flash cut, R42). Log: [`build-pc-runs/2026-10-15-M-A-M-FW-install.md`](build-pc-runs/2026-10-15-M-A-M-FW-install.md).
 
 

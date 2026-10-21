@@ -1,0 +1,115 @@
+1792447975304 click tab-mixer 37 66
+1792447976749 shot m-start
+/Users/bernardosardinha/fw1814-captures/2026-10-19-audiophile/controls/m-start.png
+1792447976802 click mix-sw12-solo-on 86 298
+1792447978243 click mix-sw12-solo-off 86 298
+1792447979683 click mix-sw12-mute-on 86 316
+1792447981124 click mix-sw12-mute-off 86 316
+1792447982564 click mix-sw12-link-off 40 316
+1792447984004 click mix-sw12-link-on 40 316
+1792447985445 click mix-sw12-out34-on 69 361
+1792447986885 click mix-sw12-out34-off 69 361
+1792447988325 click mix-sw12-outspd-on 69 379
+1792447989766 click mix-sw12-outspd-off 69 379
+1792447991206 click mix-sw12-out12-off 69 343
+1792447992647 click mix-sw12-out12-on 69 343
+1792447994087 click mix-sw34-solo-on 197 298
+1792447995527 click mix-sw34-solo-off 197 298
+1792447996968 click mix-sw34-mute-on 197 316
+1792447998408 click mix-sw34-mute-off 197 316
+1792447999848 click mix-sw34-out12-on 177 343
+1792448001288 click mix-sw34-out12-off 177 343
+1792448002729 click mix-swspd-solo-on 309 298
+1792448004169 click mix-swspd-solo-off 309 298
+1792448005610 click mix-swspd-out12-on 288 343
+1792448007050 click mix-swspd-out12-off 288 343
+1792448008490 click mix-ain-solo-on 422 358
+1792448009931 click mix-ain-solo-off 422 358
+1792448011371 click mix-ain-mute-on 422 377
+1792448012811 click mix-ain-mute-off 422 377
+1792448014251 click mix-ain-link-off 380 377
+1792448015692 click mix-ain-link-on 380 377
+1792448017132 click mix-ain-out12-on 403 403
+1792448018573 click mix-ain-out12-off 403 403
+1792448020013 click mix-ain-out34-on 403 421
+1792448021453 click mix-ain-out34-off 403 421
+1792448022894 click mix-ain-outspd-on 403 440
+1792448024334 click mix-ain-outspd-off 403 440
+1792448025774 click mix-sin-solo-on 533 358
+1792448027214 click mix-sin-solo-off 533 358
+1792448028655 click mix-sin-out12-on 513 403
+1792448030095 click mix-sin-out12-off 513 403
+1792448031535 click lc-swrtn 601 217
+1792448032976 click mix-sw12-ctrl-off 40 298
+1792448034416 click mix-sw12-ctrl-on 40 298
+1792448035856 click lc-input 601 252
+1792448037297 click mix-ain-ctrl-off 380 358
+1792448038737 click mix-ain-ctrl-on 380 358
+1792448040177 click lc-auxsend 601 269
+1792448041618 click lc-output 601 234
+1792448043058 click main-mute-on 611 324
+1792448044498 click main-mute-off 611 324
+1792448045939 click main-dim-on 651 324
+1792448047379 click main-dim-off 651 324
+1792448048819 drag mix-sw12-faderL-down 69 225 69 260
+1792448050750 drag mix-sw12-aux-knob-up 45 135 45 115
+1792448052681 drag mix-ain-pan-knob 383 322 383 340
+1792448054612 shot m-end
+/Users/bernardosardinha/fw1814-captures/2026-10-19-audiophile/controls/m-end.png
+1792448054669 click tab-output 92 66
+1792448056110 shot o-start
+/Users/bernardosardinha/fw1814-captures/2026-10-19-audiophile/controls/o-start.png
+1792448056171 click out-12-solo-on 86 298
+1792448057611 click out-12-solo-off 86 298
+1792448059052 click out-12-mute-on 86 316
+1792448060492 click out-12-mute-off 86 316
+1792448061932 click out-12-link-off 40 316
+1792448063373 click out-12-link-on 40 316
+1792448064813 click out-12-main-aux 69 343
+1792448066253 click out-12-aux-main 69 343
+1792448067694 click out-12-ctrl-off 40 298
+1792448069134 click out-12-ctrl-on 40 298
+1792448070574 click out-34-main-aux 177 343
+1792448072014 click out-34-aux-main 177 343
+1792448073455 click out-spd-main-aux 288 343
+1792448074895 click out-spd-aux-main 288 343
+1792448076335 click out-spd-solo-on 309 298
+1792448077776 click out-spd-solo-off 309 298
+1792448079216 click aux-mute-on 422 316
+1792448080656 click aux-mute-off 422 316
+1792448082097 click aux-link-off 380 316
+1792448083537 click aux-link-on 380 316
+1792448084977 click hp-mute-on 533 298
+1792448086418 click hp-mute-off 533 298
+1792448087858 click hp-link-off 491 298
+1792448089298 click hp-link-on 491 298
+1792448090739 click hp-mon-34 513 343
+1792448092179 click hp-mon-spd 513 361
+1792448093619 click hp-mon-aux 513 380
+1792448095060 click hp-mon-12 513 325
+1792448096500 drag out-12-faderL-up 51 275 51 245
+1792448098431 drag out-12-bal-knob 67 130 67 112
+1792448100362 drag aux-pan-knob 380 357 380 340
+1792448102293 drag hp-faderL-down 496 255 496 275
+1792448104224 shot o-end
+/Users/bernardosardinha/fw1814-captures/2026-10-19-audiophile/controls/o-end.png
+1792448104276 click tab-hardware 148 66
+1792448105717 shot h-start
+/Users/bernardosardinha/fw1814-captures/2026-10-19-audiophile/controls/h-start.png
+1792448105829 click hpA-34 139 352
+1792448107269 click hpA-spd 195 352
+1792448108709 click hpA-aux 251 352
+1792448110150 click hpA-12 83 352
+1792448111590 click hpB-12 83 378
+1792448113030 click hpB-spd 195 378
+1792448114471 click hpB-aux 251 378
+1792448115911 click hpB-34 139 378
+1792448117351 click ab-direct-monitoring 372 352
+1792448118792 click ab-headphone-source 372 392
+1792448120232 click sync-external 401 161
+1792448121672 sleep 2
+1792448123672 click sync-internal 401 135
+1792448125113 sleep 2
+1792448127113 shot h-end
+/Users/bernardosardinha/fw1814-captures/2026-10-19-audiophile/controls/h-end.png
+1792448127187 click tab-mixer 37 66

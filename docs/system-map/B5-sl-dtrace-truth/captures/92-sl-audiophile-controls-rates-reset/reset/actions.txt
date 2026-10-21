@@ -1,0 +1,12 @@
+1792448313446 click settings-reset 606 126
+1792448333890 click dialog-Reset 1131 547 (global)
+1792448342412 click tab-mixer 37 66
+1792448343856 shot reset-mixer
+/Users/bernardosardinha/fw1814-captures/2026-10-19-audiophile/reset/reset-mixer.png
+1792448343910 click tab-output 92 66
+1792448345350 shot reset-output
+/Users/bernardosardinha/fw1814-captures/2026-10-19-audiophile/reset/reset-output.png
+1792448345400 click tab-hardware 148 66
+1792448346841 shot reset-hardware
+/Users/bernardosardinha/fw1814-captures/2026-10-19-audiophile/reset/reset-hardware.png
+1792448346916 click tab-mixer 37 66

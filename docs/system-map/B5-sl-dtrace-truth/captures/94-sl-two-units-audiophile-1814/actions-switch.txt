@@ -1,0 +1,6 @@
+1792450390250 menu Device -> unit 1
+20 478 248 694 489 M-Audio FireWire Audiophile - unit 1
+1792450399498 menu Device -> unit 2
+20 478 248 1084 489 M-Audio FireWire 1814 - unit 2
+1792450408630 icon FireWire Audiophile - 1
+20 478 248 694 489 M-Audio FireWire Audiophile - unit 1

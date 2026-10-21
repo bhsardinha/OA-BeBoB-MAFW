@@ -1,0 +1,114 @@
+# Audiophile control-by-control sweep on the SL rig (official panel 1.4, window 694x489). Coordinates = window-relative,
+# read from capture 91. Every toggle is undone right after; the end state is restored from the saved settings anyway.
+# ---- mixer tab
+click tab-mixer 37 66
+shot m-start
+click mix-sw12-solo-on 86 298
+click mix-sw12-solo-off 86 298
+click mix-sw12-mute-on 86 316
+click mix-sw12-mute-off 86 316
+click mix-sw12-link-off 40 316
+click mix-sw12-link-on 40 316
+click mix-sw12-out34-on 69 361
+click mix-sw12-out34-off 69 361
+click mix-sw12-outspd-on 69 379
+click mix-sw12-outspd-off 69 379
+click mix-sw12-out12-off 69 343
+click mix-sw12-out12-on 69 343
+click mix-sw34-solo-on 197 298
+click mix-sw34-solo-off 197 298
+click mix-sw34-mute-on 197 316
+click mix-sw34-mute-off 197 316
+click mix-sw34-out12-on 177 343
+click mix-sw34-out12-off 177 343
+click mix-swspd-solo-on 309 298
+click mix-swspd-solo-off 309 298
+click mix-swspd-out12-on 288 343
+click mix-swspd-out12-off 288 343
+click mix-ain-solo-on 422 358
+click mix-ain-solo-off 422 358
+click mix-ain-mute-on 422 377
+click mix-ain-mute-off 422 377
+click mix-ain-link-off 380 377
+click mix-ain-link-on 380 377
+click mix-ain-out12-on 403 403
+click mix-ain-out12-off 403 403
+click mix-ain-out34-on 403 421
+click mix-ain-out34-off 403 421
+click mix-ain-outspd-on 403 440
+click mix-ain-outspd-off 403 440
+click mix-sin-solo-on 533 358
+click mix-sin-solo-off 533 358
+click mix-sin-out12-on 513 403
+click mix-sin-out12-off 513 403
+click lc-swrtn 601 217
+click mix-sw12-ctrl-off 40 298
+click mix-sw12-ctrl-on 40 298
+click lc-input 601 252
+click mix-ain-ctrl-off 380 358
+click mix-ain-ctrl-on 380 358
+click lc-auxsend 601 269
+click lc-output 601 234
+click main-mute-on 611 324
+click main-mute-off 611 324
+click main-dim-on 651 324
+click main-dim-off 651 324
+drag mix-sw12-faderL-down 69 225 69 260
+drag mix-sw12-aux-knob-up 45 135 45 115
+drag mix-ain-pan-knob 383 322 383 340
+shot m-end
+# ---- output tab
+click tab-output 92 66
+shot o-start
+click out-12-solo-on 86 298
+click out-12-solo-off 86 298
+click out-12-mute-on 86 316
+click out-12-mute-off 86 316
+click out-12-link-off 40 316
+click out-12-link-on 40 316
+click out-12-main-aux 69 343
+click out-12-aux-main 69 343
+click out-12-ctrl-off 40 298
+click out-12-ctrl-on 40 298
+click out-34-main-aux 177 343
+click out-34-aux-main 177 343
+click out-spd-main-aux 288 343
+click out-spd-aux-main 288 343
+click out-spd-solo-on 309 298
+click out-spd-solo-off 309 298
+click aux-mute-on 422 316
+click aux-mute-off 422 316
+click aux-link-off 380 316
+click aux-link-on 380 316
+click hp-mute-on 533 298
+click hp-mute-off 533 298
+click hp-link-off 491 298
+click hp-link-on 491 298
+click hp-mon-34 513 343
+click hp-mon-spd 513 361
+click hp-mon-aux 513 380
+click hp-mon-12 513 325
+drag out-12-faderL-up 51 275 51 245
+drag out-12-bal-knob 67 130 67 112
+drag aux-pan-knob 380 357 380 340
+drag hp-faderL-down 496 255 496 275
+shot o-end
+# ---- hardware tab (no rate change here; rates are swept separately)
+click tab-hardware 148 66
+shot h-start
+click hpA-34 139 352
+click hpA-spd 195 352
+click hpA-aux 251 352
+click hpA-12 83 352
+click hpB-12 83 378
+click hpB-spd 195 378
+click hpB-aux 251 378
+click hpB-34 139 378
+click ab-direct-monitoring 372 352
+click ab-headphone-source 372 392
+click sync-external 401 161
+sleep 2
+click sync-internal 401 135
+sleep 2
+shot h-end
+click tab-mixer 37 66

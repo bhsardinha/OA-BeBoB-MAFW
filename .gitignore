@@ -3,6 +3,10 @@ openaudio-fw1814/build/
 openaudio-fw1814/**/build/
 openaudio-fw1814/**/*.o
 openaudio-fw1814/**/*.dSYM/
+openaudio-mafw-bebob/build/
+openaudio-mafw-bebob/**/build/
+openaudio-mafw-bebob/**/*.o
+openaudio-mafw-bebob/**/*.dSYM/
 
 # --- Xcode ---
 xcuserdata/
@@ -42,7 +46,8 @@ _refs/*
 ~$*
 openaudio-fw1814/dist/
 openaudio-fw1814/installer/.venv/
+openaudio-mafw-bebob/dist/
+openaudio-mafw-bebob/installer/.venv/
 
-openaudio-fw1814/installer/assets/MAudioFireWireMIDI.plugin/
-openaudio-fw1814/installer/.venv/
-openaudio-fw1814/dist/
+# public copy
+openaudio-*/installer/assets/MAudioFireWireMIDI.plugin/

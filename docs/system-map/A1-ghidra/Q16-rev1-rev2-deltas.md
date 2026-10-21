@@ -1,5 +1,13 @@
 # Q16 — FWRev1AudioDevice vs FWRev2AudioDevice silicon-generation deltas
 
+> **Correction (2026-10-19) — Audiophile phase 0** (evidence: [PROVENANCE-RESOLUTIONS.md §R77](../PROVENANCE-RESOLUTIONS.md), [Q-AP0-nub-and-rev2.md](Q-AP0-nub-and-rev2.md) §2).
+> - **SyncStream phases (lines 73-74) are inverted.** ctype `0x01` = STATUS, `0x00` = CONTROL: the first frame `01 FF 1A 0F FF FE 60 <plug>` is the STATUS query, then `GetAddressAndPlugForSyncType` (vt[0xbc0]) writes the source into bytes 4/5 and the CONTROL `00 FF 1A 0F <addr> <srcplug> 60 <plug>` is sent (asm `0x12c60-0x12e1d`).
+> - **Sync-type names (lines 44, 82) have no source in the binary.** The numbers are right (type 0 → `60`/plug, 1 → `FF 81`, 2 → `FF 00`, 3 → `FF 83`, 4 → `FF 82`), but `0x60` is the music-subunit *address*, and on the Audiophile **S/PDIF is type 4 (`FF 82`)**, not "Aux" (`SetClockSourceInternal @0xb9d4`; `ctl-services` `normal.rs:483-495`).
+> - **Rev1 latency (line 39)**: asm `0x136da`: FDF1/2 (44.1/48) → 186, FDF3 (88.2) → 262, FDF4-6 (96/176.4/192) → 292, FDF0 → 0.
+> - **"Solo = Rev1" (line 80)** is wrong: `FWSoloDevice` derives from `FWRev2AudioDevice` (table in the 2026-10-14 Correction above).
+> - The Rev2 PlugSignalFormat layout (lines 68-69) is confirmed and completed in Q-AP0 §2.1 (AV/C `0x2F`, FFADO layout).
+
+
 > **Correction (2026-10-14) — opcode 0x1A** (evidence: [PROVENANCE-RESOLUTIONS.md §R16](../PROVENANCE-RESOLUTIONS.md)). Opcode `0x1A` is the AV/C **SIGNAL SOURCE** command (FFADO `src/libavc/ccm/avc_signal_source.cpp:33` `AVC1394_CMD_SIGNAL_SOURCE 0x1A`), not a 'stream-input-connect'. It appears in `FWRev2AudioDevice::AVCSetupSyncStream @0x12c7e`: the frame is built `01 FF 1A 0F FF FE 60 <sync-type>` (asm 0x12ca9-0x12d23). Rev2-only; the FW1814 (Rev1) does not use it.
 
 

@@ -1,0 +1,30 @@
+Audio (Built In):
+
+    Intel High Definition Audio:
+
+      Audio ID: 12
+
+        Line Output:
+
+          Connection: 1/8-Inch Jack
+
+        Headphone:
+
+          Connection: 1/8-Inch Jack
+
+        Line Input:
+
+          Connection: 1/8-Inch Jack
+
+        Speaker:
+
+          Connection: Internal
+
+        S/PDIF Optical Digital Audio Output:
+
+          Connection: Optical
+
+        S/PDIF Optical Digital Audio Input:
+
+          Connection: Optical
+
