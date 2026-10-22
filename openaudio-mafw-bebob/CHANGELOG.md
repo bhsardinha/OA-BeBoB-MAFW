@@ -38,7 +38,7 @@ The M-Audio CoreMIDI plug-in is shipped unmodified (1.11.2). Each entry lists th
 - **Menu bar:** a click on the icon opens the panel; a **right click** (or control-click) opens the menu. New order: Open Panel, Outputs and Phones volumes (each on its fader's law), Mute, Dim, Presets | Big Meter, Audio MIDI Setup, Firmware Check | Sync Source, Sample Rate, Show Panel In, Launch at Login | rate and lock status, Quit. Headphones A/B and the knob step left the menu (they stay in the panel); the unit list appears only with several interfaces. R128.
 
 **Installer**
-- **One package per edition.** Classic installs on macOS 10.13 to 10.15 (allowed range "before 11"), as before. Modern installs on macOS 11 and later; its postinstall checks that every kernel symbol the driver needs exists on that Mac (else it removes the driver and fails), stages the driver with `kmutil`, and the closing page asks to **Allow** it in Privacy & Security and restart. R128.
+- **One package per edition.** Classic installs on macOS 10.13 to 10.15, as before. Modern installs on macOS 11 to 15; its postinstall checks that every kernel symbol the driver needs exists on that Mac (else it removes the driver and fails), stages the driver with `kmutil`, and the closing page asks to **Allow** it in Privacy & Security and restart. R128.
 - The Modern edition's kext is built with the macOS 15 SDK; first load and playback on macOS 14.8.9 with the FW Audiophile (R125, R126).
 
 ---

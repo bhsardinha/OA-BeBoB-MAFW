@@ -6,13 +6,15 @@ Written 2026-10-21 (R129). Packages **0.3.0** are the first to come in two editi
 
 | | **Classic** | **Modern** |
 |---|---|---|
-| macOS | 10.13 High Sierra (the package allows 10.13 up to, not including, 11) | 11 Big Sur to 15 Sequoia (the package allows 11.0 up to, not including, 16.0) |
-| CPU | Intel | **Intel only** (no Apple Silicon, no macOS 26 Tahoe) |
+| macOS | 10.13 High Sierra to 10.15 Catalina | 11 Big Sur to 15 Sequoia¹ |
+| CPU | Intel | **Intel only** (no Apple Silicon) |
 | Tested on | iMac11,2 (FireWire 800, 10.13.6) and MacBookAir5,1 + Apple's Thunderbolt-to-FireWire adapter (10.13.6) | MacBookAir7,2 + the same kind of adapter, **macOS 14.8.9** |
 | Interfaces tested | FireWire 1814 and FireWire Audiophile, alone and together | **FireWire Audiophile**; FireWire 1814 for the panel and the external-rate follow only (2026-10-22, capture 99) |
 | Kernel extension built with | Xcode 9.4.1, 10.13 SDK, on the 10.13.6 build machine | Command Line Tools, **macOS 15.2 SDK**, on the Sonoma machine |
 | Security setting | SIP disabled | SIP set so unsigned kexts load (kext signing off), **plus approval in Privacy & Security** and a restart |
 | Package | `OA-BeBoB-MAFW-<version>-classic.pkg` / `.dmg` | `OA-BeBoB-MAFW-<version>-modern.pkg` / `.dmg` |
+
+¹ Does not work on macOS 26 Tahoe.
 
 The audio driver, the helper and the panel are **the same source code** in both editions. What differs is how the driver is compiled, how macOS loads it, and what has been tried on each.
 
