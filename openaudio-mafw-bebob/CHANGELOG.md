@@ -12,7 +12,18 @@ The M-Audio CoreMIDI plug-in is shipped unmodified (1.11.2). Each entry lists th
 
 ---
 
-## Package 0.3.0 — 2026-10-21 (test build, not published)
+## Package 0.3.1 — 2026-10-22
+
+| Driver | Panel | MIDI plug-in | Editions |
+|---|---|---|---|
+| **0.2.2** | **1.5** | 1.11.2 | Classic and Modern, as 0.3.0 |
+
+**Follow the external clock rate** (R131, `docs/RATE_FOLLOW_PLAN_v1.md`)
+- **Driver 0.2.2:** publishes `MAExternalSyncRate`, the rate of the external source as the interface reports it (lock bit + rate field of the status packet; 0 when nothing is seen). The interface reports the source's exact rate while it is in the current speed range (44.1/48 or 88.2/96 kHz; capture 98). `MASampleRate` and `MARateLocked` behave as before.
+- **Panel 1.5:** with the sync source on **External – digital**, the panel sets the interface to the source's rate through CoreAudio, only while no application plays through it (otherwise it shows "Source at … kHz - follows when playback stops" and follows when playback stops). When it sees nothing it tries the other speed range once (48 ↔ 96 kHz) and goes back if nothing locks. Setting **Follow external clock rate** in the Hardware tab and **Follow External Rate** in the status menu, on by default. It also runs when the panel is hidden (launch at login). Word clock is not followed.
+- **Tested** with the Modern package on macOS 14.8.9 with a FireWire 1814 and a POD X3 on coaxial S/PDIF (user, 2026-10-22, capture 99): out of range it switches speed range, in range it takes the exact rate and locks. The official driver detects the rate the same way but never follows it.
+
+## Package 0.3.0 — 2026-10-21 (published 2026-10-22, release v0.3.0)
 
 | Driver | Panel | MIDI plug-in | Editions |
 |---|---|---|---|

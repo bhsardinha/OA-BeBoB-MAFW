@@ -18,6 +18,8 @@ final class HardwareTab: FlippedView, PanelTab {
     private let rateDisplay = RateDisplay()
     private let rateStatus = makeLabel("", size: 11, weight: .medium)
     private let stepper = StepperControl()
+    // RATE_FOLLOW_PLAN_v1 (user, 2026-10-22): follow the rate of an external digital source; greyed with a driver that does not publish it
+    private let followCheck = ChoiceButton(check: "Follow external clock rate")
     private var syncRadios: [(ChoiceButton, MAClockSource.Sync)] = []
     private let dmRadio = ChoiceButton(radio: "Direct monitoring")
     private let hpRadio: ChoiceButton
@@ -48,6 +50,8 @@ final class HardwareTab: FlippedView, PanelTab {
         // sample rate: stepper through the six rates, display green/closed lock when synced, red/open lock otherwise (user, P12 item 8)
         stepper.onStep = { [weak self] dir in self?.stepRate(dir) }
         rateCard.addSubview(stepper); rateCard.addSubview(rateDisplay); rateCard.addSubview(rateStatus)
+        followCheck.onAction = { [weak self] in PanelPrefs.followExternalRate = !PanelPrefs.followExternalRate; self?.refresh() }
+        rateCard.addSubview(followCheck)
 
         // sync source: MAClockSource bits [1:0], the options the model offers (FW1814: v1.9 capture; Audiophile: internal / S/PDIF, PNAP §7)
         for opt in ctx.profile.hardware.sync {
@@ -98,7 +102,8 @@ final class HardwareTab: FlippedView, PanelTab {
         // rate: stepper | display, status line under it
         stepper.frame = NSRect(x: inner, y: top + 6, width: 26, height: 76)
         rateDisplay.frame = NSRect(x: inner + 36, y: top + 6, width: w - 2 * inner - 36, height: 76)
-        rateStatus.frame = NSRect(x: inner + 36, y: top + 96, width: w - 2 * inner - 36, height: 18)
+        rateStatus.frame = NSRect(x: inner, y: top + 90, width: w - 2 * inner, height: 18)
+        followCheck.frame = NSRect(x: inner, y: top + 116, width: w - 2 * inner, height: 20)
 
         for (i, (b, _)) in syncRadios.enumerated() { b.frame = NSRect(x: inner, y: top + 6 + CGFloat(i) * 32, width: w - 2 * inner, height: 20) }
 
@@ -131,8 +136,15 @@ final class HardwareTab: FlippedView, PanelTab {
         rateDisplay.text = Theme.rateText(m.sampleRate)
         let locked = m.rateLocked
         rateDisplay.locked = locked
-        rateStatus.stringValue = locked ? "Locked" : "Not locked"
-        rateStatus.textColor = locked ? Theme.green : Theme.red
+        if let note = ctx.follower.note {
+            rateStatus.stringValue = note
+            rateStatus.textColor = Theme.text2
+        } else {
+            rateStatus.stringValue = locked ? "Locked" : "Not locked"
+            rateStatus.textColor = locked ? Theme.green : Theme.red
+        }
+        followCheck.on = PanelPrefs.followExternalRate
+        followCheck.isEnabled = ctx.device?.externalSyncRate != nil
         let i = rates.index(of: m.sampleRate)
         stepper.canUp = (i ?? 0) < rates.count - 1
         stepper.canDown = (i ?? 0) > 0

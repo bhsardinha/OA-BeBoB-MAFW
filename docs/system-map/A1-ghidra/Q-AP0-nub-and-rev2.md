@@ -181,4 +181,6 @@ Audiophile vtable (bytes): `0xaa8` `FWAudioDevice::SupportsAC3` (asm `0xa982`: r
 
 CMP: the clone's `fHostPlug[3]` (`FWCMP.h:69`) is the host's own PCR slots (reference `[+0x28]` = 3 entries), not the device's plug count; the engine connects device plug 0 in each direction (`ConnectAudioMIDIChannels`, Q-START), so the Audiophile's 2 oPCR / 2 iPCR need no change.
 
+> **Correction (2026-10-22):** the `w2` encoding below is settled: FDF index (1 = 44.1 ... 4 = 96, `0xFF` unlocked) on the Audiophile (capture 93) and on the FW1814's word 20 (capture 98, R131), where `w2` is also the source's exact rate within the current speed range.
+
 External sync: `ReadHSCIData` passes `(locked = w3 ≠ 0, rate = w2)` to `FWAudioDevice::DetectExternalSyncChanges(bool, FDFValue)` (clone `FWAudioDeviceChain.h:112-113`). **Unverified:** that the Audiophile encodes `w2` as an FDF index (0..6) rather than an AV/C rate code. Check: read `0xFFC7:0x00600000` on the SL rig while the clock is S/PDIF at 44.1 and 48 kHz (read-only quadlet read; needs the user's OK), or compare with the 1814's HSCI byte (Q6).

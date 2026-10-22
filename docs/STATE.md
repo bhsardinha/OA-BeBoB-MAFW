@@ -2,9 +2,14 @@
 
 > **Removal notice (2026-10-14):** all pre-pivot code and docs (`_legacy_pre_ghidra/`, `openaudio-fw1814/firmware-helper/`, `openaudio-fw1814/legacy-mod/`) were deleted from the working tree at the user's request. They are recoverable from git: `git show d1-approved-2026-10-14:<old path>` (tag `d1-approved-2026-10-14`, commit `a9cb63c`). References to those paths in this file or in `docs/system-map/` are historical. `openaudio-fw1814/` is intentionally empty; new code is built from scratch per `docs/BUILD-PLAN.md` once the user approves it.
 
-Snapshot as of **2026-10-21**. Updated with each Part A/B/C/D commit and each build milestone.
+Snapshot as of **2026-10-22**. Updated with each Part A/B/C/D commit and each build milestone.
 
 Resume anchor: `/NEW_PLAN.md` → this file → `system-map/README.md` → the in-progress Part N.
+
+## 2026-10-22 (evening) - external clock rate: detection measured, follow feature in code (R131)
+* Capture 98 (SL rig, official 1.9, FW1814, POD X3 on S/PDIF coaxial): within the interface's speed range (44.1/48 or 88.2/96) the status word gives the source's exact rate; outside it nothing. The official driver does not follow.
+* Code (not yet on hardware): kext publishes `MAExternalSyncRate`; panel `RateFollower` follows through CoreAudio when idle, one try of the other range, setting on by default (`docs/RATE_FOLLOW_PLAN_v1.md`). Both kexts build; panel tests and typecheck pass on the build PC. Tracker AP-5.7.
+* **Works on the hardware (user, capture 99):** package 0.3.1 Modern (driver 0.2.2, panel 1.5) on the dev Mac with a second FW1814 (`0xD6C040074B9FB`, first FW1814 on Modern) and the POD X3: out of range it tries the other speed range, in range it takes the exact rate and locks. 0.3.1 Classic package + both `.dmg`s built (Classic kext `3FA69E4A-…`, not installed anywhere yet); not published.
 
 ## 2026-10-22 - scope floor 10.9; Legacy edition dropped (R130)
 Plan v4: bands and editions are Classic (10.9 target, installer from 10.13) and Modern (11-15); Apple Silicon open. The SL rig remains a reference, not a target.

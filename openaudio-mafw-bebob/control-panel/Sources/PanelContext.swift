@@ -7,6 +7,8 @@ final class PanelContext {
     let device: PanelBackend?
     /// The model (official panel: the CXDevice subclass + its settings views), from the device's registry class (DeviceProfiles).
     let profile: DeviceProfile
+    /// "Follow external clock rate" for this interface (RATE_FOLLOW_PLAN_v1), ticked by the panel controller
+    let follower = RateFollower()
     private(set) var meterDB = [Int](repeating: -64, count: FWDevice.peakCount)
 
     init(model: DeviceModel, device: PanelBackend?, profile: DeviceProfile) { self.model = model; self.device = device; self.profile = profile }

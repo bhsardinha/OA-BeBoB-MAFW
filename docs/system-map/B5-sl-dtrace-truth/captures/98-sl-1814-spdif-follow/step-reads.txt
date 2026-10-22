@@ -1,0 +1,44 @@
+# step 1 (2026-10-22): FW1814 set to 48 kHz external S/PDIF coaxial (official panel), POD X3 S/PDIF out at 44.1 kHz; engine idle
+  0 size 88  bytes@0x50 = 00 00 01 01  w20 = 010
+  1 size 88  bytes@0x50 = 00 00 01 01  w20 = 010
+  2 size 88  bytes@0x50 = 00 00 01 01  w20 = 010
+  3 size 88  bytes@0x50 = 00 00 01 01  w20 = 010
+  4 size 88  bytes@0x50 = 00 00 01 01  w20 = 010
+  5 size 88  bytes@0x50 = 00 00 01 01  w20 = 010
+  6 size 88  bytes@0x50 = 00 00 01 01  w20 = 010
+  7 size 88  bytes@0x50 = 00 00 01 01  w20 = 010
+    | |   |                   |   "MASampleRate" = 44100
+    | |   |                   |   "MARateLocked" = 0
+# step 2: FW1814 48 kHz external, POD X3 at 48 kHz
+  0 size 88  bytes@0x50 = 00 00 02 01  w20 = 010
+  1 size 88  bytes@0x50 = 00 00 02 01  w20 = 010
+  2 size 88  bytes@0x50 = 00 00 02 01  w20 = 010
+  3 size 88  bytes@0x50 = 00 00 02 01  w20 = 010
+  4 size 88  bytes@0x50 = 00 00 02 01  w20 = 010
+  5 size 88  bytes@0x50 = 00 00 02 01  w20 = 010
+  6 size 88  bytes@0x50 = 00 00 02 01  w20 = 010
+  7 size 88  bytes@0x50 = 00 00 02 01  w20 = 010
+    | |   |                   |   "MASampleRate" = 48000
+    | |   |                   |   "MARateLocked" = 1
+# step 3: FW1814 48 kHz external, POD X3 at 88.2 kHz
+  0 size 88  bytes@0x50 = 00 00 02 00  w20 = 000
+  1 size 88  bytes@0x50 = 00 00 02 00  w20 = 000
+  2 size 88  bytes@0x50 = 00 00 02 00  w20 = 000
+  3 size 88  bytes@0x50 = 00 00 02 00  w20 = 000
+  4 size 88  bytes@0x50 = 00 00 02 00  w20 = 000
+  5 size 88  bytes@0x50 = 00 00 02 00  w20 = 000
+  6 size 88  bytes@0x50 = 00 00 02 00  w20 = 000
+  7 size 88  bytes@0x50 = 00 00 02 00  w20 = 000
+    | |   |                   |   "MASampleRate" = 48000
+    | |   |                   |   "MARateLocked" = 0
+# step 4: FW1814 48 kHz external, POD X3 at 96 kHz
+  0 size 88  bytes@0x50 = 00 00 02 00  w20 = 000
+  1 size 88  bytes@0x50 = 00 00 02 00  w20 = 000
+  2 size 88  bytes@0x50 = 00 00 02 00  w20 = 000
+  3 size 88  bytes@0x50 = 00 00 02 00  w20 = 000
+  4 size 88  bytes@0x50 = 00 00 02 00  w20 = 000
+  5 size 88  bytes@0x50 = 00 00 02 00  w20 = 000
+  6 size 88  bytes@0x50 = 00 00 02 00  w20 = 000
+  7 size 88  bytes@0x50 = 00 00 02 00  w20 = 000
+    | |   |                   |   "MASampleRate" = 48000
+    | |   |                   |   "MARateLocked" = 0

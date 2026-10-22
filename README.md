@@ -1,6 +1,6 @@
 # OpenAudio BeBoB MAFW
 
-**A native driver, control panel and installer for the M-Audio FireWire 1814 and FireWire Audiophile on macOS 10.13.6 High Sierra.**
+**A native driver, control panel and installer for the M-Audio FireWire 1814 and FireWire Audiophile on macOS 10.13 High Sierra (Classic edition) and macOS 11 to 15 on Intel (Modern edition).**
 
 The FireWire 1814 (18 in / 14 out) and the FireWire Audiophile (4 in / 6 out) are BridgeCo BeBoB FireWire interfaces that M-Audio stopped supporting years ago. The last official driver (1.11.x, 2014) kernel-panics on macOS 10.13.6, and its Carbon control panel is 32-bit only. OpenAudio BeBoB MAFW is a from-scratch replacement — a 64-bit kernel extension, a helper daemon, a modern AppKit control panel (**OA BeBoB MAFW**) and an installer — built by reverse engineering the official driver and checking every behaviour against the real hardware. It succeeds **OpenAudio FW1814 0.1.0** (FireWire 1814 only), which its installer replaces.
 
@@ -10,7 +10,7 @@ The FireWire 1814 (18 in / 14 out) and the FireWire Audiophile (4 in / 6 out) ar
 
 > **Homebrew and experimental.** A hobby project, not a product: the kernel extension is **unsigned and will stay unsigned**, so it runs only with **System Integrity Protection disabled**, and nothing is promised or supported.
 
-> **Status: package 0.2.2** (driver 0.2.0, panel 1.3; see [`CHANGELOG.md`](openaudio-mafw-bebob/CHANGELOG.md)). Tested with **one FireWire 1814 and one FireWire Audiophile, alone and together on the same bus, on an iMac (iMac11,2, native FireWire 800)**, and installed from the disk image on a **MacBook Air (MacBookAir5,1) through Apple's Thunderbolt-to-FireWire adapter** — both on macOS 10.13.6 with SIP disabled. Nothing else has been tested. The next release (0.3.0) adds the **Modern edition** for macOS 11 to 15 on Intel (see [Compatibility](#compatibility)). Read [Known issues](#known-issues) before installing.
+> **Status: package 0.3.1** (driver 0.2.2, panel 1.5; see [`CHANGELOG.md`](openaudio-mafw-bebob/CHANGELOG.md)), in two editions (see [Compatibility](#compatibility)). **Classic** (macOS 10.13): tested with **one FireWire 1814 and one FireWire Audiophile, alone and together on the same bus, on an iMac (iMac11,2, native FireWire 800)**, and installed from the disk image on a **MacBook Air (MacBookAir5,1) through Apple's Thunderbolt-to-FireWire adapter**, both on macOS 10.13.6 with SIP disabled; that testing was done up to package 0.2.2, and the 0.3.x Classic packages have not yet been installed on a 10.13 Mac. **Modern** (macOS 11 to 15, Intel): tested on a **MacBook Air (MacBookAir7,2), macOS 14.8.9**, with the Audiophile (plays) and a FireWire 1814 (panel and external-rate follow). Nothing else has been tested. Read [Known issues](#known-issues) before installing.
 
 ---
 
@@ -37,7 +37,11 @@ The FireWire 1814 (18 in / 14 out) and the FireWire Audiophile (4 in / 6 out) ar
 
 **Both units on one bus:** both come up, both stream, both recover after the interfaces are power-cycled; the panel switches between them; the firmware check reports both as current.
 
-**Monitor level law (this project's choice, not the official one).** Output, phones and aux-out faders are dB-linear over 72 dB (centre = −36 dB, bottom = off); the hardware knobs move those levels 1.5 dB per click by default (3 dB or the official law selectable per unit). Mixer faders keep the official console law.
+**Phones level law (this project's choice, not the official one).** The phones faders are dB-linear over 72 dB (centre = −36 dB, bottom = off), and the phones knob moves them 1.5 dB per click by default (3 dB or the official law selectable per unit). Outputs, aux out and the mixer use the official console law, and the knobs move the outputs with the official law.
+
+### Follow the external clock rate (new in 0.3.1)
+
+With the sync source on **External – digital** (S/PDIF), the panel sets the interface to the **source's sample rate by itself**. The interface reports the source's exact rate only while the source is in its current speed range (44.1 / 48 or 88.2 / 96 kHz); when it sees nothing, the panel tries the other range once and goes back if nothing locks there. It changes the rate only while no application plays through the interface; otherwise it shows *Source at 44.1 kHz - follows when playback stops* and waits. Setting: **Follow external clock rate** on the Hardware page (and *Follow External Rate* in the status menu), on by default; it also works with the panel hidden or launched at login. Tested on the Modern edition with a FireWire 1814 and a Line 6 POD X3 on coaxial S/PDIF. Word clock is not followed; optical S/PDIF, ADAT, the Audiophile and the Classic edition are untried. The official driver detects the source's rate the same way but never follows it.
 
 **Light on the CPU:** the meters are GPU-composited layers redrawn only when a segment changes (the official panel's method); with moving meters the panel uses about 2 % of a core on a 2010 iMac.
 
@@ -48,12 +52,12 @@ The FireWire 1814 (18 in / 14 out) and the FireWire Audiophile (4 in / 6 out) ar
 <td valign="top" width="300"><img src="docs/images/status-menu.png" width="290" alt="Status menu of OA BeBoB MAFW"></td>
 <td valign="top">
 
-**Status menu.** The panel can live in the **menu bar**, the **Dock**, or both, and can **launch at login** (choose under *Show Panel In*). The icon shows the selected interface at a glance — **online**, **muted** or **not locked** (no sync), dimmed when no interface is connected — and its menu acts on the unit checked at the top:
+**Status menu.** The panel can live in the **menu bar**, the **Dock**, or both, and can **launch at login** (choose under *Show Panel In*). The icon shows the selected interface at a glance — **online**, **muted** or **not locked** (no sync), dimmed when no interface is connected. A click opens the panel; a right click (or control-click) opens the menu, which acts on the unit checked at the top (the list appears only with several units):
 
-- output and phones volume sliders (monitor law), **mute**, **dim**, headphones **A / B**;
-- **sample rate** (greyed while an application streams) and **sync source** with the lock state;
-- **presets** that fit that interface, the hardware **level knob** step;
-- the **big meter**, the full panel, Audio MIDI Setup and the **firmware check**.
+- **Open Panel**, outputs and phones volume sliders (each on its fader's law), **mute**, **dim**, **presets** that fit that interface;
+- the **big meter**, Audio MIDI Setup and the **firmware check**;
+- **sync source**, **Follow External Rate**, **sample rate** (greyed while an application streams), *Show Panel In*, *Launch at Login*;
+- the rate and lock state (and the external source's rate when the panel is waiting to follow it).
 
 </td>
 </tr>
@@ -80,13 +84,13 @@ The FireWire 1814 (18 in / 14 out) and the FireWire Audiophile (4 in / 6 out) ar
 
 ## Compatibility
 
-Two editions, one source tree. **Published so far: 0.2.2, Classic only.** The 0.3.0 packages (both editions) are built and not yet released; the Modern edition below is what is new. What differs, and what is tested on each, is in [`docs/EDITIONS.md`](docs/EDITIONS.md).
+Two editions, one source tree, both published since 0.3.0 (current: 0.3.1). Download the `.dmg` of your edition; each installer accepts only its own macOS range. What differs, and what is tested on each, is in [`docs/EDITIONS.md`](docs/EDITIONS.md).
 
-| | **Classic** (published, 0.2.2) | **Modern** (0.3.0, in preparation) |
+| | **Classic** | **Modern** |
 |---|---|---|
-| **macOS** | **10.13.6 High Sierra** (64-bit kext, 10.13 SDK, Xcode 9.4.1) | **11 Big Sur to 15 Sequoia, Intel only.** Works on **14.8.9**; the other versions of the range are allowed by the package but untried. No Apple Silicon, no macOS 26 |
+| **macOS** | **10.13 High Sierra** (tested on 10.13.6; the package also allows 10.14 / 10.15, untried; 64-bit kext, 10.13 SDK, Xcode 9.4.1) | **11 Big Sur to 15 Sequoia, Intel only.** Works on **14.8.9**; the other versions of the range are allowed by the package but untried. No Apple Silicon, no macOS 26 |
 | **Mac** | iMac11,2 with native FireWire 800; MacBook Air (MacBookAir5,1) through Apple's **Thunderbolt-to-FireWire adapter**. Other Macs, adapters and FireWire 400 are untested | MacBook Air (MacBookAir7,2) through the same kind of adapter. Nothing else tested |
-| **Interfaces** | **M-Audio FireWire 1814 and FireWire Audiophile only**, alone and together | The **FireWire Audiophile** has been tried (plays); the FireWire 1814 has not been tried on Modern |
+| **Interfaces** | **M-Audio FireWire 1814 and FireWire Audiophile only**, alone and together | The **FireWire Audiophile** plays; the **FireWire 1814** has been tried for the panel and the external-rate follow only |
 | **Security** | **Unsigned, always**; **System Integrity Protection must be disabled** (Recovery, `csrutil disable`) | Unsigned, always; SIP set so unsigned kexts load, then **Allow** in System Settings › Privacy & Security (shown as *unidentified developer*) and a restart |
 
 The other models of the official driver (FireWire 410, FireWire Solo, Ozonic, ProFire Lightbridge, ProjectMix I/O, NRV10) are not implemented; the structure for them exists (see [Roadmap](#roadmap)). Apple Silicon is an idea, not started. Mac OS X 10.6.8 to 10.8.5 is out of scope: the official M-Audio drivers work there. See the [compatibility plan](docs/compatibility/BROAD_COMPATIBILITY_PLAN_v4.md).
@@ -115,23 +119,24 @@ Three different reasons, kept apart on purpose.
 | **Other M-Audio BeBoB interfaces** (FireWire 410, FireWire Solo, Ozonic, ProFire Lightbridge, ProjectMix I/O, NRV10) | The code is structured for one module per model, but nothing is implemented. It needs people who own the hardware. |
 | **Interfaces from other makers** (including DICE-based ones) | Out of scope. |
 | **Firmware update from the panel** | The panel's firmware check only reads. Nothing writes the interface's flash, and there is no custom firmware. |
-| **Detecting the rate of an external S/PDIF source** | The interface locks, but you set the matching rate yourself. |
+| **Following the rate of a word-clock source** | Only *External – digital* is followed (0.3.1); with word clock you set the rate yourself. |
 | **Mac OS X 10.6.8 to 10.8.5** | Out of scope (decided 2026-10-22): the official M-Audio drivers work well there, so this project starts at 10.9. |
 | **Windows and Linux** | Not this project (Linux has FFADO and snd-bebob). |
 
 ### Written but not tried
 
-These exist in the driver, but nobody has run them, so do not count on them: macOS 10.14 and 10.15 (allowed by the Classic installer); macOS 11, 12, 13 and 15 (allowed by the Modern installer); the **FireWire 1814 on the Modern edition**; MIDI SysEx on the wire; AC-3 pass-through on the wire; sleep/wake; two FireWire 1814s on one bus; FireWire 400 and Macs other than those listed under Compatibility.
+These exist in the driver, but nobody has run them, so do not count on them: macOS 10.14 and 10.15 (allowed by the Classic installer); macOS 11, 12, 13 and 15 (allowed by the Modern installer); the **FireWire 1814 on the Modern edition** beyond the panel and the external-rate follow (playback, recording, MIDI); the external-rate follow with optical S/PDIF, ADAT, the Audiophile or on the Classic edition; MIDI SysEx on the wire; AC-3 pass-through on the wire; sleep/wake; two FireWire 1814s on one bus; FireWire 400 and Macs other than those listed under Compatibility.
 
 ## Install
 
-1. Download the `.dmg` from the [Releases](https://github.com/bhsardinha/OA-BeBoB-MAFW/releases) page.
+1. Download the `.dmg` of your edition from the [Releases](https://github.com/bhsardinha/OA-BeBoB-MAFW/releases) page: `…-classic.dmg` for macOS 10.13, `…-modern.dmg` for macOS 11 to 15 on Intel.
 2. Quit audio and MIDI applications. Remove the official M-Audio (and Avid/DICE) FireWire drivers first; they conflict. An earlier OpenAudio version does **not** need to be removed: the installer replaces it and keeps your settings.
-3. Disable System Integrity Protection if it is on (Recovery mode, `csrutil disable`).
-4. Open the `.dmg`, run **Install OA BeBoB MAFW.pkg**, **restart**. (The package contains M-Audio's CoreMIDI plug-in unmodified, so that MIDI works; see [`NOTICE.md`](NOTICE.md).)
-5. Power on the interface. It appears in Audio MIDI Setup; the panel **OA BeBoB MAFW** is in `/Applications`.
+3. Set the security level: **Classic** needs System Integrity Protection disabled (Recovery mode, `csrutil disable`); **Modern** needs SIP set so unsigned kexts load.
+4. Open the `.dmg`, run **Install OA BeBoB MAFW.pkg**. (The package contains M-Audio's CoreMIDI plug-in unmodified, so that MIDI works; see [`NOTICE.md`](NOTICE.md).)
+5. **Modern only:** when the installer says so, open System Settings › Privacy & Security and press **Allow** (the developer shows as *unidentified*, because the driver is unsigned).
+6. **Restart**, power on the interface. It appears in Audio MIDI Setup; the panel **OA BeBoB MAFW** is in `/Applications`.
 
-**Modern edition (0.3.0, not released yet):** the steps are the same, but step 3 needs SIP set so unsigned kexts load, and after the installer you must press **Allow** in System Settings › Privacy & Security and then restart. The installer refuses to run on a macOS outside its range, and removes the driver if this Mac lacks a kernel symbol it needs.
+Each installer refuses a macOS outside its range; the Modern one also removes the driver, failing the install, if this Mac lacks a kernel symbol it needs.
 
 To remove everything run **Uninstall OA BeBoB MAFW** from the disk image and restart.
 
@@ -157,7 +162,7 @@ Never copy an untested kext into `/Library/Extensions` (a panicking kext there b
 2. **Never unload the driver while a unit is attached** (`kextunload`): the official design does not free a FireWire resource on unload, and a later bus reset can panic. This driver frees it, but the installer and uninstaller still never unload — they ask for a restart.
 3. **Front-panel knobs can lose clicks on fast turns** — the interface reports only a direction per read (about every 50 ms), as with the official driver.
 4. **FW1814: the Audio MIDI Setup sidebar label can be stale** after an S/PDIF ↔ ADAT switch (the real channel counts are correct), and the switch interrupts audio for about 4 s.
-5. **External S/PDIF sync does not follow the source's rate.** With an external S/PDIF source (tested with a Line 6 POD X3) the interface locks at every rate, but you must set the same sample rate yourself in Audio MIDI Setup or the panel; the driver does not detect it.
+5. **The external-rate follow waits while audio plays** (by design: see item 1). A source outside the interface's speed range takes several seconds to be found (one try of the other range). Word clock is not followed. With *Follow external clock rate* off, set the source's rate yourself, as before 0.3.1.
 6. **Not tested** (no formal test plan; these get looked at if someone hits a problem): MIDI bytes on the wire and SysEx, AC-3 pass-through on the wire, sleep/wake, streaming for hours, two FW1814s on one bus, the full 0.1.0 test ladder of the FW1814 on the new driver. Updating in place, the Uninstall app and the status menu have been used on a real install.
 7. **No firmware update.** The driver starts the firmware already in the interface; the panel's firmware check only reads it. Nothing writes flash.
 8. **FW1814 at 176.4 / 192 kHz:** digital ports and the DSP mixer are off (hardware); a loopback of analog inputs at 192 kHz read silence once, unexplained.
@@ -174,10 +179,10 @@ Never copy an untested kext into `/Library/Extensions` (a panicking kext there b
 
 | Path | What |
 |---|---|
-| [`openaudio-mafw-bebob/`](openaudio-mafw-bebob/) | **Current code (0.2.x):** `kext/` (`src/base/` + `src/models/<Model>/`), `firmware-helper/`, `control-panel/`, `installer/`, `tools/`, `tests/`, `scripts/`, `CHANGELOG.md`, `VERSION` |
+| [`openaudio-mafw-bebob/`](openaudio-mafw-bebob/) | **Current code (0.3.x):** `kext/` (`src/base/` + `src/models/<Model>/`), `firmware-helper/`, `control-panel/`, `installer/`, `tools/`, `tests/`, `scripts/`, `CHANGELOG.md`, `VERSION` |
 | [`openaudio-fw1814/`](openaudio-fw1814/) | The 0.1.0 tree (FireWire 1814 only), kept as released (tag `v0.1.0`) |
 | [`docs/system-map/`](docs/system-map/README.md) | Reverse-engineering notes: class chain, DCL rings, clocking, AV/C and HSCI commands, mixer model, panel, MIDI plug-in, helper, captures |
-| [`docs/system-map/PROVENANCE-RESOLUTIONS.md`](docs/system-map/PROVENANCE-RESOLUTIONS.md) | Dated log of every finding, correction and test result (R1 … R129) |
+| [`docs/system-map/PROVENANCE-RESOLUTIONS.md`](docs/system-map/PROVENANCE-RESOLUTIONS.md) | Dated log of every finding, correction and test result (R1 … R131) |
 | [`docs/ARCHITECTURE_MAFW_v1.md`](docs/ARCHITECTURE_MAFW_v1.md), [`docs/BUILD_AUDIOPHILE_PLAN_v9.md`](docs/BUILD_AUDIOPHILE_PLAN_v9.md) | Driver layers and how a model plugs in; the 0.2 plan |
 | [`docs/EDITIONS.md`](docs/EDITIONS.md), [compatibility plan](docs/compatibility/BROAD_COMPATIBILITY_PLAN_v4.md) | Classic vs Modern edition: what differs and what is tested; the plan for macOS 10.6.8 to 15 |
 | [`docs/STATE.md`](docs/STATE.md), [`NEXT_STEPS.md`](docs/project/NEXT_STEPS.md) | Current state and what is next |

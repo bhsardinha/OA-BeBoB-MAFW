@@ -9,6 +9,8 @@ enum PanelPrefs {
     private static let d = UserDefaults.standard
     static var showInDock: Bool { get { return d.object(forKey: "ShowInDock") as? Bool ?? true } set { d.set(newValue, forKey: "ShowInDock") } }
     static var showInMenuBar: Bool { get { return d.object(forKey: "ShowInMenuBar") as? Bool ?? false } set { d.set(newValue, forKey: "ShowInMenuBar") } }
+    /// "Follow external clock rate" (RATE_FOLLOW_PLAN_v1, user 2026-10-22: on by default), for every interface of this Mac
+    static var followExternalRate: Bool { get { return d.object(forKey: "FollowExternalRate") as? Bool ?? true } set { d.set(newValue, forKey: "FollowExternalRate") } }
 
     /// Launch at login = a per-user LaunchAgent that starts the panel with --background (no window until asked; 10.13 has no simpler public API
     /// for an unsandboxed app without a helper bundle).
@@ -192,6 +194,7 @@ final class StatusMenuController: NSObject, NSMenuDelegate {
         m.addItem(NSMenuItem.separator())
         if let model = cur?.ctx.model {
             disabled(m, "\(Theme.rateText(model.sampleRate)) kHz  \u{00B7}  " + (model.rateLocked ? "locked" : "not locked"))
+            if let note = cur?.ctx.follower.note { disabled(m, note) }
         } else {
             disabled(m, "No interface connected")
         }
@@ -237,6 +240,10 @@ final class StatusMenuController: NSObject, NSMenuDelegate {
             i.isEnabled = opt.enabled(model.layout)
         }
         let syncItem = m.addItem(withTitle: "Sync Source", action: nil, keyEquivalent: ""); syncItem.submenu = sync
+        // RATE_FOLLOW_PLAN_v1: the same setting as the Hardware tab's checkbox (greyed with a driver that does not publish MAExternalSyncRate)
+        let follow = action(m, "Follow External Rate", #selector(toggleFollow))
+        follow.state = PanelPrefs.followExternalRate ? .on : .off
+        follow.isEnabled = c.device.externalSyncRate != nil
         let rates = NSMenu(); rates.autoenablesItems = false
         let busy = model.isStreaming
         for hz in model.supportedRates {
@@ -290,5 +297,6 @@ final class StatusMenuController: NSObject, NSMenuDelegate {
         onPresentationChanged?()
     }
     @objc private func toggleLogin() { PanelPrefs.launchAtLogin = !PanelPrefs.launchAtLogin }
+    @objc private func toggleFollow() { PanelPrefs.followExternalRate = !PanelPrefs.followExternalRate }
     @objc private func quit() { NSApp.terminate(nil) }
 }

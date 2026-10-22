@@ -123,7 +123,7 @@ public:
     IOReturn SetExportStereoPairEngines(UInt32 on);                            // ref @0x1dd6: off -> RemoveAllSubEngines, on -> CreateStereoPairSubEngines
     virtual void CreateStereoPairSubEngines();                                 // vt[0xa40] ref @0x30f2
     IOReturn SetExportAggregateEngine(UInt32) { return (IOReturn)0xE00002C7; }  // ref @0x1dca
-    // ref DetectExternalSyncChanges: FDF/lock bits of the control packet -> MASampleRate / MARateLocked
+    // ref DetectExternalSyncChanges: FDF/lock bits of the control packet -> MASampleRate / MARateLocked (+ clone MAExternalSyncRate)
     void   DetectExternalSyncChanges(bool locked, UInt32 fdf);
     // ref overrides: the property dictionary answers getProperty/copyProperty (after the LatencyProfiler handshake) and setProperties
     virtual OSObject *getProperty(const char *aKey) const APPLE_KEXT_OVERRIDE;
@@ -154,6 +154,7 @@ protected:
     bool   fWokeFromSleep;                     // ref [+0x259]
     bool   fRateLocked;                        // ref [+0x25a]
     UInt32 fDetectedFdf;                       // ref [+0x25c]
+    UInt32 fExtSyncRate;                       // clone: last MAExternalSyncRate published (RATE_FOLLOW_PLAN_v1)
 };
 
 #endif

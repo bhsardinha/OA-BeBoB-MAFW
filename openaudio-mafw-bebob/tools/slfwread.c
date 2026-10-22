@@ -5,6 +5,8 @@
 //   slfwread status [N [ms]]   read the 60-byte status packet at 0xFFC7:0x00600000 N times (default 1, 50 ms apart) and
 //                              print the 14 peaks (upper 16 bits of each big-endian quadlet) and the status word bytes
 //   slfwread quad HI LO        read one quadlet at HI:LO (hex)
+//   slfwread block1814 [N [ms]] read the FW1814's 88-byte (0x58) status packet N times and print word 20 (byte 0x50): lock = bit 24,
+//                              FDF index = bits 16..18 (FW1814Device::ReadHSCIData @0xd952, clone FW1814Device.cpp) plus the raw hex
 // It tries the IOFireWireUnit node first, then the IOFireWireDevice node, and reports every open/read status.
 // Nothing is written to the device.
 #include <CoreFoundation/CoreFoundation.h>
@@ -56,6 +58,17 @@ int main(int argc, char **argv)
         IOReturn r = readBlock(dev, (UInt16)strtoul(argv[2], 0, 16), (UInt32)strtoul(argv[3], 0, 16), &q, &size);
         unsigned char *b = (unsigned char *)&q;
         printf("read -> 0x%x  bytes %02x %02x %02x %02x\n", r, b[0], b[1], b[2], b[3]);
+    } else if (!strcmp(argv[1], "block1814")) {
+        int n = argc > 2 ? atoi(argv[2]) : 1, ms = argc > 3 ? atoi(argv[3]) : 50;
+        for (int i = 0; i < n; i++) {
+            unsigned char b[0x58]; UInt32 size = sizeof(b);
+            IOReturn r = readBlock(dev, 0xFFC7, 0x00600000, b, &size);
+            if (r) { printf("read %d -> 0x%x\n", i, r); break; }
+            UInt32 w = (UInt32)b[0x50] | b[0x51] << 8 | b[0x52] << 16 | (UInt32)b[0x53] << 24;   // memory image as the kext sees it (little-endian load of the wire bytes)
+            printf("%3d size %u  bytes@0x50 = %02x %02x %02x %02x  w20 = %08x  lock(bit24) = %u  fdf(bits16..18) = %u\n", i, (unsigned)size, b[0x50], b[0x51], b[0x52], b[0x53], (unsigned)w, (w >> 24) & 1, (w >> 16) & 7);
+            if (i == 0) { for (int k = 0; k < 0x58; k++) printf("%02x%s", b[k], (k & 15) == 15 ? "\n" : " "); printf("\n"); }
+            usleep(ms * 1000);
+        }
     } else {
         int n = argc > 2 ? atoi(argv[2]) : 1, ms = argc > 3 ? atoi(argv[3]) : 50;
         for (int i = 0; i < n; i++) {

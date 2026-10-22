@@ -38,6 +38,11 @@ then `scp` it to the SL into the persistent folder **`~/fw1814-captures/tools/`*
 panics v1.9). The SL HAL applies a rate request only while the client's run loop spins (`ratecycle` already does that). Put the SL back to the rate it had (48 kHz).
 Example: `~/fw1814-captures/tools/ratecycle 48000 192000 48000` -> capture 85.
 
+`slfwread` (read-only status-packet reads, nothing written): `status [N [ms]]` = the Audiophile's 60-byte packet (capture 93); `block1814 [N [ms]]`
+= the FW1814's 88-byte packet, word 20 decoded as the kext does (rate field byte 0x52, lock byte 0x53; capture 98, R131); `quad HI LO`. Built on the
+dev Mac (15.2 SDK) it needs `clang -arch x86_64 -mmacosx-version-min=10.6 -fno-stack-protector -D_FORTIFY_SOURCE=0 -Wl,-no_pie slfwread.c -framework
+IOKit -framework CoreFoundation` (without those flags it segfaults at start on 10.6.8); on the rig as `~/fw1814-captures/tools/slfwread-b1814`.
+
 ## Reading the clone's kernel diagnostics
 The build PC's `dmesg` ring and unified log lose this kext's `IOLog` lines under the IOAudio debug flood. The kext therefore keeps a ring of format-change events in the
 registry property **`MADebugTrace`**: `ioreg -r -c com_openaudio_FWAVCAudioDevice -l | grep -A20 MADebugTrace`.

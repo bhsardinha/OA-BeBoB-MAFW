@@ -128,6 +128,7 @@ final class PanelWindowController: NSObject, NSWindowDelegate {
     private(set) var mode = -1                          // -1 = never shown, 0 full, 1 wide, 2 narrow
     private var fittedFor: NSSize?
     private var meterTimer: Timer?
+    private var followTimer: Timer?
     var onSelectDevice: ((PanelWindowController, UInt64) -> Void)?
 
     /// Content size before the first fit (the 48 kHz ADAT mixer).
@@ -164,6 +165,23 @@ final class PanelWindowController: NSObject, NSWindowDelegate {
         model.onLocalChange = { [weak self] _ in self?.refreshAll() }
         meterTimer = Timer.scheduledTimer(withTimeInterval: 1.0 / 30.0, repeats: true) { [weak self] _ in self?.tickMeters() }
         RunLoop.main.add(meterTimer!, forMode: .commonModes)           // meters keep moving while scrolling or in a menu
+        // rate follow (RATE_FOLLOW_PLAN_v1): also while the panel is hidden (launch at login)
+        let ft = Timer(timeInterval: 0.25, repeats: true) { [weak self] _ in self?.tickFollow() }
+        RunLoop.main.add(ft, forMode: .commonModes)
+        followTimer = ft
+    }
+
+    /// Feeds the follower; a rate it returns goes through the panel's CoreAudio path (requestSampleRate). Nothing is read from CoreAudio or the
+    /// registry while the setting is off or the sync source is not external.
+    private func tickFollow() {
+        let m = ctx.model, f = ctx.follower
+        let on = PanelPrefs.followExternalRate && m.clockSource.sync == .externalDigital
+        let input = RateFollowInput(enabled: PanelPrefs.followExternalRate, external: m.clockSource.sync == .externalDigital,
+                                    detected: on ? device.externalSyncRate : nil, current: on ? device.rate?.nominalRate : nil,
+                                    available: on ? m.supportedRates : [], busy: on && m.isStreaming)
+        let before = f.status
+        if let hz = f.tick(input, now: CFAbsoluteTimeGetCurrent()) { m.requestSampleRate(hz) }
+        if f.status != before { refreshAll() }
     }
 
     private func build() {
@@ -304,6 +322,7 @@ final class PanelWindowController: NSObject, NSWindowDelegate {
 
     func close() {
         meterTimer?.invalidate(); meterTimer = nil
+        followTimer?.invalidate(); followTimer = nil
         device.onPropertiesChanged = nil
         ctx.model.onKernelChange = nil; ctx.model.onLocalChange = nil
         hideAll()

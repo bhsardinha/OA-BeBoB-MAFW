@@ -4,6 +4,10 @@
 
 Read this first after a context clear, then `NEW_PLAN.md` → `docs/STATE.md` → `docs/BUILD-MANUAL.md` §0 → `docs/system-map/README.md`.
 
+## 2026-10-22 (evening) - follow the external clock rate (R131, AP-5.7)
+Done: package **0.3.1** (driver 0.2.2, panel 1.5); Modern installed on the dev Mac and working with the second FW1814 + POD X3 (user, capture 99).
+Built 2026-10-22: `dist/OA-BeBoB-MAFW-0.3.1-classic.pkg/.dmg` (kext 0.2.2 `3FA69E4A-…`) and `-modern.pkg/.dmg` (the installed package); committed `624317c`. Open (on request): Classic 0.3.1 on a 10.13 machine; publish 0.3.x (README: editions + rate follow) on the user's go-ahead.
+
 ## 2026-10-22 - scope floor 10.9, Legacy dropped (R130)
 User: the older systems work well on the official drivers, so the plan now starts at 10.9 (`BROAD_COMPATIBILITY_PLAN_v4`). Cancelled: the Legacy edition, the Obj-C panel port, the i386 slice, the 10.6 toolchain. Remaining in scope, all on request: Classic down to 10.9-10.12, more Modern checks, Apple Silicon (hardware + DEC-3).
 

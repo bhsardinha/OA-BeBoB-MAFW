@@ -29,8 +29,13 @@ protocol PanelBackend: PropertyTransport {
     var rate: RateBackend? { get }
     /// The model (DeviceProfiles, by the device object's registry class).
     var profile: DeviceProfile { get }
+    /// The kext's MAExternalSyncRate (RATE_FOLLOW_PLAN_v1): the external source's rate, 0 = none; nil = a driver without the key.
+    var externalSyncRate: UInt32? { get }
 }
-extension PanelBackend { var rate: RateBackend? { return nil } }
+extension PanelBackend {
+    var rate: RateBackend? { return nil }
+    var externalSyncRate: UInt32? { return nil }
+}
 
 
 /// CoreAudio rate access for one FW1814, matched by GUID (the HAL device UID ends with the GUID: `...:0xD6C040012337F`). The device appears in the HAL
@@ -172,6 +177,9 @@ final class FWDevice: PanelBackend {
         guard let v = IORegistryEntryCreateCFProperty(service, key as CFString, kCFAllocatorDefault, 0) else { return nil }
         return v.takeRetainedValue()
     }
+
+    /// Registry table key, not notified (the kext publishes it on change only): read when the follower ticks.
+    var externalSyncRate: UInt32? { return (copyProperty("MAExternalSyncRate") as? NSNumber)?.uint32Value }
 
     /// The registry table holds only the static keys; the mixer/clock keys live in the kext's property dictionary and are served one by one
     /// by its copyProperty override, or all at once under "MAMetaAllProperties" (A2-P3; seen live on 10.13.6, 2026-10-16: 8 keys in the

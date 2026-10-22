@@ -203,25 +203,31 @@ void com_openaudio_FWAudioDevice::ClearPeakMeters()
     if (fSwPeaks) bzero(fSwPeaks, (size_t)GetPeakLevelCount() * 4);
 }
 
+// FDF index of the status packet -> Hz (the reference's switch in DetectExternalSyncChanges); 0 = not a valid index
+static UInt32 FdfToHz(UInt32 fdf)
+{
+    static const UInt32 kHz[] = { 32000, 44100, 48000, 88200, 96000, 176400, 192000 };
+    return fdf < sizeof(kHz) / sizeof(kHz[0]) ? kHz[fdf] : 0;
+}
+
 // ref DetectExternalSyncChanges (decomp FWAudioDevice__DetectExternalSyncChanges.c)
 void com_openaudio_FWAudioDevice::DetectExternalSyncChanges(bool locked, UInt32 fdf)
 {
+    // Clone addition (RATE_FOLLOW_PLAN_v1, capture 98; user, 2026-10-22): the device's own reading, before the reference's match against the
+    // engine rate. Lock bit set + valid rate field = the external source's exact rate (within the interface's current speed range), else 0.
+    // Registry table only, not the property dictionary: no user-client notification, so the helper neither persists nor replays it.
+    const UInt32 ext = locked ? FdfToHz(fdf) : 0;
+    if (ext != fExtSyncRate) {
+        fExtSyncRate = ext;
+        setProperty("MAExternalSyncRate", (unsigned long long)ext, 32);
+    }
     if (fDetectedFdf != fdf) {
         fDetectedFdf = fdf;
-        UInt32 rate;
-        switch (fdf) {
-            case 0: rate = 32000; break;
-            case 1: rate = 44100; break;
-            case 2: rate = 48000; break;
-            case 3: rate = 88200; break;
-            case 4: rate = 96000; break;
-            case 5: rate = 176400; break;
-            case 6: rate = 192000; break;
-            default:
-                IOLog("M-FW: invalid sample rate detected (FDF:%X)%s\n", (unsigned)fdf, locked ? " mismatch" : "");
-                rate = fMainEngine ? fMainEngine->rateHz() : 0;
-                fDetectedFdf = 0xff;
-                break;
+        UInt32 rate = FdfToHz(fdf);
+        if (!rate) {
+            IOLog("M-FW: invalid sample rate detected (FDF:%X)%s\n", (unsigned)fdf, locked ? " mismatch" : "");
+            rate = fMainEngine ? fMainEngine->rateHz() : 0;
+            fDetectedFdf = 0xff;
         }
         SetStaticPropertyAndNotifyUserClients("MASampleRate", rate);
     }
@@ -283,6 +289,7 @@ bool com_openaudio_FWAudioDevice::initHardware(IOService *provider)
     if (ok) {
         fRateLocked = true;                                                   // ref [+0x25a] = 1
         SetStaticPropertyAndNotifyUserClients("MARateLocked", 1);
+        fExtSyncRate = 0xffffffff;                                            // clone: MAExternalSyncRate is published at the first status packet
         ClearPeakMeters();
         ResetToFactorySettings();                                             // ref vt[0xb08]
         fMainEngine->ReallyRegisterService();                                 // ref engine vt[0xc70]

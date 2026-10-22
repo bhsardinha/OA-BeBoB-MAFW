@@ -196,5 +196,54 @@ check(DeviceModel(transport: Mock(), fallbackRates: fw1814Rates).supportedRates 
 // Meter slots: ADAT software-return channel n sits at slot 6 + n (after 4 analog + 2 S/PDIF), like the 18 inputs and the outputs.
 check(pk.swReturn(5) == 42 && pk.swReturn(6 + 1) == pk.swReturn(7) && pk.swReturn(6 + 8) == 51, "ADAT sw-return peak slots 7...14")
 
+// Rate follow (RATE_FOLLOW_PLAN_v1). The simulated interface behaves as the FW1814 did in capture 98: the source's rate is seen only within the
+// interface's speed range (44.1/48 or 88.2/96), nothing for 6 s after a rate change; CoreAudio applies a rate 1 s after it is asked for.
+final class FollowSim {
+    let f = RateFollower()
+    var rate: UInt32, source: UInt32, busy = false, enabled = true, external = true, keyPublished = true
+    var t: TimeInterval = 0, changedAt: TimeInterval = -100, pending: (UInt32, TimeInterval)?
+    var sets: [UInt32] = []
+    init(rate: UInt32, source: UInt32) { self.rate = rate; self.source = source }
+    func run(_ seconds: TimeInterval) {
+        let end = t + seconds
+        while t < end {
+            if let (hz, at) = pending, t >= at { rate = hz; changedAt = t; pending = nil }
+            let fast = { (r: UInt32) in r >= 88200 }
+            let seen: UInt32 = (source != 0 && fast(source) == fast(rate) && t - changedAt >= 6) ? source : 0
+            let i = RateFollowInput(enabled: enabled, external: external, detected: keyPublished ? seen : nil, current: rate,
+                                    available: [44100, 48000, 88200, 96000], busy: busy)
+            if let hz = f.tick(i, now: t) { sets.append(hz); pending = (hz, t + 1) }
+            t += 0.25
+        }
+    }
+}
+var fs = FollowSim(rate: 48000, source: 44100); fs.run(15)
+check(fs.rate == 44100 && fs.sets == [44100] && fs.f.status == .following, "follow: 48 -> 44.1 source in the same range")
+fs = FollowSim(rate: 96000, source: 88200); fs.run(15)
+check(fs.rate == 88200 && fs.sets == [88200], "follow: 96 -> 88.2 source in the same range")
+fs = FollowSim(rate: 48000, source: 96000); fs.run(30)
+check(fs.rate == 96000 && fs.sets == [96000] && fs.f.status == .following, "follow: 48 -> 96 source by one try of the other range")
+fs = FollowSim(rate: 96000, source: 44100); fs.run(30)
+check(fs.rate == 44100 && fs.sets == [48000, 44100], "follow: 96 -> 44.1 source: try 48, then the exact rate")
+fs = FollowSim(rate: 48000, source: 0); fs.run(120)
+check(fs.rate == 48000 && fs.sets == [96000, 48000] && fs.f.status == .noSource, "follow: no source: one try, back, no retry")
+fs = FollowSim(rate: 48000, source: 44100); fs.busy = true; fs.run(10)
+check(fs.sets.isEmpty && fs.f.status == .waiting(44100) && fs.f.note == "Source at 44.1 kHz - follows when playback stops", "follow: busy waits")
+fs.busy = false; fs.run(15)
+check(fs.rate == 44100 && fs.sets == [44100], "follow: follows once playback stops")
+fs = FollowSim(rate: 96000, source: 96000); fs.run(5)
+check(fs.sets.isEmpty && fs.f.status == .following, "follow: already at the source's rate")
+fs.source = 88200; fs.run(0.75); fs.source = 48000; fs.run(30)    // the POD steps 96 -> 88.2 -> 48: the 0.8 s at 88.2 is ignored
+check(fs.rate == 48000 && fs.sets == [48000] && !fs.sets.contains(88200), "follow: a source passing through 88.2 is not followed there")
+fs = FollowSim(rate: 48000, source: 44100); fs.enabled = false; fs.run(20)
+check(fs.sets.isEmpty && fs.f.status == .off, "follow: setting off")
+fs = FollowSim(rate: 48000, source: 44100); fs.external = false; fs.run(20)
+check(fs.sets.isEmpty && fs.f.status == .off, "follow: internal clock")
+fs = FollowSim(rate: 48000, source: 44100); fs.keyPublished = false; fs.run(20)
+check(fs.sets.isEmpty && fs.f.status == .off, "follow: driver without MAExternalSyncRate")
+fs = FollowSim(rate: 48000, source: 0); fs.run(120); fs.external = false; fs.run(1); fs.external = true; fs.source = 96000; fs.run(30)
+check(fs.rate == 96000 && fs.sets == [96000, 48000, 96000], "follow: re-selecting external sync re-arms the try")
+check(RateFollower.otherRange(44100, []) == 96000 && RateFollower.otherRange(88200, [44100, 88200]) == 44100, "follow: other speed range")
+
 print(failures == 0 ? "ALL PASS" : "\(failures) FAILURES")
 exit(failures == 0 ? 0 : 1)

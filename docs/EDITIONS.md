@@ -1,6 +1,6 @@
 # Editions: Classic (macOS 10.13) and Modern (macOS 11 to 15)
 
-Written 2026-10-21 (R129). Packages **0.3.0** are the first to come in two editions; they are a test build and **not published yet** (the published release is 0.2.2, Classic only). Everything below says whether it was checked, and where.
+Written 2026-10-21 (R129). Packages **0.3.0** are the first to come in two editions (published 2026-10-22, GitHub release v0.3.0); the current release is **0.3.1** (driver 0.2.2, panel 1.5: external-rate follow, R131). Everything below says whether it was checked, and where.
 
 ## At a glance
 
@@ -9,7 +9,7 @@ Written 2026-10-21 (R129). Packages **0.3.0** are the first to come in two editi
 | macOS | 10.13 High Sierra (the package allows 10.13 up to, not including, 11) | 11 Big Sur to 15 Sequoia (the package allows 11.0 up to, not including, 16.0) |
 | CPU | Intel | **Intel only** (no Apple Silicon, no macOS 26 Tahoe) |
 | Tested on | iMac11,2 (FireWire 800, 10.13.6) and MacBookAir5,1 + Apple's Thunderbolt-to-FireWire adapter (10.13.6) | MacBookAir7,2 + the same kind of adapter, **macOS 14.8.9** |
-| Interfaces tested | FireWire 1814 and FireWire Audiophile, alone and together | **FireWire Audiophile only** |
+| Interfaces tested | FireWire 1814 and FireWire Audiophile, alone and together | **FireWire Audiophile**; FireWire 1814 for the panel and the external-rate follow only (2026-10-22, capture 99) |
 | Kernel extension built with | Xcode 9.4.1, 10.13 SDK, on the 10.13.6 build machine | Command Line Tools, **macOS 15.2 SDK**, on the Sonoma machine |
 | Security setting | SIP disabled | SIP set so unsigned kexts load (kext signing off), **plus approval in Privacy & Security** and a restart |
 | Package | `OA-BeBoB-MAFW-<version>-classic.pkg` / `.dmg` | `OA-BeBoB-MAFW-<version>-modern.pkg` / `.dmg` |
@@ -37,9 +37,9 @@ The audio driver, the helper and the panel are **the same source code** in both 
 
 | Item | State |
 |---|---|
-| **A dropout during real use** | After 2 min 43 s of playing, the adapter's FireWire controller left the PCI bus before any driver event (no bus reset, no error, no panic); the interface was bus-powered. Power-cycling the interface brought it back. Cause **unknown**: bad contact, adapter or bus power, or something the driver did. It never happened on the same adapter under 10.13.6. Raw logs: `docs/compatibility/evidence/modern-kext-dropout-macos-14.8.9-1941.txt`. |
+| **A dropout during real use** | After 2 min 43 s of playing, the adapter's FireWire controller left the PCI bus before any driver event (no bus reset, no error, no panic); the interface was bus-powered. Power-cycling the interface brought it back. Cause **unknown**: bad contact, adapter or bus power, or something the driver did. It never happened on the same adapter under 10.13.6. Raw logs: `BROAD_COMPATIBILITY/evidence/modern-kext-dropout-macos-14.8.9-1941.txt`. |
 | Recording (input data), MIDI on the wire, other sample rates, S/PDIF, sleep/wake, unload | not tried on Modern |
-| FireWire 1814 on Modern | not tried |
+| FireWire 1814 on Modern | **partly tried** (2026-10-22, 0.3.1, capture 99): installs, loads, the panel works and the S/PDIF rate follow works with a POD X3; playback, recording, MIDI, other rates and modes not tried |
 | The 0.3.0 knob law on the hardware | not tried |
 | Panel controls and meters against the real driver on 14 | the panel connected and ran; the controls were not exercised one by one |
 | Other macOS versions of the range (11, 12, 13, 15) | not tried; the package allows them because the symbols exist there (static reading only) |

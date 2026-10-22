@@ -1,0 +1,18 @@
+# capture 99 - dev Mac (MacBookAir7,2, macOS 14.8.9), Modern package 0.3.1 (driver 0.2.2, panel 1.5) installed by the user via .pkg, second FW1814 GUID 0xD6C040074B9FB, POD X3 S/PDIF coaxial; 2026-10-22 19:00
+## kextstat
+  189    0 0xffffff7f967a6000 0x27000    0x27000    com.openaudio.OpenAudioBeBoBMAFW (0.2.2) 2A89CF82-C090-3A0C-ACD5-29973A8C4267 <188 175 161 7 6 3>
+## device registry (MA rate keys)
+"MASampleRate" = 48000
+"MARateLocked" = 1
+"MAExternalSyncRate" = 48000
+## FireWire
+        FW 1814:
+
+          Manufacturer: M-AUDIO
+          Model: 0x10071
+          GUID: 0xD6C040074B9FB
+--
+            FW 1814 Unit:
+              Unit Software Version: 0x14001
+              Unit Spec ID: 0xA02D
+

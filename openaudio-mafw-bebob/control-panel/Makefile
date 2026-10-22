@@ -27,7 +27,7 @@ $(BUILD)/firmware-tests: Sources/FirmwareCatalog.swift Sources/FirmwareInfo.swif
 	mkdir -p $(BUILD)/ft && cp Tests/FirmwareCatalogTests.swift $(BUILD)/ft/main.swift
 	$(SWIFTC) -o $@ Sources/FirmwareCatalog.swift Sources/FirmwareInfo.swift $(BUILD)/ft/main.swift
 
-LOGIC := Sources/Edition.swift Sources/FaderLaw.swift Sources/StatusLogic.swift Sources/MaKeys.swift Sources/ChannelLayout.swift Sources/Models/FW1814/FW1814Layout.swift Sources/Translator.swift Sources/DeviceModel.swift Sources/FirmwareInfo.swift
+LOGIC := Sources/Edition.swift Sources/FaderLaw.swift Sources/StatusLogic.swift Sources/MaKeys.swift Sources/ChannelLayout.swift Sources/Models/FW1814/FW1814Layout.swift Sources/Translator.swift Sources/DeviceModel.swift Sources/FirmwareInfo.swift Sources/RateFollower.swift
 
 $(BUILD)/layout-tests: $(LOGIC) Tests/LayoutTests.swift
 	mkdir -p $(BUILD)/t && cp Tests/LayoutTests.swift $(BUILD)/t/main.swift
