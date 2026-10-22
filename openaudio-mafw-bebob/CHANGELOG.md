@@ -23,6 +23,10 @@ The M-Audio CoreMIDI plug-in is shipped unmodified (1.11.2). Each entry lists th
 - **Panel 1.5:** with the sync source on **External – digital**, the panel sets the interface to the source's rate through CoreAudio, only while no application plays through it (otherwise it shows "Source at … kHz - follows when playback stops" and follows when playback stops). When it sees nothing it tries the other speed range once (48 ↔ 96 kHz) and goes back if nothing locks. Setting **Follow external clock rate** in the Hardware tab and **Follow External Rate** in the status menu, on by default. It also runs when the panel is hidden (launch at login). Word clock is not followed.
 - **Tested** with the Modern package on macOS 14.8.9 with a FireWire 1814 and a POD X3 on coaxial S/PDIF (user, 2026-10-22, capture 99): out of range it switches speed range, in range it takes the exact rate and locks. The official driver detects the rate the same way but never follows it.
 
+**Uninstall app, disk images replaced 2026-10-22** (same package number; the two `.pkg` files are unchanged, only the Uninstall app in both `.dmg`s is new; R132)
+- **Progress:** a one-line status ("40 % — Removing the driver…") and a 0–100 % bar instead of a spinner. The uninstall script reports each step (helper, panel, driver, panel and MIDI driver, icons and receipts, MIDI server, launch-at-login item, kernel cache); the long kernel-cache rebuild moves the bar slowly from 60 to 95 %. If it fails, the alert names the step it stopped at.
+- **Dry run:** `Uninstall OA BeBoB MAFW.app/Contents/MacOS/Uninstall OA BeBoB MAFW --dry-run` runs every step without the password and changes nothing (`--start` begins it without a click). `uninstall.sh --dry-run` and `--progress FILE` do the same from a shell; the installer's `--update` step is unchanged.
+
 ## Package 0.3.0 — 2026-10-21 (published 2026-10-22, release v0.3.0)
 
 | Driver | Panel | MIDI plug-in | Editions |

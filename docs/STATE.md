@@ -6,6 +6,9 @@ Snapshot as of **2026-10-22**. Updated with each Part A/B/C/D commit and each bu
 
 Resume anchor: `/NEW_PLAN.md` → this file → `system-map/README.md` → the in-progress Part N.
 
+## 2026-10-22 (night) - Uninstall app: status line + progress bar, dry run (R132)
+Both editions share the app; dry run checked on 14.8.9 (capture 100); shipped as a silent update of 0.3.1 (both `.dmg`s replaced on the v0.3.1 release; packages unchanged).
+
 ## 2026-10-22 (evening) - external clock rate: detection measured, follow feature in code (R131)
 * Capture 98 (SL rig, official 1.9, FW1814, POD X3 on S/PDIF coaxial): within the interface's speed range (44.1/48 or 88.2/96) the status word gives the source's exact rate; outside it nothing. The official driver does not follow.
 * Code (not yet on hardware): kext publishes `MAExternalSyncRate`; panel `RateFollower` follows through CoreAudio when idle, one try of the other range, setting on by default (`docs/RATE_FOLLOW_PLAN_v1.md`). Both kexts build; panel tests and typecheck pass on the build PC. Tracker AP-5.7.

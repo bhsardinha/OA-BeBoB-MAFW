@@ -4,6 +4,9 @@
 
 Read this first after a context clear, then `NEW_PLAN.md` → `docs/STATE.md` → `docs/BUILD-MANUAL.md` §0 → `docs/system-map/README.md`.
 
+## 2026-10-22 (night) - Uninstall app progress (R132)
+Uninstall app shows `<n> % — <step>` and a 0-100 % bar; `--dry-run` [`--start`] for looking without uninstalling. Shipped 2026-10-22 as a silent update of 0.3.1 (both `.dmg`s replaced on the release, packages unchanged); a real uninstall with it is untried.
+
 ## 2026-10-22 (evening) - follow the external clock rate (R131, AP-5.7)
 Done: package **0.3.1** (driver 0.2.2, panel 1.5); Modern installed on the dev Mac and working with the second FW1814 + POD X3 (user, capture 99).
 Built 2026-10-22: `dist/OA-BeBoB-MAFW-0.3.1-classic.pkg/.dmg` (kext 0.2.2 `3FA69E4A-…`) and `-modern.pkg/.dmg` (the installed package); committed `624317c`. **Published 2026-10-22:** public `d4a1a68`, tag v0.3.1, GitHub release (both `.dmg`s, user). Open (on request): Classic 0.3.1 on a 10.13 machine; 10.14/10.15 (allowed by Classic, untried); README screenshots without the new Follow option.
