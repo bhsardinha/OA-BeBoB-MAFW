@@ -37,7 +37,7 @@ The audio driver, the helper and the panel are **the same source code** in both 
 
 | Item | State |
 |---|---|
-| **A dropout during real use** | After 2 min 43 s of playing, the adapter's FireWire controller left the PCI bus before any driver event (no bus reset, no error, no panic); the interface was bus-powered. Power-cycling the interface brought it back. Cause **unknown**: bad contact, adapter or bus power, or something the driver did. It never happened on the same adapter under 10.13.6. Raw logs: `BROAD_COMPATIBILITY/evidence/modern-kext-dropout-macos-14.8.9-1941.txt`. |
+| **A dropout during real use** | After 2 min 43 s of playing, the adapter's FireWire controller left the PCI bus before any driver event (no bus reset, no error, no panic); the interface was bus-powered. Power-cycling the interface brought it back. Cause **unknown**: bad contact, adapter or bus power, or something the driver did. It never happened on the same adapter under 10.13.6. Raw logs: `docs/compatibility/evidence/modern-kext-dropout-macos-14.8.9-1941.txt`. |
 | Recording (input data), MIDI on the wire, other sample rates, S/PDIF, sleep/wake, unload | not tried on Modern |
 | FireWire 1814 on Modern | not tried |
 | The 0.3.0 knob law on the hardware | not tried |
@@ -48,8 +48,8 @@ The audio driver, the helper and the panel are **the same source code** in both 
 
 ## Classic: unchanged
 
-Classic is what 0.2.2 was: Intel, macOS 10.13.6, built on the High Sierra machine, tested with both interfaces. Its package refuses to install on macOS 11 and later, and the Modern package refuses 10.x (checked with `installer -pkg … -volinfo` on both machines). The planned third edition, **Legacy** (10.6.8 to 10.8.5), is not started; see the compatibility plan.
+Classic is what 0.2.2 was: Intel, macOS 10.13.6, built on the High Sierra machine, tested with both interfaces. Its package refuses to install on macOS 11 and later, and the Modern package refuses 10.x (checked with `installer -pkg … -volinfo` on both machines). There is no third edition: a planned "Legacy" edition for Mac OS X 10.6.8 to 10.8.5 was dropped on 2026-10-22, because the official M-Audio drivers work well there. The project's floor is 10.9.
 
 ## Where to read more
 
-[`BROAD_COMPATIBILITY_PLAN_v3.md`](compatibility/BROAD_COMPATIBILITY_PLAN_v3.md) (plan, evidence and effort for the whole 10.6.8 to 15 range), [`../openaudio-mafw-bebob/CHANGELOG.md`](../openaudio-mafw-bebob/CHANGELOG.md), and resolutions R124 to R129 in [`system-map/PROVENANCE-RESOLUTIONS.md`](system-map/PROVENANCE-RESOLUTIONS.md).
+[`BROAD_COMPATIBILITY_PLAN_v4.md`](compatibility/BROAD_COMPATIBILITY_PLAN_v4.md) (plan, evidence and effort for the whole 10.9 to 15 range), [`../openaudio-mafw-bebob/CHANGELOG.md`](../openaudio-mafw-bebob/CHANGELOG.md), and resolutions R124 to R129 in [`system-map/PROVENANCE-RESOLUTIONS.md`](system-map/PROVENANCE-RESOLUTIONS.md).

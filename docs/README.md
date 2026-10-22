@@ -8,7 +8,7 @@ Everything here supports the code in [`../openaudio-fw1814/`](../openaudio-fw181
 |---|---|
 | use or build the driver | the project [`README`](../README.md) |
 | know what the **Classic** (macOS 10.13) and **Modern** (macOS 11 to 15) editions do differently | [`EDITIONS.md`](EDITIONS.md) |
-| see the plan for other macOS versions (10.6.8 to 15, Apple Silicon) and the evidence behind it | [`compatibility plan v3`](compatibility/BROAD_COMPATIBILITY_PLAN_v3.md), its workbook and `evidence/` |
+| see the plan for other macOS versions (10.9 to 15, Apple Silicon) and the evidence behind it | [`compatibility plan v4`](compatibility/BROAD_COMPATIBILITY_PLAN_v4.md), its workbook and `evidence/` |
 | understand how the interface and the original driver work | [`system-map/README.md`](system-map/README.md) — the index of the reverse-engineering notes, and the **C1–C6** summaries (lifecycle, clocking, communication, transport/control, user client, latency) |
 | see why things are the way they are | [`system-map/PROVENANCE-RESOLUTIONS.md`](system-map/PROVENANCE-RESOLUTIONS.md) — dated log of every finding, correction and test result (R1 … R129) |
 | see how the multi-model driver is layered, and how to add a model | [`ARCHITECTURE_MAFW_v1.md`](ARCHITECTURE_MAFW_v1.md) |

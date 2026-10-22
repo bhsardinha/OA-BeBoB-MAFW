@@ -4,8 +4,11 @@
 
 Read this first after a context clear, then `NEW_PLAN.md` → `docs/STATE.md` → `docs/BUILD-MANUAL.md` §0 → `docs/system-map/README.md`.
 
+## 2026-10-22 - scope floor 10.9, Legacy dropped (R130)
+User: the older systems work well on the official drivers, so the plan now starts at 10.9 (`BROAD_COMPATIBILITY_PLAN_v4`). Cancelled: the Legacy edition, the Obj-C panel port, the i386 slice, the 10.6 toolchain. Remaining in scope, all on request: Classic down to 10.9-10.12, more Modern checks, Apple Silicon (hardware + DEC-3).
+
 ## 2026-10-21 (night, last) - compatibility docs updated after the Sonoma result (R129)
-The Modern edition works on macOS 14.8.9 Intel (Audiophile), so the broad-compatibility documents were brought up to date: `BROAD_COMPATIBILITY/BROAD_COMPATIBILITY_PLAN_v3.md` + `.xlsx` (v1, v2 kept), `docs/EDITIONS.md` (what differs from the High Sierra build), `docs/MACOS12_PORT_PERSPECTIVE.md` (status note), README. Public docs layout is done by `sync-to-public.sh` (see R129).
+The Modern edition works on macOS 14.8.9 Intel (Audiophile), so the broad-compatibility documents were brought up to date: `BROAD_COMPATIBILITY/BROAD_COMPATIBILITY_PLAN_v4.md` + `.xlsx` (v1, v2 kept), `docs/EDITIONS.md` (what differs from the High Sierra build), `docs/MACOS12_PORT_PERSPECTIVE.md` (status note), README. Public docs layout is done by `sync-to-public.sh` (see R129).
 * **Plan v3 order, all on request (R123):** more Modern checks (FW1814, record, MIDI, rates, other versions of 11-15) -> publish 0.3.0 with both editions -> Apple Silicon (needs hardware, DEC-3) -> Legacy (only if wanted). DEC-1...DEC-4, DEC-6, DEC-8 are still open and gate those last two.
 * **Before publishing 0.3.0:** commit this working tree (the sync refuses a dirty tree), `sync-to-public.sh --dry-run`, review, then the real sync; the user pushes and attaches the two dmgs.
 

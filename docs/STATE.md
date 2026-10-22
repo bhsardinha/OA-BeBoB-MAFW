@@ -6,6 +6,9 @@ Snapshot as of **2026-10-21**. Updated with each Part A/B/C/D commit and each bu
 
 Resume anchor: `/NEW_PLAN.md` → this file → `system-map/README.md` → the in-progress Part N.
 
+## 2026-10-22 - scope floor 10.9; Legacy edition dropped (R130)
+Plan v4: bands and editions are Classic (10.9 target, installer from 10.13) and Modern (11-15); Apple Silicon open. The SL rig remains a reference, not a target.
+
 ## 2026-10-21 (night, last) - compatibility docs after the Sonoma result (R129)
 * The Modern edition (macOS 11-15 Intel, built with the 15.2 SDK) works on 14.8.9 with the FW Audiophile; Classic (10.13) is the shipped 0.2.2 line. Both 0.3.0 packages are built, not published.
 * **Finding:** the Modern kext is the Classic source: `OA_BAND_MODERN` is unused by any source file. Differences are SDK, load procedure (kmutil, Allow, restart), installer and panel caption. Full list and open items: `docs/EDITIONS.md`.

@@ -89,7 +89,7 @@ Two editions, one source tree. **Published so far: 0.2.2, Classic only.** The 0.
 | **Interfaces** | **M-Audio FireWire 1814 and FireWire Audiophile only**, alone and together | The **FireWire Audiophile** has been tried (plays); the FireWire 1814 has not been tried on Modern |
 | **Security** | **Unsigned, always**; **System Integrity Protection must be disabled** (Recovery, `csrutil disable`) | Unsigned, always; SIP set so unsigned kexts load, then **Allow** in System Settings › Privacy & Security (shown as *unidentified developer*) and a restart |
 
-The other models of the official driver (FireWire 410, FireWire Solo, Ozonic, ProFire Lightbridge, ProjectMix I/O, NRV10) are not implemented; the structure for them exists (see [Roadmap](#roadmap)). Mac OS X 10.6.8 to 10.8.5 ("Legacy") and Apple Silicon are planned only as ideas, not started: see the [compatibility plan](docs/compatibility/BROAD_COMPATIBILITY_PLAN_v3.md).
+The other models of the official driver (FireWire 410, FireWire Solo, Ozonic, ProFire Lightbridge, ProjectMix I/O, NRV10) are not implemented; the structure for them exists (see [Roadmap](#roadmap)). Apple Silicon is an idea, not started. Mac OS X 10.6.8 to 10.8.5 is out of scope: the official M-Audio drivers work there. See the [compatibility plan](docs/compatibility/BROAD_COMPATIBILITY_PLAN_v4.md).
 
 ## What does not work
 
@@ -110,13 +110,13 @@ Three different reasons, kept apart on purpose.
 
 | What | State |
 |---|---|
-| **Mac OS X 10.6.8 to 10.8.5** ("Legacy" edition) | Planned on paper only; it needs an old SDK, a 32-bit kernel slice and a port of the panel. The official driver already runs there. |
-| **macOS 10.9 to 10.12** | Not offered: the Classic installer starts at 10.13. |
+| **OS X 10.9 to macOS 10.12** | In scope but not done: the Classic installer starts at 10.13. |
 | **Apple Silicon** | See above; it would also need a new MIDI plug-in. Needs the hardware to start. |
 | **Other M-Audio BeBoB interfaces** (FireWire 410, FireWire Solo, Ozonic, ProFire Lightbridge, ProjectMix I/O, NRV10) | The code is structured for one module per model, but nothing is implemented. It needs people who own the hardware. |
 | **Interfaces from other makers** (including DICE-based ones) | Out of scope. |
 | **Firmware update from the panel** | The panel's firmware check only reads. Nothing writes the interface's flash, and there is no custom firmware. |
 | **Detecting the rate of an external S/PDIF source** | The interface locks, but you set the matching rate yourself. |
+| **Mac OS X 10.6.8 to 10.8.5** | Out of scope (decided 2026-10-22): the official M-Audio drivers work well there, so this project starts at 10.9. |
 | **Windows and Linux** | Not this project (Linux has FFADO and snd-bebob). |
 
 ### Written but not tried
@@ -179,7 +179,7 @@ Never copy an untested kext into `/Library/Extensions` (a panicking kext there b
 | [`docs/system-map/`](docs/system-map/README.md) | Reverse-engineering notes: class chain, DCL rings, clocking, AV/C and HSCI commands, mixer model, panel, MIDI plug-in, helper, captures |
 | [`docs/system-map/PROVENANCE-RESOLUTIONS.md`](docs/system-map/PROVENANCE-RESOLUTIONS.md) | Dated log of every finding, correction and test result (R1 … R129) |
 | [`docs/ARCHITECTURE_MAFW_v1.md`](docs/ARCHITECTURE_MAFW_v1.md), [`docs/BUILD_AUDIOPHILE_PLAN_v9.md`](docs/BUILD_AUDIOPHILE_PLAN_v9.md) | Driver layers and how a model plugs in; the 0.2 plan |
-| [`docs/EDITIONS.md`](docs/EDITIONS.md), [compatibility plan](docs/compatibility/BROAD_COMPATIBILITY_PLAN_v3.md) | Classic vs Modern edition: what differs and what is tested; the plan for macOS 10.6.8 to 15 |
+| [`docs/EDITIONS.md`](docs/EDITIONS.md), [compatibility plan](docs/compatibility/BROAD_COMPATIBILITY_PLAN_v4.md) | Classic vs Modern edition: what differs and what is tested; the plan for macOS 10.6.8 to 15 |
 | [`docs/STATE.md`](docs/STATE.md), [`NEXT_STEPS.md`](docs/project/NEXT_STEPS.md) | Current state and what is next |
 | `PROVENANCE-MATRIX*.xlsx` | Project trackers (tasks, per-claim evidence, dashboards; in Portuguese) |
 
