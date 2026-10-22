@@ -91,6 +91,38 @@ Two editions, one source tree. **Published so far: 0.2.2, Classic only.** The 0.
 
 The other models of the official driver (FireWire 410, FireWire Solo, Ozonic, ProFire Lightbridge, ProjectMix I/O, NRV10) are not implemented; the structure for them exists (see [Roadmap](#roadmap)). Mac OS X 10.6.8 to 10.8.5 ("Legacy") and Apple Silicon are planned only as ideas, not started: see the [compatibility plan](docs/compatibility/BROAD_COMPATIBILITY_PLAN_v3.md).
 
+## What does not work
+
+Three different reasons, kept apart on purpose.
+
+### Impossible (by hardware, by the OS, or by design)
+
+| What | Why |
+|---|---|
+| **macOS 26 Tahoe and later** | No FireWire stack to attach to. This is another project's finding ([macfw](https://github.com/mbprado/macfw) states Apple removed it); it has not been checked here. |
+| **Apple Silicon with the kernel driver, today** | Not buildable as it stands: the driver has no arm64e build, and M-Audio's MIDI plug-in has no arm64 code. The FireWire and IOAudio kernel families do ship for arm64e (read from Apple's debug kit), but FireWire through the adapter chain has never been tried on such a Mac, so this is *not developed* rather than proven impossible. |
+| **Macs with SIP enabled, or a signed or notarised driver** | The driver is unsigned and will stay unsigned (the author's decision), so it only loads with SIP set to allow unsigned kexts. |
+| **A Mac with no FireWire port and no adapter** | The interfaces are FireWire only. Newer Macs need Apple's Thunderbolt-to-FireWire adapter (and a Thunderbolt-3-to-2 adapter on the newest ones); only the Thunderbolt 2 adapter chain has been tried. |
+| **FireWire 1814 at 176.4 / 192 kHz: digital ports and the DSP mixer** | Switched off by the hardware at those rates: 2 in / 4 out analog only. |
+| **ASIO and a driver-side buffer size** | Windows-only features of the official driver; on macOS the buffer size belongs to the application. |
+
+### Not developed (yet)
+
+| What | State |
+|---|---|
+| **Mac OS X 10.6.8 to 10.8.5** ("Legacy" edition) | Planned on paper only; it needs an old SDK, a 32-bit kernel slice and a port of the panel. The official driver already runs there. |
+| **macOS 10.9 to 10.12** | Not offered: the Classic installer starts at 10.13. |
+| **Apple Silicon** | See above; it would also need a new MIDI plug-in. Needs the hardware to start. |
+| **Other M-Audio BeBoB interfaces** (FireWire 410, FireWire Solo, Ozonic, ProFire Lightbridge, ProjectMix I/O, NRV10) | The code is structured for one module per model, but nothing is implemented. It needs people who own the hardware. |
+| **Interfaces from other makers** (including DICE-based ones) | Out of scope. |
+| **Firmware update from the panel** | The panel's firmware check only reads. Nothing writes the interface's flash, and there is no custom firmware. |
+| **Detecting the rate of an external S/PDIF source** | The interface locks, but you set the matching rate yourself. |
+| **Windows and Linux** | Not this project (Linux has FFADO and snd-bebob). |
+
+### Written but not tried
+
+These exist in the driver, but nobody has run them, so do not count on them: macOS 10.14 and 10.15 (allowed by the Classic installer); macOS 11, 12, 13 and 15 (allowed by the Modern installer); the **FireWire 1814 on the Modern edition**; MIDI SysEx on the wire; AC-3 pass-through on the wire; sleep/wake; two FireWire 1814s on one bus; FireWire 400 and Macs other than those listed under Compatibility.
+
 ## Install
 
 1. Download the `.dmg` from the [Releases](https://github.com/bhsardinha/OA-BeBoB-MAFW/releases) page.
