@@ -1,0 +1,17 @@
+# macOS 14.8.4 KDK (KDK_14.8.4_23J319) - architectures of the FireWire / audio family dSYMs and Apple Silicon kernelcache manifests. Generated 2026-10-21.
+IOFireWireFamily.kext.dSYM: x86_64 arm64e
+IOFireWireAVC.kext.dSYM: x86_64 arm64e
+IOAudioFamily.kext.dSYM: x86_64 arm64e
+IOFireWireSBP2.kext.dSYM: x86_64 arm64e
+
+kernelcache.release.mac13g.manifest.plist  arch=arm64e kernel=kernel.release.t8103  lists: com.apple.driver.AppleFWOHCI com.apple.iokit.IOAudioFamily com.apple.iokit.IOFireWireAVC com.apple.iokit.IOFireWireFamily 
+kernelcache.release.mac13j.manifest.plist  arch=arm64e kernel=kernel.release.t6000  lists: com.apple.driver.AppleFWOHCI com.apple.iokit.IOAudioFamily com.apple.iokit.IOFireWireAVC com.apple.iokit.IOFireWireFamily 
+kernelcache.release.mac14g.manifest.plist  arch=arm64e kernel=kernel.release.t8112  lists: com.apple.driver.AppleFWOHCI com.apple.iokit.IOAudioFamily com.apple.iokit.IOFireWireAVC com.apple.iokit.IOFireWireFamily 
+kernelcache.release.mac14j.manifest.plist  arch=arm64e kernel=kernel.release.t6020  lists: com.apple.driver.AppleFWOHCI com.apple.iokit.IOAudioFamily com.apple.iokit.IOFireWireAVC com.apple.iokit.IOFireWireFamily 
+kernelcache.release.mac15g.manifest.plist  arch=arm64e kernel=kernel.release.t8122  lists: com.apple.driver.AppleFWOHCI com.apple.iokit.IOAudioFamily com.apple.iokit.IOFireWireAVC com.apple.iokit.IOFireWireFamily 
+kernelcache.release.mac15j.manifest.plist  arch=arm64e kernel=kernel.release.t6031  lists: com.apple.driver.AppleFWOHCI com.apple.iokit.IOAudioFamily com.apple.iokit.IOFireWireAVC com.apple.iokit.IOFireWireFamily 
+kernelcache.release.mac15s.manifest.plist  arch=arm64e kernel=kernel.release.t6030  lists: com.apple.driver.AppleFWOHCI com.apple.iokit.IOAudioFamily com.apple.iokit.IOFireWireAVC com.apple.iokit.IOFireWireFamily 
+kernelcache.release.vma2.manifest.plist  arch=arm64e kernel=kernel.release.vmapple  lists: com.apple.iokit.IOAudioFamily 
+
+# classic-DCL entry point in the arm64e IOFireWireFamily dSYM:
+0000000000013740 S IOFireWireController::createLocalIsochPort(bool, DCLCommandStruct*, IOFireWireBus::DCLTaskInfo*, unsigned int, unsigned int, unsigned int)

@@ -69,8 +69,9 @@ final class StripView: FlippedView {
     let faders = [Fader(), Fader()]
     let meters = [MeterBar(), MeterBar()]
     let scale = FaderScale()
-    /// Output-tab strips (outputs, aux out, phones) are monitor levels: dB-linear law (plan v7 AP-5.4); the mixer keeps the console law.
-    var law: FaderLaw { return kind == .output ? .monitor : .console }
+    /// Fader law of the strip's level key (DeviceModel.law): phones follow the dB-linear monitor law (plan v7 AP-5.4, phones only since R127);
+    /// every other strip, mixer and output tab alike, the console law.
+    let law: FaderLaw
     var auxKnobs: [Knob] = []
     var panKnobs: [Knob] = []
     let balanceKnob = Knob()
@@ -96,8 +97,10 @@ final class StripView: FlippedView {
     var onMon: ((UInt32) -> Void)?             // source mask
     var onCommit: (() -> Void)?
 
-    init(title: String, features: StripFeatures, kind: Kind, routeLabels: [String] = [], monSources: [PhonesSource] = [], bottomRows: Int = 1) {
+    init(title: String, features: StripFeatures, kind: Kind, law: FaderLaw = .console, routeLabels: [String] = [], monSources: [PhonesSource] = [],
+         bottomRows: Int = 1) {
         self.features = features
+        self.law = law
         self.routeLabels = routeLabels
         self.monSources = monSources
         self.kind = kind

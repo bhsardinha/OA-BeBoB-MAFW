@@ -102,11 +102,10 @@ final class SidebarView: FlippedView, PanelTab {
             let a = ctx.model.ints(t.key)
             for c in t.channels where c >= 1 && c <= a.count { loudest = max(loudest ?? Int.min, a[c - 1]) }
         }
-        // monitor law (plan v7 AP-5.4) when every selected key is a monitor key and the unit uses a monitor knob step
-        let monitorKeys: Set<String> = [MAKeys.outputLevels.name, MAKeys.headphoneLevels.name, MAKeys.auxOutputLevels.name]
+        // monitor law (plan v7 AP-5.4) when every selected key is a monitor key (phones only since R127) and the unit uses a monitor knob step
         let targets = RotaryTargets.channels(mask: ctx.model.rotaryMask)
         let step = ctx.model.number(MAKeys.monitorKnobStep) ?? 0
-        knob.law = (!targets.isEmpty && step > 0 && !targets.contains(where: { !monitorKeys.contains($0.key.name) })) ? .monitor : .console
+        knob.law = (!targets.isEmpty && step > 0 && !targets.contains(where: { DeviceModel.law($0.key) != .monitor })) ? .monitor : .console
         knob.value = loudest                                      // the pointer and the ring follow the model, so the knob always shows the current level
         let text = loudest.map { $0 <= (knob.law == .monitor ? FaderLaw.off : MARange.levelMin) ? "-\u{221E} dB" : String(format: "%.1f dB", Double($0) / 2) } ?? "-"
         if text != readout { readout = text; setNeedsDisplay(readoutRect) }

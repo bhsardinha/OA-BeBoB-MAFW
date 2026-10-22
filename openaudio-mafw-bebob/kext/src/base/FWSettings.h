@@ -109,7 +109,7 @@ private:
     FWChannelGroup *fGroups[5];                                                 // [+0x10 .. +0x30]
     com_openaudio_FWNumber64Prop *fRotary;                                      // MARotaryControlV2 (mask lives in its value, ref [+0x68])
     com_openaudio_FWFunctionProp *fVirtual;                                     // MAMetaVirtualRotateDataKnob
-    // clone (plan v7 AP-5.4): knob step for the monitor keys (output / phones / aux-out levels), ½-dB per detent: 6, 3, or 0 = official law
+    // clone (plan v7 AP-5.4): knob step for the phones levels (outputs and aux out: official law since R127), ½-dB per detent: 6, 3, or 0 = official law
     com_openaudio_FWNumber32Prop *fMonitorStep;                                 // MAMonitorKnobStep
     IOReturn SetMonitorKnobStep(UInt32 v);
 };

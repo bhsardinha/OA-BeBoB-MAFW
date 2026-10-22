@@ -1,0 +1,4 @@
+# 0.2.2 kext imports (777) not defined in the macOS 14.8.4 (23J319) KDK x86_64 kernel + IOAudioFamily + IOFireWireFamily + IOFireWireAVC dSYMs.
+# 'defined' is necessary, not sufficient: kexts link only against exported KPI symbols. Generated 2026-10-21; recipe in README.md.
+__ZN13IOAudioEngine24_RESERVEDIOAudioEngine15Ev	IOAudioEngine::_RESERVEDIOAudioEngine15()
+__ZN13IOAudioEngine24_RESERVEDIOAudioEngine16Ev	IOAudioEngine::_RESERVEDIOAudioEngine16()

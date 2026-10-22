@@ -64,7 +64,7 @@ enum MAKeys {
     static let enableStereoPairEngines = MAKey(name: "MAEnableStereoPairEngines", kind: .scalar32, access: .readWrite, source: "row 36")
     static let enableAggregateEngine = MAKey(name: "MAEnableAggregateEngine", kind: .scalar32, access: .readWrite, source: "row 37")
     static let resetToFactory = MAKey(name: "MAMetaResetToFactorySettings", kind: .function, access: .writeOnly, source: "row 38")
-    static let monitorKnobStep = MAKey(name: "MAMonitorKnobStep", kind: .scalar32, access: .readWrite, source: "clone key (plan v7 AP-5.4): knob step on output / phones / aux-out levels, half-dB per click: 3 (factory), 6, 0 = official law")
+    static let monitorKnobStep = MAKey(name: "MAMonitorKnobStep", kind: .scalar32, access: .readWrite, source: "clone key (plan v7 AP-5.4): knob step on phones levels (outputs / aux out: official law, R127), half-dB per click: 3 (factory), 6, 0 = official law")
     static let deviceUserLabel = MAKey(name: "MADeviceUserLabel", kind: .string, access: .readWrite, source: "row 39")
     static let clockSource    = MAKey(name: "MAClockSource",    kind: .scalar32, access: .readWrite, source: "row 40, default 0x40000003")
     static let sampleRate     = MAKey(name: "MASampleRate",     kind: .scalar32, access: .readWrite, source: "row 41, fast path in setProperties")

@@ -1,5 +1,5 @@
 #!/bin/bash
-# IN.5 - builds OA-BeBoB-MAFW-<version>.pkg ON THE BUILD PC (10.13.6, Xcode 9.4.1: the only machine whose SDK builds the kext and the panel).
+# IN.5 - builds OA-BeBoB-MAFW-<version>-<edition>.pkg ON THE BUILD PC (10.13.6, Xcode 9.4.1: the only machine whose SDK builds the kext and the panel).
 # Run via installer/make-pkg.sh from the dev Mac, or directly in ~/oa-build-mafw/installer once ~/oa-build-mafw/installer/assets holds the reference MIDI
 # plug-in and the device icons (make-pkg.sh copies them from _extracted/).
 # Payload (all root:wheel):
@@ -13,8 +13,19 @@
 #   /Library/Application Support/M-Audio/DeviceIcons/*               device icons the plug-in looks up by MAIconName (A3-M2 section 3)
 # Scripts: preinstall = this package's scripts/uninstall.sh --update (removes the files of every earlier release, keeps settings; never unloads a
 # running driver, R117), postinstall (kextutil -t -n gate, caches, helper, MIDIServer). The package requires a restart: the new kext loads at boot.
+# Editions (BROAD_COMPATIBILITY_PLAN_v2 §11a, R128): BAND=classic (default; 10.13 to 10.15, kext built here) or BAND=modern (macOS 11+, Intel: the
+# kext is built on the dev Mac with the 15.x SDK and copied to kext/build/modern with imports.txt by make-pkg.sh; the panel is this machine's
+# BAND=modern build; postinstall-modern links through kmutil). Each edition has its own allowed OS range, pages and postinstall.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+BAND=${BAND:-classic}
+case $BAND in
+  classic) EDITION=Classic; OSVERSIONS='<os-version min="10.13" before="11.0"/>'; KEXT_SRC=kext/build/OpenAudioBeBoBMAFW.kext; APPDIR=control-panel/build;
+           POST=installer/scripts/postinstall; PAGES=installer/resources;;
+  modern)  EDITION=Modern; OSVERSIONS='<os-version min="11.0" before="16.0"/>'; KEXT_SRC=kext/build/modern/OpenAudioBeBoBMAFW.kext; APPDIR=control-panel/build/modern
+           POST=installer/scripts/postinstall-modern; PAGES=installer/resources/modern;;
+  *) echo "BAND must be classic or modern"; exit 1;;
+esac
 # Versions (user, 2026-10-21): the package has its own number (VERSION, changes with every release; names the .pkg/.dmg and CHANGELOG.md entries);
 # the driver (kext/Info.plist) and the panel (control-panel/Info.plist; includes the firmware check since 0.2.2) change only with their own code.
 VERSION=${VERSION:-$(cat VERSION)}
@@ -25,18 +36,22 @@ OUT=installer/build
 ROOT=$OUT/root
 rm -rf "$OUT"; mkdir -p "$ROOT"
 
-echo "== build kext, helper, panel"
-make -C kext >/dev/null
+echo "== build kext, helper, panel ($EDITION)"
+if [ "$BAND" = modern ]; then
+  [ -d "$KEXT_SRC" ] && [ -s kext/build/modern/imports.txt ] || { echo "missing the Modern kext + imports.txt (run installer/make-pkg.sh modern on the dev Mac)"; exit 1; }
+else
+  make -C kext >/dev/null
+fi
 make -C firmware-helper >/dev/null
-make -C control-panel app >/dev/null
+make -C control-panel app BAND=$BAND >/dev/null
 
 echo "== stage payload"
 install -d "$ROOT/Library/Extensions" "$ROOT/Library/PrivilegedHelperTools" "$ROOT/Library/LaunchDaemons" "$ROOT/Applications" \
            "$ROOT/Library/Audio/MIDI Drivers" "$ROOT/Library/Application Support/M-Audio"
-cp -R kext/build/OpenAudioBeBoBMAFW.kext "$ROOT/Library/Extensions/"
+cp -R "$KEXT_SRC" "$ROOT/Library/Extensions/"
 cp firmware-helper/build/oa-fwhelper "$ROOT/Library/PrivilegedHelperTools/com.openaudio.bebobmafw.helper"
 cp firmware-helper/com.openaudio.bebobmafw.helper.plist "$ROOT/Library/LaunchDaemons/"
-cp -R "control-panel/build/OA BeBoB MAFW.app" "$ROOT/Applications/"
+cp -R "$APPDIR/OA BeBoB MAFW.app" "$ROOT/Applications/"
 cp -R installer/assets/MAudioFireWireMIDI.plugin "$ROOT/Library/Audio/MIDI Drivers/"
 install -d "$ROOT/Library/Application Support/OpenAudio"
 install -m 755 scripts/uninstall.sh "$ROOT/Library/Application Support/OpenAudio/uninstall.sh"
@@ -52,11 +67,13 @@ PANEL="$ROOT/Applications/OA BeBoB MAFW.app/Contents/MacOS/OA BeBoB MAFW"
 SNAP=$(mktemp -d); "$PANEL" --demo --snapshot "$SNAP" >/dev/null 2>&1 || { echo "the staged panel does not launch"; exit 1; }
 [ -f "$SNAP/48000-adat-mixer.png" ] || { echo "the staged panel did not render"; exit 1; }; rm -rf "$SNAP"
 SCRIPTS=$OUT/scripts; mkdir -p "$SCRIPTS"
-cp installer/scripts/preinstall installer/scripts/postinstall "$SCRIPTS/"
+cp installer/scripts/preinstall "$SCRIPTS/"
+cp "$POST" "$SCRIPTS/postinstall"
+[ "$BAND" = modern ] && cp kext/build/modern/imports.txt "$SCRIPTS/"      # the Modern gate's list (postinstall-modern)
 install -m 755 scripts/uninstall.sh "$SCRIPTS/uninstall.sh"      # the update step: the same list the uninstaller uses
 chmod 755 "$SCRIPTS/preinstall" "$SCRIPTS/postinstall"
 
-echo "== pkgbuild / productbuild: package $VERSION (driver $DRIVER_V, panel $PANEL_V)"
+echo "== pkgbuild / productbuild: package $VERSION $EDITION (driver $DRIVER_V, panel $PANEL_V)"
 # Bundles are relocatable by default: the Installer then updates any other copy of the same bundle id it finds (it replaced the build-tree panel app
 # instead of installing /Applications/OpenAudio BeBoB MAFW.app, 2026-10-17). Every bundle in the payload is pinned to its path.
 pkgbuild --analyze --root "$ROOT" "$OUT/components.plist" >/dev/null
@@ -71,12 +88,13 @@ for ((i = 0; i < N; i++)); do
 done
 pkgbuild --root "$ROOT" --component-plist "$OUT/components.plist" --identifier com.openaudio.bebobmafw.pkg --version "$VERSION" --install-location / \
          --ownership recommended --scripts "$SCRIPTS" "$OUT/component.pkg" >/dev/null
-sed "s/@VERSION@/$VERSION/g" installer/distribution.xml.in > "$OUT/distribution.xml"
+sed -e "s/@VERSION@/$VERSION/g" -e "s/@EDITION@/$EDITION/g" -e "s#@OSVERSIONS@#$OSVERSIONS#" installer/distribution.xml.in > "$OUT/distribution.xml"
 # welcome / conclusion pages carry the package and component versions
 mkdir -p "$OUT/resources"
-for f in installer/resources/*.html; do
+for f in "$PAGES"/*.html; do
   sed -e "s/@VERSION@/$VERSION/g" -e "s/@DRIVER@/$DRIVER_V/g" -e "s/@PANEL@/$PANEL_V/g" "$f" > "$OUT/resources/$(basename "$f")"
 done
-productbuild --distribution "$OUT/distribution.xml" --resources "$OUT/resources" --package-path "$OUT" "$OUT/OA-BeBoB-MAFW-$VERSION.pkg" >/dev/null
-echo "built $OUT/OA-BeBoB-MAFW-$VERSION.pkg"
-pkgutil --payload-files "$OUT/OA-BeBoB-MAFW-$VERSION.pkg" | grep -c . | sed 's/^/payload entries: /'
+PKG="$OUT/OA-BeBoB-MAFW-$VERSION-$BAND.pkg"
+productbuild --distribution "$OUT/distribution.xml" --resources "$OUT/resources" --package-path "$OUT" "$PKG" >/dev/null
+echo "built $PKG"
+pkgutil --payload-files "$PKG" | grep -c . | sed 's/^/payload entries: /'

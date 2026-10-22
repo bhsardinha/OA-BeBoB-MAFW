@@ -2,7 +2,7 @@
 # IN.5 - the distributable disk image: Install OA BeBoB MAFW.pkg + Uninstall OA BeBoB MAFW.app on a styled background.
 # Run on the dev Mac. Steps: (1) installer/make-pkg.sh builds the .pkg on the build PC (10.13 toolchain); (2) the uninstaller app is built on the build PC
 # too and fetched; (3) installer/art/ (icons, background) comes from make-art.py (Pillow, in installer/.venv); (4) dmgbuild lays the image out.
-# Usage: installer/make-dmg.sh [--skip-pkg]       output: dist/OpenAudioBeBoBMAFW-<version>.dmg
+# Usage: BAND=classic|modern installer/make-dmg.sh [--skip-pkg]       output: dist/OA-BeBoB-MAFW-<version>-<edition>.dmg (one image per edition, R128)
 set -euo pipefail
 HOST=${BUILDPC:-bernardosardinha@192.168.100.20}
 cd "$(dirname "$0")/.."
@@ -11,8 +11,10 @@ VERSION=$(cat VERSION)                            # the package version (user, 2
 STAGE=$ROOT/installer/build/dmg
 [ -x installer/.venv/bin/python ] || { python3 -m venv installer/.venv && installer/.venv/bin/pip install -q -r installer/requirements.txt; }
 
-[ "${1:-}" = "--skip-pkg" ] || installer/make-pkg.sh
-installer/.venv/bin/python installer/make-art.py
+BAND=${BAND:-classic}                             # edition (R128): the disk image wraps that edition's package
+[ "${1:-}" = "--skip-pkg" ] || installer/make-pkg.sh "$BAND"
+installer/.venv/bin/python installer/make-art.py "$BAND"
+EDITION=$( [ "$BAND" = modern ] && echo Modern || echo Classic )
 
 echo "== uninstaller app (built on the build PC)"
 rsync -a installer/uninstaller installer/art/UninstallIcon.icns scripts/uninstall.sh "$HOST":oa-build-mafw/installer/
@@ -34,9 +36,9 @@ rsync -a scripts/check-self-contained.sh "$HOST":oa-build-mafw/scripts/
 ssh "$HOST" 'cd ~/oa-build-mafw/installer && ../scripts/check-self-contained.sh uapp'
 # note: a missing Swift runtime shows up as a launch crash only on a Mac without Xcode; this check is the machine-independent proof
 
-DMG=dist/OA-BeBoB-MAFW-$VERSION.dmg
+DMG=dist/OA-BeBoB-MAFW-$VERSION-$BAND.dmg
 rm -f "$DMG"
 installer/.venv/bin/dmgbuild -s installer/dmg-settings.py \
-  -D pkg="$ROOT/dist/OA-BeBoB-MAFW-$VERSION.pkg" -D app="$STAGE/Uninstall OA BeBoB MAFW.app" -D art="$ROOT/installer/art" \
-  "OA BeBoB MAFW $VERSION" "$DMG"
+  -D pkg="$ROOT/dist/OA-BeBoB-MAFW-$VERSION-$BAND.pkg" -D app="$STAGE/Uninstall OA BeBoB MAFW.app" -D art="$ROOT/installer/art" \
+  -D background="$ROOT/installer/art/dmg-background-$BAND.tiff" "OA BeBoB MAFW $VERSION $EDITION" "$DMG"
 echo "built $DMG"; ls -l "$DMG"; shasum -a 256 "$DMG"

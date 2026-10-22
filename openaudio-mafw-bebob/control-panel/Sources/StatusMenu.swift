@@ -1,6 +1,7 @@
 // Plan v8 AP-5.5 (user, 2026-10-21; a clone feature: the reference has a Carbon panel and a prefpane, no status item) -- menu bar mode.
-// A status icon shows the selected unit (online / muted / no sync; dimmed with no unit) and its menu acts on that unit: volume sliders (monitor
-// law), mute, dim, headphones A/B, sample rate, sync, presets, level knob step, the big meter, shortcuts. The Dock / menu bar choice and launch
+// A status icon shows the selected unit (online / muted / no sync; dimmed with no unit); a click opens the panel, a right click the menu, which
+// acts on that unit: open panel, volume sliders (outputs console law, phones monitor law), mute, dim, presets, the big meter, Audio MIDI Setup, firmware
+// check, sync, sample rate, panel presentation, rate and lock status (order: user, 2026-10-21). The Dock / menu bar choice and launch
 // at login are per-Mac panel preferences (PanelPrefs); AppDelegate applies them (activation policy, status item).
 import AppKit
 
@@ -30,14 +31,16 @@ enum PanelPrefs {
     }
 }
 
-/// A labelled slider inside a menu (monitor law: the slider is the fader's travel, bottom = off).
+/// A labelled slider inside a menu: the slider is the fader's travel in the key's law (phones: monitor law, bottom = off; outputs: console law).
 final class MenuSliderView: NSView {
     private let label = makeLabel("", size: 12, weight: .medium, color: .labelColor)
     private let readout = makeLabel("", size: 11, color: .secondaryLabelColor)
     let slider = NSSlider(value: 0, minValue: 0, maxValue: 1, target: nil, action: nil)
     var onChange: ((Int) -> Void)?                     // level, half-dB steps
+    private let law: FaderLaw
 
-    init(title: String) {
+    init(title: String, law: FaderLaw) {
+        self.law = law
         super.init(frame: NSRect(x: 0, y: 0, width: 250, height: 46))
         label.stringValue = title
         label.frame = NSRect(x: 20, y: 25, width: 140, height: 16)
@@ -53,12 +56,12 @@ final class MenuSliderView: NSView {
     func show(level: Int?) {
         guard let v = level else { slider.isEnabled = false; readout.stringValue = "-"; return }
         slider.isEnabled = true
-        slider.doubleValue = Double(1 - FaderLaw.monitor.fraction(forValue: v))
-        readout.stringValue = Theme.levelText(v, law: .monitor) + " dB"
+        slider.doubleValue = Double(1 - law.fraction(forValue: v))
+        readout.stringValue = Theme.levelText(v, law: law) + " dB"
     }
     @objc private func moved() {
-        let v = FaderLaw.monitor.value(forFraction: CGFloat(1 - slider.doubleValue))
-        readout.stringValue = Theme.levelText(v, law: .monitor) + " dB"
+        let v = law.value(forFraction: CGFloat(1 - slider.doubleValue))
+        readout.stringValue = Theme.levelText(v, law: law) + " dB"
         onChange?(v)
     }
 }
@@ -92,7 +95,11 @@ final class StatusMenuController: NSObject, NSMenuDelegate {
         let it = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         menu.delegate = self
         menu.autoenablesItems = false
-        it.menu = menu
+        // A click opens the panel; a right click (or control-click) opens the menu (user, 2026-10-21). The menu is attached to the item only while
+        // it is shown, otherwise every click would open it.
+        it.button?.target = self
+        it.button?.action = #selector(iconClicked)
+        it.button?.sendAction(on: [.leftMouseUp, .rightMouseUp])
         item = it
         shownState = nil
         refreshIcon()
@@ -101,8 +108,20 @@ final class StatusMenuController: NSObject, NSMenuDelegate {
         timer = t
     }
 
-    /// Screenshot aid (demo `--open-status-menu`): opens the menu as a click on the icon would.
-    func openForCapture() { item?.button?.performClick(nil) }
+    @objc private func iconClicked() {
+        let e = NSApp.currentEvent
+        if e?.type == .rightMouseUp || e?.modifierFlags.contains(.control) == true { showMenu() } else { openPanel() }
+    }
+    /// The menu under the icon: attached for this click (performClick tracks it until it closes), then detached again.
+    private func showMenu() {
+        guard let it = item else { return }
+        it.menu = menu
+        it.button?.performClick(nil)
+        it.menu = nil
+    }
+
+    /// Screenshot aid (demo `--open-status-menu`): opens the menu as a right click on the icon would.
+    func openForCapture() { showMenu() }
 
     func remove() {
         timer?.invalidate(); timer = nil
@@ -141,77 +160,62 @@ final class StatusMenuController: NSObject, NSMenuDelegate {
         return img
     }
 
-    // MARK: the menu (rebuilt each time it opens)
+    // MARK: the menu (rebuilt each time it opens). Order (user, 2026-10-21): [units, only with several] Open Panel, the volumes, mute, dim |
+    // presets | big meter, Audio MIDI Setup, firmware check | sync source, sample rate, Show Panel In, Launch at Login | rate and lock status,
+    // Quit. Headphones A/B and the phones knob step are no longer in the menu (they stay in the panel).
 
     func menuNeedsUpdate(_ m: NSMenu) {
         m.removeAllItems()
         let all = units()
         let cur = selected
-        if all.isEmpty { disabled(m, "No interface connected") }
-        for c in all {
-            let i = m.addItem(withTitle: c.displayName.isEmpty ? c.device.info.name : c.displayName, action: #selector(chooseUnit(_:)), keyEquivalent: "")
-            i.target = self; i.representedObject = NSNumber(value: c.device.entryID); i.state = (c === cur) ? .on : .off
+        // The menu acts on the checked unit: the list is needed only when there is a choice
+        if all.count > 1 {
+            for c in all {
+                let i = m.addItem(withTitle: c.displayName.isEmpty ? c.device.info.name : c.displayName, action: #selector(chooseUnit(_:)), keyEquivalent: "")
+                i.target = self; i.representedObject = NSNumber(value: c.device.entryID); i.state = (c === cur) ? .on : .off
+            }
+            m.addItem(NSMenuItem.separator())
         }
-        if let c = cur { unitSection(m, c) }
+        action(m, "Open Panel", #selector(openPanel))
+        if let c = cur { levelItems(m, c) }
         m.addItem(NSMenuItem.separator())
         let bm = m.addItem(withTitle: "Big Meter", action: nil, keyEquivalent: ""); bm.submenu = bigMeter.optionsMenu()
-        action(m, "Open Panel", #selector(openPanel))
         action(m, "Audio MIDI Setup", #selector(openAMS))
         action(m, "Firmware Check\u{2026}", #selector(openFirmwareCheck))
         m.addItem(NSMenuItem.separator())
+        if let c = cur { clockItems(m, c) }
         let show = NSMenu()
         let dock = show.addItem(withTitle: "Dock", action: #selector(toggleDock), keyEquivalent: ""); dock.target = self; dock.state = PanelPrefs.showInDock ? .on : .off
         let bar = show.addItem(withTitle: "Menu Bar", action: #selector(toggleMenuBar), keyEquivalent: ""); bar.target = self; bar.state = PanelPrefs.showInMenuBar ? .on : .off
         let showItem = m.addItem(withTitle: "Show Panel In", action: nil, keyEquivalent: ""); showItem.submenu = show
         let login = action(m, "Launch at Login", #selector(toggleLogin)); login.state = PanelPrefs.launchAtLogin ? .on : .off
         m.addItem(NSMenuItem.separator())
+        if let model = cur?.ctx.model {
+            disabled(m, "\(Theme.rateText(model.sampleRate)) kHz  \u{00B7}  " + (model.rateLocked ? "locked" : "not locked"))
+        } else {
+            disabled(m, "No interface connected")
+        }
         action(m, "Quit OA BeBoB MAFW", #selector(quit))
     }
 
-    private func unitSection(_ m: NSMenu, _ c: PanelWindowController) {
+    /// Volume sliders (main outputs: every output pair but phones / aux out, console law; phones, monitor law: as their faders, R127), mute, dim,
+    /// presets.
+    private func levelItems(_ m: NSMenu, _ c: PanelWindowController) {
         let model = c.ctx.model, counts = c.device.profile.counts
-        m.addItem(NSMenuItem.separator())
-        disabled(m, "\(Theme.rateText(model.sampleRate)) kHz  \u{00B7}  " + (model.rateLocked ? "locked" : "not locked"))
-        // volume sliders: main outputs (all output pairs but phones / aux out) and phones, monitor law
         let outCh = model.mainOutputChannels(counts)
-        let outs = MenuSliderView(title: "Outputs")
+        let outs = MenuSliderView(title: "Outputs", law: DeviceModel.law(MAKeys.outputLevels))
         outs.show(level: model.loudest(MAKeys.outputLevels, channels: outCh))
         outs.onChange = { v in for ch in outCh { model.setLevel(MAKeys.outputLevels, channel: ch, value: v, linked: false) } }
         viewItem(m, outs)
         let hpCount = model.ints(MAKeys.headphoneLevels).count
         let hpCh = hpCount > 0 ? Array(1...hpCount) : []
-        let phones = MenuSliderView(title: "Phones")
+        let phones = MenuSliderView(title: "Phones", law: DeviceModel.law(MAKeys.headphoneLevels))
         phones.show(level: model.loudest(MAKeys.headphoneLevels, channels: hpCh))
         phones.onChange = { v in for ch in hpCh { model.setLevel(MAKeys.headphoneLevels, channel: ch, value: v, linked: false) } }
         viewItem(m, phones)
         let mute = action(m, "Mute", #selector(toggleMute)); mute.state = (model.number(MAKeys.globalMute) ?? 0) != 0 ? .on : .off
         let dim = action(m, "Dim", #selector(toggleDim)); dim.state = (model.number(MAKeys.globalDim) ?? 0) != 0 ? .on : .off
-        // headphones A / B (only in the A/B function of the switch; direct monitoring uses the same button for something else)
-        if (model.number(MAKeys.momentarySwitchSource) ?? 0) == 0 {
-            let routes = model.ints(MAKeys.momentarySwitchRoutings)
-            let src = Int(model.number(MAKeys.headphoneSourceV2) ?? 0)
-            for (k, letter) in ["A", "B"].enumerated() where k < routes.count {
-                let name = c.device.profile.phonesSource(mask: routes[k])?.name ?? "-"
-                let i = action(m, "Headphones \(letter)  (\(name))", #selector(choosePhones(_:)))
-                i.representedObject = NSNumber(value: routes[k]); i.state = src == routes[k] ? .on : .off
-            }
-        }
-        // sample rate: greyed while some client runs the device (rate changes while streaming are not supported, README known issue 2)
-        let rates = NSMenu(); rates.autoenablesItems = false
-        let busy = model.isStreaming
-        for hz in model.supportedRates {
-            let i = rates.addItem(withTitle: "\(Theme.rateText(hz)) kHz", action: #selector(chooseRate(_:)), keyEquivalent: "")
-            i.target = self; i.representedObject = NSNumber(value: hz); i.state = hz == model.sampleRate ? .on : .off; i.isEnabled = !busy
-        }
-        if busy { rates.addItem(NSMenuItem.separator()); disabled(rates, "Stop playback to change the rate") }
-        let rateItem = m.addItem(withTitle: "Sample Rate", action: nil, keyEquivalent: ""); rateItem.submenu = rates
-        let sync = NSMenu(); sync.autoenablesItems = false
-        for opt in c.device.profile.hardware.sync {
-            let i = sync.addItem(withTitle: opt.title, action: #selector(chooseSync(_:)), keyEquivalent: "")
-            i.target = self; i.representedObject = opt.sync.rawValue; i.state = model.clockSource.sync == opt.sync ? .on : .off
-            i.isEnabled = opt.enabled(model.layout)
-        }
-        let syncItem = m.addItem(withTitle: "Sync Source", action: nil, keyEquivalent: ""); syncItem.submenu = sync
+        // presets: the files of this model whose arrays fit the unit (kept, user 2026-10-21)
         let presets = NSMenu(); presets.autoenablesItems = false
         let files = c.presets.fittingFiles()
         if files.isEmpty { disabled(presets, "No presets for this interface") }
@@ -220,13 +224,27 @@ final class StatusMenuController: NSObject, NSMenuDelegate {
             i.target = self; i.representedObject = u; i.state = c.presets.loadedFile == u ? .on : .off
         }
         let presetItem = m.addItem(withTitle: "Presets", action: nil, keyEquivalent: ""); presetItem.submenu = presets
-        let knob = NSMenu(); knob.autoenablesItems = false
-        let step = model.number(MAKeys.monitorKnobStep)
-        for (t, v) in [("1.5 dB per click", UInt64(3)), ("3 dB per click", 6), ("Official law", 0)] {
-            let i = knob.addItem(withTitle: t, action: #selector(chooseKnob(_:)), keyEquivalent: "")
-            i.target = self; i.representedObject = NSNumber(value: v); i.state = step == v ? .on : .off; i.isEnabled = step != nil
+    }
+
+    /// Sync source (with each option's availability) and sample rate (greyed while some client runs the device: rate changes while streaming
+    /// are not supported, README known issue 2).
+    private func clockItems(_ m: NSMenu, _ c: PanelWindowController) {
+        let model = c.ctx.model
+        let sync = NSMenu(); sync.autoenablesItems = false
+        for opt in c.device.profile.hardware.sync {
+            let i = sync.addItem(withTitle: opt.title, action: #selector(chooseSync(_:)), keyEquivalent: "")
+            i.target = self; i.representedObject = opt.sync.rawValue; i.state = model.clockSource.sync == opt.sync ? .on : .off
+            i.isEnabled = opt.enabled(model.layout)
         }
-        let knobItem = m.addItem(withTitle: "Level Knob", action: nil, keyEquivalent: ""); knobItem.submenu = knob
+        let syncItem = m.addItem(withTitle: "Sync Source", action: nil, keyEquivalent: ""); syncItem.submenu = sync
+        let rates = NSMenu(); rates.autoenablesItems = false
+        let busy = model.isStreaming
+        for hz in model.supportedRates {
+            let i = rates.addItem(withTitle: "\(Theme.rateText(hz)) kHz", action: #selector(chooseRate(_:)), keyEquivalent: "")
+            i.target = self; i.representedObject = NSNumber(value: hz); i.state = hz == model.sampleRate ? .on : .off; i.isEnabled = !busy
+        }
+        if busy { rates.addItem(NSMenuItem.separator()); disabled(rates, "Stop playback to change the rate") }
+        let rateItem = m.addItem(withTitle: "Sample Rate", action: nil, keyEquivalent: ""); rateItem.submenu = rates
     }
 
     @discardableResult private func action(_ m: NSMenu, _ t: String, _ sel: Selector) -> NSMenuItem {
@@ -245,22 +263,14 @@ final class StatusMenuController: NSObject, NSMenuDelegate {
         m.setNumber(k, (m.number(k) ?? 0) != 0 ? 0 : 1); m.commit()
         shownState = nil; refreshIcon()
     }
-    @objc private func choosePhones(_ i: NSMenuItem) {
-        guard let m = selected?.ctx.model, let mask = (i.representedObject as? NSNumber)?.uint32Value else { return }
-        m.setPhonesSource(phones: 1, mask: mask)
-    }
     @objc private func chooseRate(_ i: NSMenuItem) {
         guard let m = selected?.ctx.model, let hz = (i.representedObject as? NSNumber)?.uint32Value, !m.isStreaming else { NSSound.beep(); return }
         m.requestSampleRate(hz)
     }
+    @objc private func loadPreset(_ i: NSMenuItem) { if let u = i.representedObject as? URL { selected?.presets.loadFile(u) } }
     @objc private func chooseSync(_ i: NSMenuItem) {
         guard let m = selected?.ctx.model, let raw = i.representedObject as? MAClockSource.Sync.RawValue, let s = MAClockSource.Sync(rawValue: raw) else { return }
         m.updateClock { $0.sync = s }
-    }
-    @objc private func loadPreset(_ i: NSMenuItem) { if let u = i.representedObject as? URL { selected?.presets.loadFile(u) } }
-    @objc private func chooseKnob(_ i: NSMenuItem) {
-        guard let m = selected?.ctx.model, let v = (i.representedObject as? NSNumber)?.uint64Value else { return }
-        m.setNumber(MAKeys.monitorKnobStep, v); m.commit()
     }
     @objc private func openPanel() { onOpenPanel?(selected) }
     @objc private func openAMS() {

@@ -180,9 +180,11 @@ final class DeviceModel {
         return channel % 2 == 1 ? max(0, b) : max(0, -b)                    // positive balance (right) lowers the left channel
     }
 
-    /// Monitor keys (plan v7 AP-5.4): output-tab levels follow the monitor law, whose bottom is off (-255) instead of the console floor (-129).
-    static let monitorKeys: Set<String> = [MAKeys.outputLevels.name, MAKeys.headphoneLevels.name, MAKeys.auxOutputLevels.name]
-    static func floor(_ key: MAKey) -> Int { return monitorKeys.contains(key.name) ? FaderLaw.off : MARange.levelMin }
+    /// Monitor keys (plan v7 AP-5.4): levels that follow the monitor law, whose bottom is off (-255) instead of the console floor (-129).
+    /// Phones only since R127 (user, 2026-10-21): outputs and aux out are back on the console law and the official knob law.
+    static let monitorKeys: Set<String> = [MAKeys.headphoneLevels.name]
+    static func law(_ key: MAKey) -> FaderLaw { return monitorKeys.contains(key.name) ? .monitor : .console }
+    static func floor(_ key: MAKey) -> Int { return law(key) == .monitor ? FaderLaw.off : MARange.levelMin }
 
     /// Fader position of one channel as the user set it (device level plus the balance attenuation of that side).
     func faderLevel(_ key: MAKey, channel: Int) -> Int {

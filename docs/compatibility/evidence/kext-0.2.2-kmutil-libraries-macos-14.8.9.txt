@@ -1,0 +1,9 @@
+# E-17 (2026-10-21) kmutil libraries on macOS 14.8.9 (23J631) Intel, running BootKC/SystemKC, read-only; nothing loaded.
+# (a) shipped 0.2.2 kext (10.13 SDK): 775 of 777 imports resolve; unresolved = IOAudioEngine::_RESERVEDIOAudioEngine15 and 16 only.
+# (b) same sources built with MacOSX15.2.sdk (CLT, make SDK=... OUT=scratch): 778 of 778 resolve; HiRes methods imported instead of the two reserved slots.
+# recipe: kmutil libraries -p <kext> -a x86_64 -z | grep ' in /' | awk '{print $1}' | sort -u   vs   nm -u <binary> | sort -u
+## (a) symbols resolved:
+     775
+## (b) 15.2 SDK build imports of the HiRes slots:
+IOAudioEngine::useHiResSampleInterval()
+IOAudioEngine::calculateSampleTimeoutHiRes(unsigned long long, unsigned int, IOAudioEnginePosition*, unsigned long long*)

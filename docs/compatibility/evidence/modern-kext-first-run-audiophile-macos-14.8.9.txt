@@ -1,0 +1,96 @@
+# Modern-edition kext, first load + play on the dev Mac (MacBookAir7,2, macOS 14.8.9 23J631, Intel), 2026-10-21 19:39
+# Interface: FireWire Audiophile (Model_ID 0x10060) through the Thunderbolt-to-FireWire adapter. Playback test: say -a 87 at [[volm 0.3]], ~12 s, stereo 1-2 (analog out 1/2) into the user's receiver; user: "is working fine".
+
+## kmutil showloaded (FireWire / IOAudio / OpenAudio)
+  148    6 0xffffff7f9552f000 0x1e000    0x1e000    com.apple.iokit.IOAudioFamily (540.3) DDD838AD-FE64-30D3-AF69-05F2283760B0 <147 7 6 3 1>
+  191    3 0xffffff7f9556a000 0x34000    0x34000    com.apple.iokit.IOFireWireFamily (4.8.3) 65F86963-9F79-34E9-9BB2-4A0E5A3B9A92 <7 6 3 1>
+  193    1 0xffffff7f95557000 0xc000     0xc000     com.apple.iokit.IOFireWireAVC (4.2.8) 004EFA2D-23AE-35F8-AB74-1A6F8996E5A5 <191 7 6 3 1>
+  194    0 0xffffff7f967a6000 0x27000    0x27000    com.openaudio.OpenAudioBeBoBMAFW (0.2.0) 20D9014D-2E83-3D9F-9EF0-313E622C99D1 <193 191 148 7 6 3>
+
+## kext UUIDs (built vs installed)
+UUID: 20D9014D-2E83-3D9F-9EF0-313E622C99D1 (x86_64) openaudio-mafw-bebob/kext/build/modern/OpenAudioBeBoBMAFW.kext/Contents/MacOS/OpenAudioBeBoBMAFW
+UUID: 20D9014D-2E83-3D9F-9EF0-313E622C99D1 (x86_64) /Library/Extensions/OpenAudioBeBoBMAFW.kext/Contents/MacOS/OpenAudioBeBoBMAFW
+
+## IOService chain
+    | |   |       |                 +-o IOFireWireDevice@d6c0300211d54  <class IOFireWireDevice, id 0x100000631, registered, matched, active, busy 0 (5577 ms), retain 14>
+    | |   |       |                   +-o com_openaudio_FWMetaNub  <class com_openaudio_FWMetaNub, id 0x100000633, registered, matched, active, busy 0 (5572 ms), retain 6>
+    | |   |       |                   | +-o com_openaudio_FWAudiophileDevice  <class com_openaudio_FWAudiophileDevice, id 0x1000006b6, registered, matched, active, busy 0 (3 ms), retain 10>
+    | |   |       |                   |   +-o com_openaudio_FWAvcUnit  <class com_openaudio_FWAvcUnit, id 0x1000006b7, registered, matched, active, busy 0 (0 ms), retain 6>
+    | |   |       |                   |   +-o com_openaudio_FWEngine2  <class com_openaudio_FWEngine2, id 0x1000006b8, registered, matched, active, busy 0 (1 ms), retain 36>
+    | |   |       |                   |   | +-o com_openaudio_FWStream  <class com_openaudio_FWStream, id 0x1000006b9, registered, matched, active, busy 0 (0 ms), retain 9>
+    | |   |       |                   |   | +-o com_openaudio_FWStream  <class com_openaudio_FWStream, id 0x1000006ba, registered, matched, active, busy 0 (1 ms), retain 9>
+    | |   |       |                   |   +-o com_openaudio_FWUserClient  <class com_openaudio_FWUserClient, id 0x100000725, !registered, !matched, active, busy 0, retain 6>
+    | |   |       |                   |   +-o com_openaudio_FWUserClient  <class com_openaudio_FWUserClient, id 0x1000007dd, !registered, !matched, active, busy 0, retain 6>
+
+## MADebugTrace (attach)
+      "MADebugTrace" = ("SetIOFormat start: want in 4 out 6 rate 44100; streams now in 0 out 0"
+"SetIOFormat done: result 0x0; streams now in 4 out 6"
+"Rev2 0x2F in plug 0 rate 03: 1 list entries
+ r=0x0"
+"Rev2 0x2F out plug 0 rate 03: 1 list entries
+ r=0x0"
+"Rev2 0x1A sync type 0: source 60 01 -> plug 1
+ r=0x0"
+"Rev2 0x1A sync type 0: source 60 01 -> plug 1
+ r=0x0"
+"plug info in 0 position r=0x0 resp0 0c: 4 clusters: [1] 1/1 4/2 [2] 2/1 5/2 [3] 3/1 6/2 [4] 7/7"
+"plug info in 0 cluster 1 r=0x0 type 04 name 'SPDIF'"
+"plug info in 0 cluster 2 r=0x0 type 03 name 'Line1'"
+"plug info in 0 cluster 3 r=0x0 type 03 name 'Line2'"
+"plug info in 0 cluster 4 r=0x0 type 0a name 'Midi'"
+"plug info out 0 position r=0x0 resp0 0c: 3 clusters: [1] 1/1 3/2 [2] 2/1 4/2 [3] 5/5"
+"plug info out 0 cluster 1 r=0x0 type 04 name 'SPDIF'"
+"plug info out 0 cluster 2 r=0x0 type 03 name 'Line'"
+"plug info out 0 cluster 3 r=0x0 type 0a name 'Midi'")
+
+## CoreAudio (system_profiler SPAudioDataType)
+        FireWire Audiophile Multichannel:
+
+          Default Output Device: Yes
+          Default System Output Device: Yes
+          Input Channels: 4
+          Manufacturer: M-Audio
+          Output Channels: 6
+          Current SampleRate: 44100
+          Transport: FireWire
+
+## Engine state sampled during playback
+== t=2s
+ | "IOAudioEngineNumActiveUserClients" = 1
+ | "IOAudioEngineState" = 1
+== t=5s
+ | "IOAudioEngineNumActiveUserClients" = 1
+ | "IOAudioEngineState" = 1
+== t=7s
+ | "IOAudioEngineNumActiveUserClients" = 1
+ | "IOAudioEngineState" = 1
+== t=10s
+ | "IOAudioEngineNumActiveUserClients" = 1
+ | "IOAudioEngineState" = 1
+say exit: 0
+
+## MADebugTxStats after playback (tools/maprop.c built with the 15.x CLT SDK, MA_CLASS=com_openaudio_FWAudiophileDevice maprop get MADebugTxStats)
+MADebugTxStats = <CFString 0x7f8a9d006de0 [0x7ff84d5957b0]>{contents = "TX bank callbacks 1383: gap min 46 ms max 46 ms, >100 ms: 0, >200 ms: 0, longest callback body 160 us; gaps >80 ms (ms@t,bank):
+CLIP requests 2458: frames/request 3..1323, jumps back 0 forward 0; first jumps (ms@t expect->first n kind 1=back 2=fwd):"}
+
+## After the run (19:42, uptime 11 mins)
+# The FireWire controller (AppleFWOHCI) and every node under it are gone from the registry; the Thunderbolt controller is present; the kext stays loaded; no panic, no reboot. Cause not confirmed (adapter disconnected?).
+  194    0 0xffffff7f967a6000 0x27000    0x27000    com.openaudio.OpenAudioBeBoBMAFW (0.2.0) 20D9014D-2E83-3D9F-9EF0-313E622C99D1 <193 191 148 7 6 3>
+ioreg FireWire/OpenAudio nodes: 17
+
+## Re-attach (19:42): new registry ids (AppleFWOHCI 0x1000008ea; before the gap the device chain was 0x100000631...), i.e. the FireWire controller was torn down and re-created; the kext detached and re-attached without a panic
++-o AppleFWOHCI  <class AppleFWOHCI, id 0x1000008ea, !registered, !matched, active, busy 0 (6921 ms), retain 7>
++-o IOFireWireDevice@d6c0300211d54  <class IOFireWireDevice, id 0x1000008f9, registered, matched, active, busy 0 (6891 ms), retain 14>
++-o com_openaudio_FWMetaNub  <class com_openaudio_FWMetaNub, id 0x1000008fb, registered, matched, active, busy 0 (6885 ms), retain 6>
++-o com_openaudio_FWAudiophileDevice  <class com_openaudio_FWAudiophileDevice, id 0x100000901, registered, matched, active, busy 0 (4 ms), retain 10>
++-o com_openaudio_FWAvcUnit  <class com_openaudio_FWAvcUnit, id 0x100000902, registered, matched, active, busy 0 (0 ms), retain 6>
++-o com_openaudio_FWEngine2  <class com_openaudio_FWEngine2, id 0x100000903, registered, matched, active, busy 0 (2 ms), retain 36>
++-o com_openaudio_FWStream  <class com_openaudio_FWStream, id 0x100000904, registered, matched, active, busy 0 (1 ms), retain 8>
++-o com_openaudio_FWStream  <class com_openaudio_FWStream, id 0x100000905, registered, matched, active, busy 0 (2 ms), retain 8>
++-o com_openaudio_FWUserClient  <class com_openaudio_FWUserClient, id 0x100000940, !registered, !matched, active, busy 0, retain 6>
++-o com_openaudio_FWUserClient  <class com_openaudio_FWUserClient, id 0x100000941, !registered, !matched, active, busy 0, retain 6>
+  |   "IOAudioEngineState" = 0
+MADebugTrace entries after re-attach: 7  not ending in r=0x0 (SetIOFormat lines included)
+
+## Correction (same evening)
+# The gap above was not an unplug: the user heard a pop, the interface was gone, and they power-cycled it. The FireWire controller left PCI at 19:41:13.530 during playback. See modern-kext-dropout-macos-14.8.9-1941.txt and R126.

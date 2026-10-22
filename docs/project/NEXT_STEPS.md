@@ -4,13 +4,28 @@
 
 Read this first after a context clear, then `NEW_PLAN.md` → `docs/STATE.md` → `docs/BUILD-MANUAL.md` §0 → `docs/system-map/README.md`.
 
-## 2026-10-21 (late morning) — READ THIS FIRST: package 0.2.2
+## 2026-10-21 (night, last) - compatibility docs updated after the Sonoma result (R129)
+The Modern edition works on macOS 14.8.9 Intel (Audiophile), so the broad-compatibility documents were brought up to date: `BROAD_COMPATIBILITY/BROAD_COMPATIBILITY_PLAN_v3.md` + `.xlsx` (v1, v2 kept), `docs/EDITIONS.md` (what differs from the High Sierra build), `docs/MACOS12_PORT_PERSPECTIVE.md` (status note), README. Public docs layout is done by `sync-to-public.sh` (see R129).
+* **Plan v3 order, all on request (R123):** more Modern checks (FW1814, record, MIDI, rates, other versions of 11-15) -> publish 0.3.0 with both editions -> Apple Silicon (needs hardware, DEC-3) -> Legacy (only if wanted). DEC-1...DEC-4, DEC-6, DEC-8 are still open and gate those last two.
+* **Before publishing 0.3.0:** commit this working tree (the sync refuses a dirty tree), `sync-to-public.sh --dry-run`, review, then the real sync; the user pushes and attaches the two dmgs.
+
+## 2026-10-21 (night) — broad compatibility plan v1 waiting for decisions (R124) [superseded by v3, R129]
+`BROAD_COMPATIBILITY/BROAD_COMPATIBILITY_PLAN_v1.md` (+ `.xlsx`, `evidence/`) is a proposal for one OpenAudio BeBoB MAFW covering 10.6.8 to 15.
+* **Nothing starts** until the user answers DEC-1...DEC-10 (plan §10, `Decisions` tab). The main ones are the lowest OS, Apple Silicon, the panel strategy for 10.6-10.8 and packaging.
+* **Recommended order:** S1 (Intel 10.9-15), then S2 (Apple Silicon, needs hardware), then S3 (10.6.8-10.8.5) only if wanted.
+* **Still to read:** the 10.6.8 symbol sets on the SL rig, which did not answer SSH on 2026-10-21 (BC-1.1).
+
+## 2026-10-21 (evening) — READ THIS FIRST: testing closed, nothing planned (R123)
+Package 0.2.2 is published and in use; the user reports everything working (S/PDIF lock with a POD X3 at every rate with the rate set by hand; Uninstall app and status menu work). **No formal tests from now on (user):** the remaining checks are on demand — run one only if real use shows a problem. They are listed in R123 and as `Sob demanda (uso real)` in both `Build` tabs. Plan `docs/BUILD_AUDIOPHILE_PLAN_v9.md`.
+Possible work, only when the user asks: remove the bench diagnostics compiled into the kext; external S/PDIF rate following (compare with the official driver first: `DetectExternalSyncChanges`, `w2` encoding unverified); AP-8.5 panel/port manual; other BeBoB models (needs hardware). Entries below are history.
+
+## 2026-10-21 (late morning) — package 0.2.2
 Package **0.2.2** = driver 0.2.0, panel **1.3** (renamed `OA BeBoB MAFW.app`, firmware check inside the panel), OA names under icons, update-in-place installer, uninstall self-kill fix (R121; versions R120; CPU R119). Built: `openaudio-mafw-bebob/dist/OA-BeBoB-MAFW-0.2.2.dmg`. Next: user installs it on the Air over 0.2.0/0.2.1 (first real update test: no manual uninstall, settings and launch at login kept, About shows package 0.2.2 / panel 1.3 / driver 0.2.0, CPU with panel + big meter, the Uninstall app's button later); AP-8.3 drafts must follow the new names (no separate Firmware Tool).
 
-## 2026-10-21 (later) — READ THIS FIRST: 0.2.1
+## 2026-10-21 (later) — 0.2.1
 0.2.0 installed and working on the MacBook Air (user, 2026-10-21). Panel CPU fixed and big meter segmented (R119); version **0.2.1** (user), package + dmg rebuilt. Next: install 0.2.1 on the Air and look at CPU in Activity Monitor with the panel and the big meter open (Metal-capable GPU; not measured yet); then the items below (AP-5.5/5.6 on hardware, AP-5.3b, AP-8.3 docs — the README draft must say 0.2.1).
 
-## 2026-10-21 — READ THIS FIRST: 0.2.0 wrap-up
+## 2026-10-21 — 0.2.0 wrap-up
 Plan **`docs/BUILD_AUDIOPHILE_PLAN_v8.md`**; resolutions up to **R118**. Done: two units on the iMac (R117); menu bar mode AP-5.5 and big meter AP-5.6 coded, panel tests pass; package/dmg 0.2.0 built (`openaudio-mafw-bebob/dist/`, git-ignored) and checked statically (R118).
 Next, in order:
 1. **AP-8.2 on the MacBook Air (user):** copy the dmg, run the installer (sudo password), before restarting read `/var/log` helper output / `ps` for the helper (R118 hypothesis), restart, then FW1814 through the Thunderbolt adapter: device in AMS, `loopcheck`, panel, Firmware Tool, Uninstall app button on a real install, dmg window layout.
@@ -19,7 +34,7 @@ Next, in order:
 4. **AP-8.3:** drafts `docs/README_0.2.0_v1.md` + `docs/NOTICE_0.2.0_v1.md` written 2026-10-21; close their [pending] lines after steps 1-3 and AP-8.1, take the screenshots, then public sync only on your go-ahead. AP-8.4 release (user).
 Still open from the ladder (equipment): AP-6.2 MIDI DIN loopback, AP-7.5 S/PDIF sync lock/unlock, AP-7.8 sleep/wake, power-cycle bus reset (done once, R117), 1 h soak, AP-3.9 kextunload x5, AP-8.1 full 1814 ladder on 0.2.0.
 
-## 2026-10-20 (night, 23:30) — READ THIS FIRST: 0.2.0 state and next steps
+## 2026-10-20 (night, 23:30) — 0.2.0 state and next steps
 Plan **`docs/BUILD_AUDIOPHILE_PLAN_v7.md`** (v7 = v6 + AP-5.4 monitor level law). Resolutions up to **R116**; capture 96 = the Audiophile-alone run. Session script `openaudio-mafw-bebob/tests/hw-smoke/phase7.sh` (+ `p7util.py`; `ma-watch` records MA* changes). Tracker Build: 45/56 done.
 Done on the hardware (Audiophile alone, R115): bring-up, channel order, rates 44.1-96, factory = official, AC-3 formats, MIDI plug-in, Firmware Tool, persistence, panel, front panel. Done in the session (R116): headphone safety (helper + panel reset), monitor law for output / phones / aux-out (dB-linear 72 dB, centre -36, bottom off; knob 1.5 dB per click by default, 3 dB or official selectable). Kext with factory 1.5 dB: UUID `B034F8E6…` (staged in /tmp before the shutdown; `stage` again after boot).
 Next, in order (user, 2026-10-20: finish 0.2.0, then two units, then the Air):
@@ -167,3 +182,18 @@ R72: clean-Mac install over a Thunderbolt-to-FireWire adapter worked (MacBook Ai
 
 ## 2026-10-17 (night) - decision (R73)
 Signing / notarisation / SIP-enabled operation are out of scope: homebrew, always unsigned, SIP disabled. Ignore earlier next steps about Developer ID, UAKEL or a SIP-on test.
+
+## 2026-10-21 (late) - macOS 14.8.9 port (R125)
+Done (R126): `scripts/install-modern.sh` (not `install-sonoma.sh`), load, play. See the entry below.
+
+## 2026-10-21 (late night) - after R126 / R127
+1. **User:** run `openaudio-mafw-bebob/scripts/install-modern.sh` to put the R127 kext (knob law: phones only) on the dev Mac; it also installs the Modern panel from `control-panel/build/modern/`. Approve if asked, then restart. Then check by ear: the hardware knob on the outputs uses the official law, and the phones knob uses 1.5 dB.
+2. **Dropout (R126), on demand:** if it comes back, try the interface on its own power supply, and check the adapter contacts.
+3. **At the next release:** update the README (line 40 monitor law, lines 53-55 status menu) for R127; set the component versions (driver changed: knob law; panel changed). Classic panel built with `BAND=classic` (default). Re-render the README panel images (output page and about page changed).
+4. Modern edition still open: record/RX, panel controls against the real kext (U-8), MIDI, other rates, FW1814 on 14 (plan v2 BC-6.1).
+
+## 2026-10-21 (night, later) - after R128
+1. **Build PC, when idle (ask first):** `sudo installer -pkg ~/oa-pkg-030/OA-BeBoB-MAFW-0.3.0-classic.pkg -target /`, then restart (user). It replaces today's script install.
+2. **Dev Mac (user):** open `openaudio-mafw-bebob/dist/OA-BeBoB-MAFW-0.3.0-modern.dmg` and run *Install OA BeBoB MAFW.pkg*; Allow in Privacy & Security, then restart. Then check: the About tab (Modern, Edition row), the knob law on outputs, phones linear, the status menu (click / right click).
+3. **Still unverified:** the Modern uninstall (`kmutil rebuild` with "y" piped, Uninstall app on 14), the FW1814 on the Modern edition, the dropout of R126 (on demand).
+4. **Before any public release of 0.3.0:** README (requirements per edition, R127 law, status menu, images), `sync-to-public.sh`; the user attaches the dmgs.

@@ -2,9 +2,27 @@
 
 > **Removal notice (2026-10-14):** all pre-pivot code and docs (`_legacy_pre_ghidra/`, `openaudio-fw1814/firmware-helper/`, `openaudio-fw1814/legacy-mod/`) were deleted from the working tree at the user's request. They are recoverable from git: `git show d1-approved-2026-10-14:<old path>` (tag `d1-approved-2026-10-14`, commit `a9cb63c`). References to those paths in this file or in `docs/system-map/` are historical. `openaudio-fw1814/` is intentionally empty; new code is built from scratch per `docs/BUILD-PLAN.md` once the user approves it.
 
-Snapshot as of **2026-10-16**. Updated with each Part A/B/C/D commit and each build milestone.
+Snapshot as of **2026-10-21**. Updated with each Part A/B/C/D commit and each build milestone.
 
 Resume anchor: `/NEW_PLAN.md` → this file → `system-map/README.md` → the in-progress Part N.
+
+## 2026-10-21 (night, last) - compatibility docs after the Sonoma result (R129)
+* The Modern edition (macOS 11-15 Intel, built with the 15.2 SDK) works on 14.8.9 with the FW Audiophile; Classic (10.13) is the shipped 0.2.2 line. Both 0.3.0 packages are built, not published.
+* **Finding:** the Modern kext is the Classic source: `OA_BAND_MODERN` is unused by any source file. Differences are SDK, load procedure (kmutil, Allow, restart), installer and panel caption. Full list and open items: `docs/EDITIONS.md`.
+* Documents: plan v3 (`BROAD_COMPATIBILITY/`), `docs/EDITIONS.md`, `docs/MACOS12_PORT_PERSPECTIVE.md` status note, README, `docs/README.md`; `sync-to-public.sh` reorganises the public docs (R129). Nothing built, loaded or installed for this.
+
+## 2026-10-21 (night) — broad compatibility plan v1 (R124), proposal only
+At the user's request: `BROAD_COMPATIBILITY/BROAD_COMPATIBILITY_PLAN_v1.md` + `.xlsx` cover one product for 10.6.8 to 15.
+* **Verdict:** one package and one version is feasible, with 2 kext builds inside it. **Legacy** is i386 + x86_64 against an old SDK. **Main** is x86_64 against the 10.13 SDK plus arm64e against a 15 SDK. The panel would need an Obj-C port for 10.6 to 10.8 (Swift's floor is 10.9). Apple Silicon needs a MIDI clone.
+* **Static facts (R124):** the `_darwin14` / IOReporting imports block old kernels. The 0.2.2 kext resolves on 14.8.4 Intel except two reserved slots. The FireWire and IOAudio families ship for arm64e. The 0.2.2 panel starts on 14.8.9.
+* **Effort:** S1 Intel 10.9-15 is 13-18.5 sessions; the full range is 33.5-57.5.
+* **Status:** decisions DEC-1...DEC-10 are open. No code was changed.
+
+## 2026-10-21 (evening) — user trials; testing closed (R123) — read this first
+Package **0.2.2** (driver 0.2.0, panel 1.3) is published (v0.2.2, R122) and installed on the MacBook Air by update. User report: S/PDIF from a POD X3 locks at every rate, but the driver's rate must be set by hand (not detected; official behaviour not compared); the Uninstall app and the status menu work; everything works in daily use. **User decision: no formal tests.** The remaining checks are `Sob demanda (uso real)` in both trackers and run only if real use shows a problem; soaks dropped. Plan `docs/BUILD_AUDIOPHILE_PLAN_v9.md`. Trackers: Audiophile 53/53 done (6 on demand), 1814 38/38 (11 on demand). Nothing is planned; next work only on the user's request (diagnostics clean-up, other models).
+
+## 2026-10-21 (afternoon) — public repo v0.2.2; CPU on the Air (R122)
+`sync-to-public.sh --tag v0.2.2 --push` → public commit `49b1c6e`. 0.2.2 installed on the Air as an update over 0.2.1; panel worst case about 5 % CPU there. The dmg release asset is the user's.
 
 ## 2026-10-21 (late morning) — package 0.2.2 (R120, R121)
 Separate version numbers (package / driver / panel) with CHANGELOG.md; installer updates in place; panel renamed OA BeBoB MAFW with the firmware check built in; OA names under icons; dmg background for both models; uninstall no longer matches the Uninstall app's own process. Driver unchanged (0.2.0).
@@ -31,12 +49,12 @@ User decision: the Firmware Tool is an add-on that checks a unit against the off
 Write-ups: `A1-ghidra/Q-AP0-nub-and-rev2.md` (nub, Rev2, clock, layout, start-up/sleep, channel table, generic paths), `Q-AP0-status-packet-front-panel.md` (status packet, encoders, A/B, LEDs, Level Controller), `Q-AP0-avc-mixer.md` (AV/C frames, function-block map, routes, keys, factory state), `Q-AP0-converters.md`, `A2-panel/PNAP-control-key-map.md` (panel FWDJ = Audiophile, cookies, meters), `A4-helper/HAP-helper-firmware-midi-audiophile.md`. Tracker `PROVENANCE-MATRIX-AUDIOPHILE.xlsx`: 55 items (47 closed), 0 open flags. Key reuse finding: the 1814 clone already has the AV/C function-block builders, the channel-group engine and the property framework; new work = Rev2 base (0x2F, SIGNAL SOURCE, control packets, blank-slate clock), Audiophile tables/settings classes, converters, status packet, LED, panel descriptor.
 Remaining before the final plan: AP-0.9 on the SL rig with the user (+ two read-only reads if authorised); decisions Q1-Q5 and the AP-4.1/4.4 scope cut. Hardware-only items: bootloader Model_ID, physical channel order, boot from flash, SW-return level blocks.
 
-## 2026-10-19 — Audiophile phase 0 started (branch `audiophile-phase0`; read this first for Audiophile work)
+## 2026-10-19 — Audiophile phase 0 started (branch `audiophile-phase0`)
 Plan `docs/BUILD_AUDIOPHILE_PLAN_v2.md`; tracker **`PROVENANCE-MATRIX-AUDIOPHILE.xlsx`** (separate from the 1814 workbook; status script `openaudio-mafw-bebob/scripts/ap-status.py`). **User rule:** map and disassemble everything, organize it in the xlsx, plan approved — **no code before approval**; the official v1.11.2 driver is the main reference.
 * Done (R77, `system-map/A1-ghidra/Q-AP0-nub-and-rev2.md`): AP-0.1 (device table, nub selection by product name) and AP-0.2 (Rev2 base: `0x2F` stream format, SIGNAL SOURCE sync, Audiophile clock = internal / S/PDIF only, latencies) — verified in asm, cross-checked with FFADO and ctl-services. 141 new decompiles (tag `ap0`). Corrections in Q16, Q10, `audiophile-manual-reference.md`.
 * The Audiophile is attached to the SL rig (official v1.9); captures 89/89b/90 exist. Open: AP-0.3 mixer bytes, AP-0.4 status packet asm + LED, AP-0.5-0.7, helper/firmware, AP-0.9 rig captures (needs the user).
 
-## 2026-10-17 (later) — PN.8, helper verified, gap analysis (read this first)
+## 2026-10-17 (later) — PN.8, helper verified, gap analysis
 Details: `system-map/GAP-ANALYSIS-2026-10-17.md` (official vs clone, every difference with a status), `PROVENANCE-RESOLUTIONS.md` §R57, captures `79`-`81`.
 * **PN.8 closed:** the panel sets the rate through CoreAudio (`setNominalSampleRate:` after 1 s) and shows CoreAudio's rate, as the reference (P8 §6); user-confirmed.
 * **Helper = persistence owner (A4 H11), now verified:** installed H.4 build writes `com.m-audio.device-settings.firewire` (key = GUID, 0600, user-owned) and replays after a kext reload with the panel closed; the panel's duplicate "last settings" was removed. Bug fixed: the helper pinned the device object (`kextunload` exit 3) — release on `kIOMessageServiceIsTerminated`; install/uninstall scripts stop the helper first.
@@ -44,21 +62,21 @@ Details: `system-map/GAP-ANALYSIS-2026-10-17.md` (official vs clone, every diffe
 * **Decisions pending (yours):** M-U (v1.9's 19 pass-through controls: keep v1.11.2 or add), M-V (OK to restart MIDIServer to test the official MIDI plug-in). **Open:** AMS sidebar label (M-S), K8-K15 unverified list in the gap analysis (sleep/wake, bus reset, MIDI, AC3, latency, boot install of the current kext).
 * SL restored to its original state (clock `0x40000004`, 48 kHz, locked). Nothing committed yet.
 
-## 2026-10-17 — second integrated session: optical switch, AV/C unit, routing (read this first)
+## 2026-10-17 — second integrated session: optical switch, AV/C unit, routing
 Details: `system-map/A1-ghidra/Q-AVC-unit-and-O1.md`, `system-map/PROVENANCE-RESOLUTIONS.md` §R56, run log `system-map/build-pc-runs/2026-10-16-first-integrated-run.md` ("Second session"), captures `B5-sl-dtrace-truth/captures/76`-`80`. SL v1.9 was used as ground truth (ioreg, halwatch, panel screenshots).
 * **O1 resolved:** `stopAudioEngine` must call `performAudioEngineStop` (not `pauseAudioEngine`); ADAT/S-PDIF switch under duplex load works, CoreAudio 16/12 <-> 10/6.
 * **AV/C layer rebuilt like the reference:** `FWAvcUnit` is an `IOFireWireAVCUnit` subclass (init/attach/start as asm 0x23c72, `fCommand`/`avcLock`/`cmdLock`, async queue). Before, no FCP response ever arrived (all commands timed out 1.27 s; bring-up 23 s; SW return 1/2 -> out 3/4 never sent). Now 22 ms, bring-up 13 s (5-14 s), routing works (user-confirmed).
 * `FWHsci::Release` no longer cancels synchronously (kextunload hang); 5+ clean unload/reload cycles incl. with panel + AMS open. F4 reverted; panel caps phones at -86 on open and restores last settings per GUID (`DeviceModel.applyStartupSettings`). Stream format: alignment 0 + format extension.
 * **Open:** AMS sidebar "N ins / M outs" stays 10/6 after a switch (M-S); panel reverts a rate chosen in the panel (PN.8; official kext behaves the same, its panel keeps the choice in red); ladder (loopback, rate sweep, MIDI, sleep/wake, 5 min); remove diagnostics (O4). **Nothing committed yet** (working tree dirty: kext, panel, tools, docs, workbook).
 
-## 2026-10-16 (late) — first integrated hardware run (read this first)
+## 2026-10-16 (late) — first integrated hardware run
 
 **Result:** the full clone (kext + panel) ran on the build PC with the FW1814: CoreAudio lists "FireWire 1814 Multichannel", music plays cleanly on out 1/2, the panel shows the real device (firmware info, meters, faders, front knob all working after fixes). Full log, fixes F1–F10 and open items O1–O4: `docs/system-map/build-pc-runs/2026-10-16-first-integrated-run.md`.
 **Open:** O1 switching optical S/PDIF -> ADAT while streaming hangs the stream (`IsochStreamRunning during SetPacketSize`); a later `kextunload` **panicked** the build PC (HSCI async read completing after free, fixed in source as F10, not yet loaded). F4 (phones selector at start-up), F7 (A/B entries 0/1) and F10 are built but unverified on hardware.
 **Build PC state:** rebooted after the panic; the old M-FW kext from `/Library/Extensions` is loaded; the current build is staged in `/tmp/OpenAudioFW1814.kext` (`kextutil -t -n` OK). No `boot-args` (kext-dev-mode 0), SIP disabled.
 **Next:** see the run log §"Next session"; then the rest of the ladder (`tests/hw-smoke/integrated.sh`), M-K (second unit), M-L, installer IN.5/IN.6 last.
 
-## 2026-10-16 — panel in progress (read this first)
+## 2026-10-16 — panel in progress
 
 **Kext side:** M-A…M-J and M-I (AC3) are written, build clean on the 10.13 SDK and pass `kextutil -t -n` on the build PC; none of it has been loaded on hardware (airliner rule). Helper H.3/H.4 written (compiles, not run). MIDI plug-in: reuse the reference one (M-H2).
 **Panel (PN.1–PN.7):** PN.1 wireframe **approved** by the user (`A2-panel/PN1-wireframe.html`, `P12-panel-screens-v19.md`); PN.2 map + 54-key catalog (`PN2-control-key-map.md`, `MaKeys.swift`), its open items 1–5 closed by decompiling the reference panel translator (`P13-translator-index-map.md`, R53); PN.3–PN.7 sources written and type-checked on the build PC (Swift 4.1.2): `ChannelLayout`, `DeviceModel`, `IOKitBridge`, `FirmwareInfo`, widgets, strips, mixer/output/hardware/about tabs, sidebar, presets (`P14-clone-panel-design.md`, R54). `make test` (host logic tests) passes. Window controller, mini-meter windows, `main.swift`, Info.plist and `make app` are written: the unsigned app builds on the build PC, opens without kext/device, and every tab/variant renders in demo mode (`A2-panel/clone-snapshots/`). The view layer was then redesigned (dark minimal, Audient-EVO-inspired) with the level knob wired, live A/B text, centred windows, a multi-interface device menu and the about-tab photo; the user approved the look in demo mode (P14). Nothing run against hardware.
@@ -67,7 +85,7 @@ Details: `system-map/A1-ghidra/Q-AVC-unit-and-O1.md`, `system-map/PROVENANCE-RES
 **Readiness audit:** `docs/INTEGRATION-READINESS.md`. Closed the same day: M-N was a false positive (the CoreAudio controls exist), M-O rate-change gate implemented, M-P stubs/comments cleaned, IN.7 `scripts/conformance-check.sh` passing (it found `MAMonitorAuxOnOutput` = 3 elements, fixed in the panel catalog), the hardware ladder `tests/hw-smoke/integrated.sh` written (preflight run OK on the build PC). Ready for the first hardware run when the user is present.
 **Environment:** the dev Mac's Swift toolchain cannot build for 10.13 (CLT module clash): panel builds and tests run on the build PC (`scripts/sync-to-buildpc.sh`, then `make -C control-panel typecheck|test`).
 
-## 2026-10-15 — build phase started (read this first)
+## 2026-10-15 — build phase started
 
 **Phase:** BUILD (G1 approved 2026-10-14). The code freeze of the headline below is **lifted**; the "Code freeze" and "Build PC idle" bullets under Headline are historical.
 
@@ -371,3 +389,18 @@ performErase now clears the mix buffer like the reference; loopcheck shows no br
 
 ## 2026-10-17 (late) - meters clear on stop (R76); pkg + dmg rebuilt with R75 + R76
 Test kext FC8AD9DA verified on the MacBook Air by the user. Release asset must be replaced by the user (new sha256 in the build report).
+
+## 2026-10-21 (late) - macOS 14.8.9 Intel port started (R125)
+Goal: driver working on the dev Mac. Done: kext links against the 15.2 SDK, 778/778 imports resolve on the live kernel (E-17); `BAND=modern` in `kext/Makefile`. Next: `scripts/install-sonoma.sh` (stage, `kmutil`, approval, restart), helper + panel reused from 0.2.2, then one load-and-play check with the interface (ask before the load; a panic reboots this Mac). Not loaded yet.
+
+## 2026-10-21 (late night) - Modern kext plays on 14.8.9 (R126); phones-only monitor law + edition About (R127); public repo renamed
+* **R126:** the Modern kext loads on the dev Mac and the FW Audiophile plays through the Thunderbolt-to-FireWire adapter (user heard it; TX callbacks regular). After 2 min 43 s of real use, one dropout: the adapter's FireWire controller left PCI first. The interface was bus-powered, and the user power-cycled it to recover. Cause open; the user suspects a bad contact (on demand).
+* **R127 (user):** the dB-linear monitor law now covers the phones only. Outputs and aux out are back on the official fader and knob laws. The About tab names the edition (`OAEdition`, `make -C control-panel app BAND=modern`). Panel tests ALL PASS on the build PC. The Modern panel is installed on the dev Mac; the kext with the knob change is built but **not installed** (`scripts/install-modern.sh`, sudo, approval, restart).
+* **Public repo renamed** to `github.com/bhsardinha/OA-BeBoB-MAFW` (About link, sync-to-public.sh, README, CLAUDE.md, the public copy's remote).
+* Trackers: `BROAD_COMPATIBILITY/BROAD_COMPATIBILITY_PLAN_v2.xlsx` (new; v1 kept), Audiophile `Build` AP-5.4 note. Nothing committed.
+
+## 2026-10-21 (night, later) - package 0.3.0 per edition, disk images, installs through .pkg only (R128)
+* **User rules:** installs only through the `.pkg` (memory `feedback_install_via_pkg_only`); test package **0.3.0** = driver 0.2.1 + panel 1.4, two editions.
+* **Built and checked:** `dist/OA-BeBoB-MAFW-0.3.0-{classic,modern}.{pkg,dmg}`: per-edition OS range enforced (checked with `installer -volinfo` on 14.8.9 and 10.13.6), the Modern postinstall gate (kmutil vs the shipped import list) works, Requirements on the installer pages and the dmg backgrounds.
+* **Panel 1.4:** status menu reordered; click = panel, right click = menu; Presets kept; A/B and knob step removed from the menu.
+* **Not installed:** Classic waits for the build PC to be idle (the user was running reAMP on the Audiophile there). Modern is for the user to run on the dev Mac. Uninstall on 11+ (`kmutil rebuild`) is unverified.

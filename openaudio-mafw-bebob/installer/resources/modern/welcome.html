@@ -1,0 +1,20 @@
+<html><head><style>table.req{border-collapse:collapse;margin:4px 0 10px 0}table.req td{padding:3px 10px 3px 0;vertical-align:top}table.req td:first-child{font-weight:bold;white-space:nowrap}</style></head><body style="font-family:-apple-system,Helvetica;font-size:13px">
+<h2>OpenAudio BeBoB MAFW @VERSION@ — Modern edition</h2>
+<p>A native driver stack for the M-Audio FireWire 1814 and FireWire Audiophile on <b>macOS 11 to 15, Intel Macs</b>. This installs:</p>
+<ul>
+<li>the audio driver <b>@DRIVER@</b> (<code>/Library/Extensions/OpenAudioBeBoBMAFW.kext</code>)</li>
+<li>a firmware-start and settings helper (a LaunchDaemon)</li>
+<li>the <b>OA BeBoB MAFW</b> control panel <b>@PANEL@</b> in <code>/Applications</code>, with a read-only firmware check</li>
+<li>the M-Audio CoreMIDI driver and the device icons</li>
+</ul>
+<h3>Requirements</h3>
+<table class="req">
+<tr><td>macOS</td><td>11 Big Sur to 15 Sequoia, on Intel Macs (tested on 14.8.9 Sonoma). Not for Apple Silicon Macs or macOS 26. For macOS 10.13, use the <b>Classic</b> edition.</td></tr>
+<tr><td>Mac</td><td>An Intel Mac with a FireWire port, or with Thunderbolt and Apple's Thunderbolt to FireWire Adapter. Tested: MacBook Air (Early 2015, Thunderbolt 2 with the adapter).</td></tr>
+<tr><td>Interfaces</td><td>M-Audio FireWire Audiophile (tested) and FireWire 1814 (same driver as the Classic edition, not yet tested on macOS 11 or later). Other M-Audio FireWire models are not supported.</td></tr>
+<tr><td>Security</td><td>System Integrity Protection must allow unsigned kernel extensions (Recovery mode: <code>csrutil disable</code>, or <code>csrutil enable --without kext</code>), and the driver must be allowed in Privacy &amp; Security after installing.</td></tr>
+</table>
+<p>Any earlier version is replaced: there is no need to uninstall it first, and your settings are kept. Nothing is unloaded while it runs.</p>
+<p><b>After installing</b>, macOS asks you to allow the driver: open <b>System Settings &gt; Privacy &amp; Security</b>, click <b>Allow</b> next to the OpenAudio software, then <b>restart</b>. A new driver version needs this again.</p>
+<p><b>Note:</b> this is an experimental, <b>unsigned</b> driver. Quit audio and MIDI applications before installing. The M-Audio/Avid FireWire driver must not be installed at the same time.</p>
+</body></html>

@@ -2,7 +2,8 @@
 //   .console  the official panel's curve: most of the travel near unity, for mixing (positions approximated from the screenshots; 64.5 dB
 //             stands for the bottom, -129 steps)
 //   .monitor  plan v7 AP-5.4 (user, 2026-10-20; a clone law, not the reference): dB-linear over 72 dB, level = -72 dB x (1 - p) with p = 0 at
-//             the bottom, centre -36 dB; the very bottom is off (-255). Used by the output-tab strips (outputs, aux out, phones).
+//             the bottom, centre -36 dB; the very bottom is off (-255). Used by the phones (R127, user 2026-10-21;
+//             outputs and aux out were on it from R116 to R127).
 import Foundation
 import CoreGraphics
 

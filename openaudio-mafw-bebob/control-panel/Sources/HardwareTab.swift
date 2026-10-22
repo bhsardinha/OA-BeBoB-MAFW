@@ -9,8 +9,9 @@ final class HardwareTab: FlippedView, PanelTab {
     private let ctx: PanelContext
     private let rateCard = Card(title: "Sample Rate"), syncCard = Card(title: "Sync Source")
     private let monCard = Card(title: "A/B Switch")
-    // Level knob step (plan v7 AP-5.4, clone key MAMonitorKnobStep): the front-panel and on-screen knob on output / phones / aux-out levels
-    private let knobCard = Card(title: "Level Knob (outputs, phones, aux out)")
+    // Phones knob step (plan v7 AP-5.4, clone key MAMonitorKnobStep): the phones encoder, and the Level Controller on phones levels; outputs
+    // and aux out follow the official knob law whatever this says (R127)
+    private let knobCard = Card(title: "Phones Knob")
     private let knobRadios: [(ChoiceButton, UInt64)] = [(ChoiceButton(radio: "1.5 dB per click"), 3), (ChoiceButton(radio: "3 dB per click"), 6),
                                                          (ChoiceButton(radio: "Official law"), 0)]
     private var modelCard: HardwareCard?                    // the model's own card (FW1814: digital ports), in the bottom-left cell

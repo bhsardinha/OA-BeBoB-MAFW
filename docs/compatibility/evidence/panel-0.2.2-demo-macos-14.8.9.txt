@@ -1,0 +1,24 @@
+# 0.2.2 control panel (x86_64, Swift 4.1, bundled runtime; from dist/OA-BeBoB-MAFW-0.2.2.pkg) run in demo mode on the dev Mac,
+# MacBookAir7,2 Intel, macOS 14.8.9 (23J631). Command: 'OA BeBoB MAFW' --demo --snapshot <scratch dir>. 2026-10-21.
+# Demo mode only: no driver, no IOKit user client, no CoreAudio device of ours was exercised. No preferences or launch agents were left behind.
+
+48000-adat screen centre 720,438
+48000-adat full frame 84,86 1272x703 centre 720,438
+48000-adat mixer frame 84,86 1272x703 centre 720,438
+48000-adat output frame 107,177 1226x612 centre 720,483
+48000-adat hardware frame 216,155 1008x634 centre 720,472
+48000-adat about frame 224,177 992x612 centre 720,483
+48000-adat wide frame 372,321 697x324 centre 720,483
+48000-adat narrow frame 607,-9 228x884 centre 721,433
+48000-adat full again frame 225,127 992x612 centre 721,433
+exit=0
+
+# snapshots written:
+48000-adat-about.png
+48000-adat-hardware-ab-sheet.png
+48000-adat-hardware.png
+48000-adat-launch.png
+48000-adat-meters-narrow.png
+48000-adat-meters-wide.png
+48000-adat-mixer.png
+48000-adat-output.png

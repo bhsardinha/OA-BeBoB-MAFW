@@ -1,0 +1,30 @@
+# Symbols the 0.2.2 kext imports that none of the three reference builds imports (v1.9 SL x86_64 slice, v1.10.5 x86_64 slice, v1.11.3 _extracted).
+# mangled<TAB>demangled. Generated 2026-10-21; recipe in README.md.
+_IOFree	_IOFree
+_IOLockAlloc	_IOLockAlloc
+_IOLockFree	_IOLockFree
+_IOLockSleep_darwin14	_IOLockSleep_darwin14
+_IOLockWakeup_darwin14	_IOLockWakeup_darwin14
+_IOMalloc	_IOMalloc
+__ZN13IOAudioStream16mixOutputSamplesEPKvPvjjPK20_IOAudioStreamFormatPS_	IOAudioStream::mixOutputSamples(void const*, void*, unsigned int, unsigned int, _IOAudioStreamFormat const*, IOAudioStream*)
+__ZN13IOFireWireNub9metaClassE	IOFireWireNub::metaClass
+__ZN14IOAudioControl9metaClassE	IOAudioControl::metaClass
+__ZN16IOFWIsochChannel14handleBusResetEv	IOFWIsochChannel::handleBusReset()
+__ZN16IOFWIsochChannel14releaseChannelEv	IOFWIsochChannel::releaseChannel()
+__ZN17IOFireWireAVCUnit18matchPropertyTableEP12OSDictionary	IOFireWireAVCUnit::matchPropertyTable(OSDictionary*)
+__ZN32IOFireWireAVCAsynchronousCommand6cancelEv	IOFireWireAVCAsynchronousCommand::cancel()
+__ZN7OSArray9withArrayEPKS_j	OSArray::withArray(OSArray const*, unsigned int)
+__ZN8OSSymbol9metaClassE	OSSymbol::metaClass
+__ZN9IOService12updateReportEP19IOReportChannelListjPvS2_	IOService::updateReport(IOReportChannelList*, unsigned int, void*, void*)
+__ZN9IOService15configureReportEP19IOReportChannelListjPvS2_	IOService::configureReport(IOReportChannelList*, unsigned int, void*, void*)
+__ZN9IOService4initEP12OSDictionary	IOService::init(OSDictionary*)
+__ZN9IOService4initEP15IORegistryEntryPK15IORegistryPlane	IOService::init(IORegistryEntry*, IORegistryPlane const*)
+__ZN9IOService9metaClassE	IOService::metaClass
+__ZTV13IOFWIsochPort	vtable for IOFWIsochPort
+___memmove_chk	___memmove_chk
+___strlcat_chk	___strlcat_chk
+_memset	_memset
+_thread_call_allocate	_thread_call_allocate
+_thread_call_cancel	_thread_call_cancel
+_thread_call_enter_delayed	_thread_call_enter_delayed
+_thread_call_free	_thread_call_free

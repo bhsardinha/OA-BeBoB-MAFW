@@ -1,0 +1,100 @@
+# Dropout during playback, Modern kext on the dev Mac (macOS 14.8.9, FW Audiophile via Thunderbolt-to-FireWire adapter), 2026-10-21
+# User: "i heard a pop and its gone. turned off and on, returned". Source: /usr/bin/log show (kernel + coreaudiod), filtered; IOAudioFamily debug flood, apfs, sandbox, task_info, decmpfs, CAReporting removed.
+
+## coreaudiod: IO contexts on com_m_audio_FWEngine2 (291 = the say test; 252 = the next client, not identified)
+2026-10-21 19:37:34.755 Df coreaudiod[218:32d0] (CoreAudio) HALS_DefaultDeviceManager.cpp:1061   HALS_DefaultDeviceManager::SetDefaultDevice:           'dOut' |  159: 'com_m_audio_FWEngine2:0xD6C0300211D54'/''
+2026-10-21 19:37:34.758 Df coreaudiod[218:32d0] (CoreAudio) HALS_DefaultDeviceManager.cpp:1697   HALS_DefaultDeviceManager::FindPreferredDefaultDevice: 'dOut' | found preferred[0] 159: 'com_m_audio_FWEngine2:0xD6C0300211D54'/''
+2026-10-21 19:37:34.758 Df coreaudiod[218:32d0] (CoreAudio) HALS_DefaultDeviceManager.cpp:1697   HALS_DefaultDeviceManager::FindPreferredDefaultDevice: 'shrd' | found preferred[0] 159: 'com_m_audio_FWEngine2:0xD6C0300211D54'/''
+2026-10-21 19:37:34.782 Df coreaudiod[218:3402] (CoreAudio) HALS_DefaultDeviceManager.cpp:1061   HALS_DefaultDeviceManager::SetDefaultDevice:           'sOut' |  159: 'com_m_audio_FWEngine2:0xD6C0300211D54'/''
+2026-10-21 19:37:34.783 Df coreaudiod[218:3402] (CoreAudio) HALS_DefaultDeviceManager.cpp:1697   HALS_DefaultDeviceManager::FindPreferredDefaultDevice: 'sOut' | found preferred[0] 159: 'com_m_audio_FWEngine2:0xD6C0300211D54'/''
+2026-10-21 19:37:34.785 Df coreaudiod[218:3402] (CoreAudio) HALS_DefaultDeviceManager.cpp:486      159: 'com_m_audio_FWEngine2:0xD6C0300211D54'
+2026-10-21 19:37:34.964 Df coreaudiod[218:31fb] (CoreAudio) HALS_IOContext_Legacy_Impl.cpp:1676   IO Stopped Context 250 after 784539 frames.
+2026-10-21 19:37:35.069 Df coreaudiod[218:3431] (CoreAudio) HALS_IOContext_Legacy_Impl.cpp:1368   HALS_IOContext_Legacy_Impl::IOWorkLoopInit: 252 com_m_audio_FWEngine2:0xD6C0300211D54 (com_m_audio_FWEngine2:0xD6C0300211D54): starting
+2026-10-21 19:37:50.045 Df coreaudiod[218:3680] (CoreAudio) HALS_IOContext_Legacy_Impl.cpp:1368   HALS_IOContext_Legacy_Impl::IOWorkLoopInit: 291 com_m_audio_FWEngine2:0xD6C0300211D54 (com_m_audio_FWEngine2:0xD6C0300211D54): starting
+2026-10-21 19:37:59.006 Df coreaudiod[218:3431] (CoreAudio) HALS_IOContext_Legacy_Impl.cpp:1676   IO Stopped Context 252 after 1024002 frames.
+2026-10-21 19:37:59.006 Df coreaudiod[218:3431] (CoreAudio) HALS_IOContext_Legacy_Impl.cpp:1700   HALS_IOContext_Legacy_Impl::IOWorkLoopDeinit: 252 com_m_audio_FWEngine2:0xD6C0300211D54 (com_m_audio_FWEngine2:0xD6C0300211D54): stopping with
+2026-10-21 19:38:09.666 Df coreaudiod[218:3680] (CoreAudio) HALS_IOContext_Legacy_Impl.cpp:1676   IO Stopped Context 291 after 862208 frames.
+2026-10-21 19:38:09.666 Df coreaudiod[218:3680] (CoreAudio) HALS_IOContext_Legacy_Impl.cpp:1700   HALS_IOContext_Legacy_Impl::IOWorkLoopDeinit: 291 com_m_audio_FWEngine2:0xD6C0300211D54 (com_m_audio_FWEngine2:0xD6C0300211D54): stopping with
+2026-10-21 19:38:29.787 Df coreaudiod[218:3b8f] (CoreAudio) HALS_IOContext_Legacy_Impl.cpp:1368   HALS_IOContext_Legacy_Impl::IOWorkLoopInit: 252 com_m_audio_FWEngine2:0xD6C0300211D54 (com_m_audio_FWEngine2:0xD6C0300211D54): starting
+2026-10-21 19:41:13.540 E  coreaudiod[218:3b8f] (CoreAudio)       HALS_IOA1Engine.cpp:301    HALS_IOA1Engine::_StopIO: the call to the driver failed, Error: 0xE00002C2
+2026-10-21 19:41:13.541 Df coreaudiod[218:3b8f] (CoreAudio) HALS_IOContext_Legacy_Impl.cpp:1676   IO Stopped Context 252 after 7189182 frames.
+2026-10-21 19:41:13.541 Df coreaudiod[218:3b8f] (CoreAudio) HALS_IOContext_Legacy_Impl.cpp:1700   HALS_IOContext_Legacy_Impl::IOWorkLoopDeinit: 252 com_m_audio_FWEngine2:0xD6C0300211D54 (com_m_audio_FWEngine2:0xD6C0300211D54): stopping with
+2026-10-21 19:41:13.549 Df coreaudiod[218:44c3] (CoreAudio)           HALS_Device.cpp:208    HALS_Device::_Deactivate: deactivating device 159: com_m_audio_FWEngine2:0xD6C0300211D54
+2026-10-21 19:41:17.992 Df coreaudiod[218:4a14] (CoreAudio) HALS_IOContext_Legacy_Impl.cpp:1676   IO Stopped Context 250 after 191835 frames.
+
+## kernel: FireWire / Thunderbolt / PCI / OpenAudio lines and the first IOAudio teardown lines, 19:36-19:43
+2026-10-21 19:37:17.129 Df kernel[0:31fb] (IOAudioFamily) +-IOAudioEngine[<private>]::setState(0x1. oldState=0)
+2026-10-21 19:37:35.070 Df kernel[0:3431] (IOAudioFamily) +-IOAudioEngine[<private>]::setState(0x1. oldState=0)
+2026-10-21 19:37:37.563 Df kernel[0:70c] (IOAudioFamily) +-IOAudioEngine[<private>]::setState(0x0. oldState=0x1)
+2026-10-21 19:37:37.563 Df kernel[0:70c] (IOAudioFamily) +-IOAudioEngine[<private>]::setState(0x0. oldState=0)
+2026-10-21 19:38:09.854 Df kernel[0:10f7] (IOAudioFamily) +-IOAudioEngine[<private>]::setState(0x0. oldState=0x1)
+2026-10-21 19:38:29.788 Df kernel[0:3b8f] (IOAudioFamily) +-IOAudioEngine[<private>]::setState(0x1. oldState=0)
+2026-10-21 19:41:13.530 Df kernel[0:3e4] (IOPCIFamily) IOPCIConfigurator::configure kIOPCIEnumerationWaitTime is 900
+2026-10-21 19:41:13.539 Df kernel[0:70] (IOAudioFamily) + IOAudioDevice[<private>]::willTerminate(<private>, 1)
+2026-10-21 19:41:13.539 Df kernel[0:70] (IOAudioFamily) +-IOAudioEngine[<private>]::setState(0x0. oldState=0x1)
+2026-10-21 19:41:13.539 Df kernel[0:70] (IOAudioFamily) - IOAudioDevice[<private>]::willTerminate(<private>, 1) returns 1
+2026-10-21 19:41:13.540 Df kernel[0:70] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC async queue drained: 0 dropped, head none
+2026-10-21 19:41:13.669 Df kernel[0:4a14] (IOAudioFamily) +-IOAudioEngine[<private>]::setState(0x1. oldState=0)
+2026-10-21 19:41:20.356 Df kernel[0:70c] (IOAudioFamily) +-IOAudioEngine[<private>]::setState(0x0. oldState=0x1)
+2026-10-21 19:41:20.357 Df kernel[0:70c] (IOAudioFamily) +-IOAudioEngine[<private>]::setState(0x0. oldState=0)
+2026-10-21 19:41:57.006 Df kernel[0:4d59] (IOThunderboltFamily) 616624570us IOThunderboltSwitch(0@0)::processPlugEvent - Thunderbolt HPD packet for rid = 0 route = 0x0 port = 1 plug = 0
+2026-10-21 19:41:57.124 Df kernel[0:112] (AppleThunderboltPCIUpAdapter) 616742877us Thunderbolt PCI - deactivating upstream path - SRC [0:0x1:0x2] DST [0:0x0:0x6] - req_bandwidth = 1
+2026-10-21 19:41:57.124 Df kernel[0:112] (AppleThunderboltPCIUpAdapter) 616742887us Thunderbolt PCI - deactivating downstream path - SRC [0:0x0:0x6] DST [0:0x1:0x2] - req_bandwidth = 1
+2026-10-21 19:41:57.168 Df kernel[0:70] (IOThunderboltFamily) 616786603us IOThunderboltTunnelDriver(0:1:2)<0x00100102>::terminate
+2026-10-21 19:41:57.806 Df kernel[0:4d64] (IOThunderboltFamily) 617424943us IOThunderboltSwitch(0@0)::processPlugEvent - Thunderbolt HPD packet for rid = 0 route = 0x0 port = 1 plug = 1
+2026-10-21 19:41:58.462 Df kernel[0:4d73] (IOThunderboltFamily) 618080561us IOThunderboltTunnelDriver(0:1:2)<0x00100102>::incrementClientScanCount - incremented client scan count id 1 to 1
+2026-10-21 19:41:58.463 Df kernel[0:4d73] (IOThunderboltFamily) 618081788us IOThunderboltTunnelDriver(0:1:2)<0x00100102>::incrementClientScanCount - incremented client scan count id 2 to 1
+2026-10-21 19:41:58.464 Df kernel[0:4d73] (IOThunderboltFamily) 618082498us IOThunderboltTunnelDriver(0:1:2)<0x00100102>::decrementClientScanCount - decremented client scan count id 1 to 0
+2026-10-21 19:41:58.466 Df kernel[0:4d79] (AppleThunderboltPCIUpAdapter) 618084887us Thunderbolt PCI - activating downstream path - SRC [0:0x0:0x6] DST [0:0x1:0x2] - req_bandwidth = 1
+2026-10-21 19:41:58.466 Df kernel[0:4d79] (AppleThunderboltPCIUpAdapter) 618084911us Thunderbolt PCI - activating upstream path - SRC [0:0x1:0x2] DST [0:0x0:0x6] - req_bandwidth = 1
+2026-10-21 19:41:58.477 Df kernel[0:4d79] (IOThunderboltFamily) 618095561us IOThunderboltTunnelDriver(0:1:2)<0x00100102>::decrementClientScanCount - decremented client scan count id 2 to 0
+2026-10-21 19:42:00.470 Df kernel[0:3e4] (IOPCIFamily) IOPCIConfigurator::configure kIOPCIEnumerationWaitTime is 900
+2026-10-21 19:42:00.495 Df kernel[0:16f] (AppleFWOHCI) AppleFWOHCI_DescriptorPool::create - link = <private>
+2026-10-21 19:42:00.496 Df kernel[0:16f] (AppleFWOHCI) FireWire runtime power conservation disabled. (3)
+2026-10-21 19:42:00.697 Df kernel[0:16f] (AppleFWOHCI) FireWire (OHCI) Lucent ID 5901 PCI now active, GUID 000a2702000042c4; max speed s800.
+2026-10-21 19:42:01.697 Df kernel[0:16f] (IOFireWireFamily) ERROR: FireWire unable to determine security-mode; defaulting to full-secure.
+2026-10-21 19:42:03.342 Df kernel[0:4dfb] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: M-Audio FireWire device found: FW Audiophile Bootloader
+2026-10-21 19:42:03.342 Df kernel[0:4dfb] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: metanub <private> GUID:d6c0310211d54 product:FW Audiophile bootloader:1
+2026-10-21 19:42:03.430 Df kernel[0:74a] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: M-FW: Bootloader active: starting firmware.
+2026-10-21 19:42:06.701 Df kernel[0:4e18] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: M-Audio FireWire device found: FW Audiophile
+2026-10-21 19:42:06.701 Df kernel[0:4e18] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: metanub <private> GUID:d6c0300211d54 product:FW Audiophile bootloader:0
+2026-10-21 19:42:06.705 Df kernel[0:74a] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: M-FW: Firmware active: registering metanub.
+2026-10-21 19:42:06.708 Df kernel[0:4e1d] (IOAudioFamily) +-IOAudioEngine[<private>]::setState(0x0. oldState=0)
+2026-10-21 19:42:06.708 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: TX chain: 4 banks x (4 primers + 1 x 369 pkts), arena 73440 of 73440 B
+2026-10-21 19:42:06.708 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: RX chain: 64 segs x 4 pkts, arena 23552 of 23552 B
+2026-10-21 19:42:06.709 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: UpdateDCLProgramsWithNewPacketSizes: engine state 0, isoch refs 0, active mask 0x0, pauses 0, connected 0, TX running 0, RX running 0
+2026-10-21 19:42:06.709 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: TX chain: 4 banks x (4 primers + 1 x 369 pkts), arena 73440 of 73440 B
+2026-10-21 19:42:06.709 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: TPacketPool: 1492 packets x 232 B, 17/page, 89 pages (356 KiB), base <private>
+2026-10-21 19:42:06.709 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: TX program built: 1492 transfer DCLs, 4 timestamp DCLs, 232 B x 1492 packets
+2026-10-21 19:42:06.709 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: RX chain: 64 segs x 4 pkts, arena 23552 of 23552 B
+2026-10-21 19:42:06.709 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: TPacketPool: 256 packets x 172 B, 23/page, 13 pages (52 KiB), base <private>
+2026-10-21 19:42:06.709 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: RX program built: 256 transfer DCLs, 64 timestamp DCLs, 172 B x 256 packets
+2026-10-21 19:42:06.716 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 01 ff 2f c1 00 00 len 14 -> r=0x0 resp0 0c respLen 24  6 ms
+2026-10-21 19:42:06.817 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 00 ff 2f c0 00 00 len 26 -> r=0x0 resp0 0c respLen 26  101 ms
+2026-10-21 19:42:07.695 Df kernel[0:4e1d] (AppleFWOHCI) AppleFWOHCI_DescriptorPool::create - link = <private>
+2026-10-21 19:42:08.210 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 01 ff 2f c1 01 00 len 14 -> r=0x0 resp0 0c respLen 22  13 ms
+2026-10-21 19:42:08.285 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 00 ff 2f c0 01 00 len 24 -> r=0x0 resp0 0c respLen 24  75 ms
+2026-10-21 19:42:08.887 Df kernel[0:4e1d] (AppleFWOHCI) AppleFWOHCI_DescriptorPool::create - link = <private>
+2026-10-21 19:42:09.197 Df kernel[0:16f] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: M-FW: Reregister: device node vanished.
+2026-10-21 19:42:09.897 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 00 ff 00 00 0d 6c len 16 -> r=0x0 resp0 09 respLen 16  8 ms
+2026-10-21 19:42:09.904 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 01 ff 1a 0f ff fe len 8 -> r=0x0 resp0 0c respLen 8  6 ms
+2026-10-21 19:42:09.912 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 00 ff 1a 0f 60 01 len 8 -> r=0x0 resp0 09 respLen 8  7 ms
+2026-10-21 19:42:12.413 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) M-FW: Trying to resend mixer settings too often (within 1 second of previous resend)
+2026-10-21 19:42:13.420 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 01 ff 1a 0f ff fe len 8 -> r=0x0 resp0 0c respLen 8  5 ms
+2026-10-21 19:42:13.428 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 00 ff 1a 0f 60 01 len 8 -> r=0x0 resp0 09 respLen 8  8 ms
+2026-10-21 19:42:13.428 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: com_openaudio_FWAudiophileDevice initHardware: up
+2026-10-21 19:42:13.446 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 01 ff 02 c0 00 00 len 11 -> r=0x0 resp0 0c respLen 29  18 ms
+2026-10-21 19:42:13.462 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 01 ff 02 c0 00 00 len 13 -> r=0x0 resp0 0c respLen 18  15 ms
+2026-10-21 19:42:13.476 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 01 ff 02 c0 00 00 len 13 -> r=0x0 resp0 0c respLen 18  14 ms
+2026-10-21 19:42:13.497 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 01 ff 02 c0 00 00 len 13 -> r=0x0 resp0 0c respLen 18  21 ms
+2026-10-21 19:42:13.512 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 01 ff 02 c0 00 00 len 13 -> r=0x0 resp0 0c respLen 17  14 ms
+2026-10-21 19:42:13.529 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 01 ff 02 c0 01 00 len 11 -> r=0x0 resp0 0c respLen 24  16 ms
+2026-10-21 19:42:13.555 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 01 ff 02 c0 01 00 len 13 -> r=0x0 resp0 0c respLen 18  26 ms
+2026-10-21 19:42:13.571 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 01 ff 02 c0 01 00 len 13 -> r=0x0 resp0 0c respLen 17  16 ms
+2026-10-21 19:42:13.587 Df kernel[0:4e1d] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 01 ff 02 c0 01 00 len 13 -> r=0x0 resp0 0c respLen 17  16 ms
+2026-10-21 19:42:13.615 Df kernel[0:4e1f] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 00 ff 00 00 0d 6c len 16 -> r=0x0 resp0 09 respLen 16  18 ms
+2026-10-21 19:42:13.628 Df kernel[0:4e1f] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 01 ff 1a 0f ff fe len 8 -> r=0x0 resp0 0c respLen 8  13 ms
+2026-10-21 19:42:13.645 Df kernel[0:4e1f] (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 00 ff 1a 0f 60 01 len 8 -> r=0x0 resp0 09 respLen 8  17 ms
+2026-10-21 19:43:19.697 Df kernel[0:5251] (IOAudioFamily) +-IOAudioEngine[<private>]::setState(0x1. oldState=0)
+
+## IOMMU / PCIe error search over the same window (vtd|dmar|iommu|fault|AER|link down|surprise): no match besides the IOPCIConfigurator lines above

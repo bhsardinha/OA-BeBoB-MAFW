@@ -367,8 +367,9 @@ void com_openaudio_FWSettingsRotaryControl::SetPairLevelsFromRotary(const char *
         arr = OSDynamicCast(OSArray, cur);
         if (!arr) { if (cur) cur->release(); return; }
     }
-    // clone (AP-5.4): the monitor keys use the per-unit monitor step; inputs, SW returns keep the official law
-    const bool monitorKey = !strcmp(key, "MAOutputLevels") || !strcmp(key, "MAHeadphoneLevels") || !strcmp(key, "MAAuxOutputLevels");
+    // clone (AP-5.4): the phones levels use the per-unit monitor step, from the phones encoder or the Level Controller; every other key keeps
+    // the official law (outputs and aux out back on it, user 2026-10-21, R127)
+    const bool monitorKey = !strcmp(key, "MAHeadphoneLevels");
     const SInt32 step = (monitorKey && fMonitorStep) ? (SInt32)fMonitorStep->value() : 0;
     AdjustOSNumberElement(arr, pair * 2, delta, step);
     AdjustOSNumberElement(arr, pair * 2 + 1, delta, step);

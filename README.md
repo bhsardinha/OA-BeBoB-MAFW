@@ -10,7 +10,7 @@ The FireWire 1814 (18 in / 14 out) and the FireWire Audiophile (4 in / 6 out) ar
 
 > **Homebrew and experimental.** A hobby project, not a product: the kernel extension is **unsigned and will stay unsigned**, so it runs only with **System Integrity Protection disabled**, and nothing is promised or supported.
 
-> **Status: package 0.2.2** (driver 0.2.0, panel 1.3; see [`CHANGELOG.md`](openaudio-mafw-bebob/CHANGELOG.md)). Tested with **one FireWire 1814 and one FireWire Audiophile, alone and together on the same bus, on an iMac (iMac11,2, native FireWire 800)**, and installed from the disk image on a **MacBook Air (MacBookAir5,1) through Apple's Thunderbolt-to-FireWire adapter** — both on macOS 10.13.6 with SIP disabled. Nothing else has been tested. Read [Known issues](#known-issues) before installing.
+> **Status: package 0.2.2** (driver 0.2.0, panel 1.3; see [`CHANGELOG.md`](openaudio-mafw-bebob/CHANGELOG.md)). Tested with **one FireWire 1814 and one FireWire Audiophile, alone and together on the same bus, on an iMac (iMac11,2, native FireWire 800)**, and installed from the disk image on a **MacBook Air (MacBookAir5,1) through Apple's Thunderbolt-to-FireWire adapter** — both on macOS 10.13.6 with SIP disabled. Nothing else has been tested. The next release (0.3.0) adds the **Modern edition** for macOS 11 to 15 on Intel (see [Compatibility](#compatibility)). Read [Known issues](#known-issues) before installing.
 
 ---
 
@@ -80,20 +80,26 @@ The FireWire 1814 (18 in / 14 out) and the FireWire Audiophile (4 in / 6 out) ar
 
 ## Compatibility
 
-| | |
-|---|---|
-| **Interfaces** | **M-Audio FireWire 1814 and FireWire Audiophile only** — the hardware the author owns. The other models of the official driver (FireWire 410, FireWire Solo, Ozonic, ProFire Lightbridge, ProjectMix I/O, NRV10) are not implemented; the structure for them exists (see [Roadmap](#roadmap)). |
-| **macOS** | **10.13.6 High Sierra only** (64-bit kext, 10.13 SDK, Xcode 9.4.1). |
-| **Mac** | iMac11,2 with native FireWire 800; MacBook Air (MacBookAir5,1) through Apple's **Thunderbolt-to-FireWire adapter**. Other Macs, adapters and FireWire 400 are untested. |
-| **Security** | **Unsigned, always**; **System Integrity Protection must be disabled** (Recovery, `csrutil disable`). |
+Two editions, one source tree. **Published so far: 0.2.2, Classic only.** The 0.3.0 packages (both editions) are built and not yet released; the Modern edition below is what is new. What differs, and what is tested on each, is in [`docs/EDITIONS.md`](docs/EDITIONS.md).
+
+| | **Classic** (published, 0.2.2) | **Modern** (0.3.0, in preparation) |
+|---|---|---|
+| **macOS** | **10.13.6 High Sierra** (64-bit kext, 10.13 SDK, Xcode 9.4.1) | **11 Big Sur to 15 Sequoia, Intel only.** Works on **14.8.9**; the other versions of the range are allowed by the package but untried. No Apple Silicon, no macOS 26 |
+| **Mac** | iMac11,2 with native FireWire 800; MacBook Air (MacBookAir5,1) through Apple's **Thunderbolt-to-FireWire adapter**. Other Macs, adapters and FireWire 400 are untested | MacBook Air (MacBookAir7,2) through the same kind of adapter. Nothing else tested |
+| **Interfaces** | **M-Audio FireWire 1814 and FireWire Audiophile only**, alone and together | The **FireWire Audiophile** has been tried (plays); the FireWire 1814 has not been tried on Modern |
+| **Security** | **Unsigned, always**; **System Integrity Protection must be disabled** (Recovery, `csrutil disable`) | Unsigned, always; SIP set so unsigned kexts load, then **Allow** in System Settings › Privacy & Security (shown as *unidentified developer*) and a restart |
+
+The other models of the official driver (FireWire 410, FireWire Solo, Ozonic, ProFire Lightbridge, ProjectMix I/O, NRV10) are not implemented; the structure for them exists (see [Roadmap](#roadmap)). Mac OS X 10.6.8 to 10.8.5 ("Legacy") and Apple Silicon are planned only as ideas, not started: see the [compatibility plan](docs/compatibility/BROAD_COMPATIBILITY_PLAN_v3.md).
 
 ## Install
 
-1. Download the `.dmg` from the [Releases](https://github.com/bhsardinha/openaudio-fw1814/releases) page.
+1. Download the `.dmg` from the [Releases](https://github.com/bhsardinha/OA-BeBoB-MAFW/releases) page.
 2. Quit audio and MIDI applications. Remove the official M-Audio (and Avid/DICE) FireWire drivers first; they conflict. An earlier OpenAudio version does **not** need to be removed: the installer replaces it and keeps your settings.
 3. Disable System Integrity Protection if it is on (Recovery mode, `csrutil disable`).
 4. Open the `.dmg`, run **Install OA BeBoB MAFW.pkg**, **restart**. (The package contains M-Audio's CoreMIDI plug-in unmodified, so that MIDI works; see [`NOTICE.md`](NOTICE.md).)
 5. Power on the interface. It appears in Audio MIDI Setup; the panel **OA BeBoB MAFW** is in `/Applications`.
+
+**Modern edition (0.3.0, not released yet):** the steps are the same, but step 3 needs SIP set so unsigned kexts load, and after the installer you must press **Allow** in System Settings › Privacy & Security and then restart. The installer refuses to run on a macOS outside its range, and removes the driver if this Mac lacks a kernel symbol it needs.
 
 To remove everything run **Uninstall OA BeBoB MAFW** from the disk image and restart.
 
@@ -119,8 +125,8 @@ Never copy an untested kext into `/Library/Extensions` (a panicking kext there b
 2. **Never unload the driver while a unit is attached** (`kextunload`): the official design does not free a FireWire resource on unload, and a later bus reset can panic. This driver frees it, but the installer and uninstaller still never unload — they ask for a restart.
 3. **Front-panel knobs can lose clicks on fast turns** — the interface reports only a direction per read (about every 50 ms), as with the official driver.
 4. **FW1814: the Audio MIDI Setup sidebar label can be stale** after an S/PDIF ↔ ADAT switch (the real channel counts are correct), and the switch interrupts audio for about 4 s.
-5. **New and not fully exercised yet:** the Uninstall app's button on a real install; every status-menu item against real units (the menu and the big meter have been checked in demo mode and on a MacBook Air, not item by item with both interfaces). Updating in place worked once (0.2.1 -> 0.2.2 on the Air).
-6. **Not verified yet:** MIDI bytes on the wire and SysEx (needs a DIN loopback cable), AC-3 pass-through on the wire, Audiophile S/PDIF external sync lock/unlock, sleep/wake, long (hours) streaming, the full 0.1.0 test ladder of the FW1814 on the new driver.
+5. **External S/PDIF sync does not follow the source's rate.** With an external S/PDIF source (tested with a Line 6 POD X3) the interface locks at every rate, but you must set the same sample rate yourself in Audio MIDI Setup or the panel; the driver does not detect it.
+6. **Not tested** (no formal test plan; these get looked at if someone hits a problem): MIDI bytes on the wire and SysEx, AC-3 pass-through on the wire, sleep/wake, streaming for hours, two FW1814s on one bus, the full 0.1.0 test ladder of the FW1814 on the new driver. Updating in place, the Uninstall app and the status menu have been used on a real install.
 7. **No firmware update.** The driver starts the firmware already in the interface; the panel's firmware check only reads it. Nothing writes flash.
 8. **FW1814 at 176.4 / 192 kHz:** digital ports and the DSP mixer are off (hardware); a loopback of analog inputs at 192 kHz read silence once, unexplained.
 9. **Rough edges:** diagnostic logging is still compiled in; English only.
@@ -139,9 +145,10 @@ Never copy an untested kext into `/Library/Extensions` (a panicking kext there b
 | [`openaudio-mafw-bebob/`](openaudio-mafw-bebob/) | **Current code (0.2.x):** `kext/` (`src/base/` + `src/models/<Model>/`), `firmware-helper/`, `control-panel/`, `installer/`, `tools/`, `tests/`, `scripts/`, `CHANGELOG.md`, `VERSION` |
 | [`openaudio-fw1814/`](openaudio-fw1814/) | The 0.1.0 tree (FireWire 1814 only), kept as released (tag `v0.1.0`) |
 | [`docs/system-map/`](docs/system-map/README.md) | Reverse-engineering notes: class chain, DCL rings, clocking, AV/C and HSCI commands, mixer model, panel, MIDI plug-in, helper, captures |
-| [`docs/system-map/PROVENANCE-RESOLUTIONS.md`](docs/system-map/PROVENANCE-RESOLUTIONS.md) | Dated log of every finding, correction and test result (R1 … R121) |
-| [`docs/ARCHITECTURE_MAFW_v1.md`](docs/ARCHITECTURE_MAFW_v1.md), [`docs/BUILD_AUDIOPHILE_PLAN_v8.md`](docs/BUILD_AUDIOPHILE_PLAN_v8.md) | Driver layers and how a model plugs in; the 0.2 plan |
-| [`docs/STATE.md`](docs/STATE.md), [`NEXT_STEPS.md`](NEXT_STEPS.md) | Current state and what is next |
+| [`docs/system-map/PROVENANCE-RESOLUTIONS.md`](docs/system-map/PROVENANCE-RESOLUTIONS.md) | Dated log of every finding, correction and test result (R1 … R129) |
+| [`docs/ARCHITECTURE_MAFW_v1.md`](docs/ARCHITECTURE_MAFW_v1.md), [`docs/BUILD_AUDIOPHILE_PLAN_v9.md`](docs/BUILD_AUDIOPHILE_PLAN_v9.md) | Driver layers and how a model plugs in; the 0.2 plan |
+| [`docs/EDITIONS.md`](docs/EDITIONS.md), [compatibility plan](docs/compatibility/BROAD_COMPATIBILITY_PLAN_v3.md) | Classic vs Modern edition: what differs and what is tested; the plan for macOS 10.6.8 to 15 |
+| [`docs/STATE.md`](docs/STATE.md), [`NEXT_STEPS.md`](docs/project/NEXT_STEPS.md) | Current state and what is next |
 | `PROVENANCE-MATRIX*.xlsx` | Project trackers (tasks, per-claim evidence, dashboards; in Portuguese) |
 
 ## How it was made

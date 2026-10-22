@@ -72,9 +72,9 @@ check(m.ints(MAKeys.outputLevels) == [0, 0, 0, 0] && m.sampleRate == 48000, "mod
 m.setLevel(MAKeys.outputLevels, channel: 3, value: -10, linked: true)
 check(m.ints(MAKeys.outputLevels) == [0, 0, -10, -10] && mock.writes.isEmpty, "linked level queued, not yet written")
 m.setLevel(MAKeys.outputLevels, channel: 1, value: -500, linked: false)
-check(m.element(MAKeys.outputLevels, 1) == FaderLaw.off, "output level clamped to off (monitor key, plan v7 AP-5.4)")
+check(m.element(MAKeys.outputLevels, 1) == MARange.levelMin, "output level clamped to the console floor (outputs left the monitor law, R127)")
 m.commit()
-check(mock.writes.count == 1 && (mock.writes[0]["MAOutputLevels"] as! [NSNumber]).map { $0.intValue } == [-255, 0, -10, -10], "one batched write")
+check(mock.writes.count == 1 && (mock.writes[0]["MAOutputLevels"] as! [NSNumber]).map { $0.intValue } == [MARange.levelMin, 0, -10, -10], "one batched write")
 // Balance: R35 leaves the right fader and lowers the left one by 35 steps.
 m.setLevel(MAKeys.outputLevels, channel: 3, value: 0, linked: true)
 m.setBalance(MAKeys.outputLevels, pair: 2, balance: 35)
@@ -143,6 +143,16 @@ flModel.setLevel(MAKeys.inputLevels, channel: 1, value: -255, linked: true)
 check(flModel.ints(MAKeys.headphoneLevels) == [-255, -255] && flModel.ints(MAKeys.inputLevels) == [-129, -129], "monitor fader reaches off; mixer floor stays -129")
 flModel.setLevel(MAKeys.headphoneLevels, channel: 1, value: -140, linked: true)
 check(flModel.ints(MAKeys.headphoneLevels) == [-140, -140], "monitor fader below -64.5 dB (-140 = -70 dB)")
+// R127 (user, 2026-10-21): only the phones keep the monitor law; outputs and aux out are back on the console law and floor
+check(DeviceModel.law(MAKeys.headphoneLevels) == .monitor && DeviceModel.law(MAKeys.outputLevels) == .console
+      && DeviceModel.law(MAKeys.auxOutputLevels) == .console && DeviceModel.law(MAKeys.inputLevels) == .console, "monitor law: phones only")
+check(DeviceModel.floor(MAKeys.auxOutputLevels) == MARange.levelMin && DeviceModel.floor(MAKeys.headphoneLevels) == FaderLaw.off,
+      "floors: aux out -129, phones off")
+// Editions (About tab): no OAEdition key = Classic with the 0.2.x caption; Modern names its OS range and has no 10.13.6 text
+check(PanelEdition.current == .classic && PanelEdition.classic.caption == "macOS High Sierra (10.13.6) Driver" && PanelEdition.classic.creditsNote == nil,
+      "edition: default Classic, 0.2.x caption")
+check(PanelEdition(rawValue: "modern") == .modern && !PanelEdition.modern.caption.contains("10.13") && PanelEdition.modern.caption.contains("macOS 11 to 15"),
+      "edition: Modern caption")
 // Status menu / big meter logic (plan v8 AP-5.5 / AP-5.6)
 check(StatusIconState.of(nil) == .offline, "status icon: no unit = offline")
 let stMock = Mock()

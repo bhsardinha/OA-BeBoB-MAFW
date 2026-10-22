@@ -20,7 +20,7 @@ static inline int32_t FWRotaryStep(int32_t v, int32_t delta)
     return r;
 }
 
-// Monitor law (clone, user decision 2026-10-20, plan v7 AP-5.4; NOT the reference): output / phones / aux-out levels move by a fixed `step`
+// Monitor law (clone, user decision 2026-10-20, plan v7 AP-5.4; NOT the reference; phones only since 2026-10-21, R127): phones levels move by a fixed `step`
 // per detent (½-dB units: 6 = 3 dB, 3 = 1.5 dB) inside a 72 dB span (0 .. -144); one detent below the span, or any value under it, is
 // off (-255, the level domain's minimum); from off one detent up lands on the bottom of the span. Capped at 0.
 static const int32_t kFWMonitorFloor = -144;                                    // -72 dB

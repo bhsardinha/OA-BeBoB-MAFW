@@ -10,7 +10,7 @@ final class AudiophileProfile: DeviceProfile {
     let windowTitle = "M-Audio FireWire Audiophile"
     let aboutPhoto = "fwap-front"                          // Resources/fwap-front.png: cut-out of docs/audiophile front panel.webp (user-supplied), 118 px high like the FW1814
     let aboutTitle = "FireWire Audiophile"
-    let aboutCaption = "M-Audio FireWire Audiophile  \u{00B7}  macOS High Sierra (10.13.6) Driver"
+    let aboutCaption = "M-Audio FireWire Audiophile"                     // the About banner adds the edition (PanelEdition.caption)
     let counts = TranslatorCounts(outputs: 10, mixer: 10, inputs: 4, headphone: 2)        // CXAudiophileDevice vtable, PNAP §1 (R84)
     /// kSupportedSampleRatesArray @0x2f720 (kext FWAudiophileTables.h): no 176.4 / 192 kHz on this model
     let defaultRates: [UInt32] = [44100, 48000, 88200, 96000]

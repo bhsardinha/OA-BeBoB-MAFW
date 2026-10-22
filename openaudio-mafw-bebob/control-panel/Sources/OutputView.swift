@@ -33,7 +33,8 @@ final class OutputTab: StripPage, PanelTab {
         let monRows = (sources.count > 3 || (plan.main + plan.other).contains { $0.pan != nil }) ? 2 : 1
 
         func make(_ spec: OutputStripPlan) -> StripView {
-            let s = StripView(title: spec.title, features: spec.features, kind: .output, monSources: spec.phones != nil ? sources : [], bottomRows: monRows)
+            let s = StripView(title: spec.title, features: spec.features, kind: .output, law: DeviceModel.law(spec.levels),
+                              monSources: spec.phones != nil ? sources : [], bottomRows: monRows)
             let (l, r) = DeviceModel.channels(ofPair: spec.pairInGroup)
             s.onLevel = { [weak s] side, v in
                 let linked = m.pairFlag(spec.link, pair: spec.pairInGroup)

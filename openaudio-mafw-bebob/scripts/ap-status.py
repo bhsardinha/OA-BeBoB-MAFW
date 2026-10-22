@@ -8,7 +8,8 @@ Usage:
   scripts/ap-status.py set <ID> "<Status>" "<dated note>" [<ID> "<Status>" "<note>" ...]
 
 Allowed Status: Não iniciado | Autorizado (pré-trabalho) | Em andamento | Concluído | Aguarda aprovação do plano |
-                Cancelado (corte de escopo) | Aguarda o usuário
+                Cancelado (corte de escopo) | Aguarda o usuário | Sob demanda (uso real)
+"Sob demanda (uso real)" (R123): a test that runs only if real use shows a problem; excluded from the totals like "Cancelado".
 Keeps a backup in $TMPDIR/ap-status-backup.xlsx, appends the note to column I (Notas), never touches formulas, and
 re-checks the workbook through LibreOffice for #REF!/#VALUE!/#NAME? (skill close-item, step 3).
 """
@@ -17,7 +18,7 @@ import openpyxl
 
 XLSX = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "PROVENANCE-MATRIX-AUDIOPHILE.xlsx")
 ALLOWED = ["Não iniciado", "Autorizado (pré-trabalho)", "Em andamento", "Concluído", "Aguarda aprovação do plano",
-           "Cancelado (corte de escopo)", "Aguarda o usuário"]
+           "Cancelado (corte de escopo)", "Aguarda o usuário", "Sob demanda (uso real)"]
 
 
 def main():
@@ -45,7 +46,7 @@ def main():
         ws.cell(r, 9).value = (str(old) + " " if old else "") + f"[{today}] {note}"
     # extend the drop-down list with the scope-cut status
     for dv in ws.data_validations.dataValidation:
-        if dv.formula1 and "Aguarda aprovação" in dv.formula1 and "Cancelado" not in dv.formula1:
+        if dv.formula1 and "Aguarda aprovação" in dv.formula1 and "Sob demanda" not in dv.formula1:
             dv.formula1 = '"' + ",".join(ALLOWED) + '"'
     wb.save(XLSX)
     out = tempfile.mkdtemp()

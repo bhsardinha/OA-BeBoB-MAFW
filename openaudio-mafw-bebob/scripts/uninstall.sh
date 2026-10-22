@@ -45,5 +45,12 @@ if [ "$MODE" = "--update" ]; then
   exit 0                                    # the package installs the new files, refreshes the caches and asks for a restart
 fi
 CU=$(stat -f %Su /dev/console 2>/dev/null); [ -n "$CU" ] && $SUDO rm -f "/Users/$CU/Library/LaunchAgents/$LOGIN_AGENT"
-$SUDO kextcache -system-caches
+if [ "$(sw_vers -productVersion | cut -d. -f1)" -ge 11 ]; then
+  # macOS 11+ (Modern edition): the kext stays in the auxiliary kernel collection until it is rebuilt without it (man kmutil, "To uninstall a kext
+  # from the Auxiliary kext collection": delete the bundle, kmutil rebuild, confirm, authorize, reboot). kmutil asks the confirmation on stdin.
+  # **Unverified** (R128, 2026-10-21): that "y" is the answer it takes, and whether macOS also asks for an authorization in System Settings.
+  printf 'y\n' | $SUDO /usr/bin/kmutil rebuild >/tmp/openaudio-kmutil-rebuild.log 2>&1
+else
+  $SUDO kextcache -system-caches
+fi
 echo "uninstalled; restart the Mac to remove the driver from memory"

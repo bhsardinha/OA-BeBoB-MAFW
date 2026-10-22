@@ -18,7 +18,8 @@ OLD_HELPER=com.openaudio.fw1814.helper; OLD_APP="/Applications/OpenAudio FW1814.
 # Replace the 0.1.0 generation (plan v3 §0/§7): stop its helper and panel, unload and remove its kext and helper files.
 sudo launchctl unload /Library/LaunchDaemons/$OLD_HELPER.plist 2>/dev/null || true
 pkill -f "$OLD_APP" 2>/dev/null || true
-for try in 1 2 3 4; do sudo kextunload -b $OLD_KEXT_ID 2>/dev/null; kextstat | grep -q $OLD_KEXT_ID || break; sleep 3; done
+# (2026-10-21: `|| true` -- with set -e a failing kextunload, i.e. the 0.1.0 kext not loaded, ended the script silently before the copy)
+for try in 1 2 3 4; do sudo kextunload -b $OLD_KEXT_ID 2>/dev/null || true; kextstat | grep -q $OLD_KEXT_ID || break; sleep 3; done
 sudo rm -rf $OLD_KEXT /Library/LaunchDaemons/$OLD_HELPER.plist /Library/PrivilegedHelperTools/$OLD_HELPER
 for try in 1 2 3 4; do sudo kextunload -b com.openaudio.OpenAudioBeBoBMAFW 2>/dev/null && break || sleep 3; done
 sudo rm -rf /Library/Extensions/OpenAudioBeBoBMAFW.kext

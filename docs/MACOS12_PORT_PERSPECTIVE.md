@@ -1,5 +1,16 @@
 # macOS 12+ port of the FW1814 stack — perspective and effort (not a plan)
 
+> **Correction (2026-10-21, R124):** two of the "not verified" points below are now partly settled by static reads (`BROAD_COMPATIBILITY/evidence/`).
+> 1. **The kernel side of Apple Silicon exists.** In the macOS 14.8.4 KDK, IOFireWireFamily, IOFireWireAVC, IOAudioFamily and AppleFWOHCI are built for arm64e and are listed in every Apple Silicon kernel-cache manifest. The arm64e IOFireWireFamily defines the classic-DCL `createLocalIsochPort`. What remains unverified is FireWire through the adapter chain on real Apple Silicon hardware. "Apple Silicon is unverified for every route" (§2) should therefore read "unverified on hardware".
+> 2. **The 0.2.2 build resolves on macOS 14.8.4 Intel, with one gap.** The kext's imports resolve there except for two reserved IOAudioEngine vtable slots (15/16), which the kernel linker must patch.
+> 3. **The panel starts on 14.8.9.** The 0.2.2 panel starts on Intel macOS 14.8.9 in demo mode.
+>
+> The whole-range plan that supersedes this assessment's scope is `BROAD_COMPATIBILITY/BROAD_COMPATIBILITY_PLAN_v1.md`.
+>
+> **Correction (2026-10-21, R126):** classic DCL from the kernel works on Intel macOS 14.8.9: the 15.2-SDK build loads, and the FW Audiophile plays through the Thunderbolt-to-FireWire adapter with regular TX callbacks. One dropout was seen in real use (adapter-side, cause open). Current plan: `BROAD_COMPATIBILITY/BROAD_COMPATIBILITY_PLAN_v2.md` (Modern edition).
+
+> **Status (2026-10-21, R129): route R1 was taken and works.** The forward-ported kext (the "Modern edition") loads and plays on Intel macOS 14.8.9 with the FW Audiophile through the Thunderbolt-to-FireWire adapter. The probe this document asked for (§4) is answered: in-kernel classic DCL works on 14, and IOAudioFamily 540 needed only a rebuild against the 15.x SDK. R2 and R3 stay shelved. Apple Silicon remains unverified and unbuilt. What differs from the High Sierra build is in `EDITIONS.md`; the plan is `BROAD_COMPATIBILITY/BROAD_COMPATIBILITY_PLAN_v3.md`. The text below is the 2026-10-19 assessment, kept as written.
+
 Written 2026-10-19 at the user's request ("how much work would it take to port 0.1.0 to macOS 12+, at least Sequoia, based on the existing macfw project but with our full solution: panel and full digital functionality"). This is an assessment for a decision, not an approved plan. Session unit as in `BUILD_AUDIOPHILE_PLAN_v2.md` §8. Estimates are estimates; every fact below says where it comes from.
 
 ## 1. Facts checked today

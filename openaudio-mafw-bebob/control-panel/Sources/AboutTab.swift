@@ -26,7 +26,7 @@ private final class Banner: FlippedView {
         } else {
             Theme.draw(profile.aboutTitle, in: NSRect(x: 0, y: 40, width: bounds.width, height: 40), font: Theme.font(30, .semibold), color: Theme.text)
         }
-        Theme.draw(profile.aboutCaption, in: caption, font: Theme.font(12), color: Theme.text3)
+        Theme.draw(profile.aboutCaption + "  \u{00B7}  " + PanelEdition.current.caption, in: caption, font: Theme.font(12), color: Theme.text3)
     }
 }
 
@@ -39,12 +39,13 @@ final class AboutTab: FlippedView, PanelTab {
     private let rule = Rule()
     private let creditsLabel = makeLabel("", size: 12, color: Theme.text2)
     private let projectButton = FlatButton(AboutTab.projectURL.replacingOccurrences(of: "https://", with: ""))
-    /// Version fields, two per line: Package + Panel, Driver + Hardware, Bootloader + Firmware, GUID. The package (the installer's release number,
-    /// VERSION in the tree) and the components have separate numbers (user, 2026-10-21); the Makefile writes the package one as OAPackageVersion.
-    private static let names = ["package", "panel", "driver", "hardware", "bootloader", "firmware", "GUID"]
+    /// Version fields, two per line: Package + Panel, Driver + Hardware, Bootloader + Firmware, GUID + Edition. The package (the installer's release
+    /// number, VERSION in the tree) and the components have separate numbers (user, 2026-10-21); the Makefile writes the package one as
+    /// OAPackageVersion and the edition as OAEdition (Edition.swift).
+    private static let names = ["package", "panel", "driver", "hardware", "bootloader", "firmware", "GUID", "edition"]
 
-    /// Future home of the source (user's GitHub account bhsardinha, 2026-10-17). **Not published yet**; the repository name is assumed to match this one.
-    static let projectURL = "https://github.com/bhsardinha/openaudio-fw1814"
+    /// The public repository (published 2026-10-17 as bhsardinha/openaudio-fw1814, renamed by the user to OA-BeBoB-MAFW on 2026-10-21).
+    static let projectURL = "https://github.com/bhsardinha/OA-BeBoB-MAFW"
     /// Credits paragraph under the version table. Versions are those of the reference bundles in `_extracted/` (the 1.11.2 installer carries kext
     /// `com.m-audio.driver.firewire` 1.11.3, panel 1.5.2, MIDI plug-in 1.11.2) and of the Snow Leopard rig (driver 1.9, panel 1.4) used for the live
     /// DTrace/ioreg captures; the tools are the ones of NEW_PLAN Parts A/B.
@@ -57,7 +58,8 @@ final class AboutTab: FlippedView, PanelTab {
 
     private static let creditsAttributed: NSAttributedString = {
         let ps = NSMutableParagraphStyle(); ps.lineSpacing = 4; ps.alignment = .natural
-        return NSAttributedString(string: creditsText, attributes: [.font: Theme.font(12), .foregroundColor: Theme.text2, .paragraphStyle: ps])
+        let text = PanelEdition.current.creditsNote.map { creditsText + " " + $0 } ?? creditsText
+        return NSAttributedString(string: text, attributes: [.font: Theme.font(12), .foregroundColor: Theme.text2, .paragraphStyle: ps])
     }()
     /// Height of the credits paragraph laid out across a card of width `cardWidth` (NSTextField keeps 2 pt of line-fragment padding each side).
     private static func creditsTextHeight(cardWidth: CGFloat) -> CGFloat {
@@ -140,6 +142,7 @@ final class AboutTab: FlippedView, PanelTab {
         fields["panel"]?.stringValue = "\(ver) (build \(build))"
         fields["package"]?.stringValue = (bundle.object(forInfoDictionaryKey: "OAPackageVersion") as? String) ?? "-"
         fields["driver"]?.stringValue = AboutTab.driverVersion() ?? "-"
+        fields["edition"]?.stringValue = PanelEdition.current.versionText
         let data = ctx.model.cache["MAFirmwareInfo"] as? Data
         if let d = data, let info = FirmwareInfo.parse(d) {
             fields["bootloader"]?.stringValue = FirmwareInfo.display(date: info.bootloaderDate, time: info.bootloaderTime)

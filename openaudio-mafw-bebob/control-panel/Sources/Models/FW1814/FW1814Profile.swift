@@ -10,7 +10,7 @@ final class FW1814Profile: DeviceProfile {
     let windowTitle = "M-Audio FireWire 1814"
     let aboutPhoto = "fw1814-front"
     let aboutTitle = "FireWire 1814"
-    let aboutCaption = "M-Audio FireWire 1814  \u{00B7}  macOS High Sierra (10.13.6) Driver"
+    let aboutCaption = "M-Audio FireWire 1814"                           // the About banner adds the edition (PanelEdition.caption)
     let counts = TranslatorCounts(outputs: 20, mixer: 32, inputs: 18, headphone: 4)        // CX1814Device vtable, A2-P13 §1
     /// The six rates the kext offers (kext models/FW1814/FW1814Tables.h kFW1814Rates, ref @0x2f890)
     let defaultRates: [UInt32] = [44100, 48000, 88200, 96000, 176400, 192000]

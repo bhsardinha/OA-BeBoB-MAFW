@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <installer-gui-script minSpecVersion="1">
-    <title>OpenAudio BeBoB MAFW @VERSION@</title>
+    <title>OpenAudio BeBoB MAFW @VERSION@ (@EDITION@)</title>
     <welcome file="welcome.html" mime-type="text/html"/>
     <conclusion file="conclusion.html" mime-type="text/html"/>
     <options customize="never" require-scripts="false" rootVolumeOnly="true" hostArchitectures="x86_64"/>
-    <allowed-os-versions><os-version min="10.13"/></allowed-os-versions>
+    <allowed-os-versions>@OSVERSIONS@</allowed-os-versions>
     <choices-outline><line choice="default"><line choice="com.openaudio.bebobmafw.pkg"/></line></choices-outline>
     <choice id="default"/>
     <choice id="com.openaudio.bebobmafw.pkg" visible="false"><pkg-ref id="com.openaudio.bebobmafw.pkg"/></choice>

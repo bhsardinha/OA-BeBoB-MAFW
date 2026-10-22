@@ -7,10 +7,25 @@ Everything here supports the code in [`../openaudio-fw1814/`](../openaudio-fw181
 | If you want to… | Read |
 |---|---|
 | use or build the driver | the project [`README`](../README.md) |
+| know what the **Classic** (macOS 10.13) and **Modern** (macOS 11 to 15) editions do differently | [`EDITIONS.md`](EDITIONS.md) |
+| see the plan for other macOS versions (10.6.8 to 15, Apple Silicon) and the evidence behind it | [`compatibility plan v3`](compatibility/BROAD_COMPATIBILITY_PLAN_v3.md), its workbook and `evidence/` |
 | understand how the interface and the original driver work | [`system-map/README.md`](system-map/README.md) — the index of the reverse-engineering notes, and the **C1–C6** summaries (lifecycle, clocking, communication, transport/control, user client, latency) |
-| see why things are the way they are | [`system-map/PROVENANCE-RESOLUTIONS.md`](system-map/PROVENANCE-RESOLUTIONS.md) — dated log of every finding, correction and test result (R1 … R69) |
-| see what was decided and what is next | [`BUILD-PLAN.md`](BUILD-PLAN.md), [`STATE.md`](STATE.md), [`../NEXT_STEPS.md`](../NEXT_STEPS.md) |
+| see why things are the way they are | [`system-map/PROVENANCE-RESOLUTIONS.md`](system-map/PROVENANCE-RESOLUTIONS.md) — dated log of every finding, correction and test result (R1 … R129) |
+| see how the multi-model driver is layered, and how to add a model | [`ARCHITECTURE_MAFW_v1.md`](ARCHITECTURE_MAFW_v1.md) |
+| see what was decided and what is next | [`STATE.md`](STATE.md), [`NEXT_STEPS.md`](project/NEXT_STEPS.md), the current build plan [`BUILD_AUDIOPHILE_PLAN_v9.md`](BUILD_AUDIOPHILE_PLAN_v9.md) |
 | look at hardware captures | [`system-map/B5-sl-dtrace-truth/`](system-map/B5-sl-dtrace-truth/) — DTrace, `ioreg` and screenshots from a Snow Leopard Mac running the official driver; and [`system-map/build-pc-runs/`](system-map/build-pc-runs/), [`system-map/build-pc-panics/`](system-map/build-pc-panics/) — what this driver did on 10.13.6, including kernel panic reports |
+
+## How this folder is organised
+
+| Where | What |
+|---|---|
+| `docs/` (top level) | Current documents: this index, `EDITIONS.md`, `STATE.md`, `ARCHITECTURE_MAFW_v1.md`, `BUILD_AUDIOPHILE_PLAN_v9.md` (current plan), `BUILD-MANUAL.md`, the notes distilled from the user manuals, `MACOS12_PORT_PERSPECTIVE.md` (the 2026-10-19 assessment of a macOS 12+ port, with its status note), `images/` |
+| [`system-map/`](system-map/README.md) | The reverse-engineering notes and the resolutions log (below) |
+| [`compatibility/`](compatibility/) | The plan for the whole macOS range: `BROAD_COMPATIBILITY_PLAN_v1` to `v3` (v3 is current; each version is kept), the matching workbooks, and `evidence/` (raw outputs of the static reads and the first run on macOS 14) |
+| [`project/`](project/NEXT_STEPS.md) | The working files: `NEXT_STEPS.md`, `NEW_PLAN.md`, `PROVENANCE-AUDIT.md` and the two trackers (`PROVENANCE-MATRIX.xlsx` for 0.1.0, `PROVENANCE-MATRIX-AUDIOPHILE.xlsx` for 0.2.x; in Portuguese) |
+| [`archive/`](archive/) | Superseded or historical documents, kept as written: the earlier Audiophile plans `v2` to `v8`, the 0.1.0 build plan, the early proposal, the conformance and readiness notes, the plan flowchart |
+
+In the working repository the `compatibility/`, `project/` and `archive/` contents live at the repository root and in `docs/` under the names the dated notes use (`BROAD_COMPATIBILITY/`, `NEXT_STEPS.md`, `docs/BUILD-PLAN.md` …); the published repository gathers them as above. Paths written as text inside dated notes keep the working names.
 
 ## What is in `system-map/`
 
@@ -35,7 +50,7 @@ Everything here supports the code in [`../openaudio-fw1814/`](../openaudio-fw181
 
 ## Other files
 
-[`manual-reference.md`](manual-reference.md) — notes distilled from the FW1814 user manual (the manual itself is M-Audio's: <https://www.m-audio.com>). [`Proposal.md`](Proposal.md) — an early design proposal. [`CONFORMANCE.md`](CONFORMANCE.md) and [`INTEGRATION-READINESS.md`](INTEGRATION-READINESS.md) — verification notes. [`flowchart driver.drawio`](flowchart%20driver.drawio) — the plan flowchart the build followed. [`../PROVENANCE-MATRIX.xlsx`](../PROVENANCE-MATRIX.xlsx) — the project tracker (Portuguese).
+[`manual-reference.md`](manual-reference.md) and [`audiophile-manual-reference.md`](audiophile-manual-reference.md) — notes distilled from the FW1814 and FireWire Audiophile user manuals (the manuals themselves are M-Audio's: <https://www.m-audio.com>). The trackers in `project/` are in Portuguese.
 
 ## Reproducing a reading
 

@@ -1,0 +1,23 @@
+# Build PC (fw1814-build), Mac OS X 10.13.6 17G14042, xnu-4570.71.82.8~1/RELEASE_X86_64 - read-only nm of the KPI symbol sets. Generated 2026-10-21.
+# A symbol listed in a symbol-set kext is exported to third-party kexts that declare that KPI in OSBundleLibraries.
+## IOKit.kext/IOKit
+                 U _IOCreateThread
+                 U _IOLockSleep
+                 U _IOLockSleepDeadline
+                 U _IOLockSleepDeadline_darwin14
+                 U _IOLockSleep_darwin14
+                 U _IOLockWakeup
+                 U _IOLockWakeup_darwin14
+## Libkern.kext/Libkern
+                 U ___memmove_chk
+                 U ___strlcat_chk
+                 U _version_major
+## Mach.kext/Mach
+                 U _kernel_thread_start
+                 U _thread_call_allocate
+## family versions
+IOAudioFamily 206.5
+IOFireWireFamily 4.7.2
+IOFireWireAVC 4.2.6
+## AppleFWAudio.kext present:
+/System/Library/Extensions/AppleFWAudio.kext

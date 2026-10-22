@@ -1,0 +1,35 @@
+#!/bin/bash
+# Modern edition (macOS 11-15, Intel; BROAD_COMPATIBILITY_PLAN_v2 §11a, R128): build-pkg.sh BAND=modern ships this file as the package's postinstall.
+# The Classic postinstall's tools do not apply on 11+: there is no kextutil -t -n gate and no kextcache; kmutil links third-party kexts into the
+# auxiliary kernel collection once the user allows them in System Settings > Privacy & Security, and they load after a restart.
+# Gate (same rule as the Classic one, a kext that cannot link must never stay in /Library/Extensions): every kernel symbol the kext imports
+# (imports.txt, written with nm -u when the package was built; a Mac without developer tools has no nm) must be found by `kmutil libraries` on
+# this system, else the kext is removed and the install fails. kmutil's exit status is no use here: it is 0 even with symbols missing (checked
+# 2026-10-21 with the 0.2.2 kext on 14.8.9, R128), so the symbols it found are compared with the list.
+KEXT=/Library/Extensions/OpenAudioBeBoBMAFW.kext
+/usr/sbin/chown -R root:wheel "$KEXT" "/Library/Audio/MIDI Drivers/MAudioFireWireMIDI.plugin" /Library/PrivilegedHelperTools/com.openaudio.bebobmafw.helper \
+    /Library/LaunchDaemons/com.openaudio.bebobmafw.helper.plist "/Library/Application Support/M-Audio/DeviceIcons"
+FOUND=$(/usr/bin/mktemp)
+/usr/bin/kmutil libraries -p "$KEXT" -a x86_64 -z 2>/dev/null | /usr/bin/awk '/ in \//{print $1}' | LC_ALL=C /usr/bin/sort -u > "$FOUND"
+MISSING=$(LC_ALL=C /usr/bin/comm -23 "$(dirname "$0")/imports.txt" "$FOUND")
+/bin/rm -f "$FOUND"
+if [ -n "$MISSING" ]; then
+  /bin/rm -rf "$KEXT"
+  { echo "kernel symbols not found on this system; kext removed:"; echo "$MISSING"; } > /tmp/openaudio-kmutil-gate.log
+  echo "the driver does not link on this macOS; kext removed. See /tmp/openaudio-kmutil-gate.log" >&2
+  exit 1
+fi
+# Stage the kext for the auxiliary collection. Until the user allows it, kmutil answers KMErrorDomain Code=27 "not approved to load" (expected,
+# R127); macOS then shows Allow in Privacy & Security, and the kext loads after the restart the package asks for.
+/usr/bin/kmutil load -p "$KEXT" >/tmp/openaudio-kmutil.log 2>&1
+/bin/launchctl load -w /Library/LaunchDaemons/com.openaudio.bebobmafw.helper.plist 2>/dev/null
+# Launch at login: the agent holds the panel's executable path (as the Classic postinstall).
+CU=$(stat -f %Su /dev/console 2>/dev/null)
+AGENT="/Users/$CU/Library/LaunchAgents/com.openaudio.bebobmafw.panel.plist"
+if [ -n "$CU" ] && [ -f "$AGENT" ]; then
+  /usr/libexec/PlistBuddy -c "Set :ProgramArguments:0 /Applications/OA BeBoB MAFW.app/Contents/MacOS/OA BeBoB MAFW" "$AGENT" 2>/dev/null
+  /usr/sbin/chown "$CU" "$AGENT" 2>/dev/null
+fi
+# CoreMIDI reads its driver folder at MIDIServer start; launchd restarts it on demand.
+/usr/bin/killall MIDIServer 2>/dev/null
+exit 0

@@ -12,6 +12,26 @@ The M-Audio CoreMIDI plug-in is shipped unmodified (1.11.2). Each entry lists th
 
 ---
 
+## Package 0.3.0 — 2026-10-21 (test build, not published)
+
+| Driver | Panel | MIDI plug-in | Editions |
+|---|---|---|---|
+| **0.2.1** | **1.4** | 1.11.2 | **Classic** (macOS 10.13; `OA-BeBoB-MAFW-0.3.0-classic.pkg`) and **Modern** (macOS 11–15, Intel; `OA-BeBoB-MAFW-0.3.0-modern.pkg`) |
+
+**Driver 0.2.1** (knob law)
+- The hardware knobs move **outputs and aux out with the official law** again (0.5 dB steps near the top, 6 dB further down). The 1.5 dB / 3 dB / official step setting now applies to the **phones** only (phones encoder, or the Level Controller on a phones pair). R127.
+
+**Panel 1.4**
+- **Output and aux-out faders are back on the official console scale** (0, 2, 5, 10, 20, 30, 50 dB); only the **phones** faders keep the dB-linear 72 dB scale with off at the bottom. The step setting is now called **Phones Knob**. R127.
+- **About tab names the edition** (Classic / Modern) in the banner and in a new *Edition* row; the Modern build reads "Modern Edition · macOS 11 to 15 (Intel) Driver" instead of the High Sierra caption. The project link points to the renamed repository **github.com/bhsardinha/OA-BeBoB-MAFW**. R127.
+- **Menu bar:** a click on the icon opens the panel; a **right click** (or control-click) opens the menu. New order: Open Panel, Outputs and Phones volumes (each on its fader's law), Mute, Dim, Presets | Big Meter, Audio MIDI Setup, Firmware Check | Sync Source, Sample Rate, Show Panel In, Launch at Login | rate and lock status, Quit. Headphones A/B and the knob step left the menu (they stay in the panel); the unit list appears only with several interfaces. R128.
+
+**Installer**
+- **One package per edition.** Classic installs on macOS 10.13 to 10.15 (allowed range "before 11"), as before. Modern installs on macOS 11 and later; its postinstall checks that every kernel symbol the driver needs exists on that Mac (else it removes the driver and fails), stages the driver with `kmutil`, and the closing page asks to **Allow** it in Privacy & Security and restart. R128.
+- The Modern edition's kext is built with the macOS 15 SDK; first load and playback on macOS 14.8.9 with the FW Audiophile (R125, R126).
+
+---
+
 ## Package 0.2.2 — 2026-10-21
 
 | Driver | Panel | MIDI plug-in |
