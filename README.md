@@ -49,7 +49,7 @@ With the sync source on **External – digital** (S/PDIF), the panel sets the in
 
 <table>
 <tr>
-<td valign="top" width="300"><img src="docs/images/status-menu.png" width="290" alt="Status menu of OA BeBoB MAFW"></td>
+<td valign="top" width="300"><img src="docs/images/status-menu-0.3.1.png" width="290" alt="Status menu of OA BeBoB MAFW"></td>
 <td valign="top">
 
 **Status menu.** The panel can live in the **menu bar**, the **Dock**, or both, and can **launch at login** (choose under *Show Panel In*). The icon shows the selected interface at a glance — **online**, **muted** or **not locked** (no sync), dimmed when no interface is connected. A click opens the panel; a right click (or control-click) opens the menu, which acts on the unit checked at the top (the list appears only with several units):
