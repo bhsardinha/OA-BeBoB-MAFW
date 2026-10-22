@@ -76,7 +76,7 @@ With the sync source on **External – digital** (S/PDIF), the panel sets the in
 </tr>
 <tr>
 <td align="center"><img src="docs/images/panel-output.png" width="400" alt="FW1814 output page"><br><sub>FireWire 1814: output page</sub></td>
-<td align="center"><img src="docs/images/panel-hardware.png" width="400" alt="FW1814 hardware page"><br><sub>FireWire 1814: hardware page (rate, sync, digital ports, A/B switch)</sub></td>
+<td align="center"><img src="docs/images/panel-hardware.png" width="400" alt="FW1814 hardware page"><br><sub>FireWire 1814: hardware page (rate with <i>Follow external clock rate</i>, sync, digital ports, A/B switch, phones knob; demo mode render)</sub></td>
 </tr>
 </table>
 

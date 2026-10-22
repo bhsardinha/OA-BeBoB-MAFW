@@ -42,7 +42,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             let first = args.index(of: "--model").flatMap { i in i + 1 < args.count ? DeviceProfiles.profile(named: args[i + 1]) : nil }
             func profile(_ k: Int) -> DeviceProfile { return k < models.count ? models[k] : (k == 0 ? (first ?? FW1814Profile.shared) : FW1814Profile.shared) }
             demo = (0..<n).map { k in
-                k == 0 ? DemoBackend(id: 1, rate: rate, adat: !args.contains("--spdif"), guid: guids[0], profile: profile(0))
+                k == 0 ? DemoBackend(id: 1, rate: rate, adat: !args.contains("--spdif"), external: args.contains("--external"), guid: guids[0], profile: profile(0))
                        : DemoBackend(id: UInt64(k + 1), rate: 44100, adat: false, guid: guids[k], profile: profile(k))
             }
             sync()

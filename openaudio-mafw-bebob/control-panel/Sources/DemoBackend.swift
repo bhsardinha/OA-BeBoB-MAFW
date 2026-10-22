@@ -13,7 +13,7 @@ final class DemoBackend: PanelBackend {
 
     let profile: DeviceProfile
 
-    init(id: UInt64, rate: UInt32, adat: Bool, guid: String = "0xD6C040074B9FB", profile: DeviceProfile = FW1814Profile.shared) {
+    init(id: UInt64, rate: UInt32, adat: Bool, external: Bool = false, guid: String = "0xD6C040074B9FB", profile: DeviceProfile = FW1814Profile.shared) {
         entryID = id
         self.profile = profile
         // the first demo Audiophile shows the bench unit's GUID (capture 89 / 92)
@@ -21,6 +21,7 @@ final class DemoBackend: PanelBackend {
         func zeros(_ n: Int, _ v: Int = 0) -> [NSNumber] { return [NSNumber](repeating: NSNumber(value: v), count: n) }
         var clock = MAClockSource.factoryDefault
         clock.sync = .internalUnmuted; clock.adatIn = adat; clock.adatOut = adat
+        if external { clock.sync = .externalDigital; clock.spdifCoaxial = true }   // `--external`: External - digital, coaxial S/PDIF
         var pans: [NSNumber] = []
         for i in 0..<18 { pans.append(NSNumber(value: i % 2 == 0 ? -255 : 255)) }
         var info = [UInt8](repeating: 0, count: 0x50)
@@ -85,6 +86,11 @@ final class DemoBackend: PanelBackend {
     }
 
     var info: FWDeviceInfo { return FWDeviceInfo(entryID: entryID, guid: guid, name: "\(profile.productName) (demo)") }
+    /// MAExternalSyncRate (RATE_FOLLOW_PLAN_v1): a source at the demo's own rate while the sync source is external, else none
+    var externalSyncRate: UInt32? {
+        let c = MAClockSource(raw: UInt32(truncatingIfNeeded: (props[MAKeys.clockSource.name] as? NSNumber)?.uint64Value ?? 0))
+        return c.sync == .externalDigital ? (props[MAKeys.sampleRate.name] as? NSNumber)?.uint32Value ?? 0 : 0
+    }
     func copyProperties() -> [String: Any] { return props }
     func setProperties(_ properties: [String: Any]) -> kern_return_t {
         for (k, v) in properties {
