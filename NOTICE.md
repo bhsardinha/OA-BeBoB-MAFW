@@ -1,7 +1,7 @@
 # Notice — M-Audio ownership, intended use, third-party material
 
 ## What this project is for
-OpenAudio BeBoB MAFW (formerly OpenAudio FW1814) is an independent, non-commercial project. Its only purpose is to let **people who already own M-Audio FireWire hardware** keep using it on current macOS versions, after the manufacturer stopped supporting these interfaces more than a decade ago. The software does nothing without that hardware: it only drives an M-Audio FireWire 1814, FireWire Audiophile or FireWire 410 (the only interfaces it has been written for and tested on). It is not for sale, earns nothing for anyone, and is not meant for anyone who does not own the interface.
+OpenAudio BeBoB MAFW (formerly OpenAudio FW1814) is an independent, non-commercial project. Its only purpose is to let **people who already own M-Audio FireWire hardware** keep using it on current macOS versions, after the manufacturer stopped supporting these interfaces more than a decade ago. The software does nothing without that hardware: it only drives an M-Audio FireWire 1814, FireWire Audiophile or FireWire 410 (the only interfaces it supports). It is not for sale, earns nothing for anyone, and is not meant for anyone who does not own the interface.
 
 ## M-Audio's ownership
 The original M-Audio FireWire driver software for these interfaces — the kernel extension, control panel, preference pane, CoreMIDI plug-in, helper/firmware loader and the firmware itself (the interface firmware is by BridgeCo), together with the device icons, product photographs and manuals — **is the property of M-Audio / inMusic Brands, Inc. and their licensors**. This project claims no rights in any of it and is grateful for the free software M-Audio published for these products.

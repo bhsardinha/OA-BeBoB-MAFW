@@ -1,0 +1,4 @@
+  |   "IOAudioEngineNumActiveUserClients" = 1
+  |   "IOAudioEngineState" = 1
+  |   "IOAudioEngineDescription" = "FireWire 1814 Multichannel"
+  |   "IOAudioSampleRate" = {"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0}

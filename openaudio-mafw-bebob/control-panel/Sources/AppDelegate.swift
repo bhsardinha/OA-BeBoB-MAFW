@@ -81,7 +81,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         status.onPresentationChanged = { [weak self] in self?.applyPresentation() }
         status.onFirmwareCheck = { [weak self] in self?.showFirmwareCheck() }
         // the launch-at-login agent holds the panel's path: rewrite it so a renamed or moved panel (0.2.2: OA BeBoB MAFW.app) still starts at login
-        if PanelPrefs.launchAtLogin { PanelPrefs.launchAtLogin = true }
+        PanelPrefs.updateLaunchAgentIfMoved()
         bigMeter.unit = { [weak self] in self?.status.selected }
         applyPresentation()
         list.onChange = { [weak self] in self?.sync() }

@@ -4,6 +4,9 @@
 
 Read this first after a context clear, then `NEW_PLAN.md` → `docs/STATE.md` → `docs/BUILD-MANUAL.md` §0 → `docs/system-map/README.md`.
 
+## 2026-10-27 (night) - stereo-pair fix verified (R141); v0.4.1 (both editions) built and published
+Done: 0.4.1 Modern installed on the dev Mac, pairs have channels at 48 kHz (user + capture 107). Classic and Modern 0.4.1 packages and `.dmg`s built; README simplified (user: every interface and feature as supported in 0.4.1); release v0.4.1 with both `.dmg`s. Next (user decides): FW410 MIDI, S/PDIF, sleep/wake; nothing else pending from this item.
+
 ## 2026-10-27 - 0.4.0 documented, packages rebuilt
 Next (user decides): try the 0.4.0 Modern package (dev Mac: install + restart, never unload the old 0.2.9 by hand); re-test the FW1814 / Audiophile on 0.4.0; FW410 MIDI, S/PDIF, sleep/wake; v0.4.0 is published (release + dmgs, 2026-10-27).
 

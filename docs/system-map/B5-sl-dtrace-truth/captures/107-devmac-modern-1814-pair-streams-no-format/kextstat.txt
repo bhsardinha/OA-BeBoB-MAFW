@@ -1,0 +1,2 @@
+  150    5 0xffffff7f9552f000 0x1e000    0x1e000    com.apple.iokit.IOAudioFamily (540.3) DDD838AD-FE64-30D3-AF69-05F2283760B0 <149 7 6 3 1>
+  189    0 0xffffff7f967a6000 0x2c000    0x2c000    com.openaudio.OpenAudioBeBoBMAFW (0.3.0) AE2E01E4-1C92-367C-9E89-E9D04AB40FD8 <188 164 150 7 6 3>

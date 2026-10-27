@@ -1,0 +1,182 @@
++-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x100000734, registered, matched, active, busy 0 (1 ms), retain 7>
+    {
+      "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+      "IOAudioStreamDirection" = 0
+      "IOAudioStreamID" = 0
+      "IOAudioStreamStartingChannelID" = 1
+      "IOAudioStreamFormat" = {"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamByteOrder"=0}
+      "IOAudioStreamAvailable" = 1
+      "IOAudioStreamNumClients" = 0
+      "IOAudioStreamStartingChannelNumber" = 1
+    }
+    
+
++-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x100000735, registered, matched, active, busy 0 (0 ms), retain 7>
+    {
+      "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+      "IOAudioStreamDirection" = 1
+      "IOAudioStreamID" = 1
+      "IOAudioStreamStartingChannelID" = 1
+      "IOAudioStreamFormat" = {"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamByteOrder"=0}
+      "IOAudioStreamAvailable" = 1
+      "IOAudioStreamNumClients" = 0
+      "IOAudioStreamStartingChannelNumber" = 1
+    }
+    
+
++-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x100000737, registered, matched, active, busy 0 (4 ms), retain 8>
+    {
+      "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+      "IOAudioStreamDirection" = 0
+      "IOAudioStreamID" = 0
+      "IOAudioStreamStartingChannelID" = 1
+      "IOAudioStreamFormat" = {"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamByteOrder"=0}
+      "IOAudioStreamAvailable" = 1
+      "IOAudioStreamNumClients" = 1
+      "IOAudioStreamStartingChannelNumber" = 1
+    }
+    
+
++-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x100000738, registered, matched, active, busy 0 (2 ms), retain 7>
+    {
+      "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+      "IOAudioStreamDirection" = 1
+      "IOAudioStreamID" = 1
+      "IOAudioStreamStartingChannelID" = 1
+      "IOAudioStreamFormat" = {"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamByteOrder"=0}
+      "IOAudioStreamAvailable" = 1
+      "IOAudioStreamNumClients" = 0
+      "IOAudioStreamStartingChannelNumber" = 1
+    }
+    
+
++-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x10000073c, registered, matched, active, busy 0 (1 ms), retain 7>
+    {
+      "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+      "IOAudioStreamDirection" = 1
+      "IOAudioStreamID" = 0
+      "IOAudioStreamStartingChannelID" = 1
+      "IOAudioStreamFormat" = {"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamByteOrder"=0}
+      "IOAudioStreamAvailable" = 1
+      "IOAudioStreamNumClients" = 0
+      "IOAudioStreamStartingChannelNumber" = 1
+    }
+    
+
++-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x10000073e, registered, matched, active, busy 0 (2 ms), retain 7>
+    {
+      "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+      "IOAudioStreamDirection" = 1
+      "IOAudioStreamID" = 0
+      "IOAudioStreamStartingChannelID" = 1
+      "IOAudioStreamFormat" = {"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamByteOrder"=0}
+      "IOAudioStreamAvailable" = 1
+      "IOAudioStreamNumClients" = 0
+      "IOAudioStreamStartingChannelNumber" = 1
+    }
+    
+
++-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x100000742, registered, matched, active, busy 0 (1 ms), retain 7>
+    {
+      "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+      "IOAudioStreamDirection" = 0
+      "IOAudioStreamID" = 0
+      "IOAudioStreamStartingChannelID" = 1
+      "IOAudioStreamFormat" = {"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamByteOrder"=0}
+      "IOAudioStreamAvailable" = 1
+      "IOAudioStreamNumClients" = 0
+      "IOAudioStreamStartingChannelNumber" = 1
+    }
+    
+
++-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x100000743, registered, matched, active, busy 0 (4 ms), retain 7>
+    {
+      "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+      "IOAudioStreamDirection" = 1
+      "IOAudioStreamID" = 1
+      "IOAudioStreamStartingChannelID" = 1
+      "IOAudioStreamFormat" = {"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamByteOrder"=0}
+      "IOAudioStreamAvailable" = 1
+      "IOAudioStreamNumClients" = 0
+      "IOAudioStreamStartingChannelNumber" = 1
+    }
+    
+
++-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x100000745, registered, matched, active, busy 0 (1 ms), retain 7>
+    {
+      "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+      "IOAudioStreamDirection" = 0
+      "IOAudioStreamID" = 0
+      "IOAudioStreamStartingChannelID" = 1
+      "IOAudioStreamFormat" = {"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamByteOrder"=0}
+      "IOAudioStreamAvailable" = 1
+      "IOAudioStreamNumClients" = 0
+      "IOAudioStreamStartingChannelNumber" = 1
+    }
+    
+
++-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x100000746, registered, matched, active, busy 0 (2 ms), retain 7>
+    {
+      "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+      "IOAudioStreamDirection" = 1
+      "IOAudioStreamID" = 1
+      "IOAudioStreamStartingChannelID" = 1
+      "IOAudioStreamFormat" = {"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamByteOrder"=0}
+      "IOAudioStreamAvailable" = 1
+      "IOAudioStreamNumClients" = 0
+      "IOAudioStreamStartingChannelNumber" = 1
+    }
+    
+
++-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x10000074a, registered, matched, active, busy 0 (2 ms), retain 7>
+    {
+      "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+      "IOAudioStreamDirection" = 0
+      "IOAudioStreamID" = 0
+      "IOAudioStreamStartingChannelID" = 1
+      "IOAudioStreamFormat" = {"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamByteOrder"=0}
+      "IOAudioStreamAvailable" = 1
+      "IOAudioStreamNumClients" = 0
+      "IOAudioStreamStartingChannelNumber" = 1
+    }
+    
+
++-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x10000074b, registered, matched, active, busy 0 (3 ms), retain 7>
+    {
+      "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+      "IOAudioStreamDirection" = 1
+      "IOAudioStreamID" = 1
+      "IOAudioStreamStartingChannelID" = 1
+      "IOAudioStreamFormat" = {"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamByteOrder"=0}
+      "IOAudioStreamAvailable" = 1
+      "IOAudioStreamNumClients" = 0
+      "IOAudioStreamStartingChannelNumber" = 1
+    }
+    
+
++-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x10000074e, registered, matched, active, busy 0 (2 ms), retain 7>
+    {
+      "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+      "IOAudioStreamDirection" = 0
+      "IOAudioStreamID" = 0
+      "IOAudioStreamStartingChannelID" = 1
+      "IOAudioStreamFormat" = {"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamByteOrder"=0}
+      "IOAudioStreamAvailable" = 1
+      "IOAudioStreamNumClients" = 0
+      "IOAudioStreamStartingChannelNumber" = 1
+    }
+    
+
++-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x10000074f, registered, matched, active, busy 0 (1 ms), retain 7>
+    {
+      "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+      "IOAudioStreamDirection" = 1
+      "IOAudioStreamID" = 1
+      "IOAudioStreamStartingChannelID" = 1
+      "IOAudioStreamFormat" = {"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamByteOrder"=0}
+      "IOAudioStreamAvailable" = 1
+      "IOAudioStreamNumClients" = 0
+      "IOAudioStreamStartingChannelNumber" = 1
+    }
+    
+

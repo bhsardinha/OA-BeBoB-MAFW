@@ -14,8 +14,10 @@ fi
 # Launch at login: the agent holds the panel's executable path; point it at this release's panel (0.2.2 renamed it to OA BeBoB MAFW.app).
 CU=$(stat -f %Su /dev/console 2>/dev/null)
 AGENT="/Users/$CU/Library/LaunchAgents/com.openaudio.bebobmafw.panel.plist"
-if [ -n "$CU" ] && [ -f "$AGENT" ]; then
-  /usr/libexec/PlistBuddy -c "Set :ProgramArguments:0 /Applications/OA BeBoB MAFW.app/Contents/MacOS/OA BeBoB MAFW" "$AGENT" 2>/dev/null
+# Only when it points elsewhere: every rewrite shows "Background Items Added" on macOS 13+ (user, 2026-10-27).
+PANEL_EXE="/Applications/OA BeBoB MAFW.app/Contents/MacOS/OA BeBoB MAFW"
+if [ -n "$CU" ] && [ -f "$AGENT" ] && [ "$(/usr/libexec/PlistBuddy -c "Print :ProgramArguments:0" "$AGENT" 2>/dev/null)" != "$PANEL_EXE" ]; then
+  /usr/libexec/PlistBuddy -c "Set :ProgramArguments:0 $PANEL_EXE" "$AGENT" 2>/dev/null
   /usr/sbin/chown "$CU" "$AGENT" 2>/dev/null
 fi
 # CoreMIDI reads its driver folder at MIDIServer start; launchd restarts it on demand.

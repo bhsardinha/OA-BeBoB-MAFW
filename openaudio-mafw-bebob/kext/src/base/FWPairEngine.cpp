@@ -104,11 +104,17 @@ void com_openaudio_FWPairEngine::free()
 }
 
 // ref ResetIOFormat @0x1ab42
+// Deviation (R141): the engine rate is set BEFORE the streams' setFormat; the reference sets it after (vt[0xb58] follows vt[0xa38]).
+// IOAudioStream::setFormat validates the format against the engine's CURRENT rate (validateFormat rate check, IOAudioFamily 540.3
+// IOAudioStream.cpp:264, 206.5 :261), so with the reference order every call with a rate other than the engine's previous one (44.1 kHz
+// from initHardware) is refused and the pair streams get no IOAudioStreamFormat. The 10.6 HAL showed the devices anyway (capture 103);
+// the macOS 14 HAL gives them 0 channels (dev Mac, FW1814 at 48 kHz, 2026-10-27).
 void com_openaudio_FWPairEngine::ResetIOFormat(const IOAudioSampleRate *rate)
 {
     IOAudioStreamFormat fmt;
     PairFormat(fmt);
     beginConfigurationChange();
+    setSampleRate(rate);
     IOAudioStream *streams[2] = { fHasIn ? fInStream : 0, fHasOut ? fOutStream : 0 };
     for (int i = 0; i < 2; i++) {
         if (!streams[i]) continue;
@@ -116,7 +122,6 @@ void com_openaudio_FWPairEngine::ResetIOFormat(const IOAudioSampleRate *rate)
         streams[i]->addAvailableFormat(&fmt, rate, rate);
         streams[i]->setFormat(&fmt, true);
     }
-    setSampleRate(rate);
     hardwareSampleRateChanged(rate);
     if (fMaster) {
         static const char *keys[3] = { "IOAudioEngineInputSampleLatency", "IOAudioEngineOutputSampleLatency", "IOAudioEngineSampleOffset" };

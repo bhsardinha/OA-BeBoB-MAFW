@@ -1,0 +1,24 @@
++-o com_openaudio_FWStream  <class com_openaudio_FWStream, id 0x10000069a, registered, matched, active, busy 0 (0 ms), retain 9>
+    {
+      "IOAudioStreamDirection" = 0
+      "IOAudioStreamID" = 0
+      "IOAudioStreamStartingChannelID" = 1
+      "IOAudioStreamFormat" = {"IOAudioStreamAlignment"=0,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamIsMixable"=1,"IOAudioStreamFormatFlags"=0,"IOAudioStreamByteOrder"=0,"IOAudioStreamBitDepth"=24,"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamDriverTag"=0,"IOAudioStreamNumChannels"=12,"IOAudioStreamBytesPerPacket"=48,"IOAudioStreamBitWidth"=32,"IOAudioStreamFramesPerPacket"=1}
+      "IOAudioStreamAvailable" = 1
+      "IOAudioStreamNumClients" = 1
+      "IOAudioStreamStartingChannelNumber" = 1
+    }
+    
+
++-o com_openaudio_FWStream  <class com_openaudio_FWStream, id 0x10000069b, registered, matched, active, busy 0 (1 ms), retain 8>
+    {
+      "IOAudioStreamDirection" = 1
+      "IOAudioStreamID" = 1
+      "IOAudioStreamStartingChannelID" = 1
+      "IOAudioStreamFormat" = {"IOAudioStreamAlignment"=0,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamIsMixable"=1,"IOAudioStreamFormatFlags"=0,"IOAudioStreamByteOrder"=0,"IOAudioStreamBitDepth"=24,"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamDriverTag"=0,"IOAudioStreamNumChannels"=16,"IOAudioStreamBytesPerPacket"=64,"IOAudioStreamBitWidth"=32,"IOAudioStreamFramesPerPacket"=1}
+      "IOAudioStreamAvailable" = 1
+      "IOAudioStreamNumClients" = 0
+      "IOAudioStreamStartingChannelNumber" = 1
+    }
+    
+

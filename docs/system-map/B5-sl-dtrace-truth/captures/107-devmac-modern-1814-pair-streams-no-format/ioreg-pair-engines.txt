@@ -1,0 +1,330 @@
++-o com_openaudio_FWPairEngine  <class com_openaudio_FWPairEngine, id 0x10000082a, registered, matched, active, busy 0 (5 ms), retain 10>
+  | {
+  |   "IOAudioEngineFlavor" = 1
+  |   "IOAudioEngineOutputSampleLatency" = 112
+  |   "IOAudioEngineSampleOffset" = 48
+  |   "IOAudioEngineDescription" = "FireWire 1814 Analog 1/2"
+  |   "IOAudioEngineInputSampleLatency" = 113
+  |   "IOGeneralInterest" = "IOCommand is not serializable"
+  |   "IOAudioEngineClockDomain" = 1076695776
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 8192
+  |   "IOAudioSampleRate" = {"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0}
+  |   "IOAudioEngineState" = 0
+  |   "IOAudioEngineGlobalUniqueID" = "m_audio_b_FWPairEngine:6"
+  | }
+  | 
+  +-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x10000082b, registered, matched, active, busy 0 (2 ms), retain 7>
+  |   {
+  |     "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+  |     "IOAudioStreamDirection" = 0
+  |     "IOAudioStreamID" = 0
+  |     "IOAudioStreamStartingChannelID" = 1
+  |     "IOAudioStreamAvailable" = 1
+  |     "IOAudioStreamNumClients" = 0
+  |     "IOAudioStreamStartingChannelNumber" = 1
+  |   }
+  |   
+  +-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x10000082c, registered, matched, active, busy 0 (5 ms), retain 7>
+  |   {
+  |     "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+  |     "IOAudioStreamDirection" = 1
+  |     "IOAudioStreamID" = 1
+  |     "IOAudioStreamStartingChannelID" = 1
+  |     "IOAudioStreamAvailable" = 1
+  |     "IOAudioStreamNumClients" = 0
+  |     "IOAudioStreamStartingChannelNumber" = 1
+  |   }
+  |   
+  +-o IOAudioEngineUserClient  <class IOAudioEngineUserClient, id 0x100000848, !registered, !matched, active, busy 0, retain 6>
+      {
+        "IOUserClientCreator" = "pid 227, coreaudiod"
+        "IOUserClientDefaultLocking" = Yes
+      }
+      
+
++-o com_openaudio_FWPairEngine  <class com_openaudio_FWPairEngine, id 0x10000082d, registered, matched, active, busy 0 (4 ms), retain 10>
+  | {
+  |   "IOAudioEngineFlavor" = 1
+  |   "IOAudioEngineOutputSampleLatency" = 112
+  |   "IOAudioEngineSampleOffset" = 48
+  |   "IOAudioEngineDescription" = "FireWire 1814 Analog 3/4"
+  |   "IOAudioEngineInputSampleLatency" = 113
+  |   "IOGeneralInterest" = "IOCommand is not serializable"
+  |   "IOAudioEngineClockDomain" = 1076695872
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 8192
+  |   "IOAudioSampleRate" = {"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0}
+  |   "IOAudioEngineState" = 0
+  |   "IOAudioEngineGlobalUniqueID" = "m_audio_b_FWPairEngine:7"
+  | }
+  | 
+  +-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x10000082e, registered, matched, active, busy 0 (2 ms), retain 7>
+  |   {
+  |     "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+  |     "IOAudioStreamDirection" = 0
+  |     "IOAudioStreamID" = 0
+  |     "IOAudioStreamStartingChannelID" = 1
+  |     "IOAudioStreamAvailable" = 1
+  |     "IOAudioStreamNumClients" = 0
+  |     "IOAudioStreamStartingChannelNumber" = 1
+  |   }
+  |   
+  +-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x10000082f, registered, matched, active, busy 0 (1 ms), retain 7>
+  |   {
+  |     "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+  |     "IOAudioStreamDirection" = 1
+  |     "IOAudioStreamID" = 1
+  |     "IOAudioStreamStartingChannelID" = 1
+  |     "IOAudioStreamAvailable" = 1
+  |     "IOAudioStreamNumClients" = 0
+  |     "IOAudioStreamStartingChannelNumber" = 1
+  |   }
+  |   
+  +-o IOAudioEngineUserClient  <class IOAudioEngineUserClient, id 0x10000084f, !registered, !matched, active, busy 0, retain 6>
+      {
+        "IOUserClientCreator" = "pid 227, coreaudiod"
+        "IOUserClientDefaultLocking" = Yes
+      }
+      
+
++-o com_openaudio_FWPairEngine  <class com_openaudio_FWPairEngine, id 0x100000831, registered, matched, active, busy 0 (8 ms), retain 9>
+  | {
+  |   "IOAudioEngineFlavor" = 1
+  |   "IOAudioEngineOutputSampleLatency" = 112
+  |   "IOAudioEngineSampleOffset" = 48
+  |   "IOAudioEngineDescription" = "FireWire 1814 Analog 5/6 In"
+  |   "IOAudioEngineInputSampleLatency" = 113
+  |   "IOGeneralInterest" = "IOCommand is not serializable"
+  |   "IOAudioEngineClockDomain" = 1076695968
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 8192
+  |   "IOAudioSampleRate" = {"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0}
+  |   "IOAudioEngineState" = 0
+  |   "IOAudioEngineGlobalUniqueID" = "m_audio_b_FWPairEngine:8"
+  | }
+  | 
+  +-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x100000832, registered, matched, active, busy 0 (8 ms), retain 7>
+  |   {
+  |     "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+  |     "IOAudioStreamDirection" = 1
+  |     "IOAudioStreamID" = 0
+  |     "IOAudioStreamStartingChannelID" = 1
+  |     "IOAudioStreamAvailable" = 1
+  |     "IOAudioStreamNumClients" = 0
+  |     "IOAudioStreamStartingChannelNumber" = 1
+  |   }
+  |   
+  +-o IOAudioEngineUserClient  <class IOAudioEngineUserClient, id 0x10000084e, !registered, !matched, active, busy 0, retain 6>
+      {
+        "IOUserClientCreator" = "pid 227, coreaudiod"
+        "IOUserClientDefaultLocking" = Yes
+      }
+      
+
++-o com_openaudio_FWPairEngine  <class com_openaudio_FWPairEngine, id 0x100000833, registered, matched, active, busy 0 (5 ms), retain 9>
+  | {
+  |   "IOAudioEngineFlavor" = 1
+  |   "IOAudioEngineOutputSampleLatency" = 112
+  |   "IOAudioEngineSampleOffset" = 48
+  |   "IOAudioEngineDescription" = "FireWire 1814 Analog 7/8 In"
+  |   "IOAudioEngineInputSampleLatency" = 113
+  |   "IOGeneralInterest" = "IOCommand is not serializable"
+  |   "IOAudioEngineClockDomain" = 1076692992
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 8192
+  |   "IOAudioSampleRate" = {"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0}
+  |   "IOAudioEngineState" = 0
+  |   "IOAudioEngineGlobalUniqueID" = "m_audio_b_FWPairEngine:9"
+  | }
+  | 
+  +-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x100000835, registered, matched, active, busy 0 (5 ms), retain 7>
+  |   {
+  |     "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+  |     "IOAudioStreamDirection" = 1
+  |     "IOAudioStreamID" = 0
+  |     "IOAudioStreamStartingChannelID" = 1
+  |     "IOAudioStreamAvailable" = 1
+  |     "IOAudioStreamNumClients" = 0
+  |     "IOAudioStreamStartingChannelNumber" = 1
+  |   }
+  |   
+  +-o IOAudioEngineUserClient  <class IOAudioEngineUserClient, id 0x10000084d, !registered, !matched, active, busy 0, retain 6>
+      {
+        "IOUserClientCreator" = "pid 227, coreaudiod"
+        "IOUserClientDefaultLocking" = Yes
+      }
+      
+
++-o com_openaudio_FWPairEngine  <class com_openaudio_FWPairEngine, id 0x100000836, registered, matched, active, busy 0 (5 ms), retain 10>
+  | {
+  |   "IOAudioEngineFlavor" = 1
+  |   "IOAudioEngineOutputSampleLatency" = 112
+  |   "IOAudioEngineSampleOffset" = 48
+  |   "IOAudioEngineDescription" = "FireWire 1814 ADAT 1/2"
+  |   "IOAudioEngineInputSampleLatency" = 113
+  |   "IOGeneralInterest" = "IOCommand is not serializable"
+  |   "IOAudioEngineClockDomain" = 1076693088
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 8192
+  |   "IOAudioSampleRate" = {"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0}
+  |   "IOAudioEngineState" = 0
+  |   "IOAudioEngineGlobalUniqueID" = "m_audio_b_FWPairEngine:a"
+  | }
+  | 
+  +-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x100000839, registered, matched, active, busy 0 (2 ms), retain 7>
+  |   {
+  |     "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+  |     "IOAudioStreamDirection" = 0
+  |     "IOAudioStreamID" = 0
+  |     "IOAudioStreamStartingChannelID" = 1
+  |     "IOAudioStreamAvailable" = 1
+  |     "IOAudioStreamNumClients" = 0
+  |     "IOAudioStreamStartingChannelNumber" = 1
+  |   }
+  |   
+  +-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x10000083a, registered, matched, active, busy 0 (4 ms), retain 7>
+  |   {
+  |     "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+  |     "IOAudioStreamDirection" = 1
+  |     "IOAudioStreamID" = 1
+  |     "IOAudioStreamStartingChannelID" = 1
+  |     "IOAudioStreamAvailable" = 1
+  |     "IOAudioStreamNumClients" = 0
+  |     "IOAudioStreamStartingChannelNumber" = 1
+  |   }
+  |   
+  +-o IOAudioEngineUserClient  <class IOAudioEngineUserClient, id 0x10000084c, !registered, !matched, active, busy 0, retain 6>
+      {
+        "IOUserClientCreator" = "pid 227, coreaudiod"
+        "IOUserClientDefaultLocking" = Yes
+      }
+      
+
++-o com_openaudio_FWPairEngine  <class com_openaudio_FWPairEngine, id 0x10000083c, registered, matched, active, busy 0 (5 ms), retain 10>
+  | {
+  |   "IOAudioEngineFlavor" = 1
+  |   "IOAudioEngineOutputSampleLatency" = 112
+  |   "IOAudioEngineSampleOffset" = 48
+  |   "IOAudioEngineDescription" = "FireWire 1814 ADAT 3/4"
+  |   "IOAudioEngineInputSampleLatency" = 113
+  |   "IOGeneralInterest" = "IOCommand is not serializable"
+  |   "IOAudioEngineClockDomain" = 1076693184
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 8192
+  |   "IOAudioSampleRate" = {"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0}
+  |   "IOAudioEngineState" = 0
+  |   "IOAudioEngineGlobalUniqueID" = "m_audio_b_FWPairEngine:b"
+  | }
+  | 
+  +-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x10000083d, registered, matched, active, busy 0 (2 ms), retain 7>
+  |   {
+  |     "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+  |     "IOAudioStreamDirection" = 0
+  |     "IOAudioStreamID" = 0
+  |     "IOAudioStreamStartingChannelID" = 1
+  |     "IOAudioStreamAvailable" = 1
+  |     "IOAudioStreamNumClients" = 0
+  |     "IOAudioStreamStartingChannelNumber" = 1
+  |   }
+  |   
+  +-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x10000083e, registered, matched, active, busy 0 (3 ms), retain 7>
+  |   {
+  |     "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+  |     "IOAudioStreamDirection" = 1
+  |     "IOAudioStreamID" = 1
+  |     "IOAudioStreamStartingChannelID" = 1
+  |     "IOAudioStreamAvailable" = 1
+  |     "IOAudioStreamNumClients" = 0
+  |     "IOAudioStreamStartingChannelNumber" = 1
+  |   }
+  |   
+  +-o IOAudioEngineUserClient  <class IOAudioEngineUserClient, id 0x10000084b, !registered, !matched, active, busy 0, retain 6>
+      {
+        "IOUserClientCreator" = "pid 227, coreaudiod"
+        "IOUserClientDefaultLocking" = Yes
+      }
+      
+
++-o com_openaudio_FWPairEngine  <class com_openaudio_FWPairEngine, id 0x100000840, registered, matched, active, busy 0 (2 ms), retain 10>
+  | {
+  |   "IOAudioEngineFlavor" = 1
+  |   "IOAudioEngineOutputSampleLatency" = 112
+  |   "IOAudioEngineSampleOffset" = 48
+  |   "IOAudioEngineDescription" = "FireWire 1814 ADAT 5/6"
+  |   "IOAudioEngineInputSampleLatency" = 113
+  |   "IOGeneralInterest" = "IOCommand is not serializable"
+  |   "IOAudioEngineClockDomain" = 1076693280
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 8192
+  |   "IOAudioSampleRate" = {"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0}
+  |   "IOAudioEngineState" = 0
+  |   "IOAudioEngineGlobalUniqueID" = "m_audio_b_FWPairEngine:c"
+  | }
+  | 
+  +-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x100000841, registered, matched, active, busy 0 (2 ms), retain 7>
+  |   {
+  |     "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+  |     "IOAudioStreamDirection" = 0
+  |     "IOAudioStreamID" = 0
+  |     "IOAudioStreamStartingChannelID" = 1
+  |     "IOAudioStreamAvailable" = 1
+  |     "IOAudioStreamNumClients" = 0
+  |     "IOAudioStreamStartingChannelNumber" = 1
+  |   }
+  |   
+  +-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x100000842, registered, matched, active, busy 0 (1 ms), retain 7>
+  |   {
+  |     "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+  |     "IOAudioStreamDirection" = 1
+  |     "IOAudioStreamID" = 1
+  |     "IOAudioStreamStartingChannelID" = 1
+  |     "IOAudioStreamAvailable" = 1
+  |     "IOAudioStreamNumClients" = 0
+  |     "IOAudioStreamStartingChannelNumber" = 1
+  |   }
+  |   
+  +-o IOAudioEngineUserClient  <class IOAudioEngineUserClient, id 0x10000084a, !registered, !matched, active, busy 0, retain 6>
+      {
+        "IOUserClientCreator" = "pid 227, coreaudiod"
+        "IOUserClientDefaultLocking" = Yes
+      }
+      
+
++-o com_openaudio_FWPairEngine  <class com_openaudio_FWPairEngine, id 0x100000844, registered, matched, active, busy 0 (2 ms), retain 10>
+  | {
+  |   "IOAudioEngineFlavor" = 1
+  |   "IOAudioEngineOutputSampleLatency" = 112
+  |   "IOAudioEngineSampleOffset" = 48
+  |   "IOAudioEngineDescription" = "FireWire 1814 ADAT 7/8"
+  |   "IOAudioEngineInputSampleLatency" = 113
+  |   "IOGeneralInterest" = "IOCommand is not serializable"
+  |   "IOAudioEngineClockDomain" = 1076693376
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 8192
+  |   "IOAudioSampleRate" = {"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0}
+  |   "IOAudioEngineState" = 0
+  |   "IOAudioEngineGlobalUniqueID" = "m_audio_b_FWPairEngine:d"
+  | }
+  | 
+  +-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x100000845, registered, matched, active, busy 0 (1 ms), retain 7>
+  |   {
+  |     "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+  |     "IOAudioStreamDirection" = 0
+  |     "IOAudioStreamID" = 0
+  |     "IOAudioStreamStartingChannelID" = 1
+  |     "IOAudioStreamAvailable" = 1
+  |     "IOAudioStreamNumClients" = 0
+  |     "IOAudioStreamStartingChannelNumber" = 1
+  |   }
+  |   
+  +-o com_openaudio_FWPairStream  <class com_openaudio_FWPairStream, id 0x100000846, registered, matched, active, busy 0 (1 ms), retain 7>
+  |   {
+  |     "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamIsMixable"=1,"IOAudioStreamNumChannels"=2,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamBitWidth"=32,"IOAudioStreamDriverTag"=0,"IOAudioStreamAlignment"=1,"IOAudioStreamBitDepth"=24,"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamByteOrder"=0})
+  |     "IOAudioStreamDirection" = 1
+  |     "IOAudioStreamID" = 1
+  |     "IOAudioStreamStartingChannelID" = 1
+  |     "IOAudioStreamAvailable" = 1
+  |     "IOAudioStreamNumClients" = 0
+  |     "IOAudioStreamStartingChannelNumber" = 1
+  |   }
+  |   
+  +-o IOAudioEngineUserClient  <class IOAudioEngineUserClient, id 0x100000849, !registered, !matched, active, busy 0, retain 6>
+      {
+        "IOUserClientCreator" = "pid 227, coreaudiod"
+        "IOUserClientDefaultLocking" = Yes
+      }
+      
+

@@ -12,6 +12,21 @@ The M-Audio CoreMIDI plug-in is shipped unmodified (1.11.2). Each entry lists th
 
 ---
 
+## Package 0.4.1 — 2026-10-27 (published, release v0.4.1)
+
+| Driver | Panel | MIDI plug-in | Editions |
+|---|---|---|---|
+| **0.3.1** | **1.7** | 1.11.2 | Classic and Modern |
+
+**Driver 0.3.1** (R141, capture 107)
+- **Fixed: "Show stereo pairs as separate devices" gave devices without channels** at any rate but 44.1 kHz (seen on macOS 14 with the FireWire 1814 at 48 kHz). macOS refused the pair streams' format because the pair device's rate was set after it (the official driver's order; the 10.6 system coped, macOS 14 does not). The rate is now set first. Generic (every model). Checked with the FireWire 1814 at 48 kHz on Modern (user, 2026-10-27).
+
+**Panel 1.7**
+- **Launch at Login no longer shows macOS's "Background Items Added" at every start** (user, 2026-10-27): the panel rewrote its LaunchAgent at each launch to keep the app path current; it now rewrites it only when the path differs (a moved or renamed app). The installers' postinstall does the same check.
+
+**Docs and installer**
+- README, installer pages and disk-image text simplified: the three interfaces and every feature listed as supported in 0.4.1, without the per-version test notes (user, 2026-10-27).
+
 ## Package 0.4.0 — 2026-10-27 (published, release v0.4.0)
 
 | Driver | Panel | MIDI plug-in | Editions |

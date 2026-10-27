@@ -18,18 +18,28 @@ enum PanelPrefs {
     static var agentURL: URL {
         return FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Library/LaunchAgents/\(agentLabel).plist")
     }
+    /// The agent for this copy of the panel (nil without an executable path).
+    private static var agentPlist: NSDictionary? {
+        guard let exe = Bundle.main.executablePath else { return nil }
+        return ["Label": agentLabel, "ProgramArguments": [exe, "--background"], "RunAtLoad": true, "ProcessType": "Interactive"]
+    }
     static var launchAtLogin: Bool {
         get { return FileManager.default.fileExists(atPath: agentURL.path) }
         set {
             if newValue {
-                guard let exe = Bundle.main.executablePath else { return }
-                let plist: NSDictionary = ["Label": agentLabel, "ProgramArguments": [exe, "--background"], "RunAtLoad": true, "ProcessType": "Interactive"]
+                guard let plist = agentPlist else { return }
                 try? FileManager.default.createDirectory(at: agentURL.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
                 plist.write(to: agentURL, atomically: true)
             } else {
                 try? FileManager.default.removeItem(at: agentURL)
             }
         }
+    }
+    /// At launch: rewrite the agent only when it points at another copy of the panel (renamed or moved app). Rewriting it at every launch
+    /// made macOS 13+ show "Background Items Added" each time (user, 2026-10-27).
+    static func updateLaunchAgentIfMoved() {
+        guard launchAtLogin, let plist = agentPlist, NSDictionary(contentsOf: agentURL) != plist else { return }
+        launchAtLogin = true
     }
 }
 

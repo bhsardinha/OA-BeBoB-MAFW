@@ -1,0 +1,109 @@
+Audio:
+
+    Devices:
+
+        Built-in Microphone:
+
+          Default Input Device: Yes
+          Input Channels: 2
+          Manufacturer: Apple Inc.
+          Current SampleRate: 44100
+          Transport: Built-in
+          Input Source: Internal Microphone
+
+        Built-in Output:
+
+          Manufacturer: Apple Inc.
+          Output Channels: 2
+          Current SampleRate: 44100
+          Transport: Built-in
+          Output Source: Internal Speakers
+
+        FireWire 1814 Multichannel:
+
+          Input Channels: 16
+          Manufacturer: M-Audio
+          Output Channels: 12
+          Current SampleRate: 48000
+          Transport: FireWire
+          Input Source: Default
+          Output Source: Default
+
+        FireWire 1814 Analog 1/2:
+
+          Input Channels: 2
+          Manufacturer: M-Audio
+          Output Channels: 2
+          Current SampleRate: 48000
+          Transport: FireWire
+          Input Source: Default
+          Output Source: Default
+
+        FireWire 1814 Analog 3/4:
+
+          Default Output Device: Yes
+          Default System Output Device: Yes
+          Input Channels: 2
+          Manufacturer: M-Audio
+          Output Channels: 2
+          Current SampleRate: 48000
+          Transport: FireWire
+          Input Source: Default
+          Output Source: Default
+
+        FireWire 1814 Analog 5/6 In:
+
+          Input Channels: 2
+          Manufacturer: M-Audio
+          Current SampleRate: 48000
+          Transport: FireWire
+          Input Source: Default
+
+        FireWire 1814 Analog 7/8 In:
+
+          Input Channels: 2
+          Manufacturer: M-Audio
+          Current SampleRate: 48000
+          Transport: FireWire
+          Input Source: Default
+
+        FireWire 1814 ADAT 1/2:
+
+          Input Channels: 2
+          Manufacturer: M-Audio
+          Output Channels: 2
+          Current SampleRate: 48000
+          Transport: FireWire
+          Input Source: Default
+          Output Source: Default
+
+        FireWire 1814 ADAT 3/4:
+
+          Input Channels: 2
+          Manufacturer: M-Audio
+          Output Channels: 2
+          Current SampleRate: 48000
+          Transport: FireWire
+          Input Source: Default
+          Output Source: Default
+
+        FireWire 1814 ADAT 5/6:
+
+          Input Channels: 2
+          Manufacturer: M-Audio
+          Output Channels: 2
+          Current SampleRate: 48000
+          Transport: FireWire
+          Input Source: Default
+          Output Source: Default
+
+        FireWire 1814 ADAT 7/8:
+
+          Input Channels: 2
+          Manufacturer: M-Audio
+          Output Channels: 2
+          Current SampleRate: 48000
+          Transport: FireWire
+          Input Source: Default
+          Output Source: Default
+
