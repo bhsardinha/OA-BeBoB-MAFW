@@ -10,9 +10,9 @@ These are BridgeCo BeBoB FireWire interfaces that M-Audio stopped supporting yea
 
 > **Homebrew and experimental.** A hobby project, not a product: the kernel extension is **unsigned and will stay unsigned**, so it runs only with **System Integrity Protection disabled**, and nothing is promised or supported.
 
-> **Status: package 0.4.0** (driver 0.3.0, panel 1.6; see [`CHANGELOG.md`](openaudio-mafw-bebob/CHANGELOG.md)) adds the **FireWire 410**. The latest published release is still **0.3.1** (FireWire 1814 and FireWire Audiophile); 0.4.0 is in the repository and its disk images are not published yet.
+> **Status: package 0.4.0** (driver 0.3.0, panel 1.6; see [`CHANGELOG.md`](openaudio-mafw-bebob/CHANGELOG.md)) adds the **FireWire 410** (released 2026-10-27 as [v0.4.0](https://github.com/bhsardinha/OA-BeBoB-MAFW/releases/tag/v0.4.0)).
 > - **Classic** (macOS 10.13 to 10.15): the **FireWire 410** was brought up and checked on an **iMac (iMac11,2, native FireWire 800, macOS 10.13.6)** with package 0.4.0, installed from its package. The **FireWire 1814 and FireWire Audiophile** were tested alone and together on that iMac, and on a MacBook Air (MacBookAir5,1) through Apple's Thunderbolt-to-FireWire adapter, with packages up to 0.2.2; they have **not yet been re-tested on 0.4.0**, which changes code they share with the 410.
-> - **Modern** (macOS 11 to 15, Intel): tested with **0.3.1** on a **MacBook Air (MacBookAir7,2), macOS 14.8.9**, with the Audiophile (plays) and a FireWire 1814 (panel and external-rate follow). The 0.4.0 Modern package is built but has **not been tried**; the FireWire 410 has never run on Modern.
+> - **Modern** (macOS 11 to 15, Intel): tested with **0.3.1** on a **MacBook Air (MacBookAir7,2), macOS 14.8.9**, with the Audiophile (plays) and a FireWire 1814 (panel and external-rate follow). The 0.4.0 Modern package has **not been tried** yet; the FireWire 410 has never run on Modern.
 >
 > Nothing else has been tested. Read [Known issues](#known-issues) before installing.
 
@@ -183,7 +183,7 @@ Checked with a tone on one channel at a time and the interface's own output mete
 
 ## Install
 
-1. Download the `.dmg` of your edition from the [Releases](https://github.com/bhsardinha/OA-BeBoB-MAFW/releases) page: `…-classic.dmg` for macOS 10.13 to 10.15, `…-modern.dmg` for macOS 11 to 15 on Intel. (0.4.0, the first release with the FireWire 410, is not published yet.)
+1. Download the `.dmg` of your edition from the [Releases](https://github.com/bhsardinha/OA-BeBoB-MAFW/releases) page: `…-classic.dmg` for macOS 10.13 to 10.15, `…-modern.dmg` for macOS 11 to 15 on Intel.
 2. Quit audio and MIDI applications. Remove the official M-Audio (and Avid/DICE) FireWire drivers first; they conflict. An earlier OpenAudio version does **not** need to be removed: the installer replaces it and keeps your settings.
 3. Set the security level: **Classic** needs System Integrity Protection disabled (Recovery mode, `csrutil disable`); **Modern** needs SIP set so unsigned kexts load.
 4. Open the `.dmg`, run **Install OA BeBoB MAFW.pkg**. (The package contains M-Audio's CoreMIDI plug-in unmodified, so that MIDI works; see [`NOTICE.md`](NOTICE.md).)

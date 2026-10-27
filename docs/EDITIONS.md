@@ -1,6 +1,6 @@
 # Editions: Classic (macOS 10.13) and Modern (macOS 11 to 15)
 
-Written 2026-10-21 (R129). Packages **0.3.0** are the first to come in two editions (published 2026-10-22, GitHub release v0.3.0); the latest release is **0.3.1** (driver 0.2.2, panel 1.5: external-rate follow, R131). **0.4.0** (driver 0.3.0, panel 1.6, 2026-10-27, not published yet) adds the FireWire 410: tried on Classic only (iMac, capture 106); the 0.4.0 Modern package is built but not tried. Everything below says whether it was checked, and where.
+Written 2026-10-21 (R129). Packages **0.3.0** are the first to come in two editions (published 2026-10-22, GitHub release v0.3.0); 0.3.1 (driver 0.2.2, panel 1.5) added the external-rate follow (R131). **0.4.0** (driver 0.3.0, panel 1.6, published 2026-10-27, release v0.4.0) adds the FireWire 410: tried on Classic only (iMac, capture 106); the 0.4.0 Modern package is built but not tried. Everything below says whether it was checked, and where.
 
 ## At a glance
 

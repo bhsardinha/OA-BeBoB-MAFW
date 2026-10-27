@@ -12,7 +12,7 @@ The M-Audio CoreMIDI plug-in is shipped unmodified (1.11.2). Each entry lists th
 
 ---
 
-## Package 0.4.0 — 2026-10-27 (not published yet)
+## Package 0.4.0 — 2026-10-27 (published, release v0.4.0)
 
 | Driver | Panel | MIDI plug-in | Editions |
 |---|---|---|---|

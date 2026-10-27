@@ -58,7 +58,7 @@ Full list: the README. Changes in detail: [`CHANGELOG.md`](https://github.com/bh
 
 | File | SHA-256 |
 |---|---|
-| `OA-BeBoB-MAFW-0.4.0-classic.dmg` | *(filled in when the disk images are built)* |
-| `OA-BeBoB-MAFW-0.4.0-modern.dmg` | *(filled in when the disk images are built)* |
+| `OA-BeBoB-MAFW-0.4.0-classic.dmg` | `965518e254231690dededd51fdfe9d1a09f08398f7dc4d7fd7ad66bdcb91f2eb` |
+| `OA-BeBoB-MAFW-0.4.0-modern.dmg` | `20d2f07ef9525bb94e06369ac72ec13a39a7d0862cb0e45d5b141d95068e3681` |
 
 License: PolyForm Noncommercial 1.0.0. M-Audio's software, firmware and icons belong to M-Audio / inMusic; this project is independent and not affiliated with them.
