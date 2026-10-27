@@ -5,7 +5,7 @@
 Read this first after a context clear, then `NEW_PLAN.md` → `docs/STATE.md` → `docs/BUILD-MANUAL.md` §0 → `docs/system-map/README.md`.
 
 ## 2026-10-27 - 0.4.0 documented, packages rebuilt
-Next (user decides): try the 0.4.0 Modern package (dev Mac: install + restart, never unload the old 0.2.9 by hand); re-test the FW1814 / Audiophile on 0.4.0; FW410 MIDI, S/PDIF, sleep/wake; then the dmgs (`installer/make-dmg.sh`, SHA-256 into RELEASE-0.4.0.md) and the release (`gh release create v0.4.0 …`) when the user asks. Public repo: `sync-to-public.sh` commit prepared, push only on the user's go-ahead.
+Next (user decides): try the 0.4.0 Modern package (dev Mac: install + restart, never unload the old 0.2.9 by hand); re-test the FW1814 / Audiophile on 0.4.0; FW410 MIDI, S/PDIF, sleep/wake; v0.4.0 is published (release + dmgs, 2026-10-27).
 
 ## 2026-10-26 (late) - FireWire 410 on the Classic iMac, 0.4.0 Classic installed (R136-R138)
 Next (user decides): MIDI, S/PDIF in/out + external sync, coaxial/optical switch, sleep/wake with the 410; the kextunload FWHsci leak (R138); the Modern 0.4.0 build (dev Mac kext + build PC panel) and the dev Mac test; stereo pairs on the FW1814 (user tests it himself); README/NOTICE + release when the user says. The 410 is on the iMac's FireWire bus (alone).
