@@ -74,7 +74,9 @@ UInt32 com_openaudio_FWAudioDevice::FetchIndexIntoSampleRateArray(const FWSample
 static void WakeAfterSleepThread(void *arg)
 {
     com_openaudio_FWAudioDevice *d = static_cast<com_openaudio_FWAudioDevice *>(arg);
+    OA_LOG("WAKE-DIAG: SystemWokeUp begin");
     d->SystemWokeUp();
+    OA_LOG("WAKE-DIAG: SystemWokeUp end");
     d->release();
 }
 
@@ -82,7 +84,8 @@ static void WakeAfterSleepThread(void *arg)
 IOReturn com_openaudio_FWAudioDevice::performPowerStateChange(IOAudioDevicePowerState oldState, IOAudioDevicePowerState newState, UInt32 *us)
 {
     *us = 0;
-    if (oldState == kIOAudioDeviceSleep && newState > kIOAudioDeviceSleep) fWokeFromSleep = true;
+    OA_LOG("WAKE-DIAG: performPowerStateChange %d -> %d (fWokeFromSleep %d)", (int)oldState, (int)newState, (int)fWokeFromSleep);
+    if (oldState == kIOAudioDeviceSleep && newState > kIOAudioDeviceSleep) { fWokeFromSleep = true; WokeFromSleepArmed(); }
     else if (oldState > kIOAudioDeviceSleep && newState == kIOAudioDeviceSleep) SystemWillSleep();
     return kIOReturnSuccess;
 }
@@ -92,6 +95,7 @@ IOReturn com_openaudio_FWAudioDevice::performPowerStateChange(IOAudioDevicePower
 // Every other message is swallowed (the reference returns 0 without calling the superclass).
 IOReturn com_openaudio_FWAudioDevice::message(UInt32 type, IOService *, void *)
 {
+    OA_LOG("WAKE-DIAG: message 0x%x (fReady %d, fWokeFromSleep %d)", (unsigned)type, (int)fReady, (int)fWokeFromSleep);
     if (fReady && type == kIOMessageServiceIsResumed) {
         if (!fWokeFromSleep) BusReset();                                      // ref vt[0xb20]
         else {                                                                // ref: WakeAfterSleep (= SystemWokeUp) on a new thread

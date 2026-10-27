@@ -38,6 +38,11 @@ public:
     virtual IOReturn mixOutputSamples(const void *sourceBuf, void *mixBuf, UInt32 firstSampleFrame, UInt32 numSampleFrames,
                                       const IOAudioStreamFormat *fmt, IOAudioStream *stream) APPLE_KEXT_OVERRIDE;    // ref @0x1af32
 
+    // UID: the reference pair engine does not override getGlobalUniqueID, so IOAudioEngine's builds "<class>:<local id>" and the live UIDs are
+    // "m_audio_b_FWPairEngine:1".."5" (capture 103). The clone keeps IOAudioEngine's local id and the REFERENCE class name, so a CoreAudio
+    // pair-device UID stays the same as with the official driver (as FWBaseEngine::getGlobalUniqueID does for the main engine; R136).
+    virtual OSString *getGlobalUniqueID() APPLE_KEXT_OVERRIDE;
+
     // ref ResetIOFormat @0x1ab42 (vt[0xbf8]): re-apply the master's rate to both streams and copy the master's latency properties
     void ResetIOFormat(const IOAudioSampleRate *rate);
     // set by CreateStereoPairSubEngines

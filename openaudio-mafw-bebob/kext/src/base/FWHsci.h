@@ -26,6 +26,8 @@ public:
     void Pause();                        // ref Pause / Resume: counted, independent of Start
     void Resume();
     void Release();                      // ref Release: cancel, free the buffer
+    // clone (R139): after Release(), wait up to `ms` for the outstanding read to complete, so the object (and the kext) is free when stop() returns
+    bool WaitForReadDone(UInt32 ms, UInt32 *waitedMs = 0);
     virtual void free() APPLE_KEXT_OVERRIDE;
 private:
     static void TimerFiredStatic(OSObject *owner, IOTimerEventSource *t);
@@ -44,7 +46,7 @@ private:
     UInt32 fSize;                        // [+0xc0]
     UInt32 *fBuf;                        // [+0xc8]
     bool fArmed;
-    bool fInFlight;                      // clone: an async read is outstanding (retain held until it completes)
+    volatile bool fInFlight;             // clone: an async read is outstanding (retain held until it completes)
     bool fDead;                          // clone: Release() ran; a late completion must not touch the timers
 };
 

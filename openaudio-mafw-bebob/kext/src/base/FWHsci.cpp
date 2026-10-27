@@ -65,6 +65,19 @@ void com_openaudio_FWHsci::Release()
     fArmed = false;
 }
 
+// Correction (2026-10-26, R139, FW410 on the iMac): the read in flight when the device stops keeps this object alive until its completion
+// arrives (TimerFired's retain), a few ms after stop(). kextunload counts the class instances right after terminating the devices, so the first
+// kextunload failed with "com_openaudio_FWHsci has 1 instance" and a retry 3 s later succeeded (capture 106). stop() now waits for that
+// completion here before dropping its reference. It is a bounded sleep on the termination thread, not a cancel (Release() above explains why a
+// synchronous cancel hung kextunload); the completion runs on the FireWire side and only clears fInFlight and drops the read's reference.
+bool com_openaudio_FWHsci::WaitForReadDone(UInt32 ms, UInt32 *waitedMs)
+{
+    UInt32 waited = 0;
+    for (; fInFlight && waited < ms; waited += 5) IOSleep(5);
+    if (waitedMs) *waitedMs = waited;
+    return !fInFlight;
+}
+
 void com_openaudio_FWHsci::free()
 {
     Release();

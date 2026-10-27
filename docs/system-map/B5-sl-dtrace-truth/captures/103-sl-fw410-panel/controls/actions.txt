@@ -1,0 +1,256 @@
+1793059163005 click tab-mixer 37 66
+1793059164449 sleep 1
+1793059165449 shot m-start
+/Users/bernardosardinha/fw1814-captures/103/controls//m-start.png
+1793059165507 click mix-sw12-ctrl-a 36 298
+1793059166948 click mix-sw12-ctrl-b 36 298
+1793059168388 click mix-sw12-solo-a 70 298
+1793059169829 click mix-sw12-solo-b 70 298
+1793059171269 click mix-sw12-mute-a 70 316
+1793059172709 click mix-sw12-mute-b 70 316
+1793059174150 click mix-sw12-link-a 36 316
+1793059175590 click mix-sw12-link-b 36 316
+1793059177030 click mix-sw12-out12-a 36 343
+1793059178471 click mix-sw12-out12-b 36 343
+1793059179911 click mix-sw12-outspd-a 70 343
+1793059181351 click mix-sw12-outspd-b 70 343
+1793059182792 click mix-sw12-out34-a 36 361
+1793059184232 click mix-sw12-out34-b 36 361
+1793059185672 click mix-sw12-out56-a 36 379
+1793059187113 click mix-sw12-out56-b 36 379
+1793059188553 click mix-sw12-out78-a 36 397
+1793059189993 click mix-sw12-out78-b 36 397
+1793059191434 click mix-sw34-ctrl-a 115 298
+1793059192874 click mix-sw34-ctrl-b 115 298
+1793059194314 click mix-sw34-solo-a 149 298
+1793059195755 click mix-sw34-solo-b 149 298
+1793059197195 click mix-sw34-mute-a 149 316
+1793059198636 click mix-sw34-mute-b 149 316
+1793059200076 click mix-sw34-link-a 115 316
+1793059201516 click mix-sw34-link-b 115 316
+1793059202957 click mix-sw34-out12-a 115 343
+1793059204397 click mix-sw34-out12-b 115 343
+1793059205838 click mix-sw34-outspd-a 149 343
+1793059207278 click mix-sw34-outspd-b 149 343
+1793059208719 click mix-sw34-out34-a 115 361
+1793059210159 click mix-sw34-out34-b 115 361
+1793059211599 click mix-sw34-out56-a 115 379
+1793059213040 click mix-sw34-out56-b 115 379
+1793059214480 click mix-sw34-out78-a 115 397
+1793059215921 click mix-sw34-out78-b 115 397
+1793059217361 click mix-sw56-ctrl-a 193 298
+1793059218802 click mix-sw56-ctrl-b 193 298
+1793059220242 click mix-sw56-solo-a 227 298
+1793059221682 click mix-sw56-solo-b 227 298
+1793059223123 click mix-sw56-mute-a 227 316
+1793059224563 click mix-sw56-mute-b 227 316
+1793059226004 click mix-sw56-link-a 193 316
+1793059227444 click mix-sw56-link-b 193 316
+1793059228885 click mix-sw56-out12-a 193 343
+1793059230325 click mix-sw56-out12-b 193 343
+1793059231765 click mix-sw56-outspd-a 227 343
+1793059233206 click mix-sw56-outspd-b 227 343
+1793059234646 click mix-sw56-out34-a 193 361
+1793059236087 click mix-sw56-out34-b 193 361
+1793059237527 click mix-sw56-out56-a 193 379
+1793059238967 click mix-sw56-out56-b 193 379
+1793059240408 click mix-sw56-out78-a 193 397
+1793059241848 click mix-sw56-out78-b 193 397
+1793059243289 click mix-sw78-ctrl-a 271 298
+1793059244729 click mix-sw78-ctrl-b 271 298
+1793059246169 click mix-sw78-solo-a 305 298
+1793059247610 click mix-sw78-solo-b 305 298
+1793059249050 click mix-sw78-mute-a 305 316
+1793059250491 click mix-sw78-mute-b 305 316
+1793059251931 click mix-sw78-link-a 271 316
+1793059253371 click mix-sw78-link-b 271 316
+1793059254812 click mix-sw78-out12-a 271 343
+1793059256253 click mix-sw78-out12-b 271 343
+1793059257693 click mix-sw78-outspd-a 305 343
+1793059259133 click mix-sw78-outspd-b 305 343
+1793059260574 click mix-sw78-out34-a 271 361
+1793059262014 click mix-sw78-out34-b 271 361
+1793059263455 click mix-sw78-out56-a 271 379
+1793059264895 click mix-sw78-out56-b 271 379
+1793059266336 click mix-sw78-out78-a 271 397
+1793059267776 click mix-sw78-out78-b 271 397
+1793059269216 click mix-swspd-ctrl-a 350 298
+1793059270657 click mix-swspd-ctrl-b 350 298
+1793059272097 click mix-swspd-solo-a 384 298
+1793059273538 click mix-swspd-solo-b 384 298
+1793059274978 click mix-swspd-mute-a 384 316
+1793059276418 click mix-swspd-mute-b 384 316
+1793059277859 click mix-swspd-link-a 350 316
+1793059279299 click mix-swspd-link-b 350 316
+1793059280740 click mix-swspd-out12-a 350 343
+1793059282180 click mix-swspd-out12-b 350 343
+1793059283621 click mix-swspd-outspd-a 384 343
+1793059285061 click mix-swspd-outspd-b 384 343
+1793059286502 click mix-swspd-out34-a 350 361
+1793059287942 click mix-swspd-out34-b 350 361
+1793059289382 click mix-swspd-out56-a 350 379
+1793059290823 click mix-swspd-out56-b 350 379
+1793059292263 click mix-swspd-out78-a 350 397
+1793059293704 click mix-swspd-out78-b 350 397
+1793059295144 click mix-ain-ctrl-a 428 358
+1793059296585 click mix-ain-ctrl-b 428 358
+1793059298025 click mix-ain-solo-a 462 358
+1793059299465 click mix-ain-solo-b 462 358
+1793059300906 click mix-ain-mute-a 462 377
+1793059302346 click mix-ain-mute-b 462 377
+1793059303787 click mix-ain-link-a 428 377
+1793059305227 click mix-ain-link-b 428 377
+1793059306667 click mix-ain-out12-a 428 404
+1793059308108 click mix-ain-out12-b 428 404
+1793059309548 click mix-ain-outspd-a 462 404
+1793059310989 click mix-ain-outspd-b 462 404
+1793059312429 click mix-ain-out34-a 428 421
+1793059313870 click mix-ain-out34-b 428 421
+1793059315310 click mix-ain-out56-a 428 439
+1793059316750 click mix-ain-out56-b 428 439
+1793059318191 click mix-ain-out78-a 428 457
+1793059319631 click mix-ain-out78-b 428 457
+1793059321072 click mix-spdin-ctrl-a 506 358
+1793059322512 click mix-spdin-ctrl-b 506 358
+1793059323952 click mix-spdin-solo-a 540 358
+1793059325393 click mix-spdin-solo-b 540 358
+1793059326833 click mix-spdin-mute-a 540 377
+1793059328274 click mix-spdin-mute-b 540 377
+1793059329714 click mix-spdin-link-a 506 377
+1793059331155 click mix-spdin-link-b 506 377
+1793059332595 click mix-spdin-out12-a 506 404
+1793059334035 click mix-spdin-out12-b 506 404
+1793059335476 click mix-spdin-outspd-a 540 404
+1793059336916 click mix-spdin-outspd-b 540 404
+1793059338357 click mix-spdin-out34-a 506 421
+1793059339797 click mix-spdin-out34-b 506 421
+1793059341238 click mix-spdin-out56-a 506 439
+1793059342678 click mix-spdin-out56-b 506 439
+1793059344119 click mix-spdin-out78-a 506 457
+1793059345559 click mix-spdin-out78-b 506 457
+1793059346999 drag mix-sw12-fader-L 41 170 41 200
+1793059348930 drag mix-sw12-auxL 40 133 40 113
+1793059350862 drag mix-ain-fader-L 431 170 431 200
+1793059352793 drag mix-ain-auxL 428 133 428 113
+1793059354724 drag mix-ain-panL 428 320 428 300
+1793059356655 drag mix-spdin-fader-L 509 170 509 200
+1793059358587 shot m-end
+/Users/bernardosardinha/fw1814-captures/103/controls//m-end.png
+1793059358648 click tab-output 92 66
+1793059360088 sleep 1
+1793059361088 shot o-start
+/Users/bernardosardinha/fw1814-captures/103/controls//o-start.png
+1793059361152 click out-o12-ctrl-a 36 298
+1793059362592 click out-o12-ctrl-b 36 298
+1793059364033 click out-o12-solo-a 70 298
+1793059365473 click out-o12-solo-b 70 298
+1793059366913 click out-o12-mute-a 70 316
+1793059368354 click out-o12-mute-b 70 316
+1793059369794 click out-o12-link-a 36 316
+1793059371235 click out-o12-link-b 36 316
+1793059372675 click out-o12-main-a 55 343
+1793059374115 click out-o12-main-b 55 343
+1793059375556 click out-o34-ctrl-a 115 298
+1793059376996 click out-o34-ctrl-b 115 298
+1793059378437 click out-o34-solo-a 149 298
+1793059379877 click out-o34-solo-b 149 298
+1793059381317 click out-o34-mute-a 149 316
+1793059382758 click out-o34-mute-b 149 316
+1793059384198 click out-o34-link-a 115 316
+1793059385638 click out-o34-link-b 115 316
+1793059387079 click out-o34-main-a 134 343
+1793059388519 click out-o34-main-b 134 343
+1793059389960 click out-o56-ctrl-a 193 298
+1793059391400 click out-o56-ctrl-b 193 298
+1793059392840 click out-o56-solo-a 227 298
+1793059394281 click out-o56-solo-b 227 298
+1793059395721 click out-o56-mute-a 227 316
+1793059397161 click out-o56-mute-b 227 316
+1793059398602 click out-o56-link-a 193 316
+1793059400042 click out-o56-link-b 193 316
+1793059401482 click out-o56-main-a 212 343
+1793059402923 click out-o56-main-b 212 343
+1793059404363 click out-o78-ctrl-a 271 298
+1793059405804 click out-o78-ctrl-b 271 298
+1793059407244 click out-o78-solo-a 305 298
+1793059408684 click out-o78-solo-b 305 298
+1793059410125 click out-o78-mute-a 305 316
+1793059411565 click out-o78-mute-b 305 316
+1793059413006 click out-o78-link-a 271 316
+1793059414446 click out-o78-link-b 271 316
+1793059415886 click out-o78-main-a 290 343
+1793059417327 click out-o78-main-b 290 343
+1793059418767 click out-ospd-ctrl-a 350 298
+1793059420207 click out-ospd-ctrl-b 350 298
+1793059421648 click out-ospd-solo-a 384 298
+1793059423088 click out-ospd-solo-b 384 298
+1793059424529 click out-ospd-mute-a 384 316
+1793059425969 click out-ospd-mute-b 384 316
+1793059427409 click out-ospd-link-a 350 316
+1793059428850 click out-ospd-link-b 350 316
+1793059430290 click out-ospd-main-a 369 343
+1793059431730 click out-ospd-main-b 369 343
+1793059433171 click out-aux-ctrl-a 428 298
+1793059434611 click out-aux-ctrl-b 428 298
+1793059436052 click out-aux-link-a 428 316
+1793059437492 click out-aux-link-b 428 316
+1793059438933 click out-aux-mute-a 462 316
+1793059440373 click out-aux-mute-b 462 316
+1793059441813 click out-hp-ctrl-a 506 298
+1793059443254 click out-hp-ctrl-b 506 298
+1793059444694 click out-hp-main-a 541 298
+1793059446135 click out-hp-main-b 541 298
+1793059447575 click out-hp-link-a 506 316
+1793059449015 click out-hp-link-b 506 316
+1793059450456 click out-hp-mute-a 541 316
+1793059451896 click out-hp-mute-b 541 316
+1793059453336 click out-hp-mon12-a 506 343
+1793059454777 click out-hp-mon12-b 506 343
+1793059456217 click out-hp-monspd-a 541 343
+1793059457658 click out-hp-monspd-b 541 343
+1793059459098 click out-hp-mon34-a 506 361
+1793059460538 click out-hp-mon34-b 506 361
+1793059461979 click out-hp-mon56-a 506 379
+1793059463419 click out-hp-mon56-b 506 379
+1793059464859 click out-hp-mon78-a 506 397
+1793059466300 click out-hp-mon78-b 506 397
+1793059467740 drag out-o12-fader-L 41 170 41 200
+1793059469672 drag out-o12-bal 55 133 55 113
+1793059471603 drag out-aux-fader-L 431 170 431 200
+1793059473534 drag out-aux-panL 428 377 428 357
+1793059475465 drag out-hp-fader-L 509 170 509 200
+1793059477397 drag out-ospd-fader-L 355 170 355 200
+1793059479328 shot o-end
+/Users/bernardosardinha/fw1814-captures/103/controls//o-end.png
+1793059479478 click tab-hardware 148 66
+1793059480918 sleep 1
+1793059481918 shot h-start
+/Users/bernardosardinha/fw1814-captures/103/controls//h-start.png
+1793059481996 click hw-sync-ext 400 161
+1793059483436 sleep 2
+1793059485436 shot h-ext
+/Users/bernardosardinha/fw1814-captures/103/controls//h-ext.png
+1793059485509 click hw-sync-int 400 135
+1793059486950 sleep 2
+1793059488950 click hw-spdif-opt 127 357
+1793059490390 sleep 1
+1793059491390 shot h-opt
+/Users/bernardosardinha/fw1814-captures/103/controls//h-opt.png
+1793059491461 click hw-spdif-coax 127 331
+1793059492902 sleep 1
+1793059493902 click lc-swrtn 600 209
+1793059495342 sleep 1
+1793059496342 click lc-input 600 243
+1793059497783 sleep 1
+1793059498783 click lc-phones 600 260
+1793059500223 sleep 1
+1793059501223 click lc-aux 600 277
+1793059502664 sleep 1
+1793059503664 click lc-output 600 226
+1793059505104 sleep 1
+1793059506104 click main-mute-a 611 324
+1793059507544 click main-mute-b 611 324
+1793059508985 click main-dim-a 651 324
+1793059510425 click main-dim-b 651 324
+1793059511865 shot h-end
+/Users/bernardosardinha/fw1814-captures/103/controls//h-end.png

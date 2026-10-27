@@ -26,6 +26,15 @@ void com_openaudio_FWPairEngine::AddDirection(bool isOutput, UInt32 channelOffse
 }
 
 // ref init @0x1afb8
+OSString *com_openaudio_FWPairEngine::getGlobalUniqueID()
+{
+    OSString *local = getLocalUniqueID();
+    char buf[96];
+    snprintf(buf, sizeof(buf), "m_audio_b_FWPairEngine:%s", local ? local->getCStringNoCopy() : "");
+    if (local) local->release();
+    return OSString::withCString(buf);
+}
+
 bool com_openaudio_FWPairEngine::init(OSDictionary *properties)
 {
     fIniting = true;

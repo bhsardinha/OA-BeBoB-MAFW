@@ -53,6 +53,33 @@ final class DemoBackend: PanelBackend {
             "MAActualProductName": "FireWire 1814 (demo)", "MAFirmwareInfo": Data(info),
         ]
         if profile === AudiophileProfile.shared { props = DemoBackend.audiophileProps(rate: rate, info: DemoBackend.audiophileInfoBlock) }
+        if profile === FW410Profile.shared { props = DemoBackend.fw410Props(rate: rate, info: info) }
+        if props["MAEnableStereoPairEngines"] == nil { props["MAEnableStereoPairEngines"] = NSNumber(value: 0) }   // every driver publishes it
+    }
+
+    /// FireWire 410 demo state (plan FW410 v2 F4.1): the kext's group sizes (SW returns 10, outputs 10, inputs 4, phones 2, aux sends 14, aux
+    /// out 2, monitor switches 6, routings 5 / 2; kext models/FW410) with the routing the SL rig's 410 had (capture 103: SW return n -> out n,
+    /// inputs unrouted, phones on 1/2) and a few changes so the snapshots show states (phones on 1/2 + S/PDIF: multi-select).
+    private static func fw410Props(rate: UInt32, info: [UInt8]) -> [String: Any] {
+        func n(_ v: [Int]) -> [NSNumber] { return v.map { NSNumber(value: $0) } }
+        func zeros(_ c: Int, _ v: Int = 0) -> [NSNumber] { return [NSNumber](repeating: NSNumber(value: v), count: c) }
+        var aux = zeros(14, -129); aux[0] = NSNumber(value: -24); aux[4] = NSNumber(value: -40)
+        var clock = MAClockSource(raw: 0x4000_0004)                                    // internal, coaxial S/PDIF in (capture 103)
+        clock.sync = .internalUnmuted
+        return [
+            "MASWReturnLevels": n([0, 0, -8, -8, 0, 0, -16, -16, 0, 0]), "MASWReturnMute": zeros(10), "MASWReturnSolo": zeros(10), "MASWReturnLink": zeros(10, 1),
+            "MAOutputLevels": zeros(10, -12), "MAOutputMute": zeros(10), "MAOutputSolo": zeros(10), "MAOutputLink": zeros(10, 1),
+            "MAInputLevels": n([0, 0, -12, -12]), "MAInputMute": zeros(4), "MAInputSolo": zeros(4), "MAInputLink": zeros(4, 1),
+            "MAHeadphoneLevels": n([-20, -20]), "MAHeadphoneMute": zeros(2), "MAHeadphoneLink": zeros(2, 1), "MAMonitorKnobStep": NSNumber(value: 3),
+            "MAAuxSendLevels": aux, "MAAuxOutputLevels": zeros(2), "MAAuxOutputMute": zeros(2), "MAAuxOutputLink": zeros(2, 1),
+            "MAAuxOutputPan2": n([-255, 255]), "MAMonitorAuxOnOutput": n([0, 0, 0, 1, 0, 0]),
+            "MAInputPan2": n([-255, 255, -255, 255]), "MAInputRoutingV2": n([1, 0]), "MASWReturnRoutingV2": n([1, 2, 4, 8, 16]),
+            "MAGlobalDim": NSNumber(value: 0), "MAGlobalMute": NSNumber(value: 0),
+            "MARotaryControlV2": NSNumber(value: MARotaryMask.factoryDefault),
+            "MAHeadphoneSourceV2": NSNumber(value: 17), "MAEnableStereoPairEngines": NSNumber(value: 0),
+            "MAClockSource": NSNumber(value: clock.wireValue), "MASampleRate": NSNumber(value: rate), "MARateLocked": NSNumber(value: 1),
+            "MAActualProductName": "FireWire 410 (demo)", "MAFirmwareInfo": Data(info),
+        ]
     }
 
     /// FireWire Audiophile demo state (AP-5.2): the kext's group sizes (SW returns 6, outputs 6, inputs 4, phones 2, aux sends 10, aux out 2,

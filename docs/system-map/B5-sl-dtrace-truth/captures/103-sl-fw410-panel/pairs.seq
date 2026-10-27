@@ -1,0 +1,5 @@
+click tab-hardware 148 66
+sleep 1
+click pairs-on 331 357
+sleep 4
+shot pairs-on

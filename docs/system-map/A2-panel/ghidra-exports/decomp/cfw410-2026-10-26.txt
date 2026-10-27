@@ -1,0 +1,6118 @@
+PROGRAM Panel (Ghidra 12.1.4 headless, DecompList, 2026-10-26: all CFW410*, CX410Device, FW410Constructor)
+=== FW410Constructor @ 00072af4 ===
+/* FW410Constructor(MAIOKitService*) */
+
+CXDevice * FW410Constructor(MAIOKitService *param_1)
+
+{
+  undefined *puVar1;
+  CXDevice *this;
+  
+  this = operator_new(0x118);
+  CXDevice::CXDevice(this,param_1,true);
+  puVar1 = PTR_vtable_00163144;
+  *(undefined **)this = PTR_vtable_00163144 + 8;
+  *(undefined **)(this + 0x30) = puVar1 + 0x88;
+  return this;
+}
+
+
+=== CX410Device::GetDeviceType @ 0007329a ===
+/* CX410Device::GetDeviceType() */
+
+undefined4 CX410Device::GetDeviceType(void)
+
+{
+  return 0x46343130;
+}
+
+
+=== CX410Device::GetNumberOfOutputChannels @ 000732a4 ===
+/* CX410Device::GetNumberOfOutputChannels() */
+
+undefined4 CX410Device::GetNumberOfOutputChannels(void)
+
+{
+  return 0xe;
+}
+
+
+=== CX410Device::GetNumberOfMixerChannels @ 000732ae ===
+/* CX410Device::GetNumberOfMixerChannels() */
+
+undefined4 CX410Device::GetNumberOfMixerChannels(void)
+
+{
+  return 0xe;
+}
+
+
+=== CX410Device::GetNumberOfInputChannels @ 000732b8 ===
+/* CX410Device::GetNumberOfInputChannels() */
+
+undefined4 CX410Device::GetNumberOfInputChannels(void)
+
+{
+  return 4;
+}
+
+
+=== CX410Device::GetNumberOfHeadphoneChannels @ 000732c2 ===
+/* CX410Device::GetNumberOfHeadphoneChannels() */
+
+undefined4 CX410Device::GetNumberOfHeadphoneChannels(void)
+
+{
+  return 2;
+}
+
+
+=== CX410Device::GetNumberOfAuxMonitorSwitchChannels @ 000732cc ===
+/* CX410Device::GetNumberOfAuxMonitorSwitchChannels() */
+
+short __thiscall CX410Device::GetNumberOfAuxMonitorSwitchChannels(CX410Device *this)
+
+{
+  short sVar1;
+  short sVar2;
+  
+  sVar1 = (**(code **)(*(int *)this + 0x18))(this);
+  sVar2 = (**(code **)(*(int *)this + 0x60))(this);
+  return sVar1 - sVar2;
+}
+
+
+=== CFW410HardwareView::CFW410HardwareView @ 00079ffc ===
+/* CFW410HardwareView::CFW410HardwareView(LStream*) */
+
+void __thiscall CFW410HardwareView::CFW410HardwareView(CFW410HardwareView *this,LStream *param_1)
+
+{
+  LAttachable::LAttachable((LAttachable *)(this + 0x164));
+  CHardwareView::CHardwareView((CHardwareView *)this,(LStream *)&PTR_PTR_0018b264);
+  *(undefined ***)this = &PTR__CFW410HardwareView_0018af2c;
+  *(undefined ***)(this + 0x164) = &PTR__CFW410HardwareView_0018b248;
+  *(undefined ***)(this + 0x88) = &PTR__CFW410HardwareView_0018b1a0;
+  *(undefined ***)(this + 0xb8) = &PTR__CFW410HardwareView_0018b1b4;
+  *(undefined ***)(this + 0xe8) = &PTR__CFW410HardwareView_0018b1c8;
+  *(undefined4 *)(this + 0x154) = 0;
+  *(undefined4 *)(this + 0x158) = 0;
+  *(undefined4 *)(this + 0x15c) = 0;
+  return;
+}
+
+
+=== CFW410HardwareView::CFW410HardwareView @ 0007a0aa ===
+/* CFW410HardwareView::CFW410HardwareView(LStream*) */
+
+void __thiscall CFW410HardwareView::CFW410HardwareView(CFW410HardwareView *this,LStream *param_1)
+
+{
+  int iVar1;
+  
+  CHardwareView::CHardwareView((CHardwareView *)this,param_1 + 4);
+  iVar1 = *(int *)param_1;
+  *(int *)this = iVar1;
+  *(undefined4 *)(this + *(int *)(iVar1 + -0xc)) = *(undefined4 *)(param_1 + 0x34);
+  *(undefined ***)(this + 0x88) = &PTR__CFW410HardwareView_0018b1a0;
+  *(undefined ***)(this + 0xb8) = &PTR__CFW410HardwareView_0018b1b4;
+  *(undefined4 *)(this + 0xe8) = *(undefined4 *)(param_1 + 0x38);
+  *(undefined4 *)(this + 0x154) = 0;
+  *(undefined4 *)(this + 0x158) = 0;
+  *(undefined4 *)(this + 0x15c) = 0;
+  return;
+}
+
+
+=== CFW410HardwareView::~CFW410HardwareView @ 0007a12a ===
+/* CFW410HardwareView::~CFW410HardwareView() */
+
+void __thiscall CFW410HardwareView::~CFW410HardwareView(CFW410HardwareView *this)
+
+{
+  ~CFW410HardwareView(this);
+  operator_delete(this);
+  return;
+}
+
+
+=== CFW410HardwareView::~CFW410HardwareView @ 0007a15a ===
+/* CFW410HardwareView::~CFW410HardwareView() */
+
+void __thiscall CFW410HardwareView::~CFW410HardwareView(CFW410HardwareView *this)
+
+{
+  CHardwareView::~CHardwareView((CHardwareView *)this);
+  LAttachable::~LAttachable((LAttachable *)(this + 0x164));
+  return;
+}
+
+
+=== CFW410HardwareView::~CFW410HardwareView @ 0007a1b0 ===
+/* non-virtual thunk to CFW410HardwareView::~CFW410HardwareView() */
+
+void __thiscall CFW410HardwareView::~CFW410HardwareView(CFW410HardwareView *this)
+
+{
+  ~CFW410HardwareView(this + -0x88);
+  return;
+}
+
+
+=== CFW410HardwareView::~CFW410HardwareView @ 0007a1cc ===
+/* non-virtual thunk to CFW410HardwareView::~CFW410HardwareView() */
+
+void __thiscall CFW410HardwareView::~CFW410HardwareView(CFW410HardwareView *this)
+
+{
+  ~CFW410HardwareView(this + -0xb8);
+  return;
+}
+
+
+=== CFW410HardwareView::~CFW410HardwareView @ 0007a1e8 ===
+/* non-virtual thunk to CFW410HardwareView::~CFW410HardwareView() */
+
+void __thiscall CFW410HardwareView::~CFW410HardwareView(CFW410HardwareView *this)
+
+{
+  ~CFW410HardwareView(this + -0xe8);
+  return;
+}
+
+
+=== CFW410HardwareView::~CFW410HardwareView @ 0007a204 ===
+/* virtual thunk to CFW410HardwareView::~CFW410HardwareView() */
+
+void __thiscall CFW410HardwareView::~CFW410HardwareView(CFW410HardwareView *this)
+
+{
+  ~CFW410HardwareView(this + *(int *)(*(int *)this + -0xc));
+  return;
+}
+
+
+=== CFW410HardwareView::~CFW410HardwareView @ 0007a220 ===
+/* CFW410HardwareView::~CFW410HardwareView() */
+
+void __thiscall CFW410HardwareView::~CFW410HardwareView(CFW410HardwareView *this)
+
+{
+  CHardwareView::~CHardwareView((CHardwareView *)this);
+  return;
+}
+
+
+=== CFW410HardwareView::~CFW410HardwareView @ 0007a240 ===
+/* non-virtual thunk to CFW410HardwareView::~CFW410HardwareView() */
+
+void __thiscall CFW410HardwareView::~CFW410HardwareView(CFW410HardwareView *this)
+
+{
+  ~CFW410HardwareView(this + -0x88);
+  return;
+}
+
+
+=== CFW410HardwareView::~CFW410HardwareView @ 0007a25c ===
+/* non-virtual thunk to CFW410HardwareView::~CFW410HardwareView() */
+
+void __thiscall CFW410HardwareView::~CFW410HardwareView(CFW410HardwareView *this)
+
+{
+  ~CFW410HardwareView(this + -0xb8);
+  return;
+}
+
+
+=== CFW410HardwareView::~CFW410HardwareView @ 0007a278 ===
+/* non-virtual thunk to CFW410HardwareView::~CFW410HardwareView() */
+
+void __thiscall CFW410HardwareView::~CFW410HardwareView(CFW410HardwareView *this)
+
+{
+  ~CFW410HardwareView(this + -0xe8);
+  return;
+}
+
+
+=== CFW410HardwareView::~CFW410HardwareView @ 0007a294 ===
+/* virtual thunk to CFW410HardwareView::~CFW410HardwareView() */
+
+void __thiscall CFW410HardwareView::~CFW410HardwareView(CFW410HardwareView *this)
+
+{
+  ~CFW410HardwareView(this + *(int *)(*(int *)this + -0xc));
+  return;
+}
+
+
+=== CFW410HardwareView::LoadUIElements @ 0007a2b0 ===
+/* CFW410HardwareView::LoadUIElements() */
+
+void __thiscall CFW410HardwareView::LoadUIElements(CFW410HardwareView *this)
+
+{
+  int iVar1;
+  
+  CHardwareView::LoadUIElements((CHardwareView *)this);
+  (**(code **)(*(int *)this + 0x224))(this);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x14b5);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x154) = 0;
+LAB_0007a322:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011fcfc,0x3e
+              );
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630f0,0xffffffff);
+    *(int *)(this + 0x154) = iVar1;
+    if (iVar1 == 0) goto LAB_0007a322;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x14b7);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x158) = 0;
+LAB_0007a398:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011fcfc,0x41
+              );
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630ec,0xffffffff);
+    *(int *)(this + 0x158) = iVar1;
+    if (iVar1 == 0) goto LAB_0007a398;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x14b6);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x15c) = 0;
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630ec,0xffffffff);
+    *(int *)(this + 0x15c) = iVar1;
+    if (iVar1 != 0) goto LAB_0007a436;
+  }
+  UDebugging::DebugThrow
+            (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011fcfc,0x44);
+LAB_0007a436:
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x14c8);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x160) = 0;
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630f4,0xffffffff);
+    *(int *)(this + 0x160) = iVar1;
+    if (iVar1 != 0) {
+      return;
+    }
+  }
+  UDebugging::DebugThrow
+            (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011fcfc,0x47);
+  return;
+}
+
+
+=== CFW410HardwareView::ListenToUIElements @ 0007a4b4 ===
+/* CFW410HardwareView::ListenToUIElements() */
+
+void __thiscall CFW410HardwareView::ListenToUIElements(CFW410HardwareView *this)
+
+{
+  CHardwareView::ListenToUIElements((CHardwareView *)this);
+  (**(code **)(*(int *)this + 0x240))(this);
+  LBroadcaster::AddListener
+            ((LBroadcaster *)(*(int *)(this + 0x158) + 0x30),(LListener *)(this + 0x88));
+  LBroadcaster::AddListener
+            ((LBroadcaster *)(*(int *)(this + 0x15c) + 0x30),(LListener *)(this + 0x88));
+  return;
+}
+
+
+=== CFW410HardwareView::ListenToMessage @ 0007a50a ===
+/* CFW410HardwareView::ListenToMessage(long, void*) */
+
+void __thiscall
+CFW410HardwareView::ListenToMessage(CFW410HardwareView *this,long param_1,void *param_2)
+
+{
+  CFW410HardwareView CVar1;
+  short sVar2;
+  int iVar3;
+  ushort local_14;
+  ushort local_12;
+  
+  if (param_1 == 0x600) {
+    CVar1 = this[0xb4];
+    if (CVar1 != (CFW410HardwareView)0x0) {
+      this[0xb4] = (CFW410HardwareView)0x0;
+    }
+    (**(code **)(**(int **)(this + 0x154) + 0x1ec))
+              (*(int **)(this + 0x154),**(short **)((int)param_2 + 0xc) == 0 | 0x14b6);
+    if (CVar1 != (CFW410HardwareView)0x0) {
+      this[0xb4] = (CFW410HardwareView)0x1;
+    }
+  }
+  else if (param_1 == 0x601) {
+    AdaptToClockRate(this,**(ulong **)((int)param_2 + 0xc));
+  }
+  else if (param_1 == 0x14b5) {
+    iVar3 = (**(code **)(**(int **)(this + 0x154) + 0x1e8))(*(int **)(this + 0x154));
+    local_14 = 2;
+    local_12 = (ushort)(iVar3 != 0x14b7);
+    sVar2 = (**(code **)(**(int **)(this + 0x11c) + 0xc))
+                      (*(int **)(this + 0x11c),0x600,0,2,&local_14);
+    if ((sVar2 == 0) && ((iVar3 != 0x14b7) != local_14)) {
+      (**(code **)(**(int **)(this + 0x11c) + 0x18))(*(int **)(this + 0x11c),0x600,0,2,&local_12,0);
+    }
+  }
+  else {
+    CHardwareView::ListenToMessage((CHardwareView *)this,param_1,param_2);
+  }
+  return;
+}
+
+
+=== CFW410HardwareView::MapSPDIFSourceButtonToSetting @ 0007a64a ===
+/* CFW410HardwareView::MapSPDIFSourceButtonToSetting(long) */
+
+bool __thiscall
+CFW410HardwareView::MapSPDIFSourceButtonToSetting(CFW410HardwareView *this,long param_1)
+
+{
+  return param_1 != 0x14b7;
+}
+
+
+=== CFW410HardwareView::AdaptToClockRate @ 0007a65c ===
+/* CFW410HardwareView::AdaptToClockRate(unsigned long) */
+
+void __thiscall CFW410HardwareView::AdaptToClockRate(CFW410HardwareView *this,ulong param_1)
+
+{
+  int *piVar1;
+  
+  piVar1 = *(int **)(this + 0x154);
+  if (param_1 < 0x2b110) {
+    (**(code **)(*piVar1 + 200))(piVar1);
+    (**(code **)(**(int **)(this + 0x160) + 0xbc))(*(int **)(this + 0x160));
+  }
+  else {
+    (**(code **)(*piVar1 + 0xcc))(piVar1);
+    (**(code **)(**(int **)(this + 0x160) + 0xb8))(*(int **)(this + 0x160));
+  }
+  return;
+}
+
+
+=== CFW410HardwareView::MapSPDIFSourceSettingToButton @ 0007a6b2 ===
+/* CFW410HardwareView::MapSPDIFSourceSettingToButton(unsigned short) */
+
+uint __thiscall
+CFW410HardwareView::MapSPDIFSourceSettingToButton(CFW410HardwareView *this,ushort param_1)
+
+{
+  return param_1 == 0 | 0x14b6;
+}
+
+
+=== CFW410HardwareView::ListenToMessage @ 0007a6c8 ===
+/* non-virtual thunk to CFW410HardwareView::ListenToMessage(long, void*) */
+
+void __thiscall
+CFW410HardwareView::ListenToMessage(CFW410HardwareView *this,long param_1,void *param_2)
+
+{
+  ListenToMessage(this + -0x88,param_1,param_2);
+  return;
+}
+
+
+=== CFW410HardwareView::AdaptUIElementsToSettings @ 0007a6f2 ===
+/* CFW410HardwareView::AdaptUIElementsToSettings() */
+
+void __thiscall CFW410HardwareView::AdaptUIElementsToSettings(CFW410HardwareView *this)
+
+{
+  short sVar1;
+  ulong uVar2;
+  ulong local_14;
+  short local_e;
+  
+  local_e = 0;
+  local_14 = 0;
+  CHardwareView::AdaptUIElementsToSettings((CHardwareView *)this);
+  (**(code **)(*(int *)this + 0x25c))(this);
+  sVar1 = (**(code **)(**(int **)(this + 0x11c) + 0xc))(*(int **)(this + 0x11c),0x600,0,2,&local_e);
+  (**(code **)(**(int **)(this + 0x154) + 0x1ec))
+            (*(int **)(this + 0x154),(sVar1 != 0 || local_e == 0) | 0x14b6);
+  sVar1 = (**(code **)(**(int **)(this + 0x11c) + 0xc))(*(int **)(this + 0x11c),0x601,0,4,&local_14)
+  ;
+  uVar2 = 0;
+  if (sVar1 == 0) {
+    uVar2 = local_14;
+  }
+  AdaptToClockRate(this,uVar2);
+  return;
+}
+
+
+=== CFW410HardwareView::LoadSampleRateDisplay @ 0007a7c0 ===
+/* CFW410HardwareView::LoadSampleRateDisplay() */
+
+void CFW410HardwareView::LoadSampleRateDisplay(void)
+
+{
+  return;
+}
+
+
+=== CFW410HardwareView::LoadBitDepthControl @ 0007a7c6 ===
+/* CFW410HardwareView::LoadBitDepthControl() */
+
+void CFW410HardwareView::LoadBitDepthControl(void)
+
+{
+  return;
+}
+
+
+=== CFW410HardwareView::LoadBufferSizeControl @ 0007a7cc ===
+/* CFW410HardwareView::LoadBufferSizeControl() */
+
+void CFW410HardwareView::LoadBufferSizeControl(void)
+
+{
+  return;
+}
+
+
+=== CFW410HardwareView::LoadAsioDmEnableControl @ 0007a7d2 ===
+/* CFW410HardwareView::LoadAsioDmEnableControl() */
+
+void CFW410HardwareView::LoadAsioDmEnableControl(void)
+
+{
+  return;
+}
+
+
+=== CFW410HardwareView::ListenToSampleRateDisplay @ 0007a7d8 ===
+/* CFW410HardwareView::ListenToSampleRateDisplay() */
+
+void CFW410HardwareView::ListenToSampleRateDisplay(void)
+
+{
+  return;
+}
+
+
+=== CFW410HardwareView::ListenToBitDepthControl @ 0007a7de ===
+/* CFW410HardwareView::ListenToBitDepthControl() */
+
+void CFW410HardwareView::ListenToBitDepthControl(void)
+
+{
+  return;
+}
+
+
+=== CFW410HardwareView::ListenToBufferSizeControl @ 0007a7e4 ===
+/* CFW410HardwareView::ListenToBufferSizeControl() */
+
+void CFW410HardwareView::ListenToBufferSizeControl(void)
+
+{
+  return;
+}
+
+
+=== CFW410HardwareView::ListenToAsioDmEnableControl @ 0007a7ea ===
+/* CFW410HardwareView::ListenToAsioDmEnableControl() */
+
+void CFW410HardwareView::ListenToAsioDmEnableControl(void)
+
+{
+  return;
+}
+
+
+=== CFW410HardwareView::AdaptSampleRateDisplay @ 0007a7f0 ===
+/* CFW410HardwareView::AdaptSampleRateDisplay() */
+
+void CFW410HardwareView::AdaptSampleRateDisplay(void)
+
+{
+  return;
+}
+
+
+=== CFW410HardwareView::AdaptBitDepthControl @ 0007a7f6 ===
+/* CFW410HardwareView::AdaptBitDepthControl() */
+
+void CFW410HardwareView::AdaptBitDepthControl(void)
+
+{
+  return;
+}
+
+
+=== CFW410HardwareView::AdaptBufferSizeControl @ 0007a7fc ===
+/* CFW410HardwareView::AdaptBufferSizeControl() */
+
+void CFW410HardwareView::AdaptBufferSizeControl(void)
+
+{
+  return;
+}
+
+
+=== CFW410HardwareView::AdaptAsioDmEnableControl @ 0007a802 ===
+/* CFW410HardwareView::AdaptAsioDmEnableControl() */
+
+void CFW410HardwareView::AdaptAsioDmEnableControl(void)
+
+{
+  return;
+}
+
+
+=== CFW410HPOutChannelPairView::CFW410HPOutChannelPairView @ 0007a808 ===
+/* CFW410HPOutChannelPairView::CFW410HPOutChannelPairView(LStream*) */
+
+void __thiscall
+CFW410HPOutChannelPairView::CFW410HPOutChannelPairView
+          (CFW410HPOutChannelPairView *this,LStream *param_1)
+
+{
+  LAttachable::LAttachable((LAttachable *)(this + 0x108));
+  COutputChannelPairView::COutputChannelPairView
+            ((COutputChannelPairView *)this,(LStream *)&PTR_PTR_0018bfb4);
+  *(undefined ***)this = &PTR__CFW410HPOutChannelPairView_0018bd4c;
+  *(undefined ***)(this + 0x108) = &PTR__CFW410HPOutChannelPairView_0018bf98;
+  *(undefined ***)(this + 0x88) = &PTR__CFW410HPOutChannelPairView_0018bf70;
+  *(undefined4 *)(this + 0xf8) = 0;
+  *(undefined4 *)(this + 0xf4) = 0;
+  *(undefined4 *)(this + 0x100) = 0;
+  *(undefined4 *)(this + 0xfc) = 0;
+  *(undefined4 *)(this + 0x104) = 0;
+  return;
+}
+
+
+=== CFW410HPOutChannelPairView::CFW410HPOutChannelPairView @ 0007a8b2 ===
+/* CFW410HPOutChannelPairView::CFW410HPOutChannelPairView(LStream*) */
+
+void __thiscall
+CFW410HPOutChannelPairView::CFW410HPOutChannelPairView
+          (CFW410HPOutChannelPairView *this,LStream *param_1)
+
+{
+  int iVar1;
+  
+  COutputChannelPairView::COutputChannelPairView((COutputChannelPairView *)this,param_1 + 4);
+  iVar1 = *(int *)param_1;
+  *(int *)this = iVar1;
+  *(undefined4 *)(this + *(int *)(iVar1 + -0xc)) = *(undefined4 *)(param_1 + 0x1c);
+  *(undefined ***)(this + 0x88) = &PTR__CFW410HPOutChannelPairView_0018bf70;
+  *(undefined4 *)(this + 0xf8) = 0;
+  *(undefined4 *)(this + 0xf4) = 0;
+  *(undefined4 *)(this + 0x100) = 0;
+  *(undefined4 *)(this + 0xfc) = 0;
+  *(undefined4 *)(this + 0x104) = 0;
+  return;
+}
+
+
+=== CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView @ 0007a930 ===
+/* CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView() */
+
+void __thiscall
+CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView(CFW410HPOutChannelPairView *this)
+
+{
+  ~CFW410HPOutChannelPairView(this);
+  operator_delete(this);
+  return;
+}
+
+
+=== CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView @ 0007a960 ===
+/* CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView() */
+
+void __thiscall
+CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView(CFW410HPOutChannelPairView *this)
+
+{
+  COutputChannelPairView::~COutputChannelPairView((COutputChannelPairView *)this);
+  LAttachable::~LAttachable((LAttachable *)(this + 0x108));
+  return;
+}
+
+
+=== CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView @ 0007a9b6 ===
+/* non-virtual thunk to CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView() */
+
+void __thiscall
+CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView(CFW410HPOutChannelPairView *this)
+
+{
+  ~CFW410HPOutChannelPairView(this + -0x88);
+  return;
+}
+
+
+=== CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView @ 0007a9d2 ===
+/* virtual thunk to CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView() */
+
+void __thiscall
+CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView(CFW410HPOutChannelPairView *this)
+
+{
+  ~CFW410HPOutChannelPairView(this + *(int *)(*(int *)this + -0xc));
+  return;
+}
+
+
+=== CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView @ 0007a9ee ===
+/* CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView() */
+
+void __thiscall
+CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView(CFW410HPOutChannelPairView *this)
+
+{
+  COutputChannelPairView::~COutputChannelPairView((COutputChannelPairView *)this);
+  return;
+}
+
+
+=== CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView @ 0007aa0e ===
+/* non-virtual thunk to CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView() */
+
+void __thiscall
+CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView(CFW410HPOutChannelPairView *this)
+
+{
+  ~CFW410HPOutChannelPairView(this + -0x88);
+  return;
+}
+
+
+=== CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView @ 0007aa2a ===
+/* virtual thunk to CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView() */
+
+void __thiscall
+CFW410HPOutChannelPairView::~CFW410HPOutChannelPairView(CFW410HPOutChannelPairView *this)
+
+{
+  ~CFW410HPOutChannelPairView(this + *(int *)(*(int *)this + -0xc));
+  return;
+}
+
+
+=== CFW410HPOutChannelPairView::LoadUIElements @ 0007aa46 ===
+/* CFW410HPOutChannelPairView::LoadUIElements() */
+
+void __thiscall CFW410HPOutChannelPairView::LoadUIElements(CFW410HPOutChannelPairView *this)
+
+{
+  int iVar1;
+  
+  COutputChannelPairView::LoadUIElements((COutputChannelPairView *)this);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x8d);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0xf4) = 0;
+LAB_0007aaad:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011fd7e,0x3d
+              );
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163038,0xffffffff);
+    *(int *)(this + 0xf4) = iVar1;
+    if (iVar1 == 0) goto LAB_0007aaad;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x8e);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0xf8) = 0;
+LAB_0007ab23:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011fd7e,0x40
+              );
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163038,0xffffffff);
+    *(int *)(this + 0xf8) = iVar1;
+    if (iVar1 == 0) goto LAB_0007ab23;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x8f);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0xfc) = 0;
+LAB_0007ab99:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011fd7e,0x43
+              );
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163038,0xffffffff);
+    *(int *)(this + 0xfc) = iVar1;
+    if (iVar1 == 0) goto LAB_0007ab99;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x90);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x100) = 0;
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163038,0xffffffff);
+    *(int *)(this + 0x100) = iVar1;
+    if (iVar1 != 0) goto LAB_0007ac37;
+  }
+  UDebugging::DebugThrow
+            (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011fd7e,0x46);
+LAB_0007ac37:
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x91);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x104) = 0;
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163038,0xffffffff);
+    *(int *)(this + 0x104) = iVar1;
+    if (iVar1 != 0) {
+      return;
+    }
+  }
+  UDebugging::DebugThrow
+            (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011fd7e,0x49);
+  return;
+}
+
+
+=== CFW410HPOutChannelPairView::ListenToUIElements @ 0007acb4 ===
+/* CFW410HPOutChannelPairView::ListenToUIElements() */
+
+void __thiscall CFW410HPOutChannelPairView::ListenToUIElements(CFW410HPOutChannelPairView *this)
+
+{
+  LListener *pLVar1;
+  
+  COutputChannelPairView::ListenToUIElements((COutputChannelPairView *)this);
+  pLVar1 = (LListener *)(this + 0x88);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0xf4) + 0x30),pLVar1);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0xf8) + 0x30),pLVar1);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0xfc) + 0x30),pLVar1);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0x100) + 0x30),pLVar1);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0x104) + 0x30),pLVar1);
+  return;
+}
+
+
+=== CFW410HPOutChannelPairView::ListenToMessage @ 0007ad3e ===
+/* CFW410HPOutChannelPairView::ListenToMessage(long, void*) */
+
+void __thiscall
+CFW410HPOutChannelPairView::ListenToMessage
+          (CFW410HPOutChannelPairView *this,long param_1,void *param_2)
+
+{
+  CFW410HPOutChannelPairView CVar1;
+  int *piVar2;
+  short sVar3;
+  int iVar4;
+  int iVar5;
+  char local_15 [5];
+  
+  if (param_1 == 0x601) {
+    piVar2 = *(int **)(this + 0x104);
+    if (**(uint **)((int)param_2 + 0xc) < 0x2b110) {
+      (**(code **)(*piVar2 + 200))(piVar2);
+    }
+    else {
+      (**(code **)(*piVar2 + 0xcc))(piVar2);
+    }
+  }
+  else if (param_1 == 0x5fc) {
+    iVar5 = *(int *)((int)param_2 + 0xc);
+    CVar1 = this[0xb4];
+    if (CVar1 != (CFW410HPOutChannelPairView)0x0) {
+      this[0xb4] = (CFW410HPOutChannelPairView)0x0;
+    }
+    iVar4 = 0;
+    do {
+      (**(code **)(**(int **)(this + iVar4 * 4 + 0xf4) + 0x24))
+                (*(int **)(this + iVar4 * 4 + 0xf4),*(undefined1 *)(iVar5 + iVar4));
+      iVar4 = iVar4 + 1;
+    } while ((short)iVar4 != 5);
+    if (CVar1 != (CFW410HPOutChannelPairView)0x0) {
+      this[0xb4] = (CFW410HPOutChannelPairView)0x1;
+    }
+  }
+  else if (param_1 - 0x8dU < 5) {
+    iVar5 = 0;
+    if (param_1 - 0x8dU < 5) {
+      iVar5 = *(ushort *)(&DAT_000f8ca4 + param_1 * 2) - 1;
+    }
+    iVar4 = (**(code **)(**(int **)(this + iVar5 * 4 + 0xf4) + 0x20))
+                      (*(int **)(this + iVar5 * 4 + 0xf4));
+    sVar3 = (**(code **)(**(int **)(this + 0xc0) + 0xc))(*(int **)(this + 0xc0),0x5fc,0,5,local_15);
+    if ((sVar3 == 0) && ((bool)local_15[iVar5] != (iVar4 == 1))) {
+      local_15[iVar5] = iVar4 == 1;
+      (**(code **)(**(int **)(this + 0xc0) + 0x18))(*(int **)(this + 0xc0),0x5fc,0,5,local_15,0);
+    }
+  }
+  else {
+    COutputChannelPairView::ListenToMessage((COutputChannelPairView *)this,param_1,param_2);
+  }
+  return;
+}
+
+
+=== CFW410HPOutChannelPairView::MapMessageToHWPairID @ 0007aeae ===
+/* CFW410HPOutChannelPairView::MapMessageToHWPairID(long) */
+
+undefined2 __thiscall
+CFW410HPOutChannelPairView::MapMessageToHWPairID(CFW410HPOutChannelPairView *this,long param_1)
+
+{
+  if (param_1 - 0x8dU < 5) {
+    return *(undefined2 *)(&DAT_000f8ca4 + param_1 * 2);
+  }
+  return 1;
+}
+
+
+=== CFW410HPOutChannelPairView::AdaptToClockRate @ 0007aed6 ===
+/* CFW410HPOutChannelPairView::AdaptToClockRate(unsigned long) */
+
+void __thiscall
+CFW410HPOutChannelPairView::AdaptToClockRate(CFW410HPOutChannelPairView *this,ulong param_1)
+
+{
+  int *piVar1;
+  
+  piVar1 = *(int **)(this + 0x104);
+  if (param_1 < 0x2b110) {
+    (**(code **)(*piVar1 + 200))(piVar1);
+  }
+  else {
+    (**(code **)(*piVar1 + 0xcc))(piVar1);
+  }
+  return;
+}
+
+
+=== CFW410HPOutChannelPairView::ListenToMessage @ 0007af0a ===
+/* non-virtual thunk to CFW410HPOutChannelPairView::ListenToMessage(long, void*) */
+
+void __thiscall
+CFW410HPOutChannelPairView::ListenToMessage
+          (CFW410HPOutChannelPairView *this,long param_1,void *param_2)
+
+{
+  ListenToMessage(this + -0x88,param_1,param_2);
+  return;
+}
+
+
+=== CFW410HPOutChannelPairView::AdaptUIElementsToSettings @ 0007af34 ===
+/* CFW410HPOutChannelPairView::AdaptUIElementsToSettings() */
+
+void __thiscall
+CFW410HPOutChannelPairView::AdaptUIElementsToSettings(CFW410HPOutChannelPairView *this)
+
+{
+  int *piVar1;
+  short sVar2;
+  undefined1 uVar3;
+  int iVar4;
+  uint local_1c;
+  undefined1 local_15 [5];
+  
+  local_1c = 0;
+  COutputChannelPairView::AdaptUIElementsToSettings((COutputChannelPairView *)this);
+  sVar2 = (**(code **)(**(int **)(this + 0xc0) + 0xc))(*(int **)(this + 0xc0),0x5fc,0,5,local_15);
+  iVar4 = 0;
+  do {
+    uVar3 = 0;
+    if (sVar2 == 0) {
+      uVar3 = local_15[iVar4];
+    }
+    (**(code **)(**(int **)(this + iVar4 * 4 + 0xf4) + 0x24))
+              (*(int **)(this + iVar4 * 4 + 0xf4),uVar3);
+    iVar4 = iVar4 + 1;
+  } while ((short)iVar4 != 5);
+  sVar2 = (**(code **)(**(int **)(this + 0xc0) + 0xc))(*(int **)(this + 0xc0),0x601,0,4,&local_1c);
+  piVar1 = *(int **)(this + 0x104);
+  if ((sVar2 == 0) && (0x2b10f < local_1c)) {
+    (**(code **)(*piVar1 + 0xcc))(piVar1);
+  }
+  else {
+    (**(code **)(*piVar1 + 200))(piVar1);
+  }
+  return;
+}
+
+
+=== CFW410MixerChannelPairView::CFW410MixerChannelPairView @ 0007b00c ===
+/* CFW410MixerChannelPairView::CFW410MixerChannelPairView(LStream*) */
+
+void __thiscall
+CFW410MixerChannelPairView::CFW410MixerChannelPairView
+          (CFW410MixerChannelPairView *this,LStream *param_1)
+
+{
+  LAttachable::LAttachable((LAttachable *)(this + 0x108));
+  CMixerChannelPairView::CMixerChannelPairView
+            ((CMixerChannelPairView *)this,(LStream *)&PTR_PTR_0018c8b4);
+  *(undefined ***)this = &PTR__CFW410MixerChannelPairView_0018c64c;
+  *(undefined ***)(this + 0x108) = &PTR__CFW410MixerChannelPairView_0018c894;
+  *(undefined ***)(this + 0x88) = &PTR__CFW410MixerChannelPairView_0018c86c;
+  *(undefined4 *)(this + 0xf8) = 0;
+  *(undefined4 *)(this + 0xf4) = 0;
+  *(undefined4 *)(this + 0x100) = 0;
+  *(undefined4 *)(this + 0xfc) = 0;
+  *(undefined4 *)(this + 0x104) = 0;
+  return;
+}
+
+
+=== CFW410MixerChannelPairView::CFW410MixerChannelPairView @ 0007b0b6 ===
+/* CFW410MixerChannelPairView::CFW410MixerChannelPairView(LStream*) */
+
+void __thiscall
+CFW410MixerChannelPairView::CFW410MixerChannelPairView
+          (CFW410MixerChannelPairView *this,LStream *param_1)
+
+{
+  int iVar1;
+  
+  CMixerChannelPairView::CMixerChannelPairView((CMixerChannelPairView *)this,param_1 + 4);
+  iVar1 = *(int *)param_1;
+  *(int *)this = iVar1;
+  *(undefined4 *)(this + *(int *)(iVar1 + -0xc)) = *(undefined4 *)(param_1 + 0x1c);
+  *(undefined ***)(this + 0x88) = &PTR__CFW410MixerChannelPairView_0018c86c;
+  *(undefined4 *)(this + 0xf8) = 0;
+  *(undefined4 *)(this + 0xf4) = 0;
+  *(undefined4 *)(this + 0x100) = 0;
+  *(undefined4 *)(this + 0xfc) = 0;
+  *(undefined4 *)(this + 0x104) = 0;
+  return;
+}
+
+
+=== CFW410MixerChannelPairView::~CFW410MixerChannelPairView @ 0007b134 ===
+/* CFW410MixerChannelPairView::~CFW410MixerChannelPairView() */
+
+void __thiscall
+CFW410MixerChannelPairView::~CFW410MixerChannelPairView(CFW410MixerChannelPairView *this)
+
+{
+  ~CFW410MixerChannelPairView(this);
+  operator_delete(this);
+  return;
+}
+
+
+=== CFW410MixerChannelPairView::~CFW410MixerChannelPairView @ 0007b164 ===
+/* CFW410MixerChannelPairView::~CFW410MixerChannelPairView() */
+
+void __thiscall
+CFW410MixerChannelPairView::~CFW410MixerChannelPairView(CFW410MixerChannelPairView *this)
+
+{
+  CMixerChannelPairView::~CMixerChannelPairView((CMixerChannelPairView *)this);
+  LAttachable::~LAttachable((LAttachable *)(this + 0x108));
+  return;
+}
+
+
+=== CFW410MixerChannelPairView::~CFW410MixerChannelPairView @ 0007b1ba ===
+/* non-virtual thunk to CFW410MixerChannelPairView::~CFW410MixerChannelPairView() */
+
+void __thiscall
+CFW410MixerChannelPairView::~CFW410MixerChannelPairView(CFW410MixerChannelPairView *this)
+
+{
+  ~CFW410MixerChannelPairView(this + -0x88);
+  return;
+}
+
+
+=== CFW410MixerChannelPairView::~CFW410MixerChannelPairView @ 0007b1d6 ===
+/* virtual thunk to CFW410MixerChannelPairView::~CFW410MixerChannelPairView() */
+
+void __thiscall
+CFW410MixerChannelPairView::~CFW410MixerChannelPairView(CFW410MixerChannelPairView *this)
+
+{
+  ~CFW410MixerChannelPairView(this + *(int *)(*(int *)this + -0xc));
+  return;
+}
+
+
+=== CFW410MixerChannelPairView::~CFW410MixerChannelPairView @ 0007b1f2 ===
+/* CFW410MixerChannelPairView::~CFW410MixerChannelPairView() */
+
+void __thiscall
+CFW410MixerChannelPairView::~CFW410MixerChannelPairView(CFW410MixerChannelPairView *this)
+
+{
+  CMixerChannelPairView::~CMixerChannelPairView((CMixerChannelPairView *)this);
+  return;
+}
+
+
+=== CFW410MixerChannelPairView::~CFW410MixerChannelPairView @ 0007b212 ===
+/* non-virtual thunk to CFW410MixerChannelPairView::~CFW410MixerChannelPairView() */
+
+void __thiscall
+CFW410MixerChannelPairView::~CFW410MixerChannelPairView(CFW410MixerChannelPairView *this)
+
+{
+  ~CFW410MixerChannelPairView(this + -0x88);
+  return;
+}
+
+
+=== CFW410MixerChannelPairView::~CFW410MixerChannelPairView @ 0007b22e ===
+/* virtual thunk to CFW410MixerChannelPairView::~CFW410MixerChannelPairView() */
+
+void __thiscall
+CFW410MixerChannelPairView::~CFW410MixerChannelPairView(CFW410MixerChannelPairView *this)
+
+{
+  ~CFW410MixerChannelPairView(this + *(int *)(*(int *)this + -0xc));
+  return;
+}
+
+
+=== CFW410MixerChannelPairView::LoadUIElements @ 0007b24a ===
+/* CFW410MixerChannelPairView::LoadUIElements() */
+
+void __thiscall CFW410MixerChannelPairView::LoadUIElements(CFW410MixerChannelPairView *this)
+
+{
+  int iVar1;
+  
+  CMixerChannelPairView::LoadUIElements((CMixerChannelPairView *)this);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x83);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0xf4) = 0;
+LAB_0007b2b1:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011fe08,0x40
+              );
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163038,0xffffffff);
+    *(int *)(this + 0xf4) = iVar1;
+    if (iVar1 == 0) goto LAB_0007b2b1;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x84);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0xf8) = 0;
+LAB_0007b327:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011fe08,0x43
+              );
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163038,0xffffffff);
+    *(int *)(this + 0xf8) = iVar1;
+    if (iVar1 == 0) goto LAB_0007b327;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x85);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0xfc) = 0;
+LAB_0007b39d:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011fe08,0x46
+              );
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163038,0xffffffff);
+    *(int *)(this + 0xfc) = iVar1;
+    if (iVar1 == 0) goto LAB_0007b39d;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x86);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x100) = 0;
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163038,0xffffffff);
+    *(int *)(this + 0x100) = iVar1;
+    if (iVar1 != 0) goto LAB_0007b43b;
+  }
+  UDebugging::DebugThrow
+            (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011fe08,0x49);
+LAB_0007b43b:
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x87);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x104) = 0;
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163038,0xffffffff);
+    *(int *)(this + 0x104) = iVar1;
+    if (iVar1 != 0) {
+      return;
+    }
+  }
+  UDebugging::DebugThrow
+            (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_0011fe08,0x4c);
+  return;
+}
+
+
+=== CFW410MixerChannelPairView::ListenToUIElements @ 0007b4b8 ===
+/* CFW410MixerChannelPairView::ListenToUIElements() */
+
+void __thiscall CFW410MixerChannelPairView::ListenToUIElements(CFW410MixerChannelPairView *this)
+
+{
+  LListener *pLVar1;
+  
+  CMixerChannelPairView::ListenToUIElements((CMixerChannelPairView *)this);
+  pLVar1 = (LListener *)(this + 0x88);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0xf4) + 0x30),pLVar1);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0xf8) + 0x30),pLVar1);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0xfc) + 0x30),pLVar1);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0x100) + 0x30),pLVar1);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0x104) + 0x30),pLVar1);
+  return;
+}
+
+
+=== CFW410MixerChannelPairView::ListenToMessage @ 0007b542 ===
+/* CFW410MixerChannelPairView::ListenToMessage(long, void*) */
+
+void __thiscall
+CFW410MixerChannelPairView::ListenToMessage
+          (CFW410MixerChannelPairView *this,long param_1,void *param_2)
+
+{
+  CFW410MixerChannelPairView CVar1;
+  int *piVar2;
+  short sVar3;
+  int iVar4;
+  int iVar5;
+  char local_15 [5];
+  
+  if (param_1 == 0x601) {
+    piVar2 = *(int **)(this + 0x104);
+    if (**(uint **)((int)param_2 + 0xc) < 0x2b110) {
+      (**(code **)(*piVar2 + 200))(piVar2);
+    }
+    else {
+      (**(code **)(*piVar2 + 0xcc))(piVar2);
+    }
+  }
+  else if (param_1 == 0x5f1) {
+    iVar5 = *(int *)((int)param_2 + 0xc);
+    CVar1 = this[0xb4];
+    if (CVar1 != (CFW410MixerChannelPairView)0x0) {
+      this[0xb4] = (CFW410MixerChannelPairView)0x0;
+    }
+    iVar4 = 0;
+    do {
+      (**(code **)(**(int **)(this + iVar4 * 4 + 0xf4) + 0x24))
+                (*(int **)(this + iVar4 * 4 + 0xf4),*(undefined1 *)(iVar5 + iVar4));
+      iVar4 = iVar4 + 1;
+    } while ((short)iVar4 != 5);
+    if (CVar1 != (CFW410MixerChannelPairView)0x0) {
+      this[0xb4] = (CFW410MixerChannelPairView)0x1;
+    }
+  }
+  else if (param_1 - 0x83U < 5) {
+    iVar5 = 0;
+    if (param_1 - 0x83U < 5) {
+      iVar5 = *(ushort *)("15LStdRadioButton" + param_1 * 2 + 8) - 1;
+    }
+    iVar4 = (**(code **)(**(int **)(this + iVar5 * 4 + 0xf4) + 0x20))
+                      (*(int **)(this + iVar5 * 4 + 0xf4));
+    sVar3 = (**(code **)(**(int **)(this + 0xc0) + 0xc))
+                      (*(int **)(this + 0xc0),0x5f1,*(undefined2 *)(this + 0xb6),5,local_15);
+    if ((sVar3 == 0) && ((bool)local_15[iVar5] != (iVar4 == 1))) {
+      local_15[iVar5] = iVar4 == 1;
+      (**(code **)(**(int **)(this + 0xc0) + 0x18))
+                (*(int **)(this + 0xc0),0x5f1,*(undefined2 *)(this + 0xb6),5,local_15,0);
+    }
+  }
+  else {
+    CMixerChannelPairView::ListenToMessage((CMixerChannelPairView *)this,param_1,param_2);
+  }
+  return;
+}
+
+
+=== CFW410MixerChannelPairView::MapMessageToHWPairID @ 0007b6be ===
+/* CFW410MixerChannelPairView::MapMessageToHWPairID(long) */
+
+undefined2 __thiscall
+CFW410MixerChannelPairView::MapMessageToHWPairID(CFW410MixerChannelPairView *this,long param_1)
+
+{
+  if (param_1 - 0x83U < 5) {
+    return *(undefined2 *)("15LStdRadioButton" + param_1 * 2 + 8);
+  }
+  return 1;
+}
+
+
+=== CFW410MixerChannelPairView::AdaptToClockRate @ 0007b6e6 ===
+/* CFW410MixerChannelPairView::AdaptToClockRate(unsigned long) */
+
+void __thiscall
+CFW410MixerChannelPairView::AdaptToClockRate(CFW410MixerChannelPairView *this,ulong param_1)
+
+{
+  int *piVar1;
+  
+  piVar1 = *(int **)(this + 0x104);
+  if (param_1 < 0x2b110) {
+    (**(code **)(*piVar1 + 200))(piVar1);
+  }
+  else {
+    (**(code **)(*piVar1 + 0xcc))(piVar1);
+  }
+  return;
+}
+
+
+=== CFW410MixerChannelPairView::ListenToMessage @ 0007b71a ===
+/* non-virtual thunk to CFW410MixerChannelPairView::ListenToMessage(long, void*) */
+
+void __thiscall
+CFW410MixerChannelPairView::ListenToMessage
+          (CFW410MixerChannelPairView *this,long param_1,void *param_2)
+
+{
+  ListenToMessage(this + -0x88,param_1,param_2);
+  return;
+}
+
+
+=== CFW410MixerChannelPairView::AdaptUIElementsToSettings @ 0007b744 ===
+/* CFW410MixerChannelPairView::AdaptUIElementsToSettings() */
+
+void __thiscall
+CFW410MixerChannelPairView::AdaptUIElementsToSettings(CFW410MixerChannelPairView *this)
+
+{
+  int *piVar1;
+  short sVar2;
+  undefined1 uVar3;
+  int iVar4;
+  uint local_1c;
+  undefined1 local_15 [5];
+  
+  local_1c = 0;
+  CMixerChannelPairView::AdaptUIElementsToSettings((CMixerChannelPairView *)this);
+  sVar2 = (**(code **)(**(int **)(this + 0xc0) + 0xc))
+                    (*(int **)(this + 0xc0),0x5f1,*(undefined2 *)(this + 0xb6),5,local_15);
+  iVar4 = 0;
+  do {
+    uVar3 = 0;
+    if (sVar2 == 0) {
+      uVar3 = local_15[iVar4];
+    }
+    (**(code **)(**(int **)(this + iVar4 * 4 + 0xf4) + 0x24))
+              (*(int **)(this + iVar4 * 4 + 0xf4),uVar3);
+    iVar4 = iVar4 + 1;
+  } while ((short)iVar4 != 5);
+  sVar2 = (**(code **)(**(int **)(this + 0xc0) + 0xc))(*(int **)(this + 0xc0),0x601,0,4,&local_1c);
+  piVar1 = *(int **)(this + 0x104);
+  if ((sVar2 == 0) && (0x2b10f < local_1c)) {
+    (**(code **)(*piVar1 + 0xcc))(piVar1);
+  }
+  else {
+    (**(code **)(*piVar1 + 200))(piVar1);
+  }
+  return;
+}
+
+
+=== CFW410MixerView::CFW410MixerView @ 0007b81e ===
+/* CFW410MixerView::CFW410MixerView(LStream*) */
+
+void __thiscall CFW410MixerView::CFW410MixerView(CFW410MixerView *this,LStream *param_1)
+
+{
+  LAttachable::LAttachable((LAttachable *)(this + 300));
+  CMixerView::CMixerView((CMixerView *)this,(LStream *)&PTR_PTR_0018d244);
+  *(undefined ***)this = &PTR__CFW410MixerView_0018cf4c;
+  *(undefined ***)(this + 300) = &PTR__CFW410MixerView_0018d224;
+  *(undefined ***)(this + 0x88) = &PTR__CFW410MixerView_0018d17c;
+  *(undefined ***)(this + 0xb8) = &PTR__CFW410MixerView_0018d190;
+  *(undefined ***)(this + 0xe8) = &PTR__CFW410MixerView_0018d1a4;
+  return;
+}
+
+
+=== CFW410MixerView::CFW410MixerView @ 0007b8ae ===
+/* CFW410MixerView::CFW410MixerView(LStream*) */
+
+void __thiscall CFW410MixerView::CFW410MixerView(CFW410MixerView *this,LStream *param_1)
+
+{
+  int iVar1;
+  
+  CMixerView::CMixerView((CMixerView *)this,param_1 + 4);
+  iVar1 = *(int *)param_1;
+  *(int *)this = iVar1;
+  *(undefined4 *)(this + *(int *)(iVar1 + -0xc)) = *(undefined4 *)(param_1 + 0x34);
+  *(undefined ***)(this + 0x88) = &PTR__CFW410MixerView_0018d17c;
+  *(undefined ***)(this + 0xb8) = &PTR__CFW410MixerView_0018d190;
+  *(undefined4 *)(this + 0xe8) = *(undefined4 *)(param_1 + 0x38);
+  return;
+}
+
+
+=== CFW410MixerView::~CFW410MixerView @ 0007b910 ===
+/* CFW410MixerView::~CFW410MixerView() */
+
+void __thiscall CFW410MixerView::~CFW410MixerView(CFW410MixerView *this)
+
+{
+  ~CFW410MixerView(this);
+  operator_delete(this);
+  return;
+}
+
+
+=== CFW410MixerView::~CFW410MixerView @ 0007b940 ===
+/* CFW410MixerView::~CFW410MixerView() */
+
+void __thiscall CFW410MixerView::~CFW410MixerView(CFW410MixerView *this)
+
+{
+  CMixerView::~CMixerView((CMixerView *)this);
+  LAttachable::~LAttachable((LAttachable *)(this + 300));
+  return;
+}
+
+
+=== CFW410MixerView::~CFW410MixerView @ 0007b996 ===
+/* non-virtual thunk to CFW410MixerView::~CFW410MixerView() */
+
+void __thiscall CFW410MixerView::~CFW410MixerView(CFW410MixerView *this)
+
+{
+  ~CFW410MixerView(this + -0x88);
+  return;
+}
+
+
+=== CFW410MixerView::~CFW410MixerView @ 0007b9b2 ===
+/* non-virtual thunk to CFW410MixerView::~CFW410MixerView() */
+
+void __thiscall CFW410MixerView::~CFW410MixerView(CFW410MixerView *this)
+
+{
+  ~CFW410MixerView(this + -0xb8);
+  return;
+}
+
+
+=== CFW410MixerView::~CFW410MixerView @ 0007b9ce ===
+/* non-virtual thunk to CFW410MixerView::~CFW410MixerView() */
+
+void __thiscall CFW410MixerView::~CFW410MixerView(CFW410MixerView *this)
+
+{
+  ~CFW410MixerView(this + -0xe8);
+  return;
+}
+
+
+=== CFW410MixerView::~CFW410MixerView @ 0007b9ea ===
+/* virtual thunk to CFW410MixerView::~CFW410MixerView() */
+
+void __thiscall CFW410MixerView::~CFW410MixerView(CFW410MixerView *this)
+
+{
+  ~CFW410MixerView(this + *(int *)(*(int *)this + -0xc));
+  return;
+}
+
+
+=== CFW410MixerView::~CFW410MixerView @ 0007ba06 ===
+/* CFW410MixerView::~CFW410MixerView() */
+
+void __thiscall CFW410MixerView::~CFW410MixerView(CFW410MixerView *this)
+
+{
+  CMixerView::~CMixerView((CMixerView *)this);
+  return;
+}
+
+
+=== CFW410MixerView::~CFW410MixerView @ 0007ba26 ===
+/* non-virtual thunk to CFW410MixerView::~CFW410MixerView() */
+
+void __thiscall CFW410MixerView::~CFW410MixerView(CFW410MixerView *this)
+
+{
+  ~CFW410MixerView(this + -0x88);
+  return;
+}
+
+
+=== CFW410MixerView::~CFW410MixerView @ 0007ba42 ===
+/* non-virtual thunk to CFW410MixerView::~CFW410MixerView() */
+
+void __thiscall CFW410MixerView::~CFW410MixerView(CFW410MixerView *this)
+
+{
+  ~CFW410MixerView(this + -0xb8);
+  return;
+}
+
+
+=== CFW410MixerView::~CFW410MixerView @ 0007ba5e ===
+/* non-virtual thunk to CFW410MixerView::~CFW410MixerView() */
+
+void __thiscall CFW410MixerView::~CFW410MixerView(CFW410MixerView *this)
+
+{
+  ~CFW410MixerView(this + -0xe8);
+  return;
+}
+
+
+=== CFW410MixerView::~CFW410MixerView @ 0007ba7a ===
+/* virtual thunk to CFW410MixerView::~CFW410MixerView() */
+
+void __thiscall CFW410MixerView::~CFW410MixerView(CFW410MixerView *this)
+
+{
+  ~CFW410MixerView(this + *(int *)(*(int *)this + -0xc));
+  return;
+}
+
+
+=== CFW410MixerView::LoadUIElements @ 0007ba96 ===
+/* CFW410MixerView::LoadUIElements() */
+
+void __thiscall CFW410MixerView::LoadUIElements(CFW410MixerView *this)
+
+{
+  int iVar1;
+  undefined4 local_1c;
+  int local_18;
+  int local_14;
+  
+  local_14 = 0;
+  local_18 = 0;
+  local_1c = 0;
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xc86);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0007bb05:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410MixerView.cp"
+               ,0x3f);
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163118,0xffffffff);
+    if (local_14 == 0) goto LAB_0007bb05;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xc87);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0007bb92:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410MixerView.cp"
+               ,0x44);
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163118,0xffffffff);
+    if (local_14 == 0) goto LAB_0007bb92;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xc81);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0007bc1c:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410MixerView.cp"
+               ,0x49);
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163118,0xffffffff);
+    if (local_14 == 0) goto LAB_0007bc1c;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xc82);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0007bca6:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410MixerView.cp"
+               ,0x4e);
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163118,0xffffffff);
+    if (local_14 == 0) goto LAB_0007bca6;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xc83);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0007bd30:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410MixerView.cp"
+               ,0x53);
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163118,0xffffffff);
+    if (local_14 == 0) goto LAB_0007bd30;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xc84);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0007bdba:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410MixerView.cp"
+               ,0x58);
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163118,0xffffffff);
+    if (local_14 == 0) goto LAB_0007bdba;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xc85);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0007be44:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410MixerView.cp"
+               ,0x5d);
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163118,0xffffffff);
+    if (local_14 == 0) goto LAB_0007be44;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xc8b);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007bece:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410MixerView.cp"
+               ,99);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007bece;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xc8c);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007bf5b:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410MixerView.cp"
+               ,0x68);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007bf5b;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xc8d);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007bfe5:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410MixerView.cp"
+               ,0x6d);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007bfe5;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xc8e);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007c06f:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410MixerView.cp"
+               ,0x72);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007c06f;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xc8f);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007c0f9:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410MixerView.cp"
+               ,0x77);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007c0f9;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xc90);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007c183:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410MixerView.cp"
+               ,0x7c);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007c183;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xc91);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007c20d:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410MixerView.cp"
+               ,0x81);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007c20d;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xc92);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007c297:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410MixerView.cp"
+               ,0x86);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007c297;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xc93);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007c321:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410MixerView.cp"
+               ,0x8b);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007c321;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xc94);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007c3ab:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410MixerView.cp"
+               ,0x90);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007c3ab;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_1c,0);
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_1c,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xca9);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007c46c:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410MixerView.cp"
+               ,0x9b);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007c46c;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xcaa);
+  if (iVar1 == 0) {
+    local_18 = 0;
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 != 0) goto LAB_0007c521;
+  }
+  UDebugging::DebugThrow
+            (0x6e696c50,"LoadUIElements",
+             (uchar *)
+             "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410MixerView.cp"
+             ,0xa0);
+LAB_0007c521:
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  return;
+}
+
+
+=== CFW410MixerView::AdaptUIElementsToSettings @ 0007c544 ===
+/* CFW410MixerView::AdaptUIElementsToSettings() */
+
+void __thiscall CFW410MixerView::AdaptUIElementsToSettings(CFW410MixerView *this)
+
+{
+  short sVar1;
+  ulong uVar2;
+  ulong local_c;
+  
+  local_c = 0;
+  CMixerView::AdaptUIElementsToSettings((CMixerView *)this);
+  sVar1 = (**(code **)(**(int **)(this + 0x11c) + 0xc))(*(int **)(this + 0x11c),0x601,0,4,&local_c);
+  uVar2 = 0;
+  if (sVar1 == 0) {
+    uVar2 = local_c;
+  }
+  AdaptToClockRate(this,uVar2);
+  return;
+}
+
+
+=== CFW410MixerView::AdaptToClockRate @ 0007c5a6 ===
+/* CFW410MixerView::AdaptToClockRate(unsigned long) */
+
+void __thiscall CFW410MixerView::AdaptToClockRate(CFW410MixerView *this,ulong param_1)
+
+{
+  CMixerChannelPairView *pCVar1;
+  int *piVar2;
+  CMAVUMeter *pCVar3;
+  code *pcVar4;
+  undefined4 uVar5;
+  int iVar6;
+  
+  iVar6 = **(int **)(*(int *)(this + 0x124) + 0x14);
+  pCVar1 = *(CMixerChannelPairView **)(iVar6 + 4);
+  if (param_1 < 0x2b110) {
+    if (pCVar1 != (CMixerChannelPairView *)0x0) {
+      (**(code **)(*(int *)pCVar1 + 200))(pCVar1);
+      iVar6 = **(int **)(*(int *)(this + 0x124) + 0x14);
+    }
+    piVar2 = *(int **)(iVar6 + 0x18);
+    if (piVar2 != (int *)0x0) {
+      (**(code **)(*piVar2 + 200))(piVar2);
+    }
+    iVar6 = **(int **)(*(int *)(this + 0x128) + 0x14);
+    piVar2 = *(int **)(iVar6 + 0x20);
+    if (piVar2 != (int *)0x0) {
+      (**(code **)(*piVar2 + 200))(piVar2);
+      iVar6 = **(int **)(*(int *)(this + 0x128) + 0x14);
+    }
+    piVar2 = *(int **)(iVar6 + 0x24);
+    if (piVar2 != (int *)0x0) {
+      (**(code **)(*piVar2 + 200))(piVar2);
+    }
+  }
+  else {
+    if (pCVar1 != (CMixerChannelPairView *)0x0) {
+      (**(code **)(*(int *)pCVar1 + 0xcc))(pCVar1);
+      CMixerChannelPairView::ClearVUMeters(pCVar1);
+      iVar6 = **(int **)(*(int *)(this + 0x124) + 0x14);
+    }
+    pCVar1 = *(CMixerChannelPairView **)(iVar6 + 0x18);
+    if (pCVar1 != (CMixerChannelPairView *)0x0) {
+      (**(code **)(*(int *)pCVar1 + 0xcc))(pCVar1);
+      CMixerChannelPairView::ClearVUMeters(pCVar1);
+    }
+    iVar6 = **(int **)(*(int *)(this + 0x128) + 0x14);
+    pCVar3 = *(CMAVUMeter **)(iVar6 + 0x20);
+    if (pCVar3 != (CMAVUMeter *)0x0) {
+      (**(code **)(*(int *)pCVar3 + 0xcc))(pCVar3);
+      pcVar4 = *(code **)(*(int *)pCVar3 + 0x1e4);
+      uVar5 = CMAVUMeter::GetMinimumValue(pCVar3);
+      (*pcVar4)(pCVar3,uVar5);
+      iVar6 = **(int **)(*(int *)(this + 0x128) + 0x14);
+    }
+    pCVar3 = *(CMAVUMeter **)(iVar6 + 0x24);
+    if (pCVar3 != (CMAVUMeter *)0x0) {
+      (**(code **)(*(int *)pCVar3 + 0xcc))(pCVar3);
+      pcVar4 = *(code **)(*(int *)pCVar3 + 0x1e4);
+      uVar5 = CMAVUMeter::GetMinimumValue(pCVar3);
+      (*pcVar4)(pCVar3,uVar5);
+    }
+  }
+  return;
+}
+
+
+=== CFW410MixerView::ListenToMessage @ 0007c6e8 ===
+/* CFW410MixerView::ListenToMessage(long, void*) */
+
+void __thiscall CFW410MixerView::ListenToMessage(CFW410MixerView *this,long param_1,void *param_2)
+
+{
+  if (param_1 == 0x601) {
+    AdaptToClockRate(this,**(ulong **)((int)param_2 + 0xc));
+    (**(code **)(*(int *)this + 0x21c))(this,0x601,param_2);
+    return;
+  }
+  CMixerView::ListenToMessage((CMixerView *)this,param_1,param_2);
+  return;
+}
+
+
+=== CFW410MixerView::ListenToMessage @ 0007c73a ===
+/* non-virtual thunk to CFW410MixerView::ListenToMessage(long, void*) */
+
+void __thiscall CFW410MixerView::ListenToMessage(CFW410MixerView *this,long param_1,void *param_2)
+
+{
+  ListenToMessage(this + -0x88,param_1,param_2);
+  return;
+}
+
+
+=== CFW410MixerView::ListenToUIElements @ 0007c764 ===
+/* CFW410MixerView::ListenToUIElements() */
+
+void CFW410MixerView::ListenToUIElements(void)
+
+{
+  return;
+}
+
+
+=== CFW410OutputView::CFW410OutputView @ 0007c76a ===
+/* CFW410OutputView::CFW410OutputView(LStream*) */
+
+void __thiscall CFW410OutputView::CFW410OutputView(CFW410OutputView *this,LStream *param_1)
+
+{
+  LAttachable::LAttachable((LAttachable *)(this + 300));
+  COutputView::COutputView((COutputView *)this,(LStream *)&PTR_PTR_0018dfe4);
+  *(undefined ***)this = &PTR__CFW410OutputView_0018dcec;
+  *(undefined ***)(this + 300) = &PTR__CFW410OutputView_0018dfc4;
+  *(undefined ***)(this + 0x88) = &PTR__CFW410OutputView_0018df1c;
+  *(undefined ***)(this + 0xb8) = &PTR__CFW410OutputView_0018df30;
+  *(undefined ***)(this + 0xe8) = &PTR__CFW410OutputView_0018df44;
+  return;
+}
+
+
+=== CFW410OutputView::CFW410OutputView @ 0007c7fa ===
+/* CFW410OutputView::CFW410OutputView(LStream*) */
+
+void __thiscall CFW410OutputView::CFW410OutputView(CFW410OutputView *this,LStream *param_1)
+
+{
+  int iVar1;
+  
+  COutputView::COutputView((COutputView *)this,param_1 + 4);
+  iVar1 = *(int *)param_1;
+  *(int *)this = iVar1;
+  *(undefined4 *)(this + *(int *)(iVar1 + -0xc)) = *(undefined4 *)(param_1 + 0x34);
+  *(undefined ***)(this + 0x88) = &PTR__CFW410OutputView_0018df1c;
+  *(undefined ***)(this + 0xb8) = &PTR__CFW410OutputView_0018df30;
+  *(undefined4 *)(this + 0xe8) = *(undefined4 *)(param_1 + 0x38);
+  return;
+}
+
+
+=== CFW410OutputView::~CFW410OutputView @ 0007c85c ===
+/* CFW410OutputView::~CFW410OutputView() */
+
+void __thiscall CFW410OutputView::~CFW410OutputView(CFW410OutputView *this)
+
+{
+  ~CFW410OutputView(this);
+  operator_delete(this);
+  return;
+}
+
+
+=== CFW410OutputView::~CFW410OutputView @ 0007c88c ===
+/* CFW410OutputView::~CFW410OutputView() */
+
+void __thiscall CFW410OutputView::~CFW410OutputView(CFW410OutputView *this)
+
+{
+  COutputView::~COutputView((COutputView *)this);
+  LAttachable::~LAttachable((LAttachable *)(this + 300));
+  return;
+}
+
+
+=== CFW410OutputView::~CFW410OutputView @ 0007c8e2 ===
+/* non-virtual thunk to CFW410OutputView::~CFW410OutputView() */
+
+void __thiscall CFW410OutputView::~CFW410OutputView(CFW410OutputView *this)
+
+{
+  ~CFW410OutputView(this + -0x88);
+  return;
+}
+
+
+=== CFW410OutputView::~CFW410OutputView @ 0007c8fe ===
+/* non-virtual thunk to CFW410OutputView::~CFW410OutputView() */
+
+void __thiscall CFW410OutputView::~CFW410OutputView(CFW410OutputView *this)
+
+{
+  ~CFW410OutputView(this + -0xb8);
+  return;
+}
+
+
+=== CFW410OutputView::~CFW410OutputView @ 0007c91a ===
+/* non-virtual thunk to CFW410OutputView::~CFW410OutputView() */
+
+void __thiscall CFW410OutputView::~CFW410OutputView(CFW410OutputView *this)
+
+{
+  ~CFW410OutputView(this + -0xe8);
+  return;
+}
+
+
+=== CFW410OutputView::~CFW410OutputView @ 0007c936 ===
+/* virtual thunk to CFW410OutputView::~CFW410OutputView() */
+
+void __thiscall CFW410OutputView::~CFW410OutputView(CFW410OutputView *this)
+
+{
+  ~CFW410OutputView(this + *(int *)(*(int *)this + -0xc));
+  return;
+}
+
+
+=== CFW410OutputView::~CFW410OutputView @ 0007c952 ===
+/* CFW410OutputView::~CFW410OutputView() */
+
+void __thiscall CFW410OutputView::~CFW410OutputView(CFW410OutputView *this)
+
+{
+  COutputView::~COutputView((COutputView *)this);
+  return;
+}
+
+
+=== CFW410OutputView::~CFW410OutputView @ 0007c972 ===
+/* non-virtual thunk to CFW410OutputView::~CFW410OutputView() */
+
+void __thiscall CFW410OutputView::~CFW410OutputView(CFW410OutputView *this)
+
+{
+  ~CFW410OutputView(this + -0x88);
+  return;
+}
+
+
+=== CFW410OutputView::~CFW410OutputView @ 0007c98e ===
+/* non-virtual thunk to CFW410OutputView::~CFW410OutputView() */
+
+void __thiscall CFW410OutputView::~CFW410OutputView(CFW410OutputView *this)
+
+{
+  ~CFW410OutputView(this + -0xb8);
+  return;
+}
+
+
+=== CFW410OutputView::~CFW410OutputView @ 0007c9aa ===
+/* non-virtual thunk to CFW410OutputView::~CFW410OutputView() */
+
+void __thiscall CFW410OutputView::~CFW410OutputView(CFW410OutputView *this)
+
+{
+  ~CFW410OutputView(this + -0xe8);
+  return;
+}
+
+
+=== CFW410OutputView::~CFW410OutputView @ 0007c9c6 ===
+/* virtual thunk to CFW410OutputView::~CFW410OutputView() */
+
+void __thiscall CFW410OutputView::~CFW410OutputView(CFW410OutputView *this)
+
+{
+  ~CFW410OutputView(this + *(int *)(*(int *)this + -0xc));
+  return;
+}
+
+
+=== CFW410OutputView::LoadUIElements @ 0007c9e2 ===
+/* CFW410OutputView::LoadUIElements() */
+
+void __thiscall CFW410OutputView::LoadUIElements(CFW410OutputView *this)
+
+{
+  int iVar1;
+  int local_18;
+  int local_14;
+  
+  local_14 = 0;
+  local_18 = 0;
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x1069);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0007ca4a:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,0x3f);
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163120,0xffffffff);
+    if (local_14 == 0) goto LAB_0007ca4a;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x106a);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0007cad7:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,0x44);
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163120,0xffffffff);
+    if (local_14 == 0) goto LAB_0007cad7;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x106b);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0007cb61:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,0x49);
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163120,0xffffffff);
+    if (local_14 == 0) goto LAB_0007cb61;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x106c);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0007cbeb:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,0x4e);
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163120,0xffffffff);
+    if (local_14 == 0) goto LAB_0007cbeb;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x106d);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0007cc75:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,0x53);
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163120,0xffffffff);
+    if (local_14 == 0) goto LAB_0007cc75;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x106f);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0007ccff:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,0x58);
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163120,0xffffffff);
+    if (local_14 == 0) goto LAB_0007ccff;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x106e);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0007cd89:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,0x5d);
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163120,0xffffffff);
+    if (local_14 == 0) goto LAB_0007cd89;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x1087);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007ce13:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,100);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007ce13;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x1088);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007cea0:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,0x69);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007cea0;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x1089);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007cf2a:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,0x6e);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007cf2a;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x108a);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007cfb4:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,0x73);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007cfb4;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x1073);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007d03e:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,0x7a);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007d03e;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x1074);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007d0c8:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,0x7f);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007d0c8;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x1075);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007d152:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,0x84);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007d152;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x1076);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007d1dc:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,0x89);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007d1dc;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x1077);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007d266:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,0x8e);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007d266;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x1078);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007d2f0:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,0x93);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007d2f0;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x1079);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007d37a:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,0x98);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007d37a;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x107a);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007d404:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,0x9d);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007d404;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x107b);
+  if (iVar1 == 0) {
+    local_18 = 0;
+LAB_0007d48e:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",
+               (uchar *)
+               "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+               ,0xa2);
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 == 0) goto LAB_0007d48e;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x107c);
+  if (iVar1 == 0) {
+    local_18 = 0;
+  }
+  else {
+    local_18 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_18 != 0) goto LAB_0007d540;
+  }
+  UDebugging::DebugThrow
+            (0x6e696c50,"LoadUIElements",
+             (uchar *)
+             "~/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Control Panel/CFW410OutputView.cp"
+             ,0xa7);
+LAB_0007d540:
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_18,0);
+  return;
+}
+
+
+=== CFW410OutputView::AdaptUIElementsToSettings @ 0007d562 ===
+/* CFW410OutputView::AdaptUIElementsToSettings() */
+
+void __thiscall CFW410OutputView::AdaptUIElementsToSettings(CFW410OutputView *this)
+
+{
+  short sVar1;
+  ulong uVar2;
+  ulong local_c;
+  
+  local_c = 0;
+  COutputView::AdaptUIElementsToSettings((COutputView *)this);
+  sVar1 = (**(code **)(**(int **)(this + 0x11c) + 0xc))(*(int **)(this + 0x11c),0x601,0,4,&local_c);
+  uVar2 = 0;
+  if (sVar1 == 0) {
+    uVar2 = local_c;
+  }
+  AdaptToClockRate(this,uVar2);
+  return;
+}
+
+
+=== CFW410OutputView::AdaptToClockRate @ 0007d5c4 ===
+/* CFW410OutputView::AdaptToClockRate(unsigned long) */
+
+void __thiscall CFW410OutputView::AdaptToClockRate(CFW410OutputView *this,ulong param_1)
+
+{
+  COutputChannelPairView *this_00;
+  int *piVar1;
+  CMAVUMeter *pCVar2;
+  code *pcVar3;
+  undefined4 uVar4;
+  int iVar5;
+  
+  this_00 = *(COutputChannelPairView **)(**(int **)(*(int *)(this + 0x124) + 0x14) + 0x10);
+  if (param_1 < 0x2b110) {
+    if (this_00 != (COutputChannelPairView *)0x0) {
+      (**(code **)(*(int *)this_00 + 200))(this_00);
+    }
+    iVar5 = **(int **)(*(int *)(this + 0x128) + 0x14);
+    piVar1 = *(int **)(iVar5 + 8);
+    if (piVar1 != (int *)0x0) {
+      (**(code **)(*piVar1 + 200))(piVar1);
+      iVar5 = **(int **)(*(int *)(this + 0x128) + 0x14);
+    }
+    piVar1 = *(int **)(iVar5 + 0xc);
+    if (piVar1 != (int *)0x0) {
+      (**(code **)(*piVar1 + 200))(piVar1);
+      iVar5 = **(int **)(*(int *)(this + 0x128) + 0x14);
+    }
+    piVar1 = *(int **)(iVar5 + 0x30);
+    if (piVar1 != (int *)0x0) {
+      (**(code **)(*piVar1 + 200))(piVar1);
+      iVar5 = **(int **)(*(int *)(this + 0x128) + 0x14);
+    }
+    piVar1 = *(int **)(iVar5 + 0x34);
+    if (piVar1 != (int *)0x0) {
+      (**(code **)(*piVar1 + 200))(piVar1);
+    }
+  }
+  else {
+    if (this_00 != (COutputChannelPairView *)0x0) {
+      (**(code **)(*(int *)this_00 + 0xcc))(this_00);
+      COutputChannelPairView::ClearVUMeters(this_00);
+    }
+    iVar5 = **(int **)(*(int *)(this + 0x128) + 0x14);
+    pCVar2 = *(CMAVUMeter **)(iVar5 + 8);
+    if (pCVar2 != (CMAVUMeter *)0x0) {
+      (**(code **)(*(int *)pCVar2 + 0xcc))(pCVar2);
+      pcVar3 = *(code **)(*(int *)pCVar2 + 0x1e4);
+      uVar4 = CMAVUMeter::GetMinimumValue(pCVar2);
+      (*pcVar3)(pCVar2,uVar4);
+      iVar5 = **(int **)(*(int *)(this + 0x128) + 0x14);
+    }
+    pCVar2 = *(CMAVUMeter **)(iVar5 + 0xc);
+    if (pCVar2 != (CMAVUMeter *)0x0) {
+      (**(code **)(*(int *)pCVar2 + 0xcc))(pCVar2);
+      pcVar3 = *(code **)(*(int *)pCVar2 + 0x1e4);
+      uVar4 = CMAVUMeter::GetMinimumValue(pCVar2);
+      (*pcVar3)(pCVar2,uVar4);
+      iVar5 = **(int **)(*(int *)(this + 0x128) + 0x14);
+    }
+    pCVar2 = *(CMAVUMeter **)(iVar5 + 0x30);
+    if (pCVar2 != (CMAVUMeter *)0x0) {
+      (**(code **)(*(int *)pCVar2 + 0xcc))(pCVar2);
+      pcVar3 = *(code **)(*(int *)pCVar2 + 0x1e4);
+      uVar4 = CMAVUMeter::GetMinimumValue(pCVar2);
+      (*pcVar3)(pCVar2,uVar4);
+      iVar5 = **(int **)(*(int *)(this + 0x128) + 0x14);
+    }
+    pCVar2 = *(CMAVUMeter **)(iVar5 + 0x34);
+    if (pCVar2 != (CMAVUMeter *)0x0) {
+      (**(code **)(*(int *)pCVar2 + 0xcc))(pCVar2);
+      pcVar3 = *(code **)(*(int *)pCVar2 + 0x1e4);
+      uVar4 = CMAVUMeter::GetMinimumValue(pCVar2);
+      (*pcVar3)(pCVar2,uVar4);
+    }
+  }
+  return;
+}
+
+
+=== CFW410OutputView::ListenToMessage @ 0007d76e ===
+/* CFW410OutputView::ListenToMessage(long, void*) */
+
+void __thiscall CFW410OutputView::ListenToMessage(CFW410OutputView *this,long param_1,void *param_2)
+
+{
+  if (param_1 == 0x601) {
+    AdaptToClockRate(this,**(ulong **)((int)param_2 + 0xc));
+    (**(code **)(*(int *)this + 0x21c))(this,0x601,param_2);
+    return;
+  }
+  COutputView::ListenToMessage((COutputView *)this,param_1,param_2);
+  return;
+}
+
+
+=== CFW410OutputView::ListenToMessage @ 0007d7c0 ===
+/* non-virtual thunk to CFW410OutputView::ListenToMessage(long, void*) */
+
+void __thiscall CFW410OutputView::ListenToMessage(CFW410OutputView *this,long param_1,void *param_2)
+
+{
+  ListenToMessage(this + -0x88,param_1,param_2);
+  return;
+}
+
+
+=== CFW410OutputView::ListenToUIElements @ 0007d7ea ===
+/* CFW410OutputView::ListenToUIElements() */
+
+void CFW410OutputView::ListenToUIElements(void)
+
+{
+  return;
+}
+
+
+=== CFW410DeviceSettings::CFW410DeviceSettings @ 0007d7f0 ===
+/* CFW410DeviceSettings::CFW410DeviceSettings(unsigned long) */
+
+void __thiscall CFW410DeviceSettings::CFW410DeviceSettings(CFW410DeviceSettings *this,ulong param_1)
+
+{
+  CFW410DeviceSettings(this,param_1);
+  return;
+}
+
+
+=== CFW410DeviceSettings::CFW410DeviceSettings @ 0007d7fa ===
+/* CFW410DeviceSettings::CFW410DeviceSettings(unsigned long) */
+
+void __thiscall CFW410DeviceSettings::CFW410DeviceSettings(CFW410DeviceSettings *this,ulong param_1)
+
+{
+  code *pcVar1;
+  int iVar2;
+  CFW410DeviceSettings *pCVar3;
+  CMiddleWareManager *this_00;
+  undefined4 uVar4;
+  
+  CDeviceSettings::CDeviceSettings((CDeviceSettings *)this,param_1);
+  *(undefined ***)this = &PTR__CFW410DeviceSettings_0018ea88;
+  *(undefined **)(this + 0x30) = &DAT_0018eb48;
+  *(undefined4 *)(this + 0x84) = 0;
+  *(undefined4 *)(this + 0x314) = 0;
+  *(undefined4 *)(this + 0x310) = 0;
+  *(undefined4 *)(this + 0x31c) = 0;
+  *(undefined4 *)(this + 0x318) = 0;
+  *(undefined4 *)(this + 0x324) = 0;
+  *(undefined4 *)(this + 800) = 0;
+  *(undefined4 *)(this + 0x328) = 0;
+  *(undefined2 *)(this + 0x88) = 1;
+  *(undefined2 *)(this + 0x8a) = 0;
+  iVar2 = 0;
+  do {
+    *(undefined4 *)(this + iVar2 * 4 + 0x8c) = 0xffffffc0;
+    *(undefined4 *)(this + iVar2 * 4 + 0xc4) = 0;
+    *(undefined4 *)(this + iVar2 * 4 + 0xfc) = 0xffffffc0;
+    iVar2 = iVar2 + 1;
+  } while ((short)iVar2 != 0xe);
+  pCVar3 = this + 0x150;
+  iVar2 = 0;
+  do {
+    this[iVar2 + 0x134] = (CFW410DeviceSettings)0x0;
+    this[iVar2 + 0x13b] = (CFW410DeviceSettings)0x0;
+    this[iVar2 + 0x142] = (CFW410DeviceSettings)0x0;
+    this[iVar2 + 0x149] = (CFW410DeviceSettings)0x0;
+    pCVar3[4] = (CFW410DeviceSettings)0x0;
+    *(undefined4 *)pCVar3 = 0;
+    pCVar3 = pCVar3 + 5;
+    iVar2 = iVar2 + 1;
+  } while ((short)iVar2 != 7);
+  iVar2 = 0;
+  do {
+    *(undefined4 *)(this + iVar2 * 4 + 0x174) = 0xffffffc0;
+    *(undefined4 *)(this + iVar2 * 4 + 0x1ac) = 0xffffffc0;
+    *(undefined4 *)(this + iVar2 * 4 + 0x1e4) = 0;
+    iVar2 = iVar2 + 1;
+  } while ((short)iVar2 != 0xe);
+  iVar2 = 0;
+  do {
+    *(undefined4 *)(this + iVar2 * 4 + 0x21c) = 0;
+    this[iVar2 + 0x238] = (CFW410DeviceSettings)0x0;
+    this[iVar2 + 0x23f] = (CFW410DeviceSettings)0x0;
+    this[iVar2 + 0x246] = (CFW410DeviceSettings)0x0;
+    this[iVar2 + 0x24d] = (CFW410DeviceSettings)0x0;
+    *(undefined2 *)(this + iVar2 * 2 + 0x254) = 1;
+    iVar2 = iVar2 + 1;
+  } while ((short)iVar2 != 7);
+  this[0x266] = (CFW410DeviceSettings)0x0;
+  *(undefined4 *)(this + 0x262) = 0;
+  this[0x267] = (CFW410DeviceSettings)0x1;
+  *(undefined2 *)(this + 0x268) = 0;
+  *(undefined2 *)(this + 0x272) = 0;
+  *(undefined4 *)(this + 0x26c) = 0;
+  *(undefined2 *)(this + 0x270) = 1;
+  *(undefined4 *)(this + 0x274) = 0;
+  *(undefined2 *)(this + 0x278) = 0;
+  this[0x27a] = (CFW410DeviceSettings)0x1;
+  this[0x27b] = (CFW410DeviceSettings)0x0;
+  this[0x27c] = (CFW410DeviceSettings)0x0;
+  this[0x27d] = (CFW410DeviceSettings)0x1;
+  this[0x27e] = (CFW410DeviceSettings)0x1;
+  *(undefined4 *)(this + 0x280) = 0xffff0001;
+  *(undefined4 *)(this + 0x284) = 0xffff;
+  *(undefined4 *)(this + 0x288) = 0x3f800000;
+  *(undefined4 *)(this + 0x28c) = 0xffffffc0;
+  *(undefined4 *)(this + 0x290) = 0;
+  *(undefined4 *)(this + 0x294) = 0x3f800000;
+  *(undefined4 *)(this + 0x298) = 0xffffffc0;
+  *(undefined4 *)(this + 0x29c) = 0;
+  *(undefined4 *)(this + 0x2a0) = 0x3f800000;
+  *(undefined4 *)(this + 0x2a4) = 0xffffffc0;
+  *(undefined4 *)(this + 0x2a8) = 0;
+  *(undefined4 *)(this + 0x2ac) = 0x3f800000;
+  *(undefined4 *)(this + 0x2b0) = 0xffffffc0;
+  *(undefined4 *)(this + 0x2b4) = 0;
+  *(undefined4 *)(this + 0x2b8) = 0x3f800000;
+  *(undefined4 *)(this + 700) = 0xffffffc0;
+  *(undefined4 *)(this + 0x2c0) = 0;
+  *(undefined4 *)(this + 0x2c4) = 0x3f800000;
+  *(undefined4 *)(this + 0x2c8) = 0xffffffc0;
+  *(undefined4 *)(this + 0x2cc) = 0;
+  *(undefined4 *)(this + 0x2d0) = 0x3f800000;
+  *(undefined4 *)(this + 0x2d4) = 0xffffffc0;
+  *(undefined4 *)(this + 0x2d8) = 0x40;
+  *(undefined4 *)(this + 0x2dc) = 0x3f800000;
+  *(undefined4 *)(this + 0x2e0) = 0xffffffc0;
+  *(undefined4 *)(this + 0x2e4) = 0x40;
+  *(undefined4 *)(this + 0x2e8) = 0x3f800000;
+  *(undefined4 *)(this + 0x2ec) = 0;
+  *(undefined4 *)(this + 0x2f0) = 0;
+  *(undefined4 *)(this + 0x2f4) = 0x3f800000;
+  *(undefined4 *)(this + 0x2f8) = 0;
+  *(undefined4 *)(this + 0x2fc) = 0;
+  *(undefined4 *)(this + 0x300) = 0x3f800000;
+  *(undefined4 *)(this + 0x304) = 0;
+  *(undefined4 *)(this + 0x308) = 0;
+  *(undefined4 *)(this + 0x30c) = 0x3f800000;
+  pcVar1 = *(code **)(*(int *)this + 0x94);
+  this_00 = (CMiddleWareManager *)CMiddleWareManager::GetMiddleWareMgr();
+  uVar4 = CMiddleWareManager::GetDevice(this_00,param_1);
+  (*pcVar1)(this,uVar4);
+  return;
+}
+
+
+=== CFW410DeviceSettings::~CFW410DeviceSettings @ 0007db78 ===
+/* CFW410DeviceSettings::~CFW410DeviceSettings() */
+
+void __thiscall CFW410DeviceSettings::~CFW410DeviceSettings(CFW410DeviceSettings *this)
+
+{
+  CDeviceSettings::~CDeviceSettings((CDeviceSettings *)this);
+  operator_delete(this);
+  return;
+}
+
+
+=== CFW410DeviceSettings::~CFW410DeviceSettings @ 0007dba8 ===
+/* CFW410DeviceSettings::~CFW410DeviceSettings() */
+
+void __thiscall CFW410DeviceSettings::~CFW410DeviceSettings(CFW410DeviceSettings *this)
+
+{
+  CDeviceSettings::~CDeviceSettings((CDeviceSettings *)this);
+  return;
+}
+
+
+=== CFW410DeviceSettings::~CFW410DeviceSettings @ 0007dbb2 ===
+/* non-virtual thunk to CFW410DeviceSettings::~CFW410DeviceSettings() */
+
+void __thiscall CFW410DeviceSettings::~CFW410DeviceSettings(CFW410DeviceSettings *this)
+
+{
+  ~CFW410DeviceSettings(this + -0x30);
+  return;
+}
+
+
+=== CFW410DeviceSettings::~CFW410DeviceSettings @ 0007dbcc ===
+/* CFW410DeviceSettings::~CFW410DeviceSettings() */
+
+void __thiscall CFW410DeviceSettings::~CFW410DeviceSettings(CFW410DeviceSettings *this)
+
+{
+  CDeviceSettings::~CDeviceSettings((CDeviceSettings *)this);
+  return;
+}
+
+
+=== CFW410DeviceSettings::~CFW410DeviceSettings @ 0007dbd6 ===
+/* non-virtual thunk to CFW410DeviceSettings::~CFW410DeviceSettings() */
+
+void __thiscall CFW410DeviceSettings::~CFW410DeviceSettings(CFW410DeviceSettings *this)
+
+{
+  CDeviceSettings::~CDeviceSettings((CDeviceSettings *)(this + -0x30));
+  return;
+}
+
+
+=== CFW410DeviceSettings::SetSettingData @ 0007dbf0 ===
+/* CFW410DeviceSettings::SetSettingData(unsigned long, unsigned short, unsigned long, void*, bool&)
+    */
+
+undefined4 __thiscall
+CFW410DeviceSettings::SetSettingData
+          (CFW410DeviceSettings *this,ulong param_1,ushort param_2,ulong param_3,void *param_4,
+          bool *param_5)
+
+{
+  undefined4 uVar1;
+  uint uVar2;
+  int iVar3;
+  uint uVar4;
+  int iVar5;
+  undefined4 uVar6;
+  bool local_4d;
+  undefined8 local_4c;
+  undefined8 local_44;
+  uint local_3c;
+  int local_34;
+  int local_30;
+  ushort local_2a;
+  ushort local_28;
+  ushort local_26;
+  undefined8 local_24;
+  undefined8 local_1c;
+  uint local_14;
+  
+  if (0x32 < param_1 - 0x5e2) {
+switchD_0007dc25_caseD_5e8:
+    local_4d = true;
+    uVar6 = 1;
+    goto switchD_0007dc25_caseD_5e3;
+  }
+  uVar4 = (uint)param_2;
+  local_4d = false;
+  uVar6 = 0;
+  switch(param_1) {
+  case 0x5e2:
+    local_4d = param_3 == 1;
+    goto LAB_0007dc48;
+  case 0x5e3:
+    goto switchD_0007dc25_caseD_5e3;
+  case 0x5e4:
+    if (param_3 == 8) {
+      *(undefined4 *)(this + 0x84) = 0;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    goto LAB_0007e1eb;
+  case 0x5e5:
+    local_4d = true;
+    if (param_3 == 2) {
+      *(undefined2 *)(this + 0x88) = *(undefined2 *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x5e6:
+    if (param_3 == 1) {
+      this[0x8a] = *(CFW410DeviceSettings *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    goto LAB_0007e1eb;
+  case 0x5e7:
+    if (param_3 == 1) {
+      this[0x8b] = *(CFW410DeviceSettings *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    goto LAB_0007e1eb;
+  default:
+    goto switchD_0007dc25_caseD_5e8;
+  case 0x5e9:
+  case 0x5f3:
+    local_4d = param_3 == 0x38;
+LAB_0007dc48:
+    uVar6 = 3;
+    if (local_4d) {
+      uVar6 = 0;
+    }
+    local_4d = !local_4d;
+    goto switchD_0007dc25_caseD_5e3;
+  case 0x5ea:
+    local_4d = true;
+    if (((param_3 == 4) && (param_2 != 0)) && (param_2 < 0xf)) {
+      *(undefined4 *)(this + uVar4 * 4 + 0x88) = *(undefined4 *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x5eb:
+    local_4d = true;
+    if (((param_3 == 4) && (param_2 != 0)) && (param_2 < 5)) {
+      *(undefined4 *)(this + uVar4 * 4 + 0xc0) = *(undefined4 *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x5ec:
+    local_4d = true;
+    if (((param_3 == 4) && (param_2 != 0)) && (param_2 < 0xf)) {
+      *(undefined4 *)(this + uVar4 * 4 + 0xf8) = *(undefined4 *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x5ed:
+    local_4d = true;
+    if (((param_3 == 1) && (param_2 != 0)) && (param_2 < 8)) {
+      this[uVar4 + 0x133] = *(CFW410DeviceSettings *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x5ee:
+    local_4d = true;
+    if (((param_3 == 1) && (param_2 != 0)) && (param_2 < 8)) {
+      this[uVar4 + 0x13a] = *(CFW410DeviceSettings *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x5ef:
+    local_4d = true;
+    if (((param_3 == 1) && (param_2 != 0)) && (param_2 < 8)) {
+      this[uVar4 + 0x141] = *(CFW410DeviceSettings *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x5f0:
+    local_4d = true;
+    if (((param_3 == 1) && (param_2 != 0)) && (param_2 < 8)) {
+      this[uVar4 + 0x148] = *(CFW410DeviceSettings *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x5f1:
+    local_4d = true;
+    if (((param_3 == 5) && (param_2 != 0)) && (param_2 < 8)) {
+      iVar3 = 0;
+      do {
+        this[iVar3 + uVar4 * 5 + 0x14b] = *(CFW410DeviceSettings *)((int)param_4 + iVar3);
+        iVar3 = iVar3 + 1;
+      } while ((short)iVar3 != 5);
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x5f4:
+    local_4d = true;
+    if (((param_3 == 4) && (param_2 != 0)) && (param_2 < 0xf)) {
+      local_14 = DAT_000f8e50;
+      local_1c = DAT_000f8e48;
+      local_24 = DAT_000f8e40;
+      uVar1 = *(undefined4 *)param_4;
+      *(undefined4 *)(this + uVar4 * 4 + 0x170) = uVar1;
+      *(undefined4 *)(this + uVar4 * 4 + 0x1a8) = uVar1;
+      (**(code **)(*(int *)this + 0x28))(this,uVar4,&local_26);
+      uVar1 = CalculateOutputPairBalanceLevel(this,local_26);
+      *(undefined4 *)(this + (uint)local_26 * 4 + 0x218) = uVar1;
+      local_1c = CONCAT44(this + (uint)local_26 * 4 + 0x218,(undefined4)local_1c);
+      local_14 = local_14 & 0xffff0000;
+      local_24._0_6_ = CONCAT24(local_26,(undefined4)local_24);
+      LBroadcaster::BroadcastMessage((LBroadcaster *)(this + 0x30),0x5f6,&local_24);
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x5f5:
+    local_4d = true;
+    if ((param_3 == 4) && ((ushort)(param_2 - 0xd) < 2)) {
+      *(undefined4 *)(this + uVar4 * 4 + 0x1e0) = *(undefined4 *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x5f6:
+    local_4d = true;
+    if (((param_3 == 4) && (param_2 != 0)) && (param_2 < 8)) {
+      local_3c = DAT_000f8e64;
+      local_44 = DAT_000f8e5c;
+      local_4c = DAT_000f8e54;
+      *(undefined4 *)(this + uVar4 * 4 + 0x218) = *(undefined4 *)param_4;
+      (**(code **)(*(int *)this + 0x24))(this,uVar4,&local_28,&local_2a);
+      uVar2 = (uint)local_28;
+      local_34 = *(int *)(this + (uint)local_2a * 4 + 0x1a8);
+      if (*(int *)(this + (uint)local_2a * 4 + 0x1a8) <= *(int *)(this + uVar2 * 4 + 0x1a8)) {
+        local_34 = *(int *)(this + uVar2 * 4 + 0x1a8);
+      }
+      iVar3 = *(int *)(this + uVar4 * 4 + 0x218);
+      iVar5 = (*(int *)(this + 0x2e4) - *(int *)(this + 0x2e0)) / 2 + *(int *)(this + 0x2e0);
+      local_30 = local_34;
+      if (iVar3 < iVar5) {
+        local_34 = (iVar3 - iVar5) + local_34;
+        if (local_34 < *(int *)(this + 0x2c8)) {
+          local_34 = *(int *)(this + 0x2c8);
+        }
+      }
+      else if (iVar3 - iVar5 != 0 && iVar5 <= iVar3) {
+        local_30 = (iVar5 - iVar3) + local_34;
+        if (local_30 < *(int *)(this + 0x2c8)) {
+          local_30 = *(int *)(this + 0x2c8);
+        }
+      }
+      *(int *)(this + uVar2 * 4 + 0x170) = local_30;
+      *(int *)(this + (uint)local_2a * 4 + 0x170) = local_34;
+      (**(code **)(**(int **)(this + 0x68) + 0x2c))(*(int **)(this + 0x68),0x5f4,uVar2,4,&local_30);
+      (**(code **)(**(int **)(this + 0x68) + 0x2c))
+                (*(int **)(this + 0x68),0x5f4,local_2a,4,&local_34);
+      local_44 = CONCAT44(&local_30,4);
+      local_3c = local_3c & 0xffff0000;
+      local_4c._0_6_ = CONCAT24(local_28,(undefined4)local_4c);
+      LBroadcaster::BroadcastMessage((LBroadcaster *)(this + 0x30),0x5f4,&local_4c);
+      local_44 = CONCAT44(&local_34,4);
+      local_3c = local_3c & 0xffff0000;
+      local_4c._0_6_ = CONCAT24(local_2a,(undefined4)local_4c);
+      LBroadcaster::BroadcastMessage((LBroadcaster *)(this + 0x30),0x5f4,&local_4c);
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x5f7:
+    local_4d = true;
+    if (((param_3 == 1) && (param_2 != 0)) && (param_2 < 8)) {
+      this[uVar4 + 0x237] = *(CFW410DeviceSettings *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x5f8:
+    local_4d = true;
+    if (((param_3 == 1) && (param_2 != 0)) && (param_2 < 8)) {
+      this[uVar4 + 0x23e] = *(CFW410DeviceSettings *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x5f9:
+    if (((param_3 == 1) && (param_2 != 0)) && (param_2 < 5)) {
+      this[uVar4 + 0x245] = *(CFW410DeviceSettings *)param_4;
+      local_4d = true;
+    }
+    else {
+      uVar6 = 3;
+      if (param_2 == 5) {
+        uVar6 = 0;
+      }
+      local_4d = true;
+    }
+    goto switchD_0007dc25_caseD_5e3;
+  case 0x5fa:
+    local_4d = true;
+    if (((param_3 == 1) && (param_2 != 0)) && (param_2 < 8)) {
+      this[uVar4 + 0x24c] = *(CFW410DeviceSettings *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x5fb:
+    local_4d = true;
+    if (((param_3 == 2) && (param_2 != 0)) && (param_2 < 7)) {
+      *(undefined2 *)(this + uVar4 * 2 + 0x252) = *(undefined2 *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x5fc:
+    local_4d = true;
+    if (param_3 == 5) {
+      iVar3 = 0;
+      do {
+        this[iVar3 + 0x262] = *(CFW410DeviceSettings *)((int)param_4 + iVar3);
+        iVar3 = iVar3 + 1;
+      } while ((short)iVar3 != 5);
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x5fe:
+    local_4d = true;
+    if (param_3 == 1) {
+      this[0x267] = *(CFW410DeviceSettings *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x5ff:
+    local_4d = true;
+    if (param_3 == 2) {
+      *(undefined2 *)(this + 0x268) = *(undefined2 *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x600:
+    local_4d = true;
+    if (param_3 == 2) {
+      *(undefined2 *)(this + 0x272) = *(undefined2 *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x601:
+    local_4d = true;
+    if (param_3 == 4) {
+      *(undefined4 *)(this + 0x26c) = *(undefined4 *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x602:
+    if (param_3 == 2) {
+      *(undefined2 *)(this + 0x270) = *(undefined2 *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+LAB_0007e1eb:
+    uVar6 = 3;
+    local_4d = true;
+    goto switchD_0007dc25_caseD_5e3;
+  case 0x605:
+    local_4d = true;
+    if (param_3 == 4) {
+      *(undefined4 *)(this + 0x274) = *(undefined4 *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x60a:
+    local_4d = true;
+    if (param_3 == 2) {
+      *(undefined2 *)(this + 0x278) = *(undefined2 *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x610:
+    local_4d = true;
+    if (param_3 == 1) {
+      this[0x27a] = *(CFW410DeviceSettings *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x613:
+    local_4d = true;
+    if (param_3 == 1) {
+      this[0x27b] = *(CFW410DeviceSettings *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+    break;
+  case 0x614:
+    local_4d = true;
+    if (param_3 == 1) {
+      this[0x27c] = *(CFW410DeviceSettings *)param_4;
+      goto switchD_0007dc25_caseD_5e3;
+    }
+  }
+  local_4d = true;
+  uVar6 = 3;
+switchD_0007dc25_caseD_5e3:
+  *param_5 = local_4d;
+  return uVar6;
+}
+
+
+=== CFW410DeviceSettings::CalculateOutputPairBalanceLevel @ 0007e45c ===
+/* CFW410DeviceSettings::CalculateOutputPairBalanceLevel(unsigned short) */
+
+int __thiscall
+CFW410DeviceSettings::CalculateOutputPairBalanceLevel(CFW410DeviceSettings *this,ushort param_1)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  ushort local_c;
+  ushort local_a;
+  
+  (**(code **)(*(int *)this + 0x24))(this,param_1,&local_a,&local_c);
+  iVar3 = (*(int *)(this + 0x2e4) - *(int *)(this + 0x2e0)) / 2 + *(int *)(this + 0x2e0);
+  iVar1 = *(int *)(this + (uint)local_c * 4 + 0x170);
+  iVar2 = *(int *)(this + (uint)local_a * 4 + 0x170);
+  if ((iVar1 < iVar2) || (iVar2 < iVar1)) {
+    iVar3 = (iVar3 - iVar2) + iVar1;
+  }
+  return iVar3;
+}
+
+
+=== CFW410DeviceSettings::GetSettingData @ 0007e4c4 ===
+/* CFW410DeviceSettings::GetSettingData(unsigned long, unsigned short, unsigned long, void*) */
+
+ushort __thiscall
+CFW410DeviceSettings::GetSettingData
+          (CFW410DeviceSettings *this,ulong param_1,ushort param_2,ulong param_3,void *param_4)
+
+{
+  CFW410DeviceSettings CVar1;
+  ushort uVar2;
+  undefined2 uVar3;
+  uint uVar4;
+  int iVar5;
+  int *piVar6;
+  undefined4 uVar7;
+  
+  uVar2 = 1;
+  if (0x36 < param_1 - 0x5de) {
+    return 1;
+  }
+  uVar4 = (uint)param_2;
+  switch(param_1) {
+  case 0x5de:
+    piVar6 = *(int **)(this + 0x68);
+    iVar5 = *piVar6;
+    uVar7 = 0x5de;
+    goto LAB_0007e565;
+  case 0x5df:
+    piVar6 = *(int **)(this + 0x68);
+    iVar5 = *piVar6;
+    uVar7 = 0x5df;
+    goto LAB_0007e565;
+  case 0x5e0:
+    piVar6 = *(int **)(this + 0x68);
+    iVar5 = *piVar6;
+    uVar7 = 0x5e0;
+    goto LAB_0007e565;
+  case 0x5e1:
+    piVar6 = *(int **)(this + 0x68);
+    iVar5 = *piVar6;
+    uVar7 = 0x5e1;
+LAB_0007e565:
+    uVar2 = (**(code **)(iVar5 + 0x20))(piVar6,uVar7,param_3,param_4);
+    return uVar2;
+  default:
+    goto switchD_0007e4fd_caseD_5e2;
+  case 0x5e4:
+    if (param_3 != 8) {
+      return 3;
+    }
+    *(undefined4 *)param_4 = *(undefined4 *)(this + 0x84);
+    *(undefined4 *)((int)param_4 + 4) = 0;
+    return 0;
+  case 0x5e5:
+    if (param_3 != 2) {
+      return 3;
+    }
+    uVar3 = *(undefined2 *)(this + 0x88);
+    goto LAB_0007e995;
+  case 0x5e6:
+    if (param_3 != 1) {
+      return 3;
+    }
+    CVar1 = this[0x8a];
+    break;
+  case 0x5e7:
+    if (param_3 != 1) {
+      return 3;
+    }
+    CVar1 = this[0x8b];
+    break;
+  case 0x5ea:
+    if (param_3 != 4) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (0xe < param_2) {
+      return 3;
+    }
+    uVar7 = *(undefined4 *)(this + (uint)param_2 * 4 + 0x88);
+    goto LAB_0007e97f;
+  case 0x5eb:
+    if (param_3 != 4) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (4 < param_2) {
+      return 3;
+    }
+    uVar7 = *(undefined4 *)(this + uVar4 * 4 + 0xc0);
+    goto LAB_0007e97f;
+  case 0x5ec:
+    if (param_3 != 4) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (0xe < param_2) {
+      return 3;
+    }
+    uVar7 = *(undefined4 *)(this + uVar4 * 4 + 0xf8);
+    goto LAB_0007e97f;
+  case 0x5ed:
+    if (param_3 != 1) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (7 < param_2) {
+      return 3;
+    }
+    CVar1 = this[uVar4 + 0x133];
+    break;
+  case 0x5ee:
+    if (param_3 != 1) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (7 < param_2) {
+      return 3;
+    }
+    CVar1 = this[uVar4 + 0x13a];
+    break;
+  case 0x5ef:
+    if (param_3 != 1) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (7 < param_2) {
+      return 3;
+    }
+    CVar1 = this[uVar4 + 0x141];
+    break;
+  case 0x5f0:
+    if (param_3 != 1) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (7 < param_2) {
+      return 3;
+    }
+    CVar1 = this[uVar4 + 0x148];
+    break;
+  case 0x5f1:
+    if (param_3 != 5) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (7 < param_2) {
+      return 3;
+    }
+    iVar5 = 0;
+    do {
+      *(CFW410DeviceSettings *)((int)param_4 + iVar5) = this[iVar5 + uVar4 * 5 + 0x14b];
+      iVar5 = iVar5 + 1;
+    } while ((short)iVar5 != 5);
+    return 0;
+  case 0x5f4:
+    if (param_3 != 4) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (0xe < param_2) {
+      return 3;
+    }
+    uVar7 = *(undefined4 *)(this + uVar4 * 4 + 0x170);
+    goto LAB_0007e97f;
+  case 0x5f5:
+    if (param_3 != 4) {
+      return 3;
+    }
+    if (1 < (ushort)(param_2 - 0xd)) {
+      return 3;
+    }
+    uVar7 = *(undefined4 *)(this + uVar4 * 4 + 0x1e0);
+    goto LAB_0007e97f;
+  case 0x5f6:
+    if (param_3 != 4) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (7 < param_2) {
+      return 3;
+    }
+    uVar7 = *(undefined4 *)(this + uVar4 * 4 + 0x218);
+    goto LAB_0007e97f;
+  case 0x5f7:
+    if (param_3 != 1) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (7 < param_2) {
+      return 3;
+    }
+    CVar1 = this[uVar4 + 0x237];
+    break;
+  case 0x5f8:
+    if (param_3 != 1) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (7 < param_2) {
+      return 3;
+    }
+    CVar1 = this[uVar4 + 0x23e];
+    break;
+  case 0x5f9:
+    if (param_3 != 1) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (5 < param_2) {
+      return 3;
+    }
+    CVar1 = this[uVar4 + 0x245];
+    break;
+  case 0x5fa:
+    if (param_3 != 1) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (7 < param_2) {
+      return 3;
+    }
+    CVar1 = this[uVar4 + 0x24c];
+    break;
+  case 0x5fb:
+    if (param_3 != 2) {
+      return 3;
+    }
+    if (param_2 == 0) {
+      return 3;
+    }
+    if (6 < param_2) {
+      return 3;
+    }
+    uVar3 = *(undefined2 *)(this + uVar4 * 2 + 0x252);
+    goto LAB_0007e995;
+  case 0x5fc:
+    if (param_3 != 5) {
+      return 3;
+    }
+    iVar5 = 0;
+    do {
+      *(CFW410DeviceSettings *)((int)param_4 + iVar5) = this[iVar5 + 0x262];
+      iVar5 = iVar5 + 1;
+    } while ((short)iVar5 != 5);
+    return 0;
+  case 0x5fe:
+    if (param_3 != 1) {
+      return 3;
+    }
+    CVar1 = this[0x267];
+    break;
+  case 0x5ff:
+    if (param_3 != 2) {
+      return 3;
+    }
+    uVar3 = *(undefined2 *)(this + 0x268);
+    goto LAB_0007e995;
+  case 0x600:
+    if (param_3 != 2) {
+      return 3;
+    }
+    uVar3 = *(undefined2 *)(this + 0x272);
+    goto LAB_0007e995;
+  case 0x601:
+    if (param_3 != 4) {
+      return 3;
+    }
+    uVar7 = *(undefined4 *)(this + 0x26c);
+    goto LAB_0007e97f;
+  case 0x602:
+    if (param_3 != 2) {
+      return 3;
+    }
+    uVar3 = *(undefined2 *)(this + 0x270);
+    goto LAB_0007e995;
+  case 0x605:
+    if (param_3 != 4) {
+      return 3;
+    }
+    uVar7 = *(undefined4 *)(this + 0x274);
+LAB_0007e97f:
+    *(undefined4 *)param_4 = uVar7;
+    return 0;
+  case 0x60a:
+    if (param_3 != 2) {
+      return 3;
+    }
+    uVar3 = *(undefined2 *)(this + 0x278);
+LAB_0007e995:
+    *(undefined2 *)param_4 = uVar3;
+    return 0;
+  case 0x610:
+    if (param_3 != 1) {
+      return 3;
+    }
+    CVar1 = this[0x27a];
+    break;
+  case 0x613:
+    if (param_3 != 1) {
+      return 3;
+    }
+    *(CFW410DeviceSettings *)param_4 = this[0x27b];
+    return (byte)this[0x27d] ^ 1;
+  case 0x614:
+    uVar2 = 3;
+    if (param_3 == 1) {
+      *(CFW410DeviceSettings *)param_4 = this[0x27c];
+      return (byte)this[0x27e] ^ 1;
+    }
+    goto switchD_0007e4fd_caseD_5e2;
+  }
+  *(CFW410DeviceSettings *)param_4 = CVar1;
+  uVar2 = 0;
+switchD_0007e4fd_caseD_5e2:
+  return uVar2;
+}
+
+
+=== CFW410DeviceSettings::GetSettingRangeData @ 0007ead4 ===
+/* CFW410DeviceSettings::GetSettingRangeData(unsigned long, ValueRangeType*) */
+
+undefined4 __thiscall
+CFW410DeviceSettings::GetSettingRangeData
+          (CFW410DeviceSettings *this,ulong param_1,ValueRangeType *param_2)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = 1;
+  if (param_1 < 0x5e9) {
+    if (param_1 != 0x5e4) {
+      return 1;
+    }
+    *(undefined4 *)param_2 = *(undefined4 *)(this + 0x280);
+    *(undefined4 *)(param_2 + 4) = *(undefined4 *)(this + 0x284);
+    uVar1 = *(undefined4 *)(this + 0x288);
+  }
+  else if (param_1 < 0x5f3) {
+    switch(param_1) {
+    case 0x5e9:
+      *(undefined4 *)param_2 = *(undefined4 *)(this + 0x28c);
+      *(undefined4 *)(param_2 + 4) = *(undefined4 *)(this + 0x290);
+      uVar1 = *(undefined4 *)(this + 0x294);
+      break;
+    case 0x5ea:
+      *(undefined4 *)param_2 = *(undefined4 *)(this + 0x298);
+      *(undefined4 *)(param_2 + 4) = *(undefined4 *)(this + 0x29c);
+      uVar1 = *(undefined4 *)(this + 0x2a0);
+      break;
+    case 0x5eb:
+      *(undefined4 *)param_2 = *(undefined4 *)(this + 0x2a4);
+      *(undefined4 *)(param_2 + 4) = *(undefined4 *)(this + 0x2a8);
+      uVar1 = *(undefined4 *)(this + 0x2ac);
+      break;
+    case 0x5ec:
+      *(undefined4 *)param_2 = *(undefined4 *)(this + 0x2b0);
+      *(undefined4 *)(param_2 + 4) = *(undefined4 *)(this + 0x2b4);
+      uVar1 = *(undefined4 *)(this + 0x2b8);
+      break;
+    default:
+      goto switchD_0007eb43_default;
+    }
+  }
+  else if (param_1 < 0x601) {
+    switch(param_1) {
+    case 0x5f3:
+      *(undefined4 *)param_2 = *(undefined4 *)(this + 700);
+      *(undefined4 *)(param_2 + 4) = *(undefined4 *)(this + 0x2c0);
+      uVar1 = *(undefined4 *)(this + 0x2c4);
+      break;
+    case 0x5f4:
+      *(undefined4 *)param_2 = *(undefined4 *)(this + 0x2c8);
+      *(undefined4 *)(param_2 + 4) = *(undefined4 *)(this + 0x2cc);
+      uVar1 = *(undefined4 *)(this + 0x2d0);
+      break;
+    case 0x5f5:
+      *(undefined4 *)param_2 = *(undefined4 *)(this + 0x2d4);
+      *(undefined4 *)(param_2 + 4) = *(undefined4 *)(this + 0x2d8);
+      uVar1 = *(undefined4 *)(this + 0x2dc);
+      break;
+    case 0x5f6:
+      *(undefined4 *)param_2 = *(undefined4 *)(this + 0x2e0);
+      *(undefined4 *)(param_2 + 4) = *(undefined4 *)(this + 0x2e4);
+      uVar1 = *(undefined4 *)(this + 0x2e8);
+      break;
+    default:
+      goto switchD_0007eb43_default;
+    }
+  }
+  else if (param_1 == 0x601) {
+    *(undefined4 *)param_2 = *(undefined4 *)(this + 0x304);
+    *(undefined4 *)(param_2 + 4) = *(undefined4 *)(this + 0x308);
+    uVar1 = *(undefined4 *)(this + 0x30c);
+  }
+  else if (param_1 == 0x605) {
+    *(undefined4 *)param_2 = *(undefined4 *)(this + 0x2ec);
+    *(undefined4 *)(param_2 + 4) = *(undefined4 *)(this + 0x2f0);
+    uVar1 = *(undefined4 *)(this + 0x2f4);
+  }
+  else {
+    if (param_1 != 0x60a) {
+      return 1;
+    }
+    *(undefined4 *)param_2 = *(undefined4 *)(this + 0x2f8);
+    *(undefined4 *)(param_2 + 4) = *(undefined4 *)(this + 0x2fc);
+    uVar1 = *(undefined4 *)(this + 0x300);
+  }
+  *(undefined4 *)(param_2 + 8) = uVar1;
+  uVar1 = 0;
+switchD_0007eb43_default:
+  return uVar1;
+}
+
+
+=== CFW410DeviceSettings::CreateNewSettingsFile @ 0007ecec ===
+/* CFW410DeviceSettings::CreateNewSettingsFile() */
+
+CSettingsDataFile * CFW410DeviceSettings::CreateNewSettingsFile(void)
+
+{
+  CSettingsDataFile *this;
+  
+  this = operator_new(0x6c);
+  CSettingsDataFile::CSettingsDataFile(this,0x4d416677,0x34313053,5);
+  return this;
+}
+
+
+=== CFW410DeviceSettings::ReadSettingsFromFile @ 0007ed3e ===
+/* CFW410DeviceSettings::ReadSettingsFromFile(CSettingsDataFile*) */
+
+int __thiscall
+CFW410DeviceSettings::ReadSettingsFromFile(CFW410DeviceSettings *this,CSettingsDataFile *param_1)
+
+{
+  short sVar1;
+  short sVar2;
+  uint uVar3;
+  undefined4 uVar4;
+  CFW410DeviceSettings *pCVar5;
+  ushort uVar6;
+  LStream *this_00;
+  int iVar7;
+  int local_34;
+  CFW410DeviceSettings *local_30;
+  ulong local_28 [2];
+  char local_1d;
+  char local_1c;
+  char local_1b;
+  char local_1a;
+  char local_19;
+  char local_18;
+  char local_17;
+  char local_16;
+  char local_15;
+  char local_14;
+  char local_13;
+  char local_12;
+  char local_11;
+  
+  sVar2 = -0x32;
+  if (param_1 == (CSettingsDataFile *)0x0) goto LAB_0007f1c0;
+  local_28[1] = 0x3f3f3f3f;
+  local_28[0] = 0;
+  sVar2 = CSettingsDataFile::getHeaderFileInfo(param_1,local_28 + 1,local_28);
+  (**(code **)(*(int *)param_1 + 0x30))(param_1,0x10,1);
+  this_00 = (LStream *)(param_1 + 0x50);
+  LStream::ReadBlock(this_00,this + 0x84,4);
+  *(undefined4 *)(this + 0x84) = 0;
+  LStream::ReadBlock(this_00,this + 0x88,2);
+  pCVar5 = this + 0x88;
+  *(ushort *)pCVar5 = *(ushort *)pCVar5 << 8 | *(ushort *)pCVar5 >> 8;
+  pCVar5 = this + 0x8c;
+  uVar6 = 1;
+  do {
+    LStream::ReadBlock(this_00,pCVar5,4);
+    uVar3 = *(uint *)pCVar5;
+    *(uint *)pCVar5 =
+         uVar3 >> 0x18 | (uVar3 & 0xff0000) >> 8 | (uVar3 & 0xff00) << 8 | uVar3 << 0x18;
+    LStream::ReadBlock(this_00,pCVar5 + 0x38,4);
+    uVar3 = *(uint *)(pCVar5 + 0x38);
+    *(uint *)(pCVar5 + 0x38) =
+         uVar3 >> 0x18 | (uVar3 & 0xff0000) >> 8 | (uVar3 & 0xff00) << 8 | uVar3 << 0x18;
+    LStream::ReadBlock(this_00,pCVar5 + 0x70,4);
+    uVar3 = *(uint *)(pCVar5 + 0x70);
+    *(uint *)(pCVar5 + 0x70) =
+         uVar3 >> 0x18 | (uVar3 & 0xff0000) >> 8 | (uVar3 & 0xff00) << 8 | uVar3 << 0x18;
+    uVar6 = uVar6 + 1;
+    pCVar5 = pCVar5 + 4;
+  } while (uVar6 < 0xf);
+  local_30 = this + 0x150;
+  iVar7 = 1;
+  do {
+    local_1d = '\0';
+    LStream::ReadBlock(this_00,&local_1d,1);
+    this[iVar7 + 0x133] = (CFW410DeviceSettings)(local_1d != '\0');
+    local_1c = '\0';
+    LStream::ReadBlock(this_00,&local_1c,1);
+    this[iVar7 + 0x13a] = (CFW410DeviceSettings)(local_1c != '\0');
+    local_1b = '\0';
+    LStream::ReadBlock(this_00,&local_1b,1);
+    this[iVar7 + 0x141] = (CFW410DeviceSettings)(local_1b != '\0');
+    local_1a = '\0';
+    LStream::ReadBlock(this_00,&local_1a,1);
+    this[iVar7 + 0x148] = (CFW410DeviceSettings)(local_1a != '\0');
+    uVar6 = 1;
+    pCVar5 = local_30;
+    do {
+      local_19 = '\0';
+      LStream::ReadBlock(this_00,&local_19,1);
+      *pCVar5 = (CFW410DeviceSettings)(local_19 != '\0');
+      uVar6 = uVar6 + 1;
+      pCVar5 = pCVar5 + 1;
+    } while (uVar6 < 6);
+    local_30 = local_30 + 5;
+    iVar7 = iVar7 + 1;
+  } while ((ushort)iVar7 < 8);
+  pCVar5 = this + 0x174;
+  uVar6 = 1;
+  do {
+    LStream::ReadBlock(this_00,pCVar5,4);
+    uVar3 = *(uint *)pCVar5;
+    uVar3 = uVar3 >> 0x18 | (uVar3 & 0xff0000) >> 8 | (uVar3 & 0xff00) << 8 | uVar3 << 0x18;
+    *(uint *)pCVar5 = uVar3;
+    *(uint *)(pCVar5 + 0x38) = uVar3;
+    LStream::ReadBlock(this_00,pCVar5 + 0x70,4);
+    uVar3 = *(uint *)(pCVar5 + 0x70);
+    *(uint *)(pCVar5 + 0x70) =
+         uVar3 >> 0x18 | (uVar3 & 0xff0000) >> 8 | (uVar3 & 0xff00) << 8 | uVar3 << 0x18;
+    uVar6 = uVar6 + 1;
+    pCVar5 = pCVar5 + 4;
+  } while (uVar6 < 0xf);
+  local_34 = 0x254;
+  local_30 = (CFW410DeviceSettings *)0x238;
+  iVar7 = 0x21c;
+  uVar6 = 1;
+  do {
+    LStream::ReadBlock(this_00,this + iVar7,4);
+    uVar3 = *(uint *)(this + local_34 * 2 + -0x28c);
+    *(uint *)(this + local_34 * 2 + -0x28c) =
+         uVar3 >> 0x18 | (uVar3 & 0xff0000) >> 8 | (uVar3 & 0xff00) << 8 | uVar3 << 0x18;
+    uVar4 = CalculateOutputPairBalanceLevel(this,uVar6);
+    *(undefined4 *)(this + local_34 * 2 + -0x28c) = uVar4;
+    local_18 = '\0';
+    LStream::ReadBlock(this_00,&local_18,1);
+    this[(int)local_30] = (CFW410DeviceSettings)(local_18 != '\0');
+    local_17 = '\0';
+    LStream::ReadBlock(this_00,&local_17,1);
+    this[(int)local_30 + 7] = (CFW410DeviceSettings)(local_17 != '\0');
+    local_16 = '\0';
+    LStream::ReadBlock(this_00,&local_16,1);
+    this[(int)local_30 + 0xe] = (CFW410DeviceSettings)(local_16 != '\0');
+    local_15 = '\0';
+    LStream::ReadBlock(this_00,&local_15,1);
+    this[(int)local_30 + 0x15] = (CFW410DeviceSettings)(local_15 != '\0');
+    pCVar5 = this + local_34;
+    LStream::ReadBlock(this_00,pCVar5,2);
+    *(ushort *)pCVar5 = *(ushort *)pCVar5 << 8 | *(ushort *)pCVar5 >> 8;
+    uVar6 = uVar6 + 1;
+    iVar7 = iVar7 + 4;
+    local_30 = (CFW410DeviceSettings *)((int)local_30 + 1);
+    local_34 = local_34 + 2;
+  } while (uVar6 < 8);
+  this[0x24a] = (CFW410DeviceSettings)0x0;
+  iVar7 = 0x262;
+  do {
+    local_14 = '\0';
+    LStream::ReadBlock(this_00,&local_14,1);
+    this[iVar7] = (CFW410DeviceSettings)(local_14 != '\0');
+    sVar1 = (short)iVar7;
+    iVar7 = iVar7 + 1;
+  } while ((ushort)(sVar1 - 0x260U) < 6);
+  LStream::ReadBlock(this_00,this + 0x268,2);
+  pCVar5 = this + 0x268;
+  *(ushort *)pCVar5 = *(ushort *)pCVar5 << 8 | *(ushort *)pCVar5 >> 8;
+  LStream::ReadBlock(this_00,this + 0x272,2);
+  pCVar5 = this + 0x272;
+  *(ushort *)pCVar5 = *(ushort *)pCVar5 << 8 | *(ushort *)pCVar5 >> 8;
+  pCVar5 = this + 0x274;
+  LStream::ReadBlock(this_00,pCVar5,4);
+  uVar3 = *(uint *)pCVar5;
+  *(uint *)pCVar5 = uVar3 >> 0x18 | (uVar3 & 0xff0000) >> 8 | (uVar3 & 0xff00) << 8 | uVar3 << 0x18;
+  if (local_28[0] < 2) {
+    this[0x5d] = (CFW410DeviceSettings)0x1;
+    *(undefined2 *)(this + 0x278) = 0;
+LAB_0007f1fb:
+    this[0x5d] = (CFW410DeviceSettings)0x1;
+    this[0x27a] = (CFW410DeviceSettings)0x1;
+  }
+  else {
+    pCVar5 = this + 0x278;
+    LStream::ReadBlock(this_00,pCVar5,2);
+    *(ushort *)pCVar5 = *(ushort *)pCVar5 << 8 | *(ushort *)pCVar5 >> 8;
+    if (local_28[0] < 3) goto LAB_0007f1fb;
+    local_13 = '\0';
+    LStream::ReadBlock(this_00,&local_13,1);
+    this[0x27a] = (CFW410DeviceSettings)(local_13 != '\0');
+  }
+  if (local_28[0] < 4) {
+    this[0x5d] = (CFW410DeviceSettings)0x1;
+    this[0x27b] = (CFW410DeviceSettings)0x0;
+    this[0x27c] = (CFW410DeviceSettings)0x0;
+  }
+  else {
+    local_12 = '\0';
+    LStream::ReadBlock(this_00,&local_12,1);
+    this[0x27b] = (CFW410DeviceSettings)(local_12 != '\0');
+    local_11 = '\0';
+    LStream::ReadBlock(this_00,&local_11,1);
+    this[0x27c] = (CFW410DeviceSettings)(local_11 != '\0');
+  }
+  if (local_28[0] < 5) {
+    this[0x5d] = (CFW410DeviceSettings)0x1;
+  }
+  else {
+    pCVar5 = this + 0x26c;
+    LStream::ReadBlock(this_00,pCVar5,4);
+    uVar3 = *(uint *)pCVar5;
+    *(uint *)pCVar5 =
+         uVar3 >> 0x18 | (uVar3 & 0xff0000) >> 8 | (uVar3 & 0xff00) << 8 | uVar3 << 0x18;
+  }
+LAB_0007f1c0:
+  return (int)sVar2;
+}
+
+
+=== CFW410DeviceSettings::WriteSettingsToFile @ 0007f2de ===
+/* CFW410DeviceSettings::WriteSettingsToFile(CSettingsDataFile*) */
+
+undefined4 __thiscall
+CFW410DeviceSettings::WriteSettingsToFile(CFW410DeviceSettings *this,CSettingsDataFile *param_1)
+
+{
+  uint uVar1;
+  short sVar2;
+  int iVar3;
+  CFW410DeviceSettings *pCVar4;
+  ushort uVar5;
+  LStream *this_00;
+  CFW410DeviceSettings *local_5c;
+  uint local_54;
+  uint local_50;
+  ushort local_4a;
+  uint local_48;
+  uint local_44;
+  uint local_40;
+  CFW410DeviceSettings local_39;
+  CFW410DeviceSettings local_38;
+  CFW410DeviceSettings local_37;
+  CFW410DeviceSettings local_36;
+  CFW410DeviceSettings local_35;
+  uint local_34;
+  uint local_30;
+  uint local_2c;
+  CFW410DeviceSettings local_28;
+  CFW410DeviceSettings local_27;
+  CFW410DeviceSettings local_26;
+  CFW410DeviceSettings local_25;
+  ushort local_24;
+  CFW410DeviceSettings local_21;
+  ushort local_20;
+  ushort local_1e;
+  uint local_1c;
+  ushort local_16;
+  CFW410DeviceSettings local_13;
+  CFW410DeviceSettings local_12;
+  CFW410DeviceSettings local_11;
+  
+  sVar2 = CSettingsDataFile::UpdateFileHeader(param_1);
+  if (sVar2 != 0) {
+    UDebugging::DebugThrow
+              ((int)sVar2,"WriteSettingsToFile",
+               (uchar *)
+               "}/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/Source/FW410/Settings/CFW410DeviceSettings.cp"
+               ,0x5f8);
+  }
+  (**(code **)(*(int *)param_1 + 0x30))(param_1,0x10,1);
+  uVar1 = *(uint *)(this + 0x84);
+  local_50 = uVar1 >> 0x18 | (uVar1 & 0xff0000) >> 8 | (uVar1 & 0xff00) << 8 | uVar1 << 0x18;
+  this_00 = (LStream *)(param_1 + 0x50);
+  LStream::WriteBlock(this_00,&local_50,4);
+  local_4a = *(ushort *)(this + 0x88) << 8 | *(ushort *)(this + 0x88) >> 8;
+  LStream::WriteBlock(this_00,&local_4a,2);
+  iVar3 = 0x23;
+  do {
+    uVar1 = *(uint *)(this + iVar3 * 4);
+    local_48 = uVar1 >> 0x18 | (uVar1 & 0xff0000) >> 8 | (uVar1 & 0xff00) << 8 | uVar1 << 0x18;
+    LStream::WriteBlock(this_00,&local_48,4);
+    uVar1 = *(uint *)(this + iVar3 * 4 + 0x38);
+    local_44 = uVar1 >> 0x18 | (uVar1 & 0xff0000) >> 8 | (uVar1 & 0xff00) << 8 | uVar1 << 0x18;
+    LStream::WriteBlock(this_00,&local_44,4);
+    uVar1 = *(uint *)(this + iVar3 * 4 + 0x70);
+    local_40 = uVar1 >> 0x18 | (uVar1 & 0xff0000) >> 8 | (uVar1 & 0xff00) << 8 | uVar1 << 0x18;
+    LStream::WriteBlock(this_00,&local_40,4);
+    sVar2 = (short)iVar3;
+    iVar3 = iVar3 + 1;
+  } while ((ushort)(sVar2 - 0x21U) < 0xf);
+  local_5c = this + 0x150;
+  iVar3 = 1;
+  do {
+    local_39 = this[iVar3 + 0x133];
+    LStream::WriteBlock(this_00,&local_39,1);
+    local_38 = this[iVar3 + 0x13a];
+    LStream::WriteBlock(this_00,&local_38,1);
+    local_37 = this[iVar3 + 0x141];
+    LStream::WriteBlock(this_00,&local_37,1);
+    local_36 = this[iVar3 + 0x148];
+    uVar5 = 1;
+    LStream::WriteBlock(this_00,&local_36,1);
+    pCVar4 = local_5c;
+    do {
+      local_35 = *pCVar4;
+      LStream::WriteBlock(this_00,&local_35,1);
+      uVar5 = uVar5 + 1;
+      pCVar4 = pCVar4 + 1;
+    } while (uVar5 < 6);
+    local_5c = local_5c + 5;
+    iVar3 = iVar3 + 1;
+  } while ((ushort)iVar3 < 8);
+  iVar3 = 0x5d;
+  do {
+    uVar1 = *(uint *)(this + iVar3 * 4);
+    local_34 = uVar1 >> 0x18 | (uVar1 & 0xff0000) >> 8 | (uVar1 & 0xff00) << 8 | uVar1 << 0x18;
+    LStream::WriteBlock(this_00,&local_34,4);
+    uVar1 = *(uint *)(this + iVar3 * 4 + 0x70);
+    local_30 = uVar1 >> 0x18 | (uVar1 & 0xff0000) >> 8 | (uVar1 & 0xff00) << 8 | uVar1 << 0x18;
+    LStream::WriteBlock(this_00,&local_30,4);
+    sVar2 = (short)iVar3;
+    iVar3 = iVar3 + 1;
+  } while ((ushort)(sVar2 - 0x5bU) < 0xf);
+  iVar3 = 0;
+  do {
+    uVar1 = *(uint *)(this + iVar3 * 4 + 0x21c);
+    local_2c = uVar1 >> 0x18 | (uVar1 & 0xff0000) >> 8 | (uVar1 & 0xff00) << 8 | uVar1 << 0x18;
+    LStream::WriteBlock(this_00,&local_2c,4);
+    local_28 = this[iVar3 + 0x238];
+    LStream::WriteBlock(this_00,&local_28,1);
+    local_27 = this[iVar3 + 0x23f];
+    LStream::WriteBlock(this_00,&local_27,1);
+    local_26 = this[iVar3 + 0x246];
+    LStream::WriteBlock(this_00,&local_26,1);
+    local_25 = this[iVar3 + 0x24d];
+    LStream::WriteBlock(this_00,&local_25,1);
+    local_24 = *(ushort *)(this + iVar3 * 2 + 0x254) << 8 |
+               *(ushort *)(this + iVar3 * 2 + 0x254) >> 8;
+    LStream::WriteBlock(this_00,&local_24,2);
+    sVar2 = (short)iVar3;
+    iVar3 = iVar3 + 1;
+  } while ((ushort)(sVar2 + 2U) < 8);
+  iVar3 = 0x262;
+  do {
+    local_21 = this[iVar3];
+    LStream::WriteBlock(this_00,&local_21,1);
+    sVar2 = (short)iVar3;
+    iVar3 = iVar3 + 1;
+  } while ((ushort)(sVar2 - 0x260U) < 6);
+  local_20 = *(ushort *)(this + 0x268) << 8 | *(ushort *)(this + 0x268) >> 8;
+  LStream::WriteBlock(this_00,&local_20,2);
+  local_1e = *(ushort *)(this + 0x272) << 8 | *(ushort *)(this + 0x272) >> 8;
+  LStream::WriteBlock(this_00,&local_1e,2);
+  uVar1 = *(uint *)(this + 0x274);
+  local_1c = uVar1 >> 0x18 | (uVar1 & 0xff0000) >> 8 | (uVar1 & 0xff00) << 8 | uVar1 << 0x18;
+  LStream::WriteBlock(this_00,&local_1c,4);
+  local_16 = *(ushort *)(this + 0x278) << 8 | *(ushort *)(this + 0x278) >> 8;
+  LStream::WriteBlock(this_00,&local_16,2);
+  local_13 = this[0x27a];
+  LStream::WriteBlock(this_00,&local_13,1);
+  local_12 = this[0x27b];
+  LStream::WriteBlock(this_00,&local_12,1);
+  local_11 = this[0x27c];
+  LStream::WriteBlock(this_00,&local_11,1);
+  uVar1 = *(uint *)(this + 0x26c);
+  local_54 = uVar1 >> 0x18 | (uVar1 & 0xff0000) >> 8 | (uVar1 & 0xff00) << 8 | uVar1 << 0x18;
+  LStream::WriteBlock(this_00,&local_54,4);
+  return 0;
+}
+
+
+=== CFW410DeviceSettings::ReadSettingsFromHardware @ 0007f7b8 ===
+/* CFW410DeviceSettings::ReadSettingsFromHardware() */
+
+undefined4 __thiscall CFW410DeviceSettings::ReadSettingsFromHardware(CFW410DeviceSettings *this)
+
+{
+  CFW410DeviceSettings CVar1;
+  short sVar2;
+  undefined4 uVar3;
+  undefined2 uVar4;
+  CFW410DeviceSettings *pCVar5;
+  int iVar6;
+  uint uVar7;
+  uint uVar8;
+  ushort uVar9;
+  CFW410DeviceSettings *local_28;
+  undefined4 local_24;
+  undefined1 local_20;
+  undefined4 local_1c;
+  undefined4 local_18;
+  undefined2 local_14;
+  CFW410DeviceSettings local_11;
+  
+  local_11 = (CFW410DeviceSettings)0x0;
+  local_14 = 0;
+  local_18 = 0;
+  local_1c = 0;
+  local_20 = 0;
+  local_24 = 0;
+  (**(code **)(**(int **)(this + 0x68) + 0x24))(*(int **)(this + 0x68),0x5e9,this + 0x28c);
+  (**(code **)(**(int **)(this + 0x68) + 0x24))(*(int **)(this + 0x68),0x5ea,this + 0x298);
+  (**(code **)(**(int **)(this + 0x68) + 0x24))(*(int **)(this + 0x68),0x5eb,this + 0x2a4);
+  (**(code **)(**(int **)(this + 0x68) + 0x24))(*(int **)(this + 0x68),0x5ec,this + 0x2b0);
+  (**(code **)(**(int **)(this + 0x68) + 0x24))(*(int **)(this + 0x68),0x5f3,this + 700);
+  (**(code **)(**(int **)(this + 0x68) + 0x24))(*(int **)(this + 0x68),0x5f4,this + 0x2c8);
+  (**(code **)(**(int **)(this + 0x68) + 0x24))(*(int **)(this + 0x68),0x5f5,this + 0x2d4);
+  *(undefined4 *)(this + 0x2e0) = 0;
+  *(int *)(this + 0x2e4) = (*(int *)(this + 0x2cc) - *(int *)(this + 0x2c8)) * 2;
+  *(undefined4 *)(this + 0x2e8) = *(undefined4 *)(this + 0x2d0);
+  sVar2 = CDeviceSettings::LoadSupportedSampleRates((CDeviceSettings *)this);
+  if ((sVar2 == 0) && (*(int *)(this + 0x7c) != 0)) {
+    *(undefined4 *)(this + 0x304) = 1;
+    *(int *)(this + 0x308) = *(int *)(this + 0x7c);
+  }
+  else {
+    *(undefined4 *)(this + 0x304) = 0;
+    *(undefined4 *)(this + 0x308) = 0;
+  }
+  *(undefined4 *)(this + 0x30c) = 0x3f800000;
+  *(undefined4 *)(this + 0x84) = 0;
+  sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x5e5,2,&local_14);
+  uVar4 = 1;
+  if (sVar2 == 0) {
+    uVar4 = local_14;
+  }
+  *(undefined2 *)(this + 0x88) = uVar4;
+  sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x5e6,1,&local_11);
+  CVar1 = local_11;
+  if (sVar2 != 0) {
+    CVar1 = (CFW410DeviceSettings)0x0;
+  }
+  this[0x8a] = CVar1;
+  sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x5e7,1,&local_11);
+  CVar1 = (CFW410DeviceSettings)0x0;
+  if (sVar2 == 0) {
+    CVar1 = local_11;
+  }
+  this[0x8b] = CVar1;
+  iVar6 = 0x23;
+  do {
+    uVar8 = iVar6 - 0x22;
+    sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                      (*(int **)(this + 0x68),0x5ea,uVar8 & 0xffff,4,&local_1c);
+    uVar3 = local_1c;
+    if (sVar2 != 0) {
+      uVar3 = 0xffffffc0;
+    }
+    *(undefined4 *)(this + iVar6 * 4) = uVar3;
+    if ((ushort)uVar8 < 5) {
+      sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                        (*(int **)(this + 0x68),0x5eb,uVar8 & 0xffff,4,&local_1c);
+      uVar3 = local_1c;
+      if (sVar2 != 0) {
+        uVar3 = 0;
+      }
+      *(undefined4 *)(this + iVar6 * 4 + 0x38) = uVar3;
+    }
+    sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                      (*(int **)(this + 0x68),0x5ec,uVar8 & 0xffff,4,&local_1c);
+    uVar3 = local_1c;
+    if (sVar2 != 0) {
+      uVar3 = 0xffffffc0;
+    }
+    *(undefined4 *)(this + iVar6 * 4 + 0x70) = uVar3;
+    iVar6 = iVar6 + 1;
+  } while ((short)iVar6 != 0x31);
+  local_28 = this + 0x150;
+  uVar8 = 1;
+  do {
+    uVar7 = uVar8 & 0xffff;
+    sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                      (*(int **)(this + 0x68),0x5ed,uVar7,1,&local_11);
+    CVar1 = local_11;
+    if (sVar2 != 0) {
+      CVar1 = (CFW410DeviceSettings)0x0;
+    }
+    this[uVar8 + 0x133] = CVar1;
+    sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                      (*(int **)(this + 0x68),0x5ee,uVar7,1,&local_11);
+    CVar1 = local_11;
+    if (sVar2 != 0) {
+      CVar1 = (CFW410DeviceSettings)0x0;
+    }
+    this[uVar8 + 0x13a] = CVar1;
+    sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                      (*(int **)(this + 0x68),0x5ef,uVar7,1,&local_11);
+    CVar1 = local_11;
+    if (sVar2 != 0) {
+      CVar1 = (CFW410DeviceSettings)0x0;
+    }
+    this[uVar8 + 0x141] = CVar1;
+    sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                      (*(int **)(this + 0x68),0x5f0,uVar7,1,&local_11);
+    CVar1 = local_11;
+    if (sVar2 != 0) {
+      CVar1 = (CFW410DeviceSettings)0x0;
+    }
+    this[uVar8 + 0x148] = CVar1;
+    sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                      (*(int **)(this + 0x68),0x5f1,uVar7,5,&local_24);
+    iVar6 = 0;
+    pCVar5 = local_28;
+    do {
+      CVar1 = (CFW410DeviceSettings)0x0;
+      if (sVar2 == 0) {
+        CVar1 = *(CFW410DeviceSettings *)((int)&local_24 + iVar6);
+      }
+      *pCVar5 = CVar1;
+      pCVar5 = pCVar5 + 1;
+      iVar6 = iVar6 + 1;
+    } while ((short)iVar6 != 5);
+    local_28 = local_28 + 5;
+    uVar8 = uVar8 + 1;
+  } while ((short)uVar8 != 8);
+  iVar6 = 0x5d;
+  do {
+    sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                      (*(int **)(this + 0x68),0x5f4,iVar6 - 0x5cU & 0xffff,4,&local_1c);
+    uVar3 = local_1c;
+    if (sVar2 != 0) {
+      uVar3 = 0xffffffc0;
+    }
+    *(undefined4 *)(this + iVar6 * 4) = uVar3;
+    *(undefined4 *)(this + iVar6 * 4 + 0x38) = uVar3;
+    if ((ushort)((short)iVar6 - 0x69U) < 2) {
+      sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                        (*(int **)(this + 0x68),0x5f5,iVar6 - 0x5cU & 0xffff,4,&local_1c);
+      uVar3 = local_1c;
+      if (sVar2 != 0) {
+        uVar3 = 0;
+      }
+      *(undefined4 *)(this + iVar6 * 4 + 0x70) = uVar3;
+    }
+    iVar6 = iVar6 + 1;
+  } while ((short)iVar6 != 0x6b);
+  uVar8 = 0;
+  do {
+    uVar7 = uVar8 + 1;
+    uVar9 = (ushort)uVar7;
+    uVar3 = CalculateOutputPairBalanceLevel(this,uVar9);
+    *(undefined4 *)(this + uVar8 * 4 + 0x21c) = uVar3;
+    sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                      (*(int **)(this + 0x68),0x5f7,uVar7 & 0xffff,1,&local_11);
+    CVar1 = local_11;
+    if (sVar2 != 0) {
+      CVar1 = (CFW410DeviceSettings)0x0;
+    }
+    this[uVar8 + 0x238] = CVar1;
+    sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                      (*(int **)(this + 0x68),0x5f8,uVar7 & 0xffff,1,&local_11);
+    CVar1 = local_11;
+    if (sVar2 != 0) {
+      CVar1 = (CFW410DeviceSettings)0x0;
+    }
+    this[uVar8 + 0x23f] = CVar1;
+    if (1 < (ushort)((short)uVar8 - 5U)) {
+      sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                        (*(int **)(this + 0x68),0x5f9,uVar7 & 0xffff,1,&local_11);
+      CVar1 = local_11;
+      if (sVar2 != 0) {
+        CVar1 = (CFW410DeviceSettings)0x0;
+      }
+      this[uVar8 + 0x246] = CVar1;
+    }
+    sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                      (*(int **)(this + 0x68),0x5fa,uVar7 & 0xffff,1,&local_11);
+    CVar1 = local_11;
+    if (sVar2 != 0) {
+      CVar1 = (CFW410DeviceSettings)0x0;
+    }
+    this[uVar8 + 0x24d] = CVar1;
+    if (uVar9 < 7) {
+      sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x30))
+                        (*(int **)(this + 0x68),0x5fb,uVar7 & 0xffff,2,&local_14);
+      uVar4 = local_14;
+      if (sVar2 != 0) {
+        uVar4 = 1;
+      }
+      *(undefined2 *)(this + uVar8 * 2 + 0x254) = uVar4;
+    }
+    uVar8 = uVar7;
+  } while (uVar9 != 7);
+  if (this[0x24a] != (CFW410DeviceSettings)0x0) {
+    this[0x24a] = (CFW410DeviceSettings)0x0;
+    (**(code **)(**(int **)(this + 0x68) + 0x2c))(*(int **)(this + 0x68),0x5f9,5,1,this + 0x24a);
+  }
+  sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x5fc,5,&local_24);
+  iVar6 = 0;
+  do {
+    CVar1 = (CFW410DeviceSettings)0x0;
+    if (sVar2 == 0) {
+      CVar1 = *(CFW410DeviceSettings *)((int)&local_24 + iVar6);
+    }
+    this[iVar6 + 0x262] = CVar1;
+    iVar6 = iVar6 + 1;
+  } while ((short)iVar6 != 5);
+  sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x5fe,1,&local_11);
+  CVar1 = local_11;
+  if (sVar2 != 0) {
+    CVar1 = (CFW410DeviceSettings)0x1;
+  }
+  this[0x267] = CVar1;
+  sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x5ff,2,&local_14);
+  uVar4 = local_14;
+  if (sVar2 != 0) {
+    uVar4 = 0;
+  }
+  *(undefined2 *)(this + 0x268) = uVar4;
+  sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x601,4,&local_18);
+  uVar3 = local_18;
+  if (sVar2 != 0) {
+    uVar3 = 0;
+  }
+  *(undefined4 *)(this + 0x26c) = uVar3;
+  sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x602,2,&local_14);
+  uVar4 = 1;
+  if (sVar2 == 0) {
+    uVar4 = local_14;
+  }
+  *(undefined2 *)(this + 0x270) = uVar4;
+  sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x600,2,&local_14);
+  uVar4 = 0;
+  if (sVar2 == 0) {
+    uVar4 = local_14;
+  }
+  *(undefined2 *)(this + 0x272) = uVar4;
+  sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x613,1,&local_11);
+  CVar1 = local_11;
+  if (sVar2 != 0) {
+    CVar1 = (CFW410DeviceSettings)0x0;
+  }
+  this[0x27b] = CVar1;
+  this[0x27d] = (CFW410DeviceSettings)(sVar2 == 0);
+  sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x614,1,&local_11);
+  CVar1 = (CFW410DeviceSettings)0x0;
+  if (sVar2 == 0) {
+    CVar1 = local_11;
+  }
+  this[0x27c] = CVar1;
+  this[0x27e] = (CFW410DeviceSettings)(sVar2 == 0);
+  return 0;
+}
+
+
+=== CFW410DeviceSettings::WriteSettingsToHardware @ 0007fff0 ===
+/* CFW410DeviceSettings::WriteSettingsToHardware() */
+
+undefined4 __thiscall CFW410DeviceSettings::WriteSettingsToHardware(CFW410DeviceSettings *this)
+
+{
+  uint uVar1;
+  short sVar2;
+  int *piVar3;
+  uint uVar4;
+  ushort uVar5;
+  CFW410DeviceSettings *pCVar6;
+  uint uVar7;
+  int iVar8;
+  CFW410DeviceSettings *local_18;
+  CFW410DeviceSettings local_11;
+  
+  local_11 = (CFW410DeviceSettings)0x0;
+  (**(code **)(**(int **)(this + 0x68) + 0x28))(*(int **)(this + 0x68),0x5e5,2,this + 0x88);
+  (**(code **)(**(int **)(this + 0x68) + 0x28))(*(int **)(this + 0x68),0x5e6,1,this + 0x8a);
+  (**(code **)(**(int **)(this + 0x68) + 0x28))(*(int **)(this + 0x68),0x5e7,1,this + 0x8b);
+  pCVar6 = this + 0xfc;
+  uVar5 = 1;
+  do {
+    (**(code **)(**(int **)(this + 0x68) + 0x2c))
+              (*(int **)(this + 0x68),0x5ea,uVar5,4,pCVar6 + -0x70);
+    if (uVar5 < 5) {
+      (**(code **)(**(int **)(this + 0x68) + 0x2c))
+                (*(int **)(this + 0x68),0x5eb,uVar5,4,pCVar6 + -0x38);
+    }
+    (**(code **)(**(int **)(this + 0x68) + 0x2c))(*(int **)(this + 0x68),0x5ec,uVar5,4,pCVar6);
+    uVar5 = uVar5 + 1;
+    pCVar6 = pCVar6 + 4;
+  } while (uVar5 != 0xf);
+  local_18 = this + 0x150;
+  uVar4 = 0;
+  do {
+    uVar1 = uVar4 + 1;
+    uVar7 = uVar1 & 0xffff;
+    (**(code **)(**(int **)(this + 0x68) + 0x2c))
+              (*(int **)(this + 0x68),0x5ed,uVar7,1,this + uVar4 + 0x134);
+    (**(code **)(**(int **)(this + 0x68) + 0x2c))
+              (*(int **)(this + 0x68),0x5ee,uVar7,1,this + uVar4 + 0x13b);
+    (**(code **)(**(int **)(this + 0x68) + 0x2c))
+              (*(int **)(this + 0x68),0x5ef,uVar7,1,this + uVar4 + 0x142);
+    (**(code **)(**(int **)(this + 0x68) + 0x2c))
+              (*(int **)(this + 0x68),0x5f0,uVar7,1,this + uVar4 + 0x149);
+    (**(code **)(**(int **)(this + 0x68) + 0x2c))(*(int **)(this + 0x68),0x5f1,uVar7,5,local_18);
+    local_18 = local_18 + 5;
+    uVar4 = uVar1;
+  } while ((short)uVar1 != 7);
+  pCVar6 = this + 0x1e4;
+  sVar2 = 1;
+  do {
+    (**(code **)(**(int **)(this + 0x68) + 0x2c))
+              (*(int **)(this + 0x68),0x5f4,sVar2,4,pCVar6 + -0x70);
+    if ((ushort)(sVar2 - 0xdU) < 2) {
+      (**(code **)(**(int **)(this + 0x68) + 0x2c))(*(int **)(this + 0x68),0x5f5,sVar2,4,pCVar6);
+    }
+    sVar2 = sVar2 + 1;
+    pCVar6 = pCVar6 + 4;
+  } while (sVar2 != 0xf);
+  piVar3 = *(int **)(this + 0x68);
+  iVar8 = 0x254;
+  uVar4 = 0;
+  do {
+    uVar1 = uVar4 + 1;
+    (**(code **)(*piVar3 + 0x2c))(piVar3,0x5f7,uVar1 & 0xffff,1,this + uVar4 + 0x238);
+    (**(code **)(**(int **)(this + 0x68) + 0x2c))
+              (*(int **)(this + 0x68),0x5f8,uVar1 & 0xffff,1,this + uVar4 + 0x23f);
+    if (1 < (ushort)((short)uVar4 - 5U)) {
+      (**(code **)(**(int **)(this + 0x68) + 0x2c))
+                (*(int **)(this + 0x68),0x5f9,uVar1 & 0xffff,1,this + uVar4 + 0x246);
+    }
+    (**(code **)(**(int **)(this + 0x68) + 0x2c))
+              (*(int **)(this + 0x68),0x5fa,uVar1 & 0xffff,1,this + uVar4 + 0x24d);
+    if ((ushort)uVar1 < 7) {
+      (**(code **)(**(int **)(this + 0x68) + 0x2c))
+                (*(int **)(this + 0x68),0x5fb,uVar1 & 0xffff,2,this + iVar8);
+    }
+    iVar8 = iVar8 + 2;
+    piVar3 = *(int **)(this + 0x68);
+    uVar4 = uVar1;
+  } while ((ushort)uVar1 != 7);
+  (**(code **)(*piVar3 + 0x28))(piVar3,0x5fc,5,this + 0x262);
+  (**(code **)(**(int **)(this + 0x68) + 0x28))(*(int **)(this + 0x68),0x5ff,2,this + 0x268);
+  (**(code **)(**(int **)(this + 0x68) + 0x28))(*(int **)(this + 0x68),0x601,4,this + 0x26c);
+  (**(code **)(**(int **)(this + 0x68) + 0x28))(*(int **)(this + 0x68),0x600,2,this + 0x272);
+  sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x28))(*(int **)(this + 0x68),0x613,1,this + 0x27b)
+  ;
+  this[0x27d] = (CFW410DeviceSettings)(sVar2 == 0);
+  sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x28))(*(int **)(this + 0x68),0x614,1,this + 0x27c)
+  ;
+  this[0x27e] = (CFW410DeviceSettings)(sVar2 == 0);
+  sVar2 = (**(code **)(**(int **)(this + 0x68) + 0x20))(*(int **)(this + 0x68),0x5fe,1,&local_11);
+  if (sVar2 != 0) {
+    local_11 = (CFW410DeviceSettings)0x1;
+  }
+  this[0x267] = local_11;
+  return 0;
+}
+
+
+=== CFW410DeviceSettings::MapMixerChannelPairToChannelIDs @ 000804a8 ===
+/* CFW410DeviceSettings::MapMixerChannelPairToChannelIDs(unsigned short, unsigned short&, unsigned
+   short&) */
+
+void __thiscall
+CFW410DeviceSettings::MapMixerChannelPairToChannelIDs
+          (CFW410DeviceSettings *this,ushort param_1,ushort *param_2,ushort *param_3)
+
+{
+  switch(param_1) {
+  case 1:
+    *param_2 = 1;
+    *param_3 = 2;
+    break;
+  case 2:
+    *param_2 = 3;
+    *param_3 = 4;
+    break;
+  case 3:
+    *param_2 = 5;
+    *param_3 = 6;
+    break;
+  case 4:
+    *param_2 = 7;
+    *param_3 = 8;
+    break;
+  case 5:
+    *param_2 = 9;
+    *param_3 = 10;
+    break;
+  case 6:
+    *param_2 = 0xb;
+    *param_3 = 0xc;
+    break;
+  case 7:
+    *param_2 = 0xd;
+    *param_3 = 0xe;
+  }
+  return;
+}
+
+
+=== CFW410DeviceSettings::MapMixerChannelIDToChannelPair @ 0008053c ===
+/* CFW410DeviceSettings::MapMixerChannelIDToChannelPair(unsigned short, unsigned short&) */
+
+void __thiscall
+CFW410DeviceSettings::MapMixerChannelIDToChannelPair
+          (CFW410DeviceSettings *this,ushort param_1,ushort *param_2)
+
+{
+  switch(param_1) {
+  case 1:
+  case 2:
+    *param_2 = 1;
+    break;
+  case 3:
+  case 4:
+    *param_2 = 2;
+    break;
+  case 5:
+  case 6:
+    *param_2 = 3;
+    break;
+  case 7:
+  case 8:
+    *param_2 = 4;
+    break;
+  case 9:
+  case 10:
+    *param_2 = 5;
+    break;
+  case 0xb:
+  case 0xc:
+    *param_2 = 6;
+    break;
+  case 0xd:
+  case 0xe:
+    *param_2 = 7;
+    break;
+  default:
+    *param_2 = 0;
+  }
+  return;
+}
+
+
+=== CFW410DeviceSettings::MapOutputChannelPairToChannelIDs @ 000805cc ===
+/* CFW410DeviceSettings::MapOutputChannelPairToChannelIDs(unsigned short, unsigned short&, unsigned
+   short&) */
+
+void __thiscall
+CFW410DeviceSettings::MapOutputChannelPairToChannelIDs
+          (CFW410DeviceSettings *this,ushort param_1,ushort *param_2,ushort *param_3)
+
+{
+  switch(param_1) {
+  case 1:
+    *param_2 = 1;
+    *param_3 = 2;
+    break;
+  case 2:
+    *param_2 = 3;
+    *param_3 = 4;
+    break;
+  case 3:
+    *param_2 = 5;
+    *param_3 = 6;
+    break;
+  case 4:
+    *param_2 = 7;
+    *param_3 = 8;
+    break;
+  case 5:
+    *param_2 = 9;
+    *param_3 = 10;
+    break;
+  case 6:
+    *param_2 = 0xb;
+    *param_3 = 0xc;
+    break;
+  case 7:
+    *param_2 = 0xd;
+    *param_3 = 0xe;
+  }
+  return;
+}
+
+
+=== CFW410DeviceSettings::MapOutputChannelIDToChannelPair @ 00080660 ===
+/* CFW410DeviceSettings::MapOutputChannelIDToChannelPair(unsigned short, unsigned short&) */
+
+void __thiscall
+CFW410DeviceSettings::MapOutputChannelIDToChannelPair
+          (CFW410DeviceSettings *this,ushort param_1,ushort *param_2)
+
+{
+  switch(param_1) {
+  case 1:
+  case 2:
+    *param_2 = 1;
+    break;
+  case 3:
+  case 4:
+    *param_2 = 2;
+    break;
+  case 5:
+  case 6:
+    *param_2 = 3;
+    break;
+  case 7:
+  case 8:
+    *param_2 = 4;
+    break;
+  case 9:
+  case 10:
+    *param_2 = 5;
+    break;
+  case 0xb:
+  case 0xc:
+    *param_2 = 6;
+    break;
+  case 0xd:
+  case 0xe:
+    *param_2 = 7;
+    break;
+  default:
+    *param_2 = 0;
+  }
+  return;
+}
+
+
+=== CFW410DeviceSettings::MapMixerPairToControlGroup @ 000806f0 ===
+/* CFW410DeviceSettings::MapMixerPairToControlGroup(unsigned short) */
+
+undefined2 __thiscall
+CFW410DeviceSettings::MapMixerPairToControlGroup(CFW410DeviceSettings *this,ushort param_1)
+
+{
+  if (param_1 - 1 < 7) {
+    return *(undefined2 *)("20CFW410DeviceSettings" + (uint)param_1 * 2 + 0x16);
+  }
+  return 1;
+}
+
+
+=== CFW410DeviceSettings::MapOutputPairToControlGroup @ 00080716 ===
+/* CFW410DeviceSettings::MapOutputPairToControlGroup(unsigned short) */
+
+undefined2 __thiscall
+CFW410DeviceSettings::MapOutputPairToControlGroup(CFW410DeviceSettings *this,ushort param_1)
+
+{
+  if (param_1 - 1 < 7) {
+    return *(undefined2 *)(&DAT_000f8e94 + (uint)param_1 * 2);
+  }
+  return 2;
+}
+
+
+=== CFW410DeviceSettings::GetOpenFileTypesID @ 0008073c ===
+/* CFW410DeviceSettings::GetOpenFileTypesID() */
+
+undefined4 CFW410DeviceSettings::GetOpenFileTypesID(void)
+
+{
+  return 0x456;
+}
+
+
+=== CFW410DeviceSettings::GetDeviceProductNameStr @ 00080746 ===
+/* CFW410DeviceSettings::GetDeviceProductNameStr(LStr255&, unsigned char) */
+
+void __thiscall
+CFW410DeviceSettings::GetDeviceProductNameStr
+          (CFW410DeviceSettings *this,LStr255 *param_1,uchar param_2)
+
+{
+  short sVar1;
+  
+  if (param_2 == '\0') {
+    sVar1 = 2;
+  }
+  else {
+    sVar1 = 1;
+  }
+  LString::Assign((LString *)param_1,0x456,sVar1);
+  return;
+}
+
+
+=== CFW410DeviceSettings::GetDeviceManualNameStr @ 00080780 ===
+/* CFW410DeviceSettings::GetDeviceManualNameStr(LStr255&) */
+
+void __thiscall
+CFW410DeviceSettings::GetDeviceManualNameStr(CFW410DeviceSettings *this,LStr255 *param_1)
+
+{
+  LString::Assign((LString *)param_1,0x456,3);
+  return;
+}
+
+
+=== CFW410DeviceSettings::SaveUIViewData @ 000807a6 ===
+/* CFW410DeviceSettings::SaveUIViewData(long, LView*) */
+
+void __thiscall
+CFW410DeviceSettings::SaveUIViewData(CFW410DeviceSettings *this,long param_1,LView *param_2)
+
+{
+  if ((uint)param_1 < 0x14) {
+    switch(param_1) {
+    case 1:
+      *(LView **)(this + 0x314) = param_2;
+      break;
+    case 2:
+      *(LView **)(this + 0x318) = param_2;
+      break;
+    case 3:
+      *(LView **)(this + 0x31c) = param_2;
+      break;
+    case 4:
+      *(LView **)(this + 800) = param_2;
+      break;
+    case 10:
+      *(LView **)(this + 0x310) = param_2;
+    }
+  }
+  else if (param_1 == 0x14) {
+    *(LView **)(this + 0x324) = param_2;
+  }
+  else if (param_1 == 0x15) {
+    *(LView **)(this + 0x328) = param_2;
+  }
+  return;
+}
+
+
+=== CFW410DeviceSettings::GetUIViewData @ 00080838 ===
+/* CFW410DeviceSettings::GetUIViewData(long, long&, LView*&) */
+
+void __thiscall
+CFW410DeviceSettings::GetUIViewData
+          (CFW410DeviceSettings *this,long param_1,long *param_2,LView **param_3)
+
+{
+  if ((uint)param_1 < 0x14) {
+    switch(param_1) {
+    case 1:
+      *param_2 = 0xc80;
+      *param_3 = *(LView **)(this + 0x314);
+      break;
+    case 2:
+      *param_2 = 0x1068;
+      *param_3 = *(LView **)(this + 0x318);
+      break;
+    case 3:
+      *param_2 = 0x1450;
+      *param_3 = *(LView **)(this + 0x31c);
+      break;
+    case 4:
+      *param_2 = (long)"oreServices.framework/Versions/A/CoreServices";
+      *param_3 = *(LView **)(this + 800);
+      break;
+    default:
+      goto switchD_00080861_caseD_5;
+    case 10:
+      *param_2 = 0xa8c;
+      *param_3 = *(LView **)(this + 0x310);
+    }
+  }
+  else {
+    if (param_1 == 0x14) {
+      *param_2 = (long)&DAT_000027d8;
+      *param_3 = *(LView **)(this + 0x324);
+      return;
+    }
+    if (param_1 == 0x15) {
+      *param_2 = (long)&DAT_000027d9;
+      *param_3 = *(LView **)(this + 0x328);
+      return;
+    }
+switchD_00080861_caseD_5:
+    *param_2 = 0;
+    *param_3 = (LView *)0x0;
+  }
+  return;
+}
+
+
+=== CFW410DeviceSettings::ClearSavedMainUIViewData @ 00080918 ===
+/* CFW410DeviceSettings::ClearSavedMainUIViewData() */
+
+void __thiscall CFW410DeviceSettings::ClearSavedMainUIViewData(CFW410DeviceSettings *this)
+
+{
+  *(undefined4 *)(this + 0x314) = 0;
+  *(undefined4 *)(this + 0x310) = 0;
+  *(undefined4 *)(this + 0x31c) = 0;
+  *(undefined4 *)(this + 0x318) = 0;
+  *(undefined4 *)(this + 800) = 0;
+  return;
+}
+
+
+=== CFW410DeviceSettings::ClearSavedMiniUIViewData @ 00080952 ===
+/* CFW410DeviceSettings::ClearSavedMiniUIViewData() */
+
+void __thiscall CFW410DeviceSettings::ClearSavedMiniUIViewData(CFW410DeviceSettings *this)
+
+{
+  *(undefined4 *)(this + 0x324) = 0;
+  *(undefined4 *)(this + 0x328) = 0;
+  return;
+}
+
+
+=== CFW410DeviceSettings::GetUIGraphicsData @ 0008096e ===
+/* CFW410DeviceSettings::GetUIGraphicsData(long, long&, LStr255&) */
+
+void __thiscall
+CFW410DeviceSettings::GetUIGraphicsData
+          (CFW410DeviceSettings *this,long param_1,long *param_2,LStr255 *param_3)
+
+{
+  short sVar1;
+  
+  switch(param_1) {
+  case 1:
+    *param_2 = 700;
+    sVar1 = 5;
+    break;
+  case 2:
+    *param_2 = 0x2c6;
+    sVar1 = 1;
+    break;
+  case 3:
+    *param_2 = 0x2c7;
+    sVar1 = 2;
+    break;
+  case 4:
+    *param_2 = 0x2c8;
+    sVar1 = 3;
+    break;
+  case 5:
+    *param_2 = 0x2c9;
+    sVar1 = 4;
+    break;
+  default:
+    *param_2 = 0;
+    LString::Assign((LString *)param_3,"");
+    return;
+  }
+  LString::Assign((LString *)param_3,0x457,sVar1);
+  return;
+}
+
+
+=== CFW410DeviceSettings::GetTabInfo @ 00080a34 ===
+/* CFW410DeviceSettings::GetTabInfo(unsigned short&, short&) */
+
+void __thiscall
+CFW410DeviceSettings::GetTabInfo(CFW410DeviceSettings *this,ushort *param_1,short *param_2)
+
+{
+  *param_1 = 4;
+  *param_2 = 0x7d1;
+  return;
+}
+
+
+=== CFW410DeviceSettings::GetViewMenuID @ 00080a4a ===
+/* CFW410DeviceSettings::GetViewMenuID(short&) */
+
+void __thiscall CFW410DeviceSettings::GetViewMenuID(CFW410DeviceSettings *this,short *param_1)
+
+{
+  *param_1 = 0x85;
+  return;
+}
+
+
+=== CFW410DeviceSettings::TerminateDevice @ 00080a58 ===
+/* CFW410DeviceSettings::TerminateDevice() */
+
+void __thiscall CFW410DeviceSettings::TerminateDevice(CFW410DeviceSettings *this)
+
+{
+  int *piVar1;
+  
+  piVar1 = *(int **)(this + 0x310);
+  if (piVar1 != (int *)0x0) {
+    (**(code **)(*piVar1 + 4))(piVar1);
+  }
+  piVar1 = *(int **)(this + 0x314);
+  if (piVar1 != (int *)0x0) {
+    (**(code **)(*piVar1 + 4))(piVar1);
+  }
+  piVar1 = *(int **)(this + 0x318);
+  if (piVar1 != (int *)0x0) {
+    (**(code **)(*piVar1 + 4))(piVar1);
+  }
+  piVar1 = *(int **)(this + 0x31c);
+  if (piVar1 != (int *)0x0) {
+    (**(code **)(*piVar1 + 4))(piVar1);
+  }
+  piVar1 = *(int **)(this + 800);
+  if (piVar1 != (int *)0x0) {
+    (**(code **)(*piVar1 + 4))(piVar1);
+  }
+  piVar1 = *(int **)(this + 0x324);
+  if (piVar1 != (int *)0x0) {
+    (**(code **)(*piVar1 + 4))(piVar1);
+  }
+  piVar1 = *(int **)(this + 0x328);
+  if (piVar1 != (int *)0x0) {
+    (**(code **)(*piVar1 + 4))(piVar1);
+  }
+                    /* WARNING: Could not recover jumptable at 0x00080ae8. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(*(int *)this + 0x5c))();
+  return;
+}
+
+
+=== CFW410DeviceSettings::GetDeviceType @ 00080aea ===
+/* CFW410DeviceSettings::GetDeviceType() */
+
+undefined4 CFW410DeviceSettings::GetDeviceType(void)
+
+{
+  return 0x46343130;
+}
+
+
+=== CFW410DeviceSettings::GetDeviceFileType @ 00080af4 ===
+/* CFW410DeviceSettings::GetDeviceFileType() */
+
+undefined4 CFW410DeviceSettings::GetDeviceFileType(void)
+
+{
+  return 0x34313053;
+}
+
+
+=== CX410Device::GetHWSetting @ 00080afe ===
+/* CX410Device::GetHWSetting(unsigned long, unsigned long, void*) */
+
+undefined2 __thiscall
+CX410Device::GetHWSetting(CX410Device *this,ulong param_1,ulong param_2,void *param_3)
+
+{
+  ushort uVar1;
+  undefined2 uVar2;
+  undefined4 uVar3;
+  int iVar4;
+  ulong uVar5;
+  
+  uVar3 = _objc_msgSend(PTR_s_NSAutoreleasePool_001d47a4,PTR_s_alloc_001d401c);
+  uVar3 = _objc_msgSend(uVar3,PTR_s_init_001d4000);
+  if (param_3 == (void *)0x0) {
+    UDebugging::DebugThrow
+              (0x6e696c50,"GetHWSetting",
+               (uchar *)
+               "l/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CX410Device.mm"
+               ,0x1f);
+  }
+  if (param_1 == 0x5fc) {
+    uVar1 = (**(code **)(*(int *)this + 0x1c))(this);
+    iVar4 = (**(code **)(*(int *)this + 0x5c))(this);
+    if (((uint)uVar1 - iVar4 & 0xfffe) >> 1 != param_2) {
+      uVar1 = (**(code **)(*(int *)this + 0x1c))(this);
+      iVar4 = (**(code **)(*(int *)this + 0x5c))(this);
+      OSXLog("Incorrect size:%d expected:%d File:%s Line:%d Func:%s",param_2,
+             ((uint)uVar1 - iVar4 & 0xfffe) >> 1,
+             "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CX410Device.mm"
+             ,0x31,"GetHWSetting");
+      UDebugging::DebugThrow
+                (0x61737274,"GetHWSetting",
+                 (uchar *)
+                 "l/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CX410Device.mm"
+                 ,0x31);
+    }
+    uVar5 = CXDevice::Get32BitNumberProperty((CXDevice *)this,(NSString *)&cf_MAHeadphoneSourceV2);
+    uVar1 = (**(code **)(*(int *)this + 0x1c))(this);
+    iVar4 = (**(code **)(*(int *)this + 0x5c))(this);
+    uVar2 = 0;
+    SourceMaskToBools(((uint)uVar1 - iVar4 & 0xfffe) >> 1,uVar5,param_3);
+  }
+  else {
+    uVar2 = CXDevice::GetHWSetting((CXDevice *)this,param_1,param_2,param_3);
+  }
+  _objc_msgSend(uVar3,PTR_s_release_001d4048);
+  return uVar2;
+}
+
+
+=== CX410Device::SetHWSetting @ 00080cda ===
+/* CX410Device::SetHWSetting(unsigned long, unsigned long, void*) */
+
+undefined2 __thiscall
+CX410Device::SetHWSetting(CX410Device *this,ulong param_1,ulong param_2,void *param_3)
+
+{
+  ushort uVar1;
+  undefined2 uVar2;
+  undefined4 uVar3;
+  int iVar4;
+  ulong local_14;
+  
+  uVar3 = _objc_msgSend(PTR_s_NSAutoreleasePool_001d47a4,PTR_s_alloc_001d401c);
+  uVar3 = _objc_msgSend(uVar3,PTR_s_init_001d4000);
+  if (param_1 == 0x5fc) {
+    uVar1 = (**(code **)(*(int *)this + 0x1c))(this);
+    iVar4 = (**(code **)(*(int *)this + 0x5c))(this);
+    if (((uint)uVar1 - iVar4 & 0xfffe) >> 1 != param_2) {
+      uVar1 = (**(code **)(*(int *)this + 0x1c))(this);
+      iVar4 = (**(code **)(*(int *)this + 0x5c))(this);
+      OSXLog("Incorrect size:%d expected:%d File:%s Line:%d Func:%s",param_2,
+             ((uint)uVar1 - iVar4 & 0xfffe) >> 1,
+             "/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CX410Device.mm"
+             ,0x54,"SetHWSetting");
+      UDebugging::DebugThrow
+                (0x61737274,"SetHWSetting",
+                 (uchar *)
+                 "l/Volumes/MacBuild_Source/SVN_Source/FireWireBeBoB_01.11.002/Source/ControlPanel/../Middleware/CX410Device.mm"
+                 ,0x54);
+    }
+    uVar1 = (**(code **)(*(int *)this + 0x1c))(this);
+    iVar4 = (**(code **)(*(int *)this + 0x5c))(this);
+    SourceMaskFromBools(((uint)uVar1 - iVar4 & 0xfffe) >> 1,param_3,&local_14);
+    uVar2 = 0;
+    CXDevice::Set32BitNumberProperty((CXDevice *)this,(NSString *)&cf_MAHeadphoneSourceV2,local_14);
+  }
+  else {
+    uVar2 = CXDevice::SetHWSetting((CXDevice *)this,param_1,param_2,param_3);
+  }
+  _objc_msgSend(uVar3,PTR_s_release_001d4048);
+  return uVar2;
+}
+
+
+=== CX410Device::ReceiveHeadphoneSourceValueChange @ 00080e88 ===
+/* CX410Device::ReceiveHeadphoneSourceValueChange(unsigned long, NSString*, objc_object*, unsigned
+   long) */
+
+void CX410Device::ReceiveHeadphoneSourceValueChange
+               (ulong param_1,NSString *param_2,objc_object *param_3,ulong param_4)
+
+{
+  code *pcVar1;
+  int iVar2;
+  ushort uVar3;
+  int iVar4;
+  ulong auStack_30 [5];
+  int local_1c;
+  int *local_18;
+  int local_14;
+  
+  auStack_30[4] = 0x80e96;
+  local_1c = 0x80e96;
+  local_18 = (int *)PTR____stack_chk_guard_00163028;
+  local_14 = *(int *)PTR____stack_chk_guard_00163028;
+  auStack_30[1] = param_1;
+  auStack_30[0] = 0x80eb6;
+  uVar3 = (**(code **)(*(int *)param_1 + 0x1c))();
+  auStack_30[1] = param_1;
+  auStack_30[0] = 0x80ec7;
+  iVar4 = (**(code **)(*(int *)param_1 + 0x5c))();
+  iVar2 = -((((uint)uVar3 - iVar4 & 0xfffe) >> 1) + 0xf & 0xfffffff0);
+  *(undefined4 *)((int)auStack_30 + iVar2 + 8) = *(undefined4 *)(&UNK_001531c2 + local_1c);
+  *(ulong *)((int)auStack_30 + iVar2 + 4) = param_4;
+  *(undefined4 *)((int)auStack_30 + iVar2) = 0x80efb;
+  local_1c = _objc_msgSend();
+  iVar4 = *(int *)param_1;
+  *(ulong *)((int)auStack_30 + iVar2 + 4) = param_1;
+  pcVar1 = *(code **)(iVar4 + 0x1c);
+  *(undefined4 *)((int)auStack_30 + iVar2) = 0x80f0c;
+  uVar3 = (*pcVar1)();
+  iVar4 = *(int *)param_1;
+  *(ulong *)((int)auStack_30 + iVar2 + 4) = param_1;
+  pcVar1 = *(code **)(iVar4 + 0x5c);
+  *(undefined4 *)((int)auStack_30 + iVar2) = 0x80f1d;
+  iVar4 = (*pcVar1)();
+  *(int *)((int)auStack_30 + iVar2 + 0xc) = (int)&local_1c + iVar2;
+  *(int *)((int)auStack_30 + iVar2 + 8) = local_1c;
+  *(uint *)((int)auStack_30 + iVar2 + 4) = ((uint)uVar3 - iVar4 & 0xfffe) >> 1;
+  *(undefined4 *)((int)auStack_30 + iVar2) = 0x80f40;
+  SourceMaskToBools(*(ulong *)((int)auStack_30 + iVar2 + 4),*(ulong *)((int)auStack_30 + iVar2 + 8),
+                    *(bool **)((int)auStack_30 + iVar2 + 0xc));
+  if (*local_18 == local_14) {
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  *(code **)((int)auStack_30 + iVar2 + 0x10) = ~CX410Device;
+  ___stack_chk_fail();
+}
+
+
+=== CX410Device::~CX410Device @ 00080f5a ===
+/* CX410Device::~CX410Device() */
+
+void __thiscall CX410Device::~CX410Device(CX410Device *this)
+
+{
+  CXDevice::~CXDevice((CXDevice *)this);
+  return;
+}
+
+
+=== CX410Device::~CX410Device @ 00080f64 ===
+/* CX410Device::~CX410Device() */
+
+void __thiscall CX410Device::~CX410Device(CX410Device *this)
+
+{
+  CXDevice::~CXDevice((CXDevice *)this);
+  operator_delete(this);
+  return;
+}
+
+
+=== CX410Device::~CX410Device @ 00080f94 ===
+/* non-virtual thunk to CX410Device::~CX410Device() */
+
+void __thiscall CX410Device::~CX410Device(CX410Device *this)
+
+{
+  CXDevice::~CXDevice((CXDevice *)(this + -0x30));
+  return;
+}
+
+
+=== CX410Device::~CX410Device @ 00080fae ===
+/* non-virtual thunk to CX410Device::~CX410Device() */
+
+void __thiscall CX410Device::~CX410Device(CX410Device *this)
+
+{
+  CXDevice::~CXDevice((CXDevice *)(this + -0x30));
+  operator_delete((CXDevice *)(this + -0x30));
+  return;
+}
+
+
+=== CFW410GlobalSettingsView::CFW410GlobalSettingsView @ 00084f84 ===
+/* CFW410GlobalSettingsView::CFW410GlobalSettingsView(LStream*) */
+
+void __thiscall
+CFW410GlobalSettingsView::CFW410GlobalSettingsView(CFW410GlobalSettingsView *this,LStream *param_1)
+
+{
+  LAttachable::LAttachable((LAttachable *)(this + 0x16c));
+  CGlobalSettingsView::CGlobalSettingsView((CGlobalSettingsView *)this,(LStream *)&PTR_PTR_001930f4)
+  ;
+  *(undefined ***)this = &PTR__CFW410GlobalSettingsView_00192dcc;
+  *(undefined ***)(this + 0x16c) = &PTR__CFW410GlobalSettingsView_001930d8;
+  *(undefined ***)(this + 0x88) = &PTR__CFW410GlobalSettingsView_00193030;
+  *(undefined ***)(this + 0xb8) = &PTR__CFW410GlobalSettingsView_00193044;
+  *(undefined ***)(this + 0xe8) = &PTR__CFW410GlobalSettingsView_00193058;
+  *(undefined4 *)(this + 0x15c) = 0;
+  *(undefined4 *)(this + 0x158) = 0;
+  *(undefined4 *)(this + 0x164) = 0;
+  *(undefined4 *)(this + 0x160) = 0;
+  *(undefined4 *)(this + 0x168) = 0;
+  return;
+}
+
+
+=== CFW410GlobalSettingsView::CFW410GlobalSettingsView @ 00085046 ===
+/* CFW410GlobalSettingsView::CFW410GlobalSettingsView(LStream*) */
+
+void __thiscall
+CFW410GlobalSettingsView::CFW410GlobalSettingsView(CFW410GlobalSettingsView *this,LStream *param_1)
+
+{
+  int iVar1;
+  
+  CGlobalSettingsView::CGlobalSettingsView((CGlobalSettingsView *)this,param_1 + 4);
+  iVar1 = *(int *)param_1;
+  *(int *)this = iVar1;
+  *(undefined4 *)(this + *(int *)(iVar1 + -0xc)) = *(undefined4 *)(param_1 + 0x34);
+  *(undefined ***)(this + 0x88) = &PTR__CFW410GlobalSettingsView_00193030;
+  *(undefined ***)(this + 0xb8) = &PTR__CFW410GlobalSettingsView_00193044;
+  *(undefined4 *)(this + 0xe8) = *(undefined4 *)(param_1 + 0x38);
+  *(undefined4 *)(this + 0x15c) = 0;
+  *(undefined4 *)(this + 0x158) = 0;
+  *(undefined4 *)(this + 0x164) = 0;
+  *(undefined4 *)(this + 0x160) = 0;
+  *(undefined4 *)(this + 0x168) = 0;
+  return;
+}
+
+
+=== CFW410GlobalSettingsView::~CFW410GlobalSettingsView @ 000850da ===
+/* CFW410GlobalSettingsView::~CFW410GlobalSettingsView() */
+
+void __thiscall CFW410GlobalSettingsView::~CFW410GlobalSettingsView(CFW410GlobalSettingsView *this)
+
+{
+  ~CFW410GlobalSettingsView(this);
+  operator_delete(this);
+  return;
+}
+
+
+=== CFW410GlobalSettingsView::~CFW410GlobalSettingsView @ 0008510a ===
+/* CFW410GlobalSettingsView::~CFW410GlobalSettingsView() */
+
+void __thiscall CFW410GlobalSettingsView::~CFW410GlobalSettingsView(CFW410GlobalSettingsView *this)
+
+{
+  CGlobalSettingsView::~CGlobalSettingsView((CGlobalSettingsView *)this);
+  LAttachable::~LAttachable((LAttachable *)(this + 0x16c));
+  return;
+}
+
+
+=== CFW410GlobalSettingsView::~CFW410GlobalSettingsView @ 00085160 ===
+/* non-virtual thunk to CFW410GlobalSettingsView::~CFW410GlobalSettingsView() */
+
+void __thiscall CFW410GlobalSettingsView::~CFW410GlobalSettingsView(CFW410GlobalSettingsView *this)
+
+{
+  ~CFW410GlobalSettingsView(this + -0x88);
+  return;
+}
+
+
+=== CFW410GlobalSettingsView::~CFW410GlobalSettingsView @ 0008517c ===
+/* non-virtual thunk to CFW410GlobalSettingsView::~CFW410GlobalSettingsView() */
+
+void __thiscall CFW410GlobalSettingsView::~CFW410GlobalSettingsView(CFW410GlobalSettingsView *this)
+
+{
+  ~CFW410GlobalSettingsView(this + -0xb8);
+  return;
+}
+
+
+=== CFW410GlobalSettingsView::~CFW410GlobalSettingsView @ 00085198 ===
+/* non-virtual thunk to CFW410GlobalSettingsView::~CFW410GlobalSettingsView() */
+
+void __thiscall CFW410GlobalSettingsView::~CFW410GlobalSettingsView(CFW410GlobalSettingsView *this)
+
+{
+  ~CFW410GlobalSettingsView(this + -0xe8);
+  return;
+}
+
+
+=== CFW410GlobalSettingsView::~CFW410GlobalSettingsView @ 000851b4 ===
+/* virtual thunk to CFW410GlobalSettingsView::~CFW410GlobalSettingsView() */
+
+void __thiscall CFW410GlobalSettingsView::~CFW410GlobalSettingsView(CFW410GlobalSettingsView *this)
+
+{
+  ~CFW410GlobalSettingsView(this + *(int *)(*(int *)this + -0xc));
+  return;
+}
+
+
+=== CFW410GlobalSettingsView::~CFW410GlobalSettingsView @ 000851d0 ===
+/* CFW410GlobalSettingsView::~CFW410GlobalSettingsView() */
+
+void __thiscall CFW410GlobalSettingsView::~CFW410GlobalSettingsView(CFW410GlobalSettingsView *this)
+
+{
+  CGlobalSettingsView::~CGlobalSettingsView((CGlobalSettingsView *)this);
+  return;
+}
+
+
+=== CFW410GlobalSettingsView::~CFW410GlobalSettingsView @ 000851f0 ===
+/* non-virtual thunk to CFW410GlobalSettingsView::~CFW410GlobalSettingsView() */
+
+void __thiscall CFW410GlobalSettingsView::~CFW410GlobalSettingsView(CFW410GlobalSettingsView *this)
+
+{
+  ~CFW410GlobalSettingsView(this + -0x88);
+  return;
+}
+
+
+=== CFW410GlobalSettingsView::~CFW410GlobalSettingsView @ 0008520c ===
+/* non-virtual thunk to CFW410GlobalSettingsView::~CFW410GlobalSettingsView() */
+
+void __thiscall CFW410GlobalSettingsView::~CFW410GlobalSettingsView(CFW410GlobalSettingsView *this)
+
+{
+  ~CFW410GlobalSettingsView(this + -0xb8);
+  return;
+}
+
+
+=== CFW410GlobalSettingsView::~CFW410GlobalSettingsView @ 00085228 ===
+/* non-virtual thunk to CFW410GlobalSettingsView::~CFW410GlobalSettingsView() */
+
+void __thiscall CFW410GlobalSettingsView::~CFW410GlobalSettingsView(CFW410GlobalSettingsView *this)
+
+{
+  ~CFW410GlobalSettingsView(this + -0xe8);
+  return;
+}
+
+
+=== CFW410GlobalSettingsView::~CFW410GlobalSettingsView @ 00085244 ===
+/* virtual thunk to CFW410GlobalSettingsView::~CFW410GlobalSettingsView() */
+
+void __thiscall CFW410GlobalSettingsView::~CFW410GlobalSettingsView(CFW410GlobalSettingsView *this)
+
+{
+  ~CFW410GlobalSettingsView(this + *(int *)(*(int *)this + -0xc));
+  return;
+}
+
+
+=== CFW410GlobalSettingsView::MapAssignSettingToButton @ 00085260 ===
+/* CFW410GlobalSettingsView::MapAssignSettingToButton(unsigned short) */
+
+undefined4 __thiscall
+CFW410GlobalSettingsView::MapAssignSettingToButton(CFW410GlobalSettingsView *this,ushort param_1)
+
+{
+  if (param_1 - 2 < 4) {
+    return *(undefined4 *)("24CFW410GlobalSettingsView" + (uint)param_1 * 4 + 0x18);
+  }
+  return 0xa8e;
+}
+
+
+=== CFW410GlobalSettingsView::MapAssignButtonToSetting @ 00085286 ===
+/* CFW410GlobalSettingsView::MapAssignButtonToSetting(long) */
+
+undefined2 __thiscall
+CFW410GlobalSettingsView::MapAssignButtonToSetting(CFW410GlobalSettingsView *this,long param_1)
+
+{
+  if (param_1 - 0xa8fU < 4) {
+    return *(undefined2 *)("17LTEViewFaceAction" + param_1 * 2 + 2);
+  }
+  return 1;
+}
+
+
+=== CFW410GlobalSettingsView::LoadControllerAssignBtns @ 000852ae ===
+/* CFW410GlobalSettingsView::LoadControllerAssignBtns() */
+
+void __thiscall CFW410GlobalSettingsView::LoadControllerAssignBtns(CFW410GlobalSettingsView *this)
+
+{
+  int iVar1;
+  
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xa8d);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x13c) = 0;
+LAB_0008530d:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadControllerAssignBtns",
+               (uchar *)s__Volumes_MacBuild_Source_SVN_Sou_001207a4,0x91);
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630f0,0xffffffff);
+    *(int *)(this + 0x13c) = iVar1;
+    if (iVar1 == 0) goto LAB_0008530d;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xa8e);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x158) = 0;
+LAB_00085383:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadControllerAssignBtns",
+               (uchar *)s__Volumes_MacBuild_Source_SVN_Sou_001207a4,0x95);
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630ec,0xffffffff);
+    *(int *)(this + 0x158) = iVar1;
+    if (iVar1 == 0) goto LAB_00085383;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xa8f);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x15c) = 0;
+LAB_000853f9:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadControllerAssignBtns",
+               (uchar *)s__Volumes_MacBuild_Source_SVN_Sou_001207a4,0x98);
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630ec,0xffffffff);
+    *(int *)(this + 0x15c) = iVar1;
+    if (iVar1 == 0) goto LAB_000853f9;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xa90);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x160) = 0;
+LAB_0008546f:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadControllerAssignBtns",
+               (uchar *)s__Volumes_MacBuild_Source_SVN_Sou_001207a4,0x9b);
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630ec,0xffffffff);
+    *(int *)(this + 0x160) = iVar1;
+    if (iVar1 == 0) goto LAB_0008546f;
+  }
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xa91);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x164) = 0;
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630ec,0xffffffff);
+    *(int *)(this + 0x164) = iVar1;
+    if (iVar1 != 0) goto LAB_0008550d;
+  }
+  UDebugging::DebugThrow
+            (0x6e696c50,"LoadControllerAssignBtns",
+             (uchar *)s__Volumes_MacBuild_Source_SVN_Sou_001207a4,0x9e);
+LAB_0008550d:
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xa92);
+  if (iVar1 == 0) {
+    *(undefined4 *)(this + 0x168) = 0;
+  }
+  else {
+    iVar1 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_001630ec,0xffffffff);
+    *(int *)(this + 0x168) = iVar1;
+    if (iVar1 != 0) {
+      return;
+    }
+  }
+  UDebugging::DebugThrow
+            (0x6e696c50,"LoadControllerAssignBtns",
+             (uchar *)s__Volumes_MacBuild_Source_SVN_Sou_001207a4,0xa1);
+  return;
+}
+
+
+=== CFW410GlobalSettingsView::ListenToControllerAssignBtns @ 0008558a ===
+/* CFW410GlobalSettingsView::ListenToControllerAssignBtns() */
+
+void __thiscall
+CFW410GlobalSettingsView::ListenToControllerAssignBtns(CFW410GlobalSettingsView *this)
+
+{
+  LListener *pLVar1;
+  
+  pLVar1 = (LListener *)(this + 0x88);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0x158) + 0x30),pLVar1);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0x15c) + 0x30),pLVar1);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0x160) + 0x30),pLVar1);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0x164) + 0x30),pLVar1);
+  LBroadcaster::AddListener((LBroadcaster *)(*(int *)(this + 0x168) + 0x30),pLVar1);
+  return;
+}
+
+
+=== CFW410MiniMetersView::CFW410MiniMetersView @ 0008d41a ===
+/* CFW410MiniMetersView::CFW410MiniMetersView(LStream*) */
+
+void __thiscall
+CFW410MiniMetersView::CFW410MiniMetersView(CFW410MiniMetersView *this,LStream *param_1)
+
+{
+  LAttachable::LAttachable((LAttachable *)(this + 0x130));
+  CMetersView::CMetersView((CMetersView *)this,(LStream *)&PTR_PTR_0019c2b4);
+  *(undefined ***)this = &PTR__CFW410MiniMetersView_0019bfcc;
+  *(undefined ***)(this + 0x130) = &PTR__CFW410MiniMetersView_0019c298;
+  *(undefined ***)(this + 0x88) = &PTR__CFW410MiniMetersView_0019c1f0;
+  *(undefined ***)(this + 0xb8) = &PTR__CFW410MiniMetersView_0019c204;
+  *(undefined ***)(this + 0xe8) = &PTR__CFW410MiniMetersView_0019c218;
+  return;
+}
+
+
+=== CFW410MiniMetersView::CFW410MiniMetersView @ 0008d4aa ===
+/* CFW410MiniMetersView::CFW410MiniMetersView(LStream*) */
+
+void __thiscall
+CFW410MiniMetersView::CFW410MiniMetersView(CFW410MiniMetersView *this,LStream *param_1)
+
+{
+  int iVar1;
+  
+  CMetersView::CMetersView((CMetersView *)this,param_1 + 4);
+  iVar1 = *(int *)param_1;
+  *(int *)this = iVar1;
+  *(undefined4 *)(this + *(int *)(iVar1 + -0xc)) = *(undefined4 *)(param_1 + 0x34);
+  *(undefined ***)(this + 0x88) = &PTR__CFW410MiniMetersView_0019c1f0;
+  *(undefined ***)(this + 0xb8) = &PTR__CFW410MiniMetersView_0019c204;
+  *(undefined4 *)(this + 0xe8) = *(undefined4 *)(param_1 + 0x38);
+  return;
+}
+
+
+=== CFW410MiniMetersView::~CFW410MiniMetersView @ 0008d50c ===
+/* CFW410MiniMetersView::~CFW410MiniMetersView() */
+
+void __thiscall CFW410MiniMetersView::~CFW410MiniMetersView(CFW410MiniMetersView *this)
+
+{
+  ~CFW410MiniMetersView(this);
+  operator_delete(this);
+  return;
+}
+
+
+=== CFW410MiniMetersView::~CFW410MiniMetersView @ 0008d53c ===
+/* CFW410MiniMetersView::~CFW410MiniMetersView() */
+
+void __thiscall CFW410MiniMetersView::~CFW410MiniMetersView(CFW410MiniMetersView *this)
+
+{
+  CMetersView::~CMetersView((CMetersView *)this);
+  LAttachable::~LAttachable((LAttachable *)(this + 0x130));
+  return;
+}
+
+
+=== CFW410MiniMetersView::~CFW410MiniMetersView @ 0008d592 ===
+/* non-virtual thunk to CFW410MiniMetersView::~CFW410MiniMetersView() */
+
+void __thiscall CFW410MiniMetersView::~CFW410MiniMetersView(CFW410MiniMetersView *this)
+
+{
+  ~CFW410MiniMetersView(this + -0x88);
+  return;
+}
+
+
+=== CFW410MiniMetersView::~CFW410MiniMetersView @ 0008d5ae ===
+/* non-virtual thunk to CFW410MiniMetersView::~CFW410MiniMetersView() */
+
+void __thiscall CFW410MiniMetersView::~CFW410MiniMetersView(CFW410MiniMetersView *this)
+
+{
+  ~CFW410MiniMetersView(this + -0xb8);
+  return;
+}
+
+
+=== CFW410MiniMetersView::~CFW410MiniMetersView @ 0008d5ca ===
+/* non-virtual thunk to CFW410MiniMetersView::~CFW410MiniMetersView() */
+
+void __thiscall CFW410MiniMetersView::~CFW410MiniMetersView(CFW410MiniMetersView *this)
+
+{
+  ~CFW410MiniMetersView(this + -0xe8);
+  return;
+}
+
+
+=== CFW410MiniMetersView::~CFW410MiniMetersView @ 0008d5e6 ===
+/* virtual thunk to CFW410MiniMetersView::~CFW410MiniMetersView() */
+
+void __thiscall CFW410MiniMetersView::~CFW410MiniMetersView(CFW410MiniMetersView *this)
+
+{
+  ~CFW410MiniMetersView(this + *(int *)(*(int *)this + -0xc));
+  return;
+}
+
+
+=== CFW410MiniMetersView::~CFW410MiniMetersView @ 0008d602 ===
+/* CFW410MiniMetersView::~CFW410MiniMetersView() */
+
+void __thiscall CFW410MiniMetersView::~CFW410MiniMetersView(CFW410MiniMetersView *this)
+
+{
+  CMetersView::~CMetersView((CMetersView *)this);
+  return;
+}
+
+
+=== CFW410MiniMetersView::~CFW410MiniMetersView @ 0008d622 ===
+/* non-virtual thunk to CFW410MiniMetersView::~CFW410MiniMetersView() */
+
+void __thiscall CFW410MiniMetersView::~CFW410MiniMetersView(CFW410MiniMetersView *this)
+
+{
+  ~CFW410MiniMetersView(this + -0x88);
+  return;
+}
+
+
+=== CFW410MiniMetersView::~CFW410MiniMetersView @ 0008d63e ===
+/* non-virtual thunk to CFW410MiniMetersView::~CFW410MiniMetersView() */
+
+void __thiscall CFW410MiniMetersView::~CFW410MiniMetersView(CFW410MiniMetersView *this)
+
+{
+  ~CFW410MiniMetersView(this + -0xb8);
+  return;
+}
+
+
+=== CFW410MiniMetersView::~CFW410MiniMetersView @ 0008d65a ===
+/* non-virtual thunk to CFW410MiniMetersView::~CFW410MiniMetersView() */
+
+void __thiscall CFW410MiniMetersView::~CFW410MiniMetersView(CFW410MiniMetersView *this)
+
+{
+  ~CFW410MiniMetersView(this + -0xe8);
+  return;
+}
+
+
+=== CFW410MiniMetersView::~CFW410MiniMetersView @ 0008d676 ===
+/* virtual thunk to CFW410MiniMetersView::~CFW410MiniMetersView() */
+
+void __thiscall CFW410MiniMetersView::~CFW410MiniMetersView(CFW410MiniMetersView *this)
+
+{
+  ~CFW410MiniMetersView(this + *(int *)(*(int *)this + -0xc));
+  return;
+}
+
+
+=== CFW410MiniMetersView::LoadUIElements @ 0008d692 ===
+/* CFW410MiniMetersView::LoadUIElements() */
+
+void __thiscall CFW410MiniMetersView::LoadUIElements(CFW410MiniMetersView *this)
+
+{
+  int iVar1;
+  int local_14;
+  
+  local_14 = 0;
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xc9);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008d6f3:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x3b
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008d6f3;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xca);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008d780:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x40
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008d780;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xcb);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008d80a:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x45
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008d80a;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0xcc);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008d894:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x4a
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008d894;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x12d);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008d91e:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x52
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008d91e;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x12e);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008d9a8:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x57
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008d9a8;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x12f);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008da32:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x5c
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008da32;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x130);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008dabc:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x61
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008dabc;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x131);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008db46:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x66
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008db46;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x132);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008dbd0:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x6b
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008dbd0;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x133);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008dc5a:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x70
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008dc5a;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x134);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008dce4:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x75
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008dce4;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x135);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008dd6e:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x7a
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008dd6e;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x136);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008ddf8:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x7f
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008ddf8;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x124),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x191);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008de82:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x86
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008de82;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x192);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008df0c:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x8b
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008df0c;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x193);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008df96:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x90
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008df96;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x194);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008e020:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x95
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008e020;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x195);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008e0aa:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x9a
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008e0aa;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x196);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008e134:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0x9f
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008e134;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x197);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008e1be:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0xa4
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008e1be;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x198);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008e248:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0xa9
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008e248;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x199);
+  if (iVar1 == 0) {
+    local_14 = 0;
+LAB_0008e2d2:
+    UDebugging::DebugThrow
+              (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0xae
+              );
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 == 0) goto LAB_0008e2d2;
+  }
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_14,0);
+  iVar1 = (**(code **)(*(int *)this + 0xc))(this,0x19a);
+  if (iVar1 == 0) {
+    local_14 = 0;
+  }
+  else {
+    local_14 = ___dynamic_cast(iVar1,PTR_typeinfo_00163034,PTR_typeinfo_00163110,0xffffffff);
+    if (local_14 != 0) goto LAB_0008e384;
+  }
+  UDebugging::DebugThrow
+            (0x6e696c50,"LoadUIElements",(uchar *)s__Volumes_MacBuild_Source_SVN_Sou_00120d70,0xb3);
+LAB_0008e384:
+  LArray::AddItem(*(LArray **)(this + 0x128),&local_14,0);
+  return;
+}
+
+
+=== CFW410MiniMetersView::AdaptUIElementsToSettings @ 0008e3a6 ===
+/* CFW410MiniMetersView::AdaptUIElementsToSettings() */
+
+void __thiscall CFW410MiniMetersView::AdaptUIElementsToSettings(CFW410MiniMetersView *this)
+
+{
+  short sVar1;
+  ulong uVar2;
+  ulong local_c;
+  
+  local_c = 0;
+  CMetersView::AdaptUIElementsToSettings((CMetersView *)this);
+  sVar1 = (**(code **)(**(int **)(this + 0x11c) + 0xc))(*(int **)(this + 0x11c),0x601,0,4,&local_c);
+  uVar2 = 0;
+  if (sVar1 == 0) {
+    uVar2 = local_c;
+  }
+  AdaptToClockRate(this,uVar2);
+  return;
+}
+
+
+=== CFW410MiniMetersView::AdaptToClockRate @ 0008e408 ===
+/* CFW410MiniMetersView::AdaptToClockRate(unsigned long) */
+
+void __thiscall CFW410MiniMetersView::AdaptToClockRate(CFW410MiniMetersView *this,ulong param_1)
+
+{
+  CMAVUMeter *pCVar1;
+  int *piVar2;
+  code *pcVar3;
+  undefined4 uVar4;
+  int iVar5;
+  
+  iVar5 = **(int **)(*(int *)(this + 0x124) + 0x14);
+  pCVar1 = *(CMAVUMeter **)(iVar5 + 8);
+  if (param_1 < 0x2b110) {
+    if (pCVar1 != (CMAVUMeter *)0x0) {
+      (**(code **)(*(int *)pCVar1 + 200))(pCVar1);
+      iVar5 = **(int **)(*(int *)(this + 0x124) + 0x14);
+    }
+    piVar2 = *(int **)(iVar5 + 0xc);
+    if (piVar2 != (int *)0x0) {
+      (**(code **)(*piVar2 + 200))(piVar2);
+      iVar5 = **(int **)(*(int *)(this + 0x124) + 0x14);
+    }
+    piVar2 = *(int **)(iVar5 + 0x30);
+    if (piVar2 != (int *)0x0) {
+      (**(code **)(*piVar2 + 200))(piVar2);
+      iVar5 = **(int **)(*(int *)(this + 0x124) + 0x14);
+    }
+    piVar2 = *(int **)(iVar5 + 0x34);
+    if (piVar2 != (int *)0x0) {
+      (**(code **)(*piVar2 + 200))(piVar2);
+    }
+    iVar5 = **(int **)(*(int *)(this + 0x128) + 0x14);
+    piVar2 = *(int **)(iVar5 + 0x20);
+    if (piVar2 != (int *)0x0) {
+      (**(code **)(*piVar2 + 200))(piVar2);
+      iVar5 = **(int **)(*(int *)(this + 0x128) + 0x14);
+    }
+    piVar2 = *(int **)(iVar5 + 0x24);
+    if (piVar2 != (int *)0x0) {
+      (**(code **)(*piVar2 + 200))(piVar2);
+    }
+  }
+  else {
+    if (pCVar1 != (CMAVUMeter *)0x0) {
+      (**(code **)(*(int *)pCVar1 + 0xcc))(pCVar1);
+      pcVar3 = *(code **)(*(int *)pCVar1 + 0x1e4);
+      uVar4 = CMAVUMeter::GetMinimumValue(pCVar1);
+      (*pcVar3)(pCVar1,uVar4);
+      iVar5 = **(int **)(*(int *)(this + 0x124) + 0x14);
+    }
+    pCVar1 = *(CMAVUMeter **)(iVar5 + 0xc);
+    if (pCVar1 != (CMAVUMeter *)0x0) {
+      (**(code **)(*(int *)pCVar1 + 0xcc))(pCVar1);
+      pcVar3 = *(code **)(*(int *)pCVar1 + 0x1e4);
+      uVar4 = CMAVUMeter::GetMinimumValue(pCVar1);
+      (*pcVar3)(pCVar1,uVar4);
+      iVar5 = **(int **)(*(int *)(this + 0x124) + 0x14);
+    }
+    pCVar1 = *(CMAVUMeter **)(iVar5 + 0x30);
+    if (pCVar1 != (CMAVUMeter *)0x0) {
+      (**(code **)(*(int *)pCVar1 + 0xcc))(pCVar1);
+      pcVar3 = *(code **)(*(int *)pCVar1 + 0x1e4);
+      uVar4 = CMAVUMeter::GetMinimumValue(pCVar1);
+      (*pcVar3)(pCVar1,uVar4);
+      iVar5 = **(int **)(*(int *)(this + 0x124) + 0x14);
+    }
+    pCVar1 = *(CMAVUMeter **)(iVar5 + 0x34);
+    if (pCVar1 != (CMAVUMeter *)0x0) {
+      (**(code **)(*(int *)pCVar1 + 0xcc))(pCVar1);
+      pcVar3 = *(code **)(*(int *)pCVar1 + 0x1e4);
+      uVar4 = CMAVUMeter::GetMinimumValue(pCVar1);
+      (*pcVar3)(pCVar1,uVar4);
+    }
+    iVar5 = **(int **)(*(int *)(this + 0x128) + 0x14);
+    pCVar1 = *(CMAVUMeter **)(iVar5 + 0x20);
+    if (pCVar1 != (CMAVUMeter *)0x0) {
+      (**(code **)(*(int *)pCVar1 + 0xcc))(pCVar1);
+      pcVar3 = *(code **)(*(int *)pCVar1 + 0x1e4);
+      uVar4 = CMAVUMeter::GetMinimumValue(pCVar1);
+      (*pcVar3)(pCVar1,uVar4);
+      iVar5 = **(int **)(*(int *)(this + 0x128) + 0x14);
+    }
+    pCVar1 = *(CMAVUMeter **)(iVar5 + 0x24);
+    if (pCVar1 != (CMAVUMeter *)0x0) {
+      (**(code **)(*(int *)pCVar1 + 0xcc))(pCVar1);
+      pcVar3 = *(code **)(*(int *)pCVar1 + 0x1e4);
+      uVar4 = CMAVUMeter::GetMinimumValue(pCVar1);
+      (*pcVar3)(pCVar1,uVar4);
+    }
+  }
+  return;
+}
+
+
+=== CFW410MiniMetersView::ListenToMessage @ 0008e616 ===
+/* CFW410MiniMetersView::ListenToMessage(long, void*) */
+
+void __thiscall
+CFW410MiniMetersView::ListenToMessage(CFW410MiniMetersView *this,long param_1,void *param_2)
+
+{
+  if (param_1 == 0x601) {
+    AdaptToClockRate(this,**(ulong **)((int)param_2 + 0xc));
+    return;
+  }
+  CMetersView::ListenToMessage((CMetersView *)this,param_1,param_2);
+  return;
+}
+
+
+=== CFW410MiniMetersView::ListenToMessage @ 0008e64a ===
+/* non-virtual thunk to CFW410MiniMetersView::ListenToMessage(long, void*) */
+
+void __thiscall
+CFW410MiniMetersView::ListenToMessage(CFW410MiniMetersView *this,long param_1,void *param_2)
+
+{
+  ListenToMessage(this + -0x88,param_1,param_2);
+  return;
+}
+
+
+=== CFW410MiniMetersView::ListenToUIElements @ 0008e674 ===
+/* CFW410MiniMetersView::ListenToUIElements() */
+
+void CFW410MiniMetersView::ListenToUIElements(void)
+
+{
+  return;
+}
+
+
+=== CFW410SpdifOutChannelPairView::CFW410SpdifOutChannelPairView @ 000f3dc0 ===
+/* CFW410SpdifOutChannelPairView::CFW410SpdifOutChannelPairView(LStream*) */
+
+void __thiscall
+CFW410SpdifOutChannelPairView::CFW410SpdifOutChannelPairView
+          (CFW410SpdifOutChannelPairView *this,LStream *param_1)
+
+{
+  LAttachable::LAttachable((LAttachable *)(this + 0xf4));
+  COutputChannelPairView::COutputChannelPairView
+            ((COutputChannelPairView *)this,(LStream *)&PTR_PTR_001d2004);
+  *(undefined ***)this = &PTR__CFW410SpdifOutChannelPairView_001d1d9c;
+  *(undefined ***)(this + 0xf4) = &PTR__CFW410SpdifOutChannelPairView_001d1fe8;
+  *(undefined ***)(this + 0x88) = &PTR__CFW410SpdifOutChannelPairView_001d1fc0;
+  return;
+}
+
+
+=== CFW410SpdifOutChannelPairView::CFW410SpdifOutChannelPairView @ 000f3e38 ===
+/* CFW410SpdifOutChannelPairView::CFW410SpdifOutChannelPairView(LStream*) */
+
+void __thiscall
+CFW410SpdifOutChannelPairView::CFW410SpdifOutChannelPairView
+          (CFW410SpdifOutChannelPairView *this,LStream *param_1)
+
+{
+  int iVar1;
+  
+  COutputChannelPairView::COutputChannelPairView((COutputChannelPairView *)this,param_1 + 4);
+  iVar1 = *(int *)param_1;
+  *(int *)this = iVar1;
+  *(undefined4 *)(this + *(int *)(iVar1 + -0xc)) = *(undefined4 *)(param_1 + 0x1c);
+  *(undefined ***)(this + 0x88) = &PTR__CFW410SpdifOutChannelPairView_001d1fc0;
+  return;
+}
+
+
+=== CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView @ 000f3e84 ===
+/* CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView() */
+
+void __thiscall
+CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView(CFW410SpdifOutChannelPairView *this)
+
+{
+  ~CFW410SpdifOutChannelPairView(this);
+  operator_delete(this);
+  return;
+}
+
+
+=== CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView @ 000f3eb4 ===
+/* CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView() */
+
+void __thiscall
+CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView(CFW410SpdifOutChannelPairView *this)
+
+{
+  COutputChannelPairView::~COutputChannelPairView((COutputChannelPairView *)this);
+  LAttachable::~LAttachable((LAttachable *)(this + 0xf4));
+  return;
+}
+
+
+=== CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView @ 000f3f0a ===
+/* non-virtual thunk to CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView() */
+
+void __thiscall
+CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView(CFW410SpdifOutChannelPairView *this)
+
+{
+  ~CFW410SpdifOutChannelPairView(this + -0x88);
+  return;
+}
+
+
+=== CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView @ 000f3f26 ===
+/* virtual thunk to CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView() */
+
+void __thiscall
+CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView(CFW410SpdifOutChannelPairView *this)
+
+{
+  ~CFW410SpdifOutChannelPairView(this + *(int *)(*(int *)this + -0xc));
+  return;
+}
+
+
+=== CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView @ 000f3f42 ===
+/* CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView() */
+
+void __thiscall
+CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView(CFW410SpdifOutChannelPairView *this)
+
+{
+  COutputChannelPairView::~COutputChannelPairView((COutputChannelPairView *)this);
+  return;
+}
+
+
+=== CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView @ 000f3f62 ===
+/* non-virtual thunk to CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView() */
+
+void __thiscall
+CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView(CFW410SpdifOutChannelPairView *this)
+
+{
+  ~CFW410SpdifOutChannelPairView(this + -0x88);
+  return;
+}
+
+
+=== CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView @ 000f3f7e ===
+/* virtual thunk to CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView() */
+
+void __thiscall
+CFW410SpdifOutChannelPairView::~CFW410SpdifOutChannelPairView(CFW410SpdifOutChannelPairView *this)
+
+{
+  ~CFW410SpdifOutChannelPairView(this + *(int *)(*(int *)this + -0xc));
+  return;
+}
+
+
+=== CFW410SpdifOutChannelPairView::HasChannelLevelControls @ 000f3f9a ===
+/* CFW410SpdifOutChannelPairView::HasChannelLevelControls() */
+
+undefined4 CFW410SpdifOutChannelPairView::HasChannelLevelControls(void)
+
+{
+  return 0;
+}
+
+
+=== CFW410SpdifOutChannelPairView::HasChannelPanControls @ 000f3fa2 ===
+/* CFW410SpdifOutChannelPairView::HasChannelPanControls() */
+
+undefined4 CFW410SpdifOutChannelPairView::HasChannelPanControls(void)
+
+{
+  return 0;
+}
+
+
+=== CFW410SpdifOutChannelPairView::HasChannelPairPanControl @ 000f3faa ===
+/* CFW410SpdifOutChannelPairView::HasChannelPairPanControl() */
+
+undefined4 CFW410SpdifOutChannelPairView::HasChannelPairPanControl(void)
+
+{
+  return 0;
+}
+
+
+=== CFW410SpdifOutChannelPairView::HasAssignPairControl @ 000f3fb2 ===
+/* CFW410SpdifOutChannelPairView::HasAssignPairControl() */
+
+undefined4 CFW410SpdifOutChannelPairView::HasAssignPairControl(void)
+
+{
+  return 0;
+}
+
+
+=== CFW410SpdifOutChannelPairView::HasPairLinkControl @ 000f3fba ===
+/* CFW410SpdifOutChannelPairView::HasPairLinkControl() */
+
+undefined4 CFW410SpdifOutChannelPairView::HasPairLinkControl(void)
+
+{
+  return 0;
+}
+
+
+=== CFW410SpdifOutChannelPairView::HasPairSoloControl @ 000f3fc2 ===
+/* CFW410SpdifOutChannelPairView::HasPairSoloControl() */
+
+undefined4 CFW410SpdifOutChannelPairView::HasPairSoloControl(void)
+
+{
+  return 0;
+}
+
+
+=== CFW410SpdifOutChannelPairView::HasPairMuteControl @ 000f3fca ===
+/* CFW410SpdifOutChannelPairView::HasPairMuteControl() */
+
+undefined4 CFW410SpdifOutChannelPairView::HasPairMuteControl(void)
+
+{
+  return 0;
+}
+
+

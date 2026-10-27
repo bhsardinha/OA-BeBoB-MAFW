@@ -49,7 +49,8 @@ public:
     IOReturn SetHeadphonesLevel(UInt32 ch, UInt32 v);                           // ref @0x224ba
     virtual IOReturn SetInputChannelFeature(UInt32 ch, UInt8 controlSelector, UInt32 v);   // ref vt+0x48 @0x2254c
     virtual IOReturn SetAVCRouting(UInt32 kind, UInt32 nDst, UInt32 srcPair, UInt32 mask); // ref vt+0x60 @0x225b4
-    IOReturn SetSWReturnRouting(UInt32 idx, UInt32 v);                          // ref @0x218a6
+    virtual IOReturn SetSWReturnRouting(UInt32 idx, UInt32 v);                  // ref @0x218a6, vt+0x70 (FW410: FWSettings410Levels @0x14466)
+    virtual void BatchSetSWReturnRouting() {}                                   // ref vt+0x78: empty in the base; FW410 @0x1449a writes the routing word
     virtual IOReturn SetInputPan(UInt32 idx, UInt32 v);                         // ref @0x21878 (FW1814: FWSettings1814Levels @0xd128)
     virtual IOReturn SetInputRouting(UInt32 idx, UInt32 v);                     // ref @0x218f6 (FW1814: FWSettings1814Levels @0xd15c)
     IOReturn SetDirectMonitoringActive(UInt32 v);

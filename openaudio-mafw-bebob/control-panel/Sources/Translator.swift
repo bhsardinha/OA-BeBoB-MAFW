@@ -12,11 +12,16 @@ struct TranslatorCounts: Equatable {
 
 /// The shared meter page `uint32 peak[52]` = [inputs | outputs | SW returns] (A2-P13 §6 for the 1814: 18 + 20 + 14; PNAP §6 for the Audiophile:
 /// inputs 0-3, outputs 4-13, SW returns from 14). 1-based channel ids, as the reference's GetMixer/OutputPairChannelMap.
+/// FW410 (kext ReadHSCIData @0x15198, GetFirstSWReturnPeakMeterIndex 4): [inputs | SW returns | outputs] instead -- the mixer stream (cookie
+/// 0x5e9: inputs, then SW returns) first, then the output stream (0x5f3); `swReturnsFirst` selects it.
 struct PeakMap: Equatable {
     let counts: TranslatorCounts
+    var swReturnsFirst = false
+    init(counts: TranslatorCounts, swReturnsFirst: Bool = false) { self.counts = counts; self.swReturnsFirst = swReturnsFirst }
+    private var swReturnCount: Int { return counts.mixer - counts.inputs }
     func input(_ ch: Int) -> Int { return ch - 1 }
-    func output(_ id: Int) -> Int { return counts.inputs + id - 1 }
-    func swReturn(_ k: Int) -> Int { return counts.inputs + counts.outputs + k - 1 }
+    func output(_ id: Int) -> Int { return counts.inputs + (swReturnsFirst ? swReturnCount : 0) + id - 1 }
+    func swReturn(_ k: Int) -> Int { return counts.inputs + (swReturnsFirst ? 0 : counts.outputs) + k - 1 }
     func phones(_ ch: Int) -> Int { return output(counts.mainOutputs + ch) }
     func auxOut(_ ch: Int) -> Int { return output(counts.outputs - 2 + ch) }
 }

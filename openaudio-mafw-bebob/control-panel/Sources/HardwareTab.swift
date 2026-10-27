@@ -15,6 +15,12 @@ final class HardwareTab: FlippedView, PanelTab {
     private let knobRadios: [(ChoiceButton, UInt64)] = [(ChoiceButton(radio: "1.5 dB per click"), 3), (ChoiceButton(radio: "3 dB per click"), 6),
                                                          (ChoiceButton(radio: "Official law"), 0)]
     private var modelCard: HardwareCard?                    // the model's own card (FW1814: digital ports), in the bottom-left cell
+    // Stereo pairs as separate CoreAudio devices: MAEnableStereoPairEngines (cookie 0x614; official FW410 panel "show 410's stereo pairs as
+    // devices", capture 103: 1 adds one pair engine per stereo pair of the channel table, 0 removes them). Generic: every model's driver has it.
+    private let coreAudioCard = Card(title: "CoreAudio Devices")
+    private let pairsCheck = ChoiceButton(check: "Show stereo pairs as separate devices")
+    private let pairsNote = makeLabel("Each stereo pair also appears as its own\n2-channel CoreAudio device; the multichannel\ndevice stays.", size: 11, color: Theme.text3)
+    private var hasAB: Bool { return ctx.profile.hardware.abSwitch }
     private let rateDisplay = RateDisplay()
     private let rateStatus = makeLabel("", size: 11, weight: .medium)
     private let stepper = StepperControl()
@@ -41,7 +47,14 @@ final class HardwareTab: FlippedView, PanelTab {
 
     private func build() {
         let m = ctx.model
-        [rateCard, syncCard, monCard].forEach { addSubview($0) }
+        [rateCard, syncCard, coreAudioCard].forEach { addSubview($0) }
+        if hasAB { addSubview(monCard) }
+        pairsCheck.onAction = { [weak self] in
+            let on = (m.number(MAKeys.enableStereoPairEngines) ?? 0) != 0
+            m.setNumber(MAKeys.enableStereoPairEngines, on ? 0 : 1); m.commit(); self?.refresh()
+        }
+        pairsNote.maximumNumberOfLines = 3
+        [pairsCheck, pairsNote].forEach { coreAudioCard.addSubview($0) }
         if let c = ctx.profile.hardwareCard(ctx) {
             c.onChange = { [weak self] in self?.refresh() }
             modelCard = c; addSubview(c.card)
@@ -95,6 +108,15 @@ final class HardwareTab: FlippedView, PanelTab {
         modelCard?.card.frame = NSRect(x: x0, y: pad + row1 + gap, width: w, height: row2)
         monCard.frame = NSRect(x: modelCard == nil ? x0 : x0 + w + gap, y: pad + row1 + gap, width: w, height: row2)
         knobCard.frame = NSRect(x: x0, y: pad + row1 + gap + row2 + gap, width: 2 * w + gap, height: HardwareTab.knobRow)
+        // the CoreAudio card: the a/b cell on a model without the a/b switch, else a full-width row under the knob card
+        if hasAB { coreAudioCard.frame = NSRect(x: x0, y: knobCard.frame.maxY + gap, width: 2 * w + gap, height: HardwareTab.knobRow) }
+        else { coreAudioCard.frame = NSRect(x: modelCard == nil ? x0 : x0 + w + gap, y: pad + row1 + gap, width: w, height: row2) }
+        let cw = coreAudioCard.frame.width
+        pairsCheck.frame = NSRect(x: 18, y: Card.contentTop + 6, width: hasAB ? cw / 2 - 18 : cw - 36, height: 20)
+        pairsNote.stringValue = hasAB ? "Each stereo pair also appears as its own\n2-channel device; the multichannel device stays."
+                                      : "Each stereo pair also appears as its own\n2-channel CoreAudio device; the multichannel\ndevice stays."
+        pairsNote.frame = hasAB ? NSRect(x: cw / 2, y: Card.contentTop, width: cw / 2 - 18, height: 32)
+                                : NSRect(x: 18 + 24, y: Card.contentTop + 32, width: cw - 36 - 24, height: 48)
         let inner: CGFloat = 18, top = Card.contentTop
         let kw = (2 * w + gap - 2 * inner) / CGFloat(knobRadios.count)
         for (i, (b, _)) in knobRadios.enumerated() { b.frame = NSRect(x: inner + CGFloat(i) * kw, y: top + 6, width: kw - 8, height: 20) }
@@ -127,7 +149,7 @@ final class HardwareTab: FlippedView, PanelTab {
     func rebuild() { refresh() }
     static let knobRow: CGFloat = 76
     /// Two 380-pt cards per row, two rows, then the full-width level-knob card.
-    var preferredSize: NSSize { return NSSize(width: 2 * Theme.pad + 2 * 380 + 16, height: 2 * Theme.pad + 186 + 16 + 228 + 16 + HardwareTab.knobRow) }
+    var preferredSize: NSSize { return NSSize(width: 2 * Theme.pad + 2 * 380 + 16, height: 2 * Theme.pad + 186 + 16 + 228 + 16 + HardwareTab.knobRow + (hasAB ? 16 + HardwareTab.knobRow : 0)) }
 
     func refresh() {
         let m = ctx.model
@@ -153,6 +175,8 @@ final class HardwareTab: FlippedView, PanelTab {
             b.isEnabled = ctx.profile.hardware.sync[i].enabled(l)
         }
         modelCard?.refresh()
+        pairsCheck.on = (m.number(MAKeys.enableStereoPairEngines) ?? 0) != 0
+        pairsCheck.isEnabled = m.number(MAKeys.enableStereoPairEngines) != nil
         let dm = (m.number(MAKeys.momentarySwitchSource) ?? 0) != 0
         dmRadio.on = dm; hpRadio.on = !dm
         setSource.isEnabled = !dm

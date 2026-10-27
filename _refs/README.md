@@ -11,6 +11,7 @@ Until 2026-10-14 these files lived in `/tmp` and were lost when the old Mac rebo
 | `linux-snd-bebob/` | `/tmp/linux-snd-bebob/` | `https://github.com/torvalds/linux.git`, sparse `sound/firewire/bebob/*`, `sound/firewire/*.{c,h}` | `e90ab3669181c6469e3647ef2b30ae408275f496` (2026-10-12) | 2026-10-13 20:55 (`master`, depth 1) |
 | `sierra_kext_unpack/` | `/tmp/sierra_kext_unpack/` | `_vendor/M-AUDIO FWAUDIOPHILE KEXT-LOAD SIERRA/1_…/M-Audio FireWire.mpkg/Contents/Resources/packages/M-Audio FireWire Kernel Extension.pkg` | — (same output every run) | B3, 2026-10-13 |
 | `macfw/` | `_extracted/macfw/` (moved 2026-10-14; B4 + C6 citations updated) | `https://github.com/mbprado/macfw.git` | `054e08bb6dd0f8238b942c8d305cc73edd535052` (2026-09-29) | copied from the old Mac's repo 2026-10-14 (same commit) |
+| `IOFireWireAVC-436/` | — | `https://github.com/apple-oss-distributions/IOFireWireAVC` (Apple open source; plist 4.2.8 = the version loaded on 14.8.9) | tag `IOFireWireAVC-436` = `c11f37b85360` | 2026-10-22, R133 (only `IOFireWireAVC/IOFireWireAVCUnit.cpp`, `IOFireWireAVCCommand.cpp`, `Info-IOFireWireAVC.plist`) |
 
 ## Recipes
 
@@ -19,6 +20,7 @@ cd _refs
 git clone --filter=blob:none https://github.com/ojsl1/libffado.git ffado && git -C ffado checkout b74cd25b3a18
 git clone --filter=blob:none https://github.com/alsa-project/snd-firewire-ctl-services.git && git -C snd-firewire-ctl-services checkout 7654d40cb0e6
 git clone https://github.com/mbprado/macfw.git && git -C macfw checkout 054e08bb6dd0
+mkdir -p IOFireWireAVC-436/IOFireWireAVC && for f in IOFireWireAVC/IOFireWireAVCUnit.cpp IOFireWireAVC/IOFireWireAVCCommand.cpp Info-IOFireWireAVC.plist; do curl -sfL "https://raw.githubusercontent.com/apple-oss-distributions/IOFireWireAVC/IOFireWireAVC-436/$f" -o "IOFireWireAVC-436/$f"; done
 git clone --filter=blob:none --no-checkout --sparse --shallow-since=2026-10-01 https://github.com/torvalds/linux.git linux-snd-bebob
 ( cd linux-snd-bebob && git sparse-checkout set --no-cone 'sound/firewire/bebob/*' 'sound/firewire/*.c' 'sound/firewire/*.h' && git checkout e90ab3669181 )
 mkdir sierra_kext_unpack && cd sierra_kext_unpack

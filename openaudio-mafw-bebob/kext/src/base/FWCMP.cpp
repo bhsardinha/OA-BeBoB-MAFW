@@ -2,13 +2,21 @@
 #include <IOKit/IOLib.h>
 #include <IOKit/avc/IOFireWirePCRSpace.h>
 #include "Trace.h"
+#include "FWAudioDevice.h"
+
+// R140: the CMP plug messages also go to the device's MADebugTrace ring (the kernel log drops this kext's IOLog lines under the IOAudio flood)
+#define CMP_TRACE(dev, fmt, ...) do { char _b[160]; snprintf(_b, sizeof(_b), fmt, ##__VA_ARGS__); OA_LOG("%s", _b); \
+    if (com_openaudio_FWAudioDevice *_d = OSDynamicCast(com_openaudio_FWAudioDevice, (dev))) _d->DebugTrace(_b); } while (0)
 
 static const IOReturn kErrBadArg   = (IOReturn)0xE00002BC;
 static const IOReturn kErrNoMem    = (IOReturn)0xE00002BD;      // ref -0x1ffffd43
 static const IOReturn kErrNotFound = (IOReturn)0xE00002F0;      // ref breakConnection: no such connection
 static const IOReturn kErrNoArray  = (IOReturn)0xE00002BE;      // ref breakConnection: no connection array
-static const IOReturn kBusReset    = (IOReturn)0xE0008014;      // retryable (-0x1fff7fec)
-static const IOReturn kGenMismatch = (IOReturn)0xE0008020;      // ref ReconnectP2P stops on this (-0x1fff7fe0)
+// Correction (2026-10-23, R134): names fixed from IOFireWireFamilyCommon.h, values unchanged. 0xE0008014 = kIOFireWireResponseBase + 4 =
+// resp_conflict_error from the device (was named kBusReset); 0xE0008020 = kIOFireWireResponseBase + kFWResponseBusResetError = kIOFireWireBusReset
+// (was named kGenMismatch).
+static const IOReturn kRespConflict = (IOReturn)0xE0008014;     // retryable (-0x1fff7fec)
+static const IOReturn kIOFWBusReset = (IOReturn)0xE0008020;     // ref ReconnectP2P stops on this (-0x1fff7fe0)
 static const UInt32 kOpcrBase = 0xF0000904;                     // ref: plug * 4 - 0xffff6fc
 static const UInt32 kIpcrBase = 0xF0000984;                     // ref: plug * 4 - 0xffff67c
 static const UInt32 kSpeedUnchanged = 0x80000000;
@@ -31,6 +39,7 @@ bool com_openaudio_FWAvcConnectionManager::InitWithDevice(IOService *device, IOF
     fConnections = 0;
     bzero(fHostPlug, sizeof(fHostPlug));
     bzero(fHostPlugAllocated, sizeof(fHostPlugAllocated));
+    fClosed = false;
     fReconnected = 0;
     fReconnectedRefcon = 0;
     return true;
@@ -44,8 +53,18 @@ void com_openaudio_FWAvcConnectionManager::FreeHostPlugs()
     for (unsigned i = 0; i < 3; i++) {
         if (!fHostPlugAllocated[i]) continue;
         if (pcr) pcr->freeOutputPlug(fHostPlug[i]);
+        CMP_TRACE(fDevice, "CMP: host plug %u (slot %u) freed at teardown%s", (unsigned)fHostPlug[i], i, pcr ? "" : " -- NO PCR SPACE, left registered");
         fHostPlugAllocated[i] = false;
     }
+}
+
+// R140: the panic of 2026-10-26 23:43 (capture 106) was IOFireWirePCRSpace calling HandlePCRLockStub in the image unloaded at 23:16, the unload
+// having run while the engine streamed. Close() frees the plugs from the device's stop() and refuses any Connect_iPCR after it (a stream
+// restart during the teardown would otherwise allocate a plug no one frees).
+void com_openaudio_FWAvcConnectionManager::Close()
+{
+    fClosed = true;
+    FreeHostPlugs();
 }
 
 // ref free @0x23e96: break every recorded connection (count cleared), then drop the array. Clone: then free the host plugs (FreeHostPlugs).
@@ -82,6 +101,7 @@ IOReturn com_openaudio_FWAvcConnectionManager::Disconnect(bool remoteIsInput, UI
 // Out-of-range plug indices fall back to element 0, as in the reference.
 IOReturn com_openaudio_FWAvcConnectionManager::Connect_iPCR(UInt32 plug, UInt32 channel)
 {
+    if (fClosed) { CMP_TRACE(fDevice, "CMP: Connect_iPCR(%u) refused: connection manager closed (device stopping)", (unsigned)plug); return kIOReturnNotReady; }   // R140
     IOFireWirePCRSpace *pcr = IOFireWirePCRSpace::getPCRAddressSpace(fNub->getBus());
     if (!pcr) return kErrBadArg;
     const unsigned idx = plug < 3 ? plug : 0;
@@ -91,6 +111,7 @@ IOReturn com_openaudio_FWAvcConnectionManager::Connect_iPCR(UInt32 plug, UInt32 
     IOReturn r = pcr->allocateOutputPlug(this, HandlePCRLockStub, *slot);
     if (r != kIOReturnSuccess) return r;
     fHostPlugAllocated[idx] = true;
+    CMP_TRACE(fDevice, "CMP: host plug %u allocated (slot %u, channel %u)", (unsigned)*slot, idx, (unsigned)channel);
     UInt32 old = pcr->readOutputPlug(*slot);
     r = pcr->updateOutputPlug(*slot, old, (channel << 16) | kHostOpcrPayload122);
     if (r != kIOReturnSuccess) return r;
@@ -109,6 +130,7 @@ IOReturn com_openaudio_FWAvcConnectionManager::Disconnect_iPCR(UInt32 plug)
     IOReturn r = pcr->updateOutputPlug(*slot, old, 0x7a);          // channel and flags cleared, payload kept
     pcr->freeOutputPlug(*slot);
     fHostPlugAllocated[idx] = false;
+    CMP_TRACE(fDevice, "CMP: host plug %u freed (Disconnect_iPCR, slot %u)", (unsigned)*slot, idx);
     return r;
 }
 
@@ -222,7 +244,7 @@ IOReturn com_openaudio_FWAvcConnectionManager::updateP2PCount(UInt32 pcrAddrLo, 
         r = cas->submit();
         bool locked = cas->locked(&cur);
         cas->release();
-        if (r != kBusReset) {
+        if (r != kRespConflict) {
             if (r != kIOReturnSuccess) return r;
             if (locked) return kIOReturnSuccess;
         }
@@ -255,7 +277,7 @@ void com_openaudio_FWAvcConnectionManager::ReconnectP2P()
     for (unsigned i = 0; i < fConnections->getCount(); i++) {
         com_openaudio_FWP2PConnection *c = OSDynamicCast(com_openaudio_FWP2PConnection, fConnections->getObject(i));
         if (!c) continue;
-        if (updateP2PCount(c->pcrAddress, 1, true, c->channel, kSpeedUnchanged) == kGenMismatch) break;
+        if (updateP2PCount(c->pcrAddress, 1, true, c->channel, kSpeedUnchanged) == kIOFWBusReset) break;
     }
     if (fReconnected) fReconnected(fReconnectedRefcon);
 }

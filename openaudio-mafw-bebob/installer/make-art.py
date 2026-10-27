@@ -50,18 +50,18 @@ def uninstall_icon(src_png):
 # Per-edition text (R128): title chip, subtitle, the step after the install, the notes at the bottom.
 EDITIONS = {
     "classic": dict(chip="CLASSIC", chip_fill=(96, 104, 116),
-                    sub="Driver for the M-Audio FireWire 1814 and FireWire Audiophile  \u00b7  macOS High Sierra 10.13.6",
+                    sub="Driver for the M-Audio FireWire 1814, Audiophile and 410  \u00b7  macOS High Sierra 10.13.6",
                     step2="Restart the Mac, then power on the interface",
                     reqs=(("macOS", "10.13 High Sierra (tested on 10.13.6); 10.14 and 10.15 allowed, not tested"),
                           ("Mac", "Intel, with FireWire, or Thunderbolt + Apple Thunderbolt to FireWire Adapter"),
-                          ("Interfaces", "M-Audio FireWire 1814 and FireWire Audiophile (both tested)"),
+                          ("Interfaces", "FireWire 1814 and Audiophile (tested up to 0.2.2); FireWire 410 (tested, 0.4.0)"),
                           ("Security", "System Integrity Protection disabled (csrutil disable)"))),
     "modern": dict(chip="MODERN", chip_fill=RED,
-                   sub="Driver for the M-Audio FireWire 1814 and FireWire Audiophile  \u00b7  macOS 11 to 15, Intel Macs",
+                   sub="Driver for the M-Audio FireWire 1814, Audiophile and 410  \u00b7  macOS 11 to 15, Intel Macs",
                    step2="Allow it in System Settings \u203a Privacy & Security, then restart",
                    reqs=(("macOS", "11 Big Sur to 15 Sequoia, Intel only (tested on 14.8.9); no Apple Silicon"),
                          ("Mac", "Intel, with FireWire, or Thunderbolt + Apple Thunderbolt to FireWire Adapter"),
-                         ("Interfaces", "FireWire Audiophile (tested); FireWire 1814 (not yet tested on 11+)"),
+                         ("Interfaces", "Audiophile (tested on 0.3.1); FireWire 1814 (panel only); FireWire 410 (not tried)"),
                          ("Security", "SIP allowing unsigned kexts (csrutil disable, or enable --without kext)"))),
 }
 FOOT = "Experimental and unsigned. Quit audio and MIDI applications before installing or removing."

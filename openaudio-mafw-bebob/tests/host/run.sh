@@ -16,4 +16,5 @@ run samples           -I $B -I $M/FW1814 tests/host/samples_test.cpp $B/FWSample
 run audiophile_status -I $M/FWAudiophile tests/host/audiophile_status_test.cpp
 run audiophile_mixer  -I $B -I $M/FWAudiophile tests/host/audiophile_mixer_test.cpp
 run frontpanel        -I $B tests/host/frontpanel_test.cpp
+run fw410             -I $B -I $M/FW410 tests/host/fw410_test.cpp $B/FWSamples.cpp
 exit $fail

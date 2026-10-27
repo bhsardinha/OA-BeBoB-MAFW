@@ -56,5 +56,18 @@ void FWConvertLLRR4SkipMIDI1(UInt32 count, const UInt32 *src, SInt32 *dst, void 
 void FWRearrangeLLRR6(const SInt32 *src, UInt32 *dst, UInt32 frames);
 // ref _SamplePeaks6 @0x27e17 (decompile): six channels, identity map
 void FWSamplePeaks6(const SInt32 *src, SInt32 *dst, UInt32 frames);
+// ref _RearrangeFrameLLRR10WithMIDI @0x2b951 (asm, mafw.asm 51942-52130): wire[k] = pack(host[p[k]]), p = 8 0 2 4 6 9 1 3 5 7 (S/PDIF L, L1-L4,
+// S/PDIF R, R1-R4); host stride 10, wire stride 11 (the MIDI quadlet is not written). frames == 0 returns (the reference would loop 2^32 times).
+void FWRearrangeLLRR10WithMIDI(const SInt32 *src, UInt32 *dst, UInt32 frames);
+// ref _SamplePeaks10 @0x280d3 (decompile): ten channels, identity map
+void FWSamplePeaks10(const SInt32 *src, SInt32 *dst, UInt32 frames);
+// ---- channel-map routines (DeviceChannels +0x18/+0x20/+0x28; R136) ----
+// ref ConvertSampleFramesFromInput @0x27bb6 (decompile): per frame, wire slot k -> dst[frame * inStream + map[k]] (skipped when map[k] >= inStream);
+// wire stride in + (midi ? 1 : 0).
+void FWConvertSampleFramesFromInput(const UInt32 *src, SInt32 *dst, UInt32 in, UInt32 inStream, UInt32 frames, const UInt32 *map, bool midi);
+// ref RemapSampleFramesForOutput @0x27aad (asm): per frame, host channel h -> wire[map[h]] (skipped when map[h] >= out + midi), packed as
+// FWPackAM824; then the copy list (pairs a, b; terminated by 0xFFFFFFFF) copies wire[a] to wire[b] inside the frame. Host stride outStream,
+// wire stride out + midi. frames == 0 returns.
+void FWRemapSampleFramesForOutput(const SInt32 *src, UInt32 *dst, UInt32 out, UInt32 outStream, UInt32 frames, const UInt32 *map, const UInt32 *copy, bool midi);
 
 #endif

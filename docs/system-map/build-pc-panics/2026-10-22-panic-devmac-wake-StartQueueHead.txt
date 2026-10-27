@@ -1,0 +1,78 @@
+Panic on wake from sleep -- dev Mac (MacBookAir7,2, macOS 14.8.9 23J631), package 0.3.1 Modern, driver 0.2.2 (kext UUID 2A89CF82-C090-3A0C-ACD5-29973A8C4267)
+Attached: one FW1814, GUID 0xD6C040074B9FB (the second unit), on Apple's Thunderbolt-to-FireWire adapter. No Audiophile (user, 2026-10-22: "theres only a 1814 attached"; ioreg).
+User (2026-10-22): "the dev macair freezed and required a hard resert (hold power to restart) after sleeping. sleeped, the soundcard disconnected. when i waked the computer it froze totally."
+Report: /Library/Logs/DiagnosticReports/Kernel-2026-10-22-214613.panic (3.0 MB with the stackshot; excerpt below, as pasted by the user).
+Analysis: PROVENANCE-RESOLUTIONS.md R133.
+
+Timeline (pmset -g log; panic header): 21:44:23 -0300 "Entering Sleep state due to 'Idle Sleep'". Mach absolute time (stops during sleep on Intel):
+sleep 10122.8 s, wake 10123.4 s, panic 10129.3 s -> the panic is 5.9 s after wake. Last kext line in the unified log before it: 21:37:07 ("invalid sample rate
+detected (FDF:7) mismatch"); no "AVC async submit failed" line survived (the kernel log drops this kext's lines, CLAUDE.md).
+
+---- excerpt ----
+panic(cpu 1 caller 0xffffff8003376873): Kernel trap at 0xffffff7f995aa272, type 14=page fault, registers:
+CR0: 0x000000008001003b, CR2: 0x0000000000000028, CR3: 0x0000000007f73000, CR4: 0x00000000003626e0
+RAX: 0x0000000000000000, RBX: 0xffffffa937fe4600, RCX: 0x0000000000000000, RDX: 0x0000000001000000
+RSP: 0xffffffb495a83da0, RBP: 0xffffffb495a83dc0, RSI: 0xffffffb46ae5f910, RDI: 0xffffff9ad3abdf40
+R8:  0x0000000000000000, R9:  0xffffff7f995cb113, R10: 0x0000000000000001, R11: 0x0000000000000000
+R12: 0x000000000000000c, R13: 0xffffffb495a83e1c, R14: 0xffffff7f995cb0e2, R15: 0xffffff9ad3abdf40
+RFL: 0x0000000000010246, RIP: 0xffffff7f995aa272, CS:  0x0000000000000008, SS:  0x0000000000000010
+Fault CR2: 0x0000000000000028, Error code: 0x0000000000000000, Fault CPU: 0x1, PL: 0, VF: 1
+
+Panicked task 0xffffff9f9efa83d8: 202 threads: pid 0: kernel_task
+Backtrace (CPU 1), panicked thread: 0xffffff9fa01040c8, Frame : Return Address
+0xffffffb495a83720 : 0xffffff8003220631 mach_kernel : _handle_debugger_trap + 0x4b1
+0xffffffb495a83770 : 0xffffff8003386e10 mach_kernel : _kdp_i386_trap + 0x110
+0xffffffb495a837b0 : 0xffffff80033763cc mach_kernel : _kernel_trap + 0x55c
+0xffffffb495a83830 : 0xffffff80031ba971 mach_kernel : _return_from_trap + 0xc1
+0xffffffb495a83850 : 0xffffff800322091d mach_kernel : _DebuggerTrapWithState + 0x5d
+0xffffffb495a83940 : 0xffffff800321ffc3 mach_kernel : _panic_trap_to_debugger + 0x1e3
+0xffffffb495a839a0 : 0xffffff80039da60b mach_kernel : _panic + 0x84
+0xffffffb495a83a90 : 0xffffff8003376873 mach_kernel : _sync_iss_to_iks + 0x2c3
+0xffffffb495a83c10 : 0xffffff8003376557 mach_kernel : _kernel_trap + 0x6e7
+0xffffffb495a83c90 : 0xffffff80031ba971 mach_kernel : _return_from_trap + 0xc1
+0xffffffb495a83cb0 : 0xffffff7f995aa272 com.openaudio.OpenAudioBeBoBMAFW : __ZN23com_openaudio_FWAvcUnit14StartQueueHeadEv + 0x52
+0xffffffb495a83dc0 : 0xffffff7f995aa12c com.openaudio.OpenAudioBeBoBMAFW : __ZN23com_openaudio_FWAvcUnit15AVCCommandAsyncEPKhj + 0x10c
+0xffffffb495a83e00 : 0xffffff7f995aa8cd com.openaudio.OpenAudioBeBoBMAFW : __Z25FWAvcFeatureFunctionBlockP23com_openaudio_FWAvcUnithhht + 0x4d
+0xffffffb495a83e30 : 0xffffff7f995c343a com.openaudio.OpenAudioBeBoBMAFW : __ZL8FWThunk2I31com_openaudio_FWSettingsAuxSendXadL_ZNS0_9SetAuxPanEjjEEEiPvjj + 0x7a
+0xffffffb495a83e70 : 0xffffff7f995bc03b com.openaudio.OpenAudioBeBoBMAFW : __ZN25com_openaudio_FWArrayProp10CallSetterEPK8OSSymbolP8OSObject + 0xab
+0xffffffb495a83eb0 : 0xffffff7f995bd4a1 com.openaudio.OpenAudioBeBoBMAFW : __ZN28com_openaudio_FWPropertyDict23ApplyModifiedPropertiesEb + 0x181
+0xffffffb495a83f00 : 0xffffff7f995bd572 com.openaudio.OpenAudioBeBoBMAFW : __ZN28com_openaudio_FWPropertyDict12checkForWorkEv + 0x22
+0xffffffb495a83f20 : 0xffffff800390ddbe mach_kernel : __ZN10IOWorkLoop15runEventSourcesEv + 0x13e
+0xffffffb495a83f60 : 0xffffff800390d3e6 mach_kernel : __ZN10IOWorkLoop10threadMainEv + 0x36
+0xffffffb495a83fa0 : 0xffffff80031ba19e mach_kernel : _call_continuation + 0x2e
+      Kernel Extensions in backtrace:
+         com.openaudio.OpenAudioBeBoBMAFW(0.2.2)[2A89CF82-C090-3A0C-ACD5-29973A8C4267]@0xffffff7f995a6000->0xffffff7f995ccfff
+            dependency: com.apple.iokit.IOAudioFamily(540.3)[DDD838AD-FE64-30D3-AF69-05F2283760B0]@0xffffff7f9832f000->0xffffff7f9834cfff
+            dependency: com.apple.iokit.IOFireWireAVC(4.2.8)[004EFA2D-23AE-35F8-AB74-1A6F8996E5A5]@0xffffff7f98357000->0xffffff7f98362fff
+            dependency: com.apple.iokit.IOFireWireFamily(4.8.3)[65F86963-9F79-34E9-9BB2-4A0E5A3B9A92]@0xffffff7f9836a000->0xffffff7f9839dfff
+
+Process name corresponding to current thread (0xffffff9fa01040c8): kernel_task
+Boot args: keepsyms=1 debug=0x100 -lilubetaall ipc_control_port_options=0 -nokcmismatchpanic
+Mac OS version: 23J631
+Kernel version: Darwin Kernel Version 23.6.0: Tue Jul 21 21:56:37 PDT 2026; root:xnu-10063.141.1.713.39~1/RELEASE_X86_64
+System model name: MacBookAir7,2 (Mac-937CB26E2E02BB01)
+System uptime in nanoseconds: 10129335304963
+Last Sleep:           absolute           base_tsc          base_nano
+  Uptime  : 0x000009366b6eca9c
+  Sleep   : 0x00000934e6a6867d 0x00000002e0f9e7a2 0x0000000000000000
+  Wake    : 0x000009350a6b1936 0x00000ebe232b8ef0 0x00000935095eb764
+---- end of excerpt ----
+
+Crash site: otool -tV -p __ZN23com_openaudio_FWAvcUnit14StartQueueHeadEv on kext/build/modern/OpenAudioBeBoBMAFW.kext (UUID 2A89CF82-..., the
+installed binary; `dwarfdump --uuid` matches /Library/Extensions). Function at 0x4220, so +0x52 = 0x4272:
+
+  00000000000042a8  callq  __ZN32IOFireWireAVCAsynchronousCommand6submitEP16IOFireWireAVCNub    ; r = h->submit(this), h in r15
+  00000000000042ad  testl  %eax, %eax
+  00000000000042af  je     0x42f0                                                                 ; success -> return
+  00000000000042b8  callq  _IOLog                                                                 ; "AVC async submit failed 0x%x"
+  00000000000042c9  movq   0x98(%r15), %rax                                                       ; fAsyncHead = h->fNext
+  00000000000042d0  movq   %rax, 0xe8(%rbx)
+  ...
+  0000000000004260  movq   0xe0(%rbx), %rdi
+  0000000000004267  callq  _IOLockUnlock
+  000000000000426c  movq   (%r15), %rax                                                           ; h's vtable pointer = 0 (RAX = 0)
+  000000000000426f  movq   %r15, %rdi
+  0000000000004272  callq  *0x28(%rax)                                                            ; h->release()  <-- fault, CR2 = 0x28
+
+RDI = R15 = 0xffffff9ad3abdf40 = h. Its first quadword (vtable) reads 0: h had already been freed (zone memory is cleared on free on this kernel).
+How h was freed inside submit: R133.

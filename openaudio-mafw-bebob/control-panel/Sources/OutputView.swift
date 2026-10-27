@@ -30,7 +30,8 @@ final class OutputTab: StripPage, PanelTab {
         let m = ctx.model
         let sources = ctx.profile.phonesSources
         // One extra bottom row on every strip when a strip needs it: four headphone sources (2 x 2 grid) or the aux pan pair.
-        let monRows = (sources.count > 3 || (plan.main + plan.other).contains { $0.pan != nil }) ? 2 : 1
+        var monRows = sources.count > 4 ? 3 : (sources.count > 3 || (plan.main + plan.other).contains { $0.pan != nil }) ? 2 : 1   // 3 rows: the FW410's six sources
+        if (plan.main + plan.other).contains(where: { $0.phones != nil && $0.features.contains(.mainAux) }) { monRows += 1 }   // FW410 phones main/aux row
 
         func make(_ spec: OutputStripPlan) -> StripView {
             let s = StripView(title: spec.title, features: spec.features, kind: .output, law: DeviceModel.law(spec.levels),
@@ -47,7 +48,14 @@ final class OutputTab: StripPage, PanelTab {
             if let solo = spec.solo { s.onSolo = { on in m.setPairFlag(solo, pair: spec.pairInGroup, on: on); m.commit() } }
             if let rot = spec.rotary { s.onCtrl = { on in m.setRotaryBit(rot.bit, on: on) } }
             if let mp = spec.monitorPair { s.onMainAux = { aux in m.setMonitorAux(pair: mp, aux: aux) } }
-            if let ph = spec.phones { s.onMon = { mask in m.setPhonesSource(phones: ph, mask: mask) } }
+            if let ph = spec.phones {
+                let multi = ctx.profile.phonesMultiSelect
+                s.onMon = { mask in
+                    // multi-select (FW410): the button toggles its bit in the current mask; otherwise it selects that one source
+                    let cur = UInt32(truncatingIfNeeded: m.number(ph == 1 ? MAKeys.headphoneSourceV2 : MAKeys.headphoneSecondSource) ?? 0)
+                    m.setPhonesSource(phones: ph, mask: multi ? cur ^ mask : mask)
+                }
+            }
             if let pan = spec.pan { s.onPan = { side, v in m.setElement(pan, side == 0 ? l : r, v) } }
             s.onCommit = { m.commit() }
             if spec.hideLastMon { s.monButtons.last?.isHidden = true }
@@ -138,7 +146,7 @@ final class OutputTab: StripPage, PanelTab {
             if let pan = spec.pan { s.setPan(m.element(pan, l), m.element(pan, r)) }
             if let ph = spec.phones {
                 let key = ph == 1 ? MAKeys.headphoneSourceV2 : MAKeys.headphoneSecondSource
-                s.setMon(UInt32(truncatingIfNeeded: m.number(key) ?? 0))
+                s.setMon(UInt32(truncatingIfNeeded: m.number(key) ?? 0), multi: ctx.profile.phonesMultiSelect)
             }
         }
         if let t = digitalMainAux, let pair = plan?.digitalBus?.mainAuxPair { let aux = m.monitorAux(pair: pair); t.isOn = aux; StripView.styleMainAux(t, aux: aux) }

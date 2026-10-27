@@ -1,0 +1,250 @@
+# FW410 control sweep on the SL rig (official panel 1.4, window 694x489; coordinates from capture 103 screenshots).
+# Every click is repeated to undo it; drags are undone by the final restore (slprops.py restore + settings file copy).
+click tab-mixer 37 66
+sleep 1
+shot m-start
+click mix-sw12-ctrl-a 36 298
+click mix-sw12-ctrl-b 36 298
+click mix-sw12-solo-a 70 298
+click mix-sw12-solo-b 70 298
+click mix-sw12-mute-a 70 316
+click mix-sw12-mute-b 70 316
+click mix-sw12-link-a 36 316
+click mix-sw12-link-b 36 316
+click mix-sw12-out12-a 36 343
+click mix-sw12-out12-b 36 343
+click mix-sw12-outspd-a 70 343
+click mix-sw12-outspd-b 70 343
+click mix-sw12-out34-a 36 361
+click mix-sw12-out34-b 36 361
+click mix-sw12-out56-a 36 379
+click mix-sw12-out56-b 36 379
+click mix-sw12-out78-a 36 397
+click mix-sw12-out78-b 36 397
+click mix-sw34-ctrl-a 115 298
+click mix-sw34-ctrl-b 115 298
+click mix-sw34-solo-a 149 298
+click mix-sw34-solo-b 149 298
+click mix-sw34-mute-a 149 316
+click mix-sw34-mute-b 149 316
+click mix-sw34-link-a 115 316
+click mix-sw34-link-b 115 316
+click mix-sw34-out12-a 115 343
+click mix-sw34-out12-b 115 343
+click mix-sw34-outspd-a 149 343
+click mix-sw34-outspd-b 149 343
+click mix-sw34-out34-a 115 361
+click mix-sw34-out34-b 115 361
+click mix-sw34-out56-a 115 379
+click mix-sw34-out56-b 115 379
+click mix-sw34-out78-a 115 397
+click mix-sw34-out78-b 115 397
+click mix-sw56-ctrl-a 193 298
+click mix-sw56-ctrl-b 193 298
+click mix-sw56-solo-a 227 298
+click mix-sw56-solo-b 227 298
+click mix-sw56-mute-a 227 316
+click mix-sw56-mute-b 227 316
+click mix-sw56-link-a 193 316
+click mix-sw56-link-b 193 316
+click mix-sw56-out12-a 193 343
+click mix-sw56-out12-b 193 343
+click mix-sw56-outspd-a 227 343
+click mix-sw56-outspd-b 227 343
+click mix-sw56-out34-a 193 361
+click mix-sw56-out34-b 193 361
+click mix-sw56-out56-a 193 379
+click mix-sw56-out56-b 193 379
+click mix-sw56-out78-a 193 397
+click mix-sw56-out78-b 193 397
+click mix-sw78-ctrl-a 271 298
+click mix-sw78-ctrl-b 271 298
+click mix-sw78-solo-a 305 298
+click mix-sw78-solo-b 305 298
+click mix-sw78-mute-a 305 316
+click mix-sw78-mute-b 305 316
+click mix-sw78-link-a 271 316
+click mix-sw78-link-b 271 316
+click mix-sw78-out12-a 271 343
+click mix-sw78-out12-b 271 343
+click mix-sw78-outspd-a 305 343
+click mix-sw78-outspd-b 305 343
+click mix-sw78-out34-a 271 361
+click mix-sw78-out34-b 271 361
+click mix-sw78-out56-a 271 379
+click mix-sw78-out56-b 271 379
+click mix-sw78-out78-a 271 397
+click mix-sw78-out78-b 271 397
+click mix-swspd-ctrl-a 350 298
+click mix-swspd-ctrl-b 350 298
+click mix-swspd-solo-a 384 298
+click mix-swspd-solo-b 384 298
+click mix-swspd-mute-a 384 316
+click mix-swspd-mute-b 384 316
+click mix-swspd-link-a 350 316
+click mix-swspd-link-b 350 316
+click mix-swspd-out12-a 350 343
+click mix-swspd-out12-b 350 343
+click mix-swspd-outspd-a 384 343
+click mix-swspd-outspd-b 384 343
+click mix-swspd-out34-a 350 361
+click mix-swspd-out34-b 350 361
+click mix-swspd-out56-a 350 379
+click mix-swspd-out56-b 350 379
+click mix-swspd-out78-a 350 397
+click mix-swspd-out78-b 350 397
+click mix-ain-ctrl-a 428 358
+click mix-ain-ctrl-b 428 358
+click mix-ain-solo-a 462 358
+click mix-ain-solo-b 462 358
+click mix-ain-mute-a 462 377
+click mix-ain-mute-b 462 377
+click mix-ain-link-a 428 377
+click mix-ain-link-b 428 377
+click mix-ain-out12-a 428 404
+click mix-ain-out12-b 428 404
+click mix-ain-outspd-a 462 404
+click mix-ain-outspd-b 462 404
+click mix-ain-out34-a 428 421
+click mix-ain-out34-b 428 421
+click mix-ain-out56-a 428 439
+click mix-ain-out56-b 428 439
+click mix-ain-out78-a 428 457
+click mix-ain-out78-b 428 457
+click mix-spdin-ctrl-a 506 358
+click mix-spdin-ctrl-b 506 358
+click mix-spdin-solo-a 540 358
+click mix-spdin-solo-b 540 358
+click mix-spdin-mute-a 540 377
+click mix-spdin-mute-b 540 377
+click mix-spdin-link-a 506 377
+click mix-spdin-link-b 506 377
+click mix-spdin-out12-a 506 404
+click mix-spdin-out12-b 506 404
+click mix-spdin-outspd-a 540 404
+click mix-spdin-outspd-b 540 404
+click mix-spdin-out34-a 506 421
+click mix-spdin-out34-b 506 421
+click mix-spdin-out56-a 506 439
+click mix-spdin-out56-b 506 439
+click mix-spdin-out78-a 506 457
+click mix-spdin-out78-b 506 457
+drag mix-sw12-fader-L 41 170 41 200
+drag mix-sw12-auxL 40 133 40 113
+drag mix-ain-fader-L 431 170 431 200
+drag mix-ain-auxL 428 133 428 113
+drag mix-ain-panL 428 320 428 300
+drag mix-spdin-fader-L 509 170 509 200
+shot m-end
+click tab-output 92 66
+sleep 1
+shot o-start
+click out-o12-ctrl-a 36 298
+click out-o12-ctrl-b 36 298
+click out-o12-solo-a 70 298
+click out-o12-solo-b 70 298
+click out-o12-mute-a 70 316
+click out-o12-mute-b 70 316
+click out-o12-link-a 36 316
+click out-o12-link-b 36 316
+click out-o12-main-a 55 343
+click out-o12-main-b 55 343
+click out-o34-ctrl-a 115 298
+click out-o34-ctrl-b 115 298
+click out-o34-solo-a 149 298
+click out-o34-solo-b 149 298
+click out-o34-mute-a 149 316
+click out-o34-mute-b 149 316
+click out-o34-link-a 115 316
+click out-o34-link-b 115 316
+click out-o34-main-a 134 343
+click out-o34-main-b 134 343
+click out-o56-ctrl-a 193 298
+click out-o56-ctrl-b 193 298
+click out-o56-solo-a 227 298
+click out-o56-solo-b 227 298
+click out-o56-mute-a 227 316
+click out-o56-mute-b 227 316
+click out-o56-link-a 193 316
+click out-o56-link-b 193 316
+click out-o56-main-a 212 343
+click out-o56-main-b 212 343
+click out-o78-ctrl-a 271 298
+click out-o78-ctrl-b 271 298
+click out-o78-solo-a 305 298
+click out-o78-solo-b 305 298
+click out-o78-mute-a 305 316
+click out-o78-mute-b 305 316
+click out-o78-link-a 271 316
+click out-o78-link-b 271 316
+click out-o78-main-a 290 343
+click out-o78-main-b 290 343
+click out-ospd-ctrl-a 350 298
+click out-ospd-ctrl-b 350 298
+click out-ospd-solo-a 384 298
+click out-ospd-solo-b 384 298
+click out-ospd-mute-a 384 316
+click out-ospd-mute-b 384 316
+click out-ospd-link-a 350 316
+click out-ospd-link-b 350 316
+click out-ospd-main-a 369 343
+click out-ospd-main-b 369 343
+click out-aux-ctrl-a 428 298
+click out-aux-ctrl-b 428 298
+click out-aux-link-a 428 316
+click out-aux-link-b 428 316
+click out-aux-mute-a 462 316
+click out-aux-mute-b 462 316
+click out-hp-ctrl-a 506 298
+click out-hp-ctrl-b 506 298
+click out-hp-main-a 541 298
+click out-hp-main-b 541 298
+click out-hp-link-a 506 316
+click out-hp-link-b 506 316
+click out-hp-mute-a 541 316
+click out-hp-mute-b 541 316
+click out-hp-mon12-a 506 343
+click out-hp-mon12-b 506 343
+click out-hp-monspd-a 541 343
+click out-hp-monspd-b 541 343
+click out-hp-mon34-a 506 361
+click out-hp-mon34-b 506 361
+click out-hp-mon56-a 506 379
+click out-hp-mon56-b 506 379
+click out-hp-mon78-a 506 397
+click out-hp-mon78-b 506 397
+drag out-o12-fader-L 41 170 41 200
+drag out-o12-bal 55 133 55 113
+drag out-aux-fader-L 431 170 431 200
+drag out-aux-panL 428 377 428 357
+drag out-hp-fader-L 509 170 509 200
+drag out-ospd-fader-L 355 170 355 200
+shot o-end
+click tab-hardware 148 66
+sleep 1
+shot h-start
+click hw-sync-ext 400 161
+sleep 2
+shot h-ext
+click hw-sync-int 400 135
+sleep 2
+click hw-spdif-opt 127 357
+sleep 1
+shot h-opt
+click hw-spdif-coax 127 331
+sleep 1
+click lc-swrtn 600 209
+sleep 1
+click lc-input 600 243
+sleep 1
+click lc-phones 600 260
+sleep 1
+click lc-aux 600 277
+sleep 1
+click lc-output 600 226
+sleep 1
+click main-mute-a 611 324
+click main-mute-b 611 324
+click main-dim-a 651 324
+click main-dim-b 651 324
+shot h-end

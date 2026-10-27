@@ -1,0 +1,8 @@
+1793059936576 click tab-mixer 37 66
+1793059938027 sleep 1
+1793059939027 drag ain-panL-back2 428 320 428 400
+1793059940958 sleep 1
+1793059941958 drag ain-panL-back3 428 330 428 420
+1793059943889 sleep 1
+1793059944890 shot fix2-mixer
+/Users/bernardosardinha/fw1814-captures/103//fix2-mixer.png

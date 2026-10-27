@@ -2,6 +2,7 @@
 // Sends one click per second on every output channel and watches every input channel; the delay is counted in frames between the output
 // sample's index and the input sample's index in the same IOProc stream (independent of any latency the driver reports).
 //   looplat [RATE [BUFFER [SECONDS]]]     defaults: current rate, current buffer, 8 s
+//   LOOPLAT_OUT=n: click on output channel n only (1-based; default every output) -- e.g. a loop OUT 3 -> IN 1 without clicks on the monitors
 // Build: cc -o looplat looplat.c -framework CoreAudio -framework CoreFoundation
 #include <CoreAudio/CoreAudio.h>
 #include <stdio.h>
@@ -18,7 +19,8 @@ static volatile int gSeen[64];
 static volatile double gDelay[64];
 static volatile int gArmed;
 static Float64 gRate;
-static float gThresh = 0.03f;                         // a quiet loopback (input gain low) still clears it; LOOPLAT_THRESH overrides
+static float gThresh = 0.03f;
+static int gOutOnly = 0;                             // LOOPLAT_OUT, 0 = every output                         // a quiet loopback (input gain low) still clears it; LOOPLAT_THRESH overrides
 static volatile float gPeak[64];
 
 static OSStatus ioproc(AudioObjectID dev, const AudioTimeStamp *now, const AudioBufferList *in, const AudioTimeStamp *it,
@@ -32,7 +34,7 @@ static OSStatus ioproc(AudioObjectID dev, const AudioTimeStamp *now, const Audio
         for (UInt32 i = 0; i < frames; i++) {
             UInt64 idx = gOutFrame + i;
             if (idx % (UInt64)gRate == 100) {           // one click per second
-                for (UInt32 c = 0; c < oc; c++) o[i * oc + c] = 0.9f;
+                for (UInt32 c = 0; c < oc; c++) if (!gOutOnly || (int)c == gOutOnly - 1) o[i * oc + c] = 0.9f;
                 gClickAt = idx; gArmed = 1; memset((void *)gSeen, 0, sizeof gSeen);
             }
         }
@@ -65,7 +67,7 @@ int main(int argc, char **argv) {
         AudioObjectPropertyAddress ua = { kAudioDevicePropertyDeviceUID, kAudioObjectPropertyScopeGlobal, 0 };
         AudioObjectGetPropertyData(ids[i], &ua, 0, NULL, &n, &uid);
         char buf[256] = ""; if (uid) CFStringGetCString(uid, buf, sizeof buf, kCFStringEncodingUTF8);
-        if (strstr(buf, "FWEngine2")) gDev = ids[i];
+        if (strstr(buf, "com_m_audio_FWEngine")) gDev = ids[i];   // FWEngine2 (FW1814, Audiophile) or FWEngine1 (FW410 UID, R135)
     }
     if (!gDev) { puts("no FW1814 in CoreAudio"); return 1; }
     UInt32 n;
@@ -84,6 +86,7 @@ int main(int argc, char **argv) {
     { UInt32 sz = 0; AudioObjectPropertyAddress sa = { kAudioDevicePropertyStreamConfiguration, kAudioObjectPropertyScopeInput, 0 };
       AudioObjectGetPropertyDataSize(gDev, &sa, 0, NULL, &sz); AudioBufferList *l = malloc(sz); AudioObjectGetPropertyData(gDev, &sa, 0, NULL, &sz, l); gInCh = l->mBuffers[0].mNumberChannels; }
     if (getenv("LOOPLAT_THRESH")) gThresh = atof(getenv("LOOPLAT_THRESH"));
+    if (getenv("LOOPLAT_OUT")) gOutOnly = atoi(getenv("LOOPLAT_OUT"));
     printf("rate %.0f  buffer %u frames (%.1f ms)  - clicks on every output, watching every input\n", gRate, gBuf, gBuf * 1000 / gRate);
     AudioDeviceIOProcID pid;
     AudioDeviceCreateIOProcID(gDev, ioproc, NULL, &pid);

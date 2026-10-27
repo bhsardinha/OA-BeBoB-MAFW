@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
         AudioObjectPropertyAddress ua = { kAudioDevicePropertyDeviceUID, kAudioObjectPropertyScopeGlobal, 0 };
         AudioObjectGetPropertyData(ids[i], &ua, 0, NULL, &n, &uid);
         char buf[256] = ""; if (uid) CFStringGetCString(uid, buf, sizeof buf, kCFStringEncodingUTF8);
-        if (strstr(buf, "FWEngine2")) dev = ids[i];
+        if (strstr(buf, "com_m_audio_FWEngine")) dev = ids[i];   // FWEngine2 (FW1814, Audiophile) or FWEngine1 (FW410 UID, R135)
     }
     if (!dev) { puts("no FW1814 in CoreAudio"); return 1; }
     printf("start: rate %.0f  in %u  out %u\n", rate(dev), (unsigned)channels(dev, kAudioObjectPropertyScopeInput), (unsigned)channels(dev, kAudioObjectPropertyScopeOutput));

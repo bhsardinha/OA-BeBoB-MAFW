@@ -6,7 +6,10 @@ static const IOReturn kErrBadArg   = (IOReturn)0xE00002C2;
 static const IOReturn kErrNoMem    = (IOReturn)0xE00002BD;
 static const IOReturn kErrNotImpl  = (IOReturn)0xE00002C7;    // -0x1ffffd39: response 0x08 NOT IMPLEMENTED
 static const IOReturn kErrRejected = (IOReturn)0xE00002C2;    // -0x1ffffd3e: response 0x0A REJECTED
-static const IOReturn kBusReset    = (IOReturn)0xE0008014;    // -0x1fff7fec: retried by the reference
+// Correction (2026-10-23, R134): 0xE0008014 is NOT kIOFireWireBusReset (that is 0xE0008020). IOFireWireFamilyCommon.h: kIOFireWireResponseBase
+// (iokit_fw_err(0x10) = 0xE0008010) + kFWResponseConflictError (4) = the device answered resp_conflict_error ("resource conflict, may retry").
+// The value and the reference's retry on it are unchanged; only the name was wrong.
+static const IOReturn kRespConflict = (IOReturn)0xE0008014;   // -0x1fff7fec: retried by the reference
 
 OSDefineMetaClassAndStructors(com_openaudio_FWAsyncAVCCommand, IOFireWireAVCAsynchronousCommand)
 
@@ -96,21 +99,34 @@ IOReturn com_openaudio_FWAvcUnit::AVCCommandAsync(const UInt8 *cmd, UInt32 len)
 
 // Submit the head; a command the family refuses is dropped and the next one is tried (the reference has no such path: its submit failure only
 // happens for the very first command and releases it).
+// Correction (2026-10-22, panic on wake from sleep, dev Mac, Audiophile): a write the bus refuses at once (device gone after sleep) completes
+// INSIDE submit -- IOFireWireAVC-436 IOFireWireAVCAsynchronousCommand::submit ("the write done routine may have already been called during the
+// submit") -> IOFWWriteCommand::execute complete() -> AVCAsynchRequestWriteDone -> FWAVCAsyncCommandCallback -> FinishAsyncCommand, which pops h,
+// releases it and starts the next head before submit returns the error. The old failure path then read h->fNext and released h a second time
+// (h->release() through a zeroed vtable, StartQueueHead+0x52). The reference is immune because it makes a command the head only after its submit
+// succeeds; the clone keeps the head-before-submit order (a fast completion cannot race the head store), holds h across submit and drops it here
+// only if it is still the head, i.e. only when the family refused it before the write (not available, no memory) and no callback ran.
 void com_openaudio_FWAvcUnit::StartQueueHead()
 {
     for (;;) {
         IOLockLock(fAsyncLock);
         com_openaudio_FWAsyncAVCCommand *h = fAsyncHead;
+        if (h) h->retain();                                   // keeps h (and its address) valid across submit for the head check below
         IOLockUnlock(fAsyncLock);
         if (!h) return;
         const IOReturn r = h->submit(this);
-        if (r == kIOReturnSuccess) return;
+        if (r == kIOReturnSuccess) { h->release(); return; }
         OA_LOG("AVC async submit failed 0x%x", (unsigned)r);
         IOLockLock(fAsyncLock);
-        fAsyncHead = h->fNext;
-        if (fAsyncTail == h) fAsyncTail = 0;
+        const bool stillHead = (fAsyncHead == h);
+        if (stillHead) {
+            fAsyncHead = h->fNext;
+            if (fAsyncTail == h) fAsyncTail = 0;
+        }
         IOLockUnlock(fAsyncLock);
-        h->release();
+        h->release();                                         // the reference taken above
+        if (!stillHead) return;                               // finished by its own callback, which also submitted the next head
+        h->release();                                         // the queue's reference
         release();                                            // the unit reference that command held
     }
 }
@@ -166,7 +182,7 @@ IOReturn com_openaudio_FWAvcUnit::AVCCommandWithErrorResponse(const UInt8 *cmd, 
 {
     IOReturn r = AVCCommandExtendedTimeout(cmd, len, resp, respLen);
     UInt32 tries = 0;
-    while (r == kBusReset) {
+    while (r == kRespConflict) {
         IOSleep(1000);
         if (++tries > 0x19) break;
         r = AVCCommandExtendedTimeout(cmd, len, resp, respLen);

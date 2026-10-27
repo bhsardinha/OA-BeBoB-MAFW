@@ -12,6 +12,34 @@ The M-Audio CoreMIDI plug-in is shipped unmodified (1.11.2). Each entry lists th
 
 ---
 
+## Package 0.4.0 — 2026-10-27 (not published yet)
+
+| Driver | Panel | MIDI plug-in | Editions |
+|---|---|---|---|
+| **0.3.0** | **1.6** | 1.11.2 | Classic and Modern |
+
+**M-Audio FireWire 410** (plan `docs/BUILD_FW410_PLAN_v2.md`, R135-R138, capture 106)
+- Driver: a new model module — 4 in / 10 out at 44.1-96 kHz, 2 in / 8 out at 176.4/192 kHz (all eight analog outputs, through the official 192 kHz channel map), MIDI 1/1; register mixer; coaxial or optical S/PDIF input; Level Controller; meters.
+- Panel: the 410's own layout — five software returns and two inputs routed to one or several outputs at once, five outputs with main/aux, aux bus, phones from any combination of the output buses and from the aux bus (a source the official panel never offered), S/PDIF input card, Level Controller on five buses, About photo.
+- Checked on Classic (iMac, 10.13.6, installed from the package): attach and firmware start, every output at 44.1 and 192 kHz, recording at every rate, reported latency within 0.5 ms of a measured loopback, mixer, Level Controller, settings per unit. Not tried: MIDI, S/PDIF / external sync, coaxial/optical switch, sleep/wake, Modern.
+- Deviation (user): the phones aux source is cleared when switched off (the official driver never clears it; R138).
+
+**Every model**
+- "Show stereo pairs as separate devices" (Hardware page, CoreAudio Devices card): each stereo pair also appears as a 2-channel CoreAudio device; pair devices keep the official IDs (`m_audio_b_FWPairEngine:<n>`). Tried with the 410 only.
+- **Fixed: a kernel panic at the next bus reset after the driver was unloaded** (R140): a FireWire plug stayed registered after `kextunload`, idle or playing (the R117 fix of 0.2.0 did not work). Freed now when the driver stops; checked with idle and playing unloads and a power-cycle.
+- **Fixed: `kextunload` needed a second try** (R139): the status poller now finishes its last read before the driver stops.
+- Includes driver 0.2.3's wake-from-sleep fix (R133) and the sleep / power-loss mixer recovery (R134), which 0.3.2 carried but never published.
+- Shared code changed (channel maps, unload path, pair-device IDs): the FireWire 1814 and the Audiophile have not been re-tested on 0.4.0.
+
+## Package 0.3.2 — 2026-10-22 (test build, not published)
+
+| Driver | Panel | MIDI plug-in | Editions |
+|---|---|---|---|
+| **0.2.3** | 1.5 | 1.11.2 | Classic and Modern, as 0.3.0 |
+
+**Driver 0.2.3** (R133)
+- **Fixed a kernel panic on wake from sleep** (found on the Modern edition with a FireWire 1814, macOS 14.8.9). On wake the driver re-sends the mixer settings; when the interface was not back on the bus yet, a refused AV/C command was released twice and the Mac froze. A command refused at once is now released once only.
+
 ## Package 0.3.1 — 2026-10-22
 
 | Driver | Panel | MIDI plug-in | Editions |

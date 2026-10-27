@@ -1,0 +1,11 @@
+click tab-mixer 37 66
+sleep 1
+drag ain-panL-back 428 320 428 380
+sleep 1
+shot fix-mixer
+click tab-output 92 66
+sleep 1
+drag aux-panL-back 428 377 428 437
+sleep 1
+shot fix-output
+click tab-mixer 37 66

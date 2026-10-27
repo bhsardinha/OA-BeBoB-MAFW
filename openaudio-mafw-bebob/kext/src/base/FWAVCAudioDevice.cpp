@@ -71,7 +71,16 @@ void com_openaudio_FWAVCAudioDevice::ReleaseConnectionManager()
 
 void com_openaudio_FWAVCAudioDevice::stop(IOService *provider)
 {
-    if (fHsci) { fHsci->Release(); fHsci->release(); fHsci = 0; }            // ref FW1814 stop @0xd9ce / Rev2 stop: HSCI first
+    if (fConnMgr) fConnMgr->Close();                                          // R140: no host PCR plug may outlive the driver
+    if (fHsci) {                                                              // ref FW1814 stop @0xd9ce / Rev2 stop: HSCI first
+        fHsci->Release();
+        // R139: up to 2 s (one cycle in six needed more than 500 ms on the iMac: a read retried by the FireWire stack)
+        UInt32 waited = 0;
+        const bool done = fHsci->WaitForReadDone(2000, &waited);
+        if (!done) OA_LOG("HSCI: a status read was still outstanding 2 s after stop (kextunload may need a retry)");
+        else if (waited) OA_LOG("HSCI: waited %u ms at stop for the last status read", (unsigned)waited);
+        fHsci->release(); fHsci = 0;
+    }
     com_openaudio_FWAudioDevice::stop(provider);
     ReleaseConnectionManager();
 }
@@ -89,6 +98,26 @@ IOReturn com_openaudio_FWAVCAudioDevice::CustomMixerWriteQuads(UInt32 off, UInt3
 {
     IOFireWireNub *nub = fMetaNub ? fMetaNub->fireWireNub() : 0;
     if (!nub) return kIOReturnSuccess;
+    // Deviation from the reference (R134, 2026-10-23, hypothesis under test): the interface loses power in sleep on the dev Mac's Thunderbolt
+    // adapter; mixer writes sent in the first seconds after its firmware restarts are answered resp_conflict_error and every later mixer access
+    // keeps failing until the next power cycle. Hold them (the settings objects keep the values) until SystemWokeUp resends the whole mixer.
+    if (fMixerHold) {
+        UInt64 now; clock_get_uptime(&now);
+        if (fMixerHoldDeadline == 0 || now < fMixerHoldDeadline) {
+            if (fMixerHeldWrites++ == 0) OA_LOG("WAKE-DIAG: mixer writes held until the interface has settled (first: off 0x%02x)", (unsigned)off);
+            // keep the last value of every quadlet: registers outside ResendCurrentMixerSettings (headphone selector 0x98, pans 0x40.., routing
+            // 0x90, aux monitor 0x9c) are restored only by the helper's replay, which arrives while the hold is on
+            const UInt32 *q = static_cast<const UInt32 *>(data);
+            for (UInt32 i = 0; i < quads; i++) {
+                const UInt32 idx = off / 4 + i;
+                if (idx < 64) { fHeldRegs[idx] = q[i]; fHeldMask |= (1ULL << idx); }
+            }
+            return kIOReturnSuccess;
+        }
+        OA_LOG("WAKE-DIAG: mixer hold lapsed without SystemWokeUp (%u writes skipped)", (unsigned)fMixerHeldWrites);
+        fMixerHold = false;
+        FlushHeldMixerWrites();
+    }
     IOBufferMemoryDescriptor *buf = IOBufferMemoryDescriptor::withCapacity((vm_size_t)quads * 4, kIODirectionInOut, false);
     if (!buf) return (IOReturn)0xE00002BD;
     IOReturn r = buf->prepare();
@@ -156,6 +185,17 @@ IOReturn com_openaudio_FWAVCAudioDevice::SetClockSource(UInt32 clk)
         }
     }
     if (e) e->resumeAudioEngine();
+    // Deviation from the reference (R134, 2026-10-22): after an EXTERNAL clock is selected and no stream is running, re-assert the plug signal
+    // format (rate) once the receiver has had time to lock. Evidence: on the dev Mac, after boot/wake the replayed external clock leaves the
+    // FW1814 S/PDIF LED blinking with no audio although the status word says locked at the source's rate (LOCK-DIAG); changing the source's
+    // rate (which makes the panel re-send the rate) syncs it. The format commands of the normal start go out BEFORE the replayed clock, so
+    // nothing re-sends them afterwards. Same pair as RecalculateBandwidth's two-phase kick (INPUT then OUTPUT, engine FDF).
+    if (e && r == kIOReturnSuccess && e->externalSync() && e->isochRefs() == 0) {
+        IOSleep(1500);
+        OA_LOG("WAKE-DIAG: external clock -> rate kick (fdf %u, mode 0x%x)", (unsigned)e->fdfIndex(), (unsigned)clk);
+        AVCControlPlugSignalFormat(true, 0, (UInt8)e->fdfIndex());
+        AVCControlPlugSignalFormat(false, 0, (UInt8)e->fdfIndex());
+    }
     return r;
 }
 
@@ -226,6 +266,10 @@ void com_openaudio_FWAVCAudioDevice::ResendCurrentMixerSettings()
 // ref FWAVCAudioDevice::SystemWillSleep @0x22b16: park the hardware in the blank-slate clock state, stop the poll, pause, drop the connections
 void com_openaudio_FWAVCAudioDevice::SystemWillSleep()
 {
+    OA_LOG("WAKE-DIAG: SystemWillSleep");
+    fModeBeforeSleep = fMode;                      // clone (R134): the blank-slate park below overwrites fMode; SystemWokeUp restores it
+    fMixerHeldWrites = 0; fMixerHoldDeadline = 0; fHeldMask = 0;
+    fMixerHold = true;                             // clone (R134): no mixer writes until SystemWokeUp has let the interface settle
     SetBlankSlateClockSource();
     if (!fMainEngine) return;
     PauseReceptionOfControlPackets();
@@ -235,15 +279,67 @@ void com_openaudio_FWAVCAudioDevice::SystemWillSleep()
 }
 
 // ref FWAVCAudioDevice::SystemWokeUp @0x22d76
+// clone (R134): a hold armed at sleep lapses 30 s after wake if SystemWokeUp never runs (no "service resumed" after wake)
+void com_openaudio_FWAVCAudioDevice::ArmMixerHoldDeadline()
+{
+    if (!fMixerHold) return;
+    UInt64 now, delta; clock_get_uptime(&now);
+    nanoseconds_to_absolutetime(30ULL * 1000000000ULL, &delta);
+    fMixerHoldDeadline = now + delta;
+}
+
 void com_openaudio_FWAVCAudioDevice::SystemWokeUp()
 {
+    AbsoluteTime begin; clock_get_uptime(&begin);
     IOSleep(500);
+    OA_LOG("WAKE-DIAG: SystemWokeUp after 500 ms, engine %p", fMainEngine);
     if (!fMainEngine) return;
     ResendCurrentMixerSettings();
     SetBlankSlateClockSource();
     fMainEngine->ConnectAllPlugs();
     ResumeReceptionOfControlPackets();
     fMainEngine->resumeAudioEngine();
+    // Deviation from the reference (R134, 2026-10-22, dev Mac, Thunderbolt-FireWire adapter that cuts the interface's power in sleep): the steps
+    // above end with SetBlankSlateClockSource, which parks the clock (fMode = 0x40000007) and nothing restores the user's clock afterwards (the
+    // official helper also reacts to "system wake", ours replays only at firmware start, which is BEFORE this runs). Observed: the interface was
+    // left parked with every light off. Restore the clock the user had before sleep once the interface has settled; for an external clock
+    // SetClockSource also re-sends the rate (kick). Remove if the reference is shown to behave differently.
+    const UInt32 restore = fModeBeforeSleep;
+    fModeBeforeSleep = 0;
+    if (restore >= 0x40000000) {
+        IOSleep(2500);
+        OA_LOG("WAKE-DIAG: restoring the clock from before sleep (mode 0x%x, parked mode 0x%x)", (unsigned)restore, (unsigned)fMode);
+        SetClockSource(restore);
+    }
+    // clone (R134): release the mixer hold no earlier than 8 s after the interface came back (cold path: first mixer write ~6 s after the
+    // runtime device appears, all accepted), then push the whole mixer once.
+    if (fMixerHold) {
+        AbsoluteTime now; clock_get_uptime(&now);
+        UInt64 ns; absolutetime_to_nanoseconds(now - begin, &ns);
+        const UInt64 elapsedMs = ns / 1000000ULL;
+        if (elapsedMs < 8000) IOSleep((UInt32)(8000 - elapsedMs));
+        OA_LOG("WAKE-DIAG: mixer hold released (%u writes were held); resending the mixer", (unsigned)fMixerHeldWrites);
+        fMixerHold = false;
+        ResendCurrentMixerSettings();
+        FlushHeldMixerWrites();
+    }
+}
+
+// clone (R134): write the quadlets captured while the mixer was held, after the reference's resend; consecutive offsets go as one block write
+void com_openaudio_FWAVCAudioDevice::FlushHeldMixerWrites()
+{
+    const UInt64 mask = fHeldMask;
+    fHeldMask = 0;
+    UInt32 runs = 0, quads = 0;
+    for (UInt32 i = 0; i < 64; ) {
+        if (!(mask & (1ULL << i))) { i++; continue; }
+        UInt32 n = 1;
+        while (i + n < 64 && (mask & (1ULL << (i + n)))) n++;
+        IOReturn r = CustomMixerWriteQuads(i * 4, n, &fHeldRegs[i]);
+        OA_LOG("WAKE-DIAG: held mixer quadlets off 0x%02x x%u -> 0x%x", (unsigned)(i * 4), (unsigned)n, r);
+        runs++; quads += n; i += n;
+    }
+    OA_LOG("WAKE-DIAG: held mixer writes flushed (%u runs, %u quadlets)", (unsigned)runs, (unsigned)quads);
 }
 
 void com_openaudio_FWAVCAudioDevice::BusReset()

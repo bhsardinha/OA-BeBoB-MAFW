@@ -1,0 +1,112 @@
+Timestamp                       Thread     Type        Activity             PID    TTL  
+2026-10-22 22:14:41.761579-0300 0x176      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: SetClockSource before pause: engine state 0, isoch refs 0, active mask 0x0, pauses 0, connected 1, TX running 0, RX running 0
+2026-10-22 22:14:41.761592-0300 0x176      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: SetClockSource after pause: engine state 0, isoch refs 0, active mask 0x0, pauses 1, connected 1, TX running 0, RX running 0
+2026-10-22 22:14:41.791724-0300 0x176      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 00 ff 00 04 00 04 len 16 -> r=0x0 resp0 09 respLen 16  30 ms
+2026-10-22 22:14:43.763677-0300 0x2adf     Default     0x0                  0      0    kernel: PM waiting on pmDriverCallout(0x2) to com_openaudio_FW1814Device (2000 ms)
+2026-10-22 22:14:56.943991-0300 0x2c85     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: M-Audio FireWire device found: FW 1814 Bootloader
+2026-10-22 22:14:56.944267-0300 0x2c85     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: metanub <private> GUID:d6c041074b9fb product:FW 1814 bootloader:1
+2026-10-22 22:14:57.487345-0300 0x761      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: M-FW: Firnware active and we already started matching.
+2026-10-22 22:14:57.498872-0300 0x761      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: M-FW: Bootloader active: starting firmware.
+2026-10-22 22:15:00.778128-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 00 ff 00 03 00 01 len 8 -> r=0x0 resp0 09 respLen 8  4 ms
+2026-10-22 22:15:00.888678-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x08 quads 2 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:00.888827-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x08 quads 2 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:00.888974-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x10 quads 9 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:00.889103-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x08 quads 2 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:00.889245-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x08 quads 2 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:00.889364-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x9c quads 1 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:00.889482-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x9c quads 1 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:00.889588-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x9c quads 1 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:00.889722-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x38 quads 2 first 0x00e900e9 -> 0xe0008014
+2026-10-22 22:15:00.889916-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x10 quads 9 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:00.890065-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x38 quads 2 first 0x80e480e4 -> 0xe0008014
+2026-10-22 22:15:00.890211-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x98 quads 1 first 0x01000100 -> 0xe0008014
+2026-10-22 22:15:00.890397-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x00 quads 2 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:00.890577-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x00 quads 2 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:00.890721-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x08 quads 2 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:00.890845-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x40 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:00.890975-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x40 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:00.891104-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x44 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:00.891237-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x44 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:00.891338-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x48 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:00.891477-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x48 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:00.891574-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x4c quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:00.891685-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x4c quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:00.891811-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x50 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:00.891963-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x50 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:00.892059-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x54 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:00.892169-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x54 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:00.892264-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x58 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:00.892350-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x58 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:00.892436-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x5c quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:00.892528-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x5c quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:00.892627-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x60 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:00.892713-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x60 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:00.892816-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:00.892941-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:00.893051-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:00.893153-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:00.893235-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:00.893325-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:00.893441-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:00.893540-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:00.893639-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:00.893725-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x34 quads 1 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:00.893831-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x10 quads 9 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:00.893962-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x00 quads 2 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:00.894086-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x34 quads 1 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:00.894090-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: SetClockSource before pause: engine state 0, isoch refs 0, active mask 0x0, pauses 2, connected 0, TX running 0, RX running 0
+2026-10-22 22:15:00.894095-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: SetClockSource after pause: engine state 0, isoch refs 0, active mask 0x0, pauses 3, connected 0, TX running 0, RX running 0
+2026-10-22 22:15:00.897280-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 00 ff 00 04 00 04 len 16 -> r=0x0 resp0 09 respLen 16  3 ms
+2026-10-22 22:15:01.262179-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: SetClockSource before pause: engine state 0, isoch refs 0, active mask 0x0, pauses 4, connected 0, TX running 0, RX running 0
+2026-10-22 22:15:01.262198-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: SetClockSource after pause: engine state 0, isoch refs 0, active mask 0x0, pauses 5, connected 0, TX running 0, RX running 0
+2026-10-22 22:15:01.499632-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x00 quads 2 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:01.499942-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x10 quads 9 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:01.500283-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x08 quads 2 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:01.500513-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x34 quads 1 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:01.500765-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x38 quads 2 first 0x80e480e4 -> 0xe0008014
+2026-10-22 22:15:01.500983-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x38 quads 2 first 0x80e480e4 -> 0xe0008014
+2026-10-22 22:15:01.501254-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x40 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:01.501476-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x40 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:01.501744-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x44 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:01.501983-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x44 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:01.502247-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:01.502426-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:01.502753-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:01.502986-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:01.503260-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:01.503490-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:01.503771-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:01.504003-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:01.504259-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:01.504743-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x64 quads 11 first 0x80808080 -> 0xe0008014
+2026-10-22 22:15:01.504996-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x08 quads 2 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:01.505386-0300 0xb38      Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x38 quads 2 first 0x80e480e4 -> 0xe0008014
+2026-10-22 22:15:01.506719-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x64 quads 11 first 0x80808080 -> 0xe0008014
+2026-10-22 22:15:01.506975-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x9c quads 1 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:01.507244-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x9c quads 1 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:01.507467-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x9c quads 1 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:01.507750-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x00 quads 2 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:01.508101-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x10 quads 9 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:01.508432-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x08 quads 2 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:01.508760-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x34 quads 1 first 0x00000000 -> 0xe0008014
+2026-10-22 22:15:01.509104-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x38 quads 2 first 0x80e480e4 -> 0xe0008014
+2026-10-22 22:15:01.509402-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x38 quads 2 first 0x80e480e4 -> 0xe0008014
+2026-10-22 22:15:01.509768-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x40 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:01.509988-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x40 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:01.510222-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x44 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:01.510433-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x44 quads 1 first 0x8080807f -> 0xe0008014
+2026-10-22 22:15:01.510745-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:01.510955-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:01.511221-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:01.511425-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:01.511740-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:01.511929-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:01.512220-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:01.512392-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:01.512700-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: mixer write off 0x90 quads 1 first 0x00000100 -> 0xe0008014
+2026-10-22 22:15:01.512714-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: SetClockSource before pause: engine state 0, isoch refs 0, active mask 0x0, pauses 1, connected 0, TX running 0, RX running 0
+2026-10-22 22:15:01.512720-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: SetClockSource after pause: engine state 0, isoch refs 0, active mask 0x0, pauses 2, connected 0, TX running 0, RX running 0
+2026-10-22 22:15:01.529538-0300 0x2d66     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 00 ff 00 04 00 04 len 16 -> r=0x0 resp0 09 respLen 16  16 ms
+2026-10-22 22:15:02.615727-0300 0x2d6b     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 00 ff 19 00 90 02 len 8 -> r=0x0 resp0 09 respLen 8  224 ms
+2026-10-22 22:15:03.143552-0300 0x2d6b     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: AVC 00 ff 18 00 90 02 len 8 -> r=0x0 resp0 09 respLen 8  22 ms
+2026-10-22 22:15:18.266888-0300 0x2b21     Default     0x0                  0      0    kernel: (OpenAudioBeBoBMAFW) OpenAudioBeBoBMAFW: M-FW: Reregister: device node vanished.

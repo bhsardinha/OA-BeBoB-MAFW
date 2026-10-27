@@ -2,9 +2,24 @@
 
 > **Removal notice (2026-10-14):** all pre-pivot code and docs (`_legacy_pre_ghidra/`, `openaudio-fw1814/firmware-helper/`, `openaudio-fw1814/legacy-mod/`) were deleted from the working tree at the user's request. They are recoverable from git: `git show d1-approved-2026-10-14:<old path>` (tag `d1-approved-2026-10-14`, commit `a9cb63c`). References to those paths in this file or in `docs/system-map/` are historical. `openaudio-fw1814/` is intentionally empty; new code is built from scratch per `docs/BUILD-PLAN.md` once the user approves it.
 
-Snapshot as of **2026-10-22**. Updated with each Part A/B/C/D commit and each build milestone.
+Snapshot as of **2026-10-26**. Updated with each Part A/B/C/D commit and each build milestone.
 
 Resume anchor: `/NEW_PLAN.md` → this file → `system-map/README.md` → the in-progress Part N.
+
+## 2026-10-27 (later) - 0.4.0 documentation for three interfaces; both packages rebuilt
+README rewritten around the FireWire 1814, Audiophile and 410 (interfaces table, 410 results, stereo pairs, unload fix, honest status: 0.4.0 Classic tested with the 410 only; Modern 0.4.0 built, not tried; 1814/Audiophile not re-tested on 0.4.0); NOTICE, EDITIONS, CHANGELOG 0.4.0, release notes `installer/release-notes/RELEASE-0.4.0.md`, dmg art text and the Classic welcome page updated. FW410 About photo (cut-out of a product photo, 624x118). Packages `dist/OA-BeBoB-MAFW-0.4.0-{classic,modern}.pkg` rebuilt. Not published (no dmg, no release, nothing pushed).
+
+## 2026-10-27 - unload and power-off panics fixed (R139, R140)
+`kextunload` failed on the first try (status poller waiting for its last read): `stop()` now waits for it (R139). Two panics when the user switched the 410 off: a host PCR plug left registered by an earlier unload (any unload, idle or streaming) called into the unloaded image at the next bus reset (= R117's panic; its fix never worked). `stop()` now frees the host plugs (`Close()`), verified by the plug slot the next driver gets (always 0) after idle / streaming unloads and a power-cycle (no panic). Installed on the iMac: package 0.4.0 Classic, kext ED7E32BD. Capture 106.
+
+## 2026-10-26 (late) - FireWire 410 works on the Classic iMac; package 0.4.0 Classic installed there (R136-R138)
+Branch `fw410`: kext model `models/FW410` + generic base additions (192 kHz channel maps, LLRR10 procs, legacy engine UID, pair-engine UID, SW-return routing hooks), panel 1.6 (`Models/FW410` own layout, CoreAudio Devices card for every model, multi-select phones, five level-controller targets), driver 0.3.0, package 0.4.0. iMac (10.13.6, FW410 alone): attach from bootloader and from running firmware, 4/10 at 44.1-96, 2/8 at 176.4/192, every output by meter, recording at every rate, latency within 0.5 ms of a measured loop, stereo pairs identical to the official driver, mixer writes; by the user: phones volume, Level Controller with the panel. Phones bit 5 = aux bus, now cleared with the mask (deviation, user, R138). The unit's phones pass only the right side (hardware, also under v1.9). Installed through `OA-BeBoB-MAFW-0.4.0-classic.pkg`; after restart everything comes up by itself (capture 106). Open: kextunload leaves one FWHsci (R138); MIDI, S/PDIF / external sync, optical switch, sleep/wake not checked; Modern edition not built.
+
+## 2026-10-26 - FireWire 410, phase 0 done; plan v1 waiting for approval (R135), branch `fw410`
+0.3.2 work committed on `main` (`3fb0ded`). FW410 on the SL rig (v1.9): reference map `A1-ghidra/Q-410-0-reference-map.md` (Rev2 device with a **register mixer**; 4/10 at ≤96 kHz, 2/8 at 176.4/192; coax/optical S/PDIF; one encoder; 76-byte status), official panel map `A2-panel/PN410-control-key-map.md` (204 functions; its own UI), captures 102/103 (stereo pairs = 5 CoreAudio devices; 263 panel writes; rates). Plan `docs/BUILD_FW410_PLAN_v1.md`, tracker `PROVENANCE-MATRIX-FW410.xlsx`. No driver/panel code yet.
+
+## 2026-10-22 (late night) - panic on wake from sleep fixed in source; package 0.3.2 Modern built (R133)
+Dev Mac (14.8.9, Modern 0.3.1, one FW1814 `0xD6C040074B9FB`) panicked 5.9 s after wake: `StartQueueHead+0x52`, an AV/C command refused at once (interface off the bus) was released by its own callback inside `submit` and again by the failure path. Fix: retain across submit + still-head check (`FWAvc.cpp`); driver **0.2.3**, package **0.3.2** (test build). `dist/OA-BeBoB-MAFW-0.3.2-modern.pkg` built (kext `4EB8D407-…`); not installed yet; Classic 0.3.2 not built.
 
 ## 2026-10-22 (night) - Uninstall app: status line + progress bar, dry run (R132)
 Both editions share the app; dry run checked on 14.8.9 (capture 100); shipped as a silent update of 0.3.1 (both `.dmg`s replaced on the v0.3.1 release; packages unchanged).

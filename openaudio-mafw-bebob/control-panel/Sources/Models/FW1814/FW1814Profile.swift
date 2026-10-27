@@ -25,7 +25,7 @@ final class FW1814Profile: DeviceProfile {
                                        SyncOption(title: "Internal - digital inputs unmuted", sync: .internalUnmuted, enabled: { _ in true }),
                                        SyncOption(title: "External - digital", sync: .externalDigital, enabled: { $0.externalDigitalSyncEnabled }),
                                        SyncOption(title: "Word clock", sync: .wordClock, enabled: { _ in true })],
-                                digitalPorts: true, abSwitchTitle: "Headphone out 1 A/B", abSheetName: "Headphone Out 1")
+                                digitalPorts: true, abSwitchTitle: "Headphone out 1 A/B", abSheetName: "Headphone Out 1", abSwitch: true)
 
     func hardwareCard(_ ctx: PanelContext) -> HardwareCard? { return FW1814PortsCard(context: ctx) }
 

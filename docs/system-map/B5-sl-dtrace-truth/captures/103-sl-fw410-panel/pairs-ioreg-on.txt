@@ -1,0 +1,69 @@
++-o AppleHDAEngineOutput@1B,0,1,2  <class AppleHDAEngineOutput, id 0x100000340, registered, matched, active, busy 0 (7 ms), retain 27>
+  |   "IOAudioEngineDescription" = "DevShortNameOut"
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 12288
+  |   "IOAudioEngineGlobalUniqueID" = "AppleHDAEngineOutput:1B,0,1,2:0"
++-o AppleHDAEngineOutput@1B,0,1,3  <class AppleHDAEngineOutput, id 0x100000346, registered, matched, active, busy 0 (7 ms), retain 32>
+  |   "IOAudioEngineDescription" = "DevShortNameLino"
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 12288
+  |   "IOAudioEngineGlobalUniqueID" = "AppleHDAEngineOutput:1B,0,1,3:1"
++-o AppleHDAEngineOutput@1B,0,1,4  <class AppleHDAEngineOutput, id 0x10000034f, registered, matched, active, busy 0 (7 ms), retain 22>
+  |   "IOAudioEngineDescription" = "DevShortNameSpdo"
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 12288
+  |   "IOAudioEngineGlobalUniqueID" = "AppleHDAEngineOutput:1B,0,1,4:2"
++-o AppleHDAEngineInput@1B,0,1,0  <class AppleHDAEngineInput, id 0x100000353, registered, matched, active, busy 0 (5 ms), retain 31>
+  |   "IOAudioEngineDescription" = "DevShortNameLini"
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 6144
+  |   "IOAudioEngineGlobalUniqueID" = "AppleHDAEngineInput:1B,0,1,0:3"
++-o AppleHDAEngineInput@1B,0,1,1  <class AppleHDAEngineInput, id 0x10000035c, registered, matched, active, busy 0 (6 ms), retain 23>
+  |   "IOAudioEngineDescription" = "DevShortNameSpdi"
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 6144
+  |   "IOAudioEngineGlobalUniqueID" = "AppleHDAEngineInput:1B,0,1,1:4"
++-o com_m_audio_FWEngine2  <class com_m_audio_FWEngine2, id 0x100000489, registered, matched, active, busy 0 (6 ms), retain 48>
+  |   "IOAudioEngineDescription" = "FireWire 410 Multichannel"
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 8192
+  |   "IOAudioEngineGlobalUniqueID" = "com_m_audio_FWEngine1:0xD6C010006B8C0"
++-o m_audio_b_FWPairEngine  <class m_audio_b_FWPairEngine, id 0x10000057f, registered, matched, active, busy 0 (6 ms), retain 13>
+  |   "IOAudioEngineDescription" = "FireWire 410 Analog 1/2"
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 8192
+  |   "IOAudioEngineGlobalUniqueID" = "m_audio_b_FWPairEngine:1"
++-o m_audio_b_FWPairEngine  <class m_audio_b_FWPairEngine, id 0x100000582, registered, matched, active, busy 0 (10 ms), retain 13>
+  |   "IOAudioEngineDescription" = "FireWire 410 S/PDIF 1/2"
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 8192
+  |   "IOAudioEngineGlobalUniqueID" = "m_audio_b_FWPairEngine:2"
++-o m_audio_b_FWPairEngine  <class m_audio_b_FWPairEngine, id 0x100000585, registered, matched, active, busy 0 (13 ms), retain 12>
+  |   "IOAudioEngineDescription" = "FireWire 410 Analog 3/4 Out"
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 8192
+  |   "IOAudioEngineGlobalUniqueID" = "m_audio_b_FWPairEngine:3"
++-o m_audio_b_FWPairEngine  <class m_audio_b_FWPairEngine, id 0x100000587, registered, matched, active, busy 0 (17 ms), retain 12>
+  |   "IOAudioEngineDescription" = "FireWire 410 Analog 5/6 Out"
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 8192
+  |   "IOAudioEngineGlobalUniqueID" = "m_audio_b_FWPairEngine:4"
++-o m_audio_b_FWPairEngine  <class m_audio_b_FWPairEngine, id 0x100000589, registered, matched, active, busy 0 (20 ms), retain 12>
+  |   "IOAudioEngineDescription" = "FireWire 410 Analog 7/8 Out"
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 8192
+  |   "IOAudioEngineGlobalUniqueID" = "m_audio_b_FWPairEngine:5"
++-o com_apple_driver_IOBluetoothA2DPAudioEngine  <class com_apple_driver_IOBluetoothA2DPAudioEngine, id 0x100000366, registered, matched, active, busy 0 (6 ms), retain 38>
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 10240
+  |   "IOAudioEngineGlobalUniqueID" = "com_apple_driver_IOBluetoothA2DPAudioEngine:0x22298a00"
++-o IOBluetoothSCOAudioEngine  <class IOBluetoothSCOAudioEngine, id 0x10000037a, registered, matched, active, busy 0 (7 ms), retain 21>
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 7680
+  |   "IOAudioEngineGlobalUniqueID" = "IOBluetoothSCOAudioEngine:00-1b-66-04-6b-45"
++-o com_apple_driver_AudioIPCEngine  <class com_apple_driver_AudioIPCEngine, id 0x1000002d9, registered, matched, active, busy 0 (4 ms), retain 10>
+  |   "IOAudioEngineDescription" = "Audio IPC"
+  |   "IOAudioEngineGlobalUniqueID" = "Audio_IPC"
+  |   "IOAudioEngineNumSampleFramesPerBuffer" = 16384
+    | |   |                   +-o com_m_audio_FWEngine2  <class com_m_audio_FWEngine2, id 0x100000489, registered, matched, active, busy 0 (6 ms), retain 48>
+    | |   |                   | +-o m_audio_b_FWStream  <class m_audio_b_FWStream, id 0x10000048a, registered, matched, active, busy 0 (4 ms), retain 7>
+    | |   |                   | +-o m_audio_b_FWStream  <class m_audio_b_FWStream, id 0x10000048b, registered, matched, active, busy 0 (5 ms), retain 7>
+    | |   |                   +-o m_audio_b_FWPairEngine  <class m_audio_b_FWPairEngine, id 0x10000057f, registered, matched, active, busy 0 (6 ms), retain 13>
+    | |   |                   | +-o m_audio_b_FWPairStream  <class m_audio_b_FWPairStream, id 0x100000580, registered, matched, active, busy 0 (4 ms), retain 6>
+    | |   |                   | +-o m_audio_b_FWPairStream  <class m_audio_b_FWPairStream, id 0x100000581, registered, matched, active, busy 0 (6 ms), retain 6>
+    | |   |                   +-o m_audio_b_FWPairEngine  <class m_audio_b_FWPairEngine, id 0x100000582, registered, matched, active, busy 0 (10 ms), retain 13>
+    | |   |                   | +-o m_audio_b_FWPairStream  <class m_audio_b_FWPairStream, id 0x100000583, registered, matched, active, busy 0 (8 ms), retain 6>
+    | |   |                   | +-o m_audio_b_FWPairStream  <class m_audio_b_FWPairStream, id 0x100000584, registered, matched, active, busy 0 (10 ms), retain 6>
+    | |   |                   +-o m_audio_b_FWPairEngine  <class m_audio_b_FWPairEngine, id 0x100000585, registered, matched, active, busy 0 (13 ms), retain 12>
+    | |   |                   | +-o m_audio_b_FWPairStream  <class m_audio_b_FWPairStream, id 0x100000586, registered, matched, active, busy 0 (13 ms), retain 6>
+    | |   |                   +-o m_audio_b_FWPairEngine  <class m_audio_b_FWPairEngine, id 0x100000587, registered, matched, active, busy 0 (17 ms), retain 12>
+    | |   |                   | +-o m_audio_b_FWPairStream  <class m_audio_b_FWPairStream, id 0x100000588, registered, matched, active, busy 0 (17 ms), retain 6>
+    | |   |                   +-o m_audio_b_FWPairEngine  <class m_audio_b_FWPairEngine, id 0x100000589, registered, matched, active, busy 0 (20 ms), retain 12>
+    | |   |                     +-o m_audio_b_FWPairStream  <class m_audio_b_FWPairStream, id 0x10000058a, registered, matched, active, busy 0 (20 ms), retain 6>

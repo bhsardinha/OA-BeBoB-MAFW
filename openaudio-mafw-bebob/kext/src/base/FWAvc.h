@@ -57,8 +57,8 @@ public:
 
     IOFireWireNub *nub() const { return fDevice; }          // IOFireWireAVCNub::fDevice, set by the base start (ref [+0x88])
 private:
-    void StartQueueHead();
-    void DrainAsyncQueue();                                 // clone (AP-3.9), called by stop()                                  // submit the head until one is accepted (a refused command is dropped)
+    void StartQueueHead();                                  // submit the head until one is accepted (a refused command is dropped)
+    void DrainAsyncQueue();                                 // clone (AP-3.9), called by stop()
     // Inherited protected state used exactly as in the reference (asm 0x1594): avcLock = [+0x98] serialises commands, fCommand = [+0xa0] is the
     // command the base class's AVCResponse hands the FCP response to, cmdLock = [+0xd0] guards fCommand, fStarted = byte [+0xe0].
     IOLock        *fAsyncLock;    // the reference has no lock here; the clone's callers and the FireWire completion run on different threads

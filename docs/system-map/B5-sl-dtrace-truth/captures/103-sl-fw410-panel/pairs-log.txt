@@ -1,0 +1,10 @@
+1793059007431 click tab-hardware 148 66
+1793059008875 sleep 1
+1793059009875 click pairs-on 331 357
+1793059011316 sleep 4
+1793059015316 shot pairs-on
+/Users/bernardosardinha/fw1814-captures/103//pairs-on.png
+1793059016881 click pairs-off 331 357
+1793059018326 sleep 4
+1793059022326 shot pairs-off
+/Users/bernardosardinha/fw1814-captures/103//pairs-off.png

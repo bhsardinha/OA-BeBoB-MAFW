@@ -47,7 +47,8 @@ final class SidebarView: FlippedView, PanelTab {
         knob.frame = NSRect(x: ((w - knobSize) / 2).rounded(), y: knobY, width: knobSize, height: knobSize)
         knob.onTurn = { [weak self] n in self?.sendDetents(n) }
         addSubview(knob)
-        let defs: [(String, MARotaryMask.Group)] = [("SW return bus", .swReturn), ("Output bus", .output), ("Input bus", .input), ("Aux send", .aux)]
+        let names: [MARotaryMask.Group: String] = [.swReturn: "SW return bus", .output: "Output bus", .input: "Input bus", .headphone: "Phones", .aux: "Aux send"]
+        let defs: [(String, MARotaryMask.Group)] = ctx.profile.levelControllerTargets.map { (names[$0] ?? "", $0) }
         for (i, (t, g)) in defs.enumerated() {
             let b = ChoiceButton(radio: t)
             b.onAction = { m.setRotaryPreset(MARotaryMask.preset(for: g)) }
@@ -55,7 +56,7 @@ final class SidebarView: FlippedView, PanelTab {
             radios.append((b, g)); addSubview(b)
         }
 
-        let my = knobY + knobSize + 30 + 4 * 28 + 52
+        let my = knobY + knobSize + 30 + CGFloat(defs.count) * 28 + 52
         muteB.onColor = Theme.mute; muteB.solid = true
         dimB.onColor = Theme.solo; dimB.solid = true
         for (i, b) in [muteB, dimB].enumerated() {
@@ -83,12 +84,14 @@ final class SidebarView: FlippedView, PanelTab {
         Theme.caption("Settings", in: NSRect(x: inset, y: 20, width: w - 2 * inset, height: 14), align: .left)
         Theme.caption("Level Control", in: NSRect(x: inset, y: 130, width: w - 2 * inset, height: 14), align: .left)
         Theme.draw(readout, in: readoutRect, font: Theme.mono(12, .medium), color: Theme.text2)
-        Theme.caption("Main Output", in: NSRect(x: inset, y: knobY + knobSize + 30 + 4 * 28 + 28, width: w - 2 * inset, height: 14), align: .left)
+        Theme.caption("Main Output", in: NSRect(x: inset, y: knobY + knobSize + 30 + CGFloat(radios.count) * 28 + 28, width: w - 2 * inset, height: 14), align: .left)
     }
 
     func rebuild() { refresh() }
     func updateMeters() {}
-    var preferredSize: NSSize { return NSSize(width: Theme.sidebarWidth, height: 532) }
+    /// The mute/dim row ends at knobY + knobSize + 30 + radios * 28 + 52 + 28; 24 pt bottom margin under it (532 pt with four radios, as before;
+    /// the FW410's fifth radio, Phones, adds one row: user 2026-10-26, the buttons were almost cropped on the output tab)
+    var preferredSize: NSSize { return NSSize(width: Theme.sidebarWidth, height: knobY + knobSize + 30 + CGFloat(max(4, radios.count)) * 28 + 52 + 28 + 24) }
 
     func refresh() {
         let g = ctx.rotaryGroup

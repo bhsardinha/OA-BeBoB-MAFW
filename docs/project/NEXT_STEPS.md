@@ -4,6 +4,18 @@
 
 Read this first after a context clear, then `NEW_PLAN.md` → `docs/STATE.md` → `docs/BUILD-MANUAL.md` §0 → `docs/system-map/README.md`.
 
+## 2026-10-27 - 0.4.0 documented, packages rebuilt
+Next (user decides): try the 0.4.0 Modern package (dev Mac: install + restart, never unload the old 0.2.9 by hand); re-test the FW1814 / Audiophile on 0.4.0; FW410 MIDI, S/PDIF, sleep/wake; then the dmgs (`installer/make-dmg.sh`, SHA-256 into RELEASE-0.4.0.md) and the release (`gh release create v0.4.0 …`) when the user asks. Public repo: `sync-to-public.sh` commit prepared, push only on the user's go-ahead.
+
+## 2026-10-26 (late) - FireWire 410 on the Classic iMac, 0.4.0 Classic installed (R136-R138)
+Next (user decides): MIDI, S/PDIF in/out + external sync, coaxial/optical switch, sleep/wake with the 410; the kextunload FWHsci leak (R138); the Modern 0.4.0 build (dev Mac kext + build PC panel) and the dev Mac test; stereo pairs on the FW1814 (user tests it himself); README/NOTICE + release when the user says. The 410 is on the iMac's FireWire bus (alone).
+
+## 2026-10-26 - FireWire 410 phase 0 (R135)
+Next: the user approves `docs/BUILD_FW410_PLAN_v1.md` and answers §9 (versions, hidden features, first-run machine). Then, on branch `fw410`: desk B-3a/B-5, base B-1..B-6, model M-1..M-9, panel F4, F3/F5/F6, run F7. The FW410 is on the SL rig (alone on the bus; rig at 96 kHz as found).
+
+## 2026-10-22 (late night) - panic on wake fixed in source, 0.3.2 Modern built (R133)
+Next: the user installs `openaudio-mafw-bebob/dist/OA-BeBoB-MAFW-0.3.2-modern.pkg` on the dev Mac (Allow + restart), then real use with sleep/wake. On request: build Classic 0.3.2 (build PC) and the `.dmg`s, commit, publish v0.3.2 (sync + `gh release`). The 0.3.1 README lists the panic as a known issue until then.
+
 ## 2026-10-22 (night) - Uninstall app progress (R132)
 Uninstall app shows `<n> % — <step>` and a 0-100 % bar; `--dry-run` [`--start`] for looking without uninstalling. Shipped 2026-10-22 as a silent update of 0.3.1 (both `.dmg`s replaced on the release, packages unchanged); a real uninstall with it is untried.
 

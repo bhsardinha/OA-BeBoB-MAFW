@@ -1,0 +1,13 @@
+1793059903392 click tab-mixer 37 66
+1793059904836 sleep 1
+1793059905836 drag ain-panL-back 428 320 428 380
+1793059907768 sleep 1
+1793059908768 shot fix-mixer
+/Users/bernardosardinha/fw1814-captures/103//fix-mixer.png
+1793059908823 click tab-output 92 66
+1793059910263 sleep 1
+1793059911263 drag aux-panL-back 428 377 428 437
+1793059913194 sleep 1
+1793059914194 shot fix-output
+/Users/bernardosardinha/fw1814-captures/103//fix-output.png
+1793059914254 click tab-mixer 37 66

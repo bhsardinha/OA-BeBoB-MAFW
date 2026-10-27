@@ -96,3 +96,39 @@ void FWRearrangeLLRR6(const SInt32 *src, UInt32 *dst, UInt32 frames)
 static const UInt8 kIdentity6[6] = { 0, 1, 2, 3, 4, 5 };
 void FWSamplePeaks6(const SInt32 *src, SInt32 *dst, UInt32 frames) { FWPeaksMax(src, dst, frames, 6, kIdentity6); }
 
+void FWRearrangeLLRR10WithMIDI(const SInt32 *src, UInt32 *dst, UInt32 frames)
+{
+    static const UInt8 p[10] = { 8, 0, 2, 4, 6, 9, 1, 3, 5, 7 };
+    for (UInt32 f = 0; f < frames; f++) {
+        for (UInt32 k = 0; k < 10; k++) dst[k] = FWPackAM824(src[p[k]]);
+        src += 10;
+        dst += 11;
+    }
+}
+
+static const UInt8 kIdentity10[10] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+void FWSamplePeaks10(const SInt32 *src, SInt32 *dst, UInt32 frames) { FWPeaksMax(src, dst, frames, 10, kIdentity10); }
+
+void FWConvertSampleFramesFromInput(const UInt32 *src, SInt32 *dst, UInt32 in, UInt32 inStream, UInt32 frames, const UInt32 *map, bool midi)
+{
+    if (!frames || !in) return;
+    for (UInt32 f = 0; f < frames; f++) {
+        for (UInt32 k = 0; k < in; k++)
+            if (map[k] < inStream) dst[(UInt64)f * inStream + map[k]] = FWUnpackAM824(src[k]);
+        src += in + (midi ? 1 : 0);
+    }
+}
+
+void FWRemapSampleFramesForOutput(const SInt32 *src, UInt32 *dst, UInt32 out, UInt32 outStream, UInt32 frames, const UInt32 *map, const UInt32 *copy, bool midi)
+{
+    const UInt32 stride = out + (midi ? 1 : 0);
+    for (UInt32 f = 0; f < frames; f++) {
+        for (UInt32 h = 0; h < outStream; h++)
+            if (map[h] < stride) dst[map[h]] = FWPackAM824(src[h]);
+        if (copy)
+            for (UInt32 i = 0; copy[i] != 0xFFFFFFFFu; i += 2) dst[copy[i + 1]] = dst[copy[i]];
+        src += outStream;
+        dst += stride;
+    }
+}
+

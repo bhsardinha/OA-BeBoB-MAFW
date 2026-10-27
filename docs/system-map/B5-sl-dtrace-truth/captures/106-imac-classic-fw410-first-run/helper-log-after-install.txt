@@ -1,0 +1,8 @@
+  wrote MAFirmwareStart -> 0x0
+replayed saved settings for D6C0300211D54 -> 0x0
+nub matched: 'FW 410' state=running firmware 20070504 102656
+  wrote MAFirmwareStart -> 0x0
+nub matched but gated (sleeping=0); deferred
+nub matched: 'FW 410' state=running firmware 20070504 102656
+  wrote MAFirmwareStart -> 0x0
+no saved settings: phones limited to -86 on 2 channel(s) -> 0x0

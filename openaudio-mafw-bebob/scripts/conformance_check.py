@@ -112,8 +112,8 @@ def profile_counts(path):
     m = re.search(r"TranslatorCounts\(outputs: (\d+), mixer: (\d+), inputs: (\d+), headphone: (\d+)\)", read(path))
     return tuple(int(x) for x in m.groups())
 tr = read("control-panel/Sources/Translator.swift")
-check("func swReturn(_ k: Int) -> Int { return counts.inputs + counts.outputs + k - 1 }" in tr and "func output(_ id: Int) -> Int { return counts.inputs + id - 1 }" in tr,
-      "panel translator: output slot = inputs + id - 1, SW-return slot = inputs + outputs + k - 1 (A2-P13 §6, PNAP §6)")
+check("func swReturn(_ k: Int) -> Int { return counts.inputs + (swReturnsFirst ? 0 : counts.outputs) + k - 1 }" in tr and "func output(_ id: Int) -> Int { return counts.inputs + (swReturnsFirst ? swReturnCount : 0) + id - 1 }" in tr,
+      "panel translator: output slot = inputs + id - 1, SW-return slot = inputs + outputs + k - 1 (A2-P13 §6, PNAP §6); FW410 order [inputs | SW returns | outputs]")
 o14, _, i14, _ = profile_counts("control-panel/Sources/Models/FW1814/FW1814Profile.swift")
 check(i14 + o14 == sw_first and sw_first + sw_count == peak_count and i14 == cnt["fInput"],
       "FW1814: panel inputs %d + outputs %d = kext first SW-return slot %d; %d SW slots to the end of the page; inputs = kext input group" % (i14, o14, sw_first, sw_count))
@@ -186,6 +186,42 @@ if os.path.isdir(ap_dir):
           "Audiophile personality: product name \"FW Audiophile\" -> com_openaudio_FWAudiophileDevice (reference personality)")
     oap, _, iap, _ = profile_counts("control-panel/Sources/Models/FWAudiophile/AudiophileProfile.swift")
     check(iap + oap == first and iap == ap_cnt[0], "Audiophile panel profile: inputs %d + outputs %d = kext first SW-return slot %d; inputs = kext channel row %d" % (iap, oap, first, ap_cnt[0]))
+
+# ---- FireWire 410 module (plan FW410 v2 M-2/M-9; Q-410-0 §2-3, R135/R136) -------------------------------------------------------------
+f4_dir = os.path.join(ROOT, "kext/src/models/FW410")
+if os.path.isdir(f4_dir):
+    f4_t = read("kext/src/models/FW410/FW410Tables.h"); f4_h = read("kext/src/models/FW410/FW410Device.h"); f4_s = read("kext/src/models/FW410/FW410Status.h")
+    f4_rates = [int(x) for x in re.findall(r"\{ (\d+), 0 \}", f4_t.split("kFW410Rates[7] = {")[1].split("};")[0])]
+    def f4_row(name):
+        m = re.search(name + r" = \{\s*(\d+), (\d+), (\d+), (\d+), (\d+), 0, \{ ([^}]*) \}, kFW410Rates, kFW410Rates,\s*\{(.*?)\}\s*\};", f4_t, re.S)
+        return (tuple(int(x) for x in m.group(1, 2, 3, 4, 5)), [x.strip() for x in m.group(6).split(",")],
+                [tuple(int(v) for v in g.split(",")) for g in re.findall(r"\{ ([\d, ]+) \}", m.group(7))])
+    def f4_arr(name):
+        return [int(x) for x in re.search(name + r"\[\d+\] *= \{ ([\d, ]+) \};", f4_t).group(1).split(",")]
+    lo, lo_maps, lo_groups = f4_row("kFW410Channels"); hi, hi_maps, hi_groups = f4_row("kFW410Channels192")
+    f4_lat = {int(k): int(v, 16) for k, v in re.findall(r"case (\d): return (0x[0-9a-f]+);", f4_t)}
+    if os.path.exists(slice):
+        rr = [struct.unpack_from("<II", b, 0x2fa10 + 8 * i)[0] for i in range(7)]
+        check(f4_rates == rr, "FW410 rates equal kSupportedInputRatesArray @0x2fa10 %s" % rr)
+        for addr, cnt, maps, groups, label in ((0x4ae20, lo, lo_maps, lo_groups, "sDeviceChannels"), (0x4ad40, hi, hi_maps, hi_groups, "sDeviceChannels192")):
+            w = struct.unpack_from("<6I3Q2Q20I", b, addr)
+            ok = cnt == w[:5] and w[9] == w[10] == 0x2fa10 and groups == [tuple(w[11 + 4 * i: 15 + 4 * i]) for i in range(5)]
+            ok = ok and [m != "0" for m in maps] == [x != 0 for x in w[6:9]]
+            check(ok, "FW410 channel row equals %s @0x%x (in/inS/out/outS/m %s, maps %s, groups %s)" % (label, addr, w[:5], [hex(x) for x in w[6:9]], groups))
+        im = list(struct.unpack_from("<2I", b, 0x2f9e0)); om = list(struct.unpack_from("<8I", b, 0x2f9f0))
+        check(f4_arr("kFW410InputMap192") == im and f4_arr("kFW410OutputMap192") == om, "FW410 192 kHz maps equal @0x2f9e0 %s / @0x2f9f0 %s" % (im, om))
+    check(f4_lat == {2: 0xa0, 3: 0xfe, 4: 0xf5, 5: 0x1b8, 6: 0x1e0} and "default: return 0x96" in f4_t,
+          "FW410 latency table equals the decompile (2:0xa0 3:0xfe 4:0xf5 5:0x1b8 6:0x1e0 else 0x96)")
+    first = int(re.search(r"GetFirstSWReturnPeakMeterIndex\(\) const APPLE_KEXT_OVERRIDE \{ return (\d+)", f4_h).group(1))
+    hwout = int(re.search(r"kFW410FirstHwOutSlot = (\d+)", f4_s).group(1)); nout = int(re.search(r"kFW410HwOutPeaks = (\d+)", f4_s).group(1))
+    check(first == 4 and first + lo[2] == hwout and hwout + nout <= peak_count,
+          "FW410 meter page: hardware inputs 0-3, SW returns %d-%d (= %d out channels), hardware outputs %d-%d, inside the %d-slot page" % (first, first + lo[2] - 1, lo[2], hwout, hwout + nout - 1, peak_count))
+    check(re.search(r"<key>FireWire Product Name</key>\s*<string>FW 410</string>", plist) is not None and "com_openaudio_FW410Device" in plist,
+          "FW410 personality: product name \"FW 410\" -> com_openaudio_FW410Device (reference personality)")
+    o4, m4, i4, h4 = profile_counts("control-panel/Sources/Models/FW410/FW410Profile.swift")
+    pf = read("control-panel/Sources/Models/FW410/FW410Profile.swift")
+    check("var peakSWReturnsFirst: Bool { return true }" in pf and i4 == first == lo[0] and i4 + (m4 - i4) == hwout and m4 - i4 == lo[2] and o4 == nout,
+          "FW410 panel profile: inputs %d = kext first SW-return slot %d; SW returns %d (mixer %d - inputs) end at the kext's first output slot %d; outputs %d = kext hardware output peaks" % (i4, first, m4 - i4, m4, hwout, o4))
 
 # ---- modular / generic first (plan v4 AP-2.5 g, h) ------------------------------------------------------------------------------------
 # base/ must not include a model header, and holds no model name in code (comments are provenance and stay). The one exception is the

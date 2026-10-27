@@ -1,6 +1,6 @@
 # Editions: Classic (macOS 10.13) and Modern (macOS 11 to 15)
 
-Written 2026-10-21 (R129). Packages **0.3.0** are the first to come in two editions (published 2026-10-22, GitHub release v0.3.0); the current release is **0.3.1** (driver 0.2.2, panel 1.5: external-rate follow, R131). Everything below says whether it was checked, and where.
+Written 2026-10-21 (R129). Packages **0.3.0** are the first to come in two editions (published 2026-10-22, GitHub release v0.3.0); the latest release is **0.3.1** (driver 0.2.2, panel 1.5: external-rate follow, R131). **0.4.0** (driver 0.3.0, panel 1.6, 2026-10-27, not published yet) adds the FireWire 410: tried on Classic only (iMac, capture 106); the 0.4.0 Modern package is built but not tried. Everything below says whether it was checked, and where.
 
 ## At a glance
 
@@ -9,7 +9,7 @@ Written 2026-10-21 (R129). Packages **0.3.0** are the first to come in two editi
 | macOS | 10.13 High Sierra to 10.15 Catalina | 11 Big Sur to 15 Sequoia¹ |
 | CPU | Intel | **Intel only** (no Apple Silicon) |
 | Tested on | iMac11,2 (FireWire 800, 10.13.6) and MacBookAir5,1 + Apple's Thunderbolt-to-FireWire adapter (10.13.6) | MacBookAir7,2 + the same kind of adapter, **macOS 14.8.9** |
-| Interfaces tested | FireWire 1814 and FireWire Audiophile, alone and together | **FireWire Audiophile**; FireWire 1814 for the panel and the external-rate follow only (2026-10-22, capture 99) |
+| Interfaces tested | FireWire 1814 and FireWire Audiophile, alone and together (up to 0.2.2); **FireWire 410** alone (0.4.0, 2026-10-26/27, capture 106) | **FireWire Audiophile**; FireWire 1814 for the panel and the external-rate follow only (0.3.1, 2026-10-22, capture 99); FireWire 410 not tried |
 | Kernel extension built with | Xcode 9.4.1, 10.13 SDK, on the 10.13.6 build machine | Command Line Tools, **macOS 15.2 SDK**, on the Sonoma machine |
 | Security setting | SIP disabled | SIP set so unsigned kexts load (kext signing off), **plus approval in Privacy & Security** and a restart |
 | Package | `OA-BeBoB-MAFW-<version>-classic.pkg` / `.dmg` | `OA-BeBoB-MAFW-<version>-modern.pkg` / `.dmg` |
@@ -41,6 +41,7 @@ The audio driver, the helper and the panel are **the same source code** in both 
 |---|---|
 | **A dropout during real use** | After 2 min 43 s of playing, the adapter's FireWire controller left the PCI bus before any driver event (no bus reset, no error, no panic); the interface was bus-powered. Power-cycling the interface brought it back. Cause **unknown**: bad contact, adapter or bus power, or something the driver did. It never happened on the same adapter under 10.13.6. Raw logs: `BROAD_COMPATIBILITY/evidence/modern-kext-dropout-macos-14.8.9-1941.txt`. |
 | Recording (input data), MIDI on the wire, other sample rates, S/PDIF, sleep/wake, unload | not tried on Modern |
+| FireWire 410 on Modern, and the 0.4.0 Modern package with any interface | not tried (2026-10-27) |
 | FireWire 1814 on Modern | **partly tried** (2026-10-22, 0.3.1, capture 99): installs, loads, the panel works and the S/PDIF rate follow works with a POD X3; playback, recording, MIDI, other rates and modes not tried |
 | The 0.3.0 knob law on the hardware | not tried |
 | Panel controls and meters against the real driver on 14 | the panel connected and ran; the controls were not exercised one by one |

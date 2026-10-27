@@ -49,6 +49,15 @@ public:
     virtual IOReturn CustomMixerWriteQuads(UInt32 off, UInt32 quads, const void *data);
     virtual IOReturn InitializeUserSettableProperties() APPLE_KEXT_OVERRIDE;   // ref @0x...: base + MAFirmwareInfo + MAClockSource
     virtual void BusReset() APPLE_KEXT_OVERRIDE;                               // ref FWAudioDevice::BusReset @0x1d3c: connection manager replay
+    UInt32 fModeBeforeSleep;                                                  // clone (R134): 0 = none
+    bool     fMixerHold;                                                      // clone (R134): mixer writes held from sleep to the end of SystemWokeUp
+    UInt64   fMixerHoldDeadline;                                              // clone (R134): uptime (abs) after which a forgotten hold lapses; 0 = none
+    UInt32   fMixerHeldWrites;                                                // clone (R134): writes skipped while held (log only)
+    UInt32   fHeldRegs[64];                                                   // clone (R134): last value per mixer quadlet (offset / 4) written while held
+    UInt64   fHeldMask;                                                       // clone (R134): which of fHeldRegs are pending
+    void     FlushHeldMixerWrites();
+    void     ArmMixerHoldDeadline();
+    virtual void WokeFromSleepArmed() APPLE_KEXT_OVERRIDE { ArmMixerHoldDeadline(); }
     virtual void SystemWillSleep() APPLE_KEXT_OVERRIDE;                        // ref @0x22b16
     virtual void SystemWokeUp() APPLE_KEXT_OVERRIDE;                           // ref @0x22d76
     virtual bool HasSoftwareControls() const { return true; }                  // vt[0xac8] (ref FW1814 @0xc32c)

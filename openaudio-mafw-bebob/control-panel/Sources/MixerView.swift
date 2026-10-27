@@ -109,9 +109,10 @@ final class MixerTab: StripPage, PanelTab {
 
         // Software returns + the model's digital return bus
         let routes = ctx.profile.routeLabels
+        let routeRows = routes.count > 3 ? (routes.count + 1) / 2 : 1                 // FW410: five destinations, 3 rows of the 2-column grid
         let s1 = x
         for r in plan.returns {
-            let s = StripView(title: r.title, features: [.aux, .ctrl, .solo, .linkMute, .route, .faders], kind: .mixer, routeLabels: routes)
+            let s = StripView(title: r.title, features: [.aux, .ctrl, .solo, .linkMute, .route, .faders], kind: .mixer, routeLabels: routes, bottomRows: routeRows)
             wireSW(s, pair: r.pair)
             swStrips.append((s, r.pair)); put(s)
         }
@@ -124,13 +125,13 @@ final class MixerTab: StripPage, PanelTab {
         // Inputs
         let s2 = x
         for info in plan.inputs {
-            let s = StripView(title: info.title, features: [.aux, .pan, .ctrl, .solo, .linkMute, .route, .faders], kind: .mixer, routeLabels: routes)
+            let s = StripView(title: info.title, features: [.aux, .pan, .ctrl, .solo, .linkMute, .route, .faders], kind: .mixer, routeLabels: routes, bottomRows: routeRows)
             wireInput(s, pair: info.pair)
             inputStrips.append((s, info.pair)); put(s)
         }
         if let note = plan.inputsNote {
             let n = NoteView(note)
-            n.frame = NSRect(x: x, y: top, width: 3 * Theme.stripWidth + 2 * Theme.stripGap, height: StripView.Geometry(.mixer).height)
+            n.frame = NSRect(x: x, y: top, width: 3 * Theme.stripWidth + 2 * Theme.stripGap, height: StripView.Geometry(.mixer, bottomRows: routeRows).height)
             views.append(n); x += n.frame.width + Theme.stripGap
         }
         views.append(StripPage.section("Inputs", x: s2, width: x - s2))
@@ -138,7 +139,7 @@ final class MixerTab: StripPage, PanelTab {
 
         // Bus meters under the strips, spanning their width
         let bridge = MeterBridge(axis: .row, groups: plan.bus.map { MeterBridge.Group(title: $0.title, labels: $0.labels) })
-        let by = top + StripView.Geometry(.mixer).height + 16
+        let by = top + StripView.Geometry(.mixer, bottomRows: routeRows).height + 16
         bridge.layout(width: right - Theme.pad, height: MeterBridge.rowHeight)
         bridge.setFrameOrigin(NSPoint(x: Theme.pad, y: by))
         buses = bridge

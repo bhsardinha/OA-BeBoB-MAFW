@@ -55,7 +55,10 @@ struct FWDeviceChannels {
     UInt32 outStream;         // +0x0c
     UInt32 midi;              // +0x10  MIDI quadlets per data block (m)
     UInt32 pad14;             // +0x14
-    UInt64 clipOffset[3];     // +0x18 +0x20 +0x28  (0 for the FW1814)
+    // +0x18 input map, +0x20 output map, +0x28 output copy list (NULL = no remap; FW1814 and Audiophile rows). Decoded 2026-10-26 (R136):
+    // ConvertSampleFramesFromInput @0x27bb6 / RemapSampleFramesForOutput @0x27aad; used by the FW410's 176.4/192 kHz row (@0x4ad40). The
+    // clone first named these clipOffset[3] (UInt64); they are pointers in the reference, so the field is pointer-typed (same size and offset).
+    const UInt32 *channelMap[3];
     const FWSampleRateEntry *inRates;    // +0x30
     const FWSampleRateEntry *outRates;   // +0x38
     UInt32 group[5][4];       // +0x40: {isInput, firstPair, lastPair, signalType 0 analog / 1 S/PDIF / 2 ADAT / 3 end-of-list} x4 + terminator

@@ -24,8 +24,9 @@ void com_openaudio_FWEngine2::SetupFromDevice(UInt32 outChannels, UInt32 inChann
 // ref ClipPCMOutput @0x11d72 (decomp FWEngine2__ClipPCMOutput.c; asm 11d72-11ed0). Float mix -> scaled ints in `scratch`, then per TX packet
 // the frames that fall into it are rearranged into AM824 quadlets in the packet pool (the pool slot of a sample index is fixed by the
 // 2048-sample group / packet index tables the TX callback maintains).
-// The peak proc ([+0x308], set by SwitchDigitalSignals) fills the device's software peak array; the output remap path ([+0x328]/[+0x330]) is
-// not ported (0 for the FW1814).
+// The peak proc ([+0x308], set by SwitchDigitalSignals) fills the device's software peak array. With an output map ([+0x328], the FW410's
+// 176.4/192 kHz row) each packet's frames go through RemapSampleFramesForOutput (map + copy list [+0x330]) instead of the rearrange proc
+// (asm 0x11e41-0x11eb4, R136).
 // The per-packet count below is the reference's arithmetic literally (asm 0x11e2d..0x11e3e): framesLeft, or framesLeft+done-num when the
 // packet would run past the request. That equals the remaining frame count only for the aligned requests CoreAudio issues; it never
 // exceeds framesLeft, so it cannot write past the packet.
@@ -37,7 +38,7 @@ void com_openaudio_FWEngine2::ClipPCMOutput(const float *mix, SInt32 *scratch, U
         bzero(peaks, (size_t)fDevice->GetSWReturnPeakMeterCount() * 4);       // ref: ClipPCMOutput zeroes the region, then runs the proc
         fPeakProc(scratch, peaks, num);
     }
-    if (!fTx || !fRearrangeProc || fClipOffset[1] != 0) return;
+    if (!fTx || (!fRearrangeProc && !fChannelMap[1])) return;
     UInt32 done = 0;
     while (done < num) {
         UInt32 framesLeft = 0, *pkt = 0, frameInPkt = 0;
@@ -45,7 +46,11 @@ void com_openaudio_FWEngine2::ClipPCMOutput(const float *mix, SInt32 *scratch, U
         UInt32 n = framesLeft;
         if (framesLeft + done > num) n = framesLeft + done - num;
         if (n == 0) break;                                                   // cannot happen with the arithmetic above; keeps the loop finite
-        if (dstFrame) fRearrangeProc(scratch + (size_t)fOutStreamChannels * done, dstFrame, n);
+        if (dstFrame) {
+            const SInt32 *s = scratch + (size_t)fOutStreamChannels * done;
+            if (fChannelMap[1]) FWRemapSampleFramesForOutput(s, dstFrame, fOutChannels, fOutStreamChannels, n, fChannelMap[1], fChannelMap[2], fMidiChannels != 0);
+            else fRearrangeProc(s, dstFrame, n);
+        }
         done += n;
     }
 }

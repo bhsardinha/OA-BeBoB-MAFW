@@ -1,0 +1,27 @@
+FireWire:
+
+    FireWire Bus:
+
+      Maximum Speed: Up to 800 Mb/sec
+
+        Built-in Hub:
+
+          Maximum Speed: Up to 800 Mb/sec
+          Connection Speed: Up to 800 Mb/sec
+
+        FW 410:
+
+          Manufacturer: M-AUDIO
+          Model: 0x10046
+          GUID: 0xD6C010006B8C0
+          Maximum Speed: Up to 400 Mb/sec
+          Connection Speed: Up to 400 Mb/sec
+          Sub-units:
+            FW 410 Unit:
+              Unit Software Version: 0x14001
+              Unit Spec ID: 0xA02D
+
+   97    0 0x160e000  0x41000    0x40000    com.m-audio.driver.firewire (1.9) <96 70 69 50 11 10 5 4 3 1>
+ProductName:	Mac OS X
+ProductVersion:	10.6.8
+BuildVersion:	10K549

@@ -348,7 +348,9 @@ void com_openaudio_FW1814Device::ReconnectP2P()
 static void FW1814BusResetThread(void *arg)
 {
     com_openaudio_FW1814Device *d = static_cast<com_openaudio_FW1814Device *>(arg);
+    OA_LOG("WAKE-DIAG: BusReset thread -> ReconnectP2P begin");
     d->ReconnectP2P();
+    OA_LOG("WAKE-DIAG: ReconnectP2P end");
     d->release();
 }
 
@@ -369,6 +371,14 @@ void com_openaudio_FW1814Device::ReadHSCIData(const UInt32 *packet)
     }
     sLogged++;
     DetectExternalSyncChanges((packet[0x14] >> 24) & 1, (packet[0x14] >> 16) & 7);
+    // R134 bench diagnostics (0.2.5): the device's own lock word against what was published, logged when either changes (rate-limited by the change).
+    static UInt32 sLastW20 = 0xdeadbeef, sLastPub = 0xdeadbeef;
+    const UInt32 pub = (fRateLocked ? 1u : 0u) | (fExtSyncRate << 1);
+    if (packet[0x14] != sLastW20 || pub != sLastPub) {
+        sLastW20 = packet[0x14]; sLastPub = pub;
+        OA_LOG("LOCK-DIAG: w20 %08x (lock %u fdf %u) -> published locked %d ext %u mode 0x%x", (unsigned)packet[0x14], (unsigned)((packet[0x14] >> 24) & 1),
+               (unsigned)((packet[0x14] >> 16) & 7), (int)fRateLocked, (unsigned)fExtSyncRate, (unsigned)fMode);
+    }
     ReceiveControlPacket(reinterpret_cast<const UInt8 *>(packet));
 }
 

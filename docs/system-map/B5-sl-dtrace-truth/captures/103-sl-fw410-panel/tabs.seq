@@ -1,0 +1,17 @@
+click tab-mixer 37 66
+sleep 1
+shot mixer
+click tab-output 92 66
+sleep 1
+shot output
+click tab-about 205 66
+sleep 1
+shot about
+click view-mini 597 61
+sleep 1
+shot mini
+click view-full 662 61
+sleep 1
+shot full
+click tab-hardware 148 66
+sleep 1

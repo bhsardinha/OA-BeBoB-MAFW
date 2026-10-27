@@ -170,12 +170,15 @@ final class StripView: FlippedView {
         muteButton.onClick = { [weak self] b in self?.onMute?(b.isOn) }
         // n buttons share the 72 pt between the 6-pt margins: 2 -> 34 pt at a 38-pt pitch (the 0.1.0 geometry), 3 -> 21.3 pt.
         if features.contains(.route) {
+            // Up to 3 destinations: one row. More (FW410: 1/2, 3/4, 5/6, 7/8, spd): a 2-column grid of 34-pt buttons, as the phones sources.
+            let grid = routeLabels.count > 3
             let n = CGFloat(max(1, routeLabels.count)), gap: CGFloat = 4
             let w = ((Theme.stripWidth - 12 - (n - 1) * gap) / n).rounded(.down)
             for (i, t) in routeLabels.enumerated() {
                 let b = PillButton(t); b.onClick = { [weak self] btn in self?.onRoute?(i, btn.isOn) }
                 routeButtons.append(b)
-                place(b, NSRect(x: 6 + CGFloat(i) * (w + gap), y: g.bottomY, width: w, height: 20))
+                if grid { place(b, NSRect(x: 6 + CGFloat(i % 2) * 38, y: g.bottomY + CGFloat(i / 2) * 24, width: 34, height: 20)) }
+                else { place(b, NSRect(x: 6 + CGFloat(i) * (w + gap), y: g.bottomY, width: w, height: 20)) }
             }
         }
         if features.contains(.mainAux) {
@@ -189,14 +192,15 @@ final class StripView: FlippedView {
         // Up to 3 sources: one row, 22 pt at a 25-pt pitch (the 0.1.0 geometry). More: a 2-column grid of 34-pt buttons (link/mute size).
         if features.contains(.mon) {
             let grid = monSources.count > 3
+            let monY = g.bottomY + (features.contains(.mainAux) ? 24 : 0)     // FW410 phones: main/aux on the first row, the sources below
             let n = CGFloat(max(1, monSources.count)), gap: CGFloat = 3
             let w = ((Theme.stripWidth - 12 - (n - 1) * gap) / n).rounded(.down)
             for (i, src) in monSources.enumerated() {
                 let b = PillButton(src.button); b.momentary = true
                 b.onClick = { [weak self] _ in self?.onMon?(src.mask) }
                 monButtons.append(b)
-                if grid { place(b, NSRect(x: 6 + CGFloat(i % 2) * 38, y: g.bottomY + CGFloat(i / 2) * 24, width: 34, height: 20)) }
-                else { place(b, NSRect(x: 6 + CGFloat(i) * (w + gap), y: g.bottomY, width: w, height: 20)) }
+                if grid { place(b, NSRect(x: 6 + CGFloat(i % 2) * 38, y: monY + CGFloat(i / 2) * 24, width: 34, height: 20)) }
+                else { place(b, NSRect(x: 6 + CGFloat(i) * (w + gap), y: monY, width: w, height: 20)) }
             }
         }
     }
@@ -263,8 +267,8 @@ final class StripView: FlippedView {
     func setCtrl(enabled: Bool, on: Bool) { ctrlButton.isEnabled = enabled && stripEnabled; ctrlButton.isOn = enabled && on }
     func setRoute(mask: Int) { for (i, b) in routeButtons.enumerated() { b.isOn = (mask >> i) & 1 != 0 } }
     func setMainAux(aux: Bool) { mainAuxButton.isOn = aux; StripView.styleMainAux(mainAuxButton, aux: aux) }
-    func setMon(_ mask: UInt32) {
-        for (i, b) in monButtons.enumerated() { b.isOn = (mask == monSources[i].mask) }
+    func setMon(_ mask: UInt32, multi: Bool = false) {
+        for (i, b) in monButtons.enumerated() { b.isOn = multi ? (mask & monSources[i].mask) != 0 : (mask == monSources[i].mask) }
     }
     func setMeters(_ l: Int, _ r: Int) { meters[0].db = l; meters[1].db = r }
 

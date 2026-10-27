@@ -27,7 +27,7 @@ final class AudiophileProfile: DeviceProfile {
     /// MAClockSource 0x40000000 internal / 0x40000001 external S/PDIF (PNAP §7; kext SetClockSourceInternal @0xb9d4 accepts only these)
     let hardware = HardwarePlan(sync: [SyncOption(title: "Internal", sync: .internalUnmuted, enabled: { _ in true }),
                                        SyncOption(title: "External - S/PDIF", sync: .externalDigital, enabled: { _ in true })],
-                                digitalPorts: false, abSwitchTitle: "Headphone A/B", abSheetName: "Headphone")
+                                digitalPorts: false, abSwitchTitle: "Headphone A/B", abSheetName: "Headphone", abSwitch: true)
 
     func hardwareCard(_ ctx: PanelContext) -> HardwareCard? { return nil }
 

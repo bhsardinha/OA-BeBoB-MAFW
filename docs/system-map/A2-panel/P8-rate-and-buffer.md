@@ -1,5 +1,7 @@
 # P8 — Sample-rate + buffer-size change path (and the FW1814 "Global Settings" tab)
 
+> **Correction (2026-10-26, R135):** cookie `0x614` is `MAEnableStereoPairEngines`; on the FireWire 410's panel its checkbox reads **"show 410's stereo pairs as devices"** (capture 103) and the 410's `LoadAsioDmEnableControl` is empty. The "ASIO-DM checkbox" name below comes from the code's `AsioDm` naming; the label on the FW1814's own panel is **unverified** (screenshot the 1814 hardware tab on the SL rig to settle it).
+
 > **Correction (2026-10-17) — the clone's panel now follows §6** (evidence: `PROVENANCE-RESOLUTIONS.md` §R57, captures 79-81). The clone's panel had written `MASampleRate` through `setProperties` (the "P7-fup §3.1" reading this doc already corrected), which applies the rate to the engine without completing the kext's pending state (`MARateLocked` stays 0, `MASampleRate` stale; the same happens on the official kext, capture 80). Fixed: `HALRate`/`DeviceModel` set the rate with CoreAudio `setNominalSampleRate:` 1 s after the last pick and display CoreAudio's rate; the lock colour is `MARateLocked`. Confirmed by the user in a manual test.
 
 > **Correction (2026-10-16):** the v1.9 screenshots (`P12-panel-screens-v19.md`) show no Global Settings tab; the virtual rotary assignment is the sidebar `level controller` (sw rtn / output / input / aux send) with per-strip `ctrl` buttons, and the Hardware tab has no buffer-size control (CoreAudio sets it in the DAW).

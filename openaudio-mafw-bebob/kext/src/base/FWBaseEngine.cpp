@@ -24,6 +24,7 @@ static const IOReturn kErrBusy     = (IOReturn)0xE00002E6;
 bool com_openaudio_FWBaseEngine::init(OSDictionary *properties)
 {
     fAC3 = fFlagA = false;
+    fLegacyUniqueID = fFlag34b = false;
     fConnected = false;
     fAudioStarted = false;
     fExternalSync = false;
@@ -241,15 +242,16 @@ void com_openaudio_FWBaseEngine::ConvertInputSamplesCore(UInt32 first, UInt32 nu
     fInputConvertedEnd = num + first;
 }
 
-// ref ConvertInputSampleData @0x4624 (vt[0xc98]). Only the "no channel remap" branch is ported: the remap tables ([+0x320] and the
-// output pair [+0x328]/[+0x330]) are DeviceChannels +0x18/+0x20/+0x28, which are 0 for every FW1814 row (FWRates.h).
+// ref ConvertInputSampleData @0x4624 (vt[0xc98], asm 0x4624-0x46cd). With an input map ([+0x320] = DeviceChannels +0x18, the FW410's
+// 176.4/192 kHz row) ConvertSampleFramesFromInput(src, scratch, in, inStream, num, map, midi != 0) places the wire slots; otherwise the
+// model's input proc runs. Then the inStream * num samples become floats.
 void com_openaudio_FWBaseEngine::ConvertInputSampleData(UInt32 num, const UInt32 *src, SInt32 *scratch, float *dst)
 {
-    if (fClipOffset[0] == 0) {
-        if (!fInputProc) return;                                             // ref falls back to LLRR/LRLR default procs; the FW1814 always installs one
-        fInputProc(fInChannels * num, src, scratch, fInputProcArg);
+    if (fChannelMap[0]) {
+        FWConvertSampleFramesFromInput(src, scratch, fInChannels, fInStreamChannels, num, fChannelMap[0], fMidiChannels != 0);
     } else {
-        return;                                                              // remap tables: not ported (never set for the FW1814)
+        if (!fInputProc) return;                                             // ref falls back to LLRR/LRLR default procs; every model installs one
+        fInputProc(fInChannels * num, src, scratch, fInputProcArg);
     }
     FWInt24ScaledToFloat32(scratch, dst, fInStreamChannels * num);
 }
@@ -364,9 +366,9 @@ IOReturn com_openaudio_FWBaseEngine::SetIOFormat(const FWDeviceChannels &ch, UIn
              fOutStream && fOutStream->getFormat() ? (unsigned)fOutStream->getFormat()->fNumChannels : 0u);
     if (fDevice) fDevice->DebugTrace(tr);
     if (r == kIOReturnSuccess) {
-        fClipOffset[0] = ch.clipOffset[0];
-        fClipOffset[1] = ch.clipOffset[1];
-        fClipOffset[2] = ch.clipOffset[2];
+        fChannelMap[0] = ch.channelMap[0];
+        fChannelMap[1] = ch.channelMap[1];
+        fChannelMap[2] = ch.channelMap[2];
         if (!acThing) completeConfigurationChange();                         // vt[0xb08]
     } else if (!acThing) {
         cancelConfigurationChange();                                         // vt[0xb10]

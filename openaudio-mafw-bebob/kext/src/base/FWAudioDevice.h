@@ -103,6 +103,7 @@ public:
     virtual IOReturn performPowerStateChange(IOAudioDevicePowerState oldState, IOAudioDevicePowerState newState, UInt32 *microsecondsUntilComplete) APPLE_KEXT_OVERRIDE;
     virtual void SystemWillSleep() {}                                           // vt[0xb18]
     virtual void SystemWokeUp() {}                                              // vt[0xb10]  (also WakeAfterSleep @0x1e7c)
+    virtual void WokeFromSleepArmed() {}                                        // clone (R134): power state left sleep (FWAVCAudioDevice arms the mixer-hold deadline)
     virtual void PauseReceptionOfControlPackets() {}                            // vt[0xb88]
     virtual void ResumeReceptionOfControlPackets() {}                           // vt[0xb90]
     virtual void BusReset() {}                                                  // vt[0xb20] (ref FWAudioDevice::BusReset @0x1d3c forwards to the connection manager)

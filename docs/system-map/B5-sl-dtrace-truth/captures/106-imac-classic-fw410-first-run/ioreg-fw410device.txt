@@ -1,0 +1,738 @@
++-o com_openaudio_FW410Device  <class com_openaudio_FW410Device, id 0x100000614, registered, matched, active, busy 0 (9 ms), retain 9>
+  | {
+  |   "IOClass" = "com_openaudio_FW410Device"
+  |   "MAIconName" = "FW 410"
+  |   "MAFirmwareInfo" = <627269646765436f0100000000000000016c0d00c0b8060002000000010000003230303730353034313032363536000046000100ffffff00000008200000180032303033303430343133343632350000>
+  |   "IOAudioDeviceShortName" = "FW410"
+  |   "IOAudioDeviceModelID" = "com_openaudio_FW410Device:FireWire 410"
+  |   "IOAudioDeviceManufacturerName" = "M-Audio"
+  |   "MAMaxBytesPerCycle" = Yes
+  |   "IOPowerManagement" = {"CapabilityFlags"=32768,"CurrentPowerState"=1,"MaxPowerState"=1,"DriverPowerState"=1}
+  |   "IOProviderClass" = "com_openaudio_FWMetaNub"
+  |   "MAMIDIOutputPorts" = ("1")
+  |   "IOAudioDeviceTransportType" = 825440564
+  |   "GUID" = 3777926248446144
+  |   "IOProbeScore" = 8388607
+  |   "IOUserClientClass" = "com_openaudio_FWUserClient"
+  |   "MASampleRate" = 44100
+  |   "MARateLocked" = 1
+  |   "MABytesPerCycle" = 528
+  |   "MAMainEngineUniqueID" = "com_m_audio_FWEngine1:0xD6C010006B8C0"
+  |   "IOAudioDeviceConfigurationApplication" = "com.m-audio.appc.MAfw"
+  |   "MAExternalSyncRate" = 44100
+  |   "MAMIDIInputPorts" = ("1")
+  |   "IOMatchCategory" = "IODefaultMatchCategory"
+  |   "CFBundleIdentifier" = "com.openaudio.OpenAudioBeBoBMAFW"
+  |   "IOAudioDeviceCanBeDefaults" = 7
+  |   "MADebugTrace" = ("plug info out 0 position r=0x0 resp0 0c: 3 clusters: [1] 1/1 3/2 [2] 2/1 4/2 [3] 5/5","plug info out 0 cluster 1 r=0x0 type 04 name 'SPDIF'","plug info out 0 cluster 2 r=0x0 type 03 name 'Line'","plug info out 0 cluster 3 r=0x0 type 0a name 'Midi'","PerformFormatChange: fmt 10 ch rate 192000 (engine rate 44100)","SetIOFormat start: want in 2 out 8 rate 192000; streams now in 4 out 10","SetIOFormat done: result 0x0; streams now in 2 out 8","Rev2 0x2F in plug 0 rate 07: 6 list entries, r=0x0","Rev2 0x2F out plug 0 rate 07: 6 list entries, r=0x0","VerifyStreamFormats: streams in 2 out 10 but the row for 192000 Hz is in 2 out 8: re-applying","PerformFormatChange: fmt 8 ch rate 44100 (engine rate 192000)","SetIOFormat start: want in 4 out 10 rate 44100; streams now in 2 out 8","SetIOFormat done: result 0x0; streams now in 4 out 10","Rev2 0x2F in plug 0 rate 03: 1 list entries, r=0x0","Rev2 0x2F out plug 0 rate 03: 1 list entries, r=0x0","VerifyStreamFormats: streams in 4 out 8 but the row for 44100 Hz is in 4 out 10: re-applying")
+  |   "FireWire Product Name" = "FW 410"
+  |   "IOAudioDeviceName" = "FireWire 410"
+  | }
+  | 
+  +-o com_openaudio_FWAvcUnit  <class com_openaudio_FWAvcUnit, id 0x100000615, registered, matched, active, busy 0 (0 ms), retain 6>
+  |   {
+  |     "FireWire Device ROM" = {"Offset 0"=<0429550e31333934f0648122000d6c010006b8c00009d1ce040000040c0083c0030007f581000012170100468100001513ffffffd1000002d40000060004bb4e1200a02d130140011701004681000012000637c7120007f5130000013affffc73b1000003cffffc73d6000000004073e00000000000000004d2d415544494f000004aad0000000000000000046572034313000000004aad000000000000000004657203431300000>}
+  |     "FireWire Vendor Name" = "M-AUDIO"
+  |     "IOCFPlugInTypes" = {"CDCFCA94-F197-11D4-87E6-000502072F80"="IOFireWireFamily.kext/Contents/PlugIns/IOFireWireLib.plugin"}
+  |     "Model_ID" = 65606
+  |     "IOUserClientClass" = "IOFireWireUserClient"
+  |     "Unit_Type" = 1
+  |     "GUID" = 3777926248446144
+  |     "FireWire Node ID" = 65472
+  |     "FireWire Speed" = 2
+  |     "Vendor_ID" = 2037
+  |     "FireWire Product Name" = "FW 410"
+  |     "FireWire Self IDs" = <807f8992>
+  |   }
+  |   
+  +-o com_openaudio_FWEngine2  <class com_openaudio_FWEngine2, id 0x100000616, registered, matched, active, busy 0 (1 ms), retain 44>
+  | | {
+  | |   "IOAudioEngineNumActiveUserClients" = 0
+  | |   "IOGeneralInterest" = "IOCommand is not serializable"
+  | |   "IOAudioEngineDescription" = "FireWire 410 Multichannel"
+  | |   "IOAudioEngineInputSampleLatency" = 75
+  | |   "IOAudioEngineChannelNumberNames" = {"OutputChannel6"="6","OutputChannel1"="1","InputChannel1"="1","OutputChannel9"="1","InputChannel2"="2","OutputChannel4"="4","OutputChannel7"="7","OutputChannel2"="2","InputChannel3"="1","OutputChannel10"="2","OutputChannel5"="5","InputChannel4"="2","OutputChannel8"="8","OutputChannel3"="3"}
+  | |   "IOAudioEngineChannelCategoryNames" = {"OutputChannel6"="Output Analog","OutputChannel1"="Output Analog","InputChannel1"="Input Analog","OutputChannel9"="Output S/PDIF","InputChannel2"="Input Analog","OutputChannel4"="Output Analog","OutputChannel7"="Output Analog","OutputChannel2"="Output Analog","InputChannel3"="Input S/PDIF","OutputChannel10"="Output S/PDIF","OutputChannel5"="Output Analog","InputChannel4"="Input S/PDIF","OutputChannel8"="Output Analog","OutputChannel3"="Output Analog"}
+  | |   "IOAudioEngineState" = 0
+  | |   "IOAudioEngineNumSampleFramesPerBuffer" = 8192
+  | |   "IOAudioEngineGlobalUniqueID" = "com_m_audio_FWEngine1:0xD6C010006B8C0"
+  | |   "IOAudioEngineClockDomain" = 196460224
+  | |   "IOAudioSampleRate" = {"IOAudioSampleRateWholeNumber"=44100,"IOAudioSampleRateFraction"=0}
+  | |   "IOAudioEngineChannelNames" = {"OutputChannel6"="Output Analog 6","OutputChannel1"="Output Analog 1","InputChannel1"="Input Analog 1","OutputChannel9"="Output S/PDIF 1","InputChannel2"="Input Analog 2","OutputChannel4"="Output Analog 4","OutputChannel7"="Output Analog 7","OutputChannel2"="Output Analog 2","InputChannel3"="Input S/PDIF 1","OutputChannel10"="Output S/PDIF 2","OutputChannel5"="Output Analog 5","InputChannel4"="Input S/PDIF 2","OutputChannel8"="Output Analog 8","OutputChannel3"="Output Analog 3"}
+  | |   "IOAudioEngineFlavor" = 1
+  | |   "IOAudioEngineSampleOffset" = 44
+  | |   "IOAudioEngineOutputSampleLatency" = 75
+  | | }
+  | | 
+  | +-o com_openaudio_FWStream  <class com_openaudio_FWStream, id 0x100000617, registered, matched, active, busy 0 (0 ms), retain 8>
+  | |   {
+  | |     "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=44100,"IOAudioSampleRateFraction"=0},"IOAudioStreamAlignment"=0,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamIsMixable"=1,"IOAudioStreamFormatFlags"=0,"IOAudioStreamByteOrder"=0,"IOAudioStreamBitDepth"=24,"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamDriverTag"=0,"IOAudioStreamNumChannels"=10,"IOAudioStreamBytesPerPacket"=40,"IOAudioStreamBitWidth"=32,"IOAudioStreamFramesPerPacket"=1,"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=44100,"IOAudioSampleRateFraction"=0}},{"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamAlignment"=0,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamIsMixable"=1,"IOAudioStreamFormatFlags"=0,"IOAudioStreamByteOrder"=0,"IOAudioStreamBitDepth"=24,"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamDriverTag"=0,"IOAudioStreamNumChannels"=10,"IOAudioStreamBytesPerPacket"=40,"IOAudioStreamBitWidth"=32,"IOAudioStreamFramesPerPacket"=1,"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0}},{"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=88200,"IOAudioSampleRateFraction"=0},"IOAudioStreamAlignment"=0,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamIsMixable"=1,"IOAudioStreamFormatFlags"=0,"IOAudioStreamByteOrder"=0,"IOAudioStreamBitDepth"=24,"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamDriverTag"=0,"IOAudioStreamNumChannels"=10,"IOAudioStreamBytesPerPacket"=40,"IOAudioStreamBitWidth"=32,"IOAudioStreamFramesPerPacket"=1,"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=88200,"IOAudioSampleRateFraction"=0}},{"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=96000,"IOAudioSampleRateFraction"=0},"IOAudioStreamAlignment"=0,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamIsMixable"=1,"IOAudioStreamFormatFlags"=0,"IOAudioStreamByteOrder"=0,"IOAudioStreamBitDepth"=24,"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamDriverTag"=0,"IOAudioStreamNumChannels"=10,"IOAudioStreamBytesPerPacket"=40,"IOAudioStreamBitWidth"=32,"IOAudioStreamFramesPerPacket"=1,"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=96000,"IOAudioSampleRateFraction"=0}},{"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=176400,"IOAudioSampleRateFraction"=0},"IOAudioStreamAlignment"=0,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamIsMixable"=1,"IOAudioStreamFormatFlags"=0,"IOAudioStreamByteOrder"=0,"IOAudioStreamBitDepth"=24,"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamDriverTag"=0,"IOAudioStreamNumChannels"=10,"IOAudioStreamBytesPerPacket"=40,"IOAudioStreamBitWidth"=32,"IOAudioStreamFramesPerPacket"=1,"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=176400,"IOAudioSampleRateFraction"=0}},{"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=192000,"IOAudioSampleRateFraction"=0},"IOAudioStreamAlignment"=0,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamIsMixable"=1,"IOAudioStreamFormatFlags"=0,"IOAudioStreamByteOrder"=0,"IOAudioStreamBitDepth"=24,"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamDriverTag"=0,"IOAudioStreamNumChannels"=10,"IOAudioStreamBytesPerPacket"=40,"IOAudioStreamBitWidth"=32,"IOAudioStreamFramesPerPacket"=1,"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=192000,"IOAudioSampleRateFraction"=0}},{"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamAlignment"=0,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamIsMixable"=0,"IOAudioStreamFormatFlags"=0,"IOAudioStreamByteOrder"=1,"IOAudioStreamBitDepth"=16,"IOAudioStreamSampleFormat"=1667326771,"IOAudioStreamDriverTag"=0,"IOAudioStreamNumChannels"=2,"IOAudioStreamBytesPerPacket"=6144,"IOAudioStreamBitWidth"=16,"IOAudioStreamFramesPerPacket"=1536,"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0}},{"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=44100,"IOAudioSampleRateFraction"=0},"IOAudioStreamAlignment"=0,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamIsMixable"=0,"IOAudioStreamFormatFlags"=0,"IOAudioStreamByteOrder"=1,"IOAudioStreamBitDepth"=16,"IOAudioStreamSampleFormat"=1667326771,"IOAudioStreamDriverTag"=0,"IOAudioStreamNumChannels"=2,"IOAudioStreamBytesPerPacket"=6144,"IOAudioStreamBitWidth"=16,"IOAudioStreamFramesPerPacket"=1536,"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=44100,"IOAudioSampleRateFraction"=0}},{"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=96000,"IOAudioSampleRateFraction"=0},"IOAudioStreamAlignment"=0,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamIsMixable"=0,"IOAudioStreamFormatFlags"=0,"IOAudioStreamByteOrder"=1,"IOAudioStreamBitDepth"=16,"IOAudioStreamSampleFormat"=1667326771,"IOAudioStreamDriverTag"=0,"IOAudioStreamNumChannels"=2,"IOAudioStreamBytesPerPacket"=6144,"IOAudioStreamBitWidth"=16,"IOAudioStreamFramesPerPacket"=1536,"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=96000,"IOAudioSampleRateFraction"=0}})
+  | |     "IOAudioStreamDirection" = 0
+  | |     "IOAudioStreamID" = 0
+  | |     "IOAudioStreamStartingChannelID" = 1
+  | |     "IOAudioStreamFormat" = {"IOAudioStreamAlignment"=0,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamIsMixable"=1,"IOAudioStreamFormatFlags"=0,"IOAudioStreamByteOrder"=0,"IOAudioStreamBitDepth"=24,"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamDriverTag"=0,"IOAudioStreamNumChannels"=10,"IOAudioStreamBytesPerPacket"=40,"IOAudioStreamBitWidth"=32,"IOAudioStreamFramesPerPacket"=1}
+  | |     "IOAudioStreamAvailable" = 1
+  | |     "IOAudioStreamNumClients" = 0
+  | |     "IOAudioStreamStartingChannelNumber" = 1
+  | |   }
+  | |   
+  | +-o com_openaudio_FWStream  <class com_openaudio_FWStream, id 0x100000618, registered, matched, active, busy 0 (0 ms), retain 8>
+  | |   {
+  | |     "IOAudioStreamAvailableFormats" = ({"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=44100,"IOAudioSampleRateFraction"=0},"IOAudioStreamAlignment"=0,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamIsMixable"=1,"IOAudioStreamFormatFlags"=0,"IOAudioStreamByteOrder"=0,"IOAudioStreamBitDepth"=24,"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamDriverTag"=0,"IOAudioStreamNumChannels"=4,"IOAudioStreamBytesPerPacket"=16,"IOAudioStreamBitWidth"=32,"IOAudioStreamFramesPerPacket"=1,"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=44100,"IOAudioSampleRateFraction"=0}},{"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0},"IOAudioStreamAlignment"=0,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamIsMixable"=1,"IOAudioStreamFormatFlags"=0,"IOAudioStreamByteOrder"=0,"IOAudioStreamBitDepth"=24,"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamDriverTag"=0,"IOAudioStreamNumChannels"=4,"IOAudioStreamBytesPerPacket"=16,"IOAudioStreamBitWidth"=32,"IOAudioStreamFramesPerPacket"=1,"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=48000,"IOAudioSampleRateFraction"=0}},{"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=88200,"IOAudioSampleRateFraction"=0},"IOAudioStreamAlignment"=0,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamIsMixable"=1,"IOAudioStreamFormatFlags"=0,"IOAudioStreamByteOrder"=0,"IOAudioStreamBitDepth"=24,"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamDriverTag"=0,"IOAudioStreamNumChannels"=4,"IOAudioStreamBytesPerPacket"=16,"IOAudioStreamBitWidth"=32,"IOAudioStreamFramesPerPacket"=1,"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=88200,"IOAudioSampleRateFraction"=0}},{"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=96000,"IOAudioSampleRateFraction"=0},"IOAudioStreamAlignment"=0,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamIsMixable"=1,"IOAudioStreamFormatFlags"=0,"IOAudioStreamByteOrder"=0,"IOAudioStreamBitDepth"=24,"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamDriverTag"=0,"IOAudioStreamNumChannels"=4,"IOAudioStreamBytesPerPacket"=16,"IOAudioStreamBitWidth"=32,"IOAudioStreamFramesPerPacket"=1,"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=96000,"IOAudioSampleRateFraction"=0}},{"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=176400,"IOAudioSampleRateFraction"=0},"IOAudioStreamAlignment"=0,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamIsMixable"=1,"IOAudioStreamFormatFlags"=0,"IOAudioStreamByteOrder"=0,"IOAudioStreamBitDepth"=24,"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamDriverTag"=0,"IOAudioStreamNumChannels"=4,"IOAudioStreamBytesPerPacket"=16,"IOAudioStreamBitWidth"=32,"IOAudioStreamFramesPerPacket"=1,"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=176400,"IOAudioSampleRateFraction"=0}},{"IOAudioStreamMaximumSampleRate"={"IOAudioSampleRateWholeNumber"=192000,"IOAudioSampleRateFraction"=0},"IOAudioStreamAlignment"=0,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamIsMixable"=1,"IOAudioStreamFormatFlags"=0,"IOAudioStreamByteOrder"=0,"IOAudioStreamBitDepth"=24,"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamDriverTag"=0,"IOAudioStreamNumChannels"=4,"IOAudioStreamBytesPerPacket"=16,"IOAudioStreamBitWidth"=32,"IOAudioStreamFramesPerPacket"=1,"IOAudioStreamMinimumSampleRate"={"IOAudioSampleRateWholeNumber"=192000,"IOAudioSampleRateFraction"=0}})
+  | |     "IOAudioStreamDirection" = 1
+  | |     "IOAudioStreamID" = 1
+  | |     "IOAudioStreamStartingChannelID" = 1
+  | |     "IOAudioStreamFormat" = {"IOAudioStreamAlignment"=0,"IOAudioStreamNumericRepresentation"=1936289396,"IOAudioStreamIsMixable"=1,"IOAudioStreamFormatFlags"=0,"IOAudioStreamByteOrder"=0,"IOAudioStreamBitDepth"=24,"IOAudioStreamSampleFormat"=1819304813,"IOAudioStreamDriverTag"=0,"IOAudioStreamNumChannels"=4,"IOAudioStreamBytesPerPacket"=16,"IOAudioStreamBitWidth"=32,"IOAudioStreamFramesPerPacket"=1}
+  | |     "IOAudioStreamAvailable" = 1
+  | |     "IOAudioStreamNumClients" = 0
+  | |     "IOAudioStreamStartingChannelNumber" = 1
+  | |   }
+  | |   
+  | +-o IOAudioLevelControl  <class IOAudioLevelControl, id 0x10000061c, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1818588780
+  | | |   "IOAudioLevelControlMaxDB" = 0
+  | | |   "IOAudioControlChannelNumber" = 0
+  | | |   "IOAudioControlChannelID" = 0
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioLevelControlMinDB" = 18446744073705357312
+  | | |   "IOAudioControlID" = 0
+  | | |   "IOAudioControlSubType" = 1986817381
+  | | |   "IOAudioLevelControlMinValue" = 18446744073709551488
+  | | |   "IOAudioLevelControlMaxValue" = 0
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x100000640, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioLevelControl  <class IOAudioLevelControl, id 0x10000061d, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1818588780
+  | | |   "IOAudioLevelControlMaxDB" = 0
+  | | |   "IOAudioControlChannelNumber" = 1
+  | | |   "IOAudioControlChannelID" = 1
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioLevelControlMinDB" = 18446744073705357312
+  | | |   "IOAudioControlID" = 0
+  | | |   "IOAudioControlSubType" = 1986817381
+  | | |   "IOAudioLevelControlMinValue" = 18446744073709551488
+  | | |   "IOAudioLevelControlMaxValue" = 0
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x100000641, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioLevelControl  <class IOAudioLevelControl, id 0x10000061e, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1818588780
+  | | |   "IOAudioLevelControlMaxDB" = 0
+  | | |   "IOAudioControlChannelNumber" = 2
+  | | |   "IOAudioControlChannelID" = 2
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioLevelControlMinDB" = 18446744073705357312
+  | | |   "IOAudioControlID" = 1
+  | | |   "IOAudioControlSubType" = 1986817381
+  | | |   "IOAudioLevelControlMinValue" = 18446744073709551488
+  | | |   "IOAudioLevelControlMaxValue" = 0
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x100000642, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioLevelControl  <class IOAudioLevelControl, id 0x10000061f, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1818588780
+  | | |   "IOAudioLevelControlMaxDB" = 0
+  | | |   "IOAudioControlChannelNumber" = 3
+  | | |   "IOAudioControlChannelID" = 3
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioLevelControlMinDB" = 18446744073705357312
+  | | |   "IOAudioControlID" = 2
+  | | |   "IOAudioControlSubType" = 1986817381
+  | | |   "IOAudioLevelControlMinValue" = 18446744073709551488
+  | | |   "IOAudioLevelControlMaxValue" = 0
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x100000643, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioLevelControl  <class IOAudioLevelControl, id 0x100000620, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1818588780
+  | | |   "IOAudioLevelControlMaxDB" = 0
+  | | |   "IOAudioControlChannelNumber" = 4
+  | | |   "IOAudioControlChannelID" = 4
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioLevelControlMinDB" = 18446744073705357312
+  | | |   "IOAudioControlID" = 3
+  | | |   "IOAudioControlSubType" = 1986817381
+  | | |   "IOAudioLevelControlMinValue" = 18446744073709551488
+  | | |   "IOAudioLevelControlMaxValue" = 0
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x100000644, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioLevelControl  <class IOAudioLevelControl, id 0x100000621, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1818588780
+  | | |   "IOAudioLevelControlMaxDB" = 0
+  | | |   "IOAudioControlChannelNumber" = 5
+  | | |   "IOAudioControlChannelID" = 5
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioLevelControlMinDB" = 18446744073705357312
+  | | |   "IOAudioControlID" = 4
+  | | |   "IOAudioControlSubType" = 1986817381
+  | | |   "IOAudioLevelControlMinValue" = 18446744073709551488
+  | | |   "IOAudioLevelControlMaxValue" = 0
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x100000645, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioLevelControl  <class IOAudioLevelControl, id 0x100000622, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1818588780
+  | | |   "IOAudioLevelControlMaxDB" = 0
+  | | |   "IOAudioControlChannelNumber" = 6
+  | | |   "IOAudioControlChannelID" = 6
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioLevelControlMinDB" = 18446744073705357312
+  | | |   "IOAudioControlID" = 5
+  | | |   "IOAudioControlSubType" = 1986817381
+  | | |   "IOAudioLevelControlMinValue" = 18446744073709551488
+  | | |   "IOAudioLevelControlMaxValue" = 0
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x100000646, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioLevelControl  <class IOAudioLevelControl, id 0x100000623, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1818588780
+  | | |   "IOAudioLevelControlMaxDB" = 0
+  | | |   "IOAudioControlChannelNumber" = 7
+  | | |   "IOAudioControlChannelID" = 7
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioLevelControlMinDB" = 18446744073705357312
+  | | |   "IOAudioControlID" = 6
+  | | |   "IOAudioControlSubType" = 1986817381
+  | | |   "IOAudioLevelControlMinValue" = 18446744073709551488
+  | | |   "IOAudioLevelControlMaxValue" = 0
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x100000647, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioLevelControl  <class IOAudioLevelControl, id 0x100000624, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1818588780
+  | | |   "IOAudioLevelControlMaxDB" = 0
+  | | |   "IOAudioControlChannelNumber" = 8
+  | | |   "IOAudioControlChannelID" = 8
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioLevelControlMinDB" = 18446744073705357312
+  | | |   "IOAudioControlID" = 7
+  | | |   "IOAudioControlSubType" = 1986817381
+  | | |   "IOAudioLevelControlMinValue" = 18446744073709551488
+  | | |   "IOAudioLevelControlMaxValue" = 0
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x100000648, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioLevelControl  <class IOAudioLevelControl, id 0x100000625, !registered, !matched, active, busy 0 (0 ms), retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1818588780
+  | | |   "IOAudioLevelControlMaxDB" = 0
+  | | |   "IOAudioControlChannelNumber" = 9
+  | | |   "IOAudioControlChannelID" = 9
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioLevelControlMinDB" = 18446744073705357312
+  | | |   "IOAudioControlID" = 8
+  | | |   "IOAudioControlSubType" = 1986817381
+  | | |   "IOAudioLevelControlMinValue" = 18446744073709551488
+  | | |   "IOAudioLevelControlMaxValue" = 0
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x1000008db, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioLevelControl  <class IOAudioLevelControl, id 0x100000626, !registered, !matched, active, busy 0 (0 ms), retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1818588780
+  | | |   "IOAudioLevelControlMaxDB" = 0
+  | | |   "IOAudioControlChannelNumber" = 10
+  | | |   "IOAudioControlChannelID" = 10
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioLevelControlMinDB" = 18446744073705357312
+  | | |   "IOAudioControlID" = 9
+  | | |   "IOAudioControlSubType" = 1986817381
+  | | |   "IOAudioLevelControlMinValue" = 18446744073709551488
+  | | |   "IOAudioLevelControlMaxValue" = 0
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x1000008dc, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioToggleControl  <class IOAudioToggleControl, id 0x100000627, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1953458028
+  | | |   "IOAudioControlChannelNumber" = 1
+  | | |   "IOAudioControlChannelID" = 1
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioControlID" = 0
+  | | |   "IOAudioControlSubType" = 1836414053
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x10000064b, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioToggleControl  <class IOAudioToggleControl, id 0x100000628, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1953458028
+  | | |   "IOAudioControlChannelNumber" = 2
+  | | |   "IOAudioControlChannelID" = 2
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioControlID" = 1
+  | | |   "IOAudioControlSubType" = 1836414053
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x10000064c, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioToggleControl  <class IOAudioToggleControl, id 0x100000629, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1953458028
+  | | |   "IOAudioControlChannelNumber" = 3
+  | | |   "IOAudioControlChannelID" = 3
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioControlID" = 2
+  | | |   "IOAudioControlSubType" = 1836414053
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x10000064d, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioToggleControl  <class IOAudioToggleControl, id 0x10000062a, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1953458028
+  | | |   "IOAudioControlChannelNumber" = 4
+  | | |   "IOAudioControlChannelID" = 4
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioControlID" = 3
+  | | |   "IOAudioControlSubType" = 1836414053
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x10000064e, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioToggleControl  <class IOAudioToggleControl, id 0x10000062b, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1953458028
+  | | |   "IOAudioControlChannelNumber" = 5
+  | | |   "IOAudioControlChannelID" = 5
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioControlID" = 4
+  | | |   "IOAudioControlSubType" = 1836414053
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x10000064f, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioToggleControl  <class IOAudioToggleControl, id 0x10000062c, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1953458028
+  | | |   "IOAudioControlChannelNumber" = 6
+  | | |   "IOAudioControlChannelID" = 6
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioControlID" = 5
+  | | |   "IOAudioControlSubType" = 1836414053
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x100000650, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioToggleControl  <class IOAudioToggleControl, id 0x10000062d, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1953458028
+  | | |   "IOAudioControlChannelNumber" = 7
+  | | |   "IOAudioControlChannelID" = 7
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioControlID" = 6
+  | | |   "IOAudioControlSubType" = 1836414053
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x100000651, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioToggleControl  <class IOAudioToggleControl, id 0x10000062e, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1953458028
+  | | |   "IOAudioControlChannelNumber" = 8
+  | | |   "IOAudioControlChannelID" = 8
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioControlID" = 7
+  | | |   "IOAudioControlSubType" = 1836414053
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x100000652, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioToggleControl  <class IOAudioToggleControl, id 0x10000062f, !registered, !matched, active, busy 0 (0 ms), retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1953458028
+  | | |   "IOAudioControlChannelNumber" = 9
+  | | |   "IOAudioControlChannelID" = 9
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioControlID" = 8
+  | | |   "IOAudioControlSubType" = 1836414053
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x1000008dd, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioToggleControl  <class IOAudioToggleControl, id 0x100000630, !registered, !matched, active, busy 0 (0 ms), retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1953458028
+  | | |   "IOAudioControlChannelNumber" = 10
+  | | |   "IOAudioControlChannelID" = 10
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioControlID" = 9
+  | | |   "IOAudioControlSubType" = 1836414053
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x1000008de, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioLevelControl  <class IOAudioLevelControl, id 0x100000631, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1818588780
+  | | |   "IOAudioLevelControlMaxDB" = 0
+  | | |   "IOAudioControlChannelNumber" = 1
+  | | |   "IOAudioControlChannelID" = 1
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1768845428
+  | | |   "IOAudioLevelControlMinDB" = 18446744073705357312
+  | | |   "IOAudioControlID" = 0
+  | | |   "IOAudioControlSubType" = 1986817381
+  | | |   "IOAudioLevelControlMinValue" = 18446744073709551488
+  | | |   "IOAudioLevelControlMaxValue" = 0
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x100000655, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioLevelControl  <class IOAudioLevelControl, id 0x100000632, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1818588780
+  | | |   "IOAudioLevelControlMaxDB" = 0
+  | | |   "IOAudioControlChannelNumber" = 2
+  | | |   "IOAudioControlChannelID" = 2
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1768845428
+  | | |   "IOAudioLevelControlMinDB" = 18446744073705357312
+  | | |   "IOAudioControlID" = 1
+  | | |   "IOAudioControlSubType" = 1986817381
+  | | |   "IOAudioLevelControlMinValue" = 18446744073709551488
+  | | |   "IOAudioLevelControlMaxValue" = 0
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x100000656, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioLevelControl  <class IOAudioLevelControl, id 0x100000633, !registered, !matched, active, busy 0 (0 ms), retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1818588780
+  | | |   "IOAudioLevelControlMaxDB" = 0
+  | | |   "IOAudioControlChannelNumber" = 3
+  | | |   "IOAudioControlChannelID" = 3
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1768845428
+  | | |   "IOAudioLevelControlMinDB" = 18446744073705357312
+  | | |   "IOAudioControlID" = 2
+  | | |   "IOAudioControlSubType" = 1986817381
+  | | |   "IOAudioLevelControlMinValue" = 18446744073709551488
+  | | |   "IOAudioLevelControlMaxValue" = 0
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x1000008df, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioLevelControl  <class IOAudioLevelControl, id 0x100000634, !registered, !matched, active, busy 0 (0 ms), retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1818588780
+  | | |   "IOAudioLevelControlMaxDB" = 0
+  | | |   "IOAudioControlChannelNumber" = 4
+  | | |   "IOAudioControlChannelID" = 4
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1768845428
+  | | |   "IOAudioLevelControlMinDB" = 18446744073705357312
+  | | |   "IOAudioControlID" = 3
+  | | |   "IOAudioControlSubType" = 1986817381
+  | | |   "IOAudioLevelControlMinValue" = 18446744073709551488
+  | | |   "IOAudioLevelControlMaxValue" = 0
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x1000008e0, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioLevelControl  <class IOAudioLevelControl, id 0x100000635, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1818588780
+  | | |   "IOAudioLevelControlMaxDB" = 0
+  | | |   "IOAudioControlChannelNumber" = 1
+  | | |   "IOAudioControlChannelID" = 1
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1885434739
+  | | |   "IOAudioLevelControlMinDB" = 18446744073705357312
+  | | |   "IOAudioControlID" = 0
+  | | |   "IOAudioControlSubType" = 1986817381
+  | | |   "IOAudioLevelControlMinValue" = 18446744073709551488
+  | | |   "IOAudioLevelControlMaxValue" = 0
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x100000659, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioLevelControl  <class IOAudioLevelControl, id 0x100000636, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1818588780
+  | | |   "IOAudioLevelControlMaxDB" = 0
+  | | |   "IOAudioControlChannelNumber" = 2
+  | | |   "IOAudioControlChannelID" = 2
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1885434739
+  | | |   "IOAudioLevelControlMinDB" = 18446744073705357312
+  | | |   "IOAudioControlID" = 1
+  | | |   "IOAudioControlSubType" = 1986817381
+  | | |   "IOAudioLevelControlMinValue" = 18446744073709551488
+  | | |   "IOAudioLevelControlMaxValue" = 0
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x10000065a, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioLevelControl  <class IOAudioLevelControl, id 0x100000637, !registered, !matched, active, busy 0 (0 ms), retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1818588780
+  | | |   "IOAudioLevelControlMaxDB" = 0
+  | | |   "IOAudioControlChannelNumber" = 3
+  | | |   "IOAudioControlChannelID" = 3
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1885434739
+  | | |   "IOAudioLevelControlMinDB" = 18446744073705357312
+  | | |   "IOAudioControlID" = 2
+  | | |   "IOAudioControlSubType" = 1986817381
+  | | |   "IOAudioLevelControlMinValue" = 18446744073709551488
+  | | |   "IOAudioLevelControlMaxValue" = 0
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x1000008e1, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioLevelControl  <class IOAudioLevelControl, id 0x100000638, !registered, !matched, active, busy 0 (0 ms), retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1818588780
+  | | |   "IOAudioLevelControlMaxDB" = 0
+  | | |   "IOAudioControlChannelNumber" = 4
+  | | |   "IOAudioControlChannelID" = 4
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1885434739
+  | | |   "IOAudioLevelControlMinDB" = 18446744073705357312
+  | | |   "IOAudioControlID" = 3
+  | | |   "IOAudioControlSubType" = 1986817381
+  | | |   "IOAudioLevelControlMinValue" = 18446744073709551488
+  | | |   "IOAudioLevelControlMaxValue" = 0
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x1000008e2, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioToggleControl  <class IOAudioToggleControl, id 0x100000639, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1953458028
+  | | |   "IOAudioControlChannelNumber" = 1
+  | | |   "IOAudioControlChannelID" = 1
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1768845428
+  | | |   "IOAudioControlID" = 0
+  | | |   "IOAudioControlSubType" = 1836414053
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x10000065d, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioToggleControl  <class IOAudioToggleControl, id 0x10000063a, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1953458028
+  | | |   "IOAudioControlChannelNumber" = 2
+  | | |   "IOAudioControlChannelID" = 2
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1768845428
+  | | |   "IOAudioControlID" = 1
+  | | |   "IOAudioControlSubType" = 1836414053
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x10000065e, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioToggleControl  <class IOAudioToggleControl, id 0x10000063b, !registered, !matched, active, busy 0 (0 ms), retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1953458028
+  | | |   "IOAudioControlChannelNumber" = 3
+  | | |   "IOAudioControlChannelID" = 3
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1768845428
+  | | |   "IOAudioControlID" = 2
+  | | |   "IOAudioControlSubType" = 1836414053
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x1000008e3, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioToggleControl  <class IOAudioToggleControl, id 0x10000063c, !registered, !matched, active, busy 0 (0 ms), retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1953458028
+  | | |   "IOAudioControlChannelNumber" = 4
+  | | |   "IOAudioControlChannelID" = 4
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1768845428
+  | | |   "IOAudioControlID" = 3
+  | | |   "IOAudioControlSubType" = 1836414053
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x1000008e4, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioToggleControl  <class IOAudioToggleControl, id 0x10000063d, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1953458028
+  | | |   "IOAudioControlChannelNumber" = 0
+  | | |   "IOAudioControlChannelID" = 0
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1885434739
+  | | |   "IOAudioControlID" = 0
+  | | |   "IOAudioControlSubType" = 1836414053
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x100000661, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioToggleControl  <class IOAudioToggleControl, id 0x10000063e, !registered, !matched, active, busy 0, retain 8>
+  | | | {
+  | | |   "IOAudioControlType" = 1953458028
+  | | |   "IOAudioControlChannelNumber" = 0
+  | | |   "IOAudioControlChannelID" = 0
+  | | |   "IOAudioControlValue" = 0
+  | | |   "IOAudioControlUsage" = 1869968496
+  | | |   "IOAudioControlID" = 0
+  | | |   "IOAudioControlSubType" = 1836414053
+  | | | }
+  | | | 
+  | | +-o IOAudioControlUserClient  <class IOAudioControlUserClient, id 0x100000662, !registered, !matched, active, busy 0, retain 6>
+  | |     {
+  | |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  | |     }
+  | |     
+  | +-o IOAudioEngineUserClient  <class IOAudioEngineUserClient, id 0x100000663, !registered, !matched, active, busy 0, retain 6>
+  |     {
+  |       "IOAudioEngineUserClientActive" = 0
+  |       "IOUserClientCreator" = "pid 135, coreaudiod"
+  |     }
+  |     
+  +-o com_openaudio_FWUserClient  <class com_openaudio_FWUserClient, id 0x100000a76, !registered, !matched, active, busy 0, retain 6>
+      {
+        "IOUserClientCreator" = "pid 3934, OA BeBoB MAFW"
+      }
+      
+

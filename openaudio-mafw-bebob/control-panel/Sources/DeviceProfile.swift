@@ -75,6 +75,7 @@ struct HardwarePlan {
     let digitalPorts: Bool           // the FW1814's optical/coaxial/ADAT card
     let abSwitchTitle: String        // radio on the a/b card ("Headphone out 1 A/B")
     let abSheetName: String          // sheet title / heading ("Headphone Out 1")
+    let abSwitch: Bool               // the model has the front a/b switch (FW1814, Audiophile); the FW410 has none (plan FW410 v2)
 }
 
 /// One model. The tabs, windows and demo ask it; nothing model-specific lives outside Sources/Models/<Model>/.
@@ -97,10 +98,20 @@ protocol DeviceProfile: AnyObject {
     func output(_ l: ChannelLayout) -> OutputPlan
     func meters(_ l: ChannelLayout, narrow: Bool) -> [(String, [MeterItem])]
     func hardwareCard(_ ctx: PanelContext) -> HardwareCard?
+    /// meter page order (PeakMap.swReturnsFirst): false = [inputs | outputs | SW returns] (FW1814, Audiophile), true = FW410
+    var peakSWReturnsFirst: Bool { get }
+    var phonesMultiSelect: Bool { get }
+    /// the level-controller (encoder) radios of the sidebar, in the official panel's order; the FW410 adds phones (manual p.6-7, capture 103)
+    var levelControllerTargets: [MARotaryMask.Group] { get }
 }
 
 extension DeviceProfile {
-    var peaks: PeakMap { return PeakMap(counts: counts) }
+    var peaks: PeakMap { return PeakMap(counts: counts, swReturnsFirst: peakSWReturnsFirst) }
+    var peakSWReturnsFirst: Bool { return false }
+    /// MAHeadphoneSourceV2 as a bitmask of several sources at once (FW410: "any or all of the five output buses", manual p.21, capture 103);
+    /// the FW1814 and the Audiophile take one source (a selector), so the buttons are exclusive there.
+    var phonesMultiSelect: Bool { return false }
+    var levelControllerTargets: [MARotaryMask.Group] { return [.swReturn, .output, .input, .aux] }
     func phonesSource(mask: Int) -> PhonesSource? { return phonesSources.first { Int($0.mask) == mask } }
 }
 
@@ -109,12 +120,14 @@ enum DeviceProfiles {
     static let all: [(cls: String, profile: DeviceProfile)] = [
         ("com_openaudio_FW1814Device", FW1814Profile.shared),
         ("com_openaudio_FWAudiophileDevice", AudiophileProfile.shared),
+        ("com_openaudio_FW410Device", FW410Profile.shared),
     ]
     static func profile(forClass cls: String) -> DeviceProfile? { return all.first { $0.cls == cls }?.profile }
     static func profile(named n: String) -> DeviceProfile? {
         switch n.lowercased() {
         case "1814", "fw1814": return FW1814Profile.shared
         case "audiophile", "ap": return AudiophileProfile.shared
+        case "410", "fw410": return FW410Profile.shared
         default: return nil
         }
     }

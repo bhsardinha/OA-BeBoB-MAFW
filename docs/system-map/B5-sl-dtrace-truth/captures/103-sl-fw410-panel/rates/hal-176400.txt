@@ -1,0 +1,1 @@
+263  FireWire 410 Multichannel    uid=com_m_audio_FWEngine1:0xD6C010006B8C0      rate=176400.0 in=2  out=8  defaultOut

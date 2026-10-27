@@ -15,11 +15,11 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.2.2</string>
+	<string>0.3.0</string>
 	<key>CFBundleSignature</key>
 	<string>DDRV</string>
 	<key>CFBundleVersion</key>
-	<string>0.2.2</string>
+	<string>0.3.0</string>
 	<key>IOKitPersonalities</key>
 	<dict>
 		<key>FW1814AppleGoAway1</key>
@@ -64,6 +64,19 @@
 			<string>FW 1814</string>
 			<key>IOClass</key>
 			<string>com_openaudio_FW1814Device</string>
+			<key>IOProviderClass</key>
+			<string>com_openaudio_FWMetaNub</string>
+			<key>IOUserClientClass</key>
+			<string>com_openaudio_FWUserClient</string>
+		</dict>
+		<key>FW410Device</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.openaudio.OpenAudioBeBoBMAFW</string>
+			<key>FireWire Product Name</key>
+			<string>FW 410</string>
+			<key>IOClass</key>
+			<string>com_openaudio_FW410Device</string>
 			<key>IOProviderClass</key>
 			<string>com_openaudio_FWMetaNub</string>
 			<key>IOUserClientClass</key>

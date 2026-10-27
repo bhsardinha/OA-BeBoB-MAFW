@@ -96,6 +96,10 @@ let pk = PeakMap(counts: TranslatorCounts(outputs: 20, mixer: 32, inputs: 18, he
 check(pk.input(1) == 0 && pk.output(1) == 18 && pk.swReturn(14) == 51 && pk.phones(1) == pk.output(15) && pk.auxOut(2) == pk.output(20), "FW1814 peak slots")
 let apk = PeakMap(counts: TranslatorCounts(outputs: 10, mixer: 10, inputs: 4, headphone: 2))    // Audiophile (PNAP §1, §6)
 check(apk.input(4) == 3 && apk.output(1) == 4 && apk.output(10) == 13 && apk.swReturn(1) == 14 && apk.swReturn(6) == 19 && apk.phones(1) == 10 && apk.auxOut(1) == 12, "Audiophile peak slots: inputs 0-3, outputs 4-13, SW returns 14-19")
+let f4 = PeakMap(counts: TranslatorCounts(outputs: 14, mixer: 14, inputs: 4, headphone: 2), swReturnsFirst: true)    // FW410 (kext ReadHSCIData @0x15198)
+check(f4.input(4) == 3 && f4.swReturn(1) == 4 && f4.swReturn(10) == 13 && f4.output(1) == 14 && f4.output(10) == 23 && f4.phones(1) == 24 && f4.auxOut(2) == 27,
+      "FW410 peak slots: inputs 0-3, SW returns 4-13, outputs 14-23, phones 24-25, aux 26-27")
+check(TranslatorCounts(outputs: 14, mixer: 14, inputs: 4, headphone: 2).auxSendElement(swReturn: 1) == 5, "aux-send element of FW410 SW return 1 = 5 (MAAuxSendLevels: inputs first, capture 103)")
 check(TranslatorCounts(outputs: 10, mixer: 10, inputs: 4, headphone: 2).auxSendElement(swReturn: 1) == 5 && TranslatorCounts(outputs: 20, mixer: 32, inputs: 18, headphone: 4).auxSendElement(swReturn: 1) == 19, "aux-send element of SW return 1: Audiophile 5, FW1814 19")
 
 // FirmwareInfo: the live block values of Q-P3 §3 (SL, runtime mode).

@@ -65,6 +65,7 @@ bool com_openaudio_FWRemoteIsochPort::init(com_openaudio_FWAvcConnectionManager 
 {
     if (!IOFWIsochPort::init()) return false;
     fMgr = mgr;
+    if (fMgr) fMgr->retain();                                  // clone (R140): the port outlives the device's own reference at teardown
     fRemoteIsInput = remoteIsInput;
     fPlug = plug;
     return true;
@@ -72,6 +73,7 @@ bool com_openaudio_FWRemoteIsochPort::init(com_openaudio_FWAvcConnectionManager 
 
 void com_openaudio_FWRemoteIsochPort::free()
 {
+    if (fMgr) fMgr->release();
     fMgr = 0;
     IOFWIsochPort::free();
 }

@@ -206,6 +206,8 @@ Approve as written, or name the sections to change. On approval: tracker Build t
 
 # Appendix A — what it takes to support every FW device of the official driver (future work)
 
+> **Correction (2026-10-26, R135):** row 0 (FW 410) is wrong on the mixer path: the 410's mixer is written through registers (`CustomMixerWriteQuads`, vt 0xba8, `0xFFC7:0x00700000 + off`) like the FW1814's, not AV/C function blocks; it is a Rev2 device with a register mixer. Channels are 4 / 10 at 44.1-96 kHz and 2 / 8 at 176.4/192 kHz (capture 103). Plan: `docs/BUILD_FW410_PLAN_v1.md`.
+
 The reference kext implements eight product classes behind one nub. Product names and bootloader names are from `kDeviceSpecs @0x46450` (read from the binary); classes, base, channel counts and rates from the kext symbol tables and static data (read 2026-10-19; **only the first per-rate table of each model was read**, so counts at other rates and modes are not complete; every row is a starting point for its own phase 0). Ownership: the project has an FW1814 and an Audiophile; the others are not owned or testable.
 
 | # | Product name (runtime / bootloader) | Class, base | Mixer path | Channels (in / out, first table) | Rates | MIDI quadlets | Firmware file | Notes |

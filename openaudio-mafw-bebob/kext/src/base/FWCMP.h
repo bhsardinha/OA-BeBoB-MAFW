@@ -29,6 +29,9 @@ public:
     // ref InitWithDevice @0x24dfe stores the audio device [+0x10]; the nub is the device's provider nub ([dev+0xe0]).
     // `device` supplies the work loop CMP actions run on (ref vt[0x688] on the device = getWorkLoop).
     bool InitWithDevice(IOService *device, IOFireWireNub *nub);
+    // clone (R140): called by the device's stop() while the nub is valid: free every host plug still allocated and refuse later Connect_iPCR,
+    // so no HandlePCRLock registration can outlive the driver, whatever still holds this object (unload while streaming, capture 106 panic)
+    void Close();
     virtual void free() APPLE_KEXT_OVERRIDE;
 
     // ref Connect @0x248ce: remoteIsInput -> device iPCR path (host talks), else device oPCR path (host listens).
@@ -71,6 +74,7 @@ private:
     // Connect_iPCR and frees only in Disconnect_iPCR (free @0x23e96 never frees them): a plug left allocated keeps HandlePCRLock registered,
     // and after a kextunload the next bus reset calls into the unloaded code (panic, IOFireWirePCRSpace -> HandlePCRLockStub).
     bool           fHostPlugAllocated[3];
+    bool           fClosed;                // clone (R140): Close() ran; Connect_iPCR is refused
     void           FreeHostPlugs();
     ReconnectedProc fReconnected;
     void          *fReconnectedRefcon;

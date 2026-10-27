@@ -155,7 +155,9 @@ public:
     // string ("com_m_audio_FWEngine2" / "...FWEngine1" for pair engines) so that a CoreAudio device UID stays the same as with the 2014 driver.
     virtual OSString *getGlobalUniqueID() APPLE_KEXT_OVERRIDE;
     virtual OSString *getLocalUniqueID() APPLE_KEXT_OVERRIDE;
-    virtual const char *UniqueIDClassName() const { return "com_m_audio_FWEngine2"; }
+    virtual const char *UniqueIDClassName() const { return fLegacyUniqueID ? "com_m_audio_FWEngine1" : "com_m_audio_FWEngine2"; }   // asm 0x5b95-0x5ba8
+public:
+    void SetLegacyEngineFlags(bool uniqueIDEngine1, bool flag34b) { fLegacyUniqueID = uniqueIDEngine1; fFlag34b = flag34b; }   // ref [+0x34a] / [+0x34b]
     // ref FWBaseEngine::registerService @0x399a is an empty function: registration of the engine is deferred until the device has finished
     // initHardware, which calls ReallyRegisterService (vt[0xc70] @0x3986). That function jumps through FWDiscreteEngine's vtable slot 0x5c0
     // (mafw.asm 0x398c..0x3994), i.e. the inherited IOAudioEngine::registerService, not IOService::registerService.
@@ -175,6 +177,7 @@ public:
     // ---- state accessors ----
     UInt32 rateHz() const        { return fRate; }                                   // [+0x220]
     UInt32 sytInterval() const   { return fSytInterval; }                            // [+0x224]
+    UInt32 isochRefs() const     { return fIsochRefs; }                               // clone accessor (R134)
     UInt32 fdfIndex() const      { return fFdf; }                                    // [+0x228]
     bool   isConnected() const   { return fConnected; }
     UInt32 ActiveUserClients() const { return numActiveUserClients; }          // IOAudioEngine's count of clients doing I/O                              // [+0x2d3]
@@ -212,7 +215,7 @@ protected:
     UInt32 fMidiChannels;                          // [+0x2e8]  m
     UInt32 fOutStreamChannels;                     // [+0x2ec]  DeviceChannels.outStream
     UInt32 fInStreamChannels;                      // [+0x2f0]  DeviceChannels.inStream
-    UInt64 fClipOffset[3];                         // [+0x320 +0x328 +0x330]
+    const UInt32 *fChannelMap[3];                  // [+0x320 +0x328 +0x330] input map / output map / output copy list (DeviceChannels +0x18..)
     FWRearrangeProc    fRearrangeProc;             // [+0x300] output frames -> AM824 quadlets (NULL = no proc for this channel count)
     FWPeakProc         fPeakProc;                  // [+0x308] output peak proc, set by FW1814Device::SwitchDigitalSignals (NULL until the first clock-source change)
     FWInputConvertProc fInputProc;                 // [+0x310]
@@ -220,6 +223,8 @@ protected:
     UInt32 fInputConvertedEnd;                     // [+0x33c] first + num of the last input conversion
     UInt32 fPending;                               // [+0x344]
     bool   fTwoPhaseConnect;                       // [+0x348]
+    bool   fLegacyUniqueID;                        // [+0x34a] getGlobalUniqueID uses "com_m_audio_FWEngine1" (asm 0x5b95; FW410 SetupAudioEngine)
+    bool   fFlag34b;                               // [+0x34b] set by the FW410's SetupAudioEngine (asm 0x15526); no reader in v1.11.2 (R136)
     com_openaudio_FWDCLOutputProgram *fTx;         // [+0x350]
     com_openaudio_FWDCLInputProgram  *fRx;         // [+0x358]
     // sample rings (ResetSampleBuffers @0x57f8): sizes (channels + midi) * 0x8000 bytes

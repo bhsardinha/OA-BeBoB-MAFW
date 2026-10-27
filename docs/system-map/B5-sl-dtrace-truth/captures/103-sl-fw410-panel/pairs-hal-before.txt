@@ -1,0 +1,11 @@
+2026-10-26 21:56:45.164 Python[344:d07] Error loading /Library/Audio/Plug-Ins/HAL/DVCPROHDAudio.plugin/Contents/MacOS/DVCPROHDAudio:  dlopen(/Library/Audio/Plug-Ins/HAL/DVCPROHDAudio.plugin/Contents/MacOS/DVCPROHDAudio, 262): no suitable image found.  Did find:
+	/Library/Audio/Plug-Ins/HAL/DVCPROHDAudio.plugin/Contents/MacOS/DVCPROHDAudio: no matching architecture in universal wrapper
+2026-10-26 21:56:45.167 Python[344:d07] Cannot find function pointer NewPlugIn for factory C5A4CE5B-0BB8-11D8-9D75-0003939615B6 in CFBundle/CFPlugIn 0x101d01c80 </Library/Audio/Plug-Ins/HAL/DVCPROHDAudio.plugin> (bundle, not loaded)
+268  Built-in Line Input          uid=AppleHDAEngineInput:1B,0,1,0:3             rate=96000.0 in=2  out=0  defaultIn
+266  Built-in Digital Input       uid=AppleHDAEngineInput:1B,0,1,1:4             rate=44100.0 in=2  out=0 
+274  Built-in Output              uid=AppleHDAEngineOutput:1B,0,1,2:0            rate=44100.0 in=0  out=2 
+272  Built-in Line Output         uid=AppleHDAEngineOutput:1B,0,1,3:1            rate=96000.0 in=0  out=2 
+270  Built-in Digital Output      uid=AppleHDAEngineOutput:1B,0,1,4:2            rate=44100.0 in=0  out=2 
+258  HD 450BT                     uid=IOBluetoothSCOAudioEngine:00-1b-66-04-6b-45 rate=8000.0  in=1  out=1 
+261  HD 450BT                     uid=com_apple_driver_IOBluetoothA2DPAudioEngine:0x22298a00 rate=44100.0 in=0  out=2 
+263  FireWire 410 Multichannel    uid=com_m_audio_FWEngine1:0xD6C010006B8C0      rate=96000.0 in=4  out=10 defaultOut

@@ -1,0 +1,16 @@
+  160    0 0xffffff7f83641000 0x42000    0x42000    com.openaudio.OpenAudioBeBoBMAFW (0.3.0) C72A48B4-ADDB-38D8-8695-C9FE75F279DB <159 113 70 5 4 3>
+ProductName:	Mac OS X
+ProductVersion:	10.13.6
+BuildVersion:	17G14042
+        FW 410:
+
+          Manufacturer: M-AUDIO
+          Model: 0x10046
+          GUID: 0xD6C010006B8C0
+          Maximum Speed: Up to 400 Mb/sec
+          Connection Speed: Up to 400 Mb/sec
+--
+            FW 410 Unit:
+              Unit Software Version: 0x14001
+              Unit Spec ID: 0xA02D
+
