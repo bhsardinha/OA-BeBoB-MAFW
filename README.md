@@ -10,7 +10,7 @@ These are BridgeCo BeBoB FireWire interfaces that M-Audio stopped supporting yea
 
 > **Homebrew and experimental.** A hobby project, not a product: the kernel extension is **unsigned and will stay unsigned**, so it runs only with **System Integrity Protection disabled**, and nothing is promised or supported.
 
-> **Current version: 0.4.1** (driver 0.3.1, panel 1.7) — [download](https://github.com/bhsardinha/OA-BeBoB-MAFW/releases/tag/v0.4.1), [changelog](openaudio-mafw-bebob/CHANGELOG.md).
+> **Current version: 0.5.0** (driver 0.3.1, panel 2.0) — [download](https://github.com/bhsardinha/OA-BeBoB-MAFW/releases/tag/v0.5.0), [changelog](openaudio-mafw-bebob/CHANGELOG.md). New in 0.5.0: the [Advanced window](#advanced-window-firewire-1814) for the FireWire 1814 and the [Dual window](#dual-window-two-firewire-1814s) for two of them.
 
 ## Interfaces
 
@@ -29,6 +29,17 @@ Each interface has its own panel layout, drawn from the official panel's control
 ## Screenshots
 
 <table>
+<tr>
+<td align="center"><img src="docs/images/advanced-monitor.png" width="400" alt="Advanced window, Monitor mode"><br><sub>FireWire 1814, Advanced: Monitor (direct monitoring, mono lines)</sub></td>
+<td align="center"><img src="docs/images/advanced-daw.png" width="400" alt="Advanced window, DAW mode"><br><sub>FireWire 1814, Advanced: DAW</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="docs/images/advanced-console.png" width="400" alt="Advanced window, Console mode"><br><sub>FireWire 1814, Advanced: Console (with CUE)</sub></td>
+<td align="center"><img src="docs/images/advanced-hybrid.png" width="400" alt="Advanced window, Hybrid mode"><br><sub>FireWire 1814, Advanced: Hybrid (outboard loops)</sub></td>
+</tr>
+<tr>
+<td align="center" colspan="2"><img src="docs/images/dual-daw.png" width="820" alt="Dual window, DAW view"><br><sub>Two FireWire 1814s, Dual window: DAW (32 in / 24 out). The Advanced screenshots are the panel's demo mode.</sub></td>
+</tr>
 <tr>
 <td align="center"><img src="docs/images/panel-fw410-mixer.png" width="400" alt="FW410 mixer page"><br><sub>FireWire 410: mixer</sub></td>
 <td align="center"><img src="docs/images/panel-fw410-output.png" width="400" alt="FW410 output page"><br><sub>FireWire 410: outputs and phones</sub></td>
@@ -71,7 +82,7 @@ Not supported: macOS 26 Tahoe, Apple Silicon, and the other models of the offici
 
 - **Kernel extension** (`com.openaudio.OpenAudioBeBoBMAFW`): finds the interfaces on the FireWire bus, brings them up and publishes a CoreAudio device per unit, with the hardware mixer, peak meters and MIDI ports.
 - **Helper daemon** (LaunchDaemon): starts the interface firmware after power-up and remembers your settings per unit, replaying them when the driver attaches. It never writes the interface's flash.
-- **Control panel** (`OA BeBoB MAFW.app`): mixer, output, hardware and meter views for each model, presets, a device menu for several units, a menu bar mode, a big meter and a read-only firmware check.
+- **Control panel** (`OA BeBoB MAFW.app`): mixer, output, hardware and meter views for each model, presets, a device menu for several units, a menu bar mode, a big meter, a read-only firmware check, and for the FireWire 1814 the Advanced and Dual windows.
 - **MIDI:** the original M-Audio CoreMIDI plug-in, unmodified.
 - **Installer:** `Install OA BeBoB MAFW.pkg`, an **Uninstall OA BeBoB MAFW** app, and a `.dmg` holding both. It updates any earlier version in place (settings kept) and asks for a restart.
 
@@ -112,9 +123,25 @@ With the sync source on **External – digital** (S/PDIF), the panel sets the in
 - Source: SW 1/2, Out 1/2, Phones or In 1/2 of the selected unit.
 - Always on top, pinned to the top or bottom of the screen or free, transparent, click-through. *View › Big Meter* (⌘B).
 
+### Advanced window (FireWire 1814)
+
+A second window for the FireWire 1814 at 44.1 and 48 kHz (status menu › *Advanced Panel…*, or *View › Advanced*, ⌥⌘A), organised by what you are doing rather than by the mixer's layout. Each **mode** keeps its own interface scene for each unit; switching saves the mode you leave and applies the next one, and asks first when an output would get louder.
+
+- **DAW** — monitoring in the DAW: big input and output meters, the monitor level on the front knob, speakers A / B, the two phones.
+- **Monitor** — direct monitoring, mono first. Mix 1/2 and Mix 3/4 are each a stereo mix or **two independent mono lines** (Out 1 / 2, Out 3 / 4): the panel pans each source to the lines it is IN on. The Aux is a third mix. Solo, stereo link per input pair, mono or joined DAW returns, one output card per mono line, the front A/B switch.
+- **Console** — the 1814 as a converter for an analog console: every interface level at unity (with a warning), linear meters with a selectable 0 VU (−20 / −18 / −14 / −12 dBFS), your console's labels, and **CUE** (PFL on Phones 1, the outputs untouched).
+- **Hybrid** — outboard and reamp loops (DAW out → device → DAW in) with send and return meters and their difference, for gain matching.
+- **Your own modes** (＋ in the header), listed in the status menu; **hidden channels** per mode; the **front knob's** target and level in the header.
+
+The interface's own rules are shown instead of hidden: inputs and DAW returns reach Mix 1/2 and Mix 3/4 in pairs with one level for both, and the DAW returns have no pan (DAW 1 / 3 land on the left, DAW 2 / 4 on the right).
+
+### Dual window (two FireWire 1814s)
+
+Two FireWire 1814s used as one macOS aggregate device (32 in / 24 out with ADAT, at 44.1 or 48 kHz): a DAW view with both units' meters, monitor knobs, speakers and phones, a Console view for both, and a setup sheet that checks the rates, the word-clock link from A to B and the aggregate (and creates it). Status menu › *Advanced Dual (A + B)…* with two units connected. **Not yet tested with the aggregate on real hardware.**
+
 ### Light on the CPU
 
-Meters are GPU-composited layers, redrawn only when a segment changes (the official panel's method): about 2 % of a core on a 2010 iMac with moving meters.
+Meters are GPU-composited and redrawn only when they change: about 2 % of a core on a 2010 iMac for the standard panel. The Advanced and Dual windows draw each meter row as one GPU image filled from the driver's peak snapshot, the panel only writing the bars that changed: the Dual DAW view, 60-odd tall meters at full HD, costs about 6 % of a core plus 8 % in WindowServer on the same iMac.
 
 ---
 
@@ -150,6 +177,7 @@ To remove everything, run **Uninstall OA BeBoB MAFW** from the disk image and re
 3. **FireWire 1814: an S/PDIF ↔ ADAT switch interrupts audio for about 4 s**, and the Audio MIDI Setup sidebar label can stay stale (the real channel counts are correct).
 4. **After a sleep in which the interface lost power**, some routing (the phones source on the 1814, the S/PDIF input pans) may need to be set again in the panel.
 5. **Rough edges:** diagnostic logging is still compiled in; English only.
+6. **Advanced and Dual windows (new in 0.5.0):** each mode's interface scene was written and read back on two real FireWire 1814s, but most interactions inside the views have been checked only in the panel's demo mode, the **Dual window has not been used with a real aggregate yet**, and the Modern edition of the panel 2.0 has only been built and opened in demo mode.
 
 ## Roadmap
 

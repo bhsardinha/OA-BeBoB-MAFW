@@ -12,6 +12,28 @@ The M-Audio CoreMIDI plug-in is shipped unmodified (1.11.2). Each entry lists th
 
 ---
 
+## Package 0.5.0 — 2026-10-28 (release v0.5.0)
+
+| Driver | Panel | MIDI plug-in | Editions |
+|---|---|---|---|
+| 0.3.1 (unchanged) | **2.0** | 1.11.2 | Classic and Modern |
+
+**Panel 2.0 — the Advanced window (FireWire 1814, 44.1 / 48 kHz)**, from the status menu or *View › Advanced* (⌥⌘A). Four modes, each with its own interface scene per unit; switching saves the mode left and applies the next (asking first when an output would get louder):
+- **DAW:** big input and output meters (the DAW does the monitoring), monitor level on the front knob, speakers A / B, the two phones.
+- **Monitor:** direct monitoring, mono first. Mix 1/2 and Mix 3/4 are each a stereo mix or two independent mono lines (Out 1 / 2, Out 3 / 4; the panel pans each source to the lines it is IN on); the Aux is a third mix. Solo, a stereo link per input pair, mono or joined DAW returns, split output cards, the front A/B switch on the Phones 1 card. IN keeps a source's level; a new source joins at 0 dB.
+- **Console:** the 1814 as converter for an analog console: unity at every interface level (with a warning and *Restore 0 dB*), linear meters with a 0 VU reference (−20 / −18 / −14 / −12 dBFS), your console's labels, **CUE** (PFL on Phones 1 through the Aux, the outputs untouched).
+- **Hybrid:** outboard loops (DAW out → device → DAW in) with send / return meters and their difference.
+- **Your own modes** (＋: new from the current one, rename, delete), listed in the status menu; **hidden channels** per mode; the **front knob's** target in the header.
+- The interface's rules shown, not hidden: inputs and DAW returns reach Mix 1/2 and Mix 3/4 in pairs with one level for both (register 0x90 / 0x94), and the DAW returns have no pan (odd ones land left, even ones right).
+
+**The Dual window** (two FireWire 1814s as one macOS aggregate device, 32 in / 24 out with ADAT): DAW view with both units' meters, each unit's monitor knob, speakers and phones; Console view for both; a setup sheet (rates, word clock from A to B, the aggregate). **Not tested with the aggregate on hardware yet.**
+
+**Other panel changes:** one panel window at a time (standard, Advanced or Dual); the Advanced and Dual meters are drawn as one GPU image per row from the driver's peak snapshot (Dual DAW: about 6 % of a core plus 8 % in WindowServer on a 2010 iMac, from 31 % + 42 %); writes the driver refuses are shown.
+
+**Tested:** every mode's scene written and read back on two real FireWire 1814s (capture 108). Most interactions inside the views are checked in the demo only; nothing of 0.5.0 has been tested on the Modern edition beyond building and opening it.
+
+---
+
 ## Package 0.4.1 — 2026-10-27 (published, release v0.4.1)
 
 | Driver | Panel | MIDI plug-in | Editions |

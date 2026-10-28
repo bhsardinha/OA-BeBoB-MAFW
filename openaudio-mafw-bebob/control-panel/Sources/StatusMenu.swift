@@ -189,6 +189,21 @@ final class StatusMenuController: NSObject, NSMenuDelegate {
             m.addItem(NSMenuItem.separator())
         }
         action(m, "Open Panel", #selector(openPanel))
+        // Advanced window (PANEL_REDESIGN_PLAN_v3 §2): FW1814 only; greyed outside 44.1 / 48 kHz
+        if let c = cur, AdvancedGate.offered(modelAllows: c.device.profile.advancedPanel) {
+            let ok = AdvancedGate.available(modelAllows: true, rate: c.ctx.model.sampleRate)
+            let i = action(m, ok ? "Advanced Panel\u{2026}" : "Advanced Panel\u{2026} (44.1 / 48 kHz)", #selector(openAdvanced))
+            i.isEnabled = ok
+            // the unit's modes (plan v2 §3: the status menu lists the modes); choosing one opens the window in that mode
+            if ok, let list = advancedModes?(c) {
+                for e in list {
+                    let mi = m.addItem(withTitle: e.name, action: #selector(chooseAdvancedMode(_:)), keyEquivalent: "")
+                    mi.target = self; mi.representedObject = e.key; mi.indentationLevel = 1; mi.state = e.current ? .on : .off
+                }
+            }
+        }
+        // Dual (M7): two FW1814s as one aggregate; the window says what is missing (rates, word clock, aggregate)
+        if all.filter({ $0.device.profile.advancedPanel }).count >= 2 { action(m, "Advanced Dual (A + B)\u{2026}", #selector(openDual)) }
         if let c = cur { levelItems(m, c) }
         m.addItem(NSMenuItem.separator())
         let bm = m.addItem(withTitle: "Big Meter", action: nil, keyEquivalent: ""); bm.submenu = bigMeter.optionsMenu()
@@ -290,6 +305,14 @@ final class StatusMenuController: NSObject, NSMenuDelegate {
         m.updateClock { $0.sync = s }
     }
     @objc private func openPanel() { onOpenPanel?(selected) }
+    var onOpenAdvanced: ((PanelWindowController) -> Void)?
+    /// The Advanced modes of a unit (key, name, current) and the choice of one (M6)
+    var advancedModes: ((PanelWindowController) -> [(key: String, name: String, current: Bool)])?
+    var onAdvancedMode: ((PanelWindowController, String) -> Void)?
+    @objc private func chooseAdvancedMode(_ sender: NSMenuItem) { if let c = selected, let k = sender.representedObject as? String { onAdvancedMode?(c, k) } }
+    @objc private func openAdvanced() { if let c = selected { onOpenAdvanced?(c) } }
+    var onOpenDual: (() -> Void)?
+    @objc private func openDual() { onOpenDual?() }
     @objc private func openAMS() {
         _ = NSWorkspace.shared.launchApplication(withBundleIdentifier: "com.apple.audio.AudioMIDISetup", options: [], additionalEventParamDescriptor: nil, launchIdentifier: nil)
     }

@@ -142,8 +142,18 @@ final class DeviceModel {
         guard !dirty.isEmpty else { return }
         let batch = dirty
         dirty.removeAll()
-        transport.setProperties(batch)
+        let kr = transport.setProperties(batch)
+        if kr != KERN_SUCCESS {
+            writeFailure = (kr, (writeFailure?.keys ?? []) + batch.keys.sorted())
+            NotificationCenter.default.post(name: DeviceModel.writeFailed, object: self)
+        }
     }
+
+    /// A write the driver refused (IORegistryEntrySetCFProperties result and the keys of the refused batches) since `clearWriteFailure`.
+    /// The Advanced windows show it instead of "applied" (ADVANCED_TODO_v2 §2: the chip trusted the cache, not the driver).
+    private(set) var writeFailure: (code: kern_return_t, keys: [String])?
+    func clearWriteFailure() { writeFailure = nil }
+    static let writeFailed = Notification.Name("DeviceModelWriteFailed")
 
     // MARK: headphone safety (user request 2026-10-16)
 

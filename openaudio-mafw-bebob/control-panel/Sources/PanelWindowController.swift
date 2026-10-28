@@ -130,6 +130,10 @@ final class PanelWindowController: NSObject, NSWindowDelegate {
     private var meterTimer: Timer?
     private var followTimer: Timer?
     var onSelectDevice: ((PanelWindowController, UInt64) -> Void)?
+    /// The Advanced window of this unit (PANEL_REDESIGN_PLAN_v3), made on first use
+    private(set) var advanced: AdvancedWindowController?
+    /// Where the Advanced window keeps its modes (the demo uses a scratch folder so it never touches the user's)
+    var advancedStoreFolder = AdvancedStore.folder
 
     /// Content size before the first fit (the 48 kHz ADAT mixer).
     static let defaultContentSize = NSSize(width: 1290, height: 680)
@@ -216,7 +220,7 @@ final class PanelWindowController: NSObject, NSWindowDelegate {
 
     /// Name shown in the header and the meter windows (the product name, plus the GUID tail when several are connected).
     var displayName: String = "" {
-        didSet { header.name = displayName; wide?.deviceTitle = displayName; narrow?.deviceTitle = displayName }
+        didSet { header.name = displayName; wide?.deviceTitle = displayName; narrow?.deviceTitle = displayName; advanced?.displayName = displayName }
     }
     func setDevices(_ list: [(id: UInt64, title: String)]) { header.devices = list }
 
@@ -224,6 +228,10 @@ final class PanelWindowController: NSObject, NSWindowDelegate {
     var visibleWindow: NSWindow? { return [window, wide?.window, narrow?.window].compactMap { $0 }.first(where: { $0.isVisible }) }
     func owns(_ w: NSWindow?) -> Bool { return w != nil && (w === window || w === wide?.window || w === narrow?.window) }
     func hideAll() { [window, wide?.window, narrow?.window].compactMap { $0 }.forEach { $0.orderOut(nil) } }
+    func hideAdvanced() { advanced?.hide() }
+    /// One panel window at a time (user, 2026-10-28): told before this unit shows its standard panel (false) or its Advanced window (true),
+    /// so the app hides every other panel, Advanced and Dual window.
+    var onExclusive: ((PanelWindowController, Bool) -> Void)?
 
     func show() { setMode(mode < 0 ? 0 : mode) }
 
@@ -231,6 +239,8 @@ final class PanelWindowController: NSObject, NSWindowDelegate {
 
     /// 0 = full window, 1 = wide meters, 2 = narrow meters. The target window takes the centre of the window it replaces (or `center`).
     func setMode(_ m: Int, center: NSPoint? = nil) {
+        onExclusive?(self, false)
+        advanced?.hide()
         header.modes.selected = m
         let c = center ?? visibleWindow.map { NSPoint(x: $0.frame.midX, y: $0.frame.midY) } ?? screenCenter()
         let target: NSWindow
@@ -283,7 +293,29 @@ final class PanelWindowController: NSObject, NSWindowDelegate {
 
     // MARK: model -> views
 
+    /// Opens (or brings to the front) this unit's Advanced window. The menu offers it only for a model with `advancedPanel`.
+    func openAdvanced() {
+        guard device.profile.advancedPanel else { NSSound.beep(); return }
+        onExclusive?(self, true)
+        hideAll()
+        advancedController()?.show()
+    }
+    /// This unit's Advanced controller, made if needed, not shown (the Dual window drives both units' scenes through it).
+    @discardableResult func advancedController() -> AdvancedWindowController? {
+        guard device.profile.advancedPanel else { return nil }
+        if advanced == nil {
+            let a = AdvancedWindowController(context: ctx, device: device, name: displayName.isEmpty ? device.info.name : displayName, storeFolder: advancedStoreFolder)
+            a.onOpenStandard = { [weak self] in self?.show(); self?.visibleWindow?.makeKeyAndOrderFront(nil) }
+            advanced = a
+        }
+        return advanced
+    }
+    /// Called after every model change of this unit (the Dual window listens to both units)
+    var onRefresh: (() -> Void)?
+
     private func refreshAll() {
+        advanced?.refresh()
+        onRefresh?()
         for (_, v) in tabs { v.refresh() }
         sidebar.refresh()
         refreshHeader()
@@ -301,9 +333,10 @@ final class PanelWindowController: NSObject, NSWindowDelegate {
     /// only when one of them is.
     private func tickMeters() {
         func shown(_ w: NSWindow?) -> Bool { return w.map { $0.isVisible && (benchIgnoresOcclusion || $0.occlusionState.contains(.visible)) } ?? false }
-        let main = shown(window), wv = shown(wide?.window), nv = shown(narrow?.window)
-        guard main || wv || nv else { return }
+        let main = shown(window), wv = shown(wide?.window), nv = shown(narrow?.window), av = advanced?.isShown ?? false
+        guard main || wv || nv || av else { return }
         ctx.pollMeters()
+        if av { advanced?.updateMeters() }
         if main { currentTab?.updateMeters() }
         if wv { wide?.update() }
         if nv { narrow?.update() }
@@ -325,6 +358,7 @@ final class PanelWindowController: NSObject, NSWindowDelegate {
         followTimer?.invalidate(); followTimer = nil
         device.onPropertiesChanged = nil
         ctx.model.onKernelChange = nil; ctx.model.onLocalChange = nil
+        advanced?.close()
         hideAll()
     }
 

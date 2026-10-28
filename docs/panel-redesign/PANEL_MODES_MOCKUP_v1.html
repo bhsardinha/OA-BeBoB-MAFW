@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel Modes Mockup</title>
+<!--
+  PANEL_REDESIGN_PLAN_v2 companion: the panel as a set of modes, one per way of working, each with its own view.
+  FireWire 1814 in ADAT mode (16 in / 12 out at 44.1-48 kHz, kext FW1814Tables.h kFW1814ADAT44_48). Meters are simulated; nothing talks to
+  a driver. Palette and type from control-panel/Sources/Theme.swift. Start state from the URL: #mode=daw|monitor|console|hybrid
+-->
+<style>
+:root{
+  --chrome:#0B0C0D;--window:#101113;--surface:#191B1E;--raised:#202327;--control:#272A2F;--controlHi:#33373D;
+  --well:#08090A;--track:#2C3035;--ledOff:#24272B;--hair:rgba(255,255,255,.06);
+  --text:#ECEEF1;--text2:#A4AAB2;--text3:#6B717A;--text4:#43474E;
+  --accent:#62AEFF;--mute:#E5484D;--solo:#F1B33A;--green:#3DC97B;--red:#EF5248;
+  --mLow:#33CF7D;--mMid:#EFC43B;--mHigh:#F2493F;--cap:#D9DCE0;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:#050606;color:var(--text);font:13px/1.35 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.num{font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+.page{padding:20px 16px 64px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.intro{max-width:1120px;text-align:center;color:var(--text2);font-size:12.5px}
+.intro h1{margin:0 0 4px;font-size:17px;color:var(--text);font-weight:650}
+.intro a{color:var(--accent)}
+.scroller{max-width:100%;overflow-x:auto;padding:4px}
+.win{position:relative;width:1280px;height:720px;background:var(--window);border-radius:11px;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 30px 80px rgba(0,0,0,.6);overflow:hidden;user-select:none;-webkit-user-select:none}
+#wi{position:absolute;inset:0}
+#pops{position:absolute;inset:0;pointer-events:none}
+#pops>*{pointer-events:auto}
+
+/* header + mode bar */
+.hdr{height:52px;background:var(--chrome);display:flex;align-items:center;gap:8px;padding:0 12px}
+.lights{display:flex;gap:8px;margin-right:4px}.lights i{width:12px;height:12px;border-radius:50%;background:#34373c;display:block}
+.dev{display:flex;flex-direction:column;line-height:1.15;padding:4px 8px;margin-right:4px}
+.dev b{font-size:14px;font-weight:650}.dev span{font-size:10.5px;color:var(--text3)}
+.mseg{display:flex;background:var(--raised);border-radius:10px;padding:3px;gap:2px}
+.mseg button{display:flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:7px;color:var(--text2);font-size:12.5px;font-weight:600;white-space:nowrap}
+.mseg button:hover{background:var(--control)}
+.mseg button.on{background:var(--controlHi);color:var(--text);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.mseg button svg{opacity:.85}
+.mseg .plus{padding:0 10px;color:var(--text3);font-size:15px}
+.pill{display:flex;align-items:center;gap:7px;height:30px;padding:0 11px;border-radius:15px;background:var(--raised);font-size:12px;color:var(--text2);white-space:nowrap}
+.pill b{color:var(--text);font-weight:650}.pill .lock{color:var(--green);font-size:11px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;flex:none}
+.spacer{flex:1}
+.knobw{display:flex;align-items:center;gap:9px;height:38px;padding:0 12px 0 4px;border-radius:19px;background:var(--raised);cursor:ns-resize;touch-action:none}
+.knob{display:block;width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 50% 35%,#3c4047,#23262b);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);position:relative;flex:none}
+.knob::after{content:"";position:absolute;left:50%;top:4px;width:2px;height:8px;margin-left:-1px;background:var(--text);border-radius:1px;transform-origin:1px 11px;transform:rotate(var(--rot,0deg))}
+.knob.big{width:112px;height:112px;background:radial-gradient(circle at 50% 30%,#41454d,#1f2226 75%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),0 8px 22px rgba(0,0,0,.5)}
+.knob.big::after{top:10px;height:22px;width:4px;margin-left:-2px;border-radius:2px;transform-origin:2px 46px}
+.knob.big[style]::after{top:7px;height:15px;width:3px;margin-left:-1.5px;transform-origin:1.5px 29px}
+.kt{display:flex;flex-direction:column;line-height:1.2}.kt b{font-size:12px}.kt span{font-size:10.5px;color:var(--text3);white-space:nowrap}
+.gbtn{height:30px;padding:0 12px;border-radius:8px;background:var(--control);font-size:11.5px;font-weight:700;color:var(--text2);letter-spacing:.04em}
+.gbtn.dim.on{background:var(--green);color:#0B0C0D}.gbtn.mute.on{background:var(--mute);color:#fff}
+.mbar{height:36px;display:flex;align-items:center;gap:10px;padding:0 16px;background:#0D0E10;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.mbar b{font-size:12.5px;white-space:nowrap}.mbar span{font-size:11.5px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.hwchip{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text2);background:var(--raised);border-radius:12px;padding:4px 10px;white-space:nowrap;flex:none}
+.hwchip i{font-style:normal;color:var(--green)}
+.body{position:absolute;top:88px;left:0;right:0;bottom:0;padding:12px 16px 14px;display:flex;gap:16px}
+.zlabel{height:22px;flex:none;font-size:10px;font-weight:650;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.zlabel .r{margin-left:auto;text-transform:none;letter-spacing:0;font-weight:500}
+.card{background:var(--surface);border-radius:10px;padding:10px 12px;position:relative}
+.hint{color:var(--text3);font-size:11px;line-height:1.45}
+
+/* meters, faders (shared) */
+.mbar2{position:relative;flex:1;border-radius:2px;background:linear-gradient(to top,var(--mLow) 0%,var(--mLow) 55%,var(--mMid) 76%,var(--mHigh) 93%);overflow:hidden}
+.mbar2 .cv{position:absolute;left:0;right:0;top:0;height:calc((1 - var(--m, 0)) * 100%);background:var(--ledOff)}
+.mbar2::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(to top,transparent 0 2px,rgba(8,9,10,.85) 2px 3px)}
+.mbar2.off{opacity:.25}
+.hm{position:relative;height:4px;border-radius:2px;background:linear-gradient(to right,var(--mLow) 0%,var(--mLow) 55%,var(--mMid) 76%,var(--mHigh) 93%);overflow:hidden}
+.hm+.hm{margin-top:2px}
+.hm .cv{position:absolute;top:0;bottom:0;right:0;width:calc((1 - var(--m, 0)) * 100%);background:var(--ledOff)}
+.hm::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(to right,transparent 0 2px,rgba(8,9,10,.85) 2px 3px)}
+.ftrack{position:relative;width:26px;border-radius:5px;background:var(--well);cursor:ns-resize;display:flex;gap:3px;padding:3px 4px;touch-action:none}
+.cap{position:absolute;left:-6px;right:-6px;height:12px;border-radius:3px;background:var(--cap);box-shadow:0 1px 3px rgba(0,0,0,.7);top:calc(6px + (100% - 12px) * (1 - var(--p, 1)));transform:translateY(-50%);pointer-events:none}
+.cap::after{content:"";position:absolute;left:4px;right:4px;top:5px;height:2px;background:#2A2D31}
+.hf{position:relative;height:22px;flex:1;border-radius:5px;background:var(--well);padding:5px 6px;display:flex;flex-direction:column;justify-content:center;cursor:ew-resize;touch-action:none;min-width:40px}
+.hf .cap{top:50%;left:calc(6px + (100% - 12px) * var(--p, 1));right:auto;width:11px;height:24px;transform:translate(-50%,-50%)}
+.hf .cap::after{left:4.5px;right:auto;top:4px;bottom:4px;width:2px;height:auto}
+.hf.locked{cursor:not-allowed;opacity:.6}
+.sb{width:20px;height:20px;border-radius:5px;background:var(--control);font-size:10px;font-weight:750;color:var(--text3);display:flex;align-items:center;justify-content:center;flex:none}
+.sb:hover{background:var(--controlHi)}.sb.m.on{background:var(--mute);color:#fff}.sb.s.on{background:var(--solo);color:#111}.sb.l.on{color:var(--accent)}
+.v{font-size:11px;color:var(--text2);width:36px;text-align:right;white-space:nowrap}
+.seg{display:flex;gap:3px}
+.seg button{flex:1;height:22px;border-radius:6px;background:var(--control);font-size:10.5px;font-weight:650;color:var(--text3);padding:0 8px;white-space:nowrap}
+.seg button:hover{background:var(--controlHi)}
+.seg button.on{background:var(--c,var(--accent));color:#0B0C0D}
+.badge{font-size:8.5px;font-weight:750;padding:1px 5px;border-radius:4px;background:var(--control);color:var(--text2);letter-spacing:.06em}
+.badge.mono{background:#2a2f37;color:#cfe3ff}
+
+/* MONITOR mode */
+.msrc{flex:1;min-width:0;display:flex;flex-direction:column}
+.ctx{height:32px;flex:none;border-radius:9px;background:var(--surface);display:flex;align-items:center;gap:9px;padding:0 12px;margin-bottom:8px;box-shadow:inset 3px 0 0 var(--bc);overflow:hidden}
+.ctx b{font-size:12.5px;white-space:nowrap}.ctx span{font-size:11.5px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.groups{display:flex;gap:14px;flex:1;min-height:0;overflow-x:auto;overflow-y:hidden;padding-bottom:4px}
+.group{display:flex;flex-direction:column;min-height:0}
+.strips{display:flex;gap:4px;flex:1;min-height:0}
+.ms{width:var(--ms,44px);background:var(--surface);border-radius:8px;display:flex;flex-direction:column;align-items:center;padding:7px 0;position:relative;transition:opacity .15s;flex:none}
+.ms.st{width:calc(var(--ms,44px) + 20px)}
+.ms.out{opacity:.38}.ms.out:hover{opacity:.7}
+.ms .nm{font-size:10.5px;font-weight:650;max-width:calc(100% - 4px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ms .jk{font-size:8.5px;color:var(--text3);white-space:nowrap}
+.inbtn{margin:6px 0 2px;width:calc(100% - 10px);height:17px;border-radius:4px;background:var(--control);font-size:8.5px;font-weight:750;color:var(--text3);letter-spacing:.04em}
+.inbtn.on{background:var(--c);color:#0B0C0D}
+.ms .fm{flex:1;min-height:100px;display:flex;justify-content:center;margin:6px 0 4px}
+.ms .ftrack{width:14px;padding:3px}
+.ms.st .ftrack{width:24px}
+.ms .ftrack .cap{left:-8px;right:-8px}
+.ms .val{font-size:9.5px;color:var(--text2);height:13px}
+.ms .pm{height:16px;width:calc(100% - 10px);position:relative;margin:4px 0 0;cursor:ew-resize;touch-action:none}
+.ms .pm .tr{position:absolute;left:0;right:0;top:7px;height:2px;background:var(--track)}
+.ms .pm .h{position:absolute;top:2px;width:7px;height:12px;border-radius:2px;background:var(--text2);margin-left:-3.5px}
+.ms .pmt{font-size:8.5px;color:var(--text3);height:16px;margin-top:4px;display:flex;align-items:center}
+.ms .btns{display:flex;gap:2px;margin-top:4px}
+.ms .btns .sb{width:17px;height:17px;font-size:9px}
+.shared{position:absolute;top:5px;right:3px;width:7px;height:7px;border-radius:50%;background:var(--solo)}
+.coll{width:58px;background:var(--surface);border-radius:8px;display:flex;flex-direction:column;align-items:center;padding:8px 0;cursor:pointer;flex:none}
+.coll:hover{background:var(--raised)}
+.coll .vms{display:flex;gap:2px;flex:1;margin:8px 0;width:40px}
+.coll b{font-size:10.5px}.coll span{font-size:9px;color:var(--text3)}
+.mmix{width:166px;flex:none;display:flex;flex-direction:column}
+.tiles{display:flex;flex-direction:column;gap:7px}
+.mt{background:var(--surface);border-radius:10px;padding:8px 10px 9px;cursor:pointer;position:relative}
+.mt:hover{background:var(--raised)}
+.mt.sel{box-shadow:inset 0 0 0 1.5px var(--c);background:color-mix(in srgb,var(--c) 11%,var(--surface))}
+.mt .tn{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:650;white-space:nowrap}
+.mt .tn i{width:8px;height:8px;border-radius:50%;background:var(--c);flex:none}
+.mt .tn .badge{margin-left:auto}
+.mt .ts{font-size:10px;color:var(--text3);margin:3px 0 6px;line-height:1.3}
+.mt.new{background:transparent;box-shadow:inset 0 0 0 1px var(--text4);color:var(--text2);text-align:center;font-size:12px;padding:10px}
+.cap3{font-size:10.5px;color:var(--text2);margin-top:10px;line-height:1.4}
+.cap3 .bar{display:flex;gap:3px;margin-top:5px}.cap3 .bar i{flex:1;height:5px;border-radius:2px;background:var(--control)}.cap3 .bar i.on{background:var(--c)}
+.mout{width:236px;flex:none;display:flex;flex-direction:column;margin-left:30px}
+.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:0}
+.mmix,.mout,.msrc{position:relative;z-index:1}
+.oc{background:var(--surface);border-radius:10px;padding:8px 10px 9px;margin-bottom:7px}
+.oc .oh{display:flex;align-items:center;gap:6px}
+.oc .oh b{font-size:12px;font-weight:650;white-space:nowrap}.oc .oh span{font-size:9.5px;color:var(--text3);white-space:nowrap}
+.oc .oh .sb{margin-left:auto}
+.oc .seg{margin:7px 0 2px}
+.orow{display:flex;align-items:center;gap:6px;margin-top:5px}
+.orow .ol{width:38px;font-size:10.5px;color:var(--text2);white-space:nowrap}
+.oc .note{font-size:10px;color:var(--text3);margin-top:5px}
+.adm{display:flex;gap:3px;height:26px;margin-top:7px}
+
+/* DAW mode */
+.dmain{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px}
+.bridge{background:var(--surface);border-radius:10px;padding:8px 12px 10px;display:flex;flex-direction:column;min-height:0}
+.bridge.in{flex:1.15}.bridge.outb{flex:1}
+.bg{display:flex;gap:18px;flex:1;min-height:0;margin-top:4px}
+.bgrp{display:flex;flex-direction:column;min-height:0}
+.bgrp .gl{font-size:9.5px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;font-weight:650;height:14px}
+.mcols{display:flex;gap:4px;flex:1;min-height:0}
+.mcol{width:var(--mc,42px);display:flex;flex-direction:column;align-items:center;min-height:0}
+.mcol .pk{font-size:9.5px;color:var(--text2);height:13px}
+.clip{width:22px;height:5px;border-radius:2px;background:var(--ledOff);margin:2px 0 4px;cursor:pointer;flex:none}
+.clip.on{background:var(--red);box-shadow:0 0 6px var(--red)}
+.mcol .well{flex:1;display:flex;gap:2px;width:16px;background:var(--well);border-radius:4px;padding:2px;min-height:40px}
+.mcol .well.st{width:26px}
+.mcol .nm{font-size:9.5px;font-weight:600;margin-top:5px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mcol .ca{font-size:8.5px;color:var(--text3);white-space:nowrap}
+.dscale{position:relative;width:20px;flex:none;margin:30px 0 30px}
+.dscale i{position:absolute;right:0;font-size:8px;color:var(--text4);font-style:normal;transform:translateY(-50%);top:calc((1 - var(--p)) * 100%)}
+.cr{width:300px;flex:none;display:flex;flex-direction:column;gap:9px}
+.crk{display:flex;flex-direction:column;align-items:center;padding:14px 12px 12px}
+.crk .kv{font-size:22px;font-weight:650;margin-top:10px}.crk .ks{font-size:11px;color:var(--text3)}
+.crk .kb{cursor:ns-resize;touch-action:none}
+.row{display:flex;align-items:center;gap:8px}
+.row+.row{margin-top:7px}
+.lab{font-size:9.5px;color:var(--text3);letter-spacing:.09em;text-transform:uppercase;font-weight:650;margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.lab .r{margin-left:auto;text-transform:none;letter-spacing:0;font-weight:500}
+.status{font-size:11px;color:var(--text3);display:flex;gap:16px;align-items:center;padding:0 2px}
+.status b{color:var(--text2);font-weight:600}
+
+/* CONSOLE mode */
+.cwrap{flex:1;display:flex;flex-direction:column;gap:10px;min-width:0}
+.ctop{display:flex;align-items:center;gap:10px;height:38px;flex:none}
+.tog{display:flex;align-items:center;gap:8px;height:32px;padding:0 12px;border-radius:8px;background:var(--surface);font-size:12px;color:var(--text2)}
+.tog.on{box-shadow:inset 0 0 0 1px var(--accent);color:var(--text)}
+.tog .sw{width:26px;height:15px;border-radius:8px;background:var(--control);position:relative}
+.tog .sw::after{content:"";position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:var(--text3);transition:left .15s}
+.tog.on .sw{background:var(--accent)}.tog.on .sw::after{left:13px;background:#fff}
+.chipw{display:flex;align-items:center;gap:7px;height:32px;padding:0 12px;border-radius:8px;background:var(--surface);font-size:12px;color:var(--text2);white-space:nowrap}
+.chipw select{background:var(--well);color:var(--text);border:0;border-radius:5px;font:inherit;padding:3px 4px}
+.chipw.warn{box-shadow:inset 0 0 0 1px rgba(241,179,58,.55)}
+.chipw.warn b{color:var(--solo)}
+.chipw button{color:var(--accent);font-size:11.5px}
+.ctabs{display:flex;gap:14px;flex:1;min-height:0}
+.ctab{flex:1;background:var(--surface);border-radius:10px;padding:8px 12px;display:flex;flex-direction:column;min-width:0}
+.crow{display:grid;grid-template-columns:112px 66px 50px 1fr 38px 10px;align-items:center;gap:8px;height:26px}
+.crow.h{height:20px;font-size:9.5px;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;font-weight:650}
+.crow .jk{font-size:10.5px;color:var(--text3);white-space:nowrap}
+.crow .to{font-size:10.5px;color:var(--text2);white-space:nowrap}
+.lbl{background:transparent;border:0;color:var(--text);font:inherit;font-size:11.5px;width:100%;border-radius:4px;padding:2px 5px;outline:none}
+.lbl:hover{background:var(--raised)}.lbl:focus{background:var(--well);box-shadow:inset 0 0 0 1px var(--accent)}
+.lm{position:relative;height:9px;border-radius:2px;overflow:hidden}
+.lm .cv{position:absolute;top:0;bottom:0;right:0;width:calc((1 - var(--m, 0)) * 100%);background:var(--ledOff)}
+.lm::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(to right,transparent 0 3px,rgba(8,9,10,.8) 3px 4px)}
+.lm .ref{position:absolute;top:0;bottom:0;width:2px;background:rgba(255,255,255,.75);z-index:1}
+.lscale{position:relative;height:12px}
+.lscale i{position:absolute;font-style:normal;font-size:8.5px;color:var(--text3);transform:translateX(-50%);white-space:nowrap}
+.lscale i.ref{color:var(--text)}
+.crow .pkv{font-size:10px;color:var(--text2);text-align:right}
+.cdot{width:8px;height:8px;border-radius:50%;background:var(--ledOff);cursor:pointer}
+.cdot.on{background:var(--red);box-shadow:0 0 6px var(--red)}
+.ctab .sub{display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:8px;border-top:1px solid var(--hair)}
+
+/* HYBRID mode */
+.hmain{flex:1;min-width:0;display:flex;flex-direction:column;gap:9px}
+.loop{background:var(--surface);border-radius:10px;padding:9px 12px 10px}
+.loop .lh{display:flex;align-items:center;gap:8px}
+.loop .lh b{font-size:13px}.loop .lh span{font-size:11px;color:var(--text3)}
+.loop .lh .tg{margin-left:auto;display:flex;gap:6px}
+.mini{display:flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:6px;background:var(--control);font-size:10.5px;color:var(--text3);white-space:nowrap}
+.mini.on{color:var(--text);box-shadow:inset 0 0 0 1px var(--accent)}
+.mini i{width:7px;height:7px;border-radius:2px;background:var(--text4)}.mini.on i{background:var(--accent)}
+.path{display:flex;align-items:center;gap:5px;margin:8px 0 8px;flex-wrap:nowrap;overflow:hidden}
+.px{padding:3px 8px;border-radius:6px;background:var(--raised);font-size:11px;color:var(--text2);white-space:nowrap}
+.px.dev{background:color-mix(in srgb,#FF9F5A 20%,var(--raised));color:var(--text);font-weight:600}
+.px.daw{background:color-mix(in srgb,var(--accent) 16%,var(--raised));color:var(--text)}
+.arr{color:var(--text4);font-size:11px}
+.lmg{display:grid;grid-template-columns:50px 1fr 48px 92px;gap:6px 10px;align-items:center}
+.lmg .k{font-size:10px;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;font-weight:650}
+.lmg .hmw{background:var(--well);border-radius:4px;padding:4px 5px}
+.lmg .hmw .hm{height:6px}
+.delta{grid-row:span 2;text-align:center;border-left:1px solid var(--hair)}
+.delta b{font-size:20px;font-weight:650;display:block}.delta span{font-size:10px;color:var(--text3)}
+.other{background:var(--surface);border-radius:10px;padding:8px 12px 10px;flex:1;min-height:0;display:flex;flex-direction:column}
+.other .mcols{flex:1}
+
+/* popovers, sheet, toast */
+.pop{position:absolute;z-index:50;background:#1D1F23;border-radius:11px;box-shadow:0 0 0 1px rgba(255,255,255,.1),0 18px 50px rgba(0,0,0,.65);padding:12px 14px;width:300px;font-size:12px;line-height:1.45;color:var(--text2)}
+.pop h4,.sheet h4{margin:0 0 7px;font-size:9.5px;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;font-weight:650}
+.pop b{color:var(--text)}
+.mitem{display:flex;gap:8px;padding:6px 8px;border-radius:6px;color:var(--text2);cursor:pointer}
+.mitem:hover{background:var(--controlHi);color:var(--text)}
+.btn{height:28px;padding:0 14px;border-radius:7px;background:var(--control);font-size:12px;font-weight:600;color:var(--text)}
+.btn.pri{background:var(--accent);color:#0B0C0D}
+.sheetbg{position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:60;display:flex;justify-content:center;align-items:flex-start;padding-top:96px}
+.sheet{width:520px;background:#1D1F23;border-radius:12px;box-shadow:0 0 0 1px rgba(255,255,255,.1),0 24px 70px rgba(0,0,0,.7);padding:18px 20px;font-size:12.5px;color:var(--text2);line-height:1.5}
+.sheet .t{font-size:15px;color:var(--text);font-weight:650;margin-bottom:8px}
+.sheet ul{margin:6px 0 12px;padding-left:18px}.sheet li{margin:3px 0}
+.sheet .up{color:var(--solo);font-weight:600}
+.sheet .acts{display:flex;justify-content:flex-end;gap:8px;margin-top:6px}
+.toast{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);background:#24272c;border-radius:10px;padding:9px 14px;font-size:12px;color:var(--text);box-shadow:0 0 0 1px rgba(255,255,255,.1),0 12px 30px rgba(0,0,0,.6);z-index:70;white-space:nowrap}
+
+/* notes */
+.notes{max-width:1180px;display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:14px 28px;color:var(--text2);font-size:12.5px;line-height:1.5;margin-top:6px}
+.note b{color:var(--text)}
+.note h3{margin:0 0 4px;font-size:13px;color:var(--text)}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="intro">
+    <h1>Panel modes: one view per way of working (mockup v1)</h1>
+    FireWire 1814, ADAT in and out (16 in / 12 out). Switch modes in the window’s header. Companion of <code>docs/PANEL_REDESIGN_PLAN_v2.md</code>; the earlier single-view sketch is <a href="PANEL_FLOW_MOCKUP_v1.html">PANEL_FLOW_MOCKUP_v1</a>. Meters are simulated.
+  </div>
+  <div class="scroller"><div class="win" id="win"><div id="wi"></div><div id="pops"></div></div></div>
+  <div class="notes" id="notes"></div>
+</div>
+<script>
+'use strict';
+const NEG = -Infinity;
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const dbToP = db => (db === NEG || db <= -64) ? 0 : Math.min(1, Math.pow(10, db / 40));
+const linP = db => (db === NEG) ? 0 : clamp((db + 60) / 60, 0, 1);            // console meters: linear dBFS, -60 ... 0
+function pToDb(p) { if (p <= 0.035) return NEG; const d = 40 * Math.log10(p); return d > -0.4 ? 0 : Math.round(d * 2) / 2; }
+const fmt = db => db === NEG ? '−∞' : db === 0 ? '0.0' : (db > 0 ? '+' : '−') + Math.abs(db).toFixed(1);
+const pw = db => db === NEG ? 0 : Math.pow(10, db / 10);
+const todb = p => p <= 1e-9 ? NEG : 10 * Math.log10(p);
+function hash(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return (h >>> 0) / 4294967296; }
+function wave(key, t) {
+  const h = hash(key);
+  return 4 * Math.sin(t * 0.0019 * (0.6 + h) + h * 40) + 3 * Math.sin(t * 0.0053 * (0.7 + h) + h * 90) + (Math.random() - 0.5) * 2.5 + (Math.sin(t * 0.0007 + h * 7) > 0.86 ? 5 : 0);
+}
+
+// ---------- the unit (FW1814, ADAT in/out, 48 kHz) ----------
+// Core Audio channels: inputs 1-8 analog, 9-16 ADAT; outputs 1-4 analog, 5-12 ADAT (kext FW1814Tables.h kFW1814ADAT44_48).
+const IN = [
+  ['in1', 'Mic/Line 1', 1, -11], ['in2', 'Mic/Line 2', 2, -16], ['in3', 'Line 3', 3, -7], ['in4', 'Line 4', 4, -19],
+  ['in5', 'Line 5', 5, -21], ['in6', 'Line 6', 6, -17], ['in7', 'Line 7', 7, -18], ['in8', 'Line 8', 8, -18.5],
+  ['ad1', 'ADAT 1', 9, -20], ['ad2', 'ADAT 2', 10, -21], ['ad3', 'ADAT 3', 11, -15], ['ad4', 'ADAT 4', 12, -19],
+  ['ad5', 'ADAT 5', 13, null], ['ad6', 'ADAT 6', 14, null], ['ad7', 'ADAT 7', 15, null], ['ad8', 'ADAT 8', 16, null],
+].map(([id, jack, ca, sig]) => ({id, jack, ca, sig}));
+const DAWSIG = [-14, -15, -20, -21, -18, -19, -24, -25, null, null, -22, -23];          // Core Audio outputs 1-12 (simulated playback)
+const MODES = [
+  {id: 'monitor', name: 'Monitor', title: 'Direct monitoring', desc: 'cue mixes inside the interface, zero latency, mono first',
+   hw: 'Interface mixer: 3 cue mixes on Mix 1/2 · Mix 3/4 · Aux',
+   icon: '<svg width="14" height="13" viewBox="0 0 14 13" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8V6.5a5 5 0 0110 0V8"/><rect x="1.2" y="7.5" width="2.6" height="4.3" rx="1"/><rect x="10.2" y="7.5" width="2.6" height="4.3" rx="1"/></svg>'},
+  {id: 'daw', name: 'DAW', title: 'Everything in the DAW', desc: 'you monitor through the DAW; the panel is meters and a control room',
+   hw: 'Interface mixer: passthrough · DAW 1–4 → Line 1–4 at 0 dB · inputs not monitored',
+   icon: '<svg width="14" height="13" viewBox="0 0 14 13" fill="currentColor"><rect x="1" y="5" width="2" height="7"/><rect x="4.5" y="2" width="2" height="10"/><rect x="8" y="6" width="2" height="6"/><rect x="11.5" y="3.5" width="2" height="8.5"/></svg>'},
+  {id: 'console', name: 'Console', title: 'External mixer', desc: 'the 1814 as a 16 in / 12 out converter for an analog console',
+   hw: 'Passthrough at unity · every interface level locked at 0 dB',
+   icon: '<svg width="14" height="13" viewBox="0 0 14 13" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 1v11M7 1v11M11 1v11"/><rect x="1.5" y="7" width="3" height="2.4" fill="currentColor"/><rect x="5.5" y="3" width="3" height="2.4" fill="currentColor"/><rect x="9.5" y="8.5" width="3" height="2.4" fill="currentColor"/></svg>'},
+  {id: 'hybrid', name: 'Hybrid', title: 'Outboard and reamp', desc: 'DAW → outboard → DAW loops with send/return meters and level match',
+   hw: 'Passthrough · loop sends at unity · loop returns kept out of the cue mixes',
+   icon: '<svg width="14" height="13" viewBox="0 0 14 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 4.5h7a2.5 2.5 0 010 5h-6"/><path d="M8 2.5l2 2-2 2"/><path d="M5 7.5l-2 2 2 2"/></svg>'},
+];
+
+// ---------- state ----------
+let st;
+function initState(mode) {
+  st = {
+    mode, rate: 48000, clock: 'Internal', mute: false, dim: false, pop: null, sheet: null, toast: null,
+    names: {in1: 'Kick In', in2: 'Kick Out', in3: 'Snare Top', in4: 'Snare Bot', in5: 'Hi-hat', in6: 'Tom', in7: 'OH L', in8: 'OH R',
+            ad1: 'Room L', ad2: 'Room R', ad3: 'Bass DI', ad4: 'Guitar', ad5: 'ADAT 5', ad6: 'ADAT 6', ad7: 'ADAT 7', ad8: 'ADAT 8'},
+    // Monitor mode: the user's cue mixes and where each lives in the hardware
+    mixes: [{id: 'mon', name: 'Monitors', mono: false, bus: '12', c: '#62AEFF'},
+            {id: 'drm', name: 'Drummer', mono: true, bus: '34', c: '#B18CFF'},
+            {id: 'bas', name: 'Bass player', mono: true, bus: 'aux', c: '#3DC97B'}],
+    sel: 'drm',
+    sends: {mon: {r12: 0}, drm: {in1: -3, in2: -9, in3: -2, in4: -14, in5: -10, in6: -8, in7: -9, in8: -9, r34: -4},
+            bas: {in1: -4, in3: -7, in7: -14, in8: -14, ad3: 0, r12: -8}},
+    last: {}, pans: {in7: -1, in8: 1, ad1: -1, ad2: 1}, chMute: {}, adatOpen: false,
+    outSrc: {l12: 'mon', l34: 'drm', hp1: 'drm', hp2: 'bas'}, outLvl: {l1: -20, l2: -20, l3: -12, l4: -12, hp1: -16, hp2: -14},
+    outLink: {l12: true, l34: false}, outMute: {},
+    // DAW / Hybrid control room
+    room: {mon: -20, spk: 'A', hp1Src: '12', hp2Src: '34', hp1: -16, hp2: -14, hp1Mute: false, hp2Mute: false},
+    // Console mode
+    con: {ref: -18, locked: true, hp: -20, inLabels: {}, outLabels: {}},
+    // Hybrid mode
+    loops: [
+      {id: 'L1', name: 'Vocal comp', dev: '1176', fmt: 'mono', send: ['DAW out 3', 'Line out 3'], ret: ['Line in 5', 'DAW in 5'], sig: 3, inId: 'in5', gain: -1.6, lock: true, mon: false},
+      {id: 'L2', name: 'Reamp', dev: 'Reamp box → amp → SM57', fmt: 'mono', send: ['DAW out 4', 'Line out 4'], ret: ['Mic in 1', 'DAW in 1'], sig: 4, inId: 'in1', gain: 3.4, lock: true, mon: false},
+      {id: 'L3', name: 'Plate reverb', dev: 'Lexicon via ADAT converter', fmt: 'stereo', send: ['DAW out 5–6', 'ADAT out 1–2'], ret: ['ADAT in 1–2', 'DAW in 9–10'], sig: 5, inId: 'ad1', gain: -6.2, lock: true, mon: false},
+    ],
+    clips: {}, holds: {},
+  };
+}
+const mixById = id => st.mixes.find(m => m.id === id);
+const nm = id => st.names[id] || id;
+const isMember = (mix, ch) => (st.sends[mix] || {})[ch] !== undefined && st.sends[mix][ch] !== NEG;
+const BUS_LABEL = {'12': 'Mix 1/2', '34': 'Mix 3/4', aux: 'Aux'};
+
+// ---------- header ----------
+function knobInfo() {
+  switch (st.mode) {
+    case 'monitor': return {label: 'Knob → Line 1/2', get: () => st.outLvl.l1, set: v => { st.outLvl.l1 = v; if (st.outLink.l12) st.outLvl.l2 = v; }};
+    case 'console': return {label: 'Knob → Phones · lines locked', get: () => st.con.hp, set: v => { st.con.hp = v; }};
+    default: return {label: 'Knob → Monitor', get: () => st.room.mon, set: v => { st.room.mon = v; }};
+  }
+}
+function header() {
+  const k = knobInfo();
+  return `<div class="hdr">
+    <div class="lights"><i></i><i></i><i></i></div>
+    <div class="dev"><b>FireWire 1814</b><span>74B9FB</span></div>
+    <div class="mseg">${MODES.map(m => `<button class="${m.id === st.mode ? 'on' : ''}" data-act="mode" data-v="${m.id}" title="${m.title}">${m.icon}${m.name}</button>`).join('')}<button class="plus" data-act="pop" data-pop="newmode" title="New mode">＋</button></div>
+    <div class="spacer"></div>
+    <div class="pill"><span class="dot"></span><b class="num">48 kHz</b><span>${st.clock}</span><span>· ADAT in/out</span><span class="lock">locked</span></div>
+    <div class="knobw" data-drag="knob" title="The front Level Controller: drag to turn"><span class="knob" data-knob></span><span class="kt"><b class="num" data-val="knob"></b><span>${k.label}</span></span></div>
+    <button class="gbtn dim ${st.dim ? 'on' : ''}" data-act="gdim">DIM</button>
+    <button class="gbtn mute ${st.mute ? 'on' : ''}" data-act="gmute">MUTE</button>
+  </div>`;
+}
+function modeBar() {
+  const m = MODES.find(x => x.id === st.mode);
+  return `<div class="mbar"><b>${m.title}</b><span>— ${m.desc}</span><div class="hwchip">${m.hw}<i>✓ applied</i></div></div>`;
+}
+
+// ---------- MONITOR view ----------
+function monoStrip(c) {
+  const mix = mixById(st.sel), on = isMember(mix.id, c.id), v = on ? st.sends[mix.id][c.id] : NEG;
+  const shared = (mix.bus === '12' || mix.bus === '34') && st.mixes.some(o => o.id !== mix.id && (o.bus === '12' || o.bus === '34') && isMember(o.id, c.id));
+  const pan = !mix.mono && on
+    ? `<div class="pm" data-drag="pan" data-ch="${c.id}"><div class="tr"></div><div class="h" style="left:${((st.pans[c.id] || 0) + 1) * 50}%"></div></div>`
+    : `<div class="pmt">${mix.mono ? 'mono' : '—'}</div>`;
+  return `<div class="ms ${on ? '' : 'out'}" title="${c.jack} → DAW in ${c.ca}">
+    ${shared ? '<span class="shared" title="Same level in Monitors and Drummer: the interface has one level per channel for Mix 1/2 and Mix 3/4"></span>' : ''}
+    <div class="nm">${nm(c.id)}</div><div class="jk">${c.jack.replace('Mic/Line', 'In').replace('Line', 'In')}</div>
+    <button class="inbtn ${on ? 'on' : ''}" style="--c:${mix.c}" data-act="in" data-ch="${c.id}">${on ? 'IN' : 'OFF'}</button>
+    <div class="fm"><div class="ftrack" data-drag="send" data-ch="${c.id}"><div class="mbar2" data-m="i:${c.id}"><div class="cv"></div></div><div class="cap" data-cap="send:${c.id}"></div></div></div>
+    <div class="val num" data-val="send:${c.id}"></div>${pan}
+    <div class="btns"><button class="sb m ${st.chMute[c.id] ? 'on' : ''}" data-act="cmute" data-ch="${c.id}">M</button><button class="sb s">S</button></div></div>`;
+}
+function dawStrip(id, name, sub) {
+  const mix = mixById(st.sel), on = isMember(mix.id, id);
+  const ks = id === 'r12' ? [1, 2] : [3, 4];
+  return `<div class="ms st ${on ? '' : 'out'}"><div class="nm">${name}</div><div class="jk">${sub}</div>
+    <button class="inbtn ${on ? 'on' : ''}" style="--c:${mix.c}" data-act="in" data-ch="${id}">${on ? 'IN' : 'OFF'}</button>
+    <div class="fm"><div class="ftrack" data-drag="send" data-ch="${id}">${ks.map(k => `<div class="mbar2" data-m="x:${k}"><div class="cv"></div></div>`).join('')}<div class="cap" data-cap="send:${id}"></div></div></div>
+    <div class="val num" data-val="send:${id}"></div><div class="pmt">stereo</div>
+    <div class="btns"><button class="sb m ${st.chMute[id] ? 'on' : ''}" data-act="cmute" data-ch="${id}">M</button></div></div>`;
+}
+function viewMonitor() {
+  const mix = mixById(st.sel);
+  const nIn = IN.filter(c => isMember(mix.id, c.id)).length + ['r12', 'r34'].filter(r => isMember(mix.id, r)).length;
+  const where = mix.bus === 'aux' ? 'on the Aux bus: its own send per channel' : (mix.mono ? `on ${BUS_LABEL[mix.bus]}, pans centred by the panel: the same signal in both ears` : `on ${BUS_LABEL[mix.bus]}, stereo with pan`);
+  const analog = IN.slice(0, 8), adat = IN.slice(8);
+  const adatHtml = st.adatOpen
+    ? `<div class="group"><div class="zlabel">ADAT in <button class="r" style="color:var(--accent)" data-act="adat">collapse</button></div><div class="strips">${adat.map(monoStrip).join('')}</div></div>`
+    : `<div class="group"><div class="zlabel">ADAT</div><div class="coll" data-act="adat" title="Show the 8 ADAT inputs"><b>8 in</b><div class="vms">${adat.map(c => `<div class="mbar2" data-m="i:${c.id}"><div class="cv"></div></div>`).join('')}</div><span>show ▸</span></div></div>`;
+  const tiles = st.mixes.map(m => {
+    const dests = Object.entries(st.outSrc).filter(([, v]) => v === m.id).map(([k]) => ({l12: 'Line 1/2', l34: 'Line 3/4', hp1: 'Phones 1', hp2: 'Phones 2'})[k]);
+    return `<div class="mt ${m.id === st.sel ? 'sel' : ''}" style="--c:${m.c}" data-act="sel" data-mix="${m.id}" data-tile="${m.id}">
+      <div class="tn"><i></i>${m.name}<span class="badge ${m.mono ? 'mono' : ''}">${m.mono ? 'MONO' : 'STEREO'}</span></div>
+      <div class="ts">${BUS_LABEL[m.bus]} · → ${dests.join(', ') || 'no output'}</div>
+      <div class="hm" data-m="mx:${m.id}:0"><div class="cv"></div></div>${m.mono ? '' : `<div class="hm" data-m="mx:${m.id}:1"><div class="cv"></div></div>`}</div>`;
+  }).join('');
+  const outCard = (id, name, sub, chans, allowedBus) => {
+    const allowed = st.mixes.filter(m => allowedBus.includes(m.bus));
+    const src = mixById(st.outSrc[id]);
+    const linked = chans.length === 2 && st.outLink[id];
+    const rows = linked ? [chans] : chans.map(c => [c]);
+    return `<div class="oc" data-card="${id}"><div class="oh"><b>${name}</b><span>${sub}</span>${chans.length === 2 ? `<button class="sb l ${linked ? 'on' : ''}" data-act="olink" data-o="${id}" title="${linked ? 'Linked: one fader' : 'Two mono outputs'}">⛓</button>` : ''}</div>
+      <div class="seg">${allowed.map(m => `<button class="${m.id === src.id ? 'on' : ''}" style="--c:${m.c}" data-act="osrc" data-o="${id}" data-mix="${m.id}">${m.name}</button>`).join('')}</div>
+      ${rows.map(r => `<div class="orow"><span class="ol">${r.length === 2 ? 'L · R' : r[0].replace('l', 'Line ').replace('hp', 'Ph ')}</span><div class="hf" data-drag="olvl" data-o="${r.join(',')}">${r.map(c => `<div class="hm" data-m="o:${c}"><div class="cv"></div></div>`).join('')}<div class="cap" data-cap="olvl:${r[0]}"></div></div><span class="v num" data-val="olvl:${r[0]}"></span><button class="sb m ${st.outMute[r[0]] ? 'on' : ''}" data-act="omute" data-o="${r.join(',')}">M</button></div>`).join('')}
+      ${id.startsWith('hp') && src.mono ? '<div class="note">mono mix: same signal in both ears</div>' : ''}</div>`;
+  };
+  return `<svg class="wires" id="wires"></svg>
+    <div class="msrc">
+      <div class="ctx" style="--bc:${mix.c}"><span class="dot" style="background:${mix.c}"></span><b>${mix.name}</b><span class="badge ${mix.mono ? 'mono' : ''}">${mix.mono ? 'MONO' : 'STEREO'}</span><span>${where} · faders = each source’s level in this mix · ${nIn} in</span></div>
+      <div class="groups">
+        <div class="group"><div class="zlabel">Analog in · mono</div><div class="strips">${analog.map(monoStrip).join('')}</div></div>
+        ${adatHtml}
+        <div class="group"><div class="zlabel">DAW playback</div><div class="strips">${dawStrip('r12', 'DAW 1/2', 'playback')}${dawStrip('r34', 'DAW 3/4', 'click / cue')}</div></div>
+      </div>
+    </div>
+    <div class="mmix"><div class="zlabel">Cue mixes</div><div class="tiles">${tiles}<div class="mt new" data-act="pop" data-pop="newmix" data-popa="newmix">＋ New mix</div></div>
+      <div class="cap3">Hardware mixes in use: 3 of 3<div class="bar">${st.mixes.map(m => `<i class="on" style="--c:${m.c};background:${m.c}"></i>`).join('')}</div></div>
+      <p class="hint" style="margin-top:10px">Mix 1/2 and Mix 3/4 share one level per channel; a source in both shows a yellow dot. Inputs join mixes in pairs (In 1 + In 2) — the panel handles it.</p></div>
+    <div class="mout"><div class="zlabel">Outputs</div>
+      ${outCard('l12', 'Line 1/2', 'speakers', ['l1', 'l2'], ['12', 'aux'])}
+      ${outCard('l34', 'Line 3/4', 'wedges · mono outs', ['l3', 'l4'], ['34', 'aux'])}
+      ${outCard('hp1', 'Phones 1', 'drummer', ['hp1'], ['12', '34', 'aux'])}
+      ${outCard('hp2', 'Phones 2', 'bass player', ['hp2'], ['12', '34', 'aux'])}
+      <div class="oc"><div class="oh"><b>ADAT Out 1–8</b><span>DAW 5–12, direct (no mixer)</span></div><div class="adm">${[5, 6, 7, 8, 9, 10, 11, 12].map(k => `<div class="mbar2" data-m="x:${k}"><div class="cv"></div></div>`).join('')}</div></div>
+    </div>`;
+}
+
+// ---------- DAW view ----------
+function meterCol(key, name, ca, stereo) {
+  return `<div class="mcol"><div class="pk num" data-pk="${key}">−∞</div><div class="clip" data-clip="${key}" data-act="clip" data-k="${key}" title="Clip: click to clear"></div>
+    <div class="well ${stereo ? 'st' : ''}">${(stereo ? [key + ':0', key + ':1'] : [key]).map(k => `<div class="mbar2" data-m="${k}"><div class="cv"></div></div>`).join('')}</div>
+    <div class="nm">${name}</div><div class="ca">${ca}</div></div>`;
+}
+const dscale = `<div class="dscale">${[0, -6, -12, -24, -48].map(d => `<i style="--p:${dbToP(d)}">${d}</i>`).join('')}</div>`;
+function controlRoom(compact, extra) {
+  const r = st.room;
+  const ph = n => {
+    const k = 'hp' + n;
+    return `<div class="card"><div class="lab">Phones ${n}<span class="r">${n === 1 ? 'A/B button: DAW 1/2 ⇄ 3/4' : ''}</span></div>
+      <div class="seg" style="margin-bottom:7px">${[['12', 'DAW 1/2'], ['34', 'DAW 3/4 · cue']].map(([v, t]) => `<button class="${r[k + 'Src'] === v ? 'on' : ''}" data-act="hpsrc" data-h="${k}" data-v="${v}">${t}</button>`).join('')}</div>
+      <div class="row"><div class="hf" data-drag="hp" data-h="${k}"><div class="hm" data-m="o:${k}:0"><div class="cv"></div></div><div class="hm" data-m="o:${k}:1"><div class="cv"></div></div><div class="cap" data-cap="hp:${k}"></div></div><span class="v num" data-val="hp:${k}"></span><button class="sb m ${r[k + 'Mute'] ? 'on' : ''}" data-act="hpmute" data-h="${k}">M</button></div></div>`;
+  };
+  return `<div class="cr">
+    <div class="card crk"><div class="lab" style="align-self:stretch">Monitor<span class="r">Line 1/2 · the front knob</span></div>
+      <div class="kb" data-drag="mon"><span class="knob big" data-bigknob ${compact ? 'style="width:72px;height:72px"' : ''}></span></div><div class="kv num" data-val="mon" ${compact ? 'style="font-size:17px;margin-top:6px"' : ''}></div>${compact ? '' : '<div class="ks">drag, or turn the knob on the 1814</div>'}
+      ${compact ? '' : `<div class="seg" style="align-self:stretch;margin-top:12px">${[['A', 'Speakers A · Line 1/2'], ['B', 'B · Line 3/4']].map(([v, t]) => `<button class="${r.spk === v ? 'on' : ''}" data-act="spk" data-v="${v}">${t}</button>`).join('')}</div>`}</div>
+    ${ph(1)}${ph(2)}
+    ${compact ? '' : `<p class="hint" style="margin:0 2px">Speakers B plays DAW 1/2 on Line 3/4 (the panel routes DAW 1/2 into Mix 3/4 and mutes Line 1/2). While B is on, DAW 3/4 is not on Line 3/4.</p>`}
+    ${extra || ''}</div>`;
+}
+const shortJack = j => j.replace('Mic/Line ', 'In ').replace('Line ', 'In ').replace('ADAT ', 'A');
+function viewDaw() {
+  const ins = IN.map(c => meterCol('i:' + c.id, nm(c.id), `${shortJack(c.jack)} → ${c.ca}`, false));
+  const outs = [['o:l1', 'Line 1', 'DAW 1'], ['o:l2', 'Line 2', 'DAW 2'], ['o:l3', 'Line 3', 'DAW 3'], ['o:l4', 'Line 4', 'DAW 4']].map(([k, n, ca]) => meterCol(k, n, ca, false));
+  const adat = [1, 2, 3, 4, 5, 6, 7, 8].map(i => meterCol('o:a' + i, 'ADAT ' + i, 'DAW ' + (i + 4), false));
+  return `<div class="dmain">
+      <div class="bridge in"><div class="lab">Inputs → DAW<span class="r">recorded before the interface mixer: nothing here changes what is recorded</span></div>
+        <div class="bg" style="--mc:48px">${dscale}<div class="bgrp"><div class="gl">Analog · Mic/Line 1–2 gain on the front</div><div class="mcols">${ins.slice(0, 8).join('')}</div></div>
+          <div class="bgrp"><div class="gl">ADAT</div><div class="mcols">${ins.slice(8).join('')}</div></div></div></div>
+      <div class="bridge outb"><div class="lab">DAW → outputs<span class="r">Core Audio channel under each meter</span></div>
+        <div class="bg">${dscale}<div class="bgrp"><div class="gl">Line</div><div class="mcols">${outs.join('')}</div></div>
+          <div class="bgrp"><div class="gl">ADAT out</div><div class="mcols">${adat.join('')}</div></div>
+          <div class="bgrp"><div class="gl">Phones</div><div class="mcols">${meterCol('o:hp1', 'Ph 1', st.room.hp1Src === '12' ? 'DAW 1/2' : 'DAW 3/4', true)}${meterCol('o:hp2', 'Ph 2', st.room.hp2Src === '12' ? 'DAW 1/2' : 'DAW 3/4', true)}</div></div></div></div>
+      <div class="status"><span>Interface mixer: <b>passthrough</b> — monitor in the DAW</span><span>Buffer: <b>set in the DAW</b></span><span>Driver round trip: <b>≈ 9 ms</b> at 48 kHz / 64 frames (bench)</span></div>
+    </div>${controlRoom(false)}`;
+}
+
+// ---------- CONSOLE view ----------
+function lmeter(key) {
+  const ref = st.con.ref, r = linP(ref) * 100, y = linP(-6) * 100, rd = linP(-3) * 100;
+  return `<div class="lm" data-m="${key}" data-lin="1" style="background:linear-gradient(to right,var(--mLow) 0%,var(--mLow) ${r}%,var(--mMid) ${r}%,var(--mMid) ${rd}%,var(--mHigh) ${rd}%)"><div class="ref" style="left:${r}%"></div><div class="cv"></div></div>`;
+}
+function lscale() {
+  const ref = st.con.ref, marks = [-48, -36, -24, ref, -6, 0].filter((v, i, a) => a.indexOf(v) === i);
+  return `<div class="lscale">${marks.map(d => `<i class="${d === ref ? 'ref' : ''}" style="left:${linP(d) * 100}%">${d === ref ? '0 VU' : d}</i>`).join('')}</div>`;
+}
+function viewConsole() {
+  const c = st.con;
+  const inRows = IN.map(ch => `<div class="crow"><input class="lbl" data-inp="in" data-id="${ch.id}" value="${c.inLabels[ch.id] || 'Ch ' + ch.ca + ' · ' + nm(ch.id)}" spellcheck="false"><span class="jk">${ch.jack}</span><span class="to">→ DAW ${ch.ca}</span>${lmeter('i:' + ch.id)}<span class="pkv num" data-pk="i:${ch.id}">−∞</span><span class="cdot" data-clip="i:${ch.id}" data-act="clip" data-k="i:${ch.id}"></span></div>`).join('');
+  const outs = [['l1', 'Line out 1', 1], ['l2', 'Line out 2', 2], ['l3', 'Line out 3', 3], ['l4', 'Line out 4', 4]].concat([1, 2, 3, 4, 5, 6, 7, 8].map(i => ['a' + i, 'ADAT out ' + i, i + 4]));
+  const outRows = outs.map(([id, jack, ca]) => `<div class="crow"><input class="lbl" data-inp="out" data-id="${id}" value="${c.outLabels[id] || 'Return ' + ca}" spellcheck="false"><span class="to">DAW ${ca} →</span><span class="jk">${jack.replace(' out', '')}</span>${lmeter('o:' + id)}<span class="pkv num" data-pk="o:${id}">−∞</span><span class="cdot" data-clip="o:${id}" data-act="clip" data-k="o:${id}"></span></div>`).join('');
+  const hdr = (a, b, d) => `<div class="crow h"><span>${a}</span><span>${b}</span><span>${d}</span>${lscale()}<span>peak</span><span></span></div>`;
+  return `<div class="cwrap">
+    <div class="ctop">
+      <button class="tog ${c.locked ? 'on' : ''}" data-act="lock"><span class="sw"></span>Unity lock: every interface level at 0 dB</button>
+      <div class="chipw">Meters: 0 VU = <select data-inp="ref">${[-20, -18, -14, -12].map(v => `<option value="${v}" ${v === c.ref ? 'selected' : ''}>${v}</option>`).join('')}</select> dBFS</div>
+      <div class="chipw warn">Clock: <b>${st.clock}</b> · with an ADAT converter as master use External <button data-act="toast" data-v="The panel never changes the clock or the rate by itself: Clock ▸ External — digital, when you want it.">Change…</button></div>
+      <div class="chipw"><span class="dot"></span>ADAT in · out locked</div>
+    </div>
+    <div class="ctabs">
+      <div class="ctab"><div class="lab">Console → DAW<span class="r">16 channels · labels are yours</span></div>${hdr('Console label', 'Jack', 'Core Audio')}${inRows}</div>
+      <div class="ctab"><div class="lab">DAW → console<span class="r">12 channels · Line 1–4 through the mixer at 0 dB, ADAT direct</span></div>${hdr('Console label', 'Core Audio', 'Jack')}${outRows}
+        <div class="sub"><span class="lab" style="margin:0">Phones</span><span class="hint">Line 1/2 · talkback / check</span><div class="hf" data-drag="chp" style="max-width:220px"><div class="hm" data-m="o:hp1:0"><div class="cv"></div></div><div class="hm" data-m="o:hp1:1"><div class="cv"></div></div><div class="cap" data-cap="chp"></div></div><span class="v num" data-val="chp"></span></div></div>
+    </div></div>`;
+}
+
+// ---------- HYBRID view ----------
+function viewHybrid() {
+  const loops = st.loops.map(l => `<div class="loop">
+    <div class="lh"><b>${l.name}</b><span>${l.fmt}</span><div class="tg"><button class="mini ${l.lock ? 'on' : ''}" data-act="llock" data-l="${l.id}"><i></i>Send at 0 dB</button><button class="mini ${l.mon ? 'on' : ''}" data-act="lmon" data-l="${l.id}"><i></i>Hear return in cue</button></div></div>
+    <div class="path"><span class="px daw">${l.send[0]}</span><span class="arr">→</span><span class="px">${l.send[1]}</span><span class="arr">→</span><span class="px dev">${l.dev}</span><span class="arr">→</span><span class="px">${l.ret[0]}</span><span class="arr">→</span><span class="px daw">${l.ret[1]}</span></div>
+    <div class="lmg"><span class="k">Send</span><div class="hmw"><div class="hm" data-m="lp:${l.id}:s"><div class="cv"></div></div></div><span class="v num" data-pk="lp:${l.id}:s">−∞</span>
+      <div class="delta"><b class="num" data-delta="${l.id}">—</b><span>return vs send</span></div>
+      <span class="k">Return</span><div class="hmw"><div class="hm" data-m="lp:${l.id}:r"><div class="cv"></div></div></div><span class="v num" data-pk="lp:${l.id}:r">−∞</span></div>
+  </div>`).join('');
+  const used = new Set(st.loops.map(l => l.inId));
+  const others = IN.filter(c => !used.has(c.id) && c.id !== 'ad2').slice(0, 12).map(c => meterCol('i:' + c.id, nm(c.id), shortJack(c.jack), false));
+  return `<div class="hmain">
+      <div class="zlabel">Loops<span class="r"><button style="color:var(--accent)" data-act="pop" data-pop="newloop" data-popa="newloop">＋ New loop</button></span></div>
+      ${loops}
+      <div class="other"><div class="lab">Other inputs · tracking at the same time<span class="r">loop returns are not monitored by the interface</span></div><div class="mcols" style="--mc:46px">${others.join('')}</div></div>
+    </div>
+    ${controlRoom(true, `<div class="card"><div class="lab">Sends and latency</div><div class="hint">Free analog sends: none — Line 1/2 are the speakers, Line 3 and 4 are in loops; ADAT out 3–8 are free through a converter. The DAW measures each loop (ping); driver round trip on the bench ≈ 9 ms at 48 kHz / 64 frames.</div></div>`)}`;
+}
+
+// ---------- render ----------
+let meterEls = [], pkEls = [], clipEls = [], deltaEls = [];
+function render() {
+  const view = {monitor: viewMonitor, daw: viewDaw, console: viewConsole, hybrid: viewHybrid}[st.mode]();
+  document.getElementById('wi').innerHTML = header() + modeBar() + `<div class="body" id="body">${view}</div>`;
+  if (st.mode === 'monitor') {
+    const spare = 1280 - (16 + 8 * 44 + 7 * 4 + (st.adatOpen ? 14 + 8 * 44 + 7 * 4 : 14 + 58) + 14 + 2 * 64 + 4 + 16 + 166 + 30 + 16 + 236 + 16);
+    document.getElementById('wi').style.setProperty('--ms', (st.adatOpen ? 44 : clamp(44 + spare / 10, 44, 60)) + 'px');
+  }
+  meterEls = Array.from(document.querySelectorAll('#wi [data-m]'));
+  pkEls = Array.from(document.querySelectorAll('#wi [data-pk]'));
+  clipEls = Array.from(document.querySelectorAll('#wi [data-clip]'));
+  deltaEls = Array.from(document.querySelectorAll('#wi [data-delta]'));
+  patch();
+  renderPops();
+  requestAnimationFrame(drawWires);
+}
+function patch() {
+  document.querySelectorAll('#wi [data-cap]').forEach(el => {
+    const [k, id] = el.dataset.cap.split(':');
+    let db = 0;
+    if (k === 'send') db = (st.sends[st.sel] || {})[id] ?? NEG;
+    else if (k === 'olvl') db = st.outLvl[id];
+    else if (k === 'hp') db = st.room[id];
+    else if (k === 'chp') db = st.con.hp;
+    el.style.setProperty('--p', dbToP(db));
+  });
+  document.querySelectorAll('#wi [data-val]').forEach(el => {
+    const [k, id] = el.dataset.val.split(':');
+    if (k === 'send') { const v = (st.sends[st.sel] || {})[id]; el.textContent = fmt(v === undefined ? NEG : v); }
+    else if (k === 'olvl') el.textContent = fmt(st.outLvl[id]);
+    else if (k === 'hp') el.textContent = fmt(st.room[id]);
+    else if (k === 'chp') el.textContent = fmt(st.con.hp);
+    else if (k === 'mon') el.textContent = fmt(st.room.mon) + ' dB';
+    else if (k === 'knob') el.textContent = fmt(knobInfo().get()) + ' dB';
+  });
+  const rot = -135 + 270 * dbToP(knobInfo().get());
+  document.querySelectorAll('#wi [data-knob]').forEach(el => el.style.setProperty('--rot', rot + 'deg'));
+  document.querySelectorAll('#wi [data-bigknob]').forEach(el => el.style.setProperty('--rot', (-135 + 270 * dbToP(st.room.mon)) + 'deg'));
+}
+function drawWires() {
+  const svg = document.getElementById('wires'), body = document.getElementById('body');
+  if (!svg || !body) return;
+  const br = body.getBoundingClientRect();
+  let out = '';
+  for (const [o, mid] of Object.entries(st.outSrc)) {
+    const card = document.querySelector(`#wi [data-card="${o}"]`), tile = document.querySelector(`#wi [data-tile="${mid}"]`);
+    if (!card || !tile) continue;
+    const tr = tile.getBoundingClientRect(), cr = card.getBoundingClientRect(), m = mixById(mid), hot = mid === st.sel;
+    const x1 = tr.right - br.left, y1 = tr.top + tr.height / 2 - br.top, x2 = cr.left - br.left, y2 = cr.top + 16 - br.top, dx = Math.max(14, (x2 - x1) * 0.6);
+    out += `<path d="M${x1} ${y1} C${x1 + dx} ${y1} ${x2 - dx} ${y2} ${x2} ${y2}" stroke="${m.c}" stroke-width="${hot ? 2.2 : 1.5}" fill="none" opacity="${hot ? 0.95 : 0.4}"/><circle cx="${x2}" cy="${y2}" r="2.6" fill="${m.c}"/>`;
+  }
+  svg.innerHTML = out;
+}
+
+// ---------- popovers, sheet, toast ----------
+function renderPops() {
+  const pops = document.getElementById('pops');
+  let h = '';
+  if (st.sheet) {
+    const s = st.sheet;
+    h += `<div class="sheetbg"><div class="sheet"><div class="t">Switch to ${MODES.find(m => m.id === s.to).name}?</div>
+      These outputs get louder:<ul>${s.rising.map(r => `<li><span class="up">${r[0]}: ${fmt(r[1])} → ${fmt(r[2])} dB</span></li>`).join('')}</ul>
+      Also: the interface mixer goes to passthrough, inputs leave the cue mixes (kept in Monitor mode), the knob drives the phones only. Rate and clock are not changed.
+      <div class="acts"><button class="btn" data-act="cancel">Cancel</button><button class="btn pri" data-act="confirm">Switch</button></div></div></div>`;
+  }
+  if (st.pop) {
+    const txt = {
+      newmode: `<h4>New mode</h4><div class="mitem" data-act="close">From Monitor…</div><div class="mitem" data-act="close">From DAW…</div><div class="mitem" data-act="close">From Console…</div><div class="mitem" data-act="close">From Hybrid…</div><p class="hint" style="margin:8px 0 0">A copy with its own name, interface scene, channel names, hidden channels and meter options — e.g. “Drums tracking”, “Mixdown with outboard”.</p>`,
+      newmix: `<h4>New cue mix</h4>All three hardware mixes are in use (<b>Mix 1/2</b>, <b>Mix 3/4</b>, <b>Aux</b>). The 1814 can still split one stereo mix into <b>two mono mixes</b>, one per side — e.g. Drummer only on Line 3 and a new mix on Line 4. A phone listening to that mix then hears one in each ear.<div class="acts" style="display:flex;gap:8px;margin-top:10px"><button class="btn" data-act="close">Cancel</button><button class="btn pri" data-act="close">Split Mix 3/4…</button></div>`,
+      newloop: `<h4>New loop</h4>No free analog send: Line 1/2 are the speakers, Line 3 and 4 are in loops. Use ADAT out 3–8 through a converter, or free Line 3/4 by moving a loop.<div style="margin-top:10px"><button class="btn" data-act="close">OK</button></div>`,
+    }[st.pop];
+    h += `<div class="pop" id="pop">${txt}</div>`;
+  }
+  if (st.toast) h += `<div class="toast">${st.toast}</div>`;
+  pops.innerHTML = h;
+  const p = document.getElementById('pop');
+  if (p) {
+    const a = document.querySelector(`#wi [data-popa="${st.pop}"]`) || document.querySelector('#wi .plus');
+    const wr = document.getElementById('win').getBoundingClientRect(), ar = a.getBoundingClientRect();
+    let x = ar.left - wr.left, y = ar.bottom - wr.top + 6;
+    if (x + p.offsetWidth > wr.width - 8) x = wr.width - 8 - p.offsetWidth;
+    if (y + p.offsetHeight > wr.height - 8) y = Math.max(8, ar.top - wr.top - p.offsetHeight - 6);
+    p.style.left = Math.max(8, x) + 'px'; p.style.top = y + 'px';
+  }
+}
+let toastTimer = null;
+function toast(t) { st.toast = t; renderPops(); clearTimeout(toastTimer); toastTimer = setTimeout(() => { st.toast = null; renderPops(); }, 5200); }
+
+// ---------- mode switching ----------
+const MODE_LEVELS = {                                    // the output levels each mode's scene holds (Line 1-4)
+  monitor: () => [['Line 1/2', st.outLvl.l1], ['Line 3/4', st.outLvl.l3]],
+  daw: () => [['Line 1/2', st.room.mon], ['Line 3/4', 0]],
+  hybrid: () => [['Line 1/2', st.room.mon], ['Line 3/4', 0]],
+  console: () => [['Line 1/2', 0], ['Line 3/4', 0]],
+};
+function requestMode(to) {
+  if (to === st.mode) return;
+  const now = MODE_LEVELS[st.mode](), next = MODE_LEVELS[to]();
+  const rising = now.map((r, i) => [r[0], r[1], next[i][1]]).filter(r => (r[2] === NEG ? -999 : r[2]) > (r[1] === NEG ? -999 : r[1]) + 0.1);
+  if (rising.length) { st.sheet = {to, rising}; renderPops(); return; }
+  applyMode(to);
+}
+function applyMode(to) {
+  st.mode = to; st.sheet = null; st.pop = null;
+  render();
+  toast({monitor: 'Monitor: cue mixes restored — Monitors, Drummer, Bass player.', daw: 'DAW: interface mixer in passthrough. Your cue mixes stay saved in Monitor.',
+         console: 'Console: Line 1–4 and ADAT out at 0 dB, locked. Rate and clock unchanged.', hybrid: 'Hybrid: loop sends at 0 dB, loop returns out of the cue mixes.'}[to]);
+}
+
+// ---------- events ----------
+const win = document.getElementById('win');
+let drag = null, moved = false;
+win.addEventListener('click', e => {
+  if (moved) { moved = false; return; }
+  const t = e.target.closest('[data-act]');
+  if (!t) { if (st.pop && !e.target.closest('.pop')) { st.pop = null; renderPops(); } return; }
+  const a = t.dataset.act, d = t.dataset;
+  switch (a) {
+    case 'mode': requestMode(d.v); return;
+    case 'confirm': applyMode(st.sheet.to); return;
+    case 'cancel': st.sheet = null; renderPops(); return;
+    case 'pop': st.pop = st.pop === d.pop ? null : d.pop; renderPops(); return;
+    case 'close': st.pop = null; renderPops(); return;
+    case 'toast': toast(d.v); return;
+    case 'clip': delete st.clips[d.k]; return;
+    case 'sel': st.sel = d.mix; break;
+    case 'in': {
+      const S = st.sends[st.sel] || (st.sends[st.sel] = {}), mix = mixById(st.sel);
+      if (isMember(st.sel, d.ch)) { st.last[st.sel + d.ch] = S[d.ch]; S[d.ch] = NEG; }
+      else {
+        const twin = (mix.bus === '12' || mix.bus === '34') && st.mixes.find(o => o.id !== mix.id && (o.bus === '12' || o.bus === '34') && isMember(o.id, d.ch));
+        S[d.ch] = twin ? st.sends[twin.id][d.ch] : (st.last[st.sel + d.ch] ?? -6);
+      }
+      break;
+    }
+    case 'cmute': st.chMute[d.ch] = !st.chMute[d.ch]; break;
+    case 'adat': st.adatOpen = !st.adatOpen; break;
+    case 'osrc': st.outSrc[d.o] = d.mix; break;
+    case 'olink': st.outLink[d.o] = !st.outLink[d.o]; if (st.outLink[d.o]) { const [x, y] = d.o === 'l12' ? ['l1', 'l2'] : ['l3', 'l4']; st.outLvl[y] = st.outLvl[x]; } break;
+    case 'omute': { const ids = d.o.split(','); const v = !st.outMute[ids[0]]; ids.forEach(i => st.outMute[i] = v); break; }
+    case 'spk': st.room.spk = d.v; break;
+    case 'hpsrc': st.room[d.h + 'Src'] = d.v; break;
+    case 'hpmute': st.room[d.h + 'Mute'] = !st.room[d.h + 'Mute']; break;
+    case 'lock': st.con.locked = !st.con.locked; toast(st.con.locked ? 'Unity lock on: the panel keeps every interface level at 0 dB.' : 'Unity lock off: levels can be changed (the meters stop being calibrated).'); break;
+    case 'llock': { const l = st.loops.find(x => x.id === d.l); l.lock = !l.lock; break; }
+    case 'lmon': { const l = st.loops.find(x => x.id === d.l); l.mon = !l.mon; break; }
+    case 'gmute': st.mute = !st.mute; break;
+    case 'gdim': st.dim = !st.dim; break;
+  }
+  render();
+});
+win.addEventListener('change', e => {
+  const t = e.target;
+  if (t.dataset.inp === 'ref') { st.con.ref = +t.value; render(); }
+});
+win.addEventListener('input', e => {
+  const t = e.target;
+  if (t.dataset.inp === 'in') st.con.inLabels[t.dataset.id] = t.value;
+  if (t.dataset.inp === 'out') st.con.outLabels[t.dataset.id] = t.value;
+});
+win.addEventListener('pointerdown', e => {
+  moved = false;
+  const el = e.target.closest('[data-drag]'); if (!el) return;
+  e.preventDefault();
+  drag = {el, k: el.dataset.drag, y: e.clientY};
+  try { el.setPointerCapture(e.pointerId); } catch (_) {}
+  if (!['knob', 'mon'].includes(drag.k)) move(e);
+});
+win.addEventListener('pointermove', e => { if (drag) { moved = true; move(e); } });
+win.addEventListener('pointerup', () => { if (!drag) return; const k = drag.k; drag = null; if (k === 'send' || k === 'pan') render(); else patch(); });
+function nudge(v, d) { const x = (v === NEG ? -64 : v) + d; const r = Math.round(clamp(x, -64, 0) * 2) / 2; return r <= -64 ? NEG : r; }
+function move(e) {
+  const {el, k} = drag, r = el.getBoundingClientRect();
+  const vy = () => pToDb(clamp(1 - (e.clientY - r.top - 6) / (r.height - 12), 0, 1));
+  const hx = () => pToDb(clamp((e.clientX - r.left - 6) / (r.width - 12), 0, 1));
+  if (k === 'send') {
+    const ch = el.dataset.ch, v = vy(), mix = mixById(st.sel);
+    (st.sends[st.sel] || (st.sends[st.sel] = {}))[ch] = v;
+    if (mix.bus === '12' || mix.bus === '34') st.mixes.forEach(o => { if (o.id !== mix.id && (o.bus === '12' || o.bus === '34') && isMember(o.id, ch)) st.sends[o.id][ch] = v; });
+  } else if (k === 'olvl') { const v = hx(); el.dataset.o.split(',').forEach(i => st.outLvl[i] = v); }
+  else if (k === 'hp') st.room[el.dataset.h] = hx();
+  else if (k === 'chp') st.con.hp = hx();
+  else if (k === 'pan') st.pans[el.dataset.ch] = Math.round(clamp((e.clientX - r.left) / r.width * 2 - 1, -1, 1) * 127) / 127;
+  else if (k === 'knob' || k === 'mon') {
+    const dy = drag.y - e.clientY; drag.y = e.clientY;
+    if (k === 'mon') st.room.mon = nudge(st.room.mon, dy * 0.25);
+    else { const ki = knobInfo(); ki.set(nudge(ki.get(), dy * 0.25)); }
+  }
+  patch();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { st.pop = null; st.sheet = null; renderPops(); } });
+
+// ---------- simulated meters ----------
+const disp = {};
+function levels(t) {
+  const lv = {};
+  for (const c of IN) lv['i:' + c.id] = c.sig == null ? NEG : Math.min(0, c.sig + wave(c.id, t));
+  for (let k = 1; k <= 12; k++) { const s = DAWSIG[k - 1]; lv['x:' + k] = s == null ? NEG : Math.min(-0.5, s + wave('x' + k, t)); }
+  const gl = v => v === NEG || st.mute ? NEG : v + (st.dim ? -20 : 0);
+  if (st.mode === 'monitor') {
+    const mx = {};
+    for (const m of st.mixes) {
+      const acc = [0, 0];
+      for (const [ch, g] of Object.entries(st.sends[m.id] || {})) {
+        if (g === NEG || st.chMute[ch]) continue;
+        if (ch === 'r12' || ch === 'r34') { const ks = ch === 'r12' ? [1, 2] : [3, 4]; acc[0] += pw(lv['x:' + ks[0]] + g); acc[1] += pw(lv['x:' + ks[1]] + g); continue; }
+        const v = lv['i:' + ch]; if (v === NEG) continue;
+        const p = pw(v + g);
+        if (m.mono) { acc[0] += p; acc[1] += p; }
+        else { const a = ((st.pans[ch] || 0) + 1) * Math.PI / 4; acc[0] += 2 * p * Math.cos(a) ** 2; acc[1] += 2 * p * Math.sin(a) ** 2; }
+      }
+      mx[m.id] = acc.map(todb); lv[`mx:${m.id}:0`] = mx[m.id][0]; lv[`mx:${m.id}:1`] = mx[m.id][1];
+    }
+    const out = (o, side, src) => { const v = mx[src][side]; return st.outMute[o] || v === NEG || st.outLvl[o] === NEG ? NEG : gl(Math.min(0, v + st.outLvl[o])); };
+    lv['o:l1'] = out('l1', 0, st.outSrc.l12); lv['o:l2'] = out('l2', 1, st.outSrc.l12);
+    lv['o:l3'] = out('l3', 0, st.outSrc.l34); lv['o:l4'] = out('l4', 1, st.outSrc.l34);
+    lv['o:hp1'] = out('hp1', 0, st.outSrc.hp1); lv['o:hp2'] = out('hp2', 0, st.outSrc.hp2);
+  } else {
+    const r = st.room, unity = st.mode === 'console';
+    const mon = unity ? 0 : r.mon;
+    const b = !unity && r.spk === 'B';
+    lv['o:l1'] = b ? NEG : gl(lv['x:1'] === NEG ? NEG : lv['x:1'] + (unity ? 0 : mon)); lv['o:l2'] = b ? NEG : gl(lv['x:2'] + (unity ? 0 : mon));
+    lv['o:l3'] = gl(b ? lv['x:1'] + mon : lv['x:3']); lv['o:l4'] = gl(b ? lv['x:2'] + mon : lv['x:4']);
+    for (let i = 1; i <= 8; i++) lv['o:a' + i] = gl(lv['x:' + (i + 4)]);
+    const hp = (k, lvl, src, mute) => { const ks = src === '12' ? [1, 2] : [3, 4]; [0, 1].forEach(s => lv[`o:${k}:${s}`] = mute || lvl === NEG ? NEG : gl(lv['x:' + ks[s]] + lvl)); };
+    if (unity) hp('hp1', st.con.hp, '12', false);
+    else { hp('hp1', r.hp1, r.hp1Src, r.hp1Mute); hp('hp2', r.hp2, r.hp2Src, r.hp2Mute); }
+    if (st.mode === 'hybrid') {
+      for (const l of st.loops) {
+        const s = lv['x:' + l.sig];
+        const ret = s === NEG ? NEG : Math.min(0, s + l.gain + (Math.random() - 0.5) * 0.4);
+        lv[`lp:${l.id}:s`] = s; lv[`lp:${l.id}:r`] = ret; lv['i:' + l.inId] = ret;
+      }
+    }
+  }
+  return lv;
+}
+let lastFrame = 0;
+function frame(t) {
+  requestAnimationFrame(frame);
+  if (t - lastFrame < 33) return;
+  lastFrame = t;
+  const lv = levels(t);
+  for (const el of meterEls) {
+    const k = el.dataset.m, v = lv[k] === undefined ? NEG : lv[k];
+    const prev = disp[k] === undefined ? NEG : disp[k];
+    const shown = v >= prev ? v : (prev === NEG ? NEG : prev - 1.6);
+    disp[k] = shown < -70 ? NEG : shown;
+    el.style.setProperty('--m', el.dataset.lin ? linP(disp[k]) : dbToP(disp[k]));
+  }
+  for (const k in lv) {                                                // peak hold (1.5 s) and clip latch
+    const v = lv[k], h = st.holds[k];
+    if (!h || v >= h.v || t - h.t > 1500) st.holds[k] = {v, t};
+    if (v >= -0.1) st.clips[k] = true;
+  }
+  for (const el of pkEls) { const h = st.holds[el.dataset.pk]; el.textContent = h ? fmt(h.v === NEG ? NEG : Math.round(h.v * 10) / 10) : '−∞'; }
+  for (const el of clipEls) el.classList.toggle('on', !!st.clips[el.dataset.clip]);
+  for (const el of deltaEls) {
+    const l = st.loops.find(x => x.id === el.dataset.delta), s = st.holds[`lp:${l.id}:s`], r = st.holds[`lp:${l.id}:r`];
+    if (s && r && s.v !== NEG && r.v !== NEG) { const d = r.v - s.v; el.textContent = (d >= 0 ? '+' : '−') + Math.abs(d).toFixed(1) + ' dB'; el.style.color = Math.abs(d) < 1 ? 'var(--green)' : 'var(--text)'; }
+  }
+}
+
+// ---------- notes ----------
+document.getElementById('notes').innerHTML = [
+  ['Monitor — direct monitoring', 'The cue-mix view, mono first. Each mix is MONO or STEREO; in a mono mix the panel centres the pans and there is no pan control. Faders are the sources’ levels in the selected mix. The panel shows which hardware mix each cue uses (3 on the 1814) and when two cues share a level.'],
+  ['DAW — everything in the box', 'No mixer on screen. Input meters (what is recorded, with the Core Audio channel), output meters, and a control room: monitor level on the front knob, speakers A/B, phones with DAW 1/2 or a DAW cue on 3/4, mute, dim.'],
+  ['Console — external analog mixer', 'The 1814 as converter. A channel table with your console labels, calibrated linear meters with a 0 VU reference, unity lock on every interface level, clock and ADAT status. The knob only drives the phones.'],
+  ['Hybrid — outboard and reamp', 'Loops DAW → output → device → input → DAW, each with send and return meters and the level difference (to match levels). Loop sends stay at unity; loop returns stay out of the cue mixes so you do not hear them twice.'],
+  ['What a mode is', 'A view + the interface scene that goes with it + view options (names, hidden channels, meter reference). Switching saves the scene of the mode you leave and applies the one you enter; the cue mixes of Monitor survive a day in DAW mode.'],
+  ['What a mode never does', 'Change the rate, the clock or the digital ports (it tells you what it expects), or raise an output level without asking: switching to Console asks first because Line 1–4 go to 0 dB.'],
+  ['Only two real hardware states', 'For the 1814 the interface mixer is either making cue mixes (Monitor) or a passthrough (DAW, Console, Hybrid). The last three differ in what you see and what the panel protects, not in the hardware.'],
+  ['Your own modes', '＋ makes a copy of any mode with its own name, scene, labels and view options: “Drums tracking”, “Mixdown with outboard”, “Rehearsal on the console”.'],
+].map(([t, d]) => `<div class="note"><h3>${t}</h3>${d}</div>`).join('');
+
+// start
+const hp0 = new URLSearchParams(location.hash.slice(1));
+initState(MODES.some(m => m.id === hp0.get('mode')) ? hp0.get('mode') : 'monitor');
+if (hp0.get('adat') === '1') st.adatOpen = true;
+render();
+if (hp0.get('sheet')) requestMode(hp0.get('sheet'));
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

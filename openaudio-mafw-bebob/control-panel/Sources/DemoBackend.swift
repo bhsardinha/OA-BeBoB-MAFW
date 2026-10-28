@@ -9,11 +9,12 @@ final class DemoBackend: PanelBackend {
     var onPropertiesChanged: (() -> Void)?
     private var props: [String: Any]
     private var phase = 0.0
+    private var env: [Double] = [], seed: UInt32 = 0x1814
     private let guid: String
 
     let profile: DeviceProfile
 
-    init(id: UInt64, rate: UInt32, adat: Bool, external: Bool = false, guid: String = "0xD6C040074B9FB", profile: DeviceProfile = FW1814Profile.shared) {
+    init(id: UInt64, rate: UInt32, adat: Bool, external: Bool = false, guid: String = "0xD6C04000DE001", profile: DeviceProfile = FW1814Profile.shared) {
         entryID = id
         self.profile = profile
         // the first demo Audiophile shows the bench unit's GUID (capture 89 / 92)
@@ -148,12 +149,32 @@ final class DemoBackend: PanelBackend {
     /// `--fixed-meters` (test aid, plan v4 AP-5.1): the synthetic meters stand still so snapshots are reproducible and two builds compare byte for byte.
     static var fixedMeters = false
     func readPeaks() -> [UInt32]? {
-        if !DemoBackend.fixedMeters { phase += 0.12 } else { phase = 1.0 }
+        if !DemoBackend.fixedMeters { return livePeaks() }
+        phase = 1.0
         return (0..<FWDevice.peakCount).map { i in
             let a = 0.5 + 0.5 * sin(phase * (0.8 + Double(i % 7) * 0.12) + Double(i) * 0.9)
             let top = 14000.0 + Double(i % 5) * 4600.0                 // some channels touch full scale (clip LED)
             return UInt32(max(0, a * a * top))
         }
+    }
+
+    /// Peaks shaped like real material (user, 2026-10-28: a sine creeping one step a tick is not what audio does): per channel, hits that
+    /// jump up and decay (drums), a level that wanders around a mean with phrase gaps (voice, bass), occasional near-full-scale peaks, and
+    /// silent channels. One call per meter tick (30 Hz).
+    private func livePeaks() -> [UInt32] {
+        func rnd() -> Double { seed = seed &* 1664525 &+ 1013904223; return Double(seed >> 8) / Double(1 << 24) }
+        if env.count != FWDevice.peakCount { env = [Double](repeating: -64, count: FWDevice.peakCount) }
+        for i in 0..<env.count {
+            switch i % 6 {
+            case 0: env[i] = -64                                                     // nothing connected
+            case 1, 2: env[i] = rnd() < 0.07 ? -2 - 10 * rnd() : max(-64, env[i] - 6)     // drum hits, ~2 per second, peaks falling 180 dB/s
+            case 3, 4:                                                               // sustained, with gaps
+                if rnd() < 0.01 { env[i] = env[i] > -40 ? -64 : -12 }
+                else if env[i] > -40 { env[i] = min(-4, max(-20, env[i] + (rnd() - 0.5) * 2.5)) }
+            default: env[i] = rnd() < 0.02 ? -0.5 * rnd() : -26 + 3 * rnd()            // a bed with rare one-tick transients near 0 dBFS
+            }
+        }
+        return env.map { $0 <= -64 ? 0 : UInt32(32768 * pow(10, $0 / 20)) }
     }
 }
 
@@ -164,9 +185,79 @@ import AppKit
 
 extension PanelWindowController {
     private func writePNG(_ view: NSView, _ path: String) {
+        // The Advanced and Dual windows draw their static views into one root layer and their meters into GPU framebuffers (MeterField):
+        // cacheDisplay renders neither, so those windows are captured as WindowServer shows them (content area only).
+        if view.canDrawSubviewsIntoLayer, let w = view.window, w.isVisible,
+           let img = CGWindowListCreateImage(.null, .optionIncludingWindow, CGWindowID(w.windowNumber), [.boundsIgnoreFraming, .bestResolution]) {
+            let scale = CGFloat(img.width) / w.frame.width
+            let content = w.contentRect(forFrameRect: w.frame)
+            let crop = CGRect(x: 0, y: (w.frame.maxY - content.maxY) * scale, width: content.width * scale, height: content.height * scale)
+            if let c = img.cropping(to: crop), let data = NSBitmapImageRep(cgImage: c).representation(using: .png, properties: [:]) {
+                try? data.write(to: URL(fileURLWithPath: path)); return
+            }
+        }
         guard let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds) else { return }
         view.cacheDisplay(in: view.bounds, to: rep)
         if let data = rep.representation(using: .png, properties: [:]) { try? data.write(to: URL(fileURLWithPath: path)) }
+    }
+
+    /// `--demo --advanced --snapshot DIR`: the Advanced window from a fresh store (first opening -> DAW), then every mode; the switch to
+    /// Console also writes the question it asks (its levels rise). Outside 44.1 / 48 kHz (`--rate 96000`) the one PNG is the lock-out.
+    func snapshotAdvanced(to dir: String, prefix: String) {
+        try? FileManager.default.createDirectory(atPath: dir, withIntermediateDirectories: true, attributes: nil)
+        if device is DemoBackend { try? FileManager.default.removeItem(at: advancedStoreFolder) }
+        printScene(prefix, "before")
+        openAdvanced()
+        guard let a = advanced else { return }
+        a.ignoresOcclusion = true
+        let demo = device is DemoBackend
+        // demo loops for the Hybrid snapshot (a channel the optical mode lacks drops its loop, as on a unit)
+        if demo { a.store.loops = [] }
+        if demo { a.store.loops += [HybridLoop(name: "Vocal comp", device: "1176", sends: ["out.l3"], returns: ["in.a5"]),
+                         HybridLoop(name: "Reamp", device: "reamp box \u{2192} amp \u{2192} SM57", sends: ["out.l4"], returns: ["in.a1"]),
+                         HybridLoop(name: "Plate reverb", device: "Lexicon via ADAT", sends: ["out.adat1", "out.adat2"], returns: ["in.adat1", "in.adat2"])] }
+        for _ in 0..<12 { RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.05)) }
+        if let v = a.window.contentView { writePNG(v, "\(dir)/\(prefix)-advanced-open.png") }
+        guard a.available else { return }
+        // demo outputs start at 0 dB; lower them so the Console switch has levels to raise (and its question is captured)
+        if demo { ctx.model.restore([MAKeys.outputLevels.name: [-40, -40, -24, -24].map { NSNumber(value: Int32($0)) }]) }
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
+        printScene(prefix, "open (\(a.mode.rawValue))")
+        // a real unit ends in Monitor: the scene kept at the first opening, i.e. its mixer as it was before the run
+        for m in demo ? [AdvancedMode.monitor, .console, .hybrid, .daw] : [.console, .hybrid, .monitor] {
+            let plan = AdvancedSwitch.plan(from: a.mode, to: m, current: ctx.model.cache, stored: a.store.scene(m))
+            if !plan.rises.isEmpty {
+                let alert = AdvancedWindowController.riseAlert(plan)
+                alert.layout()
+                if let v = alert.window.contentView { writePNG(v, "\(dir)/\(prefix)-advanced-ask-\(m.rawValue).png") }
+                print("\(prefix) advanced \(a.mode.rawValue) -> \(m.rawValue): \(plan.rises.count) rises")
+            }
+            a.request(m, ask: false)
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: demo ? 0.4 : 1.2))
+            if let v = a.window.contentView { writePNG(v, "\(dir)/\(prefix)-advanced-\(m.rawValue).png") }
+            printScene(prefix, m.rawValue)
+        }
+    }
+
+    /// `--demo --devices 2 --dual --snapshot DIR`: the Dual window in each of its modes, and its setup sheet.
+    func snapshotDual(_ d: AdvancedDualWindowController, to dir: String, prefix: String) {
+        try? FileManager.default.createDirectory(atPath: dir, withIntermediateDirectories: true, attributes: nil)
+        if device is DemoBackend { try? FileManager.default.removeItem(at: advancedStoreFolder) }      // reproducible: a fresh demo store
+        d.writeSnapshots(dir: dir, prefix: prefix) { [weak self] v, path in self?.writePNG(v, path) }
+    }
+
+    /// Bench aid: the mixer keys the modes write, read back from the driver (registry), one line per key.
+    private func printScene(_ prefix: String, _ what: String) {
+        ctx.model.refresh()
+        let props = (device as PropertyTransport).copyProperties()
+        let keys = [MAKeys.inputRoutingV2, MAKeys.swReturnRoutingV2, MAKeys.swReturnLevels, MAKeys.outputLevels, MAKeys.outputMute,
+                    MAKeys.monitorAuxOnOutput, MAKeys.headphoneSourceV2, MAKeys.headphoneSecondSource, MAKeys.rotaryControl, MAKeys.inputLevels]
+        print("\(prefix) [\(what)] driver: " + keys.map { k -> String in
+            let v = props[k.name]
+            if let a = v as? [Any] { return k.name + "=" + a.map { "\(DeviceModel.int($0))" }.joined(separator: ",") }
+            if let n = v as? NSNumber { return k.name + "=" + String(format: "0x%llx", n.uint64Value) }
+            return k.name + "=-"
+        }.joined(separator: "  "))
     }
 
     func snapshotAll(to dir: String, prefix: String, knob: Int = 0, ab: (UInt32, UInt32)? = nil) {

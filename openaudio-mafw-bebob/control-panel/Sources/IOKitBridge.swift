@@ -31,10 +31,13 @@ protocol PanelBackend: PropertyTransport {
     var profile: DeviceProfile { get }
     /// The kext's MAExternalSyncRate (RATE_FOLLOW_PLAN_v1): the external source's rate, 0 = none; nil = a driver without the key.
     var externalSyncRate: UInt32? { get }
+    /// Registry id of the FireWire controller above the unit (the Dual setup's bus line); nil = unknown (demo)
+    var busID: UInt64? { get }
 }
 extension PanelBackend {
     var rate: RateBackend? { return nil }
     var externalSyncRate: UInt32? { return nil }
+    var busID: UInt64? { return nil }
 }
 
 
@@ -135,6 +138,8 @@ final class FWDevice: PanelBackend {
     private var peakAddress: mach_vm_address_t = 0
     private var peakLength: mach_vm_size_t = 0
 
+    var busID: UInt64? { return DualAggregate.busID(of: service) }
+
     static let peakCount = 52       // the shared page: GetPeakLevelCount = 52 for every model (ref FWAudioDevice @0x1d30); one 4 KiB page
 
     /// The device object's registry class (com_openaudio_FW1814Device, com_openaudio_FWAudiophileDevice, ...) picks the model.
@@ -197,11 +202,18 @@ final class FWDevice: PanelBackend {
         return out
     }
 
+    static let logWrites = ProcessInfo.processInfo.environment["OA_LOG_WRITES"] != nil
     /// One call carries every changed key (the reference batches in SendQueuedProperties, A2-P3).
     @discardableResult
     func setProperties(_ properties: [String: Any]) -> kern_return_t {
         if properties.isEmpty { return KERN_SUCCESS }
-        return IORegistryEntrySetCFProperties(service, properties as CFDictionary)
+        let kr = IORegistryEntrySetCFProperties(service, properties as CFDictionary)
+        // OA_LOG_WRITES=1 (bench aid): every registry write with its result, on stderr
+        if FWDevice.logWrites {
+            FileHandle.standardError.write(String(format: "%.3f write %@ %@ -> 0x%x\n", CFAbsoluteTimeGetCurrent(), String(info.guid.suffix(6)),
+                                                  properties.keys.sorted().joined(separator: ","), kr).data(using: .utf8)!)
+        }
+        return kr
     }
 
     // MARK: user client, notifications, meters

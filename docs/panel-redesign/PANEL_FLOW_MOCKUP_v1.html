@@ -1,0 +1,955 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flow Panel Mockup</title>
+<!--
+  PANEL_REDESIGN_PLAN_v1 companion: an interactive HTML mockup of the "Flow" layout for the OA BeBoB MAFW panel.
+  It is a sketch of organisation and proportions, not the app: the meters are simulated, nothing talks to a driver.
+  Palette, type and metrics come from control-panel/Sources/Theme.swift so that only the organisation changes.
+  Open it in a browser (file://). "Compare" shows the current panel's screenshots from docs/images.
+-->
+<style>
+:root{
+  --chrome:#0B0C0D;--window:#101113;--surface:#191B1E;--raised:#202327;--control:#272A2F;--controlHi:#33373D;
+  --well:#08090A;--track:#2C3035;--ledOff:#24272B;--hair:rgba(255,255,255,.06);
+  --text:#ECEEF1;--text2:#A4AAB2;--text3:#6B717A;--text4:#43474E;
+  --accent:#62AEFF;--mute:#E5484D;--solo:#F1B33A;--green:#3DC97B;--red:#EF5248;
+  --mLow:#33CF7D;--mMid:#EFC43B;--mHigh:#F2493F;--cap:#D9DCE0;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:#050606;color:var(--text);font:13px/1.35 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.num{font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer;text-align:inherit}
+.page{padding:20px 16px 64px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.intro{max-width:1100px;text-align:center;color:var(--text2);font-size:12.5px}
+.intro h1{margin:0 0 4px;font-size:17px;color:var(--text);font-weight:650}
+.toolbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center}
+.toolbar .lbl{color:var(--text3);font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;margin:0 4px 0 10px}
+.tb{background:var(--control);border-radius:7px;padding:6px 11px;font-size:12px;color:var(--text2)}
+.tb.on{background:var(--controlHi);color:var(--text);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.scroller{max-width:100%;overflow-x:auto;padding:4px}
+
+/* window */
+.win{position:relative;height:720px;background:var(--window);border-radius:11px;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 30px 80px rgba(0,0,0,.6);overflow:hidden;user-select:none;-webkit-user-select:none}
+#wi{position:absolute;inset:0}
+#pops,#cos{position:absolute;inset:0;pointer-events:none}
+#pops>*{pointer-events:auto}
+
+/* header */
+.hdr{height:52px;background:var(--chrome);display:flex;align-items:center;gap:8px;padding:0 12px}
+.lights{display:flex;gap:8px;margin-right:4px}.lights i{width:12px;height:12px;border-radius:50%;background:#34373c;display:block}
+.dev{display:flex;flex-direction:column;line-height:1.15;padding:4px 8px;border-radius:7px}
+.dev:hover,.pill:hover,.knobw:hover{background:var(--controlHi)}
+.dev b{font-size:14px;font-weight:650}.dev span{font-size:10.5px;color:var(--text3)}
+.pill{display:flex;align-items:center;gap:7px;height:30px;padding:0 11px;border-radius:15px;background:var(--raised);font-size:12px;color:var(--text2);white-space:nowrap}
+.pill b{color:var(--text);font-weight:650}
+.pill .lock{color:var(--green);font-size:11px}
+.car{color:var(--text3);font-size:9px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;flex:none}
+.spacer{flex:1}
+.knobw{display:flex;align-items:center;gap:9px;height:38px;padding:0 12px 0 4px;border-radius:19px;background:var(--raised)}
+.knob{display:block;width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 50% 35%,#3c4047,#23262b);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);position:relative;flex:none}
+.knob::after{content:"";position:absolute;left:50%;top:4px;width:2px;height:8px;margin-left:-1px;background:var(--text);border-radius:1px;transform-origin:1px 11px;transform:rotate(var(--rot,0deg))}
+.knob.big{width:64px;height:64px}
+.knob.big::after{top:7px;height:14px;width:3px;margin-left:-1.5px;transform-origin:1.5px 25px}
+.kt{display:flex;flex-direction:column;line-height:1.2;text-align:left}.kt b{font-size:12px}.kt span{font-size:10.5px;color:var(--text3);white-space:nowrap}
+.gbtn{height:30px;padding:0 12px;border-radius:8px;background:var(--control);font-size:11.5px;font-weight:700;color:var(--text2);letter-spacing:.04em}
+.gbtn.dim.on{background:var(--green);color:#0B0C0D}
+.gbtn.mute.on{background:var(--mute);color:#fff}
+.views{display:flex;background:var(--raised);border-radius:8px;padding:3px;gap:2px;margin-left:4px}
+.views span{width:30px;height:24px;border-radius:6px;color:var(--text3);display:flex;align-items:center;justify-content:center}
+.views span.on{background:var(--controlHi);color:var(--text)}
+
+/* body */
+.body{position:absolute;top:52px;left:0;right:0;bottom:0;display:flex;padding:12px 16px 16px}
+.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible}
+.col{position:relative;z-index:1;display:flex;flex-direction:column;min-height:0}
+.zlabel{height:22px;flex:none;font-size:10px;font-weight:650;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.zlabel .glab{color:var(--text2);font-size:10px;font-weight:650;letter-spacing:.1em;padding:2px 6px;margin-left:-6px;border-radius:5px;background:var(--raised)}
+.zlabel .glab:hover{background:var(--controlHi)}
+.zlabel em{font-style:normal;color:var(--solo);letter-spacing:.02em;text-transform:none;font-weight:500}
+.zlabel .unh{color:var(--accent);text-transform:none;letter-spacing:0;font-weight:500}
+
+.srccol{flex:1;min-width:0}
+.ctx{height:34px;flex:none;overflow:hidden;border-radius:9px;background:var(--surface);display:flex;align-items:center;gap:9px;padding:0 12px;margin-bottom:8px;box-shadow:inset 3px 0 0 var(--bc)}
+.ctx .cdot{width:8px;height:8px;border-radius:50%;flex:none}
+.ctx b{font-size:12.5px;white-space:nowrap}.ctx span{min-width:0;font-size:11.5px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ctx em{margin-left:auto;font-style:normal;font-size:11px;color:var(--text3);white-space:nowrap}
+.groups{display:flex;gap:18px;flex:1;min-height:0}
+.group{display:flex;flex-direction:column;min-height:0}
+.strips{display:flex;gap:6px;flex:1;min-height:0}
+
+.strip{width:var(--sw,70px);background:var(--surface);border-radius:10px;display:flex;flex-direction:column;align-items:center;padding:9px 0 8px;position:relative;transition:opacity .15s,box-shadow .15s}
+.strip.wide{width:calc(var(--sw,70px) + 30px)}
+.strip.out{opacity:.4}
+.strip.out:hover{opacity:.75}
+.strip.off{opacity:.22;pointer-events:none}
+.strip.hl{box-shadow:0 0 0 1.5px var(--hc)}
+.sname{font-size:12px;font-weight:650;white-space:nowrap;max-width:calc(var(--sw,70px) - 6px);overflow:hidden;text-overflow:ellipsis;text-align:center;border-radius:4px;padding:0 3px}
+.sname:hover{background:var(--controlHi)}
+.ssub{font-size:9.5px;color:var(--text3);margin-top:1px;white-space:nowrap}
+.chips{display:grid;grid-template-columns:repeat(3,19px);gap:3px;margin:8px 0 7px}
+.chip{height:16px;border-radius:4px;background:var(--control);font-size:8px;font-weight:750;color:var(--text3);display:flex;align-items:center;justify-content:center;letter-spacing:.01em}
+.chip.on{background:var(--c);color:#0B0C0D}
+.chip.cur{box-shadow:0 0 0 1.5px var(--c)}
+.vlab{font-size:8.5px;color:var(--text3);letter-spacing:.09em;font-weight:650;height:12px}
+.vlab.send{color:var(--green)}
+.fm{flex:1;min-height:120px;width:100%;display:flex;justify-content:center;gap:6px;position:relative;margin:4px 0 4px;padding-right:6px}
+.scale{position:relative;width:16px;flex:none}
+.scale i{position:absolute;right:0;font-size:8px;color:var(--text4);font-style:normal;transform:translateY(-50%);top:calc(7px + (100% - 14px) * (1 - var(--p)))}
+.ftrack{position:relative;width:26px;border-radius:5px;background:var(--well);cursor:ns-resize;display:flex;gap:3px;padding:3px 4px;touch-action:none}
+.ftrack.one{width:20px}
+.ftrack.send{box-shadow:inset 0 0 0 1px rgba(61,201,123,.45)}
+.mbar{position:relative;flex:1;border-radius:2px;background:linear-gradient(to top,var(--mLow) 0%,var(--mLow) 55%,var(--mMid) 76%,var(--mHigh) 93%);overflow:hidden}
+.mbar .cv{position:absolute;left:0;right:0;top:0;height:calc((1 - var(--m, 0)) * 100%);background:var(--ledOff)}
+.mbar::after,.hm::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(to top,transparent 0 2px,rgba(8,9,10,.85) 2px 3px)}
+.hm::after{background:repeating-linear-gradient(to right,transparent 0 2px,rgba(8,9,10,.85) 2px 3px)}
+.cap{position:absolute;left:-6px;right:-6px;height:13px;border-radius:3px;background:var(--cap);box-shadow:0 1px 3px rgba(0,0,0,.7);top:calc(7px + (100% - 14px) * (1 - var(--p, 1)));transform:translateY(-50%);pointer-events:none}
+.cap::after{content:"";position:absolute;left:4px;right:4px;top:5.5px;height:2px;background:#2A2D31}
+.ftrack.send .cap{background:#BFEFD2}
+.val{font-size:11px;color:var(--text2);height:15px;white-space:nowrap}
+.val.two{font-size:10px;letter-spacing:-.02em}
+.img{width:calc(var(--sw,70px) - 14px);height:16px;position:relative;margin:7px 0 1px;cursor:ew-resize;touch-action:none}
+.img .tr{position:absolute;left:0;right:0;top:7px;height:2px;background:var(--track);border-radius:1px}
+.img .span{position:absolute;top:7px;height:2px;background:var(--accent);opacity:.7}
+.img .h{position:absolute;top:1px;width:11px;height:14px;border-radius:3px;background:var(--text2);margin-left:-5.5px;font-size:7.5px;color:#111;text-align:center;line-height:14px;font-weight:800;pointer-events:none}
+.img.na{opacity:.25;pointer-events:none}
+.plab{font-size:9px;color:var(--text3);height:12px;white-space:nowrap}
+.btns{display:flex;gap:3px;margin-top:7px}
+.sb{width:20px;height:20px;border-radius:5px;background:var(--control);font-size:10px;font-weight:750;color:var(--text3);display:flex;align-items:center;justify-content:center;flex:none}
+.sb:hover{background:var(--controlHi)}
+.sb.m.on{background:var(--mute);color:#fff}.sb.s.on{background:var(--solo);color:#111}.sb.l.on{color:var(--accent)}
+.kbadge{position:absolute;top:8px;right:6px;width:9px;height:9px;border-radius:50%;border:2px solid var(--accent);box-shadow:0 0 6px rgba(98,174,255,.5)}
+
+.quadmsg{flex:1;background:var(--surface);border-radius:10px;padding:22px 24px;color:var(--text2);font-size:12.5px;line-height:1.5}
+.quadmsg b{color:var(--text);font-size:14px}
+.quadmsg .qin{display:flex;gap:16px;margin-top:22px;align-items:flex-end}
+.quadmsg .qin .ftrack{height:200px;cursor:default}
+
+/* mixes column */
+.buscol{width:136px;margin-left:22px;flex:none}
+.tiles{display:flex;flex-direction:column;gap:7px}
+.tile{background:var(--surface);border-radius:10px;padding:8px 10px 9px;cursor:pointer;box-shadow:inset 0 0 0 1px transparent;position:relative;transition:background .15s}
+.tile:hover{background:var(--raised)}
+.tile.sel{box-shadow:inset 0 0 0 1.5px var(--c);background:color-mix(in srgb,var(--c) 11%,var(--surface))}
+.tile .tn{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:650;white-space:nowrap}
+.tile .tn i{width:8px;height:8px;border-radius:50%;background:var(--c);flex:none}
+.tile .tn kbd{margin-left:auto;font:600 9.5px -apple-system,sans-serif;color:var(--text3);background:var(--control);border-radius:4px;padding:1px 4px}
+.tile .ts{font-size:10px;color:var(--text3);margin:2px 0 6px;white-space:nowrap}
+.hm{position:relative;height:4px;border-radius:2px;background:linear-gradient(to right,var(--mLow) 0%,var(--mLow) 55%,var(--mMid) 76%,var(--mHigh) 93%);overflow:hidden}
+.hm+.hm{margin-top:2px}
+.hm .cv{position:absolute;top:0;bottom:0;right:0;width:calc((1 - var(--m, 0)) * 100%);background:var(--ledOff)}
+.amast{display:flex;align-items:center;gap:5px;margin-top:9px}
+.amast .al{font-size:9.5px;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;font-weight:650}
+.amast .vv{font-size:10.5px;color:var(--text2);margin-left:auto}
+.amast .more{margin-left:0}
+.tile.direct{cursor:default;background:transparent;box-shadow:inset 0 0 0 1px var(--text4)}
+.tile.direct .tn i{background:#7C838D}
+.tile.direct .vms{display:flex;gap:3px;height:30px}
+.tile.direct .vms .mbar{border-radius:1px}
+.tile.none{cursor:default;opacity:.5}
+
+/* horizontal fader-meter */
+.hf{position:relative;height:22px;flex:1;border-radius:5px;background:var(--well);padding:5px 6px;display:flex;flex-direction:column;justify-content:center;cursor:ew-resize;touch-action:none}
+.hf .hm{height:4px}
+.hf .cap{top:50%;left:calc(6px + (100% - 12px) * var(--p, 1));right:auto;width:11px;height:24px;transform:translate(-50%,-50%)}
+.hf .cap::after{left:4.5px;right:auto;top:4px;bottom:4px;width:2px;height:auto}
+.hf.plain{background:var(--track);height:4px;padding:0;margin:12px 6px 6px;flex:none}
+.hf.ro{cursor:default}
+
+/* outputs column */
+.destcol{width:262px;margin-left:50px;flex:none}
+.cards{display:flex;flex-direction:column;gap:7px}
+.card{background:var(--surface);border-radius:10px;padding:8px 10px 9px 11px;position:relative}
+.card.dis{opacity:.3;pointer-events:none}
+.ch{display:flex;align-items:center;gap:7px;min-height:22px}
+.cn{display:flex;flex-direction:column;line-height:1.15;min-width:0}
+.cn b{font-size:12.5px;font-weight:650;white-space:nowrap}.cn span{font-size:9.5px;color:var(--text3);white-space:nowrap}
+.more{color:var(--text3);font-size:15px;line-height:1;padding:2px 4px;border-radius:5px;margin-left:auto}
+.more:hover{background:var(--controlHi);color:var(--text)}
+.ch .more{margin-left:4px}
+.ch .seg{margin:0 0 0 auto}
+.seg{display:flex;gap:3px;margin:7px 0}
+.seg button{flex:1;height:22px;border-radius:6px;background:var(--control);font-size:10.5px;font-weight:650;color:var(--text3);padding:0 7px;white-space:nowrap;text-align:center}
+.seg button:hover{background:var(--controlHi)}
+.seg button.on{background:var(--c);color:#0B0C0D}
+.ch .seg button{flex:none}
+.fixed{margin-left:auto;display:flex;align-items:center;gap:5px;font-size:10.5px;color:var(--text2);background:var(--raised);border-radius:6px;padding:3px 7px;white-space:nowrap}
+.fixed i{width:7px;height:7px;border-radius:50%}
+.lrow{display:flex;align-items:center;gap:8px;margin-top:7px}
+.lrow .v{width:34px;text-align:right;font-size:11px;color:var(--text2)}
+.ab{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:10.5px;color:var(--text3);cursor:pointer;border-radius:6px;padding:3px 4px;margin-left:-4px;margin-right:-4px}
+.ab:hover{background:var(--raised)}
+.ab .abl{font-weight:750;letter-spacing:.06em;color:var(--text2)}
+.ab .abs{padding:1px 6px;border-radius:5px;background:var(--control);color:var(--text3);white-space:nowrap}
+.ab .abs.on{background:var(--c);color:#0B0C0D;font-weight:650}
+.led{width:9px;height:9px;border-radius:50%;background:var(--ledOff);flex:none;margin-left:auto}
+.led.on{background:var(--solo);box-shadow:0 0 7px var(--solo)}
+.adatm{display:flex;gap:4px;height:30px;margin-top:8px}
+.adatm .mbar.off{opacity:.25}
+
+/* popovers + sheet */
+.pop{position:absolute;z-index:50;background:#1D1F23;border-radius:11px;box-shadow:0 0 0 1px rgba(255,255,255,.1),0 18px 50px rgba(0,0,0,.65);padding:12px 13px;min-width:230px;max-width:330px;font-size:12px}
+.pop h4,.sheet h4{margin:0 0 7px;font-size:9.5px;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;font-weight:650}
+.sec+.sec{margin-top:13px}
+.radio{display:flex;align-items:center;gap:8px;padding:4px 0;color:var(--text2);cursor:pointer;white-space:nowrap}
+.radio i{width:13px;height:13px;border-radius:50%;border:1.5px solid var(--text3);flex:none}
+.radio.on{color:var(--text)}.radio.on i{border:4px solid var(--accent)}
+.radio i.cbx{border-radius:3px}
+.radio.on i.cbx{border:0;background:var(--accent)}
+.radio.dis{opacity:.35;pointer-events:none}
+.rseg{display:flex;gap:3px}.rseg.wrap{flex-wrap:wrap}
+.rseg button{flex:1;height:26px;border-radius:6px;background:var(--control);font-size:11.5px;color:var(--text2);padding:0 8px;white-space:nowrap;text-align:center}
+.rseg button.on{background:var(--accent);color:#0B0C0D;font-weight:650}
+.rseg button.dis{opacity:.35;pointer-events:none}
+.mitem{display:flex;gap:8px;padding:6px 8px;border-radius:6px;color:var(--text2);cursor:pointer;white-space:nowrap}
+.mitem:hover{background:var(--controlHi);color:var(--text)}
+.mitem .ck{width:12px;color:var(--accent)}
+.sep{height:1px;background:var(--hair);margin:6px 0}
+.hint{margin:11px 0 0;color:var(--text3);font-size:11px;line-height:1.4;white-space:normal}
+.kpop{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.kbig{cursor:ns-resize;touch-action:none}
+.kv{font-size:18px;font-weight:650}.ks{font-size:11px;color:var(--text3)}
+.kitems{display:flex;flex-wrap:wrap;gap:4px}
+.kit{height:24px;border-radius:6px;background:var(--control);padding:0 9px;font-size:11px;color:var(--text3)}
+.kit.on{background:color-mix(in srgb,var(--accent) 25%,var(--control));color:var(--text);box-shadow:inset 0 0 0 1px var(--accent)}
+.txt{width:100%;height:28px;border-radius:6px;border:0;background:var(--well);color:var(--text);font:inherit;padding:0 9px;outline:none;box-shadow:inset 0 0 0 1px var(--hair)}
+.txt:focus{box-shadow:inset 0 0 0 1.5px var(--accent)}
+.balrow{display:flex;align-items:center;gap:8px}.balrow .hf{height:16px;padding:0 6px}.balrow .hf .cap{height:16px}
+.sheetbg{position:absolute;inset:0;background:rgba(0,0,0,.45);z-index:60;display:flex;justify-content:center;align-items:flex-start;padding-top:60px}
+.sheet{width:640px;max-height:620px;overflow:auto;background:#1D1F23;border-radius:12px;box-shadow:0 0 0 1px rgba(255,255,255,.1),0 24px 70px rgba(0,0,0,.7);padding:18px 20px}
+.sheet .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 26px}
+.sheet .top{display:flex;align-items:center;margin-bottom:14px}.sheet .top b{font-size:15px}
+.sheet .top button{margin-left:auto}
+
+/* callouts */
+.co{position:absolute;z-index:40;width:20px;height:20px;border-radius:50%;background:#FFD54A;color:#111;font-size:11px;font-weight:850;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.7),0 0 0 2px #050606}
+
+/* notes */
+.notes{max-width:1120px;display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px 26px;color:var(--text2);font-size:12.5px;line-height:1.5;margin-top:6px}
+.note{display:flex;gap:10px}
+.note .n{width:20px;height:20px;border-radius:50%;background:#FFD54A;color:#111;font-size:11px;font-weight:850;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px}
+.note b{color:var(--text)}
+.howto{max-width:1120px;color:var(--text3);font-size:12px;text-align:center}
+.compare{max-width:1300px;display:none;flex-direction:column;gap:14px;align-items:center}
+.compare.on{display:flex}
+.compare figure{margin:0;text-align:center;color:var(--text3);font-size:12px}
+.compare img{max-width:100%;border-radius:10px;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="intro">
+    <h1>Flow: a proposal for the OA BeBoB MAFW panel (mockup v1)</h1>
+    Interactive sketch of the organisation in <code>docs/PANEL_REDESIGN_PLAN_v1.md</code>. Same palette and type as the current panel; meters are simulated and nothing talks to a driver.
+  </div>
+  <div class="toolbar" id="toolbar"></div>
+  <div class="scroller"><div class="win" id="win"><div id="wi"></div><div id="cos"></div><div id="pops"></div></div></div>
+  <div class="howto">Click a mix tile (or press 1–6) to work on that mix · drag faders, pans and the knob · ⌥-click or double-click a fader for 0 dB · click a strip name to rename or hide it · ⋯ opens an output's rare controls · click the Phones A/B row to press the front button · try 192 kHz on the FW1814 from the clock pill.</div>
+  <div class="notes" id="notes"></div>
+  <div class="compare" id="compare">
+    <figure><img src="../images/panel-mixer.png" alt="Current mixer tab"><figcaption>Current panel: Mixer tab</figcaption></figure>
+    <figure><img src="../images/panel-output.png" alt="Current output tab"><figcaption>Current panel: Output tab</figcaption></figure>
+    <figure><img src="../images/panel-hardware-0.3.1.png" alt="Current hardware tab"><figcaption>Current panel: Hardware tab</figcaption></figure>
+  </div>
+</div>
+<script>
+'use strict';
+const NEG = -Infinity;
+const BUS = {
+  '12': {name: 'Mix 1/2', short: '1/2', color: '#62AEFF'},
+  '34': {name: 'Mix 3/4', short: '3/4', color: '#B18CFF'},
+  '56': {name: 'Mix 5/6', short: '5/6', color: '#2FD4C4'},
+  '78': {name: 'Mix 7/8', short: '7/8', color: '#FF7EB6'},
+  'spd': {name: 'Mix S/PDIF', short: 'SPD', color: '#FF9F5A'},
+  'aux': {name: 'Aux', short: 'AUX', color: '#3DC97B'},
+  'direct': {name: 'Direct', short: 'DIR', color: '#7C838D'},
+  'o12': {name: 'Out 1/2', short: '1/2', color: '#62AEFF'},
+  'o34': {name: 'Out 3/4', short: '3/4', color: '#B18CFF'},
+};
+const KNOB_STEPS = [['1.5 dB per click', 3], ['3 dB per click', 6], ['Official law', 0]];
+
+// S(id, name, sub, signal dBFS or null = silent, enabled)
+function S(id, name, sub, sig, enabled) { return {id, name, sub, sig, enabled: enabled !== false}; }
+function lineDest(b, sub) { return {id: 'l' + b, name: 'Line Out ' + BUS[b].short, sub, sources: [b, 'aux'], level: true, knob: true}; }
+
+const MODELS = {
+  fw1814: {
+    label: 'FW1814', name: 'FireWire 1814', unit: '74B9FB', rates: [44100, 48000, 88200, 96000, 176400, 192000],
+    sync: ['Internal — digital inputs muted', 'Internal — digital inputs unmuted', 'External — digital', 'Word clock'],
+    knob: ['DAW returns', 'Inputs', 'Outputs', 'Aux'], digitalPorts: true, ab: true,
+    build(st) {
+      const quad = st.rate >= 176400, dual = st.rate >= 88200 && !quad;
+      if (quad) return {
+        quad: 'The interface’s mixer is off at 176.4 and 192 kHz (hardware): inputs 1–2 go straight to the computer and Line Out 1–4 play DAW 1–4. Mixes, the aux and the digital ports come back at 96 kHz and below. Outputs and phones stay where they are.',
+        groups: [], buses: [], direct: {name: 'Core Audio', sub: 'DAW 1–4 → Line 1–4', n: 4},
+        dests: [
+          {id: 'l12', name: 'Line Out 1/2', sub: 'TRS 1–2', sources: ['direct'], directLabel: 'DAW 1/2', directCh: [0, 1], level: true, knob: true},
+          {id: 'l34', name: 'Line Out 3/4', sub: 'TRS 3–4', sources: ['direct'], directLabel: 'DAW 3/4', directCh: [2, 3], level: true, knob: true},
+          {id: 'hp1', name: 'Phones 1', sub: 'front', sources: ['o12', 'o34'], level: true, phones: true},
+          {id: 'hp2', name: 'Phones 2', sub: 'front', sources: ['o12', 'o34'], level: true, phones: true}]};
+      const digital = st.adatIn
+        ? {label: 'ADAT in', menu: true, strips: [1, 2, 3, 4].map(i => S('d' + i, 'ADAT ' + (2 * i - 1) + '/' + 2 * i, dual ? 'optical · S/MUX' : 'optical', i === 1 ? -21 : null, !(dual && i > 2)))}
+        : {label: 'S/PDIF in', menu: true, strips: [S('sp', 'S/PDIF', st.coax ? 'coaxial' : 'optical', -19)]};
+      return {
+        groups: [
+          {label: 'DAW', daw: true, strips: [S('r12', 'DAW 1/2', 'SW return 1–2', -15), S('r34', 'DAW 3/4', 'SW return 3–4', -23)]},
+          {label: 'Analog in', strips: [S('a12', 'In 1/2', 'Mic/Line 1–2', -14), S('a34', 'In 3/4', 'Line 3–4', -19), S('a56', 'In 5/6', 'Line 5–6', null), S('a78', 'In 7/8', 'Line 7–8', null)]},
+          digital],
+        buses: ['12', '34', 'aux'],
+        direct: st.adatOut ? {name: 'DAW 5–12', sub: 'direct → ADAT out', n: 8, greyFrom: dual ? 4 : 8} : {name: 'DAW S/PDIF', sub: 'direct → S/PDIF out', n: 2},
+        dests: [
+          lineDest('12', 'TRS 1–2'), lineDest('34', 'TRS 3–4'),
+          st.adatOut ? {id: 'dig', name: 'ADAT Out', sub: dual ? 'optical · 4 ch (S/MUX)' : 'optical · 8 ch', sources: ['direct'], directLabel: 'DAW 5–12', adat: dual ? 4 : 8, digitalMenu: true}
+                     : {id: 'dig', name: 'S/PDIF Out', sub: 'coax + optical, mirrored', sources: ['direct', 'aux'], directLabel: 'DAW S/PDIF', directCh: [0, 1], meterOnly: true, digitalMenu: true},
+          {id: 'hp1', name: 'Phones 1', sub: 'front · A/B button', sources: ['12', '34', 'aux'], level: true, phones: true, ab: true},
+          {id: 'hp2', name: 'Phones 2', sub: 'front', sources: ['12', '34', 'aux'], level: true, phones: true}]};
+    },
+  },
+  audiophile: {
+    label: 'Audiophile', name: 'FireWire Audiophile', unit: '7512C4', rates: [44100, 48000, 88200, 96000],
+    sync: ['Internal', 'External — S/PDIF'], knob: ['DAW returns', 'Inputs', 'Outputs', 'Aux'], digitalPorts: false, ab: true,
+    build(st) {
+      return {
+        groups: [
+          {label: 'DAW', daw: true, strips: [S('r12', 'DAW 1/2', 'SW return 1–2', -15), S('r34', 'DAW 3/4', 'SW return 3–4', null), S('r56', 'S/PDIF', 'SW return 5–6', -24)]},
+          {label: 'Inputs', strips: [S('a12', 'In 1/2', 'Analog 1–2', -15), S('sp', 'S/PDIF', 'digital in', null)]}],
+        buses: ['12', '34', 'spd', 'aux'], direct: null,
+        dests: [lineDest('12', 'analog 1–2'), lineDest('34', 'analog 3–4'),
+          {id: 'lspd', name: 'S/PDIF Out', sub: 'digital', sources: ['spd', 'aux'], level: true, knob: true},
+          {id: 'hp1', name: 'Phones', sub: 'front · A/B button', sources: ['12', '34', 'spd', 'aux'], level: true, phones: true, ab: true}]};
+    },
+  },
+  fw410: {
+    label: 'FW410', name: 'FireWire 410', unit: 'demo', rates: [44100, 48000, 88200, 96000, 176400, 192000],
+    sync: ['Internal', 'External — S/PDIF'], knob: ['DAW returns', 'Outputs', 'Inputs', 'Phones', 'Aux'], digitalPorts: false, ab: false,
+    build(st) {
+      const quad = st.rate >= 176400;
+      return {
+        groups: [
+          {label: 'DAW', daw: true, strips: [S('r12', 'DAW 1/2', 'SW return 1–2', -15), S('r34', 'DAW 3/4', 'SW return 3–4', -21), S('r56', 'DAW 5/6', 'SW return 5–6', null), S('r78', 'DAW 7/8', 'SW return 7–8', null), S('r9', 'S/PDIF', 'SW return 9–10', null, !quad)]},
+          {label: 'Inputs', strips: [S('a12', 'In 1/2', 'Mic/Line 1–2', -14), S('sp', 'S/PDIF', 'digital in', null, !quad)]}],
+        buses: ['12', '34', '56', '78', 'spd', 'aux'], direct: null,
+        dests: [lineDest('12', 'analog 1–2'), lineDest('34', 'analog 3–4'), lineDest('56', 'analog 5–6'), lineDest('78', 'analog 7–8'),
+          {id: 'lspd', name: 'S/PDIF Out', sub: quad ? 'off at 176.4/192 kHz' : 'digital', sources: ['spd', 'aux'], level: true, knob: true, disabled: quad},
+          {id: 'hp1', name: 'Phones', sub: 'any mixes at once', sources: ['12', '34', '56', '78', 'spd', 'aux'], level: true, phones: true, multi: true}]};
+    },
+  },
+};
+
+// ---------- state ----------
+let st, cur;
+const win = document.getElementById('win'), wi = document.getElementById('wi'), pops = document.getElementById('pops'), cos = document.getElementById('cos');
+let showCallouts = true, showCompare = false;
+
+function initState(model) {
+  st = {model, rate: model === 'fw410' ? 44100 : 48000, sync: 0, follow: true, adatIn: true, adatOut: true, coax: true, smux: false,
+    ctx: '12', strips: {}, dests: {}, names: {}, hidden: new Set(), aux: {level: 0, mute: false, link: true, bal: 0, pan: [-1, 1]},
+    knob: {group: 'Outputs', members: new Set()}, mute: false, dim: false, scene: 'Tracking', law: 3, pairs: false,
+    ab: {fn: 'phones', a: '12', b: 'aux', state: 'A'}, pop: null, sheet: false};
+  const routes = {r12: ['12'], r34: ['34'], r56: model === 'audiophile' ? ['spd'] : ['56'], r78: ['78'], r9: ['spd'], a12: ['12', '34'], a34: ['12'], d1: ['34'], sp: ['12']};
+  const levels = {a12: -3.5, a34: -6, r34: -2, d1: -4};
+  const sends = {a12: -8, a34: -14, r12: -20};
+  for (const [id, r] of Object.entries(routes)) { const x = ss(id); r.forEach(b => x.routes.add(b)); }
+  for (const [id, v] of Object.entries(levels)) ss(id).level = [v, v];
+  for (const [id, v] of Object.entries(sends)) ss(id).send = [v, v];
+  const L = MODELS[model].build(st);
+  L.dests.forEach(d => { const x = ds(d); if (d.phones) x.level = d.id === 'hp2' ? -15 : -18; else x.level = -10; });
+  if (model === 'fw1814') { ds(L.dests.find(d => d.id === 'hp2')).src = 'aux'; }
+  st.knob.members = new Set(knobItems('Outputs', L).map(i => i.id));
+}
+function ss(id) {
+  return st.strips[id] || (st.strips[id] = {level: [0, 0], send: [NEG, NEG], pan: [-1, 1], routes: new Set(), mute: false, solo: false, link: true, lastSend: null});
+}
+function ds(d) {
+  let x = st.dests[d.id];
+  if (!x) x = st.dests[d.id] = {src: d.multi ? [d.sources[0]] : d.sources[0], level: -10, mute: false, solo: false, link: true, bal: 0};
+  if (d.multi) { if (!Array.isArray(x.src)) x.src = [d.sources[0]]; x.src = x.src.filter(s => d.sources.includes(s)); if (!x.src.length) x.src = [d.sources[0]]; }
+  else if (!d.sources.includes(x.src)) x.src = d.sources[0];
+  if (d.ab && st.ab.fn === 'phones' && !cur?.quad) {
+    if (!d.sources.includes(st.ab.a)) st.ab.a = d.sources[0];
+    if (!d.sources.includes(st.ab.b)) st.ab.b = d.sources[d.sources.length - 1];
+    x.src = st.ab.state === 'A' ? st.ab.a : st.ab.b;
+  }
+  return x;
+}
+const destById = id => cur.dests.find(d => d.id === id);
+const allStrips = () => cur.groups.flatMap(g => g.strips);
+const stripName = s => st.names[s.id] || s.name;
+const isAuxOn = x => x.send[0] > NEG || x.send[1] > NEG;
+const memberOf = (x, b) => b === 'aux' ? isAuxOn(x) : x.routes.has(b);
+
+// ---------- maths ----------
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const dbToP = db => (db === NEG || db <= -64) ? 0 : Math.min(1, Math.pow(10, db / 40));
+function pToDb(p) { if (p <= 0.035) return NEG; const d = 40 * Math.log10(p); return d > -0.4 ? 0 : Math.round(d * 2) / 2; }
+const fmt = db => db === NEG ? '−∞' : db === 0 ? '0.0' : '−' + Math.abs(db).toFixed(1);
+const rl = r => (r % 1000 === 0 ? String(r / 1000) : (r / 1000).toFixed(1));
+const panTxt = v => Math.abs(v) < 0.004 ? 'C' : (v < 0 ? 'L' : 'R') + Math.round(Math.abs(v) * 127);
+const col = s => (BUS[s] || BUS.direct).color;
+
+// ---------- view builders ----------
+const ICON_LINK = '<svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 7l2-2M4.2 5.3L3 6.5a2 2 0 002.8 2.8L7 8.1M7.8 6.7L9 5.5A2 2 0 006.2 2.7L5 3.9"/></svg>';
+const ICON_VIEWS = ['<svg width="14" height="12" viewBox="0 0 14 12" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="1" width="12" height="10" rx="2"/><path d="M1 4h12"/></svg>',
+  '<svg width="14" height="12" viewBox="0 0 14 12" fill="currentColor"><rect x="1" y="4" width="2" height="7"/><rect x="4.5" y="1" width="2" height="10"/><rect x="8" y="5" width="2" height="6"/><rect x="11.5" y="3" width="2" height="8"/></svg>',
+  '<svg width="14" height="12" viewBox="0 0 14 12" fill="currentColor"><rect x="1" y="1" width="12" height="2"/><rect x="1" y="5" width="8" height="2"/><rect x="1" y="9" width="10" height="2"/></svg>'];
+const SCALE = [0, -6, -12, -24, -48];
+
+function knobKind(group) { return {'DAW returns': 'ret', 'Inputs': 'in', 'Outputs': 'out', 'Aux': 'aux', 'Phones': 'ph'}[group]; }
+function knobItems(group, L) {
+  L = L || cur;
+  switch (knobKind(group)) {
+    case 'ret': return (L.groups[0] && L.groups[0].daw ? L.groups[0].strips : []).map(s => ({id: s.id, name: stripName(s)}));
+    case 'in': return L.groups.filter(g => !g.daw).flatMap(g => g.strips).map(s => ({id: s.id, name: stripName(s)}));
+    case 'out': return L.dests.filter(d => d.knob).map(d => ({id: d.id, name: d.name.replace('Line Out ', 'Out ')}));
+    case 'aux': return [{id: 'aux', name: 'Aux master'}];
+    case 'ph': return L.dests.filter(d => d.phones).map(d => ({id: d.id, name: d.name}));
+  }
+  return [];
+}
+function inKnob(kind, id) { return knobKind(st.knob.group) === kind && st.knob.members.has(id); }
+const badge = on => on ? '<span class="kbadge" title="The front knob drives this"></span>' : '';
+
+function header(m) {
+  const sync = m.sync[st.sync].split(' — ')[0];
+  const kitems = knobItems(st.knob.group), n = kitems.filter(i => st.knob.members.has(i.id)).length;
+  const target = st.knob.group + (n && n < kitems.length ? ' (' + n + ')' : '');
+  return `<div class="hdr">
+    <div class="lights"><i></i><i></i><i></i></div>
+    <button class="dev" data-act="pop" data-pop="device" data-popa="device"><b>${m.name}</b><span>${m.unit === 'demo' ? 'demo unit' : m.unit} ▾</span></button>
+    <button class="pill" data-act="pop" data-pop="clock" data-popa="clock" data-co="6"><span class="dot"></span><b class="num">${rl(st.rate)} kHz</b><span>${sync}</span><span class="lock">locked</span><span class="car">▼</span></button>
+    <button class="pill" data-act="pop" data-pop="scene" data-popa="scene" data-co="8"><span>Scene</span><b>${st.scene}</b><span class="car">▼</span></button>
+    <div class="spacer"></div>
+    <button class="knobw" data-act="pop" data-pop="knob" data-popa="knob" data-co="7" title="The interface's front Level Controller"><span class="knob" data-knob></span><span class="kt"><b class="num" data-val="knob"></b><span>Knob → ${target}</span></span></button>
+    <button class="gbtn dim ${st.dim ? 'on' : ''}" data-act="gdim">DIM</button>
+    <button class="gbtn mute ${st.mute ? 'on' : ''}" data-act="gmute">MUTE</button>
+    <div class="views" title="Full panel / meters / compact: unchanged">${ICON_VIEWS.map((s, i) => `<span class="${i ? '' : 'on'}">${s}</span>`).join('')}</div>
+  </div>`;
+}
+
+function strip(s, gi, first) {
+  const x = ss(s.id), aux = st.ctx === 'aux', noPan = !!cur.groups[gi].daw;     // SW returns have no pan (current mixer tab, MAInputPan2 = inputs only)
+  const member = memberOf(x, st.ctx);
+  const cls = ['strip', x.link ? '' : 'wide', s.enabled ? '' : 'off', member ? '' : 'out'].join(' ');
+  const chips = cur.buses.map(b => `<button class="chip ${memberOf(x, b) ? 'on' : ''} ${b === st.ctx ? 'cur' : ''}" style="--c:${BUS[b].color}" data-act="route" data-strip="${s.id}" data-bus="${b}" title="${b === 'aux' ? 'Aux send on/off' : 'Route to ' + BUS[b].name}">${BUS[b].short}</button>`).join('');
+  const chans = x.link ? [0] : [0, 1];
+  const tracks = chans.map(ch => `<div class="ftrack ${x.link ? '' : 'one'} ${aux ? 'send' : ''}" data-drag="s" data-strip="${s.id}" data-ch="${ch}">${(x.link ? [0, 1] : [ch]).map(mc => `<div class="mbar" data-mtr="s:${s.id}:${mc}"><div class="cv"></div></div>`).join('')}<div class="cap" data-cap="s:${s.id}:${ch}"></div></div>`).join('');
+  const scale = `<div class="scale">${SCALE.map(d => `<i style="--p:${dbToP(d)}">${d === 0 ? '0' : d}</i>`).join('')}<i style="--p:0">−∞</i></div>`;
+  return `<div class="${cls}" data-sid="${s.id}" ${first ? 'data-co="4"' : ''}>
+    ${badge(inKnob(gi === 0 && cur.groups[0].daw ? 'ret' : 'in', s.id))}
+    <button class="sname" data-act="pop" data-pop="strip:${s.id}" data-popa="strip:${s.id}" title="Rename, hide, link">${stripName(s)}</button>
+    <div class="ssub">${s.sub}</div>
+    <div class="chips" ${first ? 'data-co="3"' : ''}>${chips}</div>
+    <div class="vlab ${aux ? 'send' : ''}">${aux ? 'AUX SEND' : 'LEVEL'}</div>
+    <div class="fm">${scale}${tracks}</div>
+    <div class="val num ${x.link ? '' : 'two'}" data-val="s:${s.id}"></div>
+    ${noPan ? '<div class="img na" style="visibility:hidden"></div><div class="plab">no pan</div>' : `<div class="img ${aux ? 'na' : ''}" data-drag="pan" data-strip="${s.id}" title="Pan of each channel"><div class="tr"></div><div class="span" data-pspan="${s.id}"></div><div class="h" data-ph="${s.id}:0">L</div><div class="h" data-ph="${s.id}:1">R</div></div>
+    <div class="plab num" data-val="p:${s.id}"></div>`}
+    <div class="btns"><button class="sb m ${x.mute ? 'on' : ''}" data-act="mute" data-strip="${s.id}" title="Mute">M</button><button class="sb s ${x.solo ? 'on' : ''}" data-act="solo" data-strip="${s.id}" title="Solo">S</button><button class="sb l ${x.link ? 'on' : ''}" data-act="link" data-strip="${s.id}" title="Link the pair">${ICON_LINK}</button></div>
+  </div>`;
+}
+
+function sourcesCol() {
+  if (cur.quad) {
+    return `<div class="col srccol"><div class="zlabel">Sources</div><div class="quadmsg" data-co="9"><b>Mixer off at ${rl(st.rate)} kHz</b><p>${cur.quad}</p>
+      <div class="qin">${['In 1', 'In 2'].map((n, i) => `<div style="text-align:center"><div class="ftrack one" style="margin:0 auto"><div class="mbar" data-mtr="q:${i}"><div class="cv"></div></div></div><div class="ssub" style="margin-top:6px">${n} → computer</div></div>`).join('')}</div></div></div>`;
+  }
+  const b = BUS[st.ctx], aux = st.ctx === 'aux';
+  const n = allStrips().filter(s => s.enabled && memberOf(ss(s.id), st.ctx)).length;
+  const text = aux ? 'Faders are aux sends, one per channel. The aux bus has no pan; its master is on the Aux tile.'
+                   : 'Faders set each channel’s level. A channel lit in several mixes uses the same fader in all of them (hardware).';
+  const dmOff = MODELS[st.model].ab && st.ab.fn === 'dm' && st.ab.state === 'A';
+  const groups = cur.groups.map((g, gi) => {
+    const vis = g.strips.filter(s => !st.hidden.has(s.id)), hid = g.strips.length - vis.length;
+    const lab = g.menu ? `<button class="glab" data-act="pop" data-pop="digital" data-popa="digital" data-co="6">${g.label} ▾</button>` : g.label;
+    const notes = (dmOff && !g.daw ? '<em>· muted: A/B = direct monitoring off</em>' : '') + (hid ? `<button class="unh" data-act="unhide" data-group="${gi}">+${hid} hidden</button>` : '');
+    return `<div class="group"><div class="zlabel">${lab}${notes}</div><div class="strips">${vis.map((s, si) => strip(s, gi, gi === 0 && si === 0)).join('')}</div></div>`;
+  }).join('');
+  return `<div class="col srccol">
+    <div class="ctx" style="--bc:${b.color}" data-co="2"><i class="cdot" style="background:${b.color}"></i><b>${b.name}</b><span>${text}</span><em>${n} feeding · keys 1–${cur.buses.length}</em></div>
+    <div class="groups">${groups}</div></div>`;
+}
+
+function busCol() {
+  const directTile = cur.direct ? `<div class="zlabel" style="margin-top:12px">Direct</div><div class="tile direct" data-tile="direct" title="Hard-wired by the interface: no mixer">
+      <div class="tn"><i></i>${cur.direct.name}</div><div class="ts">${cur.direct.sub}</div>
+      <div class="vms">${Array.from({length: cur.direct.n}, (_, i) => `<div class="mbar ${cur.direct.greyFrom !== undefined && i >= cur.direct.greyFrom ? 'off' : ''}" data-mtr="x:${i}"><div class="cv"></div></div>`).join('')}</div></div>` : '';
+  if (cur.quad) return `<div class="col buscol"><div class="zlabel" data-co="1">Mixes</div><div class="tile none"><div class="tn">No mixes</div><div class="ts">mixer off at this rate</div></div>${directTile}</div>`;
+  const tiles = cur.buses.map((b, i) => {
+    const B = BUS[b], n = allStrips().filter(s => s.enabled && memberOf(ss(s.id), b)).length;
+    const master = b === 'aux' ? `<div class="amast"><span class="al">Master</span><span class="vv num" data-val="aux"></span><button class="sb m ${st.aux.mute ? 'on' : ''}" data-act="amute" title="Mute the aux master">M</button><button class="more" data-act="pop" data-pop="auxm" data-popa="auxm" title="Balance, link">⋯</button></div><div class="hf plain" data-drag="aux"><div class="cap" data-cap="aux"></div></div>` : '';
+    return `<div class="tile ${b === st.ctx ? 'sel' : ''}" style="--c:${B.color}" data-act="ctx" data-bus="${b}" data-tile="${b}">
+      ${b === 'aux' ? badge(inKnob('aux', 'aux')) : ''}
+      <div class="tn"><i></i>${B.name}<kbd>${i + 1}</kbd></div>
+      <div class="ts">${n} source${n === 1 ? '' : 's'}${b === 'aux' ? ' · sends' : ''}</div>
+      <div class="hm" data-mtr="b:${b}:0"><div class="cv"></div></div><div class="hm" data-mtr="b:${b}:1"><div class="cv"></div></div>
+      ${master}</div>`;
+  }).join('');
+  return `<div class="col buscol"><div class="zlabel" data-co="1">Mixes</div><div class="tiles">${tiles}</div>${directTile}</div>`;
+}
+
+function srcLabel(s, d, many) { return s === 'direct' ? (d.directLabel || cur.direct.name) : (many ? BUS[s].short : BUS[s].name); }
+function card(d, i) {
+  const x = ds(d), srcs = d.sources, curSrc = d.multi ? x.src : [x.src];
+  const segBtns = many => srcs.map(s => `<button class="${curSrc.includes(s) ? 'on' : ''}" style="--c:${col(s)}" data-act="dsrc" data-dest="${d.id}" data-src="${s}" title="${d.multi ? 'Toggle' : 'Listen to'} ${srcLabel(s, d, false)}">${srcLabel(s, d, many)}</button>`).join('');
+  let inline = '', block = '';
+  if (srcs.length === 1) inline = `<span class="fixed"><i style="background:${col(srcs[0])}"></i>${srcLabel(srcs[0], d, false)}</span>`;
+  else if (srcs.length === 2 && !d.multi) inline = `<div class="seg">${segBtns(false)}</div>`;
+  else block = `<div class="seg">${segBtns(srcs.length > 3)}</div>`;
+  const more = `<button class="more" data-act="pop" data-pop="dest:${d.id}" data-popa="dest:${d.id}" title="More">⋯</button>`;
+  let body = '';
+  if (d.level) body = `<div class="lrow"><div class="hf" data-drag="d" data-dest="${d.id}"><div class="hm" data-mtr="d:${d.id}:0"><div class="cv"></div></div><div class="hm" data-mtr="d:${d.id}:1"><div class="cv"></div></div><div class="cap" data-cap="d:${d.id}"></div></div><span class="v num" data-val="d:${d.id}"></span><button class="sb m ${x.mute ? 'on' : ''}" data-act="dmute" data-dest="${d.id}" title="Mute">M</button></div>`;
+  else if (d.meterOnly) body = `<div class="lrow"><div class="hf ro"><div class="hm" data-mtr="d:${d.id}:0"><div class="cv"></div></div><div class="hm" data-mtr="d:${d.id}:1"><div class="cv"></div></div></div><span class="v" style="width:auto;color:var(--text3)">no fader</span></div>`;
+  else if (d.adat) body = `<div class="adatm">${Array.from({length: 8}, (_, k) => `<div class="mbar ${k >= d.adat ? 'off' : ''}" data-mtr="x:${k}"><div class="cv"></div></div>`).join('')}</div>`;
+  let ab = '';
+  if (d.ab && !cur.quad) {
+    const A = st.ab.state === 'A';
+    ab = st.ab.fn === 'phones'
+      ? `<div class="ab" data-act="ab" title="Press the front A/B button"><span class="abl">A/B</span><span class="abs ${A ? 'on' : ''}" style="--c:${col(st.ab.a)}">A · ${BUS[st.ab.a].short}</span><span class="abs ${A ? '' : 'on'}" style="--c:${col(st.ab.b)}">B · ${BUS[st.ab.b].short}</span><span>front button</span><span class="led ${A ? '' : 'on'}"></span></div>`
+      : `<div class="ab" data-act="ab" title="Press the front A/B button"><span class="abl">A/B</span><span>direct monitoring ${A ? 'off' : 'on'}</span><span class="led ${A ? '' : 'on'}"></span></div>`;
+  }
+  const kb = badge(d.phones ? inKnob('ph', d.id) : (d.knob && inKnob('out', d.id)));
+  return `<div class="card ${d.disabled ? 'dis' : ''}" data-card="${d.id}" ${i === 0 ? 'data-co="5"' : ''}>${kb}
+    <div class="ch"><div class="cn"><b>${d.name}</b><span>${d.sub}</span></div>${inline}${inline ? '' : '<span style="margin-left:auto"></span>'}${more}</div>
+    ${block}${body}${ab}</div>`;
+}
+function destCol() { return `<div class="col destcol"><div class="zlabel">Outputs</div><div class="cards">${cur.dests.map(card).join('')}</div></div>`; }
+
+// ---------- render ----------
+function render() {
+  const m = MODELS[st.model];
+  cur = m.build(st);
+  if (!cur.quad && !cur.buses.includes(st.ctx)) st.ctx = cur.buses[0];
+  const vis = cur.quad ? [] : cur.groups.map(g => g.strips.filter(s => !st.hidden.has(s.id)));
+  const srcW = cur.quad ? 470 : vis.reduce((a, g, i) => a + (i ? 18 : 0) + g.reduce((b, s, j) => b + (j ? 6 : 0) + (ss(s.id).link ? 70 : 100), 0), 0);
+  // fixed columns: padding 16 + 16, mixes 22 + 136, wire gap 50, outputs 262. Spare width (small models) widens the strips up to 92 px.
+  const need = 502 + srcW, W = Math.max(1080, need), nStrips = vis.reduce((a, g) => a + g.length, 0);
+  win.style.width = W + 'px';
+  win.style.setProperty('--sw', (nStrips ? Math.min(92, 70 + (W - need) / nStrips) : 70) + 'px');
+  wi.innerHTML = header(m) + `<div class="body" id="body"><svg class="wires" id="wires"></svg>${sourcesCol()}${busCol()}${destCol()}</div>`;
+  meterEls = Array.from(wi.querySelectorAll('[data-mtr]'));
+  patch();
+  renderPop();
+  requestAnimationFrame(() => { drawWires(); placeCallouts(); });
+  renderToolbar();
+}
+
+function patch() {
+  const aux = st.ctx === 'aux';
+  wi.querySelectorAll('[data-cap]').forEach(el => {
+    const [k, id, ch] = el.dataset.cap.split(':');
+    let db = 0;
+    if (k === 's') { const x = ss(id); db = (aux ? x.send : x.level)[+ch]; }
+    else if (k === 'd') db = ds(destById(id)).level;
+    else if (k === 'aux') db = st.aux.level;
+    el.style.setProperty('--p', dbToP(db));
+  });
+  win.querySelectorAll('[data-val]').forEach(el => {
+    const [k, id] = el.dataset.val.split(':');
+    if (k === 's') { const x = ss(id), a = aux ? x.send : x.level; el.textContent = x.link ? fmt(a[0]) : fmt(a[0]) + ' ' + fmt(a[1]); }
+    else if (k === 'p') { const x = ss(id); el.textContent = aux ? '—' : panTxt(x.pan[0]) + ' ' + panTxt(x.pan[1]); }
+    else if (k === 'd') el.textContent = fmt(ds(destById(id)).level);
+    else if (k === 'aux') el.textContent = fmt(st.aux.level);
+    else if (k === 'knob') el.textContent = fmt(knobValue()) + ' dB';
+  });
+  wi.querySelectorAll('[data-ph]').forEach(el => { const [id, i] = el.dataset.ph.split(':'); el.style.left = ((ss(id).pan[+i] + 1) * 50) + '%'; });
+  wi.querySelectorAll('[data-pspan]').forEach(el => { const p = ss(el.dataset.pspan).pan; const a = (Math.min(p[0], p[1]) + 1) * 50, b = (Math.max(p[0], p[1]) + 1) * 50; el.style.left = a + '%'; el.style.width = (b - a) + '%'; });
+  const rot = -135 + 270 * dbToP(knobValue());
+  win.querySelectorAll('[data-knob]').forEach(el => el.style.setProperty('--rot', rot + 'deg'));
+}
+
+// ---------- the front knob ----------
+function knobTargets() {
+  const kind = knobKind(st.knob.group), out = [];
+  for (const it of knobItems(st.knob.group)) {
+    if (!st.knob.members.has(it.id)) continue;
+    if (kind === 'ret' || kind === 'in') out.push({get: () => ss(it.id).level[0], set: v => { const x = ss(it.id); x.level = [v, x.link ? v : clamp(x.level[1] + (v - x.level[0]), -64, 0)]; }});
+    else if (kind === 'aux') out.push({get: () => st.aux.level, set: v => { st.aux.level = v; }});
+    else { const d = destById(it.id); if (d) out.push({get: () => ds(d).level, set: v => { ds(d).level = v; }}); }
+  }
+  return out;
+}
+function knobValue() { const t = knobTargets(); return t.length ? t[0].get() : NEG; }
+function knobNudge(delta) {
+  for (const t of knobTargets()) {
+    const v = t.get() === NEG ? -64 : t.get();
+    const n = Math.round(clamp(v + delta, -64, 0) * 2) / 2;
+    t.set(n <= -64 ? NEG : n);
+  }
+}
+
+// ---------- wires ----------
+function drawWires() {
+  const svg = document.getElementById('wires'), body = document.getElementById('body');
+  if (!svg || !body) return;
+  const br = body.getBoundingClientRect();
+  let out = '';
+  for (const d of cur.dests) {
+    if (d.disabled) continue;
+    const cardEl = wi.querySelector(`[data-card="${d.id}"]`); if (!cardEl) continue;
+    const cr = cardEl.getBoundingClientRect();
+    const x = ds(d), srcs = d.multi ? x.src : [x.src];
+    srcs.forEach((s, k) => {
+      const tileEl = wi.querySelector(`[data-tile="${BUS[s] && wi.querySelector(`[data-tile="${s}"]`) ? s : 'direct'}"]`);
+      if (!tileEl) return;
+      const tr = tileEl.getBoundingClientRect();
+      const x1 = tr.right - br.left, y1 = tr.top + tr.height / 2 - br.top;
+      const x2 = cr.left - br.left, y2 = cr.top + Math.min(cr.height / 2, 22) + (k - (srcs.length - 1) / 2) * 5 - br.top;
+      const hot = s === st.ctx || s === 'direct' || cur.quad;
+      const dx = Math.max(24, (x2 - x1) * 0.55);
+      out += `<path d="M${x1} ${y1} C${x1 + dx} ${y1} ${x2 - dx} ${y2} ${x2} ${y2}" stroke="${col(s)}" stroke-width="${hot ? 2.2 : 1.5}" fill="none" opacity="${hot ? 0.95 : 0.4}" stroke-linecap="round"/>`;
+      out += `<circle cx="${x2}" cy="${y2}" r="2.6" fill="${col(s)}" opacity="${hot ? 1 : 0.5}"/>`;
+    });
+  }
+  svg.innerHTML = out;
+}
+
+// ---------- popovers ----------
+function clockContent() {
+  const m = MODELS[st.model];
+  return `<div class="sec"><h4>Sample rate</h4><div class="rseg">${m.rates.map(r => `<button class="${r === st.rate ? 'on' : ''}" data-act="rate" data-v="${r}">${rl(r)}</button>`).join('')}</div></div>
+    <div class="sec"><h4>Clock source</h4>${m.sync.map((s, i) => `<div class="radio ${i === st.sync ? 'on' : ''}" data-act="sync" data-v="${i}"><i></i>${s}</div>`).join('')}</div>
+    <div class="sec"><div class="radio ${st.follow ? 'on' : ''}" data-act="follow"><i class="cbx"></i>Follow external clock rate</div></div>
+    <div class="sec" style="display:flex;gap:7px;align-items:center;color:var(--text2)"><span class="dot"></span>Locked · ${rl(st.rate)} kHz</div>`;
+}
+function digitalContent() {
+  const spdifPortFree = !st.adatIn;
+  return `<div class="sec"><h4>Optical in</h4><div class="rseg"><button class="${st.adatIn ? 'on' : ''}" data-act="adatIn" data-v="1">ADAT</button><button class="${st.adatIn ? '' : 'on'}" data-act="adatIn" data-v="0">S/PDIF</button></div></div>
+    <div class="sec"><h4>Optical out</h4><div class="rseg"><button class="${st.adatOut ? 'on' : ''}" data-act="adatOut" data-v="1">ADAT</button><button class="${st.adatOut ? '' : 'on'}" data-act="adatOut" data-v="0">S/PDIF</button></div></div>
+    <div class="sec"><h4>S/PDIF input</h4><div class="rseg"><button class="${!st.coax ? 'on' : ''} ${spdifPortFree ? '' : 'dis'}" data-act="coax" data-v="0">Optical</button><button class="${st.coax ? 'on' : ''}" data-act="coax" data-v="1">Coaxial</button></div></div>
+    <div class="sec"><div class="radio ${st.smux ? 'on' : ''}" data-act="smux"><i class="cbx"></i>ADAT S/MUX (88.2 / 96 kHz)</div></div>
+    <p class="hint">Same rules as today’s digital-ports card. The input group and the digital output card change as you choose.</p>`;
+}
+function abContent(d) {
+  const side = k => `<div class="rseg">${d.sources.map(s => `<button class="${st.ab[k] === s ? 'on' : ''}" data-act="absrc" data-side="${k}" data-src="${s}">${BUS[s].short}</button>`).join('')}</div>`;
+  return `<div class="sec"><h4>Front A/B button</h4>
+      <div class="radio ${st.ab.fn === 'phones' ? 'on' : ''}" data-act="abfn" data-v="phones"><i></i>Switches ${d.name}’s source</div>
+      <div class="radio ${st.ab.fn === 'dm' ? 'on' : ''}" data-act="abfn" data-v="dm"><i></i>Direct monitoring (A off · B on)</div></div>
+    ${st.ab.fn === 'phones' ? `<div class="sec"><h4>A</h4>${side('a')}</div><div class="sec"><h4>B</h4>${side('b')}</div>` : ''}`;
+}
+function knobLawContent() { return `<div class="sec"><h4>Phones knob</h4>${KNOB_STEPS.map(([t, v]) => `<div class="radio ${st.law === v ? 'on' : ''}" data-act="law" data-v="${v}"><i></i>${t}</div>`).join('')}</div>`; }
+function balanceRow(v) { return `<div class="balrow"><div class="hf ro" style="--p:${(v + 1) / 2}"><div class="cap"></div></div><span class="num" style="width:30px;color:var(--text2)">${panTxt(v)}</span></div>`; }
+
+function popContent(kind) {
+  const m = MODELS[st.model];
+  if (kind === 'clock') return clockContent();
+  if (kind === 'digital') return digitalContent();
+  if (kind === 'scene') {
+    const scenes = ['Tracking', 'Mixdown', 'DJ cue'];
+    return `${scenes.map(s => `<div class="mitem" data-act="scene" data-v="${s}"><span class="ck">${s === st.scene ? '✓' : ''}</span>${s}</div>`).join('')}<div class="sep"></div>
+      <div class="mitem" data-act="close"><span class="ck"></span>Save “${st.scene}”</div><div class="mitem" data-act="close"><span class="ck"></span>Save as new scene…</div>
+      <div class="mitem" data-act="close"><span class="ck"></span>Reset to factory settings…</div><div class="mitem" data-act="close"><span class="ck"></span>Delete “${st.scene}”…</div>
+      <p class="hint">Today’s Load / Save / Reset / Delete, with the saved files listed so a scene is one click.</p>`;
+  }
+  if (kind === 'device') {
+    return `<div class="mitem" data-act="close"><span class="ck">✓</span>${m.name} · ${m.unit}</div><div class="mitem" data-act="close"><span class="ck"></span>Other units on the bus…</div><div class="sep"></div>
+      <div class="mitem" data-act="sheet"><span class="ck"></span>Device settings…</div><div class="mitem" data-act="close"><span class="ck"></span>Firmware check…</div><div class="mitem" data-act="close"><span class="ck"></span>About</div>`;
+  }
+  if (kind === 'knob') {
+    const items = knobItems(st.knob.group);
+    return `<div class="kpop"><div class="kbig" data-drag="knob"><span class="knob big" data-knob></span></div><div><div class="kv num" data-val="knob"></div><div class="ks">drag here, or turn the knob on the interface</div></div></div>
+      <div class="sec"><h4>The knob controls</h4><div class="rseg wrap">${m.knob.map(g => `<button class="${g === st.knob.group ? 'on' : ''}" data-act="kgroup" data-v="${g}">${g}</button>`).join('')}</div></div>
+      <div class="sec"><h4>${st.knob.group}</h4><div class="kitems">${items.map(it => `<button class="kit ${st.knob.members.has(it.id) ? 'on' : ''}" data-act="kmem" data-id="${it.id}">${it.name}</button>`).join('')}</div></div>
+      <p class="hint">One group at a time, any pairs inside it: the interface’s rule. A blue ring marks what the knob drives.</p>`;
+  }
+  if (kind.startsWith('strip:')) {
+    const id = kind.slice(6), s = allStrips().find(t => t.id === id), x = ss(id);
+    return `<div class="sec"><h4>Name</h4><input class="txt" data-inp="name" data-strip="${id}" value="${stripName(s)}" maxlength="12" spellcheck="false"></div>
+      <div class="sec"><div class="radio ${x.link ? 'on' : ''}" data-act="link" data-strip="${id}"><i class="cbx"></i>Link the pair (one fader)</div>
+      <div class="radio" data-act="hide" data-strip="${id}"><i class="cbx"></i>Hide this strip</div></div>
+      <p class="hint">Names and hidden strips are panel settings kept per unit; the driver is not involved.</p>`;
+  }
+  if (kind === 'auxm') {
+    return `<div class="sec"><h4>Aux master balance</h4>${balanceRow(st.aux.bal)}</div>
+      <div class="sec"><div class="radio ${st.aux.link ? 'on' : ''}" data-act="alink"><i class="cbx"></i>Link</div></div>`;
+  }
+  if (kind.startsWith('dest:')) {
+    const d = destById(kind.slice(5)); if (!d) return '';
+    const x = ds(d);
+    if (d.digitalMenu) return digitalContent();
+    let h = `<div class="sec"><h4>${d.name} balance</h4>${balanceRow(x.bal)}</div>
+      <div class="sec"><div class="radio ${x.link ? 'on' : ''}" data-act="dlink" data-dest="${d.id}"><i class="cbx"></i>Link</div>`;
+    if (!d.phones) h += `<div class="radio ${x.solo ? 'on' : ''}" data-act="dsolo" data-dest="${d.id}"><i class="cbx"></i>Solo</div>`;
+    h += `</div>`;
+    if (d.phones) h += knobLawContent();
+    if (d.ab && !cur.quad) h += abContent(d);
+    return h;
+  }
+  return '';
+}
+function renderPop() {
+  pops.innerHTML = '';
+  if (st.sheet) { renderSheet(); return; }
+  if (!st.pop) return;
+  const a = wi.querySelector(`[data-popa="${st.pop}"]`);
+  if (!a) { st.pop = null; return; }
+  const p = document.createElement('div');
+  p.className = 'pop'; p.innerHTML = popContent(st.pop);
+  pops.appendChild(p);
+  const wr = win.getBoundingClientRect(), ar = a.getBoundingClientRect();
+  let x = ar.left - wr.left, y = ar.bottom - wr.top + 6;
+  if (x + p.offsetWidth > wr.width - 8) x = wr.width - 8 - p.offsetWidth;
+  if (y + p.offsetHeight > wr.height - 8) y = Math.max(8, ar.top - wr.top - p.offsetHeight - 6);
+  p.style.left = Math.max(8, x) + 'px'; p.style.top = y + 'px';
+  patch();
+}
+function renderSheet() {
+  const m = MODELS[st.model], ph = cur.dests.find(d => d.ab);
+  pops.innerHTML = `<div class="sheetbg" data-act="sheet"><div class="sheet" data-stop="1">
+    <div class="top"><b>${m.name} · device settings</b><button class="tb" data-act="sheet">Done</button></div>
+    <div class="grid"><div>${clockContent()}</div>
+      <div>${m.digitalPorts ? digitalContent() : '<div class="sec"><h4>Digital</h4><div style="color:var(--text3)">S/PDIF input card of the model</div></div>'}</div>
+      <div>${ph && !cur.quad ? abContent(ph) : '<div class="sec"><h4>Front A/B button</h4><div style="color:var(--text3)">none on this model</div></div>'}</div>
+      <div>${knobLawContent()}<div class="sec"><h4>Core Audio</h4><div class="radio ${st.pairs ? 'on' : ''}" data-act="pairs"><i class="cbx"></i>Stereo pairs as separate devices</div></div></div>
+    </div><p class="hint">Every hardware setting in one sheet (today’s Hardware tab). The same controls also live where they act: the clock pill, the digital group and card, the phones card.</p></div></div>`;
+}
+
+// ---------- callouts, toolbar, notes ----------
+function placeCallouts() {
+  cos.innerHTML = '';
+  if (!showCallouts) return;
+  const wr = win.getBoundingClientRect(), seen = new Set();
+  wi.querySelectorAll('[data-co]').forEach(el => {
+    const n = el.dataset.co; if (seen.has(n)) return; seen.add(n);
+    const r = el.getBoundingClientRect();
+    const b = document.createElement('div'); b.className = 'co'; b.textContent = n;
+    b.style.left = (r.left - wr.left - 11) + 'px'; b.style.top = (r.top - wr.top - 11) + 'px';
+    cos.appendChild(b);
+  });
+}
+function renderToolbar() {
+  const tb = document.getElementById('toolbar');
+  tb.innerHTML = `<span class="lbl">Model</span>${Object.entries(MODELS).map(([k, m]) => `<button class="tb ${k === st.model ? 'on' : ''}" data-tb="model" data-v="${k}">${m.label}</button>`).join('')}
+    <span class="lbl">Show</span><button class="tb ${showCallouts ? 'on' : ''}" data-tb="co">Callouts</button><button class="tb ${showCompare ? 'on' : ''}" data-tb="cmp">Compare with the current panel</button>`;
+}
+const NOTES = [
+  ['Signal flow, left to right.', 'Sources → mixes → outputs. The routing that the current panel keeps in small 1/2 · 3/4 buttons, plus a phones selector on another tab, is drawn as wires.'],
+  ['Work on one mix at a time.', 'Click a mix: its sources stay bright, the rest dims. On the Aux mix the faders become aux sends, so the 2 × 16 small aux knobs go away. The bar says when one fader feeds two mixes (the hardware has one level per channel).'],
+  ['One colour per mix, everywhere.', 'Strip chips, mix tiles, wires, the outputs’ source buttons and the phones use the same colour; later the status menu too.'],
+  ['Fader-meter strips.', 'One fader per linked pair, with the meter inside its track; a stereo-image bar replaces the two pan knobs. 70 px per pair instead of 84; unlinking opens two faders.'],
+  ['Outputs as cards.', 'Source, level and mute on two lines; balance, solo, link and the phones knob law behind ⋯. Phones 1 shows what the front A/B button does and its live state.'],
+  ['Settings where they act.', 'Rate and clock in the header pill; ADAT / S/PDIF on the digital input group and on the digital output card; the A/B function on the phones card. The Hardware tab goes away; one Device settings sheet still holds everything.'],
+  ['The front knob in the header.', 'Its value, its target and a popover to assign it. A blue ring on the strips and cards shows what it drives (replaces the radio list and the per-strip ctrl buttons).'],
+  ['No sidebar.', 'Scenes (presets), mute and dim move to the header; the 200 px go to channels. The window fits 1366 × 768.'],
+  ['One layout at every rate.', 'At 176.4 / 192 kHz the FW1814’s mixer area folds in place with the reason; outputs and phones stay where they were.'],
+];
+document.getElementById('notes').innerHTML = NOTES.map(([t, d], i) => `<div class="note"><span class="n">${i + 1}</span><div><b>${t}</b> ${d}</div></div>`).join('');
+
+// ---------- events ----------
+let drag = null, dragMoved = false;
+document.getElementById('toolbar').addEventListener('click', e => {
+  const t = e.target.closest('[data-tb]'); if (!t) return;
+  if (t.dataset.tb === 'model') { initState(t.dataset.v); }
+  else if (t.dataset.tb === 'co') showCallouts = !showCallouts;
+  else if (t.dataset.tb === 'cmp') { showCompare = !showCompare; document.getElementById('compare').classList.toggle('on', showCompare); }
+  render();
+});
+win.addEventListener('click', e => {
+  if (dragMoved) { dragMoved = false; return; }
+  const t = e.target.closest('[data-act]');
+  if (t && t.dataset.act === 'sheet' && e.target.closest('[data-stop]') && !e.target.closest('button[data-act="sheet"]') && t.classList.contains('sheetbg')) return;
+  if (!t) { if (st.pop && !e.target.closest('.pop')) { st.pop = null; renderPop(); } return; }
+  const a = t.dataset.act, d = t.dataset;
+  switch (a) {
+    case 'pop': st.pop = st.pop === d.pop ? null : d.pop; renderPop(); return;
+    case 'close': st.pop = null; break;
+    case 'ctx': st.ctx = d.bus; break;
+    case 'route': {
+      const x = ss(d.strip);
+      if (d.bus === 'aux') { if (isAuxOn(x)) { x.lastSend = x.send.slice(); x.send = [NEG, NEG]; } else x.send = x.lastSend || [-12, -12]; }
+      else x.routes.has(d.bus) ? x.routes.delete(d.bus) : x.routes.add(d.bus);
+      break;
+    }
+    case 'mute': ss(d.strip).mute = !ss(d.strip).mute; break;
+    case 'solo': ss(d.strip).solo = !ss(d.strip).solo; break;
+    case 'link': { const x = ss(d.strip); x.link = !x.link; if (x.link) { x.level[1] = x.level[0]; x.send[1] = x.send[0]; } break; }
+    case 'hide': st.hidden.add(d.strip); st.pop = null; break;
+    case 'unhide': cur.groups[+d.group].strips.forEach(s => st.hidden.delete(s.id)); break;
+    case 'dsrc': {
+      const dd = destById(d.dest), x = ds(dd);
+      if (dd.multi) { const i = x.src.indexOf(d.src); if (i >= 0) { if (x.src.length > 1) x.src.splice(i, 1); } else x.src.push(d.src); }
+      else if (dd.ab && st.ab.fn === 'phones' && !cur.quad) st.ab[st.ab.state === 'A' ? 'a' : 'b'] = d.src;
+      else x.src = d.src;
+      break;
+    }
+    case 'dmute': { const x = ds(destById(d.dest)); x.mute = !x.mute; break; }
+    case 'dsolo': { const x = ds(destById(d.dest)); x.solo = !x.solo; break; }
+    case 'dlink': { const x = ds(destById(d.dest)); x.link = !x.link; break; }
+    case 'ab': st.ab.state = st.ab.state === 'A' ? 'B' : 'A'; break;
+    case 'abfn': st.ab.fn = d.v; break;
+    case 'absrc': st.ab[d.side] = d.src; break;
+    case 'gmute': st.mute = !st.mute; break;
+    case 'gdim': st.dim = !st.dim; break;
+    case 'amute': st.aux.mute = !st.aux.mute; break;
+    case 'alink': st.aux.link = !st.aux.link; break;
+    case 'rate': st.rate = +d.v; break;
+    case 'sync': st.sync = +d.v; break;
+    case 'follow': st.follow = !st.follow; break;
+    case 'adatIn': st.adatIn = d.v === '1'; if (st.adatIn) st.coax = true; break;
+    case 'adatOut': st.adatOut = d.v === '1'; break;
+    case 'coax': if (!st.adatIn) st.coax = d.v === '1'; break;
+    case 'smux': st.smux = !st.smux; break;
+    case 'kgroup': st.knob.group = d.v; st.knob.members = new Set(knobItems(d.v).map(i => i.id)); break;
+    case 'kmem': st.knob.members.has(d.id) ? st.knob.members.delete(d.id) : st.knob.members.add(d.id); break;
+    case 'scene': st.scene = d.v; st.pop = null; break;
+    case 'law': st.law = +d.v; break;
+    case 'pairs': st.pairs = !st.pairs; break;
+    case 'sheet': st.sheet = !st.sheet; st.pop = null; break;
+  }
+  render();
+});
+win.addEventListener('dblclick', e => {
+  const el = e.target.closest('[data-drag]'); if (!el) return;
+  setZero(el); patch(); render();
+});
+function setZero(el) {
+  const k = el.dataset.drag;
+  if (k === 's') { const x = ss(el.dataset.strip), arr = st.ctx === 'aux' ? x.send : x.level; if (x.link) { arr[0] = arr[1] = 0; } else arr[+el.dataset.ch] = 0; }
+  else if (k === 'd') ds(destById(el.dataset.dest)).level = 0;
+  else if (k === 'aux') st.aux.level = 0;
+  else if (k === 'pan') ss(el.dataset.strip).pan = [-1, 1];
+}
+win.addEventListener('pointerdown', e => {
+  dragMoved = false;
+  const el = e.target.closest('[data-drag]'); if (!el) return;
+  e.preventDefault();
+  if (e.altKey) { setZero(el); patch(); return; }
+  drag = {el, k: el.dataset.drag, lastY: e.clientY, h: undefined};
+  try { el.setPointerCapture(e.pointerId); } catch (_) {}
+  if (drag.k !== 'knob') moveTo(e);
+});
+win.addEventListener('pointermove', e => { if (!drag) return; dragMoved = true; moveTo(e); });
+win.addEventListener('pointerup', () => { if (!drag) return; const wasKnob = drag.k === 'knob'; drag = null; if (!wasKnob) render(); else { patch(); } });
+function moveTo(e) {
+  const {el, k} = drag, r = el.getBoundingClientRect();
+  if (k === 's') {
+    const p = clamp(1 - (e.clientY - r.top - 7) / (r.height - 14), 0, 1), db = pToDb(p);
+    const x = ss(el.dataset.strip), arr = st.ctx === 'aux' ? x.send : x.level;
+    if (x.link) { arr[0] = arr[1] = db; } else arr[+el.dataset.ch] = db;
+  } else if (k === 'd') {
+    ds(destById(el.dataset.dest)).level = pToDb(clamp((e.clientX - r.left - 6) / (r.width - 12), 0, 1));
+  } else if (k === 'aux') {
+    st.aux.level = pToDb(clamp((e.clientX - r.left - 6) / (r.width - 12), 0, 1));
+  } else if (k === 'pan') {
+    const v = clamp((e.clientX - r.left) / r.width * 2 - 1, -1, 1), x = ss(el.dataset.strip);
+    if (drag.h === undefined) drag.h = Math.abs(v - x.pan[0]) <= Math.abs(v - x.pan[1]) ? 0 : 1;
+    x.pan[drag.h] = Math.round(v * 127) / 127;
+  } else if (k === 'knob') {
+    const dy = drag.lastY - e.clientY; drag.lastY = e.clientY; knobNudge(dy * 0.25);
+  }
+  patch();
+}
+win.addEventListener('input', e => {
+  const t = e.target; if (t.dataset.inp !== 'name') return;
+  st.names[t.dataset.strip] = t.value.trim();
+  const b = wi.querySelector(`[data-popa="strip:${t.dataset.strip}"]`); if (b) b.textContent = t.value.trim() || allStrips().find(s => s.id === t.dataset.strip).name;
+});
+win.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.dataset.inp) { st.pop = null; render(); } });
+win.addEventListener('mouseover', e => {
+  const t = e.target.closest('[data-tile]'); if (!t || cur.quad) return;
+  const b = t.dataset.tile; if (!BUS[b] || b === 'direct') return;
+  allStrips().forEach(s => { const el = wi.querySelector(`[data-sid="${s.id}"]`); if (el && memberOf(ss(s.id), b)) { el.classList.add('hl'); el.style.setProperty('--hc', BUS[b].color); } });
+});
+win.addEventListener('mouseout', e => { if (e.target.closest('[data-tile]')) wi.querySelectorAll('.strip.hl').forEach(el => el.classList.remove('hl')); });
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  if (e.key === 'Escape') { st.pop = null; st.sheet = false; renderPop(); return; }
+  const n = parseInt(e.key, 10);
+  if (n >= 1 && cur && !cur.quad && n <= cur.buses.length) { st.ctx = cur.buses[n - 1]; render(); }
+});
+window.addEventListener('resize', () => { drawWires(); placeCallouts(); renderPop(); });
+
+// ---------- simulated meters ----------
+let meterEls = [];
+const disp = {};
+function hash(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return (h >>> 0) / 4294967296; }
+function wave(key, t) {
+  const h = hash(key);
+  return 4 * Math.sin(t * 0.0019 * (0.6 + h) + h * 40) + 3 * Math.sin(t * 0.0053 * (0.7 + h) + h * 90) + (Math.random() - 0.5) * 2.5 + (Math.sin(t * 0.0007 + h * 7) > 0.86 ? 5 : 0);
+}
+const pw = db => db === NEG ? 0 : Math.pow(10, db / 10);
+const todb = p => p <= 1e-9 ? NEG : 10 * Math.log10(p);
+function computeLevels(t) {
+  const lv = {};
+  const m = MODELS[st.model];
+  const directSig = i => (cur.quad ? [-14, -15, -22, -23][i] : st.adatOut && m.digitalPorts ? [-18, -19, null, null, -25, null, null, null][i] : [-20, -21][i]);
+  const nDirect = cur.direct ? cur.direct.n : 0;
+  for (let i = 0; i < nDirect; i++) { const s = directSig(i); lv['x:' + i] = s == null || (cur.direct.greyFrom !== undefined && i >= cur.direct.greyFrom) ? NEG : Math.min(-0.5, s + wave('x' + i, t)); }
+  if (cur.quad) {
+    lv['q:0'] = Math.min(-0.5, -14 + wave('q0', t)); lv['q:1'] = Math.min(-0.5, -17 + wave('q1', t));
+  }
+  const busP = {};
+  (cur.buses || []).forEach(b => busP[b] = [0, 0]);
+  if (!cur.quad) {
+    const strips = allStrips(), anySolo = strips.some(s => ss(s.id).solo);
+    const dmOff = m.ab && st.ab.fn === 'dm' && st.ab.state === 'A';
+    const dawIds = new Set(cur.groups.filter(g => g.daw).flatMap(g => g.strips.map(s => s.id)));
+    for (const s of strips) {
+      const x = ss(s.id);
+      for (let ch = 0; ch < 2; ch++) {
+        const v = (s.sig == null || !s.enabled) ? NEG : Math.min(-0.5, s.sig + wave(s.id + ch, t));
+        lv[`s:${s.id}:${ch}`] = v;
+        if (v === NEG || x.mute || (anySolo && !x.solo) || (dmOff && !dawIds.has(s.id))) continue;
+        for (const b of cur.buses) {
+          if (b === 'aux') { const g = x.send[ch]; if (g !== NEG) busP[b][ch] += pw(v + g); continue; }
+          if (!x.routes.has(b) || x.level[ch] === NEG) continue;
+          const a = (x.pan[ch] + 1) * Math.PI / 4, p = pw(v + x.level[ch]);
+          busP[b][0] += p * Math.cos(a) ** 2; busP[b][1] += p * Math.sin(a) ** 2;
+        }
+      }
+    }
+  }
+  const bus = {};
+  for (const b in busP) { bus[b] = busP[b].map(todb); lv[`b:${b}:0`] = bus[b][0]; lv[`b:${b}:1`] = bus[b][1]; }
+  const auxOut = bus.aux ? bus.aux.map(v => st.aux.mute ? NEG : v + (st.aux.level === NEG ? -200 : st.aux.level)) : [NEG, NEG];
+  const destOut = {};
+  for (const d of cur.dests) {
+    if (d.adat) continue;
+    const x = ds(d), srcs = d.multi ? x.src : [x.src], acc = [0, 0];
+    for (const s of srcs) {
+      let lr = [NEG, NEG];
+      if (s === 'aux') lr = auxOut;
+      else if (s === 'direct') lr = (d.directCh || [0, 1]).map(i => lv['x:' + i]);
+      else if (s === 'o12' || s === 'o34') lr = destOut[s === 'o12' ? 'l12' : 'l34'] || [NEG, NEG];
+      else if (bus[s]) lr = bus[s];
+      acc[0] += pw(lr[0]); acc[1] += pw(lr[1]);
+    }
+    const gain = (d.level ? (x.level === NEG ? -200 : x.level) : 0) + (st.dim ? -20 : 0);
+    const out = acc.map(p => (st.mute || x.mute || d.disabled) ? NEG : Math.min(0, todb(p) + gain));
+    destOut[d.id] = out; lv[`d:${d.id}:0`] = out[0]; lv[`d:${d.id}:1`] = out[1];
+  }
+  return lv;
+}
+let lastFrame = 0;
+function frame(t) {
+  requestAnimationFrame(frame);
+  if (t - lastFrame < 33 || !cur) return;
+  lastFrame = t;
+  const lv = computeLevels(t);
+  for (const el of meterEls) {
+    const k = el.dataset.mtr, v = lv[k] === undefined ? NEG : lv[k];
+    const prev = disp[k] === undefined ? NEG : disp[k];
+    const shown = v >= prev ? v : (prev === NEG ? NEG : prev - 1.6);
+    disp[k] = shown < -70 ? NEG : shown;
+    el.style.setProperty('--m', dbToP(disp[k]));
+  }
+}
+
+// Optional start state from the URL: #model=fw410&ctx=aux&rate=192000&pop=clock&adatIn=0&callouts=0 (used for the plan's screenshots)
+const hp = new URLSearchParams(location.hash.slice(1));
+initState(MODELS[hp.get('model')] ? hp.get('model') : 'fw1814');
+if (hp.get('rate')) st.rate = +hp.get('rate');
+if (hp.get('ctx')) st.ctx = hp.get('ctx');
+if (hp.get('adatIn') === '0') { st.adatIn = false; }
+if (hp.get('adatOut') === '0') { st.adatOut = false; }
+if (hp.get('callouts') === '0') showCallouts = false;
+if (hp.get('sheet') === '1') st.sheet = true;
+render();
+if (hp.get('pop')) { st.pop = hp.get('pop'); renderPop(); }
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

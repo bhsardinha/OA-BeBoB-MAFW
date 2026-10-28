@@ -4,7 +4,7 @@
 <ul>
 <li>the audio driver <b>@DRIVER@</b> (<code>/Library/Extensions/OpenAudioBeBoBMAFW.kext</code>)</li>
 <li>a firmware-start and settings helper (a LaunchDaemon)</li>
-<li>the <b>OA BeBoB MAFW</b> control panel <b>@PANEL@</b> in <code>/Applications</code>, with a read-only firmware check</li>
+<li>the <b>OA BeBoB MAFW</b> control panel <b>@PANEL@</b> in <code>/Applications</code>, with a read-only firmware check and, for the FireWire 1814, the Advanced window</li>
 <li>the M-Audio CoreMIDI driver and the device icons</li>
 </ul>
 <h3>Requirements</h3>
@@ -14,6 +14,6 @@
 <tr><td>Interfaces</td><td>M-Audio FireWire 1814, FireWire Audiophile and FireWire 410, alone or together. Other M-Audio FireWire models are not supported.</td></tr>
 <tr><td>Security</td><td>System Integrity Protection disabled (Recovery mode: <code>csrutil disable</code>).</td></tr>
 </table>
-<p>Any earlier version (OpenAudio FW1814 0.1.0, OpenAudio BeBoB MAFW 0.2.x / 0.3.x) is replaced: there is no need to uninstall it first, and your settings are kept. Nothing is unloaded while it runs: the Mac must be restarted at the end.</p>
+<p>Any earlier version (OpenAudio FW1814 0.1.0, OpenAudio BeBoB MAFW 0.2.x to 0.4.x) is replaced: there is no need to uninstall it first, and your settings are kept. Nothing is unloaded while it runs: the Mac must be restarted at the end.</p>
 <p><b>Note:</b> this is an experimental, <b>unsigned</b> driver. Quit audio and MIDI applications before installing. The M-Audio/Avid FireWire driver must not be installed at the same time.</p>
 </body></html>

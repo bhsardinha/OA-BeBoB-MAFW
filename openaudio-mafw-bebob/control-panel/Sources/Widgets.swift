@@ -530,7 +530,7 @@ final class MeterBar: NSView {
     private var clipStamp: CFAbsoluteTime = -100
     private var drawn: (Int, Int, Bool) = (-1, -1, false)
 
-    private let unlit = CALayer(), lit = CALayer(), holdSeg = CALayer(), clip = CALayer()
+    private let lit = CALayer(), holdSeg = CALayer(), clip = CALayer()
     private var renderedFor: (NSSize, CGFloat)?
 
     // Display law: dB -> fraction of the bar (not the fader law; the meter only shows level).
@@ -538,6 +538,8 @@ final class MeterBar: NSView {
     static let scaleMarks = [0, -6, -12, -24, -48]
     static let clipLength: CGFloat = 4, clipGap: CGFloat = 3
     static let segment: CGFloat = 2, segmentGap: CGFloat = 1
+    /// Segment colour zones over n segments (shared with MeterField)
+    static func zones(_ n: Int) -> (yellow: Int, red: Int) { return (Int(fraction(-12) * CGFloat(n)), Int(fraction(-3) * CGFloat(n))) }
 
     static func fraction(_ db: Int) -> CGFloat {
         let d = min(0, max(-64, Double(db)))
@@ -554,7 +556,7 @@ final class MeterBar: NSView {
         layerContentsRedrawPolicy = .never
         let still: [String: CAAction] = ["position": NSNull(), "bounds": NSNull(), "frame": NSNull(), "backgroundColor": NSNull(),
                                           "hidden": NSNull(), "contents": NSNull()]
-        for l in [unlit, lit, holdSeg, clip] { l.actions = still; l.anchorPoint = .zero }
+        for l in [lit, holdSeg, clip] { l.actions = still; l.anchorPoint = .zero }
         lit.contentsGravity = kCAGravityBottomLeft            // image at its natural size from the bar's start; the frame crops it
         lit.masksToBounds = true
     }
@@ -566,7 +568,9 @@ final class MeterBar: NSView {
     override func updateLayer() {
         guard let l = layer else { return }
         l.backgroundColor = surface.cgColor
-        if unlit.superlayer !== l { [unlit, lit, holdSeg, clip].forEach { l.addSublayer($0) } }
+        // the unlit pattern is the bar's own contents (set in render); sublayers only for what moves, the clip lamp only where it is shown
+        if lit.superlayer !== l { [lit, holdSeg].forEach { l.addSublayer($0) } }
+        if showsClip && clip.superlayer !== l { l.addSublayer(clip) }
     }
     override func setFrameSize(_ newSize: NSSize) { super.setFrameSize(newSize); needsLayout = true }
     override func viewDidChangeBackingProperties() { super.viewDidChangeBackingProperties(); renderedFor = nil; needsLayout = true }
@@ -610,9 +614,8 @@ final class MeterBar: NSView {
             for i in 0..<n { ctx.setFillColor(color(i).cgColor); ctx.fill(segRect(i)) }
             return ctx.makeImage()
         }
-        unlit.frame = CGRect(origin: .zero, size: bounds.size)
-        for l in [unlit, lit] { l.contentsScale = scale }
-        unlit.contents = image { _ in self.offColor }
+        layer?.contentsScale = scale; lit.contentsScale = scale
+        layer?.contents = image { _ in self.offColor }
         lit.contents = image { self.zone($0) }
         clip.frame = horizontal ? CGRect(x: bounds.width - MeterBar.clipLength, y: 0, width: MeterBar.clipLength, height: bounds.height)
                                 : CGRect(x: 0, y: bounds.height - MeterBar.clipLength, width: bounds.width, height: MeterBar.clipLength)

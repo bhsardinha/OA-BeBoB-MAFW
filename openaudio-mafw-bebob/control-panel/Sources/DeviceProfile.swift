@@ -103,6 +103,10 @@ protocol DeviceProfile: AnyObject {
     var phonesMultiSelect: Bool { get }
     /// the level-controller (encoder) radios of the sidebar, in the official panel's order; the FW410 adds phones (manual p.6-7, capture 103)
     var levelControllerTargets: [MARotaryMask.Group] { get }
+    /// The Advanced window (PANEL_REDESIGN_PLAN_v3, user 2026-10-27): offered for the FireWire 1814 only
+    var advancedPanel: Bool { get }
+    /// The Advanced window's meter channels for a layout (Core Audio order, jacks, peak slots)
+    func advancedChannels(_ l: ChannelLayout) -> AdvancedChannels
 }
 
 extension DeviceProfile {
@@ -112,6 +116,8 @@ extension DeviceProfile {
     /// the FW1814 and the Audiophile take one source (a selector), so the buttons are exclusive there.
     var phonesMultiSelect: Bool { return false }
     var levelControllerTargets: [MARotaryMask.Group] { return [.swReturn, .output, .input, .aux] }
+    var advancedPanel: Bool { return false }
+    func advancedChannels(_ l: ChannelLayout) -> AdvancedChannels { return .none }
     func phonesSource(mask: Int) -> PhonesSource? { return phonesSources.first { Int($0.mask) == mask } }
 }
 

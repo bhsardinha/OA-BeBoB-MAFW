@@ -25,6 +25,14 @@ builds these tools into `tools/build/` on the build PC and sets `OA_DEV` / `MA_C
 
 ## Panel CPU bench (`panel-cpubench.sh`, R119)
 `panel-cpubench.sh "<label>" [panel args]` runs a demo panel for ~25 s and prints the panel's and WindowServer's average CPU (`top`, 5 s samples). Panel bench options (demo mode only): `--big-meter` opens the big meter, `--no-panel` hides the panel windows. Examples: `panel-cpubench.sh "mixer"`, `panel-cpubench.sh "big meter" --big-meter --no-panel`. Keep the screen awake and unlocked (`caffeinate -d -t 1800`): hidden or covered windows stop drawing by design.
+Advanced windows (2026-10-28): `--open-advanced daw|monitor|console|hybrid` opens the first unit's Advanced window in that mode; with
+`--devices 2 --dual`, `--open-dual daw|console` opens the Dual window in that mode (always name the mode: the window reopens in the last mode
+it was in, and a snapshot run leaves it in Console). The demo peaks are shaped like real material (drum hits falling ~180 dB/s, sustained
+channels, one-tick transients near 0 dBFS, silent channels); `--fixed-meters` freezes them (the 0 % reference).
+Other Advanced bench aids (panel, not shipped behaviour): `OA_LOG_WRITES=1` prints every `setProperties` batch the panel sends (time, unit, keys
+and the driver's result) to stderr; `--snapshot DIR --advanced` without `--demo` runs the snapshot pass on the real first unit and prints each mode's scene as
+read back from the driver after the switch (`printScene`), the check used in capture 108; Advanced and Dual snapshots are WindowServer window
+captures, so the screen must be awake and unlocked (a locked screen leaves the run waiting).
 
 ## Running on the MacBook Air (`192.168.100.22`, 10.13.6)
 The Air has no Xcode and `sudo` there needs a password. Build the tools on the build PC (`cc -w -mmacosx-version-min=10.13 -o <name> <name>.c -framework CoreAudio -framework CoreFoundation -framework IOKit -framework CoreMIDI`), copy the binaries to `~/fw1814-captures/tools/` on the Air (persistent, not `/tmp`) and run them over SSH. They need no root; loading kexts and installing packages does (the user does that locally).

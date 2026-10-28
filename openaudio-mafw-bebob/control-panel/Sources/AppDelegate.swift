@@ -19,6 +19,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private lazy var status = StatusMenuController(bigMeter: bigMeter)
     private let appMenu = NSMenu()
     private var startHidden = false                         // --background (launch at login): no panel window until asked
+    private var dual: AdvancedDualWindowController?         // PANEL_REDESIGN_PLAN_v3 §4 (M7): two FW1814s as one aggregate
 
     private var ordered: [PanelWindowController] { return order.compactMap { controllers[$0] } }
     /// The interface whose window is in front (key or main), else the one with a visible window.
@@ -35,15 +36,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             // Debug aid: `--devices N` simulates N interfaces (the second and later ones at 44.1 kHz S/PDIF, so they look different).
             let rate = args.index(of: "--rate").flatMap { i in i + 1 < args.count ? UInt32(args[i + 1]) : nil } ?? 48000
             let n = max(1, min(4, args.index(of: "--devices").flatMap { i in i + 1 < args.count ? Int(args[i + 1]) : nil } ?? 1))
-            let guids = ["0xD6C040074B9FB", "0xD6C04007512C4", "0xD6C0400753A10", "0xD6C04007560D7"]
+            let guids = ["0xD6C04000DE001", "0xD6C04000DE002", "0xD6C04000DE003", "0xD6C04000DE004"]   // plainly fake (no real unit has them; "DE" = demo)
             // `--model audiophile` (AP-5.2) shows the first interface as a FireWire Audiophile; `--models 1814,audiophile` sets each one.
             let models = (args.index(of: "--models").flatMap { i in i + 1 < args.count ? args[i + 1] : nil } ?? "")
                 .split(separator: ",").compactMap { DeviceProfiles.profile(named: String($0)) }
             let first = args.index(of: "--model").flatMap { i in i + 1 < args.count ? DeviceProfiles.profile(named: args[i + 1]) : nil }
             func profile(_ k: Int) -> DeviceProfile { return k < models.count ? models[k] : (k == 0 ? (first ?? FW1814Profile.shared) : FW1814Profile.shared) }
-            demo = (0..<n).map { k in
-                k == 0 ? DemoBackend(id: 1, rate: rate, adat: !args.contains("--spdif"), external: args.contains("--external"), guid: guids[0], profile: profile(0))
-                       : DemoBackend(id: UInt64(k + 1), rate: 44100, adat: false, guid: guids[k], profile: profile(k))
+            let likeFirst = args.contains("--dual")                 // `--dual`: every demo unit like the first (same rate, ADAT), so the Dual window opens
+            let adat = !args.contains("--spdif"), external = args.contains("--external")
+            demo = []
+            for k in 0..<n {
+                let p = profile(k), g = guids[k], id = UInt64(k + 1)
+                if k == 0 || likeFirst { demo.append(DemoBackend(id: id, rate: rate, adat: adat, external: external, guid: g, profile: p)) }
+                else { demo.append(DemoBackend(id: id, rate: 44100, adat: false, guid: g, profile: p)) }
             }
             sync()
             // Bench / screenshot aids: `--status-item` puts the status menu in the menu bar for the demo units (`--open-status-menu` also opens it
@@ -52,10 +57,32 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 status.units = { [weak self] in self?.ordered ?? [] }
                 status.front = { [weak self] in self?.front }
                 status.onFirmwareCheck = { [weak self] in self?.showFirmwareCheck() }
+                status.onOpenAdvanced = { [weak self] c in self?.openAdvanced(c) }
+                status.advancedModes = { c in c.advancedController()?.modeEntries ?? [] }
+                status.onAdvancedMode = { [weak self] c, k in self?.openAdvanced(c); c.advancedController()?.request(key: k) }
+                status.onOpenDual = { [weak self] in self?.openDual() }
                 bigMeter.unit = { [weak self] in self?.status.selected }
                 status.install()
                 if args.contains("--open-status-menu") {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in self?.status.openForCapture() }
+                }
+            }
+            // `--open-dual [daw|console]` (with `--devices 2 --dual`): the Dual window opens on the demo pair, in that mode if given, for a
+            // look without the hardware or a CPU bench
+            if let i = args.index(of: "--open-dual") {
+                let m = i + 1 < args.count ? AdvancedMode(rawValue: args[i + 1]) : nil
+                DispatchQueue.main.async { [weak self] in
+                    self?.openDual(); self?.dual?.demo = true; self?.dual?.refresh()
+                    if let m = m { self?.dual?.request(m, ask: false) }
+                }
+            }
+            // `--open-advanced [daw|monitor|console|hybrid]`: the first unit's Advanced window in that mode, for a look or a CPU bench
+            if let i = args.index(of: "--open-advanced") {
+                let m = i + 1 < args.count ? AdvancedMode(rawValue: args[i + 1]) : nil
+                DispatchQueue.main.async { [weak self] in
+                    guard let me = self, let c = me.ordered.first else { return }
+                    me.openAdvanced(c)
+                    if let m = m { c.advancedController()?.request(m, ask: false) }
                 }
             }
             if args.contains("--big-meter") { bigMeter.unit = { [weak self] in self?.ordered.first }; bigMeter.show() }
@@ -67,8 +94,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 let abList = (abArg ?? "").split(separator: ",").compactMap { UInt32($0) }
                 let ab: (UInt32, UInt32)? = abList.count == 2 ? (abList[0], abList[1]) : nil
                 let prefix = "\(rate)-\(args.contains("--spdif") ? "spdif" : "adat")" + (knob != 0 ? "-knob\(knob)" : "") + (ab != nil ? "-ab" : "")
+                let advanced = args.contains("--advanced"), dualSnap = args.contains("--dual")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-                    self?.snapshot(dir: dir, prefix: prefix, knob: knob, ab: ab)
+                    if dualSnap, let me = self, let first = me.ordered.first {
+                        me.openDual()
+                        if let d = me.dual { d.demo = true; first.snapshotDual(d, to: dir, prefix: prefix) }
+                    } else if advanced { self?.ordered.first?.snapshotAdvanced(to: dir, prefix: prefix) }
+                    else { self?.snapshot(dir: dir, prefix: prefix, knob: knob, ab: ab) }
                     NSApp.terminate(nil)
                 }
             }
@@ -80,6 +112,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         status.onOpenPanel = { [weak self] c in self?.openPanel(c) }
         status.onPresentationChanged = { [weak self] in self?.applyPresentation() }
         status.onFirmwareCheck = { [weak self] in self?.showFirmwareCheck() }
+        status.onOpenAdvanced = { [weak self] c in self?.openAdvanced(c) }
+        status.advancedModes = { c in c.advancedController()?.modeEntries ?? [] }
+        status.onAdvancedMode = { [weak self] c, k in self?.openAdvanced(c); c.advancedController()?.request(key: k) }
+        status.onOpenDual = { [weak self] in self?.openDual() }
         // the launch-at-login agent holds the panel's path: rewrite it so a renamed or moved panel (0.2.2: OA BeBoB MAFW.app) still starts at login
         PanelPrefs.updateLaunchAgentIfMoved()
         bigMeter.unit = { [weak self] in self?.status.selected }
@@ -89,8 +125,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         // `--snapshot DIR` also works against a real interface (bench aid for the integrated run): PNGs of every view, then quit.
         if let i = args.index(of: "--snapshot"), i + 1 < args.count {
             let dir = args[i + 1]
+            // `--advanced` (bench, with the user's go-ahead): every unit's Advanced window from a scratch store, all modes, ending in Monitor
+            let advanced = args.contains("--advanced")
             DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) { [weak self] in
-                self?.snapshot(dir: dir, prefix: "real", knob: 0, ab: nil)
+                if advanced {
+                    for c in self?.ordered ?? [] where c.device.profile.advancedPanel {
+                        c.advancedStoreFolder = URL(fileURLWithPath: dir).appendingPathComponent("store", isDirectory: true)
+                        c.snapshotAdvanced(to: dir, prefix: "real-" + String(c.device.info.guid.suffix(6)))
+                    }
+                } else { self?.snapshot(dir: dir, prefix: "real", knob: 0, ab: nil) }
                 NSApp.terminate(nil)
             }
         }
@@ -115,6 +158,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         let present = Set(backends.map { $0.entryID })
         var center: NSPoint?
         var changed = false
+        // the Dual window closes when one of its units goes away
+        if let d = dual, d.units.contains(where: { !present.contains($0.controller.device.entryID) }) { d.close(); dual = nil }
         for (id, c) in controllers where !present.contains(id) {
             if let w = c.visibleWindow { center = NSPoint(x: w.frame.midX, y: w.frame.midY) }
             c.close(); controllers[id] = nil
@@ -123,6 +168,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         for d in backends where controllers[d.entryID] == nil {
             let c = PanelWindowController(device: d)
+            c.onExclusive = { [weak self] me, _ in self?.exclusive(keep: me) }
+            if !demo.isEmpty { c.advancedStoreFolder = FileManager.default.temporaryDirectory.appendingPathComponent("oa-advanced-demo", isDirectory: true) }
             c.onSelectDevice = { [weak self] from, id in self?.switchDevice(from: from, to: id) }
             controllers[d.entryID] = c
             order.append(d.entryID)
@@ -231,6 +278,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         let big = NSMenuItem(title: "Big Meter", action: #selector(toggleBigMeter), keyEquivalent: "b")
         big.target = self
         view.addItem(big)
+        let adv = NSMenuItem(title: "Advanced Panel\u{2026}", action: #selector(advancedFromMenu), keyEquivalent: "a")
+        adv.keyEquivalentModifierMask = [.command, .option]
+        adv.target = self
+        view.addItem(adv)
+        let dualItem = NSMenuItem(title: "Advanced Dual (A + B)\u{2026}", action: #selector(dualFromMenu), keyEquivalent: "")
+        dualItem.target = self
+        view.addItem(dualItem)
         let fw = NSMenuItem(title: "Firmware Check\u{2026}", action: #selector(showFirmwareCheck), keyEquivalent: "")
         fw.target = self
         view.addItem(fw)
@@ -277,6 +331,36 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     @objc private func viewMode(_ item: NSMenuItem) { (front ?? ordered.first)?.setMode(item.tag) }
     @objc private func toggleBigMeter() { bigMeter.toggle() }
+    @objc private func dualFromMenu() { openDual() }
+    /// One panel window at a time (user, 2026-10-28): the standard panel, a unit's Advanced window or the Dual window, never two. `keep` is
+    /// the unit about to show (its own standard / Advanced swap is done by the unit itself); nil = the Dual window is about to show.
+    private func exclusive(keep: PanelWindowController?) {
+        for c in ordered where c !== keep { c.hideAll(); c.hideAdvanced() }
+        if keep != nil { dual?.hide() }
+    }
+    /// The units the Dual window can pair: the connected models with the Advanced window (FW1814), in arrival order
+    private var dualCandidates: [PanelWindowController] { return ordered.filter { $0.device.profile.advancedPanel } }
+    /// The Dual window (two FW1814s as one aggregate): made for the first two FW1814s, remade when that pair changes.
+    private func openDual() {
+        let pair = Array(dualCandidates.prefix(2))
+        guard pair.count == 2 else { NSSound.beep(); return }
+        if let d = dual, Set(d.units.map { $0.controller.device.entryID }) != Set(pair.map { $0.device.entryID }) { d.close(); dual = nil }
+        if dual == nil {
+            let d = AdvancedDualWindowController(pair: pair)
+            d.onExclusive = { [weak self] in self?.exclusive(keep: nil) }
+            dual = d
+        }
+        startHidden = false
+        NSApp.activate(ignoringOtherApps: true)
+        dual?.show()
+    }
+    @objc private func advancedFromMenu() { if let c = front ?? ordered.first { openAdvanced(c) } else { NSSound.beep() } }
+    /// The unit's Advanced window (PANEL_REDESIGN_PLAN_v3): FW1814 only; it shows its own lock-out outside 44.1 / 48 kHz.
+    private func openAdvanced(_ c: PanelWindowController) {
+        startHidden = false
+        NSApp.activate(ignoringOtherApps: true)
+        c.openAdvanced()
+    }
 
     /// Firmware check window (AP-9.1; formerly the separate OpenAudio Firmware Tool app, part of the panel since 2026-10-21, user). Read-only.
     private var firmwareCheck: CheckWindow?

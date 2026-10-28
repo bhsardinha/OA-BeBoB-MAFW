@@ -6,6 +6,7 @@
 //   maprop setxml FILE         -> writes an `allxml` dump back with one IORegistryEntrySetCFProperties, as the helper's replay does (Settings.c
 //                                 loadPrefs); the session keys (rate, lock, bandwidth, engine options) are left out, so no rate change happens
 //   MA_CLASS=com_m_audio_FW1814Device maprop ...  -> the same against the official driver (Snow Leopard reference rig)
+//   MA_GUID=74B9FB maprop ...  -> the unit whose GUID ends with these hex digits (two units of the same model)
 //   maprop peaks [N]           -> open the user client (type 0), map memory type 1 (the meter page) and print the 52 raw peaks N times
 #include <IOKit/IOKitLib.h>
 #include <CoreFoundation/CoreFoundation.h>
@@ -14,10 +15,23 @@
 #include <string.h>
 #include <unistd.h>
 
+/// The first unit of MA_CLASS, or with MA_GUID=<hex tail, e.g. 74B9FB> the unit whose GUID ends with it (two units of one model).
 static io_service_t device(void) {
     io_iterator_t it;
     if (IOServiceGetMatchingServices(kIOMasterPortDefault, IOServiceMatching(getenv("MA_CLASS") ? getenv("MA_CLASS") : "com_openaudio_FWAVCAudioDevice"), &it)) return 0;
-    io_service_t s = IOIteratorNext(it); IOObjectRelease(it); return s;
+    const char *want = getenv("MA_GUID");
+    io_service_t s, found = 0;
+    while ((s = IOIteratorNext(it))) {
+        if (!want) { found = s; break; }
+        CFNumberRef g = IORegistryEntryCreateCFProperty(s, CFSTR("GUID"), kCFAllocatorDefault, 0);
+        unsigned long long v = 0; char hex[32];
+        if (g) { CFNumberGetValue(g, kCFNumberSInt64Type, &v); CFRelease(g); }
+        snprintf(hex, sizeof hex, "%llX", v);
+        size_t lh = strlen(hex), lw = strlen(want);
+        if (lw <= lh && strcasecmp(hex + lh - lw, want) == 0) { found = s; break; }
+        IOObjectRelease(s);
+    }
+    IOObjectRelease(it); return found;
 }
 static void show(const char *label, CFTypeRef v) {
     CFStringRef d = v ? CFCopyDescription(v) : CFSTR("(null)");
