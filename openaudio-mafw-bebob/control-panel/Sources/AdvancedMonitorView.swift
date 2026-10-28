@@ -301,6 +301,21 @@ final class AdvancedMonitorView: FlippedView, AdvancedView {
         }
         needsLayout = true
     }
+    /// Where a source sits in the Aux (a stereo pair with no pan): its fixed side, or both for a stereo source
+    /// Demo snapshot: the Aux selected with In 1-4 and DAW 1-2 in it, In 3 muted there (and In 1 soloed there with `solo`)
+    func demoAux(solo: Bool = false) {
+        selected = .aux; side = .left
+        let ms = mixes
+        apply { mx in
+            for s in [MonitorSource.input(1), .input(2), .input(3), .input(4), .dawMono(1), .dawMono(2)] { mx.setMember(s, .aux, true, mixes: ms) }
+            mx.setAuxMute(.input(3), true)
+            if solo { mx.setAuxSolo(.input(1), true) }
+        }
+    }
+    private func auxRoute(_ s: MonitorSource) -> String {
+        guard let side = s.auxSide else { return "Aux L / R" }
+        return side == .left ? "Aux L" : "Aux R"
+    }
     private func mix(_ b: MixBus) -> MonitorMix { return mixes.first(where: { $0.bus == b }) ?? MonitorMix(bus: b, name: b.label, mono: true) }
 
     // MARK: sources
@@ -417,7 +432,9 @@ final class AdvancedMonitorView: FlippedView, AdvancedView {
             guard let me = self else { return }
             let m = me.ctx.model
             if me.selected == .aux {
-                for ch in src.channels { m.setElement(MAKeys.auxSendLevels, src.kind == .input ? ch : m.ints(MAKeys.inputLevels).count + ch, val) }
+                var mx = MonitorMixer(m.cache, parked: me.store.parkedLevels)
+                if mx.auxSilenced(src) { mx.setKeptAuxSend(src, val); me.store.parkedLevels = mx.parked }    // M / another's S: the send stays cut
+                else { for ch in src.channels { m.setElement(MAKeys.auxSendLevels, src.kind == .input ? ch : m.ints(MAKeys.inputLevels).count + ch, val) } }
             } else {
                 for ch in src.channels { m.setElement(src.kind == .input ? MAKeys.inputLevels : MAKeys.swReturnLevels, ch, val) }
             }
@@ -427,12 +444,18 @@ final class AdvancedMonitorView: FlippedView, AdvancedView {
         v.pan.onChange = { [weak self] val in self?.ctx.model.setElement(MAKeys.inputPan2, src.channels[0], val) }
         v.pan.onCommit = { [weak self] in self?.ctx.model.commit() }
         v.mute.onClick = { [weak self] b in
-            guard let m = self?.ctx.model else { return }
+            guard let me = self else { return }
+            // in the Aux, M cuts this source's Aux send only (user, 2026-10-28); elsewhere it is the channel's mute in the interface mixer
+            if me.selected == .aux { me.apply { $0.setAuxMute(src, b.isOn) }; return }
+            let m = me.ctx.model
             for ch in src.channels { m.setElement(src.kind == .input ? MAKeys.inputMute : MAKeys.swReturnMute, ch, b.isOn ? 1 : 0) }
             m.commit()
         }
         v.solo.onClick = { [weak self] b in
-            guard let m = self?.ctx.model else { return }
+            guard let me = self else { return }
+            // in the Aux, S solos inside the Aux only (user, 2026-10-28); elsewhere it is the interface mixer's solo
+            if me.selected == .aux { me.apply { $0.setAuxSolo(src, b.isOn) }; return }
+            let m = me.ctx.model
             for ch in src.channels { m.setElement(src.kind == .input ? MAKeys.inputSolo : MAKeys.swReturnSolo, ch, b.isOn ? 1 : 0) }
             m.commit()
         }
@@ -473,7 +496,7 @@ final class AdvancedMonitorView: FlippedView, AdvancedView {
     /// STEREO <-> MONO (two independent lines). Nothing is written when the lines appear: each source's pan already says which lines it is
     /// on (hard left = the odd line, hard right = the even line, anything else = both). Back to stereo, linked pairs spread hard L / R.
     private func toggleMono(_ bus: MixBus) {
-        guard bus != .aux else { showNote("The Aux has no pan: it is one mono line (hardware)."); return }
+        guard bus != .aux else { showNote("The Aux is a stereo pair with no pan: odd channels on Aux L, even on Aux R (hardware)."); return }
         var ms = store.monitorMixes
         guard let i = ms.index(where: { $0.bus == bus }) else { return }
         ms[i].mono = !ms[i].mono
@@ -693,12 +716,14 @@ final class AdvancedMonitorView: FlippedView, AdvancedView {
     func refresh() {
         let m = ctx.model
         if layoutKey != m.layout || builtLinks != linkedPairs || builtReturns != store.stereoReturns { rebuild() }
-        let mx = MonitorMixer(m.cache), sel = mix(selected), l = line
+        let mx = MonitorMixer(m.cache, parked: store.parkedLevels), sel = mix(selected), l = line
         let stereoBus = l.side == nil && selected != .aux
         let other = selected.other
         for v in stripViews {
             let s = v.source
             v.member = mx.member(s, l)
+            v.mute.toolTip = selected == .aux ? "Mute in the Aux: this source\u{2019}s Aux send to \u{2212}\u{221E} (Mix 1/2 and Mix 3/4 do not change)" : "Mute (the interface mixer\u{2019}s channel mute)"
+            v.solo.toolTip = selected == .aux ? "Solo in the Aux: only soloed sources are heard in the Aux (Mix 1/2 and Mix 3/4 do not change)" : "Solo (the interface mixer\u{2019}s solo: only soloed sources are heard on the mixes)"
             let reach = mx.reachable(s, l)
             v.inButton.isEnabled = reach
             // a partner the pair routing brought in (it is in the other bus at a level, the pair is not linked): amber, with the reason
@@ -723,21 +748,21 @@ final class AdvancedMonitorView: FlippedView, AdvancedView {
                     let t = onL && onR ? outs[0].output + " + " + String(outs[1].output.split(separator: " ").last ?? "") : (onL ? outs[0].output : (onR ? outs[1].output : ""))
                     v.showRoute(t)
                 } else {
-                    v.showRoute(s.isStereoInput ? "stereo \u{00B7} L / R" : "aux \u{00B7} no pan")
+                    v.showRoute(selected == .aux ? auxRoute(s) : "stereo \u{00B7} L / R")
                 }
-                v.mute.isOn = m.element(MAKeys.inputMute, s.channels[0]) != 0
-                v.solo.isOn = m.element(MAKeys.inputSolo, s.channels[0]) != 0
+                v.mute.isOn = selected == .aux ? mx.auxMuted(s) : m.element(MAKeys.inputMute, s.channels[0]) != 0
+                v.solo.isOn = selected == .aux ? mx.auxSoloed(s) : m.element(MAKeys.inputSolo, s.channels[0]) != 0
             } else {
                 if let f = s.fixedSide {
                     // a mono return: where it lands (its side, the line on a mono bus)
                     let t: String
-                    if selected == .aux { t = "aux \u{00B7} no pan" }
+                    if selected == .aux { t = auxRoute(s) }
                     else if l.side != nil { t = reach ? (v.member ? l.output : "\u{2192} " + l.output) : "not here" }
                     else { t = f == .left ? "left only" : "right only" }
                     v.showRoute(t)
                 }
-                v.mute.isOn = m.element(MAKeys.swReturnMute, s.channels[0]) != 0
-                v.solo.isOn = m.element(MAKeys.swReturnSolo, s.channels[0]) != 0
+                v.mute.isOn = selected == .aux ? mx.auxMuted(s) : m.element(MAKeys.swReturnMute, s.channels[0]) != 0
+                v.solo.isOn = selected == .aux ? mx.auxSoloed(s) : m.element(MAKeys.swReturnSolo, s.channels[0]) != 0
             }
         }
         // the context bar (unless a note is showing)
@@ -748,7 +773,7 @@ final class AdvancedMonitorView: FlippedView, AdvancedView {
                 let partner = MixLine(bus: selected, side: side.other)
                 contextLabel.stringValue = "MONO \u{00B7} \(l.output): a source IN here only is panned to it; IN on \(l.output) and \(partner.output) = centre \u{00B7} one level per source for both lines \u{00B7} \(n) in"
             } else if selected == .aux {
-                contextLabel.stringValue = "MONO \u{00B7} the Aux: its own send per channel, no pan \u{00B7} faders = each source\u{2019}s send \u{00B7} \(n) in"
+                contextLabel.stringValue = "STEREO \u{00B7} the Aux: its own send per channel, no pan: odd channels on Aux L, even on Aux R \u{00B7} faders = each source\u{2019}s send \u{00B7} M / S act in the Aux only\(mx.auxSoloActive ? " (solo on: only soloed sources heard)" : "") \u{00B7} \(n) in"
             } else {
                 contextLabel.stringValue = "STEREO \u{00B7} \(selected.label): pan each source \u{00B7} faders = each source\u{2019}s level (shared by Mix 1/2 and Mix 3/4) \u{00B7} \(n) in"
             }
@@ -758,7 +783,7 @@ final class AdvancedMonitorView: FlippedView, AdvancedView {
         // tiles
         for t in tiles {
             let mm = mix(t.bus)
-            t.name = mm.name(t.line); t.mono = mm.mono || t.bus == .aux; t.selected = t.line == l
+            t.name = mm.name(t.line); t.mono = mm.mono && t.bus != .aux; t.selected = t.line == l
             var dests: [String] = []
             let lineOut: (Int) -> String = { pair in
                 guard let s = t.line.side else { return pair == 1 ? "Line 1/2" : "Line 3/4" }

@@ -349,7 +349,7 @@ check(!mm5.routed(.input(10), .mix34), "monitor: stereo source leaves: pair unro
 
 // mono lines (user, 2026-10-28): a MONO bus is two independent outputs; the panel pans each source to the lines it is IN on
 let linesMixes = [MonitorMix(bus: .mix12, name: "Monitors", mono: false), MonitorMix(bus: .mix34, name: "Wedge 1", mono: true, rightName: "Wedge 2"),
-                  MonitorMix(bus: .aux, name: "Cue C", mono: true)]
+                  MonitorMix(bus: .aux, name: "Aux", mono: false)]
 check(linesMixes[1].lines == [out3, out4] && linesMixes[0].lines.count == 1 && out3.output == "Out 3" && out4.output == "Out 4", "lines: a mono bus is Out 3 and Out 4")
 var ml = MonitorMixer(mscene())
 ml.setLineMember(.input(1), out3, true, mixes: linesMixes)
@@ -393,6 +393,52 @@ check(mp.level(.input(5)) == -14 && mp.parked["lvl.in5"] == nil, "park: IN gives
 mp.setMember(.input(7), .aux, true, mixes: linesMixes); mp.setSend(.input(7), .aux, -20)
 mp.setMember(.input(7), .aux, false, mixes: linesMixes); mp.setMember(.input(7), .aux, true, mixes: linesMixes)
 check(mp.send(.input(7), .aux) == -20, "park: the Aux send comes back too")
+
+// Aux mute and solo (user, 2026-10-28): M / S in the Aux act on the Aux sends only, keep the sources IN, and give the sends back
+let send = { (m: MonitorMixer, el: Int) -> Int in AdvancedScene.ints(m.s, MAKeys.auxSendLevels)[el - 1] }
+var ma = MonitorMixer(mscene())
+ma.setMember(.input(3), .mix12, true, mixes: linesMixes); ma.setMember(.input(3), .aux, true, mixes: linesMixes); ma.setSend(.input(3), .aux, -10)
+let lvl3 = ma.level(.input(3))
+ma.setAuxMute(.input(3), true)
+check(ma.auxMuted(.input(3)) && ma.member(.input(3), .aux) && ma.send(.input(3), .aux) == -10 && send(ma, 3) == MonitorMixer.off,
+      "aux mute: send at the floor, the fader keeps -10, still IN")
+check(ma.level(.input(3)) == lvl3 && ma.member(.input(3), .mix12) && !ma.changed.contains("MAInputMute"), "aux mute: Mix 1/2 and the channel mute untouched")
+ma.setSend(.input(3), .aux, -6)
+check(send(ma, 3) == MonitorMixer.off && ma.send(.input(3), .aux) == -6, "aux mute: the fader moves the kept send, the send stays cut")
+ma.setAuxMute(.input(3), false)
+check(!ma.auxMuted(.input(3)) && send(ma, 3) == -6 && ma.parked["auxkeep.in3"] == nil, "aux mute: M again gives -6 back")
+ma.setAuxMute(.daw(1), true)
+check(!ma.member(.daw(1), .aux) && ma.auxMuted(.daw(1)), "aux mute: a source not in the Aux stays out")
+ma.setAuxMute(.daw(1), false)
+ma.setAuxMute(.input(3), true); ma.setMember(.input(3), .aux, false, mixes: linesMixes)
+check(!ma.member(.input(3), .aux) && !ma.auxMuted(.input(3)) && ma.parked["auxkeep.in3"] == nil && ma.parked["aux.in3"] == -6, "aux mute: OFF ends the mute, IN gives the send back")
+ma.setMember(.input(3), .aux, true, mixes: linesMixes)
+check(ma.send(.input(3), .aux) == -6 && send(ma, 3) == -6 && !ma.auxMuted(.input(3)), "aux mute: back IN unmuted at -6")
+var raised = MonitorMixer(mscene()); raised.setSend(.input(5), .aux, -2)
+var mb = MonitorMixer(raised.s, parked: ["auxmute.in5": 1, "auxkeep.in5": -4])
+mb.applyAux()
+check(!mb.auxMuted(.input(5)) && send(mb, 5) == -2 && mb.send(.input(5), .aux) == -2, "aux mute: a send raised elsewhere ends the mute")
+// solo: In 3 at -6, In 4 at -8, DAW 2 at -3 in the Aux; S on In 4 cuts the others, keeps their sends; S off gives them back
+var ms = MonitorMixer(ma.s)
+ms.setMember(.input(4), .aux, true, mixes: linesMixes); ms.setSend(.input(4), .aux, -8)
+ms.setMember(.dawMono(2), .aux, true, mixes: linesMixes); ms.setSend(.dawMono(2), .aux, -3)
+ms.setAuxSolo(.input(4), true)
+check(ms.auxSoloActive && ms.auxSoloed(.input(4)) && send(ms, 4) == -8 && send(ms, 3) == MonitorMixer.off && send(ms, 20) == MonitorMixer.off,
+      "aux solo: only the soloed source is heard in the Aux")
+check(ms.member(.input(3), .aux) && ms.send(.input(3), .aux) == -6 && ms.auxSilenced(.input(3)) && !ms.changed.contains("MAInputSolo") && ms.level(.input(3)) == lvl3,
+      "aux solo: the others stay IN with their faders; Mix 1/2 and MAInputSolo untouched")
+ms.setAuxSolo(.dawMono(2), true)
+check(send(ms, 20) == -3 && send(ms, 3) == MonitorMixer.off, "aux solo: a second solo is heard too")
+ms.setAuxMute(.input(4), true)
+check(send(ms, 4) == MonitorMixer.off && ms.send(.input(4), .aux) == -8, "aux solo: M still wins on a soloed source")
+ms.setAuxMute(.input(4), false); ms.setAuxSolo(.input(4), false); ms.setAuxSolo(.dawMono(2), false)
+check(!ms.auxSoloActive && send(ms, 3) == -6 && send(ms, 4) == -8 && send(ms, 20) == -3 && ms.parked.keys.filter({ $0.hasPrefix("auxkeep.") }).isEmpty,
+      "aux solo: the last S off gives every send back")
+ms.setAuxSolo(.input(4), true); ms.setMember(.input(4), .aux, false, mixes: linesMixes)
+check(!ms.auxSoloActive && send(ms, 3) == -6, "aux solo: OFF on the soloed source ends the solo")
+check(MonitorSource.input(3).auxSide == .left && MonitorSource.input(4).auxSide == .right && MonitorSource.dawMono(2).auxSide == .right && MonitorSource.stereo(3).auxSide == nil,
+      "aux: a stereo pair with no pan, odd channels left, even right")
+check(MonitorMix.defaults[2].name == "Aux" && !MonitorMix.defaults[2].mono && MonitorMix.defaults[2].lines.count == 1, "aux: default name Aux, one stereo line")
 
 // link (MAInputLink): the partner takes the first channel's level, send and pan; in a stereo mix the pair spreads
 var mk = MonitorMixer(mscene())

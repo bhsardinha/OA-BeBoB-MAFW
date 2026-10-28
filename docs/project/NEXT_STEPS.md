@@ -4,6 +4,12 @@
 
 Read this first after a context clear, then `NEW_PLAN.md` → `docs/STATE.md` → `docs/BUILD-MANUAL.md` §0 → `docs/system-map/README.md`.
 
+## 2026-10-28 (later) - Advanced fixes (R142), in source only
+Done: View-menu Advanced items hidden when unavailable; Aux = stereo pair named "Aux"; M and S in the Aux act on the Aux sends only. Next (user decides): commit; a panel version (2.0.1?) and package for the next release; real clicks on a unit.
+
+## 2026-10-28 - panel 2.0 (Advanced + Dual) published as v0.5.0
+Done: `panel-redesign` merged; package 0.5.0 (driver 0.3.1, panel 2.0) built for both editions and published (public `e4c2c0c`, tag v0.5.0, GitHub release, digests match). Open (user decides, list in `docs/panel-redesign/ADVANCED_TODO_v2.md`): real use of the Advanced views on the FW1814, the Dual window with two breakout cables + BNC word clock and the aggregate, the knob's ring badges, Console / Monitor meters on the MeterField path, short strip names on narrow screens (ADAT names cut at 1440 px), driver follow-ups (GUID in log lines, host plug 0, 12337F optical after reboot).
+
 ## 2026-10-27 (night) - stereo-pair fix verified (R141); v0.4.1 (both editions) built and published
 Done: 0.4.1 Modern installed on the dev Mac, pairs have channels at 48 kHz (user + capture 107). Classic and Modern 0.4.1 packages and `.dmg`s built; README simplified (user: every interface and feature as supported in 0.4.1); panel 1.7 (login item rewritten only when the app moved; user). **Published 2026-10-27:** public `1b0b452`, tag v0.4.1, GitHub release with `OA-BeBoB-MAFW-0.4.1-classic.dmg` (`9730c1b9…`) and `-modern.dmg` (`5afcce3e…`), digests on GitHub match. Next (user decides): FW410 MIDI, S/PDIF, sleep/wake; nothing else pending from this item.
 

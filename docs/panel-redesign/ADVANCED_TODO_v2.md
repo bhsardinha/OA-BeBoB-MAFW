@@ -67,7 +67,7 @@ hardware, only when the user asks (no formal testing, R123) · **(driver)** a ke
       a pan per source) or MONO = two independent lines, one tile each ("MONO · OUT 3", "MONO · OUT 4", own names). On a mono line a source
       has no pan control: IN on Out 3 only = hard left, Out 4 only = hard right, both = centre (the strip says "Out 3", "Out 4", "Out 3 + 4").
       The badge (or ＋ New mix) switches a bus between stereo and two mono lines; up to 5 mixes (two buses × 2 lines + the Aux). Defaults:
-      Monitors stereo on Mix 1/2, Cue A / Cue B mono lines on Out 3 / Out 4, Cue C on the Aux.
+      Monitors stereo on Mix 1/2, Cue A / Cue B mono lines on Out 3 / Out 4, **Aux** on the Aux (named "Cue C" until 2026-10-28; R142).
 - [x] **Monitor: IN acts on the clicked channel only** (user: the pair turned on together). The logic always did this when the partner is
       used nowhere else (tests); what the user saw is the hardware rule: the FW1814 routes inputs to Mix 1/2 and Mix 3/4 **per pair**
       (register 0x90, FFADO `special_mixer_model.h:163-174`, `special.rs:883-911`) with **one level per input for both** (analog_gains), so
@@ -104,6 +104,10 @@ hardware, only when the user asks (no formal testing, R123) · **(driver)** a ke
 - [x] **Console CUE (PFL, user 2026-10-28)**: a CUE button on every row that goes through the mixer (inputs; Line 1–4 = DAW 1–4) sends it
       at 0 dB to the Aux and Phones 1 listens to the Aux while any cue is on (its source comes back after the last); the outputs to the
       console do not change (user's choice: Aux to the phones, not Mix 3/4 which feeds Line 3/4). Single and Dual Console.
+      Cue in the centre of the phones: **not possible** (user, 2026-10-28): the Aux has no pan, a cued odd channel is on the left only.
+- [x] **(R142, user 2026-10-28) The Aux is a stereo pair** (odd channels Aux L, even Aux R, no pan — like the DAW returns), default name
+      "Aux"; **M and S in the Aux** act on the Aux sends only (kept, given back), not the channel's mute / solo in every mix. View menu:
+      "Advanced Panel…" and "Advanced Dual…" hidden when the front unit / the connected units cannot open them.
 
 ## 2. Fix
 - [x] **Write failures**: `DeviceModel.commit` keeps a refused batch (`writeFailure`: kern_return_t + keys) until the next scene apply;
@@ -140,7 +144,7 @@ Single unit (hw)
 - [ ] Hybrid: New loop sheet (mono and stereo), "Set send to 0 dB", Remove, the return-vs-send difference with a real loop.
 - [ ] Mode switches on a unit: the louder-outputs question; first opening (mixer kept as Monitor, DAW applied); the lock-out at 88.2+ kHz
       and coming back at 44.1/48; the status-menu items (shown for FW1814 only, greyed outside 44.1/48 kHz) — never seen on screen.
-- [ ] **(hw, user) Audible checks** that settle the open hardware questions (plan v2 §6): aux send L/R distribution; pan law at centre;
+- [ ] **(hw, user) Audible checks** that settle the open hardware questions (plan v2 §6): ~~aux send L/R distribution~~ (user, R142: odd L, even R); pan law at centre;
       recording is pre-mixer; then the Monitor wording/defaults follow.
 - [ ] One-window rule with real clicks (status menu, View menu, ⌥⌘A, Dock icon, the standard panel's own button) and resizing the
       Advanced and Dual windows on a Full HD screen — so far only demo snapshots.

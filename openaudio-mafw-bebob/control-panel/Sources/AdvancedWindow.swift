@@ -209,6 +209,8 @@ final class AdvancedWindowController: NSObject, NSWindowDelegate {
     private var applied: [String: Any]?             // the scene the current mode last wrote (for "edited")
     private var headerKeys: [String] = []
     private var bodyView: AdvancedView?
+    /// the Monitor view while it is in the body (demo snapshots)
+    var monitorView: AdvancedMonitorView? { return bodyView as? AdvancedMonitorView }
     private var bodyKey = ""                          // which view is in the body ("lock", or a mode's rawValue)
     private var noteTimer: Timer?
     /// "Open the standard panel" (the lock-out's button)

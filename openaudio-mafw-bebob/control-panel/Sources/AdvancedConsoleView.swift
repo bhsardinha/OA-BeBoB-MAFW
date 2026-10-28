@@ -122,7 +122,7 @@ final class ConsoleRow: FlippedView {
         ca.stringValue = input ? "\u{2192} DAW \(c.ca)" : "DAW \(c.ca) \u{2192}"
         ca.font = Theme.mono(10.5); peak.font = Theme.mono(10)
         cue.solid = true; cue.onColor = Theme.solo; cue.fontSize = 8.5; cue.isHidden = true
-        cue.toolTip = "Cue (PFL): hear this channel alone on Phones 1, through the Aux; the outputs to the console do not change"
+        cue.toolTip = "Cue (PFL): hear this channel alone on Phones 1, through the Aux (no pan there: odd channels on the left, even on the right); the outputs to the console do not change"
         [field, jack, ca, meter, peak, latch, cue].forEach { addSubview($0) }
     }
     required init?(coder: NSCoder) { fatalError("unused") }

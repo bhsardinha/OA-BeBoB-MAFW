@@ -12,6 +12,22 @@ The M-Audio CoreMIDI plug-in is shipped unmodified (1.11.2). Each entry lists th
 
 ---
 
+## Package 0.5.1 — 2026-10-28 (release v0.5.1)
+
+| Driver | Panel | MIDI plug-in | Editions |
+|---|---|---|---|
+| 0.3.1 (unchanged) | **2.1** | 1.11.2 | Classic and Modern |
+
+**Panel 2.1 — fixes to the Advanced window (FireWire 1814)** (R142):
+- **The Aux is a stereo pair** in the Monitor mode, as the hardware has it: no pan, odd channels on Aux L, even channels on Aux R (inputs and DAW returns alike). Its tile says STEREO and each strip says where it lands (*Aux L* / *Aux R*). The default name is **Aux** (was *Cue C*; a saved *Cue C* reads as *Aux*).
+- **M and S in the Aux act in the Aux only.** With the Aux selected, M cuts that source's Aux send (the fader keeps its level and M gives it back) and S hears only the soloed sources in the Aux; before, they muted or soloed the channel in every mix. Mix 1/2, Mix 3/4 and the channel's own mute and solo do not change.
+- **Console CUE:** the tooltip says where a cue is heard (the Aux has no pan: an odd channel on the left of Phones 1, an even one on the right). A cue in the centre of the phones is not possible on this hardware.
+- **View menu:** *Advanced Panel…* and *Advanced Dual (A + B)…* are hidden when the front interface (or the connected ones) cannot open them, as in the status menu; before, they were always there and only beeped.
+
+**Tested:** the panel's logic tests (new ones for the Aux mute and solo) and demo snapshots on the build PC (10.13.6). Not tried with real clicks on a unit or by ear.
+
+---
+
 ## Package 0.5.0 — 2026-10-28 (release v0.5.0)
 
 | Driver | Panel | MIDI plug-in | Editions |

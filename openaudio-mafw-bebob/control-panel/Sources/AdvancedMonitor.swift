@@ -6,7 +6,10 @@
 //     A channel is in such a mix when its pair is routed there and its level is above the floor.
 //   * DAW returns 1-4: one level per channel, routed per pair (MASWReturnRoutingV2), no pan (odd -> left, even -> right).
 //   * The Aux has its own send per channel (MAAuxSendLevels 22: inputs 1-18, then returns 1-4 = elements 19-22, TranslatorCounts
-//     auxSendElement) and no pan: a channel is in the Aux mix when its send is above the floor.
+//     auxSendElement) and no pan: a channel is in the Aux mix when its send is above the floor. It is a stereo pair, not a mono bus (user,
+//     2026-10-28; snd-firewire-ctl-services special.rs:26-31 "22x2 aux mixer", aux-output-1/2): like the DAW returns, an odd channel lands
+//     on Aux L only, an even one on Aux R only. M and S in the Aux act there only: a source the Aux silences (muted, or not soloed while
+//     another source is) has its send at the floor and the send it gets back kept (`parked`, "auxkeep.in3").
 //   * Mono mix (user, 2026-10-27): its sources are centred (pan 0) unless a stereo mix on the other bus pans them (shared pan): those are
 //     reported as conflicts. A source joining a mix starts at centre unless a stereo mix already pans it.
 import Foundation
@@ -24,7 +27,8 @@ enum MixBus: String {
 
 /// One hardware bus as the user sees it (user, 2026-10-28): Mix 1/2 or Mix 3/4 is either STEREO (one mix, a pan per source) or MONO = two
 /// independent mono lines, one per output (Out 1 / Out 2, Out 3 / Out 4): a source IN on the odd line only is panned hard left, on the even
-/// line only hard right, on both centred — the panel computes the pan and shows no pan control. The Aux is one mono line (no pan).
+/// line only hard right, on both centred — the panel computes the pan and shows no pan control. The Aux is one stereo line with no pan:
+/// odd channels on Aux L, even on Aux R (MonitorSource.auxSide).
 /// `name` is the stereo mix's name or the odd line's; `rightName` the even line's.
 struct MonitorMix: Equatable {
     let bus: MixBus
@@ -37,7 +41,7 @@ struct MonitorMix: Equatable {
     }
     static let defaults = [MonitorMix(bus: .mix12, name: "Monitors", mono: false, rightName: "Out 2"),
                            MonitorMix(bus: .mix34, name: "Cue A", mono: true, rightName: "Cue B"),
-                           MonitorMix(bus: .aux, name: "Cue C", mono: true)]
+                           MonitorMix(bus: .aux, name: "Aux", mono: false)]
     /// the lines the user mixes on this bus: one (stereo, or the Aux) or two (mono)
     var lines: [MixLine] { return mono && bus != .aux ? [MixLine(bus: bus, side: .left), MixLine(bus: bus, side: .right)] : [MixLine(bus: bus, side: nil)] }
     func name(_ l: MixLine) -> String { return l.side == .right ? rightName : name }
@@ -75,6 +79,8 @@ struct MonitorSource: Equatable {
     /// A mono DAW return (user, 2026-10-28): the FW1814 has no pan for the DAW returns (Q-ME §FWSettingsLevels::Init: SW returns get
     /// levels, mute, solo, link and pair routing only), so an odd return always lands on the left of a bus, an even one on the right
     var fixedSide: MixSide? { return kind == .daw && channels.count == 1 ? (channels[0] % 2 == 1 ? .left : .right) : nil }
+    /// The Aux side of a single channel (no pan there: odd -> Aux L, even -> Aux R); nil for a stereo source (both)
+    var auxSide: MixSide? { return channels.count == 1 ? (channels[0] % 2 == 1 ? .left : .right) : nil }
     /// "In 3", "DAW 2"
     var label: String { return (kind == .input ? "In " : "DAW ") + "\(channels[0])" }
     static func input(_ ch: Int) -> MonitorSource { return MonitorSource(kind: .input, channels: [ch], id: "in\(ch)") }
@@ -103,6 +109,9 @@ struct MonitorMixer {
     /// back (user, 2026-10-28: "it always comes back as -12 dB"). Key: "lvl.in3", "lvl.daw2", "aux.in3".
     var parked: [String: Int] = [:]
     private static func key(_ aux: Bool, _ src: MonitorSource, _ ch: Int) -> String { return (aux ? "aux." : "lvl.") + (src.kind == .input ? "in" : "daw") + "\(ch)" }
+    /// Aux mute and solo (user, 2026-10-28): flags "auxmute.in3" / "auxsolo.in3" (value 1) and the send a silenced source gets back,
+    /// "auxkeep.in3". The channel's own mute and solo (MAInputMute / MAInputSolo, every mix) do not change.
+    static func auxKey(_ what: String, _ src: MonitorSource, _ ch: Int) -> String { return "aux" + what + "." + (src.kind == .input ? "in" : "daw") + "\(ch)" }
 
     init(_ scene: [String: Any], parked p: [String: Int] = [:]) { s = scene; parked = p }
 
@@ -133,12 +142,21 @@ struct MonitorMixer {
         guard bus != .aux else { return false }
         return at(src.kind == .input ? MAKeys.inputRoutingV2 : MAKeys.swReturnRoutingV2, src.pair) & bus.bit != 0
     }
+    /// The fader of a source in a mix: the Aux send (while the Aux silences it, the send it gets back), or the channel level
     func send(_ src: MonitorSource, _ bus: MixBus) -> Int {
-        return bus == .aux ? at(MAKeys.auxSendLevels, auxElement(src, src.channels[0])) : level(src)
+        guard bus == .aux else { return level(src) }
+        let ch = src.channels[0]
+        return parked[MonitorMixer.auxKey("keep", src, ch)] ?? at(MAKeys.auxSendLevels, auxElement(src, ch))
     }
     func member(_ src: MonitorSource, _ bus: MixBus) -> Bool {
         return bus == .aux ? send(src, .aux) > MonitorMixer.off : routed(src, bus) && level(src) > MonitorMixer.off
     }
+    func auxMuted(_ src: MonitorSource) -> Bool { return parked[MonitorMixer.auxKey("mute", src, src.channels[0])] != nil }
+    func auxSoloed(_ src: MonitorSource) -> Bool { return parked[MonitorMixer.auxKey("solo", src, src.channels[0])] != nil }
+    /// some source is soloed in the Aux: only the soloed ones are heard there
+    var auxSoloActive: Bool { return parked.keys.contains { $0.hasPrefix("auxsolo.") } }
+    /// silent in the Aux by M, or by another source's S
+    func auxSilenced(_ src: MonitorSource) -> Bool { return auxMuted(src) || (auxSoloActive && !auxSoloed(src)) }
     func pan(_ ch: Int) -> Int { return at(MAKeys.inputPan2, ch) }
     /// Mix 1/2 and Mix 3/4 share the level: a source in both shows it.
     func sharedLevel(_ src: MonitorSource) -> Bool { return member(src, .mix12) && member(src, .mix34) }
@@ -169,7 +187,38 @@ struct MonitorMixer {
     /// Fader of a source in a mix: the Aux send, or the channel level (shared by Mix 1/2 and Mix 3/4).
     mutating func setSend(_ src: MonitorSource, _ bus: MixBus, _ v: Int) {
         let x = max(MonitorMixer.off, min(MARange.levelMax, v))
-        if bus == .aux { for ch in src.channels { put(MAKeys.auxSendLevels, auxElement(src, ch), x) } } else { setLevel(src, x) }
+        if bus == .aux {
+            if auxSilenced(src) { setKeptAuxSend(src, x) } else { for ch in src.channels { put(MAKeys.auxSendLevels, auxElement(src, ch), x) } }
+        } else { setLevel(src, x) }
+    }
+
+    /// M in the Aux (user, 2026-10-28): the source's Aux send to the floor, kept for M again; Mix 1/2, Mix 3/4 and the channel's own
+    /// mute (MAInputMute / MASWReturnMute) do not change.
+    mutating func setAuxMute(_ src: MonitorSource, _ on: Bool) { setAuxFlag("mute", src, on) }
+    /// S in the Aux (user, 2026-10-28): while any source is soloed there, only the soloed ones are heard in the Aux (the others' sends
+    /// to the floor, kept); Mix 1/2, Mix 3/4 and MAInputSolo / MASWReturnSolo do not change.
+    mutating func setAuxSolo(_ src: MonitorSource, _ on: Bool) { setAuxFlag("solo", src, on) }
+    private mutating func setAuxFlag(_ what: String, _ src: MonitorSource, _ on: Bool) {
+        for ch in src.channels { let k = MonitorMixer.auxKey(what, src, ch); if on { parked[k] = 1 } else { parked.removeValue(forKey: k) } }
+        applyAux()
+    }
+    /// The fader of a source the Aux silences moves the send it gets back; the send stays at the floor
+    mutating func setKeptAuxSend(_ src: MonitorSource, _ v: Int) {
+        for ch in src.channels { parked[MonitorMixer.auxKey("keep", src, ch)] = max(MonitorMixer.off, min(MARange.levelMax, v)) }
+    }
+    /// Puts every Aux send where M and S say: a silenced source at the floor with its send kept, the others at their send. A kept send
+    /// whose live send is above the floor was raised elsewhere (the standard panel): that ends its mute.
+    mutating func applyAux() {
+        let soloing = auxSoloActive
+        for e in 1...max(1, arr(MAKeys.auxSendLevels).count) {
+            let src = e <= inputCount ? MonitorSource.input(e) : MonitorSource.dawMono(e - inputCount), ch = src.channels[0]
+            let keep = MonitorMixer.auxKey("keep", src, ch), cur = at(MAKeys.auxSendLevels, e)
+            if parked[keep] != nil && cur > MonitorMixer.off { parked.removeValue(forKey: keep); parked.removeValue(forKey: MonitorMixer.auxKey("mute", src, ch)) }
+            let silent = parked[MonitorMixer.auxKey("mute", src, ch)] != nil || (soloing && parked[MonitorMixer.auxKey("solo", src, ch)] == nil)
+            if silent {
+                if cur > MonitorMixer.off { parked[keep] = cur; put(MAKeys.auxSendLevels, e, MonitorMixer.off) }
+            } else if let v = parked.removeValue(forKey: keep) { put(MAKeys.auxSendLevels, e, v) }
+        }
     }
 
     mutating func setPan(_ ch: Int, _ v: Int) { put(MAKeys.inputPan2, ch, max(MARange.panMin, min(MARange.panMax, v))) }
@@ -178,7 +227,16 @@ struct MonitorMixer {
     mutating func setMember(_ src: MonitorSource, _ bus: MixBus, _ on: Bool, mixes: [MonitorMix]) {
         guard member(src, bus) != on else { return }
         if bus == .aux {
-            if on { unpark(src, aux: true) } else { park(src, aux: true) }
+            if on { unpark(src, aux: true) }
+            else {
+                // OFF ends its M and S in the Aux; the send it had (kept or live) is what IN gives back
+                for ch in src.channels {
+                    parked.removeValue(forKey: MonitorMixer.auxKey("mute", src, ch)); parked.removeValue(forKey: MonitorMixer.auxKey("solo", src, ch))
+                    if let v = parked.removeValue(forKey: MonitorMixer.auxKey("keep", src, ch)), v > MonitorMixer.off { parked[MonitorMixer.key(true, src, ch)] = v }
+                }
+                park(src, aux: true)
+            }
+            applyAux()
             return
         }
         let other = bus.other!
@@ -282,6 +340,10 @@ struct MonitorMixer {
         let p = ch + 1
         put(MAKeys.inputLevels, p, at(MAKeys.inputLevels, ch))
         put(MAKeys.auxSendLevels, p, at(MAKeys.auxSendLevels, ch))
+        for what in ["keep", "mute", "solo"] {
+            let pk = MonitorMixer.auxKey(what, .input(p), p)
+            if let v = parked[MonitorMixer.auxKey(what, .input(ch), ch)] { parked[pk] = v } else { parked.removeValue(forKey: pk) }
+        }
         let inStereo = [MixBus.mix12, .mix34].contains { b in mixes.first(where: { $0.bus == b })?.mono == false && member(.input(ch), b) }
         if inStereo { setPan(ch, MARange.panMin); setPan(p, MARange.panMax) } else { setPan(p, pan(ch)) }
     }

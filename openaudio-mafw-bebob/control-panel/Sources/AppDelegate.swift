@@ -14,6 +14,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private var demo: [DemoBackend] = []
     private var waiting: NSWindow?
     private let deviceMenu = NSMenu(title: "Device")
+    private let viewMenu = NSMenu(title: "View")
     // plan v8 AP-5.5 / AP-5.6: menu bar mode and the big meter (clone features)
     private let bigMeter = BigMeterController()
     private lazy var status = StatusMenuController(bigMeter: bigMeter)
@@ -262,7 +263,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         add(app)
         deviceMenu.delegate = self                          // rebuilt when opened (reference: DoDeferedDeviceMenuUpdate / BuildDeviceMenu)
         add(deviceMenu)
-        let view = NSMenu(title: "View")
+        let view = viewMenu
+        view.delegate = self                                // hides the Advanced items a unit cannot open (menuNeedsUpdate)
         for (i, t) in ["Mixer", "Output", "Hardware", "About"].enumerated() {
             let item = NSMenuItem(title: t, action: #selector(viewTab(_:)), keyEquivalent: "\(i + 1)")
             item.target = self; item.tag = i
@@ -303,6 +305,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 if i.action == #selector(toggleDock) { i.state = PanelPrefs.showInDock ? .on : .off }
                 if i.action == #selector(toggleMenuBar) { i.state = PanelPrefs.showInMenuBar ? .on : .off }
                 if i.action == #selector(toggleLogin) { i.state = PanelPrefs.launchAtLogin ? .on : .off }
+            }
+            return
+        }
+        if menu === viewMenu {
+            // Like the status menu (StatusMenu.swift): Advanced only for a model with the window, Dual only with two such units (user, 2026-10-28).
+            // AppKit runs this before matching a key equivalent (no menuHasKeyEquivalent here), so a hidden item's shortcut does nothing either.
+            let advanced = (front ?? ordered.first).map { AdvancedGate.offered(modelAllows: $0.device.profile.advancedPanel) } ?? false
+            for i in menu.items {
+                if i.action == #selector(advancedFromMenu) { i.isHidden = !advanced }
+                if i.action == #selector(dualFromMenu) { i.isHidden = dualCandidates.count < 2 }
             }
             return
         }

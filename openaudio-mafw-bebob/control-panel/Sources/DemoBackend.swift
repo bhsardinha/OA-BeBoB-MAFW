@@ -236,6 +236,12 @@ extension PanelWindowController {
             RunLoop.current.run(until: Date(timeIntervalSinceNow: demo ? 0.4 : 1.2))
             if let v = a.window.contentView { writePNG(v, "\(dir)/\(prefix)-advanced-\(m.rawValue).png") }
             printScene(prefix, m.rawValue)
+            if demo, m == .monitor, let mv = a.monitorView {
+                mv.demoAux(); RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.4))
+                if let v = a.window.contentView { writePNG(v, "\(dir)/\(prefix)-advanced-monitor-aux.png") }
+                mv.demoAux(solo: true); RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.4))
+                if let v = a.window.contentView { writePNG(v, "\(dir)/\(prefix)-advanced-monitor-aux-solo.png") }
+            }
         }
     }
 

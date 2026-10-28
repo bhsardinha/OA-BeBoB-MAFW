@@ -56,7 +56,9 @@ final class AdvancedStore {
             let read = a.compactMap { e -> MonitorMix? in
                 guard let b = (e["Bus"] as? String).flatMap({ MixBus(rawValue: $0) }), let n = e["Name"] as? String, let m = e["Mono"] as? Bool else { return nil }
                 // "Split" (a short-lived name for the two mono lines) reads as mono
-                return MonitorMix(bus: b, name: n, mono: b == .aux ? true : m || (e["Split"] as? Bool ?? false), rightName: e["RightName"] as? String ?? "")
+                // the Aux is a stereo pair (odd L, even R; user 2026-10-28); its old default name "Cue C" reads as "Aux"
+                return MonitorMix(bus: b, name: b == .aux && n == "Cue C" ? "Aux" : n, mono: b == .aux ? false : m || (e["Split"] as? Bool ?? false),
+                                  rightName: e["RightName"] as? String ?? "")
             }
             if read.count == 3 { monitorMixes = read }
         }
