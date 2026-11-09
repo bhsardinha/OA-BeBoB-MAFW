@@ -1,10 +1,10 @@
 #include "FWSharedSync.h"
 
-bool TRingBuffer::InitializeWithSizeInBytes(UInt32 bytes)
+bool TRingBuffer::InitializeWithSizeInBytes(UInt32 bytes, bool userShared)
 {
     Invalidate();
     size = bytes;
-    mem = IOBufferMemoryDescriptor::withOptions(0, bytes, 0x1000);
+    mem = IOBufferMemoryDescriptor::withOptions(userShared ? kIOMemoryKernelUserShared : 0, bytes, 0x1000);
     if (!mem) return false;
     if (mem->prepare() != kIOReturnSuccess) { mem->release(); mem = 0; return false; }
     data = static_cast<UInt8 *>(mem->getBytesNoCopy());

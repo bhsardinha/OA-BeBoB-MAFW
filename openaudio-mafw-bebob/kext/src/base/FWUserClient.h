@@ -4,6 +4,8 @@
 //   * clientMemoryForType: 1 = the 4 KiB meter page uint32 peak[52] (read-only), 0x400+n = MIDI source ring n (read-only),
 //     0x800+n = MIDI destination ring n
 //   * notification type 1 = MIDI-in push channel (320-byte messages); type 0 is the base class (property changes)
+// Glue tap (R143, NOT in the reference; GlueTap.h): selectors 508 GlueStart / 509 GlueStop (one isoch reference per client, released by
+// clientClose), memory types 0x1000 (the Glue page) and 0x1001 (the input ring), read-only, checked before the MIDI destination range.
 // Deviations: clientClose also terminate()s the client (the reference leaks it, Q-UC Correction R16); WaitForTermination waits on an
 // IOLock condition instead of a Mach semaphore (no semaphore KPI dependency).
 #ifndef OA_FWUSERCLIENT_H
@@ -33,18 +35,21 @@ public:
     IOReturn EntryDiceGetRequest(void *, void *) { return (IOReturn)0xE00002C7; }   // 505
     IOReturn WaitForTermination();                                        // 506 (virtual in the reference, vt[0x968])
     IOReturn SetInitializedProperty();                                    // 507 (vt[0x970])
+    IOReturn GlueStart();                                                 // 508, Glue tap (R143)
+    IOReturn GlueStop();                                                  // 509, Glue tap (R143)
 
     // ref ReceivedMIDIPacket @0x757e: push one received MIDI packet to the type-1 port (M-H calls this)
     IOReturn ReceivedMIDIPacket(const void *packet);
 
 private:
-    static IOExternalMethod sMethods[8];
+    static IOExternalMethod sMethods[10];
     com_openaudio_FWAudioDevice *fDevice;                // [+0x290]
     bool fMidiStarted;                                   // [+0x140]
     Notification fMidiNote;                              // [+0x148 .. +0x287] 320-byte template for type 1 (size 0x140)
     UInt8 fMidiNoteBody[0x140 - sizeof(Notification)];
     IOLock *fTermLock;                                   // replaces [+0x288] semaphore
     bool fTerminating;
+    bool fGlueStarted;                                   // Glue tap (R143): this client holds one Glue isoch reference
 };
 
 #endif

@@ -14,7 +14,7 @@ OSDefineMetaClassAndStructors(com_openaudio_FWUserClient, com_openaudio_FWKIPCUs
 typedef com_openaudio_FWUserClient UC;
 
 // ref sMethods @0x339e0 (legacy IOExternalMethod, stride 48): flags/counts read from the table bytes (Q-UC-surface §2)
-IOExternalMethod com_openaudio_FWUserClient::sMethods[8] = {
+IOExternalMethod com_openaudio_FWUserClient::sMethods[10] = {
     { 0, (IOMethod)&UC::EntryStartMIDI,         kIOUCScalarIScalarO, 0, 0 },                           // 500
     { 0, (IOMethod)&UC::EntryStopMIDI,          kIOUCScalarIScalarO, 0, 0 },                           // 501
     { 0, (IOMethod)&UC::EntryStopMIDI,          kIOUCScalarIScalarO, 0, 0 },                           // 502 (alias)
@@ -23,13 +23,15 @@ IOExternalMethod com_openaudio_FWUserClient::sMethods[8] = {
     { 0, (IOMethod)&UC::EntryDiceGetRequest,    kIOUCStructIStructO, kIOUCVariableStructureSize, kIOUCVariableStructureSize },   // 505
     { 0, (IOMethod)&UC::WaitForTermination,     kIOUCScalarIScalarO, 0, 0 },                           // 506
     { 0, (IOMethod)&UC::SetInitializedProperty, kIOUCScalarIScalarO, 0, 0 },                           // 507
+    { 0, (IOMethod)&UC::GlueStart,              kIOUCScalarIScalarO, 0, 0 },                           // 508 Glue tap (R143), not in the reference
+    { 0, (IOMethod)&UC::GlueStop,               kIOUCScalarIScalarO, 0, 0 },                           // 509 Glue tap (R143), not in the reference
 };
 
 // ref initWithTask @0x773e
 bool com_openaudio_FWUserClient::initWithTask(task_t owningTask, void *securityToken, UInt32 type)
 {
     bzero(&fMidiNote, sizeof(fMidiNote));
-    fDevice = 0; fMidiStarted = false; fTermLock = 0; fTerminating = false;
+    fDevice = 0; fMidiStarted = false; fTermLock = 0; fTerminating = false; fGlueStarted = false;
     return super::initWithTask(owningTask, securityToken, type);
 }
 
@@ -68,8 +70,20 @@ IOReturn com_openaudio_FWUserClient::clientClose()
         if (fDevice && fDevice->mainEngine()) fDevice->mainEngine()->UserStopMIDI();
         fMidiStarted = false;
     }
+    if (fGlueStarted) GlueStop();                                            // Glue tap (R143): a dead or closing client gives its reference back
     super::clientClose();
     terminate();
+    return kIOReturnSuccess;
+}
+
+// Glue tap (R143): the page or the ring, retained, read on the work loop (ResetSampleBuffers replaces the ring there)
+static IOReturn ActionGlueMemory(OSObject *owner, void *typeV, void *outV, void *, void *)
+{
+    com_openaudio_FWBaseEngine *e = OSDynamicCast(com_openaudio_FWBaseEngine, owner);
+    IOMemoryDescriptor *m = 0;
+    if (e) m = ((UInt32)(uintptr_t)typeV == kGlueTapPageType) ? e->GluePageMemory() : e->GlueRingMemory();
+    if (m) m->retain();
+    *static_cast<IOMemoryDescriptor **>(outV) = m;
     return kIOReturnSuccess;
 }
 
@@ -87,6 +101,15 @@ IOReturn com_openaudio_FWUserClient::clientMemoryForType(UInt32 type, IOOptionBi
         return kIOReturnSuccess;
     }
     com_openaudio_FWBaseEngine *e = fDevice->mainEngine();
+    if (e && (type == kGlueTapPageType || type == kGlueTapRingType)) {       // Glue tap (R143): before the MIDI destination range (0x800+)
+        IOWorkLoop *wl = fDevice->getWorkLoop();
+        IOMemoryDescriptor *m = 0;
+        if (wl) wl->runAction(&ActionGlueMemory, e, (void *)(uintptr_t)type, &m);   // the ring is reallocated on the work loop
+        if (!m) return kErrNotReady;
+        *memory = m;                                                         // retained by the action
+        *options = kIOMapReadOnly;
+        return kIOReturnSuccess;
+    }
     if (e) {
         if (type >= 0x400 && type < 0x800) {                                // MIDI source port n: RX ring, read-only
             if (IOMemoryDescriptor *m = e->MidiPortMemory(false, type - 0x400)) { m->retain(); *memory = m; *options = kIOMapReadOnly; return kIOReturnSuccess; }
@@ -100,7 +123,7 @@ IOReturn com_openaudio_FWUserClient::clientMemoryForType(UInt32 type, IOOptionBi
 // ref getTargetAndMethodForIndex @0x72f6
 IOExternalMethod *com_openaudio_FWUserClient::getTargetAndMethodForIndex(IOService **target, UInt32 index)
 {
-    if (fDevice && index - 500 < 8) { *target = this; return &sMethods[index - 500]; }
+    if (fDevice && index - 500 < 10) { *target = this; return &sMethods[index - 500]; }   // 500..507 ref, 508..509 Glue tap (R143)
     return 0;
 }
 
@@ -159,6 +182,38 @@ IOReturn com_openaudio_FWUserClient::EntrySendMIDI(void *packet, UInt32 *result)
     IOWorkLoop *wl = fDevice ? fDevice->getWorkLoop() : 0;
     if (!wl || !fDevice->mainEngine()) return kErrNoDevice;
     return wl->runAction(&ActionSendMIDI, fDevice->mainEngine(), packet, result);
+}
+
+// ---- Glue tap (R143), NOT in the reference: one isoch reference per client, on the work loop ----
+static IOReturn ActionGlueStart(OSObject *owner, void *, void *, void *, void *)
+{
+    com_openaudio_FWBaseEngine *e = OSDynamicCast(com_openaudio_FWBaseEngine, owner);
+    return e ? e->GlueStart() : kErrNoDevice;
+}
+static IOReturn ActionGlueStop(OSObject *owner, void *, void *, void *, void *)
+{
+    com_openaudio_FWBaseEngine *e = OSDynamicCast(com_openaudio_FWBaseEngine, owner);
+    if (e) e->GlueStop();
+    return kIOReturnSuccess;
+}
+
+IOReturn com_openaudio_FWUserClient::GlueStart()
+{
+    if (fGlueStarted) return kIOReturnSuccess;
+    IOWorkLoop *wl = fDevice ? fDevice->getWorkLoop() : 0;
+    if (!wl || !fDevice->mainEngine()) return kErrNoDevice;
+    const IOReturn r = wl->runAction(&ActionGlueStart, fDevice->mainEngine());
+    if (r == kIOReturnSuccess) fGlueStarted = true;
+    return r;
+}
+
+IOReturn com_openaudio_FWUserClient::GlueStop()
+{
+    if (!fGlueStarted) return kIOReturnSuccess;
+    fGlueStarted = false;
+    IOWorkLoop *wl = fDevice ? fDevice->getWorkLoop() : 0;
+    if (!wl || !fDevice->mainEngine()) return kErrNoDevice;
+    return wl->runAction(&ActionGlueStop, fDevice->mainEngine());
 }
 
 // ref WaitForTermination @0x761e (selector 506): block until the client is terminating

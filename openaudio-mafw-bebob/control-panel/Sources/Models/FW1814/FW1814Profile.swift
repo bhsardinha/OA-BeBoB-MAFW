@@ -30,6 +30,7 @@ final class FW1814Profile: DeviceProfile {
     func hardwareCard(_ ctx: PanelContext) -> HardwareCard? { return FW1814PortsCard(context: ctx) }
     /// The Advanced window is for this model only (user, 2026-10-27; PANEL_REDESIGN_PLAN_v3 §1)
     var advancedPanel: Bool { return true }
+    var glue: Bool { return true }
     func advancedChannels(_ l: ChannelLayout) -> AdvancedChannels { return fw1814AdvancedChannels(l, peaks: peaks) }
 
     // MARK: mixer tab

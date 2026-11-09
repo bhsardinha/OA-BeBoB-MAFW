@@ -1,4 +1,5 @@
 #include "FWSamples.h"
+#include "GlueTap.h"
 
 // floor() for a float already clamped into the SInt32 range.
 static inline SInt32 FloorToInt(float v)
@@ -81,6 +82,12 @@ void FWConvertLLRR4SkipMIDI1(UInt32 count, const UInt32 *src, SInt32 *dst, void 
         src += 5;
         dst += 4;
     }
+}
+
+void FWGlueMapLLRR4(GlueTapChannel *map, UInt32 count)
+{
+    static const uint16_t wire[4] = { 1, 3, 0, 2 };                         // the stores of FWConvertLLRR4SkipMIDI1 above
+    for (UInt32 i = 0; i < count && i < 4; i++) { map[i].slot = wire[i]; map[i].delay = 0; }
 }
 
 void FWRearrangeLLRR6(const SInt32 *src, UInt32 *dst, UInt32 frames)

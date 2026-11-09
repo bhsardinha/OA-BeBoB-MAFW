@@ -10,7 +10,7 @@ These are BridgeCo BeBoB FireWire interfaces that M-Audio stopped supporting yea
 
 > **Homebrew and experimental.** A hobby project, not a product: the kernel extension is **unsigned and will stay unsigned**, so it runs only with **System Integrity Protection disabled**, and nothing is promised or supported.
 
-> **Current version: 0.5.1** (driver 0.3.1, panel 2.1) — [download](https://github.com/bhsardinha/OA-BeBoB-MAFW/releases/tag/v0.5.1), [changelog](openaudio-mafw-bebob/CHANGELOG.md). New in 0.5.1: fixes to the [Advanced window](#advanced-window-firewire-1814) — the Aux shown as the stereo pair it is, and M / S in the Aux acting in the Aux only.
+> **Current version: 0.6.0** (driver 0.4.0, panel 2.2) — [download](https://github.com/bhsardinha/OA-BeBoB-MAFW/releases/tag/v0.6.0), [changelog](openaudio-mafw-bebob/CHANGELOG.md). New in 0.6.0: a fix for a kernel panic when a second FireWire 1814 was switched on with the first one running (audio now pauses and comes back by itself), and **[OpenAudio Glue](#openaudio-glue-firewire-1814) 1.0.0**, an optional input device for the FireWire 1814 that prints analog-style colour while you record.
 
 ## Highlights
 
@@ -18,6 +18,8 @@ These are BridgeCo BeBoB FireWire interfaces that M-Audio stopped supporting yea
 - **Two editions from one source tree:** Classic (macOS 10.13 to 10.15) and Modern (macOS 11 to 15, Intel).
 - **A full control panel** for each model: mixer, outputs, phones, hardware page, presets, Level Controller, status menu, big meter, stereo pairs as separate CoreAudio devices, follow the external clock rate.
 - **The [Advanced window](#advanced-window-firewire-1814) for the FireWire 1814:** the panel organised by what you are doing — DAW, direct monitoring with cue mixes, the 1814 as converter for an analog console (with CUE), outboard loops — each mode with its own mixer scene, plus your own modes. The **Dual window** drives two FireWire 1814s as one 32-in / 24-out device.
+- **[OpenAudio Glue](#openaudio-glue-firewire-1814) (optional, FireWire 1814):** a second input device per unit that carries the inputs through a transformer, tube, EQ, compressor, desk and tape chain, with its own app. A separate download.
+- **Units can be switched on and off while the Mac runs:** audio on the other interface pauses for a few seconds and continues.
 - **An installer that updates in place** and keeps your settings, and an Uninstall app.
 
 ## Interfaces
@@ -126,6 +128,25 @@ The interface's own rules are shown instead of hidden: inputs and DAW returns re
 
 Two FireWire 1814s used as one macOS aggregate device (32 in / 24 out with ADAT, at 44.1 or 48 kHz): a DAW view with both units' meters, monitor knobs, speakers and phones, a Console view for both, and a setup sheet that checks the rates, the word-clock link from A to B and the aggregate (and creates it). Status menu › *Advanced Dual (A + B)…* with two units connected. **Not yet tested with the aggregate on real hardware.**
 
+## OpenAudio Glue (FireWire 1814)
+
+An optional spin-off, published with 0.6.0 as its own disk image. Glue gives each FireWire 1814 a second Core Audio **input** device ("FireWire 1814 Glue") with the same inputs, already processed by an analog-style chain, so the colour is recorded:
+
+```
+Transformer → Tube → EQ (4 bands) → Compressor → Desk colour → Tape
+```
+
+- **Global per unit:** transformer, tube and tape (Off / Soft / Medium / High / Full), desk colour (Neve, API or SSL flavour, Medium or High), and a Drive of 0 to +18 dB into the colour stages.
+- **Per channel:** ON (off is a bit-exact pass-through), a one-knob compressor with a Source voicing (General, Drums, Vocals, Heavy guitar, Bass, Synth), a 4-band EQ on an XY graph, stereo link per pair.
+- **The OpenAudio Glue app** sets it, in the style of the control panel; the panel has a menu item that opens it. With two FireWire 1814s the app creates a "Dual FireWire 1814 Glue" aggregate (processed inputs 1–32, raw inputs 33–64, outputs 1–24).
+- **How it works:** an AudioServerPlugIn reads the interface's inputs from the driver through a read-only tap and runs on the interface's own clock. The plain interface device is unchanged.
+
+<p align="center"><img src="openaudio-glue/docs/images/glue-app-demo-v1.png" width="820" alt="The OpenAudio Glue app (demo mode)"></p>
+
+**Install:** first the main package 0.6.0 or later and a restart, then `OpenAudio-Glue-1.0.0-classic.dmg` (macOS 10.13 to 10.15) or `-modern.dmg` (macOS 11 to 15, Intel) from the same release. The colour stages are ports of [Airwindows](https://github.com/airwindows/airwindows) plug-ins by Chris Johnson (MIT). Everything else is in [`openaudio-glue/README.md`](openaudio-glue/README.md).
+
+**Status:** used on macOS 10.13.6 with two FireWire 1814s. The Modern edition is built from the same binaries and has not been run.
+
 ## Screenshots
 
 <table>
@@ -173,8 +194,10 @@ The Advanced and Dual screenshots are the panel's demo mode.
 2. **Front-panel knobs can lose clicks on fast turns:** the interface reports only a direction per read (about every 50 ms), as with the official driver.
 3. **FireWire 1814: an S/PDIF ↔ ADAT switch interrupts audio for about 4 s**, and the Audio MIDI Setup sidebar label can stay stale (the real channel counts are correct).
 4. **After a sleep in which the interface lost power**, some routing (the phones source on the 1814, the S/PDIF input pans) may need to be set again in the panel.
-5. **Rough edges:** diagnostic logging is still compiled in; English only.
-6. **Advanced and Dual windows (new in 0.5.0, fixed in 0.5.1):** each mode's interface scene was written and read back on two real FireWire 1814s, but most interactions inside the views have been checked only in the panel's demo mode (the 0.5.1 Aux changes: logic tests and demo snapshots only), the **Dual window has not been used with a real aggregate yet**, and the Modern edition of the panel has only been built and opened in demo mode.
+5. **Switching an interface on or off while another is in use** interrupts the audio of the one in use for a few seconds (the FireWire bus resets and the driver re-makes its connections); it then continues by itself. Before 0.6.0 this could panic the Mac with two FireWire 1814s.
+6. **Rough edges:** diagnostic logging is still compiled in; English only.
+7. **Advanced and Dual windows (new in 0.5.0, fixed in 0.5.1):** each mode's interface scene was written and read back on two real FireWire 1814s, but most interactions inside the views have been checked only in the panel's demo mode (the 0.5.1 Aux changes: logic tests and demo snapshots only), the **Dual window has not been used with a real aggregate yet**, and the Modern edition of the panel has only been built and opened in demo mode.
+8. **0.6.0, Modern edition:** the driver with the bus-reset fix and OpenAudio Glue are built for macOS 11 to 15 but have not been run there; the tests were on macOS 10.13.6.
 
 ## Limitations
 
@@ -220,10 +243,11 @@ tests/host/run.sh            # host tests of the kernel-free parts (frames, tabl
 
 | Path | What |
 |---|---|
-| [`openaudio-mafw-bebob/`](openaudio-mafw-bebob/) | **Current code (0.5.x):** `kext/` (`src/base/` + `src/models/FW1814`, `FWAudiophile`, `FW410`), `firmware-helper/`, `control-panel/` (`Sources/Models/<Model>/`), `installer/`, `tools/`, `tests/`, `scripts/`, `CHANGELOG.md`, `VERSION` |
+| [`openaudio-mafw-bebob/`](openaudio-mafw-bebob/) | **Current code (0.6.x):** `kext/` (`src/base/` + `src/models/FW1814`, `FWAudiophile`, `FW410`), `firmware-helper/`, `control-panel/` (`Sources/Models/<Model>/`), `installer/`, `tools/`, `tests/`, `scripts/`, `CHANGELOG.md`, `VERSION` |
+| [`openaudio-glue/`](openaudio-glue/) | **OpenAudio Glue:** `dsp/` (the chain), `driver/` (the AudioServerPlugIn), `panel/` (the app), `installer/`, `tools/`, `docs/` |
 | [`openaudio-fw1814/`](openaudio-fw1814/) | The 0.1.0 tree (FireWire 1814 only), kept as released (tag `v0.1.0`); its `tools/` hold the bench tools |
 | [`docs/system-map/`](docs/system-map/README.md) | Reverse-engineering notes: class chain, DCL rings, clocking, AV/C and HSCI commands, mixer model, panel, MIDI plug-in, helper, captures |
-| [`docs/system-map/PROVENANCE-RESOLUTIONS.md`](docs/system-map/PROVENANCE-RESOLUTIONS.md) | Dated log of every finding, correction and fix (R1 … R142) |
+| [`docs/system-map/PROVENANCE-RESOLUTIONS.md`](docs/system-map/PROVENANCE-RESOLUTIONS.md) | Dated log of every finding, correction and fix (R1 … R145) |
 | [`docs/ARCHITECTURE_MAFW_v1.md`](docs/ARCHITECTURE_MAFW_v1.md) | Driver layers and how a model plugs in |
 | [`docs/BUILD_AUDIOPHILE_PLAN_v9.md`](docs/BUILD_AUDIOPHILE_PLAN_v9.md), [`docs/BUILD_FW410_PLAN_v2.md`](docs/BUILD_FW410_PLAN_v2.md) | The plans for the Audiophile and the FireWire 410 |
 | [`docs/fw410-manual-reference.md`](docs/fw410-manual-reference.md), [`docs/audiophile-manual-reference.md`](docs/audiophile-manual-reference.md), [`docs/manual-reference.md`](docs/manual-reference.md) | Developer notes on each interface's manual, against the driver |

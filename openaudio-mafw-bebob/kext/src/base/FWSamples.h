@@ -24,6 +24,10 @@ FWRearrangeProc FWRearrangeProcForChannels(UInt32 channels);        // NULL for 
 // Input converters ([+0x310] in the reference): (count = channels * frames, source quadlets, destination samples, per-proc argument).
 typedef void (*FWInputConvertProc)(UInt32 count, const UInt32 *src, SInt32 *dst, void *arg);
 
+// Glue tap (R143), not in the reference: FWConvertLLRR4SkipMIDI1's order as a table (host 0..3 <- wire 1, 3, 0, 2), for GetGlueInputMap.
+struct GlueTapChannel;
+void FWGlueMapLLRR4(GlueTapChannel *map, UInt32 count);
+
 // One AM824 quadlet in wire order (as the little-endian host reads it) -> signed 24-bit sample.
 static inline SInt32 FWUnpackAM824(UInt32 x)
 {

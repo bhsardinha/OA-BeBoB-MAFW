@@ -30,8 +30,8 @@ ICONS=installer/assets/DeviceIcons;               [ -d "$ICONS" ]  || ICONS="$RE
 [ -d "$ICONS" ]  || { echo "missing device icons (installer/assets/DeviceIcons)"; exit 1; }
 rsync -a --delete "$PLUGIN" "$HOST":oa-build-mafw/installer/assets/
 rsync -a --delete "$ICONS"/ "$HOST":oa-build-mafw/installer/assets/DeviceIcons/
-ssh "$HOST" "cd ~/oa-build-mafw && BAND=$BAND installer/build-pkg.sh"
+ssh "$HOST" "cd ~/oa-build-mafw && ${VERSION:+VERSION=$VERSION} BAND=$BAND installer/build-pkg.sh"      # VERSION=... labels a test build
 mkdir -p dist
-V=$(cat VERSION)
+V=${VERSION:-$(cat VERSION)}
 scp "$HOST":"oa-build-mafw/installer/build/OA-BeBoB-MAFW-$V-$BAND.pkg" dist/
 ls -l "dist/OA-BeBoB-MAFW-$V-$BAND.pkg"

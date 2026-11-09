@@ -12,6 +12,7 @@
 #include "FWPropertyDict.h"
 #include "Trace.h"
 #include <libkern/c++/OSString.h>
+#include <libkern/OSAtomic.h>
 
 #define super com_openaudio_FWRev1AudioDevice
 OSDefineMetaClassAndAbstractStructors(com_m_audio_FW1814Device, com_openaudio_FWRev1AudioDevice)
@@ -68,6 +69,17 @@ void com_openaudio_FW1814Device::ResetRearrangementProcs(com_openaudio_FWBaseEng
     engine->SetPeakProc(FW1814PeakProcForChannels(engine->outChannels()));
     if (engine->inChannels() == 2) engine->SetInputConvertProc(FWConvertInputOneStereoPairSkipMIDI, (void *)2);
     else                           engine->SetInputConvertProc(FW1814InputDelayThunk, this);
+}
+
+// Glue tap (R143), NOT in the reference: the input procs above as a table. 2 channels: FWConvertInputOneStereoPairSkipMIDI (identity).
+// Otherwise WorkaroundFor1814InputDelay below: host 0 <- wire 0, host 1 <- wire 4, host 2..7 <- wire 1, 5, 2, 6, 3, 7 of 16 frames earlier,
+// host 8.. <- the same wire slot.
+void com_openaudio_FW1814Device::GetGlueInputMap(com_openaudio_FWBaseEngine *engine, GlueTapChannel *map, UInt32 count)
+{
+    if (!engine || engine->inChannels() == 2) return;                        // identity, as filled by the engine
+    static const uint16_t wire[8] = { 0, 4, 1, 5, 2, 6, 3, 7 };
+    static const uint16_t delay[8] = { 0, 0, 16, 16, 16, 16, 16, 16 };
+    for (UInt32 i = 0; i < count && i < 8; i++) { map[i].slot = wire[i]; map[i].delay = delay[i]; }
 }
 
 // ref FW1814Device::WorkaroundFor1814InputDelay @0xcba4. Per frame (source stride channels+1, the extra quadlet is MIDI):
@@ -335,30 +347,76 @@ void com_openaudio_FW1814Device::audioEngineStopped()
     }
 }
 
-// ref FW1814Device::ReconnectP2P @0xe1ea: drop and re-establish the connections after a bus reset, then re-assert the clock source
+// ref FW1814Device::ReconnectP2P @0xe1ea: drop and re-establish the connections after a bus reset, then re-assert the clock source.
+//
+// Deviation from the reference (R144, 2026-11-09; panic build-pc-panics/Kernel_2026-11-06-204657, a second FW1814 switched on with the
+// first one running). The reference runs DisconnectAllPlugs + ConnectAllPlugs on a new thread per bus reset, outside the work loop and
+// with no lock (@0xe1ea, @0xe53a, ConnectAllPlugs @0x12476 only tests the "connected" byte). Switching a unit on gives several bus resets,
+// so two of these threads (or one and a format change on the work loop) could be inside ConnectAllPlugs together: the second builds a
+// second local port over the same TX DCL list (AppleFWOHCI then points every DCL's compilerData at the new port's objects), fails at
+// allocateChannel in the reset storm and frees that port, and the program is left with the first port over dangling compilerData. The
+// next engine start primed the TX banks and AppleFWOHCI_DCLProgram::notify called through a freed IOFWDCL (general protection fault).
+// The clone therefore (1) runs the disconnect + connect as ONE action on the work loop, with the engine paused around it as the wake
+// path does (SystemWillSleep / SystemWokeUp), so a client that was streaming is restarted by the HAL instead of being left on a dead
+// channel; (2) keeps a single reconnect thread, which runs once more for the bus resets that arrived while it worked and retries a
+// failed connect; (3) FWDCLProgram::Connect refuses a program that already has a channel.
+static IOReturn ReconnectPlugsAction(OSObject *owner, void *, void *, void *, void *)
+{
+    return static_cast<com_openaudio_FW1814Device *>(owner)->ReconnectPlugsGated();
+}
+
+IOReturn com_openaudio_FW1814Device::ReconnectPlugsGated()
+{
+    com_openaudio_FWBaseEngine *e = fMainEngine;                              // read on the work loop: RepublishAudioEngine replaces it there
+    if (!e || !fReady) return kIOReturnNotReady;
+    e->retain();
+    e->pauseAudioEngine();
+    e->DisconnectAllPlugs();                                                  // ref vt[0xcc0]
+    const IOReturn r = e->ConnectAllPlugs();                                  // ref vt[0xcb8]
+    e->resumeAudioEngine();
+    e->release();
+    return r;
+}
+
 void com_openaudio_FW1814Device::ReconnectP2P()
 {
     if (!fMainEngine) return;
-    fMainEngine->DisconnectAllPlugs();
-    fMainEngine->ConnectAllPlugs();
+    IOWorkLoop *wl = getWorkLoop();
+    fReconnectResult = wl ? wl->runAction(&ReconnectPlugsAction, this) : kIOReturnNotReady;
     IOSleep(0x44c);
-    if (!fMainEngine->externalSync()) SetClockSourceInternal(fMode, true);
+    if (fReady && fMainEngine && !fMainEngine->externalSync()) SetClockSourceInternal(fMode, true);
+}
+
+void com_openaudio_FW1814Device::BusResetThreadBody()
+{
+    UInt32 failures = 0;
+    for (;;) {
+        const SInt32 seen = fReconnectPending;
+        OA_LOG("WAKE-DIAG: BusReset thread -> ReconnectP2P begin (%d pending)", (int)seen);
+        ReconnectP2P();
+        OA_LOG("WAKE-DIAG: ReconnectP2P end -> 0x%x", (unsigned)fReconnectResult);
+        { char tr[96]; snprintf(tr, sizeof(tr), "ReconnectP2P: %d bus reset(s) served -> 0x%x", (int)seen, (unsigned)fReconnectResult); DebugTrace(tr); }
+        const bool failed = fReady && fReconnectResult != kIOReturnSuccess && fReconnectResult != kIOReturnNotReady;
+        if (failed && ++failures <= 3) { IOSleep(500); continue; }            // the bus was still settling: try again, at most 3 times
+        if (OSCompareAndSwap((UInt32)seen, 0, (volatile UInt32 *)&fReconnectPending)) break;   // no bus reset arrived meanwhile
+        failures = 0;
+    }
 }
 
 static void FW1814BusResetThread(void *arg)
 {
     com_openaudio_FW1814Device *d = static_cast<com_openaudio_FW1814Device *>(arg);
-    OA_LOG("WAKE-DIAG: BusReset thread -> ReconnectP2P begin");
-    d->ReconnectP2P();
-    OA_LOG("WAKE-DIAG: ReconnectP2P end");
+    d->BusResetThreadBody();
     d->release();
 }
 
-// ref FW1814Device::BusReset @0xe53a: the member at vtable slot 0xbf0 (= ReconnectP2P) on a new thread
+// ref FW1814Device::BusReset @0xe53a: the member at vtable slot 0xbf0 (= ReconnectP2P) on a new thread. Clone (R144): one thread at a time;
+// a bus reset that arrives while it runs is only counted, and the thread runs ReconnectP2P once more for it.
 void com_openaudio_FW1814Device::BusReset()
 {
+    if (OSIncrementAtomic(&fReconnectPending) != 0) return;                   // a reconnect thread is alive and will see this one
     retain();                                                                 // the thread uses `this`
-    if (!FWRunOnNewThread(&FW1814BusResetThread, this)) release();
+    if (!FWRunOnNewThread(&FW1814BusResetThread, this)) { fReconnectPending = 0; release(); }
 }
 
 // ref ReadHSCIData @0xd952: word 20 carries the clock lock (bit 24) and the FDF (bits 16..18), then the packet is interpreted

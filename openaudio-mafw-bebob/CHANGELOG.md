@@ -12,6 +12,26 @@ The M-Audio CoreMIDI plug-in is shipped unmodified (1.11.2). Each entry lists th
 
 ---
 
+## Package 0.6.0 — 2026-11-09 (release v0.6.0, with OpenAudio Glue 1.0.0)
+
+| Driver | Panel | MIDI plug-in | Editions |
+|---|---|---|---|
+| **0.4.0** | **2.2** | 1.11.2 | Classic and Modern |
+
+**Driver 0.4.0**
+- **Fixed: kernel panic when a second FireWire 1814 was switched on while the first was running** (R144; panic of 2026-11-06 on the build iMac). Cause: after each FireWire bus reset the driver re-made its connections on a new thread, with nothing keeping two of those threads (or one and a format change) apart; switching a unit on gives several bus resets. Two overlapping reconnects could leave the transmit program with a port whose compiled DCL objects had been freed, and the next start of the audio engine crashed inside Apple's FireWire controller driver. The official 2014 driver has the same structure. Now one reconnect runs at a time, on the driver's work loop, with the audio engine paused around it; a bus reset that arrives meanwhile is served by the same thread; a failed connect is retried; and a transmit or receive program refuses a second connect.
+- **Audio comes back by itself after a bus reset.** A client that was playing or recording when a unit is switched on or off stops for a few seconds and then continues (before, the stream stayed dead until the application restarted it).
+- **Glue tap** (R143): a read-only shared-memory view of each interface's input samples and timing, for the OpenAudio Glue input device. Nothing changes for other applications. Not in the official driver.
+
+**Panel 2.2**
+- One menu item that opens the **OpenAudio Glue** app, shown when it is installed and a FireWire 1814 is connected.
+
+**OpenAudio Glue 1.0.0** is published with this release as its own disk image (`OpenAudio-Glue-1.0.0-classic.dmg` / `-modern.dmg`); it needs this package (driver 0.4.0). See `openaudio-glue/README.md` and `openaudio-glue/CHANGELOG.md`.
+
+**Tested (build iMac, macOS 10.13.6, two FireWire 1814s, 2026-11-09):** bus resets issued from software (`tools/fwbusreset.c`): one, a burst of four followed by a client start (the sequence that panicked), and bursts while a client streamed; no panic, the stream resumed each time. The user then switched the second unit on and off: the stream paused and came back, no panic. **Not tested:** the Modern edition of this driver (built, not run); the FireWire Audiophile and FireWire 410 with this build (their bus-reset path is not the one changed).
+
+---
+
 ## Package 0.5.1 — 2026-10-28 (release v0.5.1)
 
 | Driver | Panel | MIDI plug-in | Editions |

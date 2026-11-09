@@ -7,6 +7,7 @@
 
 #include <IOKit/IOBufferMemoryDescriptor.h>
 #include <IOKit/audio/IOAudioEngine.h>
+#include "GlueTap.h"
 
 // m_audio_FWb::TRingBuffer (A1 decomp 0x7b6a..0x7cc4). Byte ring with wrap counters, filled by the RX program.
 class TRingBuffer
@@ -16,7 +17,9 @@ public:
                     readWrapped(false), writeWrapped(false) {}
     ~TRingBuffer() { Invalidate(); }
 
-    bool InitializeWithSizeInBytes(UInt32 bytes);   // ref @0x7cc4: IOBMD::withOptions(0, bytes, 0x1000), prepare, bzero
+    // ref @0x7cc4: IOBMD::withOptions(0, bytes, 0x1000), prepare, bzero. userShared adds kIOMemoryKernelUserShared (Glue tap, R143: the
+    // 10.13 SDK's IOBufferMemoryDescriptor.h:153 asks for it on memory mapped into clients; the 10.13.6 allocator ignores it, Glue G3).
+    bool InitializeWithSizeInBytes(UInt32 bytes, bool userShared = false);
     void Invalidate();                               // ref @0x7c6a: NULL-safe
     // ref AdvanceIndex @0x7b6a: idx += n; if idx >= size { idx -= size; wraps++; return true }
     bool AdvanceIndex(UInt32 n, UInt32 &idx, UInt32 &wraps) const;
@@ -58,6 +61,7 @@ struct FWDCLSharedSyncData
     IOAudioEngine *engine;           // [+0x78] receives takeTimeStamp from the TX callback of bank 3
     UInt64  startNanos;              // [+0x80]
     UInt32  lastInputSegment;        // [+0x88] RX segment index of the last processed segment (0x3f at Start)
+    GlueTapPage *gluePage;           // not in the reference (Glue tap, R143): RX publishes writeOff, TX the wrap timestamps; 0 = none
 };
 
 #endif

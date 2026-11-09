@@ -287,6 +287,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         let dualItem = NSMenuItem(title: "Advanced Dual (A + B)\u{2026}", action: #selector(dualFromMenu), keyEquivalent: "")
         dualItem.target = self
         view.addItem(dualItem)
+        let glueItem = NSMenuItem(title: "OpenAudio Glue\u{2026}", action: #selector(glueFromMenu), keyEquivalent: "")
+        glueItem.target = self
+        view.addItem(glueItem)
         let fw = NSMenuItem(title: "Firmware Check\u{2026}", action: #selector(showFirmwareCheck), keyEquivalent: "")
         fw.target = self
         view.addItem(fw)
@@ -315,6 +318,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             for i in menu.items {
                 if i.action == #selector(advancedFromMenu) { i.isHidden = !advanced }
                 if i.action == #selector(dualFromMenu) { i.isHidden = dualCandidates.count < 2 }
+                if i.action == #selector(glueFromMenu) { i.isHidden = !(GlueLink.installed && ordered.contains { $0.device.profile.glue }) }
             }
             return
         }
@@ -344,6 +348,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @objc private func viewMode(_ item: NSMenuItem) { (front ?? ordered.first)?.setMode(item.tag) }
     @objc private func toggleBigMeter() { bigMeter.toggle() }
     @objc private func dualFromMenu() { openDual() }
+    @objc private func glueFromMenu() { GlueLink.open() }
     /// One panel window at a time (user, 2026-10-28): the standard panel, a unit's Advanced window or the Dual window, never two. `keep` is
     /// the unit about to show (its own standard / Advanced swap is done by the unit itself); nil = the Dual window is about to show.
     private func exclusive(keep: PanelWindowController?) {

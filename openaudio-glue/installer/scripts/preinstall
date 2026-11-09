@@ -1,0 +1,12 @@
+#!/bin/bash
+# OpenAudio Glue needs the OpenAudio driver with the Glue tap (kext Info.plist OAGlueTapVersion >= 1, driver 0.4.0+; main R-log R143).
+# Without it the plug-in would load but find no unit, so the install stops here with a clear reason.
+KEXT=/Library/Extensions/OpenAudioBeBoBMAFW.kext
+V=$(/usr/libexec/PlistBuddy -c 'Print :OAGlueTapVersion' "$KEXT/Contents/Info.plist" 2>/dev/null)
+if [ -z "$V" ] || [ "$V" -lt 1 ]; then
+  echo "OpenAudio Glue needs the OpenAudio BeBoB MAFW driver with the Glue tap (driver 0.4.0 or later). Install that package first." >&2
+  exit 1
+fi
+# an earlier Glue: remove its files first (update in place)
+[ -x "/Library/Application Support/OpenAudio Glue/glue-uninstall.sh" ] && "/Library/Application Support/OpenAudio Glue/glue-uninstall.sh" --update
+exit 0

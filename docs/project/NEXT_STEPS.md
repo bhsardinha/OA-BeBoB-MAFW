@@ -4,7 +4,16 @@
 
 Read this first after a context clear, then `NEW_PLAN.md` → `docs/STATE.md` → `docs/BUILD-MANUAL.md` §0 → `docs/system-map/README.md`.
 
-## 2026-10-28 (later) - Advanced fixes (R142), in source only
+## 2026-11-09 - v0.6.0 published (driver 0.4.0, panel 2.2) with Glue 1.0.0
+Done: R144 (bus-reset reconnect race, panic of 2026-11-06) fixed and verified on the build PC and by the user; package 0.6.0 and Glue 1.0.0, both editions, published as release v0.6.0; `glue` merged into `main`. Open, on demand (real use): the Modern edition of this release (never run; the dev Mac still has the earlier Modern kext); a unit switched off while in use (teardown path, R140); the Glue device watched across a bus reset.
+
+## 2026-11-02 - Glue spin-off: works on the High Sierra iMac (branch `glue`)
+User: "the tests in the real high sierra iMac ran fine. everything works as should" (Glue G12, the user's report, no capture). State: `openaudio-glue/docs/STATE.md`. Docs updated (Glue README, STATE, ARCHITECTURE/plan corrections: the app is standalone). Next, to finish Glue 1.0.0: the main panel's menu item that opens `OpenAudio Glue.app` (main-project hook, R-entry); a main package with the kext's `ringGeneration` (`628fb4c`, newer than `dist/OA-BeBoB-MAFW-0.6.0-glue1-classic.pkg`); the Modern edition; then the user decides versions, the merge into `main`, sync and release. On demand: the Core Audio SIGILL at restarts (G11, unverified link to Glue).
+
+## 2026-10-28 (evening) - v0.5.1 published (panel 2.1)
+Done: package 0.5.1 (driver 0.3.1, panel 2.1) both editions, public `521271b`, tag v0.5.1, GitHub release (digests match), README reorganised. Next (user decides): real use of the Advanced window on a unit (Aux mute / solo by ear, View menu with other models).
+
+## 2026-10-28 (later) - Advanced fixes (R142), released in 0.5.1
 Done: View-menu Advanced items hidden when unavailable; Aux = stereo pair named "Aux"; M and S in the Aux act on the Aux sends only. Next (user decides): commit; a panel version (2.0.1?) and package for the next release; real clicks on a unit.
 
 ## 2026-10-28 - panel 2.0 (Advanced + Dual) published as v0.5.0

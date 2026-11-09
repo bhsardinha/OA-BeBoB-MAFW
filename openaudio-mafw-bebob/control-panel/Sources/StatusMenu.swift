@@ -204,6 +204,7 @@ final class StatusMenuController: NSObject, NSMenuDelegate {
         }
         // Dual (M7): two FW1814s as one aggregate; the window says what is missing (rates, word clock, aggregate)
         if all.filter({ $0.device.profile.advancedPanel }).count >= 2 { action(m, "Advanced Dual (A + B)\u{2026}", #selector(openDual)) }
+        if GlueLink.installed && all.contains(where: { $0.device.profile.glue }) { action(m, "OpenAudio Glue\u{2026}", #selector(openGlue)) }     // Glue's package installed and an FW1814 here (R144)
         if let c = cur { levelItems(m, c) }
         m.addItem(NSMenuItem.separator())
         let bm = m.addItem(withTitle: "Big Meter", action: nil, keyEquivalent: ""); bm.submenu = bigMeter.optionsMenu()
@@ -311,6 +312,7 @@ final class StatusMenuController: NSObject, NSMenuDelegate {
     var onAdvancedMode: ((PanelWindowController, String) -> Void)?
     @objc private func chooseAdvancedMode(_ sender: NSMenuItem) { if let c = selected, let k = sender.representedObject as? String { onAdvancedMode?(c, k) } }
     @objc private func openAdvanced() { if let c = selected { onOpenAdvanced?(c) } }
+    @objc private func openGlue() { GlueLink.open() }
     var onOpenDual: (() -> Void)?
     @objc private func openDual() { onOpenDual?() }
     @objc private func openAMS() {

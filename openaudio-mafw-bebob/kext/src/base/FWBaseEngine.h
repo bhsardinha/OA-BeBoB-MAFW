@@ -151,6 +151,16 @@ public:
     virtual IOMemoryDescriptor *MidiPortMemory(bool output, UInt32 port);           // ref [+0x2a8] (destinations) / [+0x2b0] (sources) descriptors
     virtual void     ReconnectAfterBusReset() {}                                     // ref @0x394a (empty in the base)
 
+    // ---- Glue tap (R143; openaudio-glue/docs/GLUE_PLAN_v1.md phase 2) -- NOT in the reference ----
+    // A read-only page (GlueTap.h) and the input ring for the Glue AudioServerPlugIn, and one isoch reference per Glue client. Glue's
+    // references follow MIDI's pattern: dropped when the engine pauses (no stream may run through a format change: SetPacketSize panics
+    // while running, C4 §3), taken back on resume, released on stop.
+    IOMemoryDescriptor *GluePageMemory() const { return fGlueMem; }
+    IOMemoryDescriptor *GlueRingMemory() const { return fShared.inputRing.mem; }
+    IOReturn GlueStart();                                                             // one isoch reference (work loop)
+    void     GlueStop();                                                              // releases one (work loop)
+    void     PublishGlueGeometry(bool newRing = false);                               // geometry + map; bumps the generation (and ringGeneration)
+
     // ref getGlobalUniqueID @0x5b84 / getLocalUniqueID @0x5adc: "<class>:<registry name>:<GUID hex>". The class-name part keeps the REFERENCE's
     // string ("com_m_audio_FWEngine2" / "...FWEngine1" for pair engines) so that a CoreAudio device UID stays the same as with the 2014 driver.
     virtual OSString *getGlobalUniqueID() APPLE_KEXT_OVERRIDE;
@@ -235,6 +245,13 @@ protected:
     TRingBuffer fInRing1b0;                        // [+0x1b0]
     // the input sample ring is fShared.inputRing ([+0x268]) -- filled by the RX program
     FWStreamControl fStreamControl;
+    // Glue tap (R143), not in the reference
+    IOBufferMemoryDescriptor *fGlueMem;            // one page, kIOMemoryKernelUserShared (GlueTap.h)
+    GlueTapPage *fGluePage;
+    UInt32 fGlueRefs;                              // isoch references Glue holds now
+    UInt32 fGlueParked;                            // Glue references dropped by a pause, to be taken back on resume
+    void   GlueRestartParked();
+    void   GlueDropAll();
 };
 
 #endif

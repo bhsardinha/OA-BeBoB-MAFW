@@ -1,0 +1,8 @@
+-xc++
+-std=c++17
+-Wall
+-Wextra
+-mmacosx-version-min=10.13
+-I.
+-I../../dsp
+-I../../../openaudio-mafw-bebob/kext/src/base

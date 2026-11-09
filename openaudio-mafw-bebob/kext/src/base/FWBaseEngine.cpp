@@ -41,6 +41,21 @@ bool com_openaudio_FWBaseEngine::init(OSDictionary *properties)
     if (!fSytTable) return false;
     bzero(fSytTable, 0x1000);
     fShared.sytTable = fSytTable;
+    // Glue tap (R143), not in the reference: one user-shared page, like the meter page (FWAudioDeviceProps.cpp:279)
+    fGlueRefs = fGlueParked = 0;
+    fGluePage = 0;
+    fShared.gluePage = 0;
+    fGlueMem = IOBufferMemoryDescriptor::withOptions(kIOMemoryKernelUserShared | kIODirectionInOut, 0x1000, 0x1000);
+    if (fGlueMem && fGlueMem->prepare() == kIOReturnSuccess) {
+        fGluePage = static_cast<GlueTapPage *>(fGlueMem->getBytesNoCopy());
+        bzero(fGluePage, 0x1000);
+        fGluePage->magic = kGlueTapMagic;
+        fGluePage->version = kGlueTapVersion;
+        fGluePage->ringFrames = kGlueTapRingFrames;
+        fShared.gluePage = fGluePage;
+    } else if (fGlueMem) {
+        fGlueMem->release(); fGlueMem = 0;                                   // Glue is optional: the engine works without the page
+    }
     return super::init(properties);
 }
 
@@ -71,6 +86,7 @@ bool com_openaudio_FWBaseEngine::initHardware(IOService *provider)
 void com_openaudio_FWBaseEngine::stop(IOService *provider)
 {
     if (midiRunning()) StopMIDI();                                           // ref [+0x298]
+    GlueDropAll();                                                           // Glue tap (R143)
     if (fIsochRefs != 0) StopIsochStreams();
     if (fConnected) DisconnectAllPlugs();
     if (fInStream)  { fInStream->release();  fInStream = 0; }
@@ -87,6 +103,7 @@ void com_openaudio_FWBaseEngine::Quiesce()
     const IOAudioEngineState s = getState();
     if (s == kIOAudioEngineRunning || s == kIOAudioEngineResumed) stopAudioEngine();
     if (midiRunning()) StopMIDI();
+    GlueDropAll();                                                           // Glue tap (R143)
     for (int guard = 0; fIsochRefs != 0 && guard < 8; guard++) StopIsochStreams();
     if (fConnected) DisconnectAllPlugs();
 }
@@ -97,6 +114,11 @@ void com_openaudio_FWBaseEngine::free()
     if (fMidiOut) { for (UInt32 i = 0; i < fShared.midiOutPorts; i++) fMidiOut[i].Release(); IOFree(fMidiOut, (size_t)fShared.midiOutPorts * sizeof(FWMIDIPort)); fMidiOut = 0; fShared.midiOutPortArray = 0; }
     if (fSytTable) { IOFree(fSytTable, 0x1000); fSytTable = 0; }
     fOutSampleRing.Invalidate(); fOutMixRing.Invalidate(); fInRing180.Invalidate(); fInRing1b0.Invalidate();
+    if (fGlueMem) {                                                          // Glue tap (R143): a client still mapping the page sees Retired
+        fShared.gluePage = 0;
+        if (fGluePage) { fGluePage->state = kGlueTapRetired; fGluePage->generation = fGluePage->generation + 1; fGluePage = 0; }
+        fGlueMem->complete(); fGlueMem->release(); fGlueMem = 0;
+    }
     super::free();
 }
 
@@ -133,6 +155,7 @@ IOReturn com_openaudio_FWBaseEngine::pauseAudioEngine()
 {
     if (++fPauseCount < 2) {
         if (midiRunning()) { fMidiWasRunning = true; StopMIDI(); }   // ref [+0x230] = [+0x298]; vt[0xcf8]
+        while (fGlueRefs != 0) { fGlueRefs--; fGlueParked++; StopIsochStreams(); }   // Glue tap (R143): as MIDI above
         return IOAudioEngine::pauseAudioEngine();
     }
     return kIOReturnSuccess;
@@ -142,6 +165,7 @@ IOReturn com_openaudio_FWBaseEngine::resumeAudioEngine()
 {
     if (--fPauseCount == 0) {
         if (fMidiWasRunning && StartMIDI() == kIOReturnSuccess) fMidiWasRunning = false;   // ref: vt[0xcf0] == 0 -> [+0x230] = 0
+        GlueRestartParked();                                                 // Glue tap (R143)
         return IOAudioEngine::resumeAudioEngine();
     }
     return kIOReturnSuccess;
@@ -369,6 +393,7 @@ IOReturn com_openaudio_FWBaseEngine::SetIOFormat(const FWDeviceChannels &ch, UIn
         fChannelMap[0] = ch.channelMap[0];
         fChannelMap[1] = ch.channelMap[1];
         fChannelMap[2] = ch.channelMap[2];
+        PublishGlueGeometry();                                               // Glue tap (R143): counts and map
         if (!acThing) completeConfigurationChange();                         // vt[0xb08]
     } else if (!acThing) {
         cancelConfigurationChange();                                         // vt[0xb10]
@@ -483,6 +508,7 @@ IOReturn com_openaudio_FWBaseEngine::CompletePendingStateChangesAction()
     }
     if (p & kFWPendingResetBuffers) {
         if (!ResetSampleBuffers()) { result = kErrNoMem; goto done; }
+        PublishGlueGeometry(true);                                           // Glue tap (R143): new ring
         p = fPending;
     }
     if (p & kFWPendingResetPairFormats) { ResetStereoPairIOFormats(); p = fPending; }
@@ -499,6 +525,7 @@ IOReturn com_openaudio_FWBaseEngine::CompletePendingStateChangesAction()
             if (p & kFWPendingSettle)    { IOSleep(1000); p = fPending; }
             if (p & kFWPendingRateNotify) fDevice->SetStaticPropertyAndNotifyUserClients("MASampleRate", sampleRate.whole);
             if (fConnected && fMidiWasRunning) fMidiWasRunning = (StartMIDI() != kIOReturnSuccess);   // ref [+0x230] <- (vt[0xcf0] != 0)
+            if (fConnected && fPauseCount == 0) GlueRestartParked();         // Glue tap (R143): as MIDI above
         }
     }
 done:
@@ -555,14 +582,87 @@ IOReturn com_openaudio_FWBaseEngine::StartIsochStreams()
         fShared.inputRing.readWraps = fShared.inputRing.writeWraps = 0;
         IOReturn r = StartAudio();                                           // vt[0xcd0]
         if (r != kIOReturnSuccess) { fIsochRefs--; return r; }
+        if (fGluePage) {                                                     // Glue tap (R143): a new stream, ring reset above
+            fGluePage->seq = fGluePage->seq + 1;
+            __asm__ __volatile__("" ::: "memory");
+            fGluePage->wrapCount = 0; fGluePage->wrapHostTime = 0; fGluePage->writeOff = 0;
+            __asm__ __volatile__("" ::: "memory");
+            fGluePage->seq = fGluePage->seq + 1;
+            fGluePage->state = kGlueTapRunning;
+            fGluePage->generation = fGluePage->generation + 1;
+        }
     }
+    if (fGluePage) { fGluePage->isochRefs = fIsochRefs; fGluePage->glueRefs = fGlueRefs; }
     return kIOReturnSuccess;
 }
 
 // ref StopIsochStreams @0x416c
 void com_openaudio_FWBaseEngine::StopIsochStreams()
 {
-    if (fIsochRefs != 0 && --fIsochRefs == 0) StopAudio();                   // vt[0xcd8]
+    if (fIsochRefs != 0 && --fIsochRefs == 0) {
+        StopAudio();                                                         // vt[0xcd8]
+        if (fGluePage) { fGluePage->state = kGlueTapStopped; fGluePage->generation = fGluePage->generation + 1; }   // Glue tap (R143)
+    }
+    if (fGluePage) { fGluePage->isochRefs = fIsochRefs; fGluePage->glueRefs = fGlueRefs; }
+}
+
+// ---- Glue tap (R143; openaudio-glue/docs/GLUE_PLAN_v1.md phase 2) -- NOT in the reference -------------------------------------------
+// Called on the work loop (FWUserClient runs them through runAction). While the engine is paused a start is only remembered, as
+// UserStartMIDI does (ref CoreStartMIDI @0x717c).
+IOReturn com_openaudio_FWBaseEngine::GlueStart()
+{
+    if (fPauseCount > 0) { fGlueParked++; return kIOReturnSuccess; }
+    const IOReturn r = StartIsochStreams();
+    if (r == kIOReturnSuccess) fGlueRefs++;
+    if (fGluePage) fGluePage->glueRefs = fGlueRefs;
+    return r;
+}
+
+void com_openaudio_FWBaseEngine::GlueStop()
+{
+    if (fGlueRefs != 0) { fGlueRefs--; StopIsochStreams(); }
+    else if (fGlueParked != 0) fGlueParked--;
+    if (fGluePage) fGluePage->glueRefs = fGlueRefs;
+}
+
+void com_openaudio_FWBaseEngine::GlueRestartParked()
+{
+    while (fGlueParked != 0) {
+        if (StartIsochStreams() != kIOReturnSuccess) break;                  // not connected yet: CompletePendingStateChanges retries
+        fGlueParked--; fGlueRefs++;
+    }
+    if (fGluePage) fGluePage->glueRefs = fGlueRefs;
+}
+
+void com_openaudio_FWBaseEngine::GlueDropAll()
+{
+    while (fGlueRefs != 0) { fGlueRefs--; StopIsochStreams(); }
+    fGlueParked = 0;
+    if (fGluePage) { fGluePage->glueRefs = 0; fGluePage->state = kGlueTapRetired; fGluePage->generation = fGluePage->generation + 1; }
+}
+
+// Geometry and the host-channel map. The base's input map (fChannelMap[0], wire slot -> host channel: the FW410 at 176.4/192 kHz) wins, as in
+// ConvertInputSampleData; otherwise the model describes its input proc (FWAudioDevice::GetGlueInputMap). Bumps the generation.
+void com_openaudio_FWBaseEngine::PublishGlueGeometry(bool newRing)
+{
+    GlueTapPage *g = fGluePage;
+    if (!g) return;
+    const UInt32 hostCh = fInStreamChannels < kGlueTapMaxChannels ? fInStreamChannels : kGlueTapMaxChannels;
+    g->rateHz = sampleRate.whole;
+    g->inChannels = hostCh;
+    g->wireQuadlets = fInChannels;
+    g->frameQuads = fInChannels + fMidiChannels;
+    g->ringFrames = kGlueTapRingFrames;
+    g->ringBytes = fShared.inputRing.size;
+    for (UInt32 i = 0; i < kGlueTapMaxChannels; i++) { g->map[i].slot = (uint16_t)i; g->map[i].delay = 0; }
+    if (fChannelMap[0]) {
+        for (UInt32 k = 0; k < fInChannels; k++)
+            if (fChannelMap[0][k] < hostCh) { g->map[fChannelMap[0][k]].slot = (uint16_t)k; g->map[fChannelMap[0][k]].delay = 0; }
+    } else if (fDevice) {
+        fDevice->GetGlueInputMap(this, g->map, hostCh);
+    }
+    if (newRing) g->ringGeneration = g->ringGeneration + 1;
+    g->generation = g->generation + 1;
 }
 
 // ref StartAudio @0x4bca (base version; FWEngine2 overrides it, Q-START): ResetPort(start cycle) on every program, Start on every
@@ -648,7 +748,7 @@ bool com_openaudio_FWBaseEngine::ResetSampleBuffers()
     const UInt32 inBytes  = (fInChannels + m) * 0x8000;
     const UInt32 outBytes = (fOutChannels + m) * 0x8000;
     if (!fOutSampleRing.InitializeWithSizeInBytes(outBytes) || !fOutMixRing.InitializeWithSizeInBytes(outBytes) ||
-        !fShared.inputRing.InitializeWithSizeInBytes(inBytes) || !fInRing180.InitializeWithSizeInBytes(inBytes) ||
+        !fShared.inputRing.InitializeWithSizeInBytes(inBytes, true) || !fInRing180.InitializeWithSizeInBytes(inBytes) ||   // true: Glue tap (R143)
         !fInRing1b0.InitializeWithSizeInBytes(inBytes))
         return false;
     fOutStream->setSampleBuffer(fOutSampleRing.data, fOutSampleRing.size);

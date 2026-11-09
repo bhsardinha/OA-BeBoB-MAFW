@@ -8,6 +8,7 @@
 #define OA_FW410DEVICE_H
 
 #include "FWRev2AudioDevice.h"
+#include "FWSamples.h"
 #include "FWChannelGroup.h"
 #include "FW410Tables.h"
 #include "FW410MixerMap.h"
@@ -33,6 +34,8 @@ public:
     virtual void GetDeviceChannelsForSampleRate(UInt32 rateHz, FWDeviceChannels &out) const APPLE_KEXT_OVERRIDE   // asm 0x14010
         { out = rateHz > 96000 ? kFW410Channels192 : kFW410Channels; }
     virtual UInt32 GetRoundTripLatencyForFDF(UInt32 fdf) const APPLE_KEXT_OVERRIDE { return FW410RoundTripLatencyForFDF(fdf); }
+    // Glue tap (R143), NOT in the reference: the input proc FWConvertLLRR4SkipMIDI1 as a table (the engine's channel map, when set, wins)
+    virtual void GetGlueInputMap(com_openaudio_FWBaseEngine *, GlueTapChannel *map, UInt32 count) APPLE_KEXT_OVERRIDE { FWGlueMapLLRR4(map, count); }
     virtual void IndexForAC3OutputChannels(UInt32 &left, UInt32 &right) const APPLE_KEXT_OVERRIDE { left = 0; right = 5; }   // decomp: wire slots of S/PDIF L/R
     virtual UInt32 GetFirstSWReturnPeakMeterIndex() const APPLE_KEXT_OVERRIDE { return 4; }    // decomp; count = base (out channels)
     virtual UInt32 GetControlPacketSize() const APPLE_KEXT_OVERRIDE { return 0x4c; }           // decomp (vt 0xba0): 76-byte status packet

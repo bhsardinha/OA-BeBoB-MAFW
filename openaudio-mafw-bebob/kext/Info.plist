@@ -15,11 +15,11 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.3.1</string>
+	<string>0.4.0</string>
 	<key>CFBundleSignature</key>
 	<string>DDRV</string>
 	<key>CFBundleVersion</key>
-	<string>0.3.1</string>
+	<string>0.4.0</string>
 	<key>IOKitPersonalities</key>
 	<dict>
 		<key>FW1814AppleGoAway1</key>
@@ -105,6 +105,8 @@
 			<string>IOFireWireDevice</string>
 		</dict>
 	</dict>
+	<key>OAGlueTapVersion</key>
+	<integer>1</integer>
 	<key>OSBundleLibraries</key>
 	<dict>
 		<key>com.apple.iokit.IOAudioFamily</key>

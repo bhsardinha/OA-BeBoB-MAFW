@@ -1,0 +1,6 @@
+#!/bin/bash
+# The plug-in must be owned by root to load; Core Audio reads its plug-in folder when it starts, so it is restarted (audio stops for a
+# moment, the welcome page says so).
+/usr/sbin/chown -R root:wheel /Library/Audio/Plug-Ins/HAL/OpenAudioGlue.driver "/Applications/OpenAudio Glue.app"
+/usr/bin/killall coreaudiod 2>/dev/null
+exit 0

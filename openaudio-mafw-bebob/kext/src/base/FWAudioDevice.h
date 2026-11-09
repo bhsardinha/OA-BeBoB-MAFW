@@ -19,6 +19,7 @@
 #include <IOKit/IOBufferMemoryDescriptor.h>
 #include <libkern/c++/OSDictionary.h>
 #include "FWRates.h"
+#include "GlueTap.h"
 
 class com_openaudio_FWMetaNub;
 class IOFireWireNub;
@@ -76,6 +77,9 @@ public:
     virtual void SetupAudioEngine(com_openaudio_FWBaseEngine *engine) = 0;
     // ref vt[0xaf8] (FWAudioDevice @0x1c8c: empty): install the engine's rearrange / input-convert procs for its current channel counts
     virtual void ResetRearrangementProcs(com_openaudio_FWBaseEngine *engine) { (void)engine; }
+    // Glue tap (R143), NOT in the reference: the model's input proc as a table (host channel <- wire slot, delay in frames) for `count`
+    // host channels, matching what ResetRearrangementProcs installs. Default: identity, no delay (already filled by the engine).
+    virtual void GetGlueInputMap(com_openaudio_FWBaseEngine *engine, GlueTapChannel *map, UInt32 count) { (void)engine; (void)map; (void)count; }
     bool createAudioEngine();
     void SetChannelNamesForMainEngine(IOAudioEngine *engine);                  // ref @0x2d2a: IOAudioEngineChannel{,Category,Number}Names
 

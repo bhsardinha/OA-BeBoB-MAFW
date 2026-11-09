@@ -1,0 +1,6 @@
+-xc++
+-std=c++17
+-Wall
+-Wextra
+-mmacosx-version-min=10.13
+-I.

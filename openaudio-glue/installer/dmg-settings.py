@@ -1,0 +1,31 @@
+# dmgbuild settings: layout of the OpenAudio Glue disk image (same layout as the main project's). Paths come from `-D` defines set by make-dmg.sh.
+import os
+pkg = defines["pkg"]
+app = defines["app"]
+art = defines["art"]
+
+format = "UDZO"
+filesystem = "HFS+"
+size = None
+icon = os.path.join(art, "VolumeIcon.icns")
+background = defines["background"]
+files = [(pkg, "Install OpenAudio Glue.pkg"), (app, "Uninstall OpenAudio Glue.app")]
+symlinks = {}
+icon_locations = {"Install OpenAudio Glue.pkg": (170, 232), "Uninstall OpenAudio Glue.app": (470, 232)}
+window_rect = ((200, 140), (640, 500))
+default_view = "icon-view"
+show_status_bar = False
+show_tab_view = False
+show_toolbar = False
+show_pathbar = False
+show_sidebar = False
+sidebar_width = 0
+arrange_by = None
+grid_offset = (0, 0)
+grid_spacing = 100
+scroll_position = (0, 0)
+label_pos = "bottom"
+text_size = 13
+icon_size = 112
+include_icon_view_settings = "auto"
+include_list_view_settings = "auto"

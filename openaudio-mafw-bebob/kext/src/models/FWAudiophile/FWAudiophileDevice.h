@@ -8,6 +8,7 @@
 #define OA_FWAUDIOPHILEDEVICE_H
 
 #include "FWRev2AudioDevice.h"
+#include "FWSamples.h"
 #include "FWAudiophileTables.h"
 #include "FWChannelGroup.h"
 #include "FWAudiophileMixerMap.h"
@@ -35,6 +36,8 @@ public:
         { (void)rateHz; out = kFWAudiophileChannels; }
     virtual UInt32 GetRoundTripLatencyForFDF(UInt32 fdf) const APPLE_KEXT_OVERRIDE { return FWAudiophileRoundTripLatencyForFDF(fdf); }
     virtual void IndexForAC3OutputChannels(UInt32 &left, UInt32 &right) const APPLE_KEXT_OVERRIDE { left = 2; right = 5; }   // decomp
+    // Glue tap (R143), NOT in the reference: the input proc FWConvertLLRR4SkipMIDI1 as a table (the engine's channel map, when set, wins)
+    virtual void GetGlueInputMap(com_openaudio_FWBaseEngine *, GlueTapChannel *map, UInt32 count) APPLE_KEXT_OVERRIDE { FWGlueMapLLRR4(map, count); }
     virtual UInt32 GetFirstSWReturnPeakMeterIndex() const APPLE_KEXT_OVERRIDE { return 0xe; }   // @0xaa02; count = base (out channels = 6)
     virtual UInt32 GetControlPacketSize() const APPLE_KEXT_OVERRIDE { return 0x3c; }            // @0xaf7e (vt 0xba0): 60-byte status packet
     // ref SetupAudioEngine (decomp FWAudiophileDevice__SetupAudioEngine.c): m = 1, MIDI ports 1/1, in 4 / out 6 (stream = channels), then the

@@ -20,5 +20,8 @@ The **PolyForm Noncommercial License 1.0.0** (see [`LICENSE`](LICENSE)) covers t
 ## Third-party references
 The wire protocol and register meanings were cross-checked with [FFADO](https://github.com/ojsl1/libffado), the Linux [snd-bebob](https://github.com/torvalds/linux/tree/master/sound/firewire/bebob) driver, [snd-firewire-ctl-services](https://github.com/alsa-project/snd-firewire-ctl-services) and [macfw](https://github.com/mbprado/macfw), and the analysis used [Ghidra](https://ghidra-sre.org). Those projects have their own licenses; their sources are not included here.
 
+## Airwindows (OpenAudio Glue)
+The transformer, tube, desk-colour and tape stages of OpenAudio Glue (`openaudio-glue/dsp/`) are ports of the [Airwindows](https://github.com/airwindows/airwindows) plug-ins Interstage, Tube2, Channel9 and ToTape9 by Chris Johnson, under the MIT license. The notice and the license text are in [`openaudio-glue/NOTICE.md`](openaudio-glue/NOTICE.md) and ship inside the Glue app and plug-in.
+
 ## Not affiliated
 Independent and unofficial: not made, endorsed or supported by M-Audio, inMusic, Avid, Apple or BridgeCo. *M-Audio*, *FireWire*, *macOS* and other names are trademarks of their owners.

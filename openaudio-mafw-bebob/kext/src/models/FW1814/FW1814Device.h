@@ -36,6 +36,7 @@ public:
     virtual com_openaudio_FWBaseEngine *AllocateAudioEngine() APPLE_KEXT_OVERRIDE;      // ref @0xd78a -> FWEngine2
     virtual void SetupAudioEngine(com_openaudio_FWBaseEngine *engine) APPLE_KEXT_OVERRIDE;   // ref @0xed34
     virtual void ResetRearrangementProcs(com_openaudio_FWBaseEngine *engine) APPLE_KEXT_OVERRIDE;   // ref @0xcad4
+    virtual void GetGlueInputMap(com_openaudio_FWBaseEngine *engine, GlueTapChannel *map, UInt32 count) APPLE_KEXT_OVERRIDE;   // Glue tap (R143)
     virtual void IndexForAC3OutputChannels(UInt32 &left, UInt32 &right) const APPLE_KEXT_OVERRIDE { left = 4; right = 5; }   // ref @0xc3fe
     virtual const char *GetIconName() const APPLE_KEXT_OVERRIDE { return "FW 1814 box.png"; }          // ref @0xc96e
     virtual const char *GetDescriptionString() const APPLE_KEXT_OVERRIDE { return "FireWire 1814"; }   // ref @0xc97c
@@ -47,6 +48,8 @@ public:
     virtual IOReturn SetBlankSlateClockSource() APPLE_KEXT_OVERRIDE;                                    // ref @0xe4f0
     virtual void SwitchDigitalSignals(UInt32 clk) APPLE_KEXT_OVERRIDE;                                  // ref @0xe5dc
     void ReconnectP2P();                                                                                // ref @0xe1ea
+    IOReturn ReconnectPlugsGated();                 // clone (R144): the disconnect + connect of ReconnectP2P, on the work loop
+    void BusResetThreadBody();                      // clone (R144): one thread serves every bus reset that arrives while it runs
     virtual void BusReset() APPLE_KEXT_OVERRIDE;                                                        // ref @0xe53a: ReconnectP2P on a new thread
     // hardware control poll (A1 Q-ME §5)
     virtual UInt32 GetControlPacketSize() const APPLE_KEXT_OVERRIDE { return 0x58; }                     // ref @0xc962
@@ -93,6 +96,8 @@ private:
     bool fRepublishPending;                         // clone (M-S): SwitchDigitalSignals changed the channel counts
     bool fRepublishDeferred;                        // clone (M-S): counts differ from the published engine's but a client was streaming
     bool fRepublishThread;                          // clone (M-S): a deferred-republish thread is alive
+    volatile SInt32 fReconnectPending;              // clone (R144): bus resets not yet served by the reconnect thread (0 = no thread)
+    IOReturn fReconnectResult;                      // clone (R144): what the last gated reconnect returned
     UInt32 fPubIn, fPubOut;                         // clone (M-S): channel counts the HAL currently knows (0 = not recorded yet)
     com_openaudio_FWBaseEngine *fMidiDonor;         // clone (M-S): engine whose MIDI ports the next SetupAudioEngine adopts
     com_openaudio_FWNumber32Prop *fStereoPairProp;  // MAEnableStereoPairEngines (ref value cell [+0x184])

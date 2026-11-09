@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="1">
+    <title>OpenAudio Glue @VERSION@ @EDITION@</title>
+    <welcome file="welcome.html" mime-type="text/html"/>
+    <options customize="never" require-scripts="false" rootVolumeOnly="true" hostArchitectures="x86_64"/>
+    <allowed-os-versions>@OSVERSIONS@</allowed-os-versions>
+    <choices-outline><line choice="default"><line choice="com.openaudio.glue.pkg"/></line></choices-outline>
+    <choice id="default"/>
+    <choice id="com.openaudio.glue.pkg" visible="false"><pkg-ref id="com.openaudio.glue.pkg"/></choice>
+    <pkg-ref id="com.openaudio.glue.pkg" version="@VERSION@">component.pkg</pkg-ref>
+</installer-gui-script>

@@ -199,6 +199,10 @@ static IOReturn ForceStopNotificationProc(void *refcon, IOFWIsochChannel *channe
 IOReturn com_openaudio_FWDCLProgram::Connect(UInt32 plug)
 {
     if (!fNub || !fConnMgr || !fBuilder.Head()) return kIOReturnNotReady;
+    // clone (R144): never build a second local port over a DCL list whose port is alive. createLocalIsochPort re-points every DCL's
+    // compilerData at the new port's objects; if that port is then freed (allocateChannel failed) the live port is left over dangling
+    // compilerData and the next notify() panics (Kernel_2026-11-06-204657). The reference has no such test (@0x255c2).
+    if (fChannel || fPort) { OA_LOG("%s program: Connect refused, already connected", fTx ? "TX" : "RX"); return (IOReturn)0xE00002C2; }
     fPlug = plug;
     IOFireWireBus *bus = fNub->getBus();
     IOFWLocalIsochPort *local = bus ? bus->createLocalIsochPort(fTx, fBuilder.Head(), 0, 0, 0, 0) : 0;
@@ -470,12 +474,23 @@ void com_openaudio_FWDCLOutputProgram::OutputDCLCallback(UInt32 bank, bool prime
         fHist[idx].lap = fLap;
         fHistIdx = idx;
         sh->lastBank = bank;
+        if (GlueTapPage *g = sh->gluePage) g->lastBank = bank;                 // Glue tap (R143), not in the reference
         if (bank == 3) {
             if (fLap >= 3) {
                 // ref vt[0xae0] on shared+0x78 = IOAudioEngine::takeTimeStamp(true, &abstime)  (C2 §6.1)
                 AbsoluteTime abs;
                 nanoseconds_to_absolutetime(ns, &abs);
                 if (sh->engine) sh->engine->takeTimeStamp(true, &abs);
+                // Glue tap (R143, not in the reference): the same wrap time, under a seqlock (GlueTap.h). x86 keeps stores in order;
+                // the compiler barriers keep the compiler from reordering them.
+                if (GlueTapPage *g = sh->gluePage) {
+                    g->seq = g->seq + 1;
+                    __asm__ __volatile__("" ::: "memory");
+                    g->wrapHostTime = (uint64_t)abs;
+                    g->wrapCount = g->wrapCount + 1;
+                    __asm__ __volatile__("" ::: "memory");
+                    g->seq = g->seq + 1;
+                }
             } else if (fLap == 2) {
                 sh->resyncCycleTime = ts;
                 sh->resyncPending = true;
@@ -865,6 +880,7 @@ void com_openaudio_FWDCLInputProgram::InputDCLCallbackCopyPacketGroupToSamples(U
             t = AddFWCycleTimeToFWCycleTime(t, 0x1000);
         }
         if (fPrimary) sh->sytWrite = wr;
+        if (fPrimary && sh->gluePage) sh->gluePage->writeOff = sh->inputRing.writeOff;   // Glue tap (R143), not in the reference
         if (fMidiQ != 0 && midiOn && fTxProgram && (seg & 1) == 0) fTxProgram->ProcessCompoundMIDIOutput(3);
         if (last < seg + 1) break;
     }

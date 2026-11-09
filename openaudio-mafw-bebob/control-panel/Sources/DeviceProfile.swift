@@ -105,6 +105,8 @@ protocol DeviceProfile: AnyObject {
     var levelControllerTargets: [MARotaryMask.Group] { get }
     /// The Advanced window (PANEL_REDESIGN_PLAN_v3, user 2026-10-27): offered for the FireWire 1814 only
     var advancedPanel: Bool { get }
+    /// OpenAudio Glue: FireWire 1814 only, on purpose (user, 2026-11-06, R144)
+    var glue: Bool { get }
     /// The Advanced window's meter channels for a layout (Core Audio order, jacks, peak slots)
     func advancedChannels(_ l: ChannelLayout) -> AdvancedChannels
 }
@@ -117,6 +119,7 @@ extension DeviceProfile {
     var phonesMultiSelect: Bool { return false }
     var levelControllerTargets: [MARotaryMask.Group] { return [.swReturn, .output, .input, .aux] }
     var advancedPanel: Bool { return false }
+    var glue: Bool { return false }
     func advancedChannels(_ l: ChannelLayout) -> AdvancedChannels { return .none }
     func phonesSource(mask: Int) -> PhonesSource? { return phonesSources.first { Int($0.mask) == mask } }
 }
