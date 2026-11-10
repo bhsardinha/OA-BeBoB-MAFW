@@ -2,6 +2,8 @@
 
 **A native driver, control panel and installer for the M-Audio FireWire 1814, FireWire Audiophile and FireWire 410 — on macOS 10.13 to 10.15 (Classic edition) and macOS 11 to 15 on Intel Macs (Modern edition).**
 
+<p align="center"><a href="https://www.youtube.com/watch?v=8KF8jSjwMV0"><img src="docs/images/video-thumbnail.png" width="720" alt="Watch the video: M-Audio FireWire on modern macOS"></a><br><sub><a href="https://www.youtube.com/watch?v=8KF8jSjwMV0">▶ Watch the 76-second overview on YouTube</a></sub></p>
+
 These are BridgeCo BeBoB FireWire interfaces that M-Audio stopped supporting years ago. The last official driver (1.11.x, 2014) kernel-panics on macOS 10.13.6, and its Carbon control panel is 32-bit only. OpenAudio BeBoB MAFW is a from-scratch replacement — a 64-bit kernel extension, a helper daemon, a modern AppKit control panel (**OA BeBoB MAFW**) and an installer — built by reverse engineering the official driver and checking its behaviour against the real hardware. It succeeds **OpenAudio FW1814 0.1.0** (FireWire 1814 only), which its installer replaces.
 
 <p align="center"><img src="docs/images/panel-mixer.png" width="820" alt="Mixer page of the control panel with a FireWire 1814"></p>
